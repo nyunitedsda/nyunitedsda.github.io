@@ -10,9 +10,9 @@ const theme = responsiveFontSizes(
     },
 		palette: {
 			primary: {
-				main: "#5e35b1", // Deep purple - represents spirituality
-				light: "#9162e4",
-				dark: "#280680",
+				main: "#187cc2", // Deep purple - represents spirituality
+				// light: "#9162e4",
+				// dark: "#280680",
 			},
 			secondary: {
 				main: "#c0b283", // Gold - represents divinity and warmth
