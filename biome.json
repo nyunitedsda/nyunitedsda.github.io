@@ -1,18 +1,47 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-	"files": { "ignoreUnknown": false, "ignore": [] },
-	"formatter": { "enabled": true, "indentStyle": "tab" },
-	"organizeImports": { "enabled": true },
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"ignore": []
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 80,
+		"bracketSpacing": true,
+		"attributePosition":"auto",
+		"lineEnding": "lf"
+
+
+	},
+	"organizeImports": {
+		"enabled": true
+	},
 	"linter": {
 		"enabled": true,
-		"rules": { "recommended": false },
-		"ignore": ["dist"]
+		"rules": {
+			"recommended": false
+		},
+		"ignore": [
+			"dist"
+		]
 	},
-	"javascript": { "formatter": { "quoteStyle": "double" } },
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
 	"overrides": [
 		{
-			"include": ["**/*.{ts,tsx}"],
+			"include": [
+				"**/*.{ts,tsx}"
+			],
 			"linter": {
 				"rules": {
 					"complexity": {
@@ -75,12 +104,23 @@
 				}
 			}
 		},
-		{ "include": ["**/*.{ts,tsx}"], "javascript": { "globals": [] } },
 		{
-			"include": ["**/*.{ts,tsx}"],
+			"include": [
+				"**/*.{ts,tsx}"
+			],
+			"javascript": {
+				"globals": []
+			}
+		},
+		{
+			"include": [
+				"**/*.{ts,tsx}"
+			],
 			"linter": {
 				"rules": {
-					"complexity": { "noWith": "off" },
+					"complexity": {
+						"noWith": "off"
+					},
 					"correctness": {
 						"noConstAssign": "off",
 						"noGlobalObjectCalls": "off",
@@ -112,7 +152,9 @@
 			}
 		},
 		{
-			"include": ["**/*.{ts,tsx}"],
+			"include": [
+				"**/*.{ts,tsx}"
+			],
 			"linter": {
 				"rules": {
 					"complexity": {
@@ -123,7 +165,10 @@
 						"noUnusedVariables": "error",
 						"useArrayLiterals": "off"
 					},
-					"style": { "noNamespace": "error", "useAsConstAssertion": "error" },
+					"style": {
+						"noNamespace": "error",
+						"useAsConstAssertion": "error"
+					},
 					"suspicious": {
 						"noExplicitAny": "error",
 						"noExtraNonNullAssertion": "error",
@@ -135,7 +180,9 @@
 			}
 		},
 		{
-			"include": ["**/*.{ts,tsx}"],
+			"include": [
+				"**/*.{ts,tsx}"
+			],
 			"javascript": {
 				"globals": [
 					"onscrollend",

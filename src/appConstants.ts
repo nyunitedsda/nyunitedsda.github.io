@@ -1,1 +1,1 @@
-export const WEBSITE_TITLE = 'NY United SDA Church'
+export const WEBSITE_TITLE = "NY United SDA Church";

@@ -5,9 +5,9 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 // Create a theme instance with spiritual and welcoming colors
 const theme = responsiveFontSizes(
 	createTheme({
-    colorSchemes:{
-      dark: true
-    },
+		colorSchemes: {
+			dark: true,
+		},
 		palette: {
 			primary: {
 				main: "#187cc2", // Deep purple - represents spirituality
