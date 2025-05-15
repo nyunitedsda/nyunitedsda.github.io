@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { SxProps, Theme } from '@mui/material/styles';
 import { type FC } from 'react';

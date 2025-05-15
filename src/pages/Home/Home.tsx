@@ -1,8 +1,6 @@
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import { type FC, useState } from "react";
+import { Container, Grid, Stack, Typography } from "@mui/material";
+import { type FC } from "react";
 
-import { AccessTime, CalendarToday, Notifications } from "@mui/icons-material";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import MinistryCard from "./components/MinistryCard";
 import { ministries } from "./constants";
 // import Link from "next/link"
@@ -72,9 +70,9 @@ const Home: FC = () => {
           sx={{
             alignItems: { xs: 'center', md: 'flex-start' },
             '& .MuiPaper-root': {
-            height: theme => `${theme.spacing(36)}`,
-            maxWidth: {md: '32%' }
-          },
+              height: theme => `${theme.spacing(36)}`,
+              maxWidth: { md: '32%' }
+            },
           }}
           flexWrap="wrap"
           gap={2}

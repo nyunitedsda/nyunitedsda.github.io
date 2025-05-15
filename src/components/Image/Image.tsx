@@ -2,8 +2,6 @@ import { Box } from '@mui/material';
 import { type FC } from 'react';
 import type { ImageProps } from './types';
 
-
-
 const Image: FC<ImageProps> = ({ root, image }) => {
 
   return (

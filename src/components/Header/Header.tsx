@@ -1,11 +1,4 @@
-"use client";
-
 import {
-	Article,
-	ChevronRight,
-	ContactMail,
-	Home,
-	LiveTv,
 	Login,
 	Menu,
 } from "@mui/icons-material";
@@ -16,23 +9,19 @@ import {
 	Container,
 	Drawer,
 	IconButton,
-	List,
-	ListItem,
-	ListItemText,
 	type SxProps,
 	type Theme,
 	Toolbar,
 	Typography,
-	useMediaQuery,
-	useTheme,
 } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 // import Link from "next/link"
-// import { usePathname } from "next/navigation"
 import logo from "../../assets/img/NY United Logo small.png";
 import navItems from "../../constants/navItems";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import MenuDrawer from "./MenuDrawer";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -45,63 +34,16 @@ const LOGIN = "Login";
 
 export default function Header() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
-	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-	// const pathname = usePathname()
+	const { pathname } = useLocation();
 
-	const handleDrawerToggle = () => {
+	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen(!drawerOpen);
-	};
+	}, []);
 
-	const isActive = (path: string) => {
-		// return pathname === path
-	};
+	const isActive = useCallback((path: string) => {
+		return pathname === path
+	}, []);
 
-	const drawer = (
-		<Box onClick={handleDrawerToggle} sx={{ textAlign: "center", width: 250 }}>
-			<Typography
-				variant="h6"
-				sx={{ my: 2, fontWeight: "bold", color: "primary.main" }}
-			>
-				{WEBSITE_TITLE}
-			</Typography>
-			<List>
-				{navItems.map((item) => (
-					<ListItem
-						key={item.name}
-						component={"a"}
-						// component={Link}
-						href={item.path}
-						sx={{
-							// color: isActive(item.path) ? "primary.main" : "text.primary",
-							// bgcolor: isActive(item.path) ? "action.selected" : "transparent",
-							"&:hover": { bgcolor: "action.hover" },
-						}}
-					>
-						<Box sx={{ mr: 2 }}>{item.icon}</Box>
-						<ListItemText primary={item.name} />
-						{/* {isActive(item.path) && <ChevronRight />} */}
-					</ListItem>
-				))}
-				<ListItem
-					// component={Link}
-					component={"a"}
-					href="/login"
-					sx={{
-						// color: isActive("/login") ? "primary.main" : "text.primary",
-						// bgcolor: isActive("/login") ? "action.selected" : "transparent",
-						"&:hover": { bgcolor: "action.hover" },
-					}}
-				>
-					<Box sx={{ mr: 2 }}>
-						<Login />
-					</Box>
-					<ListItemText primary="Login" />
-					{/* {isActive("/login") && <ChevronRight />} */}
-				</ListItem>
-			</List>
-		</Box>
-	);
 
 	return (
 		<AppBar
@@ -165,21 +107,21 @@ export default function Header() {
 								sx={{
 									my: 2,
 									mx: 1,
-									// color: isActive(item.path) ? "primary.main" : "text.primary",
+									color: isActive(item.path) ? "primary.main" : "text.primary",
 									display: "flex",
-									// fontWeight: isActive(item.path) ? "bold" : "medium",
-									// "&:after": isActive(item.path)
-									//   ? {
-									//       content: '""',
-									//       position: "absolute",
-									//       bottom: 0,
-									//       left: "25%",
-									//       width: "50%",
-									//       height: "3px",
-									//       bgcolor: "primary.main",
-									//       borderRadius: "3px 3px 0 0",
-									//     }
-									//   : {},
+									fontWeight: isActive(item.path) ? "bold" : "medium",
+									"&:after": isActive(item.path)
+										? {
+											content: '""',
+											position: "absolute",
+											bottom: 0,
+											left: "25%",
+											width: "50%",
+											height: "3px",
+											bgcolor: "primary.main",
+											borderRadius: "3px 3px 0 0",
+										}
+										: {},
 								}}
 							>
 								{item.name}
@@ -187,14 +129,14 @@ export default function Header() {
 						))}
 					</Box>
 
-					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+					<Box sx={{ display: { xs: "none", md: "flex" }, px: 2 }}>
 						<ThemeToggleButton />
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
 							// component={Link}
 							href="/login"
-							// variant={isActive("/login") ? "contained" : "outlined"}
+							variant={isActive("/login") ? "contained" : "text"}
 							color="primary"
 							startIcon={<Login />}
 							sx={{ display: { xs: "none", md: "flex" } }}
@@ -213,7 +155,12 @@ export default function Header() {
 					keepMounted: true, // Better open performance on mobile.
 				}}
 			>
-				{drawer}
+				<MenuDrawer
+					isActive={isActive}
+					menuItems={navItems}
+					toggleDrawer={handleDrawerToggle}
+					title={WEBSITE_TITLE}
+				/>
 			</Drawer>
 		</AppBar>
 	);
