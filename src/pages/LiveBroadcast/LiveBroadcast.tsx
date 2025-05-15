@@ -2,9 +2,9 @@
 
 import CountdownTimer from '../../components/CountdownTimer/CountdownTimer'
 import { Box, Container, Grid, Paper, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect, useState, type FC } from "react"
 
-export default function LivePage() {
+const LiveBroadcast: FC = () => {
   const [isLive, setIsLive] = useState(false)
   const [nextServiceDate, setNextServiceDate] = useState(new Date("2023-05-21T09:00:00"))
 
@@ -56,6 +56,7 @@ export default function LivePage() {
             </Paper>
             <Typography variant="body1" sx={{ mt: 3, textAlign: "center" }}>
               If you're having trouble with the stream, please refresh the page or visit our{" "}
+              {/* TODO: Get church Youtube channel */}
               <a href="https://youtube.com/@example-church" target="_blank" rel="noopener noreferrer">
                 YouTube channel
               </a>{" "}
@@ -83,6 +84,7 @@ export default function LivePage() {
                 <Box sx={{ position: "relative", paddingTop: "56.25%", width: "100%" }}>
                   <iframe
                     style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                    // Ensure this is working 
                     src="https://www.youtube.com/embed/videoseries?list=PL-example-church-playlist"
                     title="YouTube video player"
                     frameBorder="0"
@@ -100,3 +102,6 @@ export default function LivePage() {
     </Box>
   )
 }
+
+
+export default LiveBroadcast
