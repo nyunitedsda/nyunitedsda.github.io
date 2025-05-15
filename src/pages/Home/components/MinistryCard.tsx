@@ -25,6 +25,8 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
         sx: {
           bgcolor: "primary.main",
           color: "primary.contrastText",
+          
+          
         },
       }}
       content={
@@ -40,9 +42,9 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
       }
       actions={
         image ? (
-          <Stack width={'100%'} direction={'row'} justifyContent={'center'}>
+          // <Stack width={'100%'} direction={'row'} justifyContent={'center'}>
             <Image {...image} />
-          </Stack>
+          // </Stack>
         ) : undefined
       }
     />

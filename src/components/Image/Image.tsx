@@ -8,7 +8,7 @@ const Image: FC<ImageProps> = ({ root, image }) => {
 
   return (
     <Box {...root}>
-      <img {...image} />
+      <img {...image} style={{ objectFit: 'scale-down', maxWidth: '100%', height: 'auto' }} />
     </Box>
   );
 };

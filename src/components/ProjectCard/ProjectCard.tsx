@@ -29,7 +29,7 @@ const cardSx: SxProps<Theme> = (theme) => ({
 
 const ProjectCard: FC<CardProps> = ({ actions, content, header }) => {
 	return (
-		<Card sx={cardSx}>
+		<Card sx={cardSx} className="card-animation">
 			<CardHeader {...header} />
 			{content && (
 				<CardContent sx={{ flexGrow: 1, overflowY: "auto" }}>
