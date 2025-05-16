@@ -9,6 +9,7 @@ import type { MinistryCardProps } from './types';
 const contentSx: SxProps<Theme> = {
   display: "flex",
   alignItems: "center",
+  overflow: 'hidden',
   "& a": {
     textDecoration: "none",
     color: "primary.main",
@@ -23,9 +24,7 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
         ...header,
         sx: {
           bgcolor: "primary.main",
-          color: "primary.contrastText",
-          
-          
+          color: "primary.contrastText",         
         },
       }}
       content={
@@ -39,13 +38,7 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
           </Typography>
         </Box>
       }
-      actions={
-        image ? (
-          // <Stack width={'100%'} direction={'row'} justifyContent={'center'}>
-            <Image {...image} />
-          // </Stack>
-        ) : undefined
-      }
+      actions={ image ? (<Image {...image} /> ) : undefined }
     />
   );
 };

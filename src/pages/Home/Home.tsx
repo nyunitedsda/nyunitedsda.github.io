@@ -1,10 +1,40 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import { Container, Grid, Stack, type SxProps, type Theme, Typography } from "@mui/material";
 import { type FC } from "react";
 
 import MinistryCard from "./components/MinistryCard";
 import { ministries } from "./constants";
 // import Link from "next/link"
 // import Image from "next/image"
+
+const imageRootSx: SxProps<Theme> = {
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  height: theme => `${theme.spacing(11)}`,
+  p: 1,
+}
+
+const cardContainerSx: SxProps<Theme> = {
+  alignItems: { xs: 'center', md: 'flex-start' },
+  flexWrap: "wrap",
+  gap: 2,
+  width: "100%",
+  '& .MuiPaper-root': {
+    height: theme => `${theme.spacing(36)}`,
+    maxWidth: { md: '32%' }
+  },
+  '& .MuiCardActions-root': {
+    p: 0,
+  },
+}
+
+const titleSx: SxProps<Theme> = {
+  mb: 4,
+  fontWeight: "bold",
+  color: "primary.main",
+  textAlign: 'center',
+  width: '100%',
+}
 
 const MINISTRIES_HEADER = "Ministries Links";
 
@@ -56,43 +86,25 @@ const Home: FC = () => {
 
       <Grid size={{ xs: 12 }}>
         <Typography
-          width={"100%"}
-          textAlign={"center"}
           variant="h4"
           component="h2"
-          sx={{ mb: 4, fontWeight: "bold", color: "primary.main" }}
+          sx={titleSx}
         >
           {MINISTRIES_HEADER}
         </Typography>
 
         <Stack
           direction={{ xs: 'column', md: 'row' }}
-          sx={{
-            alignItems: { xs: 'center', md: 'flex-start' },
-            '& .MuiPaper-root': {
-              height: theme => `${theme.spacing(36)}`,
-              maxWidth: { md: '32%' }
-            },
-          }}
-          flexWrap="wrap"
-          gap={2}
-          width="100%"
+          sx={cardContainerSx}
         >
           {ministries.map((i) => (
-            // <Stack key={i.title} className="card-animation">
             <MinistryCard {...{
               header: { title: i.title },
               content: i.content,
               link: i.link,
               image: {
                 root: {
-                  sx: {
-                    // height: theme => `${theme.spacing(12)}`,
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    height: theme => `${theme.spacing(11)}`
-                  }
+                  sx: imageRootSx
                 },
                 image: {
                   src: i.image,
@@ -100,10 +112,7 @@ const Home: FC = () => {
                 }
               }
             }} key={`${i.title} image`}
-
             />
-
-            // </Stack>
           ))}
         </Stack>
       </Grid>
