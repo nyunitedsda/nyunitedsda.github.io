@@ -50,7 +50,7 @@ const SOCIAL_MEDIA = [
 	},
 	{
 		label: "YouTube",
-		href: "https://youtube.com",
+		href: "https://www.youtube.com/@newyorkunitedchurch3756",
 		icon: <YouTube />,
 	},
 ];

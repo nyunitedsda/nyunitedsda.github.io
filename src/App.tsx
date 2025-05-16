@@ -4,6 +4,8 @@ import { useRoutes } from "react-router";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import routes from "./constants/routes";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const rootSx: SxProps<Theme> = {
   width: "100%",
