@@ -30,6 +30,8 @@ const footerSx: SxProps<Theme> = {
 	color: "white",
 	p: 2,
 	width: "100%",
+	bottom: 0, 
+	position: 'sticky',
 };
 
 const SOCIAL_MEDIA = [

@@ -6,6 +6,7 @@ import Image from '../../components/Image/Image';
 import MinistryCard from "./components/MinistryCard";
 import { ministries } from "./constants";
 import sliderImages from "./sliderImages";
+import Footer from "../../components/Footer/Footer";
 
 const imageRootSx: SxProps<Theme> = {
   width: '100%',
@@ -155,6 +156,8 @@ const Home: FC = () => {
           ))}
         </Stack>
       </Grid>
+
+      <Footer />
     </Container>
 
   );

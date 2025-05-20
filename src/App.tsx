@@ -1,5 +1,5 @@
 import { Grid, Stack, type SxProps, type Theme } from "@mui/material";
-import { type FC } from "react";
+import { useEffect, type FC } from "react";
 import { useRoutes } from "react-router";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -20,6 +20,9 @@ const FOOTER_SIZE = 250;
 const App: FC = () => {
   const element = useRoutes(routes);
 
+  useEffect(() => {
+    
+  }, []);
   return (
     <Grid
       container
@@ -31,6 +34,7 @@ const App: FC = () => {
         sx={{
           flexGrow: 1,
           minHeight: `calc(100vh - ${HEADER_SIZE + FOOTER_SIZE}px)`,
+          height: '100%',
           width: "100%",
         }}
       >
