@@ -41,7 +41,7 @@ const App: FC = () => {
         {element}
       </Stack>
 
-      <Footer />
+      {/* <Footer /> */}
     </Grid>
   );
 };
