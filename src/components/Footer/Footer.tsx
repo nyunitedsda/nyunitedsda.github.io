@@ -1,10 +1,6 @@
 import {
 	Email,
-	Facebook,
-	Instagram,
 	Phone,
-	Twitter,
-	YouTube,
 } from "@mui/icons-material";
 import {
 	Box,
@@ -14,51 +10,29 @@ import {
 	IconButton,
 	List,
 	ListItem,
-	Link as MuiLink,
 	type SxProps,
 	type Theme,
 	Typography,
 } from "@mui/material";
+import type { FC } from "react";
 import { WEBSITE_TITLE } from "../../appConstants";
 import contactInfo from "../../constants/contactInfo";
 import navItems from "../../constants/navItems";
 import services from "../../constants/services";
-// import Link from "next/link"
+import socialMediaInfo from "./socialMediaInfo";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.dark",
 	color: "white",
 	p: 2,
 	width: "100%",
-	bottom: 0, 
+	bottom: 0,
 	position: 'sticky',
 };
 
-const SOCIAL_MEDIA = [
-	{
-		label: "Facebook",
-		href: "https://facebook.com",
-		icon: <Facebook />,
-	},
-	{
-		label: "Instagram",
-		href: "https://instagram.com",
-		icon: <Instagram />,
-	},
-	{
-		label: "Twitter",
-		href: "https://twitter.com",
-		icon: <Twitter />,
-	},
-	{
-		label: "YouTube",
-		href: "https://www.youtube.com/@newyorkunitedchurch3756",
-		icon: <YouTube />,
-	},
-];
+const MOTTO = "A place of worship, community, and spiritual growth.";
 
-const MOTO = "A place of worship, community, and spiritual growth.";
-export default function Footer() {
+const Footer: FC = () => {
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
@@ -68,10 +42,10 @@ export default function Footer() {
 							{WEBSITE_TITLE}
 						</Typography>
 						<Typography variant="body2" sx={{ mb: 2 }}>
-							{MOTO}
+							{MOTTO}
 						</Typography>
 						<Box sx={{ display: "flex", gap: 1 }}>
-							{SOCIAL_MEDIA.map((i) => (
+							{socialMediaInfo.map((i) => (
 								<IconButton
 									key={i.label}
 									color="inherit"
@@ -173,3 +147,5 @@ export default function Footer() {
 		</Box>
 	);
 }
+
+export default Footer

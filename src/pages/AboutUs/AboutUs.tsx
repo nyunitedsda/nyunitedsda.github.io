@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 const AboutUs: FC = () => {
 	return <div>AboutUs Component</div>;
