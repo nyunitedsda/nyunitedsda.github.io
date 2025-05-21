@@ -17,7 +17,6 @@ import {
 import { useCallback, useState } from "react";
 import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
-// import Link from "next/link"
 import logo from "../../assets/img/NY United Logo small.png";
 import navItems from "../../constants/navItems";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
@@ -28,6 +27,19 @@ const brandingSx: SxProps<Theme> = {
 	fontWeight: 700,
 	textDecoration: "none",
 };
+
+const logoSx: SxProps<Theme> = {
+	flexGrow: 1,
+	display: { xs: "flex" },
+	alignItems: "center",
+	gap: 2,
+}
+
+const menuSx: SxProps<Theme> = {
+	flexGrow: 1,
+	display: { xs: "none", md: "flex" },
+	justifyContent: "center",
+}
 
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
@@ -55,17 +67,13 @@ export default function Header() {
 			<Container maxWidth="lg">
 				<Toolbar disableGutters>
 					<Box
-						sx={{
-							flexGrow: 1,
-							display: { xs: "flex" },
-							alignItems: "center",
-							gap: 2,
-						}}
+						sx={logoSx}
 					>
 						{/* Logo */}
 						<Box sx={{ display: { xs: "none", md: "flex" } }}>
 							<img src={logo} alt={LOGO_ALT} height={38} />
 						</Box>
+
 						{/* Mobile Hamburger Menu */}
 						<IconButton
 							sx={{ display: { xs: "flex", md: "none" } }}
@@ -81,7 +89,6 @@ export default function Header() {
 						{/* Company branding */}
 						<Typography
 							variant="h6"
-							// component={Link}
 							component={"a"}
 							href="/"
 							color="primary"
@@ -93,16 +100,11 @@ export default function Header() {
 
 					{/* Menu */}
 					<Box
-						sx={{
-							flexGrow: 1,
-							display: { xs: "none", md: "flex" },
-							justifyContent: "center",
-						}}
+						sx={menuSx}
 					>
 						{navItems.map((item) => (
 							<Button
 								key={item.name}
-								// component={Link}
 								href={item.path}
 								sx={{
 									my: 2,
@@ -134,7 +136,6 @@ export default function Header() {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
-							// component={Link}
 							href="/login"
 							variant={isActive("/login") ? "contained" : "text"}
 							color="primary"

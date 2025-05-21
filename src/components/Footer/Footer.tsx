@@ -26,13 +26,22 @@ const footerSx: SxProps<Theme> = {
 	color: "white",
 	p: 2,
 	width: "100%",
-	// bottom: 0,
-	// position: 'sticky',
 };
 
+const listSx: SxProps<Theme> = {
+	listStyle: "none",
+	p: 0,
+	m: 0,
+	"& a": { color: "inherit" },
+}
+
 const MOTTO = "A place of worship, community, and spiritual growth.";
+const QUICK_LINKS = 'Quick Links'
+const SERVICE_TIMES = 'Service Times'
+const CONTACT_US = 'Contact Us'
 
 const Footer: FC = () => {
+
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
@@ -63,17 +72,12 @@ const Footer: FC = () => {
 
 					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
 						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							Quick Links
+							{QUICK_LINKS}
 						</Typography>
 						<List
 							dense
 							component="ul"
-							sx={{
-								listStyle: "none",
-								p: 0,
-								m: 0,
-								"& a": { color: "inherit" },
-							}}
+							sx={listSx}
 						>
 							{navItems.map((i) => (
 								<ListItem
@@ -91,7 +95,7 @@ const Footer: FC = () => {
 					{/* Services */}
 					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
 						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							Service Times
+							{SERVICE_TIMES}
 						</Typography>
 						{services.map((i) => (
 							<Typography key={i.title} variant="body2" sx={{ mb: 1 }}>
@@ -103,7 +107,7 @@ const Footer: FC = () => {
 					{/* Contacts */}
 					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
 						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							Contact Us
+							{CONTACT_US}
 						</Typography>
 
 						<Typography variant="body2" sx={{ mb: 1 }}>

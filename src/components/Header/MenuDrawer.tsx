@@ -6,35 +6,41 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { type FC, type ReactNode } from 'react';
-import type { NavItem } from '../../constants/navItems';
+import type { SxProps, Theme } from '@mui/material/styles';
+import { memo, type FC } from 'react';
+import type { MenuDrawerProps } from './types';
 
-export interface MenuDrawerProps {
-  menuItems: NavItem[];
-  title: ReactNode;
-  isActive: (path: string) => boolean;
-  toggleDrawer: () => void;
+const rootSx: SxProps<Theme> = {
+  textAlign: "center",
+  width: 250,
+  height: '100%',
+  p: 1,
+  pt: 0
 }
 
-const MenuDrawer: FC<MenuDrawerProps> = (props) => {
-  const { isActive, toggleDrawer, title, menuItems } = props;
-  return (
+const MenuDrawer: FC<MenuDrawerProps> = ({ isActive, toggleDrawer, title, menuItems }) => {
 
-    <Stack onClick={toggleDrawer} sx={{ textAlign: "center", width: 250, height: '100%', p: 1, pt: 0 }}>
-      <Stack sx={{height: theme => `${theme.spacing(8)}`, borderBottom: theme => `1px solid ${theme.palette.divider}`, justifyContent: 'center'}}>
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: "bold", color: "primary.main" }}
+  return (
+    <Stack onClick={toggleDrawer} sx={rootSx}
+    >
+      <Stack sx={{
+        height: theme => `${theme.spacing(8)}`,
+        borderBottom: theme => `1px solid ${theme.palette.divider}`,
+        justifyContent: 'center'
+      }}
       >
-        {title}
-      </Typography>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: "bold", color: "primary.main" }}
+        >
+          {title}
+        </Typography>
       </Stack>
       <List>
         {menuItems.map((item) => (
           <ListItem
             key={item.name}
             component={"a"}
-            // component={Link}
             href={item.path}
             sx={{
               color: isActive(item.path) ? "primary.main" : "text.primary",
@@ -48,7 +54,6 @@ const MenuDrawer: FC<MenuDrawerProps> = (props) => {
           </ListItem>
         ))}
         <ListItem
-          // component={Link}
           component={"a"}
           href="/login"
           sx={{
@@ -69,4 +74,4 @@ const MenuDrawer: FC<MenuDrawerProps> = (props) => {
 
 };
 
-export default MenuDrawer;
+export default memo(MenuDrawer);

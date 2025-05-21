@@ -1,26 +1,14 @@
 import { Stack } from "@mui/material";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import services from "../../constants/services";
 import { HEADER, SERVICES, SUBHEADER, aboutContent, details, organization, organizationContent } from "./constants";
 
-
-
-
 const AboutUs: FC = () => {
 	return (
 		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
-
-			{/* // <Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}>
-		// 	<Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: "bold", color: "primary.main" }}>
-		// 		{HEADER}
-		// 	</Typography>
-		// 	<Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
-		// 		{SUBHEADER}
-		// 	</Typography> */}
 
 			<Stack spacing={2}>
 				{
@@ -58,14 +46,13 @@ const AboutUs: FC = () => {
 					</Typography>
 
 					{services.map((i) => (
-						<Typography key={i.title} variant="body1" sx={{ mb: 0, '& i': { color: 'text.secondary' } }}>
+						<Typography key={i.title} variant="body1" sx={{ '& i': { color: 'text.secondary' } }}>
 							<i style={{ fontWeight: 'bold', }}>{`${i.title}: `}</i>{i.time}
 						</Typography>
 					))}
 				</Stack>
 
 			</Stack>
-		{/* </Container> */}
 		</PageWrapper >
 	);
 };
