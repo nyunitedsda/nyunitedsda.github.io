@@ -21,6 +21,7 @@ import logo from "../../assets/img/NY United Logo small.png";
 import navItems from "../../constants/navItems";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
+import { BASE_URL } from "../../constants/routes";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -90,7 +91,7 @@ export default function Header() {
 						<Typography
 							variant="h6"
 							component={"a"}
-							href="/"
+							href={`${BASE_URL}/`}
 							color="primary"
 							sx={brandingSx}
 						>
@@ -136,7 +137,7 @@ export default function Header() {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
-							href="/login"
+							href={`${BASE_URL}/login`}
 							variant={isActive("/login") ? "contained" : "text"}
 							color="primary"
 							startIcon={<Login />}

@@ -1,8 +1,13 @@
 {
 	"name": "nyunitedsda",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"type": "module",
+	"repository": "https://github.com/nhope123/nyunitedsda.git",
+	"description": "",
+	"homepage": "https://nhope123.github.io/nyunitedsda/",
+	"keywords": [],
+	"author": "Nial Hope",
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
