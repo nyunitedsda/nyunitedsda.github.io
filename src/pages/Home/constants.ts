@@ -45,21 +45,21 @@ export const ministries = [
 		title: "Revive Reform Ministry",
 		content:
 			"Revive Reform Radio streaming 24/7 Christian internet radio with music, seminars, live talk, natural health, and much more. ",
-		link: "http://www.revivereform.org/Radio/tabid/169/Default.aspx",
-		image: "http://nyunitedsda.org/portals/0/RRR%20welcome%20radio%202%20s.jpg",
+		link: "https://revivereform.org/radio/",
+		image: "https://www.elasticplayer.xyz/storage/logo_radio_121.jpg?1490111417975",
 	},
 	{
 		title: "Free SDA Church",
 		content:
 			" International Association of Free Seventh-day Adventists is a network of self-supporting SDA churches and ministries worldwide.",
 		link: "http://www.freesda.org/",
-		image: "http://nyunitedsda.org/portals/0/Free%20church%20logo.jpg",
+		image: "https://www.freesda.org/images/3Angels_website.jpg",
 	},
 	{
 		title: "Amazing Facts",
 		content:
 			"Amazing Facts is a multifaceted, soul-winning ministry committed to proclaiming the gospel and the three angels’ messages of Revelation 14",
 		link: "https://www.amazingfacts.org/",
-		image: "http://nyunitedsda.org/portals/0/af-logo-full.png",
+		image: "https://manna.amazingfacts.org/amazingfacts/website/amazingfacts/images/skin/2018/amazing-facts-logo.png",
 	},
 ];
