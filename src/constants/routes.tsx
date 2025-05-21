@@ -5,7 +5,7 @@ import LiveBroadcast from "../pages/LiveBroadcast/LiveBroadcast";
 import Blog from "../pages/Blog/Blog";
 import Contact from "../pages/Contact/Contact";
 
-export const BASE_URL = "/nyunitedsda";
+export const BASE_URL =  "/nyunitedsda";
 
 const routes: RouteObject[] = [
 	{
@@ -16,12 +16,12 @@ const routes: RouteObject[] = [
 	{
 		element: <LiveBroadcast />,
 		index: true,
-		path: `${BASE_URL}/live-broadcast`,
+		path: `${BASE_URL}/liveBroadcast`,
 	},
 	{
 		element: <AboutUs />,
 		index: true,
-		path: `${BASE_URL}/about-us"`,
+		path: `${BASE_URL}/aboutUs"`,
 	},
 	{
 		element: <Blog />,

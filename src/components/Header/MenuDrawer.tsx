@@ -18,6 +18,9 @@ const rootSx: SxProps<Theme> = {
 	pt: 0,
 };
 
+export const BASE_URL = "/nyunitedsda";
+const LOGIN_URL = `${BASE_URL}/login`;
+
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
 	toggleDrawer,
@@ -59,10 +62,10 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				))}
 				<ListItem
 					component={"a"}
-					href="/login"
+					href={LOGIN_URL}
 					sx={{
-						color: isActive("/login") ? "primary.main" : "text.primary",
-						bgcolor: isActive("/login") ? "action.selected" : "transparent",
+						color: isActive(LOGIN_URL) ? "primary.main" : "text.primary",
+						bgcolor: isActive(LOGIN_URL) ? "action.selected" : "transparent",
 						"&:hover": { bgcolor: "action.hover" },
 					}}
 				>
@@ -70,7 +73,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						<Login />
 					</Box>
 					<ListItemText primary="Login" />
-					{isActive("/login") && <ChevronRight />}
+					{isActive(LOGIN_URL) && <ChevronRight />}
 				</ListItem>
 			</List>
 		</Stack>

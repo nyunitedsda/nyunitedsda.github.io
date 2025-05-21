@@ -16,9 +16,9 @@ import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
 import navItems from "../../constants/navItems";
+import { BASE_URL } from "../../constants/routes";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
-import { BASE_URL } from "../../constants/routes";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -129,6 +129,7 @@ export default function Header() {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
+							disabled
 							href={`${BASE_URL}/login`}
 							variant={isActive(`${BASE_URL}/login`) ? "contained" : "text"}
 							color="primary"
