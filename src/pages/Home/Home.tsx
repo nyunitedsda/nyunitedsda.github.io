@@ -2,7 +2,6 @@ import { Container, Grid, Stack, type SxProps, type Theme, Typography } from "@m
 import { type FC } from "react";
 
 import Slider from "react-slick";
-import Footer from "../../components/Footer/Footer";
 import Image from '../../components/Image/Image';
 import MinistryCard from "./components/MinistryCard";
 import { ministries } from "./constants";

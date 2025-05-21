@@ -23,7 +23,7 @@ const SUBHEADER = 'Insights, reflections, and spiritual guidance from our church
 
 const Blog: FC = () => {
   const [page, setPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState<number>(DEFAULT_POST_PER_PAGE);
+  const [postsPerPage, _setPostsPerPage] = useState<number>(DEFAULT_POST_PER_PAGE);
 
   const totalPages = useMemo(() => Math.ceil(blogPosts.length / postsPerPage), [blogPosts, postsPerPage])
 

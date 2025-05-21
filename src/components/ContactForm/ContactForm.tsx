@@ -1,4 +1,15 @@
-import { Box, Button, Card, CardActions, CardContent, Paper, Stack, type SxProps, TextField, type Theme, useMediaQuery, useTheme } from '@mui/material';
+import { 
+  Button, 
+  Card, 
+  CardActions, 
+  CardContent, 
+  Stack, 
+  type SxProps, 
+  TextField, 
+  type Theme, 
+  useMediaQuery, 
+  useTheme
+ } from '@mui/material';
 import { type FC, useCallback, useMemo } from 'react';
 
 const contentSx: SxProps<Theme> = {

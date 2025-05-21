@@ -5,31 +5,33 @@ import LiveBroadcast from "../pages/LiveBroadcast/LiveBroadcast";
 import Blog from "../pages/Blog/Blog";
 import Contact from "../pages/Contact/Contact";
 
+export const BASE_URL = 'nyunitedsda'
+
 const routes: RouteObject[] = [
 	{
 		element: <Home />,
 		index: true,
-		path: "/",
+		path: `/${BASE_URL}/`,
 	},
 	{
 		element: <LiveBroadcast />,
 		index: true,
-		path: "/live-broadcast",
+		path: `/${BASE_URL}/live-broadcast`,
 	},
 	{
 		element: <AboutUs />,
 		index: true,
-		path: "/about-us",
+		path: `${BASE_URL}/about-us"`
 	},
 	{
 		element: <Blog/>,
 		index: true,
-		path: "/blog",
+		path: `${BASE_URL}/blog"`
 	}, 
 	{
 		element: <Contact/>,
 		index: true,
-		path: '/contact'
+		path: `${BASE_URL}/contact`
 	}
 ];
 
