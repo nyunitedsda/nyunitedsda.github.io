@@ -15,6 +15,8 @@ const rootSx: SxProps<Theme> = {
 const App: FC = () => {
 	const element = useRoutes(routes);
 
+  console.table(routes)
+
 	useEffect(() => {}, []);
 	return (
 		<Grid container sx={rootSx}>

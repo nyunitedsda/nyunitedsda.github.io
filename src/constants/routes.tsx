@@ -5,7 +5,7 @@ import LiveBroadcast from "../pages/LiveBroadcast/LiveBroadcast";
 import Blog from "../pages/Blog/Blog";
 import Contact from "../pages/Contact/Contact";
 
-export const BASE_URL =  "/nyunitedsda";
+export const BASE_URL = "/nyunitedsda";
 
 const routes: RouteObject[] = [
 	{
