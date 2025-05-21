@@ -34,7 +34,7 @@ body {
 
 /* Smooth scrolling */
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 /* Custom scrollbar
@@ -57,109 +57,109 @@ html {
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .welcome-text {
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+	opacity: 0;
+	animation: fadeIn 1s ease-in-out forwards;
 }
 
 .welcome-text:nth-child(2) {
-  animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 
 .welcome-text:nth-child(3) {
-  animation-delay: 0.6s;
+	animation-delay: 0.6s;
 }
 
 .card-animation {
-  opacity: 0;
-  animation: scaleIn 0.8s ease-in-out forwards;
+	opacity: 0;
+	animation: scaleIn 0.8s ease-in-out forwards;
 }
 
 .card-animation:nth-child(1) {
-  animation-delay: 0.1s;
+	animation-delay: 0.1s;
 }
 
 .card-animation:nth-child(2) {
-  animation-delay: 0.25s;
+	animation-delay: 0.25s;
 }
 
 .card-animation:nth-child(3) {
-  animation-delay: 0.4s;
+	animation-delay: 0.4s;
 }
 
 .blog-card {
-  opacity: 0;
-  animation: scaleIn 0.8s ease-in-out forwards;
+	opacity: 0;
+	animation: scaleIn 0.8s ease-in-out forwards;
 }
 
 .blog-card:nth-child(1) {
-  animation-delay: 0.1s;
+	animation-delay: 0.1s;
 }
 
 .blog-card:nth-child(2) {
-  animation-delay: 0.25s;
+	animation-delay: 0.25s;
 }
 
 .blog-card:nth-child(3) {
-  animation-delay: 0.4s;
+	animation-delay: 0.4s;
 }
 
 .blog-card:nth-child(4) {
-  animation-delay: 0.55s;
+	animation-delay: 0.55s;
 }
 
 .contact-animation {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in-out forwards;
+	opacity: 0;
+	animation: fadeIn 0.8s ease-in-out forwards;
 }
 
 .contact-animation:nth-child(1) {
-  animation-delay: 0.1s;
+	animation-delay: 0.1s;
 }
 
 .contact-animation:nth-child(2) {
-  animation-delay: 0.25s;
+	animation-delay: 0.25s;
 }
 
 .contact-animation:nth-child(3) {
-  animation-delay: 0.4s;
+	animation-delay: 0.4s;
 }
 
 .fade-in {
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+	opacity: 0;
+	animation: fadeIn 1s ease-in-out forwards;
 }
 
 .fade-in:nth-child(1) {
-  animation-delay: 0.1s;
+	animation-delay: 0.1s;
 }
 
 .fade-in:nth-child(2) {
-  animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 
 .login-animation {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-in-out forwards;
+	opacity: 0;
+	animation: fadeIn 0.8s ease-in-out forwards;
 }

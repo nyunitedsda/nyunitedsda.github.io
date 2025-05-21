@@ -6,26 +6,21 @@ import "slick-carousel/slick/slick.css";
 import routes from "./constants/routes";
 
 const rootSx: SxProps<Theme> = {
-  width: "100%",
-  height: "100%",
-  overflowX: "hidden",
-  overflowY: "auto",
-}
+	width: "100%",
+	height: "100%",
+	overflowX: "hidden",
+	overflowY: "auto",
+};
 
 const App: FC = () => {
-  const element = useRoutes(routes);
+	const element = useRoutes(routes);
 
-  useEffect(() => {
-
-  }, []);
-  return (
-    <Grid
-      container
-      sx={rootSx}
-    >
-      {element}
-    </Grid>
-  );
+	useEffect(() => {}, []);
+	return (
+		<Grid container sx={rootSx}>
+			{element}
+		</Grid>
+	);
 };
 
 export default App;

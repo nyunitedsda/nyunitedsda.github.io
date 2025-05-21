@@ -88,14 +88,14 @@ const theme = responsiveFontSizes(
 			},
 			MuiTextField: {
 				defaultProps: {
-					size: 'small',
+					size: "small",
 					required: true,
-					slotProps:{
-            inputLabel: {
-              shrink: true
-            }
-          },
-				}
+					slotProps: {
+						inputLabel: {
+							shrink: true,
+						},
+					},
+				},
 			},
 			MuiAppBar: {
 				styleOverrides: {

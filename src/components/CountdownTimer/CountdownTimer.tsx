@@ -23,7 +23,7 @@ const clockSx: SxProps<Theme> = {
 	borderRadius: 2,
 	p: 2,
 	minWidth: "80px",
-}
+};
 
 export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -66,20 +66,21 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 		return () => clearInterval(timer);
 	}, [targetDate]);
 
-	const timeUnits = useMemo(() => [
-		{ label: "Days", value: timeLeft.days },
-		{ label: "Hours", value: timeLeft.hours },
-		{ label: "Minutes", value: timeLeft.minutes },
-		{ label: "Seconds", value: timeLeft.seconds },
-	], [timeLeft]);
+	const timeUnits = useMemo(
+		() => [
+			{ label: "Days", value: timeLeft.days },
+			{ label: "Hours", value: timeLeft.hours },
+			{ label: "Minutes", value: timeLeft.minutes },
+			{ label: "Seconds", value: timeLeft.seconds },
+		],
+		[timeLeft],
+	);
 
 	return (
 		<Grid container spacing={2} justifyContent="center">
 			{timeUnits.map((unit) => (
 				<Grid key={unit.label}>
-					<Box
-						sx={clockSx}
-					>
+					<Box sx={clockSx}>
 						<Typography
 							variant="h4"
 							component="div"

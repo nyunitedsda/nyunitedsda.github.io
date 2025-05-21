@@ -20,7 +20,7 @@ const cardSx: SxProps<Theme> = (theme) => ({
 	display: "flex",
 	flexDirection: "column",
 	boxShadow: 5,
-  borderRadius: 1,
+	borderRadius: 1,
 	maxWidth: `${theme.spacing(50)}`,
 	"& .MuiCardHeader-title": {
 		fontSize: "1.25rem",

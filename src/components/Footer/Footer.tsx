@@ -1,7 +1,4 @@
-import {
-	Email,
-	Phone,
-} from "@mui/icons-material";
+import { Email, Phone } from "@mui/icons-material";
 import {
 	Box,
 	Container,
@@ -33,15 +30,14 @@ const listSx: SxProps<Theme> = {
 	p: 0,
 	m: 0,
 	"& a": { color: "inherit" },
-}
+};
 
 const MOTTO = "A place of worship, community, and spiritual growth.";
-const QUICK_LINKS = 'Quick Links'
-const SERVICE_TIMES = 'Service Times'
-const CONTACT_US = 'Contact Us'
+const QUICK_LINKS = "Quick Links";
+const SERVICE_TIMES = "Service Times";
+const CONTACT_US = "Contact Us";
 
 const Footer: FC = () => {
-
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
@@ -74,11 +70,7 @@ const Footer: FC = () => {
 						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
 							{QUICK_LINKS}
 						</Typography>
-						<List
-							dense
-							component="ul"
-							sx={listSx}
-						>
+						<List dense component="ul" sx={listSx}>
 							{navItems.map((i) => (
 								<ListItem
 									component={"a"}
@@ -150,6 +142,6 @@ const Footer: FC = () => {
 			</Container>
 		</Box>
 	);
-}
+};
 
-export default Footer
+export default Footer;

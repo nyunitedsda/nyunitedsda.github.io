@@ -1,7 +1,4 @@
-import {
-	Login,
-	Menu,
-} from "@mui/icons-material";
+import { Login, Menu } from "@mui/icons-material";
 import {
 	AppBar,
 	Box,
@@ -34,13 +31,13 @@ const logoSx: SxProps<Theme> = {
 	display: { xs: "flex" },
 	alignItems: "center",
 	gap: 2,
-}
+};
 
 const menuSx: SxProps<Theme> = {
 	flexGrow: 1,
 	display: { xs: "none", md: "flex" },
 	justifyContent: "center",
-}
+};
 
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
@@ -54,9 +51,8 @@ export default function Header() {
 	}, []);
 
 	const isActive = useCallback((path: string) => {
-		return pathname === path
+		return pathname === path;
 	}, []);
-
 
 	return (
 		<AppBar
@@ -67,9 +63,7 @@ export default function Header() {
 		>
 			<Container maxWidth="lg">
 				<Toolbar disableGutters>
-					<Box
-						sx={logoSx}
-					>
+					<Box sx={logoSx}>
 						{/* Logo */}
 						<Box sx={{ display: { xs: "none", md: "flex" } }}>
 							<img src={logo} alt={LOGO_ALT} height={38} />
@@ -100,9 +94,7 @@ export default function Header() {
 					</Box>
 
 					{/* Menu */}
-					<Box
-						sx={menuSx}
-					>
+					<Box sx={menuSx}>
 						{navItems.map((item) => (
 							<Button
 								key={item.name}
@@ -115,15 +107,15 @@ export default function Header() {
 									fontWeight: isActive(item.path) ? "bold" : "medium",
 									"&:after": isActive(item.path)
 										? {
-											content: '""',
-											position: "absolute",
-											bottom: 0,
-											left: "25%",
-											width: "50%",
-											height: "3px",
-											bgcolor: "primary.main",
-											borderRadius: "3px 3px 0 0",
-										}
+												content: '""',
+												position: "absolute",
+												bottom: 0,
+												left: "25%",
+												width: "50%",
+												height: "3px",
+												bgcolor: "primary.main",
+												borderRadius: "3px 3px 0 0",
+											}
 										: {},
 								}}
 							>
@@ -138,7 +130,7 @@ export default function Header() {
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
 							href={`${BASE_URL}/login`}
-							variant={isActive("/login") ? "contained" : "text"}
+							variant={isActive(`${BASE_URL}/login`) ? "contained" : "text"}
 							color="primary"
 							startIcon={<Login />}
 							sx={{ display: { xs: "none", md: "flex" } }}
