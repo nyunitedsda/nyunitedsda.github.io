@@ -114,7 +114,7 @@ const Footer: FC = () => {
 							{contactInfo.street}
 						</Typography>
 						<Typography variant="body2" sx={{ mb: 1 }}>
-							{`${contactInfo.city}, ${contactInfo.city}, ${contactInfo.country}`}
+							{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
 						</Typography>
 						<Box
 							color="inherit"

@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
   { name: "Watch Live", path: "/live-broadcast", icon: <LiveTv /> },
   { name: "Blog", path: "/blog", icon: <Article /> },
   { name: "About Us", path: "/about-us", icon: <Diversity3Rounded /> },
-  { name: "Contact", path: "/contact", icon: <ContactMail /> },
+  { name: "Contacts", path: "/contact", icon: <ContactMail /> },
 ];
 
 

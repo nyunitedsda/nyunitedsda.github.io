@@ -1,5 +1,5 @@
 interface PageWrapperProps {
-  header: string;
+  header?: string;
   subHeader?: string;
 };
 

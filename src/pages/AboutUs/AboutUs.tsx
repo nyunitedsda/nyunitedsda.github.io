@@ -10,7 +10,7 @@ const AboutUs: FC = () => {
 	return (
 		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
 
-			<Stack spacing={2}>
+			<Stack spacing={2} className="fade-in">
 				{
 					aboutContent.map((i) => (
 						<Typography variant="body1" key={i}>

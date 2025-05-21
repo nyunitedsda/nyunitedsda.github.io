@@ -3,6 +3,10 @@
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState, type FC } from "react";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
+
+const LIVE_SERVICE = "Live Worship Service"
+const NEXT_SERVICE = "Join Us for Our Next Service"
 
 const LiveBroadcast: FC = () => {
 	const [isLive, setIsLive] = useState(false);
@@ -29,22 +33,9 @@ const LiveBroadcast: FC = () => {
 	}, []);
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column" }}>
+		<PageWrapper header={ isLive ? LIVE_SERVICE : NEXT_SERVICE}>
 			<Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}>
-				<Typography
-					variant="h3"
-					component="h1"
-					className="fade-in"
-					sx={{
-						mb: 4,
-						fontWeight: "bold",
-						color: "primary.main",
-						textAlign: "center",
-					}}
-				>
-					{isLive ? "Live Worship Service" : "Join Us for Our Next Service"}
-				</Typography>
-
+				
 				{isLive ? (
 					<Box className="fade-in" sx={{ mt: 4 }}>
 						<Paper
@@ -152,7 +143,7 @@ const LiveBroadcast: FC = () => {
 					</Grid>
 				)}
 			</Container>
-		</Box>
+		</PageWrapper>
 	);
 };
 

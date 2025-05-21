@@ -7,6 +7,7 @@ import Image from '../../components/Image/Image';
 import MinistryCard from "./components/MinistryCard";
 import { ministries } from "./constants";
 import sliderImages from "./sliderImages";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const imageRootSx: SxProps<Theme> = {
   width: '100%',
@@ -54,6 +55,7 @@ const Home: FC = () => {
 
   return (
     <>
+    <PageWrapper >
       <Container maxWidth="lg" sx={{ mb: 8, flexGrow: 1, gap: 2 }}>
         {/* <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 12 }}>
@@ -110,10 +112,8 @@ const Home: FC = () => {
                 }} root={{
                   sx: {
                     height: { xs: theme => `${theme.spacing(30)}`, md: theme => `${theme.spacing(69)}` },
-                    width: '100%',
-                    // borderRadius: 1,                 
+                    width: '100%',                
                     '& img': {
-                      // borderRadius: 1,
                       width: '100%',
                       height: 'auto',
                       objectFit: 'cover !important'
@@ -160,7 +160,7 @@ const Home: FC = () => {
 
 
       </Container>
-      <Footer />
+      </PageWrapper>
     </>
   );
 };

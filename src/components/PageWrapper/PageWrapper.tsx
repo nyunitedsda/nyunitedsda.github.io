@@ -35,16 +35,24 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
     <Stack sx={rootSx}>
       <Header />
       <Container maxWidth="lg" sx={containerSx}>
-        <Stack spacing={2} sx={{ pb: 2 }}>
-          <Typography variant="h3" component="h1" sx={headerSx}>
-            {header}
-          </Typography>
-          {subHeader && (
-            <Typography variant="h6" sx={subHeaderSx}>
-              {subHeader}
-            </Typography>
-          )}
-        </Stack>
+        {
+          (header || subHeader) && (
+            <Stack spacing={2} sx={{ pb: 2 }} className='fade-in'>
+              {
+                header && (
+                  <Typography variant="h3" component="h1" sx={headerSx}>
+                    {header}
+                  </Typography>
+                )
+              }
+              {subHeader && (
+                <Typography variant="h6" sx={subHeaderSx}>
+                  {subHeader}
+                </Typography>
+              )}
+            </Stack>
+          )
+        }
         <Stack sx={{ flexGrow: 1 }}>
           {children}
         </Stack>
