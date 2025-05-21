@@ -16,7 +16,7 @@ export interface NavItem {
 const BASE_URL = "/nyunitedsda";
 
 const navItems: NavItem[] = [
-	{ name: "Home", path: `/`, icon: <Home /> },
+	{ name: "Home", path: `${BASE_URL}/`, icon: <Home /> },
 	{ name: "Watch Live", path: `${BASE_URL}/liveBroadcast`, icon: <LiveTv /> },
 	{ name: "Blog", path: `${BASE_URL}/blog`, icon: <Article /> },
 	{

@@ -15,22 +15,22 @@ const routes: RouteObject[] = [
 	},
 	{
 		element: <LiveBroadcast />,
-		index: true,
+		// index: true,
 		path: `${BASE_URL}/liveBroadcast`,
 	},
 	{
 		element: <AboutUs />,
-		index: true,
+		// index: true,
 		path: `${BASE_URL}/aboutUs"`,
 	},
 	{
 		element: <Blog />,
-		index: true,
+		// index: true,
 		path: `${BASE_URL}/blog"`,
 	},
 	{
 		element: <Contact />,
-		index: true,
+		// index: true,
 		path: `${BASE_URL}/contact`,
 	},
 ];
