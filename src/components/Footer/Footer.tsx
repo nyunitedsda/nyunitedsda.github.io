@@ -26,8 +26,8 @@ const footerSx: SxProps<Theme> = {
 	color: "white",
 	p: 2,
 	width: "100%",
-	bottom: 0,
-	position: 'sticky',
+	// bottom: 0,
+	// position: 'sticky',
 };
 
 const MOTTO = "A place of worship, community, and spiritual growth.";
