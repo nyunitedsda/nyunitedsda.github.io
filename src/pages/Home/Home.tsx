@@ -1,4 +1,5 @@
 import {
+	Button,
 	Container,
 	Grid,
 	Stack,
@@ -8,12 +9,14 @@ import {
 } from "@mui/material";
 import { type FC } from "react";
 
+import { Notifications } from "@mui/icons-material";
 import Slider from "react-slick";
 import Image from "../../components/Image/Image";
-import MinistryCard from "./components/MinistryCard";
-import { ministries } from "./constants";
-import sliderImages from "./sliderImages";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import MinistryCard from "./components/MinistryCard";
+import { ministries, notifications } from "./constants";
+import sliderImages from "./sliderImages";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -61,47 +64,7 @@ const Home: FC = () => {
 		<>
 			<PageWrapper>
 				<Container maxWidth="lg" sx={{ mb: 8, flexGrow: 1, gap: 2 }}>
-					{/* <Grid container spacing={4}>
-          <Grid size={{ xs: 12, md: 12 }}>
-            <Typography
-              variant="h4"
-              component="h2"
-              sx={{ mb: 4, fontWeight: "bold", color: "primary.main" }}
-            >
-              Latest Notifications
-            </Typography>
-            <Grid container spacing={3}>
-              {notifications.map((notification, index) => (
-                <Grid
-                  size={12}
-                  key={notification.id}
-                  className="card-animation"
-                >
-                  <ProjectCard
-                    header={{
-                      title: notification.title,
-                      subheader: new Date(
-                        notification.date,
-                      ).toLocaleDateString(),
-                      avatar: <Notifications color="primary" />,
-                    }}
-                    content={
-                      <Typography variant="body1">
-                        {notification.content}
-                      </Typography>
-                    }
-                    actions={
-                      <Button size="small" color="primary">
-                        Learn More
-                      </Button>
-                    }
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid> */}
-
+					
 					<Grid
 						size={12}
 						sx={{
@@ -138,6 +101,47 @@ const Home: FC = () => {
 								/>
 							))}
 						</Slider>
+					</Grid>
+
+					<Grid container spacing={4}>
+						<Grid size={{ xs: 12, md: 12 }}>
+							<Typography
+								variant="h4"
+								component="h2"
+								sx={{ mb: 4, fontWeight: "bold", color: "primary.main" }}
+							>
+								Latest Notifications
+							</Typography>
+							<Grid container spacing={3}>
+								{notifications.map((notification, index) => (
+									<Grid
+										size={12}
+										key={notification.id}
+										className="card-animation"
+									>
+										<ProjectCard
+											header={{
+												title: notification.title,
+												subheader: new Date(
+													notification.date,
+												).toLocaleDateString(),
+												avatar: <Notifications color="primary" />,
+											}}
+											content={
+												<Typography variant="body1">
+													{notification.content}
+												</Typography>
+											}
+											actions={
+												<Button size="small" color="primary">
+													Learn More
+												</Button>
+											}
+										/>
+									</Grid>
+								))}
+							</Grid>
+						</Grid>
 					</Grid>
 
 					<Grid size={{ xs: 12 }}>
