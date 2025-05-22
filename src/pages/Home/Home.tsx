@@ -1,5 +1,5 @@
 import {
-	Button,
+	Box,
 	Container,
 	Grid,
 	Stack,
@@ -9,13 +9,11 @@ import {
 } from "@mui/material";
 import { type FC } from "react";
 
-import { Notifications } from "@mui/icons-material";
 import Slider from "react-slick";
 import Image from "../../components/Image/Image";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import MinistryCard from "./components/MinistryCard";
-import { ministries, notifications } from "./constants";
+import { ministries } from "./constants";
 import sliderImages from "./sliderImages";
 
 const imageRootSx: SxProps<Theme> = {
@@ -66,16 +64,24 @@ const Home: FC = () => {
 		<>
 			<PageWrapper>
 				<Container maxWidth="lg" sx={{ mb: 8, flexGrow: 1, gap: 2 }}>
-					<Grid
-						size={12}
-						sx={{
-							// p: { xs: 0, md: 2 },
+					<Box						
+						sx={{							
+							display: 'flex',
+							flexDirection: 'column',
+							
 							borderRadius: 1,
-							height: {
-								xs: (theme) => `${theme.spacing(36)}`,
-								md: (theme) => `${theme.spacing(78)}`,
-							},
-						}}
+							mb: 8,
+							height: (theme) => ({
+								xs: `${theme.spacing(36)}`,
+								md: `${theme.spacing(78)}`,
+								'& .slick-list': {
+									height: '100%',
+								},
+								'& .slick-slider': {
+									height: '100%',
+								},
+							}),
+						}}						
 					>
 						<Slider {...settings}>
 							{sliderImages.map((i) => (
@@ -102,10 +108,36 @@ const Home: FC = () => {
 								/>
 							))}
 						</Slider>
-					</Grid>
+					</Box>
+
+							<Box						
+						sx={{							
+							display: 'flex',
+							flexDirection: 'column',
+							
+							borderRadius: 1,
+							mb: 8,
+							height: (theme) => ({
+								xs: `${theme.spacing(36)}`,
+								md: `${theme.spacing(78)}`,
+								'& .slick-list': {
+									height: '100%',
+								},
+								'& .slick-slider': {
+									height: '100%',
+								},
+							}),
+						}}						
+					>
+						<Slider {...settings}>
+
+						</Slider>
+						</Box>
+
+
 
 					{/* Notifications */}
-					<Grid container spacing={4}>
+					{/* <Grid container spacing={4}>
 						<Grid size={{ xs: 12, md: 12 }}>
 							<Typography
 								variant="h4"
@@ -144,7 +176,7 @@ const Home: FC = () => {
 								))}
 							</Grid>
 						</Grid>
-					</Grid>
+					</Grid> */}
 
 					<Grid size={{ xs: 12 }}>
 						<Typography variant="h4" component="h2" sx={titleSx}>
