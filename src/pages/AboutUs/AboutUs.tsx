@@ -27,7 +27,7 @@ const AboutUs: FC = () => {
 				<Typography variant="h6" fontWeight={"bold"}>
 					{organization}
 				</Typography>
-				<Typography variant="body1">{organizationContent}</Typography>
+				<Typography variant="body1" sx={{ '& strong': { color: 'text.secondary' } }} dangerouslySetInnerHTML={{ __html: organizationContent }} />
 
 				{details.map((i) => (
 					<Box key={i.title}>

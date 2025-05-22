@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import type { FC } from 'react';
 import PageWrapper from '../../components/PageWrapper/PageWrapper';
 
@@ -12,7 +12,7 @@ const DONATION_OPTIONS = [
   },
   {
     method: '​By Mail',
-    description: 'Please mail your donation to NY United Sabbath Day Adventist Church 163 West 131st Street, New York, NY 10027. Please be sure to notate your name and address on the check or envelope, so that you may be given donation receipts that may be used for tax purposes.'
+    description: 'Please mail your donation to <i>NY United Sabbath Day Adventist Church 163 West 131st Street, New York, NY 10027</i>. Please be sure to notate your name and address on the check or envelope, so that you may be given donation receipts that may be used for tax purposes.'
   },
   {
     method: 'Online Giving',
@@ -25,19 +25,17 @@ const Donations: FC = () => {
 
   return (
     <PageWrapper header={HEADER} subHeader={SUBHEADER}>
-      <Typography>
-        {DONATION_TEXT}
-      </Typography>
 
-      {
-        DONATION_OPTIONS.map((i) => (
-          <Typography key={i.method}>
-            <strong>{`${i.method}: `}</strong>{i.description}
-          </Typography>
+      <Stack spacing={2} className='fade-in'>
+        <Typography>
+          {DONATION_TEXT}
+        </Typography>
 
-        ))
-      }
-      <div>Donations Component</div>
+        {
+          DONATION_OPTIONS.map((i) => (
+            <Typography key={i.method} dangerouslySetInnerHTML={{ __html: `<strong>${i.method}: </strong>${i.description}` }} />))
+        }
+      </Stack>
     </PageWrapper>
   );
 };

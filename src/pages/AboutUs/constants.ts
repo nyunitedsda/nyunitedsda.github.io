@@ -10,7 +10,7 @@ export const aboutContent = [
 export const organization =
 	"New York United Sabbath Day Adventist Church, Inc.";
 export const organizationContent =
-	"Organized 1936 Bishop J. K. Humphrey Erected Nov. 4th, 1955 with Elder William A. Samuel. With a rich history to tell then and now the current Pastor is George Whiteman.";
+	"Organized 1936 Bishop J. K. Humphrey, with a rich history to tell then, and now the current Pastor is <strong>George Whiteman</strong>.";
 export const details = [
 	{
 		title: "DENOMINATION",
