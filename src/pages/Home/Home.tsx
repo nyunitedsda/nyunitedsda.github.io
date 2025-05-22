@@ -113,7 +113,7 @@ const Home: FC = () => {
 								Latest Notifications
 							</Typography>
 							<Grid container spacing={3}>
-								{notifications.map((notification, index) => (
+								{notifications.map((notification) => (
 									<Grid
 										size={12}
 										key={notification.id}

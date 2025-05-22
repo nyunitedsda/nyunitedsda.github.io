@@ -1,4 +1,3 @@
-import { ArticleRounded, ContactMailRounded, Diversity3Rounded, HomeRounded, LiveTvRounded, VolunteerActivismRounded } from "@mui/icons-material";
 import { type RouteObject } from "react-router";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Blog from "../pages/Blog/Blog";

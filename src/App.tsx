@@ -3,7 +3,7 @@ import { type FC, useEffect } from "react";
 import { useRoutes } from "react-router";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import routes from "./constants/routes";
+import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
@@ -13,6 +13,7 @@ const rootSx: SxProps<Theme> = {
 };
 
 const App: FC = () => {
+  const {routes} = useFormattedRoutes();
 	const element = useRoutes(routes);
 
   console.table(routes)
