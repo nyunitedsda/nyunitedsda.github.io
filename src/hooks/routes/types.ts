@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import type { RouteObject } from "react-router";
 
 export interface RouteMenu {
-  name: string;
-  path: string;
-  icon: ReactNode;
+	name: string;
+	path: string;
+	icon: ReactNode;
 }
 
 export interface FormattedRoutes {
@@ -13,6 +13,6 @@ export interface FormattedRoutes {
 }
 
 export type Route = RouteObject & {
-  icon?: ReactNode;
-  name?: string;
-}
+	icon?: ReactNode;
+	name?: string;
+};

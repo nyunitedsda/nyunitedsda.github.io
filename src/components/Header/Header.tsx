@@ -41,23 +41,23 @@ const menuSx: SxProps<Theme> = {
 
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
-const HOME = 'Home'
+const HOME = "Home";
 
 export default function Header() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
-	const {menuItems} = useFormattedRoutes();
+	const { menuItems } = useFormattedRoutes();
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen(!drawerOpen);
 	}, []);
 
 	const loginAuthRoute = useMemo(() => {
-		return authRoutes.filter((i) => i.name === LOGIN)[0]
+		return authRoutes.filter((i) => i.name === LOGIN)[0];
 	}, []);
 
 	const homeRoute = useMemo(() => {
-		return siteRoutes.filter((i) => i.name === HOME)[0]
+		return siteRoutes.filter((i) => i.name === HOME)[0];
 	}, []);
 
 	const isActive = useCallback((path: string) => {

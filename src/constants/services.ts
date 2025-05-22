@@ -5,7 +5,7 @@ const services = [
 	},
 	{ time: "11:45am", title: "Worship Service" },
 	{ time: "To Be Announce", title: "Bible Study" },
-	{ time: '3:00 pm (On Special Days)', title: 'AYS' }
+	{ time: "3:00 pm (On Special Days)", title: "AYS" },
 ];
 
 export default services;

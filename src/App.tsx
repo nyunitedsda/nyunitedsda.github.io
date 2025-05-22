@@ -13,10 +13,10 @@ const rootSx: SxProps<Theme> = {
 };
 
 const App: FC = () => {
-  const {routes} = useFormattedRoutes();
+	const { routes } = useFormattedRoutes();
 	const element = useRoutes(routes);
 
-  console.table(routes)
+	console.table(routes);
 
 	useEffect(() => {}, []);
 	return (

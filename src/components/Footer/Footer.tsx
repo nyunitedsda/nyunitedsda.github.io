@@ -38,7 +38,7 @@ const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
 
 const Footer: FC = () => {
-const {menuItems} = useFormattedRoutes();
+	const { menuItems } = useFormattedRoutes();
 
 	return (
 		<Box component="footer" sx={footerSx}>

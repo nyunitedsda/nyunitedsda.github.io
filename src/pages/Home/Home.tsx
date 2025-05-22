@@ -64,7 +64,6 @@ const Home: FC = () => {
 		<>
 			<PageWrapper>
 				<Container maxWidth="lg" sx={{ mb: 8, flexGrow: 1, gap: 2 }}>
-					
 					<Grid
 						size={12}
 						sx={{
