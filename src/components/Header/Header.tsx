@@ -1,4 +1,4 @@
-import { Login, Menu } from "@mui/icons-material";
+import { Menu } from "@mui/icons-material";
 import {
 	AppBar,
 	Box,
@@ -11,14 +11,14 @@ import {
 	Toolbar,
 	Typography,
 } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
-import navItems from "../../constants/navItems";
-import { BASE_URL } from "../../constants/routes";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
+import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
+import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -41,13 +41,23 @@ const menuSx: SxProps<Theme> = {
 
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
+const HOME = 'Home'
 
 export default function Header() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
+	const {menuItems} = useFormattedRoutes();
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen(!drawerOpen);
+	}, []);
+
+	const loginAuthRoute = useMemo(() => {
+		return authRoutes.filter((i) => i.name === LOGIN)[0]
+	}, []);
+
+	const homeRoute = useMemo(() => {
+		return siteRoutes.filter((i) => i.name === HOME)[0]
 	}, []);
 
 	const isActive = useCallback((path: string) => {
@@ -85,7 +95,7 @@ export default function Header() {
 						<Typography
 							variant="h6"
 							component={"a"}
-							href={`${BASE_URL}/`}
+							href={homeRoute.path}
 							color="primary"
 							sx={brandingSx}
 						>
@@ -95,7 +105,7 @@ export default function Header() {
 
 					{/* Menu */}
 					<Box sx={menuSx}>
-						{navItems.map((item) => (
+						{menuItems.map((item) => (
 							<Button
 								key={item.name}
 								href={item.path}
@@ -130,10 +140,10 @@ export default function Header() {
 					<Box sx={{ flexGrow: 0 }}>
 						<Button
 							disabled
-							href={`${BASE_URL}/login`}
-							variant={isActive(`${BASE_URL}/login`) ? "contained" : "text"}
+							href={loginAuthRoute.path}
+							variant={isActive(loginAuthRoute.path) ? "contained" : "text"}
 							color="primary"
-							startIcon={<Login />}
+							startIcon={loginAuthRoute.icon}
 							sx={{ display: { xs: "none", md: "flex" } }}
 						>
 							{LOGIN}
@@ -152,7 +162,7 @@ export default function Header() {
 			>
 				<MenuDrawer
 					isActive={isActive}
-					menuItems={navItems}
+					menuItems={menuItems}
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import type { NavItem } from "../../constants/navItems";
+import type { RouteMenu } from "../../hooks/routes/types";
 
 export interface MenuDrawerProps {
-	menuItems: NavItem[];
+	menuItems: RouteMenu[];
 	title: ReactNode;
 	isActive: (path: string) => boolean;
 	toggleDrawer: () => void;

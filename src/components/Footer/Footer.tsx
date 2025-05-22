@@ -14,9 +14,9 @@ import {
 import type { FC } from "react";
 import { WEBSITE_TITLE } from "../../appConstants";
 import contactInfo from "../../constants/contactInfo";
-import navItems from "../../constants/navItems";
 import services from "../../constants/services";
 import socialMediaInfo from "./socialMediaInfo";
+import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.dark",
@@ -38,6 +38,8 @@ const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
 
 const Footer: FC = () => {
+const {menuItems} = useFormattedRoutes();
+
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
@@ -71,7 +73,7 @@ const Footer: FC = () => {
 							{QUICK_LINKS}
 						</Typography>
 						<List dense component="ul" sx={listSx}>
-							{navItems.map((i) => (
+							{menuItems.map((i) => (
 								<ListItem
 									component={"a"}
 									href={i.path}

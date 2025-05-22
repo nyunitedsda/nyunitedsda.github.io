@@ -6,6 +6,7 @@ import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
 import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import { lazy } from "react";
 import type { Route } from "./types";
+import { LoginRounded } from "@mui/icons-material";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
@@ -55,5 +56,15 @@ const siteRoutes: Route[] = [
     path: `${BASE_URL}/aboutUs`,
   },
 ];
+
+export const authRoutes = [
+  {
+    element: <Donations />,
+    icon: <LoginRounded />,
+    name: 'Login',
+    path: `${BASE_URL}/login`,
+
+  }
+]
 
 export default siteRoutes
