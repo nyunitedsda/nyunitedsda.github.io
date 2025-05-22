@@ -49,6 +49,8 @@ const titleSx: SxProps<Theme> = {
 };
 
 const MINISTRIES_HEADER = "Ministries Links";
+const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
+const LEARN_MORE_LABEL = "Learn More";
 const settings = {
 	autoplay: true,
 	autoplaySpeed: 7000,
@@ -67,7 +69,7 @@ const Home: FC = () => {
 					<Grid
 						size={12}
 						sx={{
-							p: { xs: 0, md: 2 },
+							// p: { xs: 0, md: 2 },
 							borderRadius: 1,
 							height: {
 								xs: (theme) => `${theme.spacing(36)}`,
@@ -102,6 +104,7 @@ const Home: FC = () => {
 						</Slider>
 					</Grid>
 
+					{/* Notifications */}
 					<Grid container spacing={4}>
 						<Grid size={{ xs: 12, md: 12 }}>
 							<Typography
@@ -109,7 +112,7 @@ const Home: FC = () => {
 								component="h2"
 								sx={{ mb: 4, fontWeight: "bold", color: "primary.main" }}
 							>
-								Latest Notifications
+								{LATEST_NOTIFICATIONS_HEADER}
 							</Typography>
 							<Grid container spacing={3}>
 								{notifications.map((notification) => (
@@ -133,7 +136,7 @@ const Home: FC = () => {
 											}
 											actions={
 												<Button size="small" color="primary">
-													Learn More
+													{LEARN_MORE_LABEL}
 												</Button>
 											}
 										/>
