@@ -1,6 +1,3 @@
-import nyUnitedLogoSmallImage from "../../assets/img/NY United Logo small.png";
-import nyUnitedOldFrontImage from "../../assets/img/NY United Old front.jpg";
-import buildingPlackImage from "../../assets/img/building-plack.jpg";
 import elderImage from "../../assets/img/elder.jpg";
 import familyImage from "../../assets/img/family.jpg";
 import family2Image from "../../assets/img/family2.jpg";
@@ -16,19 +13,14 @@ import membersImage from "../../assets/img/members.jpg";
 import members2Image from "../../assets/img/members2.jpg";
 import members3Image from "../../assets/img/members3.jpg";
 import members4Image from "../../assets/img/members4.jpg";
-import members5Image from "../../assets/img/members5.jpg";
 import members6Image from "../../assets/img/members6.jpg";
-import reactSvgImage from "../../assets/img/react.svg";
 import singingSisterImage from "../../assets/img/singing-sister.jpg";
 import sisterPhotographyImage from "../../assets/img/sister-photography.jpg";
 import youthsImage from "../../assets/img/youths.jpg";
 import youths2Image from "../../assets/img/youths2.jpg";
 import youths3Image from "../../assets/img/youths3.jpg";
 
-
-
 export default [
-	{ src: buildingPlackImage, alt: "Building plack" },
 	{ src: elderImage, alt: "Elder" },
 	{ src: familyImage, alt: "Family" },
 	{ src: family2Image, alt: "Family 2" },
@@ -41,14 +33,10 @@ export default [
 	{ src: members2Image, alt: "Members 2" },
 	{ src: members3Image, alt: "Members 3" },
 	{ src: members4Image, alt: "Members 4" },
-	{ src: members5Image, alt: "Members 5" },
 	{ src: members6Image, alt: "Members 6" },
 	{ src: membersEmbraceImage, alt: "Members embrace" },
 	{ src: membersEmbrace1Image, alt: "Members embrace 1" },
 	{ src: membersEmbrace2Image, alt: "Members embrace 2" },
-	{ src: nyUnitedLogoSmallImage, alt: "NY United Logo small" },
-	{ src: nyUnitedOldFrontImage, alt: "NY United Old front" },
-	{ src: reactSvgImage, alt: "React logo" },
 	{ src: singingSisterImage, alt: "Singing sister" },
 	{ src: sisterPhotographyImage, alt: "Sister photography" },
 	{ src: youthsImage, alt: "Youths" },

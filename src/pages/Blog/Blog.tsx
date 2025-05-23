@@ -22,7 +22,7 @@ const HEADER = "Our Blog";
 const SUBHEADER =
 	"Insights, reflections, and spiritual guidance from our church community.";
 
-// FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button  
+// FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button
 // FEATURE: Add the ability to change the pagination of blog post
 
 const Blog: FC = () => {

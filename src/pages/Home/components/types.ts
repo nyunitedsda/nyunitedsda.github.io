@@ -12,4 +12,4 @@ export interface MinistryCardProps
 export type SectionWrapperProps = PropsWithChildren<{
 	header?: string;
 	spacing?: number;
-}>
+}>;
