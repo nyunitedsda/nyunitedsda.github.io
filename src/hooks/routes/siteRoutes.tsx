@@ -6,8 +6,9 @@ import HomeRounded from "@mui/icons-material/HomeRounded";
 import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
 import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import { lazy } from "react";
-import type { Route } from "./types";
+import Error from "../../pages/Error/Error";
 import Login from "../../pages/Login/Login";
+import type { Route } from "./types";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
@@ -26,36 +27,42 @@ const siteRoutes: Route[] = [
 		icon: <HomeRounded />,
 		name: "Home",
 		path: `${BASE_URL}/`,
+		errorElement: <Error />,
 	},
 	{
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
 		path: `${BASE_URL}/liveBroadcast`,
+		errorElement: <Error />,
 	},
 	{
 		element: <Donations />,
 		icon: <VolunteerActivismRounded />,
 		name: "Donations",
 		path: `${BASE_URL}/donations`,
+		errorElement: <Error />,
 	},
 	{
 		element: <Blog />,
 		icon: <ArticleRounded />,
 		name: "Blog",
 		path: `${BASE_URL}/blog`,
+		errorElement: <Error />,
 	},
 	{
 		element: <Contact />,
 		icon: <ContactMailRounded />,
 		name: "Contact",
 		path: `${BASE_URL}/contact`,
+		errorElement: <Error />,
 	},
 	{
 		element: <AboutUs />,
 		icon: <Diversity3Rounded />,
 		name: "About Us",
 		path: `${BASE_URL}/aboutUs`,
+		errorElement: <Error />,
 	},
 ];
 

@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -15,22 +14,22 @@ import Typography from "@mui/material/Typography";
 import { type FC, useCallback, useState } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
+// TODO: Clean up, format, review, complete component
+// TODO: Sanitize all input data.
+
 const Login: FC = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false)
-	const [isLogin, setIsLogin] = useState<boolean>(true)
+	const [isLogin, _setIsLogin] = useState<boolean>(true)
 	const [email, setEmail] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
 	const [rememberMe, setRememberMe] = useState<boolean>(false)
 	const [error, setError] = useState<string>("")
 
-	const handleClickShowPassword = () => {
-		setShowPassword(!showPassword)
-	}
+	const handleClickShowPassword = useCallback(() => {
+		setShowPassword(prev => !prev)
+	}, [])
 
-	const toggleForm = () => {
-		setIsLogin(!isLogin)
-		setError("")
-	}
+
 
 	const handleSubmit = useCallback((e: React.FormEvent) => {
 		e.preventDefault()
@@ -65,19 +64,18 @@ const Login: FC = () => {
 					textAlign: "center",
 					color: "primary.main",
 					p: 4,
-					// maxWidth: "800px",
 				}}
 			>
 				<Typography variant="h2" component="h1" className="welcome-text" sx={{ mb: 2, fontWeight: "bold" }}>
-					{isLogin ? "Member Login" : "Create Account"}
+					{isLogin ? "Login" : "Create Account"}
 				</Typography>
 				<Typography variant="h6" className="welcome-text" sx={{ mb: 4 }}>
-					{isLogin ? "Access your church member account" : "Join our online church community"}
+					{isLogin ? "Access to Admin account" : "Join our online church community"}
 				</Typography>
 			</Box>
 
 			<Container maxWidth="sm" sx={{ mb: 8, flexGrow: 1 }}>
-				<Paper elevation={3} sx={{ p: 4, borderRadius: 2 }} className="login-animation">
+				<Paper elevation={0} sx={{ p: 4, borderRadius: 2 }} className="login-animation">
 					{error && (
 						<Alert severity="error" sx={{ mb: 3 }}>
 							{error}
@@ -110,7 +108,7 @@ const Login: FC = () => {
 										input: {
 											startAdornment: (
 												<InputAdornment position="start">
-													<EmailOutlined color="action" />
+													<EmailOutlined color="primary" />
 												</InputAdornment>
 											),
 										}
@@ -131,7 +129,7 @@ const Login: FC = () => {
 										input: {
 											startAdornment: (
 												<InputAdornment position="start">
-													<LockOutlined color="action" />
+													<LockOutlined color="primary" />
 												</InputAdornment>
 											),
 											endAdornment: (
@@ -140,6 +138,7 @@ const Login: FC = () => {
 														aria-label="toggle password visibility"
 														onClick={handleClickShowPassword}
 														edge="end"
+														color='primary'
 													>
 														{showPassword ? <VisibilityOffOutlined /> : <VisibilityOutlined />}
 													</IconButton>
@@ -185,7 +184,7 @@ const Login: FC = () => {
 											label="Remember me"
 										/>
 
-										<Typography
+										{/* <Typography
 											href="/forgot-password"
 											component={'a'}
 											variant="body2"
@@ -193,7 +192,7 @@ const Login: FC = () => {
 											sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
 										>
 											Forgot password?
-										</Typography>
+										</Typography> */}
 									</Box>
 								</Grid>
 							)}
@@ -206,7 +205,7 @@ const Login: FC = () => {
 						</Grid>
 					</form>
 
-					<Divider sx={{ my: 3 }}>
+					{/* <Divider sx={{ my: 3 }}>
 						<Typography variant="body2" color="text.secondary">
 							OR
 						</Typography>
@@ -219,7 +218,7 @@ const Login: FC = () => {
 								{isLogin ? "Sign Up" : "Sign In"}
 							</Button>
 						</Typography>
-					</Box>
+					</Box> */}
 				</Paper>
 			</Container>
 		</PageWrapper>

@@ -16,7 +16,7 @@ import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
 import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
-import type { Route, RouteMenu } from "../../hooks/routes/types";
+import type { Route } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";

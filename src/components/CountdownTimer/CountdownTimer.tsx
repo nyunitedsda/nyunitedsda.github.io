@@ -1,10 +1,10 @@
-"use client";
-
 import { Box, Grid, type SxProps, type Theme, Typography } from "@mui/material";
+import type { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 
 interface CountdownTimerProps {
-	targetDate: Date;
+	targetDate: Dayjs;
 }
 
 interface TimeLeft {
@@ -25,17 +25,19 @@ const clockSx: SxProps<Theme> = {
 	minWidth: "80px",
 };
 
+const INITIAL_TIMER_VALUES = {
+	days: 0,
+	hours: 0,
+	minutes: 0,
+	seconds: 0,
+}
+
 export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
-	const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-		days: 0,
-		hours: 0,
-		minutes: 0,
-		seconds: 0,
-	});
+	const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIMER_VALUES);
 
 	useEffect(() => {
 		const calculateTimeLeft = () => {
-			const difference = targetDate.getTime() - new Date().getTime();
+			const difference = dayjs(targetDate).diff(dayjs());
 
 			if (difference > 0) {
 				return {
@@ -45,12 +47,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 					seconds: Math.floor((difference / 1000) % 60),
 				};
 			} else {
-				return {
-					days: 0,
-					hours: 0,
-					minutes: 0,
-					seconds: 0,
-				};
+				return (INITIAL_TIMER_VALUES)
 			}
 		};
 
@@ -84,7 +81,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 						<Typography
 							variant="h4"
 							component="div"
-							sx={{ fontWeight: "bold" }}
+							fontWeight="bold"
 						>
 							{unit.value.toString().padStart(2, "0")}
 						</Typography>

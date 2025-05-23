@@ -1,0 +1,5 @@
+interface ErrorProps {
+
+};
+
+export { ErrorProps };

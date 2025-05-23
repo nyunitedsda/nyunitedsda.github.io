@@ -1,40 +1,43 @@
 "use client";
 
+import { Box, Grid, Paper, Typography } from "@mui/material";
+import dayjs from "dayjs";
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isToday from 'dayjs/plugin/isToday';
+import { type FC, useEffect, useState } from "react";
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { useEffect, useState, type FC } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+
+dayjs.extend(isToday)
+dayjs.extend(isSameOrAfter);
 
 const LIVE_SERVICE = "Live Worship Service";
 const NEXT_SERVICE = "Join Us for Our Next Service";
 
 const LiveBroadcast: FC = () => {
 	const [isLive, setIsLive] = useState(false);
-	const [nextServiceDate, setNextServiceDate] = useState(
-		new Date("2023-05-21T09:00:00"),
+	const [nextServiceDate, _setNextServiceDate] = useState(
+		() => dayjs().day(5).hour(10).minute(30),
 	);
+
+	const [refreshToken, setRefreshToken] = useState<boolean>(false);
 
 	useEffect(() => {
 		// Check if we should be live (Sunday between 9 AM and 12 PM)
-		const now = new Date();
-		const day = now.getDay();
-		const hour = now.getHours();
-
-		if (day === 0 && hour >= 9 && hour < 12) {
+		if (
+			refreshToken ||
+			(nextServiceDate.isToday() &&
+				dayjs().isSameOrAfter(nextServiceDate, 'minutes'))
+		) {
 			setIsLive(true);
-		} else {
-			// Set next service date to next Sunday at 9 AM
-			const daysUntilSunday = day === 0 ? 7 : 7 - day;
-			const nextSunday = new Date();
-			nextSunday.setDate(now.getDate() + daysUntilSunday);
-			nextSunday.setHours(9, 0, 0, 0);
-			setNextServiceDate(nextSunday);
+			setRefreshToken(false);
 		}
-	}, []);
+
+	}, [refreshToken, nextServiceDate]);
 
 	return (
 		<PageWrapper header={isLive ? LIVE_SERVICE : NEXT_SERVICE}>
-			<Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}>
+			{/* <Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}> */}
 				{isLive ? (
 					<Box className="fade-in" sx={{ mt: 4 }}>
 						<Paper
@@ -81,7 +84,7 @@ const LiveBroadcast: FC = () => {
 					<Grid container spacing={4} justifyContent="center">
 						<Grid size={{ xs: 12, md: 8 }} className="fade-in">
 							<Paper
-								elevation={3}
+								elevation={0}
 								sx={{
 									p: 4,
 									bgcolor: "background.paper",
@@ -94,7 +97,7 @@ const LiveBroadcast: FC = () => {
 								</Typography>
 								<CountdownTimer targetDate={nextServiceDate} />
 								<Typography variant="body1" sx={{ mt: 3 }}>
-									Join us every Sunday at 9:00 AM for our live worship service.
+									{`Join us on ${nextServiceDate.format('dddd DDD, h:mm a')} for our live worship service.`}
 								</Typography>
 							</Paper>
 						</Grid>
@@ -141,7 +144,7 @@ const LiveBroadcast: FC = () => {
 						</Grid>
 					</Grid>
 				)}
-			</Container>
+			{/* </Container> */}
 		</PageWrapper>
 	);
 };

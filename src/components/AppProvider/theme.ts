@@ -77,6 +77,9 @@ const theme = responsiveFontSizes(
 						},
 					},
 				},
+				defaultProps: {
+					size: 'medium',
+				}
 			},
 			MuiCard: {
 				styleOverrides: {
