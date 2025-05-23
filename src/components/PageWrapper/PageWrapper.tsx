@@ -49,7 +49,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 						)}
 					</Stack>
 				)}
-				<Stack sx={{ flexGrow: 1 }}>{children}</Stack>
+				<Stack sx={{ flexGrow: 1, gap: 2 }}>{children}</Stack>
 			</Container>
 
 			<Footer />

@@ -1,8 +1,6 @@
 import { Grid, type SxProps, type Theme } from "@mui/material";
 import { type FC, useEffect } from "react";
 import { useRoutes } from "react-router";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
 
 const rootSx: SxProps<Theme> = {

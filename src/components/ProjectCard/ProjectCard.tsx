@@ -32,7 +32,7 @@ const ProjectCard: FC<CardProps> = ({ actions, content, header }) => {
 		<Card sx={cardSx} className="card-animation">
 			<CardHeader {...header} />
 			{content && (
-				<CardContent sx={{ flexGrow: 1, overflowY: "auto" }}>
+				<CardContent sx={{display: 'flex', flexDirection: 'column', gap: 2,  flexGrow: 1, overflowY: "auto" }}>
 					{content}
 				</CardContent>
 			)}

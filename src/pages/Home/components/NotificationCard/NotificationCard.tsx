@@ -1,5 +1,4 @@
-import { EventRounded, InfoRounded, LocationOnRounded, Person3Rounded } from '@mui/icons-material';
-import { Divider, capitalize } from '@mui/material';
+import { AutoStoriesOutlined, CodeOutlined, EventOutlined, InfoOutlined, LocationOnOutlined, Person3Outlined, PhoneOutlined } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { type FC, type ReactNode, useMemo } from 'react';
@@ -16,10 +15,10 @@ interface Section {
 
 
 const NoteSection: FC<Section> = ({ icon, content, title }) => (
-  <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
+  <Box sx={{ display: "flex", alignItems: "center", gap: 2, '& svg': { color: 'primary.main' } }}>
     {icon && icon}
-    <Box>
-      <Typography variant="subtitle2" color="text.secondary" fontWeight='bold'>
+    <Box sx={{ display: "flex", gap: 2}}>
+      <Typography variant="body1" color="text.secondary" fontWeight='bold'>
         {`${title}:`}
       </Typography>
       <Typography variant="body1">{content}</Typography>
@@ -27,8 +26,12 @@ const NoteSection: FC<Section> = ({ icon, content, title }) => (
   </Box>
 )
 
-const WHEN = 'When:'
-const WHERE = 'Where:'
+const WHEN = 'When'
+const WHERE = 'Where'
+const SERMON_TITLE = 'Sermon Title'
+const PHONE_NUMBER = 'Phone #'
+const CONFERENCE_CODE = 'Conference Code'
+const SPEAKER = 'Speaker'
 
 const contentKeys = [
   'date',
@@ -42,63 +45,123 @@ const contentKeys = [
 
 const createFormattedContent = (props: ChurchNotificationProps) => {
 
-  const elements = [];
-  return contentKeys.forEach((i) => {
-
-    switch (i) {
+  const elements: Section[] = [];
+  contentKeys.forEach((key) => {
+    let section: Section | undefined;
+    switch (key) {
       case 'date':
+        if (props?.date) {
+          const display = props?.date && props?.time ? `${props?.date}, ${props?.time}` : props?.date;
+          section = { content: display!, icon: <EventOutlined />, title: WHEN };
+        }
+        break;
       case 'time':
-        const display = props?.date && props?.time ? `${props?.date}, ${props?.time}` : props?.date ? props?.date : props?.time;
-        return props?.date || props?.time ? ({ content: display, icon: <EventRounded color='primary' />, title: WHEN }) : undefined
 
+        if (props?.time && !props?.date) {
+          section = { content: props?.time, icon: <EventOutlined />, title: WHEN };
+        }
+        break;
       case 'location':
-        return props?.location ? ({ icon: <LocationOnRounded color='primary' />, content: props?.location, title: WHERE }) : undefined
-
+        if (props?.location) {
+          section = { icon: <LocationOnOutlined />, content: props?.location, title: WHERE };
+        }
+        break;
       case 'speaker':
-        return props?.speaker ? ({
-          content: props.speaker,
-          icon: <Person3Rounded color='primary' />,
-          title: capitalize(props.speaker),
-        }) : undefined
+        if (props?.speaker) {
+          section = {
+            content: props.speaker,
+            icon: <Person3Outlined />,
+            title: SPEAKER,
+          };
+        }
+        break;
 
+      case 'sermonTitle':
+        if (props?.sermonTitle) {
+          section = {
+            content: props.sermonTitle,
+            icon: <AutoStoriesOutlined />,
+            title: SERMON_TITLE,
+          };
+        }
+        break;
+
+      case 'phoneNumber':
+        if (props?.phoneNumber) {
+          section = {
+            content: props.phoneNumber,
+            icon: <PhoneOutlined />,
+            title: PHONE_NUMBER,
+          };
+        }
+        break;
+      case 'conferenceCode':
+        if (props?.conferenceCode) {
+          section = {
+            content: props.conferenceCode,
+            icon: <CodeOutlined />,
+            title: CONFERENCE_CODE,
+          };
+        }
+        break;
       default:
         break;
     }
-
-  })
+    if (section) {
+      elements.push(section);
+    }
+  });
+  return elements;
 }
 
 const NotificationCard: FC<NotificationCardProps> = (props) => {
-  const { title, date, time } = props;
+  const { title, description } = props;
 
   const contents = useMemo(() => {
-    return createFormattedContent(props);
+    return createFormattedContent(props) ?? [];
   }, [props]);
 
   return (
     <ProjectCard
-      header={{ title }}
+      header={{
+        title,
+        sx: {
+          bgcolor: "primary.main",
+          color: "primary.contrastText",
+        },
+      }}
       content={
         (<>
           {
             contents.map((i) => (
-              <NoteSection {...i} key={i.title} />
+              <NoteSection {...i} key={i?.title} />
             ))
           }
         </>)
       }
       actions={
         description ? (
-          <>
-            <Divider />
-            <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
-              <InfoRounded color='primary' />
 
-              <Typography variant="subtitle2" color="text.secondary" fontWeight='bold'>
-                {description}
-              </Typography>
-            </Box>
-          </>
+          <Box sx={{
+            pt: 2,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            height: '100%',
+            borderTop: theme => `1px solid ${theme.palette.divider}`,
+            '& p': {
+
+              height: 'inherit',
+              overflowY: 'auto',
+            },
+          }}>
+            <InfoOutlined color='primary' />
+
+            <Typography variant="body2" color="text.secondary" fontWeight='bold'>
+              {description}
+            </Typography>
+          </Box>
+
         ) : undefined
 
       }

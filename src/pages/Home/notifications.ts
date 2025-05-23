@@ -1,4 +1,7 @@
+import dayjs from "dayjs";
+
 export interface ChurchNotificationProps {
+  id: number;
   type: "event" | "service" | "announcement"
   title: string
   date?: string
@@ -16,51 +19,40 @@ export interface ChurchNotificationProps {
 
 export const notifications: ChurchNotificationProps[] = [
     {
+      id: 1,
       type: "service",
       title: "Church Service",
-      date: "March 22, 2025",
+      date: dayjs().day(6).format('MMM DD, YYYY'),
       speaker: "Pastor John Lomacang",
       sermonTitle: "STAND",
       variant: "primary",
     },
     {
+      id: 2,
       type: "event",
       title: "Wednesday Bible Study",
-      time: "Wednesdays, 6:30pm",
+      time: dayjs().day(3).hour(18).minute(30).format('dddd, h:mm a'),
       location: "Fellowship Hall & Via Zoom",
       variant: "dark",
     },
     {
-      type: "event",
-      title: "TVCJA Soup and Salad Fundraiser",
-      time: "Wednesdays, 5:45pm",
-      location: "Fellowship Hall",
-      description:
-        "The Thompsonville Christian Junior Academy is offering a soup and salad meal as a fundraiser every Wednesday before Wednesday Bible Study. Come out and support the school by having a meal before joining in Wednesday Bible Study.",
-      variant: "secondary",
-    },
-    {
+      id: 4,
       type: "event",
       title: "Prayer Meeting",
-      time: "Tuesdays, 6:30pm",
+      time: dayjs().day(2).hour(18).minute(30).format('dddd, h:mm a'),
       location: "Via phone conference",
       phoneNumber: "971-224-6575",
       conferenceCode: "519018",
       variant: "dark",
     },
     {
-      type: "announcement",
-      title: "Volunteer Opportunity",
-      description:
-        "We need volunteers for our upcoming community outreach event. Please sign up at the welcome desk or contact the church office.",
-      variant: "primary",
-    },
-    {
+      id: 3,
       type: "event",
-      title: "Youth Group Meeting",
-      time: "Fridays, 7:00pm",
-      location: "Youth Room",
-      description: "All teenagers are welcome to join for games, worship, and Bible study.",
+      title: "TVCJA Soup and Salad Fundraiser",
+      time: dayjs().day(3).hour(17).minute(45).format('dddd, h:mm a'),
+      location: "Fellowship Hall",
+      description:
+        "The Thompsonville Christian Junior Academy is offering a soup and salad meal as a fundraiser every Wednesday before Wednesday Bible Study. Come out and support the school by having a meal before joining in Wednesday Bible Study.",
       variant: "secondary",
     },
   ]
