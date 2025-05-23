@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import type { ImageProps } from "../../../components/Image/types";
 import type { CardProps } from "../../../components/ProjectCard/ProjectCard";
 
@@ -7,3 +8,8 @@ export interface MinistryCardProps
 	link?: string;
 	image?: ImageProps;
 }
+
+export type SectionWrapperProps = PropsWithChildren<{
+	header?: string;
+	spacing?: number;
+}>

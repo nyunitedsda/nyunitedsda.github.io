@@ -1,7 +1,5 @@
 import {
 	Box,
-	Container,
-	Grid,
 	Stack,
 	type SxProps,
 	type Theme,
@@ -22,6 +20,7 @@ import sliderImages from "./sliderImages";
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import SectionWrapper from "./components/SectionWrapper";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -115,13 +114,14 @@ const Home: FC = () => {
 	return (
 		<>
 			<PageWrapper>
-
 				<Stack sx={{ flexGrow: 1, width: '100%', gap: 5 }}>
+
+					<SectionWrapper>
 					<Box
 						className="slider-container"
 						sx={{
-							// display: 'flex',
-							// flexDirection: 'column',
+							display: 'flex',
+							flexDirection: 'column',
 
 							// borderRadius: 1,
 							// mb: 8,
@@ -174,11 +174,9 @@ const Home: FC = () => {
 							))}
 						</Slider>
 					</Box>
+					</SectionWrapper>
 
-					<Stack spacing={3}>
-						<Typography variant="h4" component="h2" sx={titleSx}>
-							{LATEST_NOTIFICATIONS_HEADER}
-						</Typography>
+					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER} >
 						<Box
 							sx={{
 								display: 'flex',
@@ -239,14 +237,10 @@ const Home: FC = () => {
 								}
 							</Slider>
 						</Box>
-					</Stack>
+					</SectionWrapper>
 
 
-					<Stack  spacing={3}>
-						<Typography variant="h4" component="h2" sx={titleSx}>
-							{MINISTRIES_HEADER}
-						</Typography>
-
+					<SectionWrapper header={MINISTRIES_HEADER}>
 						<Stack direction={{ xs: "column", md: "row" }} sx={cardContainerSx}>
 							{ministries.map((i) => (
 								<MinistryCard
@@ -268,9 +262,9 @@ const Home: FC = () => {
 								/>
 							))}
 						</Stack>
-					</Stack>
-				</Stack>
+					</SectionWrapper>
 
+				</Stack>
 			</PageWrapper>
 		</>
 	);
