@@ -16,7 +16,7 @@ import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
 import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
-import type { Route } from "../../hooks/routes/types";
+import type { Route, RouteMenu } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
@@ -115,7 +115,9 @@ export default function Header() {
 									mx: 1,
 									color: isActive(item.path) ? "primary.main" : "text.primary",
 									display: "flex",
-									fontWeight: isActive(item.path) ? "bold" : "medium",
+									fontWeight: isActive(item.path) ? "bold" : "normal",
+									fontSize: theme => theme.typography.body1,
+									// fontWeight: 'bold',
 									"&:after": isActive(item.path)
 										? {
 											content: '""',
@@ -143,7 +145,8 @@ export default function Header() {
 							<Button
 								disabled
 								href={loginAuthRoute?.path}
-								variant={isActive(loginAuthRoute?.path as string) ? "contained" : "text"}
+								size='large'
+								variant={isActive(loginAuthRoute?.path as string) ? "outlined" : "text"}
 								color="primary"
 								startIcon={loginAuthRoute?.icon}
 								sx={{ display: { xs: "none", md: "flex" } }}
@@ -165,7 +168,7 @@ export default function Header() {
 			>
 				<MenuDrawer
 					isActive={isActive}
-					menuItems={menuItems}
+					menuItems={[...menuItems, ...(loginAuthRoute ? [loginAuthRoute] : [])] as RouteMenu[]}
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>

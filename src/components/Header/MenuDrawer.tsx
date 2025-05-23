@@ -1,13 +1,11 @@
-import ChevronRight from "@mui/icons-material/ChevronRight";
-import Login from "@mui/icons-material/Login";
-import Box from "@mui/material/Box";
+import { ListItemButton, ListItemIcon } from "@mui/material";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { memo, type FC } from "react";
+import { type FC, memo, useCallback } from "react";
+import { useNavigate } from "react-router";
 import type { MenuDrawerProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
@@ -18,8 +16,6 @@ const rootSx: SxProps<Theme> = {
 	pt: 0,
 };
 
-export const BASE_URL = "/nyunitedsda";
-const LOGIN_URL = `${BASE_URL}/login`;
 
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
@@ -27,6 +23,14 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 	title,
 	menuItems,
 }) => {
+
+	const navigate = useNavigate();
+
+	const handleClick = useCallback((path: string) => {
+		navigate(path);
+		toggleDrawer();
+	}, []);
+
 	return (
 		<Stack onClick={toggleDrawer} sx={rootSx}>
 			<Stack
@@ -45,24 +49,26 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 			</Stack>
 			<List>
 				{menuItems.map((item) => (
-					<ListItem
+					<ListItemButton
 						key={item.name}
-						component={"a"}
-						href={item.path}
+						disabled={item.name === 'Login'}
+						onClick={() => handleClick(item.path)}
 						sx={{
+							borderRadius: 0.5,
+							'& .MuiTypography-root': { fontWeight: isActive(item.path) ? 'bold' : 'normal' },
 							color: isActive(item.path) ? "primary.main" : "text.primary",
 							bgcolor: isActive(item.path) ? "action.selected" : "transparent",
 							"&:hover": { bgcolor: "action.hover" },
 						}}
 					>
-						<Box sx={{ mr: 2 }}>{item.icon}</Box>
+						{item.icon && (<ListItemIcon sx={{ color: isActive(item.path) ? "primary.main" : "text.primary", }}>{item.icon}</ListItemIcon>)}
 						<ListItemText primary={item.name} />
-						{isActive(item.path) && <ChevronRight />}
-					</ListItem>
+
+					</ListItemButton>
 				))}
 
 				{/* TODO: Update menuItems with login  */}
-				<ListItem
+				{/* <ListItem
 					component={"a"}
 					href={LOGIN_URL}
 					sx={{
@@ -76,7 +82,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 					</Box>
 					<ListItemText primary="Login" />
 					{isActive(LOGIN_URL) && <ChevronRight />}
-				</ListItem>
+				</ListItem> */}
 			</List>
 		</Stack>
 	);
