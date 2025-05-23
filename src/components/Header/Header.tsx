@@ -15,10 +15,11 @@ import { useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
+import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
+import type { Route, RouteMenu } from "../../hooks/routes/types";
+import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
-import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
-import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -53,7 +54,7 @@ export default function Header() {
 	}, []);
 
 	const loginAuthRoute = useMemo(() => {
-		return authRoutes.filter((i) => i.name === LOGIN)[0];
+		return (authRoutes as Route[]).filter((i) => i?.name === LOGIN)[0];
 	}, []);
 
 	const homeRoute = useMemo(() => {
@@ -117,15 +118,15 @@ export default function Header() {
 									fontWeight: isActive(item.path) ? "bold" : "medium",
 									"&:after": isActive(item.path)
 										? {
-												content: '""',
-												position: "absolute",
-												bottom: 0,
-												left: "25%",
-												width: "50%",
-												height: "3px",
-												bgcolor: "primary.main",
-												borderRadius: "3px 3px 0 0",
-											}
+											content: '""',
+											position: "absolute",
+											bottom: 0,
+											left: "25%",
+											width: "50%",
+											height: "3px",
+											bgcolor: "primary.main",
+											borderRadius: "3px 3px 0 0",
+										}
 										: {},
 								}}
 							>
@@ -137,18 +138,20 @@ export default function Header() {
 					<Box sx={{ display: { xs: "none", md: "flex" }, px: 2 }}>
 						<ThemeToggleButton />
 					</Box>
-					<Box sx={{ flexGrow: 0 }}>
-						<Button
-							disabled
-							href={loginAuthRoute.path}
-							variant={isActive(loginAuthRoute.path) ? "contained" : "text"}
-							color="primary"
-							startIcon={loginAuthRoute.icon}
-							sx={{ display: { xs: "none", md: "flex" } }}
-						>
-							{LOGIN}
-						</Button>
-					</Box>
+					{
+						loginAuthRoute && (<Box sx={{ flexGrow: 0 }}>
+							<Button
+								disabled
+								href={loginAuthRoute?.path}
+								variant={isActive(loginAuthRoute?.path as string) ? "contained" : "text"}
+								color="primary"
+								startIcon={loginAuthRoute?.icon}
+								sx={{ display: { xs: "none", md: "flex" } }}
+							>
+								{LOGIN}
+							</Button>
+						</Box>
+						)}
 				</Toolbar>
 			</Container>
 

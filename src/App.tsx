@@ -1,5 +1,5 @@
 import { Grid, type SxProps, type Theme } from "@mui/material";
-import { type FC, useEffect } from "react";
+import { type FC } from "react";
 import { useRoutes } from "react-router";
 import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
 
@@ -14,9 +14,6 @@ const App: FC = () => {
 	const { routes } = useFormattedRoutes();
 	const element = useRoutes(routes);
 
-	console.table(routes);
-
-	useEffect(() => {}, []);
 	return (
 		<Grid container sx={rootSx}>
 			{element}

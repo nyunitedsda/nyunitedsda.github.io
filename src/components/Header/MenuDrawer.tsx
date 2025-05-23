@@ -12,7 +12,7 @@ import type { MenuDrawerProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
 	textAlign: "center",
-	width: 250,
+	width: 350,
 	height: "100%",
 	p: 1,
 	pt: 0,
@@ -60,6 +60,8 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						{isActive(item.path) && <ChevronRight />}
 					</ListItem>
 				))}
+
+				{/* TODO: Update menuItems with login  */}
 				<ListItem
 					component={"a"}
 					href={LOGIN_URL}
