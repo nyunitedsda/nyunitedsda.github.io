@@ -22,6 +22,9 @@ const HEADER = "Our Blog";
 const SUBHEADER =
 	"Insights, reflections, and spiritual guidance from our church community.";
 
+// FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button  
+// FEATURE: Add the ability to change the pagination of blog post
+
 const Blog: FC = () => {
 	const [page, setPage] = useState(1);
 	const [postsPerPage, _setPostsPerPage] = useState<number>(
@@ -60,6 +63,7 @@ const Blog: FC = () => {
 							content={<Typography variant="body1">{post.excerpt}</Typography>}
 							actions={
 								<Button
+									disabled
 									size="small"
 									color="primary"
 									component={"a"}

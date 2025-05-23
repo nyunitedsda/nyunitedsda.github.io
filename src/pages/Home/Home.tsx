@@ -47,8 +47,8 @@ const titleSx: SxProps<Theme> = {
 };
 
 const MINISTRIES_HEADER = "Ministries Links";
-const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
-const LEARN_MORE_LABEL = "Learn More";
+// const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
+// const LEARN_MORE_LABEL = "Learn More";
 const settings = {
 	autoplay: true,
 	autoplaySpeed: 7000,
