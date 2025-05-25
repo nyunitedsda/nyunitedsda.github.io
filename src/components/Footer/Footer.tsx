@@ -19,8 +19,8 @@ import socialMediaInfo from "./socialMediaInfo";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 
 const footerSx: SxProps<Theme> = {
-	bgcolor: "primary.dark",
-	color: "white",
+	bgcolor: "primary.main",
+	color: "primary.contrastText",
 	p: 2,
 	width: "100%",
 };

@@ -19,49 +19,49 @@ const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "/nyunitedsda";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "/nyunitedsda/";
 
 const siteRoutes: Route[] = [
 	{
 		element: <Home />,
 		icon: <HomeRounded />,
 		name: "Home",
-		path: `${BASE_URL}/`,
+		path: `${BASE_URL}`,
 		errorElement: <Error />,
 	},
 	{
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
-		path: `${BASE_URL}/liveBroadcast`,
+		path: `${BASE_URL}liveBroadcast`,
 		errorElement: <Error />,
 	},
 	{
 		element: <Donations />,
 		icon: <VolunteerActivismRounded />,
 		name: "Donations",
-		path: `${BASE_URL}/donations`,
+		path: `${BASE_URL}donations`,
 		errorElement: <Error />,
 	},
 	{
 		element: <Blog />,
 		icon: <ArticleRounded />,
 		name: "Blog",
-		path: `${BASE_URL}/blog`,
+		path: `${BASE_URL}blog`,
 		errorElement: <Error />,
 	},
 	{
 		element: <Contact />,
 		icon: <ContactMailRounded />,
 		name: "Contact",
-		path: `${BASE_URL}/contact`,
+		path: `${BASE_URL}contact`,
 		errorElement: <Error />,
 	},
 	{
 		element: <AboutUs />,
 		icon: <Diversity3Rounded />,
 		name: "About Us",
-		path: `${BASE_URL}/aboutUs`,
+		path: `${BASE_URL}aboutUs`,
 		errorElement: <Error />,
 	},
 ];
@@ -71,7 +71,7 @@ export const authRoutes: Route[] = [
 		element: <Login />,
 		icon: <LoginRounded />,
 		name: "Login",
-		path: `${BASE_URL}/login`,
+		path: `${BASE_URL}login`,
 	},
 ];
 

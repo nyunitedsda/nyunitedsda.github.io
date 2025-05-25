@@ -19,7 +19,7 @@ const clockSx: SxProps<Theme> = {
 	flexDirection: "column",
 	alignItems: "center",
 	bgcolor: "primary.main",
-	color: "white",
+	color: "primary.contrastText",
 	borderRadius: 2,
 	p: 2,
 	minWidth: "80px",

@@ -20,7 +20,7 @@ const Error: FC<ErrorProps> = (props) => {
     return menuItems.filter((i) => i.name === HOME)[0];
   }, [menuItems]);
 
-  const reset = useCallback(() => {
+  const refreshPage = useCallback(() => {
     window.location.reload();
   }, []);
 
@@ -58,7 +58,7 @@ const Error: FC<ErrorProps> = (props) => {
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: 'center', gap: 3, flexWrap: "wrap", p: 2, width: '100%' }}>
           <Button
             color="secondary"
-            onClick={reset}
+            onClick={refreshPage}
             size='large'
             startIcon={<RefreshOutlined />}
             variant='outlined'

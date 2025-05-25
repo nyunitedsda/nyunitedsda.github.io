@@ -24,7 +24,23 @@ const rootSx: SxProps<Theme> = {
 		bottom: 0, //'-25px',
 		position: "relative",
 	},
+	'& .slick-arrow': {
+		background: 'primary.main',
+	},
 };
+
+
+
+const SliderArrow: FC = ({ className, style, onClick }) => {
+  
+  return (
+    <div
+      className={className}
+      style={{ ...style, backgroundColor: "green" }}
+      onClick={onClick}
+    />
+  );
+}
 
 const DEFAULT_SETTINGS: Settings = {
 	adaptiveHeight: false,
@@ -34,6 +50,8 @@ const DEFAULT_SETTINGS: Settings = {
 	slidesToScroll: 1,
 	slidesToShow: 1,
 	useCSS: true,
+	nextArrow: <SliderArrow/>,
+	prevArrow: <SliderArrow/>,
 };
 
 const ProjectSlider: FC<ProjectSliderProps> = (props) => {

@@ -1,4 +1,4 @@
-import { DarkModeRounded, LightModeRounded } from "@mui/icons-material";
+import { DarkModeRounded, DarkModeTwoTone, LightModeRounded } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { useColorScheme } from "@mui/material/styles";
 import { type FC, useCallback, useMemo } from "react";
@@ -24,7 +24,7 @@ const ThemeToggleButton: FC = () => {
 			{mode === "dark" ? (
 				<LightModeRounded color="warning" />
 			) : (
-				<DarkModeRounded
+				<DarkModeTwoTone
 					sx={{ color: (theme) => theme.palette.primary.main }}
 				/>
 			)}
