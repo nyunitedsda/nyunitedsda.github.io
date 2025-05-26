@@ -10,11 +10,10 @@ const theme = responsiveFontSizes(
 		},
 		palette: {
 			primary: {
-				main: "#187cc2", 
+				main: "#187cc2",
 			},
 		},
 		typography: {
-			
 			fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
 		},
 		shape: {
@@ -29,8 +28,8 @@ const theme = responsiveFontSizes(
 					},
 				},
 				defaultProps: {
-					size: 'medium',
-				}
+					size: "medium",
+				},
 			},
 			MuiCard: {
 				styleOverrides: {

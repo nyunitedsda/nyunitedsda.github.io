@@ -30,7 +30,7 @@ const INITIAL_TIMER_VALUES = {
 	hours: 0,
 	minutes: 0,
 	seconds: 0,
-}
+};
 
 export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIMER_VALUES);
@@ -47,7 +47,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 					seconds: Math.floor((difference / 1000) % 60),
 				};
 			} else {
-				return (INITIAL_TIMER_VALUES)
+				return INITIAL_TIMER_VALUES;
 			}
 		};
 
@@ -78,11 +78,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 			{timeUnits.map((unit) => (
 				<Grid key={unit.label}>
 					<Box sx={clockSx}>
-						<Typography
-							variant="h4"
-							component="div"
-							fontWeight="bold"
-						>
+						<Typography variant="h4" component="div" fontWeight="bold">
 							{unit.value.toString().padStart(2, "0")}
 						</Typography>
 						<Typography variant="body2">{unit.label}</Typography>

@@ -24,7 +24,7 @@ const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
 	fontWeight: 700,
 	textDecoration: "none",
-	fontFamily: 'Inter',
+	fontFamily: "Inter",
 };
 
 const logoSx: SxProps<Theme> = {
@@ -38,15 +38,16 @@ const menuSx: SxProps<Theme> = {
 	flexGrow: 1,
 	display: { xs: "none", md: "flex" },
 	justifyContent: "center",
-	fontFamily: 'Inter',
+	fontFamily: "Inter",
 };
 
-const WEBSITE_TITLE = import.meta.env.VITE_WEBSITE_TITLE || 'NY United SDA Church'
+const WEBSITE_TITLE =
+	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
 const HOME = "Home";
 
-const Header: FC = () =>  {
+const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
@@ -118,19 +119,19 @@ const Header: FC = () =>  {
 									color: isActive(item.path) ? "primary.main" : "text.primary",
 									display: "flex",
 									fontWeight: isActive(item.path) ? "bold" : "normal",
-									fontSize: theme => theme.typography.body1,
+									fontSize: (theme) => theme.typography.body1,
 									// fontWeight: 'bold',
 									"&:after": isActive(item.path)
 										? {
-											content: '""',
-											position: "absolute",
-											bottom: 0,
-											left: "25%",
-											width: "50%",
-											height: "3px",
-											bgcolor: "primary.main",
-											borderRadius: "3px 3px 0 0",
-										}
+												content: '""',
+												position: "absolute",
+												bottom: 0,
+												left: "25%",
+												width: "50%",
+												height: "3px",
+												bgcolor: "primary.main",
+												borderRadius: "3px 3px 0 0",
+											}
 										: {},
 								}}
 							>
@@ -142,13 +143,15 @@ const Header: FC = () =>  {
 					<Box sx={{ display: { xs: "none", md: "flex" }, px: 2 }}>
 						<ThemeToggleButton />
 					</Box>
-					{
-						loginAuthRoute && (<Box sx={{ flexGrow: 0 }}>
+					{loginAuthRoute && (
+						<Box sx={{ flexGrow: 0 }}>
 							<Button
 								disabled
 								href={loginAuthRoute?.path}
-								size='large'
-								variant={isActive(loginAuthRoute?.path as string) ? "outlined" : "text"}
+								size="large"
+								variant={
+									isActive(loginAuthRoute?.path as string) ? "outlined" : "text"
+								}
 								color="primary"
 								startIcon={loginAuthRoute?.icon}
 								sx={{ display: { xs: "none", md: "flex" } }}
@@ -156,7 +159,7 @@ const Header: FC = () =>  {
 								{LOGIN}
 							</Button>
 						</Box>
-						)}
+					)}
 				</Toolbar>
 			</Container>
 
@@ -170,14 +173,18 @@ const Header: FC = () =>  {
 			>
 				<MenuDrawer
 					isActive={isActive}
-					menuItems={[...menuItems, ...(loginAuthRoute ? [loginAuthRoute] : [])] as RouteMenu[]}
+					menuItems={
+						[
+							...menuItems,
+							...(loginAuthRoute ? [loginAuthRoute] : []),
+						] as RouteMenu[]
+					}
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>
 			</Drawer>
 		</AppBar>
 	);
-}
-
+};
 
 export default Header;

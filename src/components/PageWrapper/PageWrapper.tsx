@@ -26,7 +26,7 @@ const subHeaderSx: SxProps<Theme> = {
 const rootSx: SxProps<Theme> = {
 	width: "100%",
 	minHeight: "100%",
-	backgroundColor: theme => theme.palette.background.paper,
+	backgroundColor: (theme) => theme.palette.background.paper,
 };
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {

@@ -50,7 +50,7 @@ const notificationSx: SxProps<Theme> = {
 		p: 2,
 		pt: 0,
 	},
-}
+};
 
 const sliderImageSx: SxProps<Theme> = {
 	height: (theme) => ({
@@ -63,7 +63,7 @@ const sliderImageSx: SxProps<Theme> = {
 		height: "auto",
 		objectFit: "cover !important",
 	},
-}
+};
 
 const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
@@ -116,7 +116,7 @@ const Home: FC = () => {
 										alt: i.alt,
 									}}
 									root={{
-										sx: sliderImageSx
+										sx: sliderImageSx,
 									}}
 								/>
 							))}
@@ -125,10 +125,7 @@ const Home: FC = () => {
 
 					{/* Notification Slides */}
 					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
-						<ProjectSlider
-							settings={sliderSettings}
-							sx={notificationSx}
-						>
+						<ProjectSlider settings={sliderSettings} sx={notificationSx}>
 							{notifications.map((i) => (
 								<NotificationCard key={i.id} {...i} />
 							))}

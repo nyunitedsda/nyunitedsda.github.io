@@ -2,14 +2,14 @@
 
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import isToday from 'dayjs/plugin/isToday';
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isToday from "dayjs/plugin/isToday";
 import { type FC, useEffect, useState } from "react";
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import advancedFormat from 'dayjs/plugin/advancedFormat'
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
-dayjs.extend(isToday)
+dayjs.extend(isToday);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(advancedFormat);
 
@@ -18,37 +18,44 @@ const NEXT_SERVICE = "Join Us for Our Next Service";
 
 const LiveBroadcast: FC = () => {
 	const [isLive, setIsLive] = useState(true);
-	const [nextServiceDate, _setNextServiceDate] = useState(
-		() => dayjs().day(6).hour(10).minute(30),
+	const [nextServiceDate, _setNextServiceDate] = useState(() =>
+		dayjs().day(6).hour(10).minute(30),
 	);
 
 	const [refreshToken, setRefreshToken] = useState<boolean>(false);
 
 	useEffect(() => {
-		// Check if we should be live 
+		// Check if we should be live
 		if (
 			refreshToken ||
 			(nextServiceDate.isToday() &&
-				dayjs().isSameOrAfter(nextServiceDate, 'minutes'))
+				dayjs().isSameOrAfter(nextServiceDate, "minutes"))
 		) {
 			setIsLive(true);
 			setRefreshToken(false);
 		} else if (isLive) {
-			setIsLive(false)
+			setIsLive(false);
 		}
 
-		return () => { setIsLive(false) }
-
+		return () => {
+			setIsLive(false);
+		};
 	}, [refreshToken, nextServiceDate]);
 
 	return (
 		<PageWrapper header={isLive ? LIVE_SERVICE : NEXT_SERVICE}>
 			{/* <Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}> */}
 			{isLive ? (
-				<Box className="fade-in" sx={{ mt: 4, height: '100%' }}>
+				<Box className="fade-in" sx={{ mt: 4, height: "100%" }}>
 					<Paper
 						elevation={3}
-						sx={{ p: 2, bgcolor: "background.paper", borderRadius: 2, height: '100%', width: '100%' }}
+						sx={{
+							p: 2,
+							bgcolor: "background.paper",
+							borderRadius: 2,
+							height: "100%",
+							width: "100%",
+						}}
 					>
 						{/* <Box
 							sx={{
@@ -65,19 +72,19 @@ const LiveBroadcast: FC = () => {
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
-						// controls="1"
+							// controls="1"
 						></iframe>
 						{/* </Box> */}
 					</Paper>
 					<Typography variant="body1" sx={{ mt: 3, textAlign: "center" }}>
-						If you're having trouble with the stream, please refresh the page
-						or visit our {/* TODO: Get church Youtube channel */}
+						If you're having trouble with the stream, please refresh the page or
+						visit our {/* TODO: Get church Youtube channel */}
 						<a
 							href="https://www.youtube.com/@newyorkunitedchurch3756/streams"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							{'YouTube channel'}
+							{"YouTube channel"}
 						</a>{" "}
 						directly.
 					</Typography>
@@ -100,9 +107,12 @@ const LiveBroadcast: FC = () => {
 							<CountdownTimer targetDate={nextServiceDate} />
 							<Typography
 								variant="body1"
-								sx={{ mt: 3, '& i': { color: 'primary.main', fontWeight: 'bold'},  }}
+								sx={{
+									mt: 3,
+									"& i": { color: "primary.main", fontWeight: "bold" },
+								}}
 								dangerouslySetInnerHTML={{
-									__html: `Join us on <i>${nextServiceDate.format('dddd MMM Do, h:mm a')}</i> for our live worship service.`,
+									__html: `Join us on <i>${nextServiceDate.format("dddd MMM Do, h:mm a")}</i> for our live worship service.`,
 								}}
 							/>
 						</Paper>

@@ -1,4 +1,9 @@
-import { EmailOutlined, LockOutlined, VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
+import {
+	EmailOutlined,
+	LockOutlined,
+	VisibilityOffOutlined,
+	VisibilityOutlined,
+} from "@mui/icons-material";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -18,43 +23,44 @@ import PageWrapper from "../../components/PageWrapper/PageWrapper";
 // TODO: Sanitize all input data.
 
 const Login: FC = () => {
-	const [showPassword, setShowPassword] = useState<boolean>(false)
-	const [isLogin, _setIsLogin] = useState<boolean>(true)
-	const [email, setEmail] = useState<string>("")
-	const [password, setPassword] = useState<string>("")
-	const [rememberMe, setRememberMe] = useState<boolean>(false)
-	const [error, setError] = useState<string>("")
+	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [isLogin, _setIsLogin] = useState<boolean>(true);
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+	const [rememberMe, setRememberMe] = useState<boolean>(false);
+	const [error, setError] = useState<string>("");
 
 	const handleClickShowPassword = useCallback(() => {
-		setShowPassword(prev => !prev)
-	}, [])
+		setShowPassword((prev) => !prev);
+	}, []);
 
+	const handleSubmit = useCallback(
+		(e: React.FormEvent) => {
+			e.preventDefault();
 
+			// Basic validation
+			if (!email) {
+				setError("Email is required");
+				return;
+			}
 
-	const handleSubmit = useCallback((e: React.FormEvent) => {
-		e.preventDefault()
+			if (!password) {
+				setError("Password is required");
+				return;
+			}
 
-		// Basic validation
-		if (!email) {
-			setError("Email is required")
-			return
-		}
+			// Here you would typically handle authentication
+			// For now, just show a success message
+			console.log("Form submitted:", { email, password, rememberMe });
 
-		if (!password) {
-			setError("Password is required")
-			return
-		}
-
-		// Here you would typically handle authentication
-		// For now, just show a success message
-		console.log("Form submitted:", { email, password, rememberMe })
-
-		// Clear form after submission
-		if (!isLogin) {
-			setEmail("")
-			setPassword("")
-		}
-	}, [email, password, rememberMe]);
+			// Clear form after submission
+			if (!isLogin) {
+				setEmail("");
+				setPassword("");
+			}
+		},
+		[email, password, rememberMe],
+	);
 
 	return (
 		<PageWrapper>
@@ -66,16 +72,27 @@ const Login: FC = () => {
 					p: 4,
 				}}
 			>
-				<Typography variant="h2" component="h1" className="welcome-text" sx={{ mb: 2, fontWeight: "bold" }}>
+				<Typography
+					variant="h2"
+					component="h1"
+					className="welcome-text"
+					sx={{ mb: 2, fontWeight: "bold" }}
+				>
 					{isLogin ? "Login" : "Create Account"}
 				</Typography>
 				<Typography variant="h6" className="welcome-text" sx={{ mb: 4 }}>
-					{isLogin ? "Access to Admin account" : "Join our online church community"}
+					{isLogin
+						? "Access to Admin account"
+						: "Join our online church community"}
 				</Typography>
 			</Box>
 
 			<Container maxWidth="sm" sx={{ mb: 8, flexGrow: 1 }}>
-				<Paper elevation={0} sx={{ p: 4, borderRadius: 2 }} className="login-animation">
+				<Paper
+					elevation={0}
+					sx={{ p: 4, borderRadius: 2 }}
+					className="login-animation"
+				>
 					{error && (
 						<Alert severity="error" sx={{ mb: 3 }}>
 							{error}
@@ -87,10 +104,20 @@ const Login: FC = () => {
 							{!isLogin && (
 								<>
 									<Grid size={{ xs: 12, sm: 6 }}>
-										<TextField required fullWidth label="First Name" variant="outlined" />
+										<TextField
+											required
+											fullWidth
+											label="First Name"
+											variant="outlined"
+										/>
 									</Grid>
 									<Grid size={{ xs: 12, sm: 6 }}>
-										<TextField required fullWidth label="Last Name" variant="outlined" />
+										<TextField
+											required
+											fullWidth
+											label="Last Name"
+											variant="outlined"
+										/>
 									</Grid>
 								</>
 							)}
@@ -111,7 +138,7 @@ const Login: FC = () => {
 													<EmailOutlined color="primary" />
 												</InputAdornment>
 											),
-										}
+										},
 									}}
 								/>
 							</Grid>
@@ -138,13 +165,17 @@ const Login: FC = () => {
 														aria-label="toggle password visibility"
 														onClick={handleClickShowPassword}
 														edge="end"
-														color='primary'
+														color="primary"
 													>
-														{showPassword ? <VisibilityOffOutlined /> : <VisibilityOutlined />}
+														{showPassword ? (
+															<VisibilityOffOutlined />
+														) : (
+															<VisibilityOutlined />
+														)}
 													</IconButton>
 												</InputAdornment>
 											),
-										}
+										},
 									}}
 								/>
 							</Grid>
@@ -164,7 +195,7 @@ const Login: FC = () => {
 														<LockOutlined color="action" />
 													</InputAdornment>
 												),
-											}
+											},
 										}}
 									/>
 								</Grid>
@@ -172,7 +203,13 @@ const Login: FC = () => {
 
 							{isLogin && (
 								<Grid size={12}>
-									<Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+									<Box
+										sx={{
+											display: "flex",
+											justifyContent: "space-between",
+											alignItems: "center",
+										}}
+									>
 										<FormControlLabel
 											control={
 												<Checkbox
@@ -198,7 +235,14 @@ const Login: FC = () => {
 							)}
 
 							<Grid size={12}>
-								<Button variant="contained" color="primary" size="large" fullWidth type="submit" sx={{ py: 1.5 }}>
+								<Button
+									variant="contained"
+									color="primary"
+									size="large"
+									fullWidth
+									type="submit"
+									sx={{ py: 1.5 }}
+								>
 									{isLogin ? "Sign In" : "Create Account"}
 								</Button>
 							</Grid>
@@ -222,7 +266,7 @@ const Login: FC = () => {
 				</Paper>
 			</Container>
 		</PageWrapper>
-	)
+	);
 };
 
 export default Login;

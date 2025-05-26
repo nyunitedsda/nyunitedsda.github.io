@@ -31,8 +31,8 @@ const listSx: SxProps<Theme> = {
 	"& a": { color: "inherit" },
 };
 
-
-const WEBSITE_TITLE = import.meta.env.VITE_WEBSITE_TITLE || 'NY United SDA Church'
+const WEBSITE_TITLE =
+	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
 const MOTTO = "A place of worship, community, and spiritual growth.";
 const QUICK_LINKS = "Quick Links";
 const SERVICE_TIMES = "Service Times";

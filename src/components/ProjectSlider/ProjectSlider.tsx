@@ -23,24 +23,21 @@ const rootSx: SxProps<Theme> = {
 		textAlign: "center",
 		bottom: 0, //'-25px',
 		position: "relative",
-		'& .slick-active button::before': {
-			color: 'primary.main',
+		"& .slick-active button::before": {
+			color: "primary.main",
 		},
 	},
-	'& .slick-arrow': {
+	"& .slick-arrow": {
 		// background: 'primary.main',
-		
 	},
-	'& .slick-prev': {
-		left: '-35px',
+	"& .slick-prev": {
+		left: "-35px",
 	},
-	'& .slick-next:before, .slick-prev:before': {
-		color: { xs: 'unset', md: 'primary.main'},
-		fontSize: theme => `${theme.spacing(4.5)}`,
-	}
+	"& .slick-next:before, .slick-prev:before": {
+		color: { xs: "unset", md: "primary.main" },
+		fontSize: (theme) => `${theme.spacing(4.5)}`,
+	},
 };
-
-
 
 const DEFAULT_SETTINGS: Settings = {
 	adaptiveHeight: false,

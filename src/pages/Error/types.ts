@@ -1,5 +1,0 @@
-interface ErrorProps {
-
-};
-
-export { ErrorProps };

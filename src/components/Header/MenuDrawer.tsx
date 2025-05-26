@@ -16,14 +16,12 @@ const rootSx: SxProps<Theme> = {
 	pt: 0,
 };
 
-
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
 	toggleDrawer,
 	title,
 	menuItems,
 }) => {
-
 	const navigate = useNavigate();
 
 	const handleClick = useCallback((path: string) => {
@@ -51,19 +49,28 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				{menuItems.map((item) => (
 					<ListItemButton
 						key={item.name}
-						disabled={item.name === 'Login'}
+						disabled={item.name === "Login"}
 						onClick={() => handleClick(item.path)}
 						sx={{
 							borderRadius: 0.5,
-							'& .MuiTypography-root': { fontWeight: isActive(item.path) ? 'bold' : 'normal' },
+							"& .MuiTypography-root": {
+								fontWeight: isActive(item.path) ? "bold" : "normal",
+							},
 							color: isActive(item.path) ? "primary.main" : "text.primary",
 							bgcolor: isActive(item.path) ? "action.selected" : "transparent",
 							"&:hover": { bgcolor: "action.hover" },
 						}}
 					>
-						{item.icon && (<ListItemIcon sx={{ color: isActive(item.path) ? "primary.main" : "text.primary", }}>{item.icon}</ListItemIcon>)}
+						{item.icon && (
+							<ListItemIcon
+								sx={{
+									color: isActive(item.path) ? "primary.main" : "text.primary",
+								}}
+							>
+								{item.icon}
+							</ListItemIcon>
+						)}
 						<ListItemText primary={item.name} />
-
 					</ListItemButton>
 				))}
 
