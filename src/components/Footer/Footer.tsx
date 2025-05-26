@@ -12,7 +12,6 @@ import {
 	Typography,
 } from "@mui/material";
 import type { FC } from "react";
-import { WEBSITE_TITLE } from "../../appConstants";
 import contactInfo from "../../constants/contactInfo";
 import services from "../../constants/services";
 import socialMediaInfo from "./socialMediaInfo";
@@ -32,6 +31,8 @@ const listSx: SxProps<Theme> = {
 	"& a": { color: "inherit" },
 };
 
+
+const WEBSITE_TITLE = import.meta.env.VITE_WEBSITE_TITLE || 'NY United SDA Church'
 const MOTTO = "A place of worship, community, and spiritual growth.";
 const QUICK_LINKS = "Quick Links";
 const SERVICE_TIMES = "Service Times";

@@ -2,13 +2,13 @@ import { Stack, type SxProps, type Theme, useMediaQuery } from "@mui/material";
 import { type FC, useMemo } from "react";
 import Image from "../../components/Image/Image";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import ProjectSlider from "../../components/ProjectSlider/ProjectSlider";
 import MinistryCard from "./components/MinistryCard";
 import NotificationCard from "./components/NotificationCard/NotificationCard";
+import SectionWrapper from "./components/SectionWrapper";
 import { ministries } from "./constants";
 import { notifications } from "./notifications";
 import sliderImages from "./sliderImages";
-import ProjectSlider from "../../components/ProjectSlider/ProjectSlider";
-import SectionWrapper from "./components/SectionWrapper";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -31,6 +31,39 @@ const cardContainerSx: SxProps<Theme> = {
 		p: 0,
 	},
 };
+
+const notificationSx: SxProps<Theme> = {
+	height: (theme) => ({
+		xs: `${theme.spacing(47)}`,
+		md: `${theme.spacing(50)}`,
+	}),
+	"& .MuiPaper-root": {
+		maxWidth: "415Px",
+		width: "99%",
+		height: "100%",
+		minHeight: (theme) => ({
+			xs: `${theme.spacing(40)}`,
+			md: `${theme.spacing(40)}`,
+		}),
+	},
+	"& .MuiCardActions-root": {
+		p: 2,
+		pt: 0,
+	},
+}
+
+const sliderImageSx: SxProps<Theme> = {
+	height: (theme) => ({
+		xs: `${theme.spacing(30)}`,
+		md: `${theme.spacing(60)}`,
+	}),
+	width: "100%",
+	"& img": {
+		width: "100%",
+		height: "auto",
+		objectFit: "cover !important",
+	},
+}
 
 const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
@@ -65,7 +98,7 @@ const Home: FC = () => {
 					<SectionWrapper>
 						<ProjectSlider
 							settings={{
-								autoplay: true,
+								// autoplay: true,
 								speed: 500,
 							}}
 							sx={{
@@ -83,18 +116,7 @@ const Home: FC = () => {
 										alt: i.alt,
 									}}
 									root={{
-										sx: {
-											height: (theme) => ({
-												xs: `${theme.spacing(30)}`,
-												md: `${theme.spacing(60)}`,
-											}),
-											width: "100%",
-											"& img": {
-												width: "100%",
-												height: "auto",
-												objectFit: "cover !important",
-											},
-										},
+										sx: sliderImageSx
 									}}
 								/>
 							))}
@@ -105,25 +127,7 @@ const Home: FC = () => {
 					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
 						<ProjectSlider
 							settings={sliderSettings}
-							sx={{
-								height: (theme) => ({
-									xs: `${theme.spacing(47)}`,
-									md: `${theme.spacing(50)}`,
-								}),
-								"& .MuiPaper-root": {
-									maxWidth: "415Px",
-									width: "99%",
-									height: "100%",
-									minHeight: (theme) => ({
-										xs: `${theme.spacing(40)}`,
-										md: `${theme.spacing(40)}`,
-									}),
-								},
-								"& .MuiCardActions-root": {
-									p: 2,
-									pt: 0,
-								},
-							}}
+							sx={notificationSx}
 						>
 							{notifications.map((i) => (
 								<NotificationCard key={i.id} {...i} />

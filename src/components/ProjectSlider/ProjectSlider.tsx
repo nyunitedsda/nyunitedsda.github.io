@@ -23,24 +23,24 @@ const rootSx: SxProps<Theme> = {
 		textAlign: "center",
 		bottom: 0, //'-25px',
 		position: "relative",
+		'& .slick-active button::before': {
+			color: 'primary.main',
+		},
 	},
 	'& .slick-arrow': {
-		background: 'primary.main',
+		// background: 'primary.main',
+		
 	},
+	'& .slick-prev': {
+		left: '-35px',
+	},
+	'& .slick-next:before, .slick-prev:before': {
+		color: { xs: 'unset', md: 'primary.main'},
+		fontSize: theme => `${theme.spacing(4.5)}`,
+	}
 };
 
 
-
-const SliderArrow: FC = ({ className, style, onClick }) => {
-  
-  return (
-    <div
-      className={className}
-      style={{ ...style, backgroundColor: "green" }}
-      onClick={onClick}
-    />
-  );
-}
 
 const DEFAULT_SETTINGS: Settings = {
 	adaptiveHeight: false,
@@ -50,8 +50,6 @@ const DEFAULT_SETTINGS: Settings = {
 	slidesToScroll: 1,
 	slidesToShow: 1,
 	useCSS: true,
-	nextArrow: <SliderArrow/>,
-	prevArrow: <SliderArrow/>,
 };
 
 const ProjectSlider: FC<ProjectSliderProps> = (props) => {

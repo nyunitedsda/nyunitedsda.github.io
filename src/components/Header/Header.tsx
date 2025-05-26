@@ -11,9 +11,8 @@ import {
 	Toolbar,
 	Typography,
 } from "@mui/material";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, type FC } from "react";
 import { useLocation } from "react-router";
-import { WEBSITE_TITLE } from "../../appConstants";
 import logo from "../../assets/img/NY United Logo small.png";
 import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
 import type { Route, RouteMenu } from "../../hooks/routes/types";
@@ -25,6 +24,7 @@ const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
 	fontWeight: 700,
 	textDecoration: "none",
+	fontFamily: 'Inter',
 };
 
 const logoSx: SxProps<Theme> = {
@@ -38,13 +38,15 @@ const menuSx: SxProps<Theme> = {
 	flexGrow: 1,
 	display: { xs: "none", md: "flex" },
 	justifyContent: "center",
+	fontFamily: 'Inter',
 };
 
+const WEBSITE_TITLE = import.meta.env.VITE_WEBSITE_TITLE || 'NY United SDA Church'
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 const LOGIN = "Login";
 const HOME = "Home";
 
-export default function Header() {
+const Header: FC = () =>  {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
@@ -176,3 +178,6 @@ export default function Header() {
 		</AppBar>
 	);
 }
+
+
+export default Header;
