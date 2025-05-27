@@ -1,26 +1,26 @@
-import contactInfo from "../../constants/contactInfo";
 import dayjs from "dayjs";
+import contactInfo from "../../constants/contactInfo";
 
 const socialMediaInfo = [
 	{
 		label: "Facebook",
 		href: "https://facebook.com",
-		icon: 'Facebook',
+		icon: "Facebook",
 	},
 	{
 		label: "Instagram",
 		href: "https://instagram.com",
-		icon: 'Instagram',
+		icon: "Instagram",
 	},
 	{
 		label: "Twitter",
 		href: "https://twitter.com",
-		icon: 'Twitter',
+		icon: "Twitter",
 	},
 	{
 		label: "YouTube",
 		href: "https://www.youtube.com/@newyorkunitedchurch3756",
-		icon: 'YouTube',
+		icon: "YouTube",
 	},
 ];
 
@@ -32,7 +32,6 @@ const QUICK_LINKS = "Quick Links";
 const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
 
-
 const CONTACT_DATA = [
 	{ content: contactInfo.street },
 	{
@@ -43,37 +42,25 @@ const CONTACT_DATA = [
 			color: "inherit",
 			component: "a",
 			href: `tel:${contactInfo.phone}`,
-			sx: { display: "flex", gap: 1, textDecoration: "none" }
+			sx: { display: "flex", gap: 1, textDecoration: "none" },
 		},
 		content: contactInfo.phone,
-		icon: 'Phone',
+		icon: "Phone",
 	},
 	{
 		attributes: {
 			color: "inherit",
 			component: "a",
 			href: `mailto:${contactInfo.email}`,
-			sx: { display: "flex", gap: 1, textDecoration: "none" }
+			sx: { display: "flex", gap: 1, textDecoration: "none" },
 		},
 		content: contactInfo.email,
-		icon: 'Email',
+		icon: "Email",
 	},
-
-]
-
-const TERMS_AND_POLICIES = [
-	{
-		content: 'Terms Of Use',
-		href: '/termsOfService',
-	},
-	{
-		content: 'Privacy Statement',
-		href: '/privacy',
-	}
-]
+];
 
 const getCopyright = () =>
-  `${dayjs().year()} ${WEBSITE_TITLE}. All rights reserved`;
+	`${dayjs().year()} ${WEBSITE_TITLE}. All rights reserved`;
 
 export {
 	CONTACT_DATA,
@@ -83,6 +70,5 @@ export {
 	QUICK_LINKS,
 	SERVICE_TIMES,
 	socialMediaInfo,
-	TERMS_AND_POLICIES,
 	WEBSITE_TITLE,
 };

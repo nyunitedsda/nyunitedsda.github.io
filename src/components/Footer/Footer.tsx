@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
-import type { FC, ReactNode } from "react";
+import { useMemo, type FC, type ReactNode } from "react";
 import services from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import FooterSegment from "./components/FooterSegment";
@@ -22,11 +22,11 @@ import {
 	MOTTO,
 	QUICK_LINKS,
 	SERVICE_TIMES,
-	TERMS_AND_POLICIES,
 	WEBSITE_TITLE,
 	getCopyright,
 	socialMediaInfo,
 } from "./footerData";
+import { getTermsAndPolicies } from "../../pages/UserAgreements/helpers";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -34,21 +34,21 @@ const footerSx: SxProps<Theme> = {
 	p: 2,
 	width: "100%",
 	"& a": {
-		textDecoration: 'none',
-		color: 'inherit',
+		textDecoration: "none",
+		color: "inherit",
 	},
 };
 
 const menuSx: SxProps<Theme> = {
 	"& a": {
 		color: "inherit",
-	}
-}
+	},
+};
 
 const dividerSx: SxProps<Theme> = {
 	my: 2,
-	backgroundColor: theme => `${theme.palette.divider}`,
-}
+	backgroundColor: (theme) => `${theme.palette.divider}`,
+};
 
 const iconMap: Record<string, ReactNode> = {
 	Facebook: <Facebook />,
@@ -57,111 +57,90 @@ const iconMap: Record<string, ReactNode> = {
 	YouTube: <YouTube />,
 	Phone: <Phone fontSize="small" />,
 	Email: <Email fontSize="small" />,
-}
-
+};
 
 const Footer: FC = () => {
 	const { menuItems } = useFormattedRoutes();
+
+	const TERMS_AND_POLICIES = useMemo(() => {
+		return getTermsAndPolicies();
+	}, []);
 
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
 				<Grid container spacing={4}>
-
 					{/* Social Media */}
-					<FooterSegment
-						title={WEBSITE_TITLE}
-						subtitle={MOTTO}
-					>
+					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO}>
 						<>
-
-							{
-								TERMS_AND_POLICIES.map((i) => (
-									<Typography
-										component="a"
-										href={i.href}
-										key={i.content}
-										target="_blank"
-										variant="body2"
-									>
-										{i.content}
-									</Typography>
-								))
-							}
-
+							{TERMS_AND_POLICIES.map((i) => (
+								<Typography
+									component="a"
+									href={i.href}
+									key={i.label}
+									target="_self"
+									variant="body2"
+								>
+									{i.label}
+								</Typography>
+							))}
 
 							<Box display="flex" gap={1}>
-								{
-									socialMediaInfo.map((i) => (
-										<IconButton
-											aria-label={i.label}
-											component="a"
-											href={i.href}
-											key={i.label}
-											size='small'
-											target="_blank"
-											title={i.label}
-										>
-											{iconMap[i.icon]}
-										</IconButton>
-									))
-								}
+								{socialMediaInfo.map((i) => (
+									<IconButton
+										aria-label={i.label}
+										component="a"
+										href={i.href}
+										key={i.label}
+										size="small"
+										target="_blank"
+										title={i.label}
+									>
+										{iconMap[i.icon]}
+									</IconButton>
+								))}
 							</Box>
-
-
 						</>
 					</FooterSegment>
 
 					{/* Menu */}
-					<FooterSegment
-						sx={menuSx}
-						title={QUICK_LINKS} >
-						{
-							menuItems.map((i) => (
-								<ListItem
-									component={"a"}
-									href={i.path}
-									key={i.name}
-									disablePadding
-								>
-									{i.name}
-								</ListItem>
-							))
-						}
+					<FooterSegment sx={menuSx} title={QUICK_LINKS}>
+						{menuItems.map((i) => (
+							<ListItem
+								component={"a"}
+								href={i.path}
+								key={i.name}
+								disablePadding
+							>
+								{i.name}
+							</ListItem>
+						))}
 					</FooterSegment>
 
 					{/* Services */}
-					<FooterSegment
-						title={SERVICE_TIMES}
-					>
-						{
-							services.map((i) => (
-								<Typography key={i.title} variant="body2" >
-									<strong>{`${i.title}: `}</strong> {i.time}
-								</Typography>
-							))
-						}
+					<FooterSegment title={SERVICE_TIMES}>
+						{services.map((i) => (
+							<Typography key={i.title} variant="body2">
+								<strong>{`${i.title}: `}</strong> {i.time}
+							</Typography>
+						))}
 					</FooterSegment>
 
 					{/* Contacts */}
-					<FooterSegment
-						title={CONTACT_US}
-					>
-						{
-							CONTACT_DATA.map((i) => i.icon ? (
-								<Box
-									{...i.attributes}
-									key={i.content}
-								>
+					<FooterSegment title={CONTACT_US}>
+						{CONTACT_DATA.map((i) =>
+							i.icon ? (
+								<Box {...i.attributes} key={i.content}>
 									{iconMap[i.icon]}
 									<Typography variant="body2">{i.content}</Typography>
 								</Box>
 							) : (
-								<Typography key={i.content} variant="body2">{i.content}</Typography>
-							))
-						}
+								<Typography key={i.content} variant="body2">
+									{i.content}
+								</Typography>
+							),
+						)}
 					</FooterSegment>
-
 				</Grid>
 
 				<Divider sx={dividerSx} />
@@ -169,9 +148,8 @@ const Footer: FC = () => {
 				<Typography variant="body2" align="center">
 					&copy; {getCopyright()}
 				</Typography>
-
 			</Container>
-		</Box >
+		</Box>
 	);
 };
 

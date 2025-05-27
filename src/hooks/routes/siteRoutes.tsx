@@ -8,6 +8,7 @@ import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRound
 import { lazy } from "react";
 import Error from "../../pages/Error/Error";
 import Login from "../../pages/Login/Login";
+import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 import type { Route } from "./types";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
@@ -63,6 +64,16 @@ const siteRoutes: Route[] = [
 		name: "About Us",
 		path: `${BASE_URL}aboutUs`,
 		errorElement: <Error />,
+	},
+	{
+		element: <UserAgreements />,
+		path: `${BASE_URL}legal/termsOfUse`,
+		errorElement: <Error />,
+	},
+	{
+		element: <UserAgreements />,
+		errorElement: <Error />,
+		path: `${BASE_URL}legal/privacy`,
 	},
 ];
 

@@ -21,11 +21,11 @@ const rootSx: SxProps<Theme> = {
 		whiteSpace: "nowrap",
 		width: "100%",
 		textAlign: "center",
-		bottom: 0, 		
+		bottom: 0,
 		position: "relative",
 		"& button::before": {
-			color: 'text.primary',
-			fontSize: theme=> `${theme.spacing(1)}`,
+			color: "text.primary",
+			fontSize: (theme) => `${theme.spacing(1)}`,
 		},
 		"& .slick-active button::before": {
 			color: "primary.main",
