@@ -1,32 +1,26 @@
-import Facebook from "@mui/icons-material/Facebook";
-import Instagram from "@mui/icons-material/Instagram";
-import Twitter from "@mui/icons-material/Twitter";
-import YouTube from "@mui/icons-material/YouTube";
 import contactInfo from "../../constants/contactInfo";
-import Phone from "@mui/icons-material/Phone";
-import Email from "@mui/icons-material/Email";
 import dayjs from "dayjs";
 
 const socialMediaInfo = [
 	{
 		label: "Facebook",
 		href: "https://facebook.com",
-		icon: <Facebook />,
+		icon: 'Facebook',
 	},
 	{
 		label: "Instagram",
 		href: "https://instagram.com",
-		icon: <Instagram />,
+		icon: 'Instagram',
 	},
 	{
 		label: "Twitter",
 		href: "https://twitter.com",
-		icon: <Twitter />,
+		icon: 'Twitter',
 	},
 	{
 		label: "YouTube",
 		href: "https://www.youtube.com/@newyorkunitedchurch3756",
-		icon: <YouTube />,
+		icon: 'YouTube',
 	},
 ];
 
@@ -37,7 +31,7 @@ const MOTTO = "A place of worship, community, and spiritual growth.";
 const QUICK_LINKS = "Quick Links";
 const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
-const COPYRIGHT = `${dayjs().year()} ${WEBSITE_TITLE}. All rights reserved`
+
 
 const CONTACT_DATA = [
 	{ content: contactInfo.street },
@@ -52,7 +46,7 @@ const CONTACT_DATA = [
 			sx: { display: "flex", gap: 1, textDecoration: "none" }
 		},
 		content: contactInfo.phone,
-		icon: <Phone fontSize="small" />,
+		icon: 'Phone',
 	},
 	{
 		attributes: {
@@ -62,7 +56,7 @@ const CONTACT_DATA = [
 			sx: { display: "flex", gap: 1, textDecoration: "none" }
 		},
 		content: contactInfo.email,
-		icon: <Email fontSize="small" />,
+		icon: 'Email',
 	},
 
 ]
@@ -78,10 +72,13 @@ const TERMS_AND_POLICIES = [
 	}
 ]
 
+const getCopyright = () =>
+  `${dayjs().year()} ${WEBSITE_TITLE}. All rights reserved`;
+
 export {
 	CONTACT_DATA,
 	CONTACT_US,
-	COPYRIGHT,
+	getCopyright,
 	MOTTO,
 	QUICK_LINKS,
 	SERVICE_TIMES,

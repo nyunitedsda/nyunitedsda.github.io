@@ -6,21 +6,27 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import services from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import FooterSegment from "./components/FooterSegment";
 import {
 	CONTACT_DATA,
 	CONTACT_US,
-	COPYRIGHT,
 	MOTTO,
 	QUICK_LINKS,
 	SERVICE_TIMES,
 	TERMS_AND_POLICIES,
 	WEBSITE_TITLE,
+	getCopyright,
 	socialMediaInfo,
 } from "./footerData";
+import Facebook from "@mui/icons-material/Facebook";
+import Instagram from "@mui/icons-material/Instagram";
+import Twitter from "@mui/icons-material/Twitter";
+import YouTube from "@mui/icons-material/YouTube";
+import Phone from "@mui/icons-material/Phone";
+import Email from "@mui/icons-material/Email";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -43,6 +49,16 @@ const dividerSx: SxProps<Theme> = {
 	my: 2,
 	backgroundColor: theme => `${theme.palette.divider}`,
 }
+
+const iconMap: Record<string, ReactNode> = {
+	Facebook: <Facebook />,
+	Instagram: <Instagram />,
+	Twitter: <Twitter />,
+	YouTube: <YouTube />,
+	Phone: <Phone fontSize="small" />,
+	Email: <Email fontSize="small" />,
+}
+
 
 const Footer: FC = () => {
 	const { menuItems } = useFormattedRoutes();
@@ -86,7 +102,7 @@ const Footer: FC = () => {
 											target="_blank"
 											title={i.label}
 										>
-											{i.icon}
+											{iconMap[i.icon]}
 										</IconButton>
 									))
 								}
@@ -137,7 +153,7 @@ const Footer: FC = () => {
 									{...i.attributes}
 									key={i.content}
 								>
-									{i.icon}
+									{iconMap[i.icon]}
 									<Typography variant="body2">{i.content}</Typography>
 								</Box>
 							) : (
@@ -151,7 +167,7 @@ const Footer: FC = () => {
 				<Divider sx={dividerSx} />
 
 				<Typography variant="body2" align="center">
-					&copy; {COPYRIGHT}
+					&copy; {getCopyright()}
 				</Typography>
 
 			</Container>
