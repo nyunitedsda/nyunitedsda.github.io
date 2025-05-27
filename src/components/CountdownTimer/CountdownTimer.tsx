@@ -3,10 +3,12 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useEffect, useMemo, useState } from "react";
-import { INITIAL_TIMER_VALUES, calculateRemainingTime, formatTimeUnits } from "./helpers";
+import {
+	INITIAL_TIMER_VALUES,
+	calculateRemainingTime,
+	formatTimeUnits,
+} from "./helpers";
 import type { CountdownTimerProps, TimeLeft } from "./types";
-
-
 
 const clockSx: SxProps<Theme> = {
 	display: "flex",
@@ -19,21 +21,16 @@ const clockSx: SxProps<Theme> = {
 	minWidth: "80px",
 };
 
-
-
 const CountdownTimer: FC<CountdownTimerProps> = ({ targetDate }) => {
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIMER_VALUES);
 
 	useEffect(() => {
-
 		// Initial calculation
 		setTimeLeft(calculateRemainingTime(targetDate));
 
 		// Update every second
 		const timer = setInterval(() => {
-			setTimeLeft(
-				calculateRemainingTime(targetDate)
-			);
+			setTimeLeft(calculateRemainingTime(targetDate));
 		}, 1000);
 
 		// Cleanup
@@ -44,18 +41,16 @@ const CountdownTimer: FC<CountdownTimerProps> = ({ targetDate }) => {
 
 	return (
 		<Grid container spacing={2} justifyContent="center">
-			{
-				timeUnits.map((unit) => (
-					<Grid key={unit.label}>
-						<Box sx={clockSx}>
-							<Typography variant="h4" component="div" fontWeight="bold">
-								{unit.value.toString().padStart(2, "0")}
-							</Typography>
-							<Typography variant="body2">{unit.label}</Typography>
-						</Box>
-					</Grid>
-				))
-			}
+			{timeUnits.map((unit) => (
+				<Grid key={unit.label}>
+					<Box sx={clockSx}>
+						<Typography variant="h4" component="div" fontWeight="bold">
+							{unit.value.toString().padStart(2, "0")}
+						</Typography>
+						<Typography variant="body2">{unit.label}</Typography>
+					</Box>
+				</Grid>
+			))}
 		</Grid>
 	);
 };
