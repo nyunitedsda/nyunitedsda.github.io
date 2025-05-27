@@ -21,8 +21,6 @@ const LiveBroadcast = lazy(
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "/nyunitedsda/";
 
-console.log("Title: ", import.meta.env.VITE_BASE_URL);
-
 const siteRoutes: Route[] = [
 	{
 		element: <Home />,

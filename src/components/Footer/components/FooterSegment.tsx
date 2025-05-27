@@ -2,13 +2,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { SxProps, Theme } from '@mui/material/styles';
-import { type FC, type PropsWithChildren } from 'react';
-
-export type FooterSegmentProps = PropsWithChildren<{
-  title: string;
-  subtitle?: string;
-  sx?: SxProps<Theme>;
-}>
+import { type FC, memo } from 'react';
+import type { FooterSegmentProps } from './types';
 
 const contentSx: SxProps<Theme> = {
   color: 'inherit',
@@ -46,4 +41,4 @@ const FooterSegment: FC<FooterSegmentProps> = ({
 );
 
 
-export default FooterSegment;
+export default memo(FooterSegment);

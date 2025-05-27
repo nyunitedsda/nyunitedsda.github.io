@@ -64,11 +64,11 @@ const CONTACT_DATA = [
 const TERMS_AND_POLICIES = [
 	{
 		content: 'Terms Of Use',
-		href: '',
+		href: '/termsOfService',
 	},
 	{
 		content: 'Privacy Statement',
-		href: '',
+		href: '/privacy',
 	}
 ]
 

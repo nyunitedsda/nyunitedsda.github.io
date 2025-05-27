@@ -1,3 +1,9 @@
+import Email from "@mui/icons-material/Email";
+import Facebook from "@mui/icons-material/Facebook";
+import Instagram from "@mui/icons-material/Instagram";
+import Phone from "@mui/icons-material/Phone";
+import Twitter from "@mui/icons-material/Twitter";
+import YouTube from "@mui/icons-material/YouTube";
 import { type SxProps, type Theme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -21,12 +27,6 @@ import {
 	getCopyright,
 	socialMediaInfo,
 } from "./footerData";
-import Facebook from "@mui/icons-material/Facebook";
-import Instagram from "@mui/icons-material/Instagram";
-import Twitter from "@mui/icons-material/Twitter";
-import YouTube from "@mui/icons-material/YouTube";
-import Phone from "@mui/icons-material/Phone";
-import Email from "@mui/icons-material/Email";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
