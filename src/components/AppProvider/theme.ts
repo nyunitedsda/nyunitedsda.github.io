@@ -6,11 +6,24 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 const theme = responsiveFontSizes(
 	createTheme({
 		colorSchemes: {
-			dark: true,
-		},
-		palette: {
-			primary: {
-				main: "#187cc2",
+			light: {
+				palette: {
+					primary: {
+						main: "#187cc2",
+					},					
+				},
+			},
+			dark: {
+				palette: {
+					primary: {
+						main: "#187cc2",
+						dark: "#4489c9",
+					},
+					background: {
+						default: "#1f2f41",
+						paper: "#354354",
+					},
+				},
 			},
 		},
 		typography: {
