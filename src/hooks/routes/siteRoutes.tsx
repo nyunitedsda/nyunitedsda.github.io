@@ -75,6 +75,10 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 		path: `${BASE_URL}legal/privacy`,
 	},
+	{
+		element: <Error />,
+		path: "*",
+	},
 ];
 
 export const authRoutes: Route[] = [

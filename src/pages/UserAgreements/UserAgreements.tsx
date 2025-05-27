@@ -17,55 +17,68 @@ const UserAgreements: FC = () => {
   const agreements = useMemo(() => getTermsAndPolicies(), []);
 
   useEffect(() => {
-    const pathMath = agreements.filter((i) => pathname.includes(i.tag))[0];
+    const matchedAgreement = agreements.find(
+      (i) => pathname.indexOf(i.tag) > -1,
+    );
 
-    if (
-      (selectedTab === undefined || selectedTab === null) &&
-      pathMath.href &&
-      pathname
-    ) {
-      navigate(pathMath.href);
-      setSelectedTab(pathMath.id);
-    } else if (pathMath.href && selectedTab !== pathMath.id) {
-      const path = agreements.filter((i) => i.id === selectedTab)[0]?.href;
-      if (path) navigate(path);
+    if (!matchedAgreement) {
+      navigate("/error");
     }
-  }, [agreements, selectedTab]);
+    else if (matchedAgreement.href && selectedTab !== matchedAgreement.id) {
+      setSelectedTab(matchedAgreement.id)
+    }
+
+  }, [agreements, selectedTab, pathname, navigate]);
 
   const handleChange = useCallback(
     (_event: SyntheticEvent, newValue: string) => {
-      const agreementId = parseInt(newValue);
-      setSelectedTab(agreementId);
+      try {
+        const agreementId = parseInt(newValue);
+        const path = agreements.filter((i) => i.id === agreementId)[0].href
+        if (path) navigate(path)
+      } catch (error) {
+        console.error(error);
+      }
     },
     [],
   );
 
   return (
     <PageWrapper>
-      <Tabs
-        aria-label="Terms and policies"
-        indicatorColor="primary"
-        onChange={handleChange}
-        textColor="primary"
-        value={selectedTab}
-        sx={{
-          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-        }}
-      >
-        {agreements.map((i) => (
-          <Tab key={i.label} value={i.id} label={i.label} />
-        ))}
-      </Tabs>
+      {
+        selectedTab ? (
+          <>
+            <Tabs
+              aria-label="Terms and policies"
+              indicatorColor="primary"
+              onChange={handleChange}
+              textColor="primary"
+              value={selectedTab}
+              sx={{
+                borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+              }}
+            >
+              {agreements.map((i) => (
+                <Tab key={i.label} value={i.id} label={i.label} />
+              ))}
+            </Tabs>
+            {
+              agreements.map((i) => (
+                <TabPanel index={i.id} key={i.label} value={selectedTab}>
+                  {typeof i.content === "string" ? (
+                    <Box dangerouslySetInnerHTML={{ __html: i.content }} />
+                  ) : (
+                    i.content
+                  )}
+                </TabPanel>
+              ))
+            }
+          </>
 
-      {selectedTab ? (
-        agreements.map((i) => (
-          <TabPanel index={i.id} key={i.label} value={selectedTab}>
-            <Box dangerouslySetInnerHTML={{ __html: i.content }} />
-          </TabPanel>
-        ))
-      ) : (
-        <Skeleton variant="rectangular" width="100%" height="100%" />
-      )}
+        ) : (
+          <Skeleton variant="rectangular" width="100%" height="100%" />
+        )
+      }
     </PageWrapper>
   );
 };
