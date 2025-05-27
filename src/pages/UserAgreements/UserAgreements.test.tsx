@@ -27,7 +27,7 @@ vi.mock("./helpers", () => ({
 			tag: "privacy",
 			href: "/privacy",
 			content: "<div>Privacy Content</div>",
-		}
+		},
 	],
 }));
 
@@ -59,7 +59,7 @@ describe.skip("UserAgreements", () => {
 			state: undefined,
 			key: "",
 			search: "",
-			hash: ""
+			hash: "",
 		});
 		(useNavigate as Mock).mockReturnValue(vi.fn());
 
@@ -90,7 +90,6 @@ describe.skip("UserAgreements", () => {
 			hash: "",
 		});
 
-
 		render(<UserAgreements />);
 		const privacyTab = screen.getByText("Privacy Policy");
 		fireEvent.click(privacyTab);
@@ -113,7 +112,5 @@ describe.skip("UserAgreements", () => {
 
 		render(<UserAgreements />);
 		expect(mockNavigate).toBeCalledWith("/error");
-
-
 	});
 });
