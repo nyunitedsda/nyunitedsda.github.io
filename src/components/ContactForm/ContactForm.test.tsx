@@ -3,6 +3,8 @@ import "@testing-library/jest-dom";
 import { describe, expect, it } from "vitest";
 import ContactForm from "./ContactForm";
 
+//TODO: Test ContactForm component
+
 describe("ContactForm", () => {
 	it("renders ContactForm", () => {
 		const { getByText } = render(<ContactForm />);

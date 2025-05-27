@@ -1,146 +1,152 @@
-import { Email, Phone } from "@mui/icons-material";
-import {
-	Box,
-	Container,
-	Divider,
-	Grid,
-	IconButton,
-	List,
-	ListItem,
-	type SxProps,
-	type Theme,
-	Typography,
-} from "@mui/material";
-import type { FC } from "react";
-import contactInfo from "../../constants/contactInfo";
+import Email from "@mui/icons-material/Email";
+import Facebook from "@mui/icons-material/Facebook";
+import Instagram from "@mui/icons-material/Instagram";
+import Phone from "@mui/icons-material/Phone";
+import Twitter from "@mui/icons-material/Twitter";
+import YouTube from "@mui/icons-material/YouTube";
+import { type SxProps, type Theme } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
+import { useMemo, type FC, type ReactNode } from "react";
 import services from "../../constants/services";
-import socialMediaInfo from "./socialMediaInfo";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import FooterSegment from "./components/FooterSegment";
+import {
+	CONTACT_DATA,
+	CONTACT_US,
+	MOTTO,
+	QUICK_LINKS,
+	SERVICE_TIMES,
+	WEBSITE_TITLE,
+	getCopyright,
+	socialMediaInfo,
+} from "./footerData";
+import { getTermsAndPolicies } from "../../pages/UserAgreements/helpers";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
 	color: "primary.contrastText",
 	p: 2,
 	width: "100%",
+	"& a": {
+		textDecoration: "none",
+		color: "inherit",
+	},
 };
 
-const listSx: SxProps<Theme> = {
-	listStyle: "none",
-	p: 0,
-	m: 0,
-	"& a": { color: "inherit" },
+const menuSx: SxProps<Theme> = {
+	"& a": {
+		color: "inherit",
+	},
 };
 
-const WEBSITE_TITLE =
-	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
-const MOTTO = "A place of worship, community, and spiritual growth.";
-const QUICK_LINKS = "Quick Links";
-const SERVICE_TIMES = "Service Times";
-const CONTACT_US = "Contact Us";
+const dividerSx: SxProps<Theme> = {
+	my: 2,
+	backgroundColor: (theme) => `${theme.palette.divider}`,
+};
+
+const iconMap: Record<string, ReactNode> = {
+	Facebook: <Facebook />,
+	Instagram: <Instagram />,
+	Twitter: <Twitter />,
+	YouTube: <YouTube />,
+	Phone: <Phone fontSize="small" />,
+	Email: <Email fontSize="small" />,
+};
 
 const Footer: FC = () => {
 	const { menuItems } = useFormattedRoutes();
+
+	const TERMS_AND_POLICIES = useMemo(() => {
+		return getTermsAndPolicies();
+	}, []);
 
 	return (
 		<Box component="footer" sx={footerSx}>
 			<Container maxWidth="lg">
 				<Grid container spacing={4}>
-					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
-						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							{WEBSITE_TITLE}
-						</Typography>
-						<Typography variant="body2" sx={{ mb: 2 }}>
-							{MOTTO}
-						</Typography>
-						<Box sx={{ display: "flex", gap: 1 }}>
-							{socialMediaInfo.map((i) => (
-								<IconButton
-									key={i.label}
-									color="inherit"
-									aria-label={i.label}
+					{/* Social Media */}
+					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO}>
+						<>
+							{TERMS_AND_POLICIES.map((i) => (
+								<Typography
 									component="a"
 									href={i.href}
-									target="_blank"
-									title={i.label}
+									key={i.label}
+									target="_self"
+									variant="body2"
 								>
-									{i.icon}
-								</IconButton>
+									{i.label}
+								</Typography>
 							))}
-						</Box>
-					</Grid>
 
-					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
-						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							{QUICK_LINKS}
-						</Typography>
-						<List dense component="ul" sx={listSx}>
-							{menuItems.map((i) => (
-								<ListItem
-									component={"a"}
-									href={i.path}
-									key={i.name}
-									sx={{ py: 0, fontSize: 14, mb: 1 }}
-								>
-									{i.name}
-								</ListItem>
-							))}
-						</List>
-					</Grid>
+							<Box display="flex" gap={1}>
+								{socialMediaInfo.map((i) => (
+									<IconButton
+										aria-label={i.label}
+										component="a"
+										href={i.href}
+										key={i.label}
+										size="small"
+										target="_blank"
+										title={i.label}
+									>
+										{iconMap[i.icon]}
+									</IconButton>
+								))}
+							</Box>
+						</>
+					</FooterSegment>
+
+					{/* Menu */}
+					<FooterSegment sx={menuSx} title={QUICK_LINKS}>
+						{menuItems.map((i) => (
+							<ListItem
+								component={"a"}
+								href={i.path}
+								key={i.name}
+								disablePadding
+							>
+								{i.name}
+							</ListItem>
+						))}
+					</FooterSegment>
 
 					{/* Services */}
-					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
-						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							{SERVICE_TIMES}
-						</Typography>
+					<FooterSegment title={SERVICE_TIMES}>
 						{services.map((i) => (
-							<Typography key={i.title} variant="body2" sx={{ mb: 1 }}>
+							<Typography key={i.title} variant="body2">
 								<strong>{`${i.title}: `}</strong> {i.time}
 							</Typography>
 						))}
-					</Grid>
+					</FooterSegment>
 
 					{/* Contacts */}
-					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
-						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-							{CONTACT_US}
-						</Typography>
-
-						<Typography variant="body2" sx={{ mb: 1 }}>
-							{contactInfo.street}
-						</Typography>
-						<Typography variant="body2" sx={{ mb: 1 }}>
-							{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
-						</Typography>
-						<Box
-							color="inherit"
-							component={"a"}
-							href={`tel:${contactInfo.phone}`}
-							sx={{ display: "flex", gap: 1, textDecoration: "none" }}
-						>
-							<Phone fontSize="small" />
-							<Typography variant="body2" sx={{ mb: 1 }}>
-								{contactInfo.phone}
-							</Typography>
-						</Box>
-						<Box
-							color="inherit"
-							component={"a"}
-							href={`mailto:${contactInfo.email}`}
-							sx={{ display: "flex", gap: 1, textDecoration: "none" }}
-						>
-							<Email fontSize="small" />
-							<Typography variant="body2" sx={{ mb: 1 }}>
-								{contactInfo.email}
-							</Typography>
-						</Box>
-					</Grid>
+					<FooterSegment title={CONTACT_US}>
+						{CONTACT_DATA.map((i) =>
+							i.icon ? (
+								<Box {...i.attributes} key={i.content}>
+									{iconMap[i.icon]}
+									<Typography variant="body2">{i.content}</Typography>
+								</Box>
+							) : (
+								<Typography key={i.content} variant="body2">
+									{i.content}
+								</Typography>
+							),
+						)}
+					</FooterSegment>
 				</Grid>
 
-				<Divider sx={{ my: 2, borderColor: "divider" }} />
+				<Divider sx={dividerSx} />
 
 				<Typography variant="body2" align="center">
-					&copy; {new Date().getFullYear()} {WEBSITE_TITLE}. All rights
-					reserved.
+					&copy; {getCopyright()}
 				</Typography>
 			</Container>
 		</Box>

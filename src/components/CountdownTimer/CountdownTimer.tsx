@@ -1,18 +1,14 @@
-import { Box, Grid, type SxProps, type Theme, Typography } from "@mui/material";
-import type { Dayjs } from "dayjs";
-import dayjs from "dayjs";
-import { useEffect, useMemo, useState } from "react";
-
-interface CountdownTimerProps {
-	targetDate: Dayjs;
-}
-
-interface TimeLeft {
-	days: number;
-	hours: number;
-	minutes: number;
-	seconds: number;
-}
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import type { SxProps, Theme } from "@mui/material/styles";
+import { type FC, useEffect, useMemo, useState } from "react";
+import {
+	INITIAL_TIMER_VALUES,
+	calculateRemainingTime,
+	formatTimeUnits,
+} from "./helpers";
+import type { CountdownTimerProps, TimeLeft } from "./types";
 
 const clockSx: SxProps<Theme> = {
 	display: "flex",
@@ -25,53 +21,23 @@ const clockSx: SxProps<Theme> = {
 	minWidth: "80px",
 };
 
-const INITIAL_TIMER_VALUES = {
-	days: 0,
-	hours: 0,
-	minutes: 0,
-	seconds: 0,
-};
-
-export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
+const CountdownTimer: FC<CountdownTimerProps> = ({ targetDate }) => {
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIMER_VALUES);
 
 	useEffect(() => {
-		const calculateTimeLeft = () => {
-			const difference = dayjs(targetDate).diff(dayjs());
-
-			if (difference > 0) {
-				return {
-					days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-					hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-					minutes: Math.floor((difference / 1000 / 60) % 60),
-					seconds: Math.floor((difference / 1000) % 60),
-				};
-			} else {
-				return INITIAL_TIMER_VALUES;
-			}
-		};
-
 		// Initial calculation
-		setTimeLeft(calculateTimeLeft());
+		setTimeLeft(calculateRemainingTime(targetDate));
 
 		// Update every second
 		const timer = setInterval(() => {
-			setTimeLeft(calculateTimeLeft());
+			setTimeLeft(calculateRemainingTime(targetDate));
 		}, 1000);
 
 		// Cleanup
 		return () => clearInterval(timer);
 	}, [targetDate]);
 
-	const timeUnits = useMemo(
-		() => [
-			{ label: "Days", value: timeLeft.days },
-			{ label: "Hours", value: timeLeft.hours },
-			{ label: "Minutes", value: timeLeft.minutes },
-			{ label: "Seconds", value: timeLeft.seconds },
-		],
-		[timeLeft],
-	);
+	const timeUnits = useMemo(() => formatTimeUnits(timeLeft), [timeLeft]);
 
 	return (
 		<Grid container spacing={2} justifyContent="center">
@@ -87,4 +53,6 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 			))}
 		</Grid>
 	);
-}
+};
+
+export default CountdownTimer;

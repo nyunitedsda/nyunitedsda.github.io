@@ -22,7 +22,7 @@ export const formatRoutes = (routes: any[]): RouteObject[] => {
 
 export const generateMenuItems = (routes: any[]): RouteMenu[] => {
 	return routes.reduce<RouteMenu[]>((acc, i) => {
-		if (i.name || i.icon || i.path) {
+		if ((i.name || i.icon) && i.path) {
 			acc.push({
 				name: i.name ?? "",
 				path: i.path ?? "",

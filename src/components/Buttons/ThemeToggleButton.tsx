@@ -1,4 +1,5 @@
-import { DarkModeTwoTone, LightModeRounded } from "@mui/icons-material";
+import DarkModeTwoTone from "@mui/icons-material/DarkModeTwoTone";
+import LightModeRounded from "@mui/icons-material/LightModeRounded";
 import IconButton from "@mui/material/IconButton";
 import { useColorScheme } from "@mui/material/styles";
 import { type FC, useCallback, useMemo } from "react";

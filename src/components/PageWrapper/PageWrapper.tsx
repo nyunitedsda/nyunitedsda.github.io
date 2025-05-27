@@ -21,6 +21,7 @@ const containerSx: SxProps<Theme> = {
 };
 const subHeaderSx: SxProps<Theme> = {
 	fontWeight: "bold",
+	color: "text.primary",
 };
 
 const rootSx: SxProps<Theme> = {
@@ -50,7 +51,9 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 						)}
 					</Stack>
 				)}
-				<Stack sx={{ flexGrow: 1, gap: 2 }}>{children}</Stack>
+				<Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}>
+					{children}
+				</Stack>
 			</Container>
 
 			<Footer />
