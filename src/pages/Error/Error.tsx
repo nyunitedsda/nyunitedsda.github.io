@@ -6,12 +6,10 @@ import Typography from "@mui/material/Typography";
 import { type FC, useCallback, useMemo } from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
-import type { ErrorProps } from "./types";
 
 const HOME = "Home";
 
-const Error: FC<ErrorProps> = (props) => {
-	const {} = props;
+const Error: FC = () => {
 
 	const { menuItems } = useFormattedRoutes();
 
