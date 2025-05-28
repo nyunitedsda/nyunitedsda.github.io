@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import type { ImageProps } from "../../../components/Image/types";
-import type { CardProps } from "../../../components/ProjectCard/ProjectCard";
+import type { CardProps } from "../../../components/ProjectCard/types";
 
 export interface MinistryCardProps
 	extends Omit<CardProps, "content" | "actions"> {

@@ -9,6 +9,7 @@ import {
 } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, type ReactNode, useMemo } from "react";
 import ProjectCard from "../../../../components/ProjectCard/ProjectCard";
 import type { ChurchNotificationProps } from "../../notifications";
@@ -20,15 +21,15 @@ interface Section {
 	title: string;
 }
 
+const noteSx: SxProps<Theme> = {
+	display: "flex",
+	alignItems: "center",
+	gap: 2,
+	"& svg": { color: "primary.light" },
+};
+
 const NoteSection: FC<Section> = ({ icon, content, title }) => (
-	<Box
-		sx={{
-			display: "flex",
-			alignItems: "center",
-			gap: 2,
-			"& svg": { color: "primary.main" },
-		}}
-	>
+	<Box sx={noteSx}>
 		{icon && icon}
 		<Box sx={{ display: "flex", gap: 2 }}>
 			<Typography variant="body1" color="text.secondary" fontWeight="bold">
@@ -137,7 +138,7 @@ const createFormattedContent = (props: ChurchNotificationProps) => {
 };
 
 const NotificationCard: FC<NotificationCardProps> = (props) => {
-	const { title, description } = props;
+	const { title, description, className } = props;
 
 	const contents = useMemo(() => {
 		return createFormattedContent(props) ?? [];
@@ -145,11 +146,13 @@ const NotificationCard: FC<NotificationCardProps> = (props) => {
 
 	return (
 		<ProjectCard
+			className={className ?? ""}
 			header={{
 				title,
 				sx: {
 					bgcolor: "primary.main",
 					color: "primary.contrastText",
+					width: "100%",
 				},
 			}}
 			content={

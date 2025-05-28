@@ -39,8 +39,12 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				}}
 			>
 				<Typography
-					variant="h6"
-					sx={{ fontWeight: "bold", color: "primary.main" }}
+					variant="h5"
+					sx={{
+						fontWeight: "bold",
+						color: "primary.light",
+						fontFamily: "inter",
+					}}
 				>
 					{title}
 				</Typography>
@@ -56,15 +60,19 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 							"& .MuiTypography-root": {
 								fontWeight: isActive(item.path) ? "bold" : "normal",
 							},
-							color: isActive(item.path) ? "primary.main" : "text.primary",
-							bgcolor: isActive(item.path) ? "action.selected" : "transparent",
+							color: isActive(item.path)
+								? "primary.contrastText"
+								: "text.secondary",
+							bgcolor: isActive(item.path) ? "primary.light" : "transparent",
 							"&:hover": { bgcolor: "action.hover" },
 						}}
 					>
 						{item.icon && (
 							<ListItemIcon
 								sx={{
-									color: isActive(item.path) ? "primary.main" : "text.primary",
+									color: isActive(item.path)
+										? "primary.contrastText"
+										: "text.secondary",
 								}}
 							>
 								{item.icon}
@@ -75,21 +83,6 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				))}
 
 				{/* TODO: Update menuItems with login  */}
-				{/* <ListItem
-					component={"a"}
-					href={LOGIN_URL}
-					sx={{
-						color: isActive(LOGIN_URL) ? "primary.main" : "text.primary",
-						bgcolor: isActive(LOGIN_URL) ? "action.selected" : "transparent",
-						"&:hover": { bgcolor: "action.hover" },
-					}}
-				>
-					<Box sx={{ mr: 2 }}>
-						<Login />
-					</Box>
-					<ListItemText primary="Login" />
-					{isActive(LOGIN_URL) && <ChevronRight />}
-				</ListItem> */}
 			</List>
 		</Stack>
 	);

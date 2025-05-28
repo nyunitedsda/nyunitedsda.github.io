@@ -3,7 +3,7 @@ import { Box, Grid, List, ListItem, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
-import ContactForm from "../../components/ContactForm/ContactForm";
+// import ContactForm from "../../components/ContactForm/ContactForm";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import contactInfo from "../../constants/contactInfo";
 import services from "../../constants/services";
@@ -23,12 +23,12 @@ const SERVICES = "Services";
 const Contact: FC = () => {
 	return (
 		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
-			<ContactForm />
+			{/* <ContactForm /> */}
 
 			<Paper elevation={3} sx={{ p: 4, mb: 2, mt: 4 }}>
 				<Typography
 					variant="h5"
-					sx={{ mb: 4, color: "primary.main", fontWeight: "bold" }}
+					sx={{ mb: 4, color: "primary.light", fontWeight: "bold" }}
 				>
 					{COMPANY}
 				</Typography>
@@ -36,29 +36,18 @@ const Contact: FC = () => {
 				<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
 					<LocationOn color="primary" sx={{ mr: 2, fontSize: 24 }} />
 					<Box>
-						{/* <Typography variant="h6">Address</Typography> */}
 						<Typography variant="body1" sx={{ mb: 1 }}>
 							{contactInfo.street}
 						</Typography>
 						<Typography variant="body1" sx={{ mb: 1 }}>
 							{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
 						</Typography>
-						{/* <Button
-              variant="text"
-              color="primary"
-              href="https://maps.google.com/?q=123+Faith+Avenue,+Blessed+City,+BC+12345"
-              target="_blank"
-              sx={{ pl: 0, mt: 0.5 }}
-            >
-              Get Directions
-            </Button> */}
 					</Box>
 				</Box>
 
 				<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
 					<Phone color="primary" sx={{ mr: 2, fontSize: 24 }} />
 					<Box>
-						{/* <Typography variant="h6">Phone</Typography> */}
 						<Typography variant="body1">{contactInfo.phone}</Typography>
 					</Box>
 				</Box>
@@ -66,7 +55,6 @@ const Contact: FC = () => {
 				<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
 					<Email color="primary" sx={{ mr: 2, fontSize: 24 }} />
 					<Box>
-						{/* <Typography variant="h6">Email</Typography> */}
 						<Typography variant="body1">{contactInfo.email}</Typography>
 					</Box>
 				</Box>
@@ -74,7 +62,10 @@ const Contact: FC = () => {
 				<Box sx={{ display: "flex", alignItems: "center" }}>
 					{/* Services */}
 					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
-						<Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+						<Typography
+							variant="h5"
+							sx={{ fontWeight: "bold", mb: 2, color: "primary.light" }}
+						>
 							{SERVICES}
 						</Typography>
 						{services.map((i) => (
@@ -123,7 +114,7 @@ const Contact: FC = () => {
 						</Typography>
 						<Typography
 							component={"a"}
-							sx={{ textDecoration: "none", color: "primary.main" }}
+							sx={{ textDecoration: "none", color: "primary.light" }}
 							href="http://www.mta.info/nyct"
 						>
 							{TRIP_PLANNER}

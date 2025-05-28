@@ -68,7 +68,7 @@ const Login: FC = () => {
 				sx={{
 					position: "relative",
 					textAlign: "center",
-					color: "primary.main",
+					color: "primary.light",
 					p: 4,
 				}}
 			>

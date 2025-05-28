@@ -26,7 +26,7 @@ const ThemeToggleButton: FC = () => {
 				<LightModeRounded color="warning" />
 			) : (
 				<DarkModeTwoTone
-					sx={{ color: (theme) => theme.palette.primary.main }}
+					sx={{ color: (theme) => theme.palette.primary.light }}
 				/>
 			)}
 		</IconButton>

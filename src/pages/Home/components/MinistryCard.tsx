@@ -12,7 +12,7 @@ const contentSx: SxProps<Theme> = {
 	overflow: "hidden",
 	"& a": {
 		textDecoration: "none",
-		color: "primary.main",
+		color: "primary.light",
 	},
 };
 

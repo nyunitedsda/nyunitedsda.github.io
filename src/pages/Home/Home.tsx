@@ -1,8 +1,7 @@
-import { Stack, type SxProps, type Theme, useMediaQuery } from "@mui/material";
-import { type FC, useMemo } from "react";
-import Image from "../../components/Image/Image";
+import { Stack, type SxProps, type Theme } from "@mui/material";
+import { type FC } from "react";
+import Carousel from "../../components/Carousel/Carousel";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import ProjectSlider from "../../components/ProjectSlider/ProjectSlider";
 import MinistryCard from "./components/MinistryCard";
 import NotificationCard from "./components/NotificationCard/NotificationCard";
 import SectionWrapper from "./components/SectionWrapper";
@@ -32,104 +31,50 @@ const cardContainerSx: SxProps<Theme> = {
 	},
 };
 
-const notificationSx: SxProps<Theme> = {
-	height: (theme) => ({
-		xs: `${theme.spacing(47)}`,
-		md: `${theme.spacing(50)}`,
-	}),
-	"& .MuiPaper-root": {
-		maxWidth: "415Px",
-		width: "99%",
-		height: "100%",
-		minHeight: (theme) => ({
-			xs: `${theme.spacing(40)}`,
-			md: `${theme.spacing(40)}`,
-		}),
-	},
-	"& .MuiCardActions-root": {
-		p: 2,
-		pt: 0,
-	},
-};
-
-const sliderImageSx: SxProps<Theme> = {
-	height: (theme) => ({
-		xs: `${theme.spacing(30)}`,
-		md: `${theme.spacing(60)}`,
-	}),
-	width: "100%",
-	"& img": {
-		width: "100%",
-		height: "auto",
-		objectFit: "cover !important",
-	},
-};
-
 const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
 
 const Home: FC = () => {
-	const mediumDevice = useMediaQuery((theme) => theme.breakpoints.up("md"));
-
-	const sliderSettings = useMemo(() => {
-		if (mediumDevice) {
-			return {
-				centerMode: true,
-				centerPadding: "20px",
-				className: "center",
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				initialSlide: 1,
-			};
-		}
-
-		return {
-			initialSlide: 1,
-			slidesToShow: 1,
-			slidesToScroll: 1,
-		};
-	}, [mediumDevice]);
-
 	return (
 		<>
 			<PageWrapper>
 				<Stack sx={{ flexGrow: 1, width: "100%", gap: 5 }}>
 					{/* Image Slides */}
 					<SectionWrapper>
-						<ProjectSlider
-							settings={{
-								// autoplay: true,
-								speed: 500,
-							}}
+						<Carousel
 							sx={{
-								height: (theme) => ({
-									xs: `${theme.spacing(47)}`,
-									md: `${theme.spacing(78)}`,
-								}),
+								"& .embla__slide": {
+									height: { xs: "350px", sm: "unset" },
+								},
 							}}
 						>
 							{sliderImages.map((i) => (
-								<Image
-									key={i.src}
-									image={{
-										src: i.src,
-										alt: i.alt,
-									}}
-									root={{
-										sx: sliderImageSx,
-									}}
-								/>
+								<Stack direction="row" className="embla__slide" key={i.src}>
+									<img
+										className="embla__slide__number"
+										src={i.src}
+										alt={i.alt ?? `${i.src}-image`}
+									/>
+								</Stack>
 							))}
-						</ProjectSlider>
+						</Carousel>
 					</SectionWrapper>
 
 					{/* Notification Slides */}
 					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
-						<ProjectSlider settings={sliderSettings} sx={notificationSx}>
+						<Carousel
+							sx={{
+								"& .embla__viewport .embla__container": {
+									gap: 2,
+									py: 2,
+									px: 1,
+								},
+							}}
+						>
 							{notifications.map((i) => (
-								<NotificationCard key={i.id} {...i} />
+								<NotificationCard className="embla__slide" key={i.id} {...i} />
 							))}
-						</ProjectSlider>
+						</Carousel>
 					</SectionWrapper>
 
 					{/* Ministries content */}

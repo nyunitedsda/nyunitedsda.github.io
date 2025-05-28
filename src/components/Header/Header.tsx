@@ -6,17 +6,19 @@ import {
 	Container,
 	Drawer,
 	IconButton,
+	MenuItem,
 	type SxProps,
 	type Theme,
 	Toolbar,
 	Typography,
 } from "@mui/material";
-import { useCallback, useMemo, useState, type FC } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import logo from "../../assets/img/NY United Logo small.png";
-import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
-import type { Route, RouteMenu } from "../../hooks/routes/types";
+import siteRoutes from "../../hooks/routes/siteRoutes";
+import type { RouteMenu } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import useColorTheme from "../../hooks/theme/useColorTheme";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
 
@@ -25,6 +27,7 @@ const brandingSx: SxProps<Theme> = {
 	fontWeight: 700,
 	textDecoration: "none",
 	fontFamily: "Inter",
+	color: "primary.light",
 };
 
 const logoSx: SxProps<Theme> = {
@@ -44,20 +47,16 @@ const menuSx: SxProps<Theme> = {
 const WEBSITE_TITLE =
 	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
 const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
-const LOGIN = "Login";
 const HOME = "Home";
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
+	const { toggleMode } = useColorTheme();
 
 	const handleDrawerToggle = useCallback(() => {
-		setDrawerOpen(!drawerOpen);
-	}, []);
-
-	const loginAuthRoute = useMemo(() => {
-		return (authRoutes as Route[]).filter((i) => i?.name === LOGIN)[0];
+		setDrawerOpen((d) => !d);
 	}, []);
 
 	const homeRoute = useMemo(() => {
@@ -73,9 +72,15 @@ const Header: FC = () => {
 			position="sticky"
 			color="default"
 			elevation={1}
-			sx={{ bgcolor: "background.paper" }}
+			sx={{
+				bgcolor: "background.paper",
+				height: (theme) => `${theme.spacing(8)}`,
+			}}
 		>
-			<Container maxWidth="lg">
+			<Container
+				sx={{ height: (theme) => `${theme.spacing(8)}` }}
+				maxWidth="lg"
+			>
 				<Toolbar disableGutters>
 					<Box sx={logoSx}>
 						{/* Logo */}
@@ -97,10 +102,9 @@ const Header: FC = () => {
 
 						{/* Company branding */}
 						<Typography
-							variant="h6"
+							variant="h5"
 							component={"a"}
 							href={homeRoute.path}
-							color="primary"
 							sx={brandingSx}
 						>
 							{WEBSITE_TITLE}
@@ -114,13 +118,10 @@ const Header: FC = () => {
 								key={item.name}
 								href={item.path}
 								sx={{
-									my: 2,
-									mx: 1,
-									color: isActive(item.path) ? "primary.main" : "text.primary",
+									color: isActive(item.path) ? "primary.light" : "text.primary",
 									display: "flex",
 									fontWeight: isActive(item.path) ? "bold" : "normal",
 									fontSize: (theme) => theme.typography.body1,
-									// fontWeight: 'bold',
 									"&:after": isActive(item.path)
 										? {
 												content: '""',
@@ -129,7 +130,7 @@ const Header: FC = () => {
 												left: "25%",
 												width: "50%",
 												height: "3px",
-												bgcolor: "primary.main",
+												bgcolor: "primary.light",
 												borderRadius: "3px 3px 0 0",
 											}
 										: {},
@@ -140,26 +141,9 @@ const Header: FC = () => {
 						))}
 					</Box>
 
-					<Box sx={{ display: { xs: "none", md: "flex" }, px: 2 }}>
+					<Box sx={{ display: { xs: "none", md: "flex" } }}>
 						<ThemeToggleButton />
 					</Box>
-					{loginAuthRoute && (
-						<Box sx={{ flexGrow: 0 }}>
-							<Button
-								disabled
-								href={loginAuthRoute?.path}
-								size="large"
-								variant={
-									isActive(loginAuthRoute?.path as string) ? "outlined" : "text"
-								}
-								color="primary"
-								startIcon={loginAuthRoute?.icon}
-								sx={{ display: { xs: "none", md: "flex" } }}
-							>
-								{LOGIN}
-							</Button>
-						</Box>
-					)}
 				</Toolbar>
 			</Container>
 
@@ -173,15 +157,20 @@ const Header: FC = () => {
 			>
 				<MenuDrawer
 					isActive={isActive}
-					menuItems={
-						[
-							...menuItems,
-							...(loginAuthRoute ? [loginAuthRoute] : []),
-						] as RouteMenu[]
-					}
+					menuItems={[...menuItems] as RouteMenu[]}
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>
+				<MenuItem
+					onClick={() => {
+						toggleMode();
+						handleDrawerToggle();
+					}}
+					sx={{ display: "flex", p: 2, alignItems: "center" }}
+				>
+					<ThemeToggleButton />
+					<Typography sx={{ color: "text.secondary" }}>{`Theme`}</Typography>
+				</MenuItem>
 			</Drawer>
 		</AppBar>
 	);

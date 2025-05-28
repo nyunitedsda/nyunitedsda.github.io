@@ -1,15 +1,17 @@
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import type { SxProps, Theme } from "@mui/material/styles";
+import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
 import type { FC, PropsWithChildren } from "react";
+import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import type { PageWrapperProps } from "./types";
 
 const headerSx: SxProps<Theme> = {
 	fontWeight: "bold",
-	color: "primary.main",
+	color: "primary.light",
+	fontFamily: "inter",
 };
 const containerSx: SxProps<Theme> = {
 	pt: 8,
@@ -32,7 +34,7 @@ const rootSx: SxProps<Theme> = {
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	const { header, subHeader, children } = props;
-
+	const theme = useTheme();
 	return (
 		<Stack sx={rootSx}>
 			<Header />
@@ -56,6 +58,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 				</Stack>
 			</Container>
 
+			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />
 		</Stack>
 	);
