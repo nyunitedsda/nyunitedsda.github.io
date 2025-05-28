@@ -9,6 +9,7 @@ import SectionWrapper from "./components/SectionWrapper";
 import { ministries } from "./constants";
 import { notifications } from "./notifications";
 import sliderImages from "./sliderImages";
+import Carousel from "../../components/Carousel/Carousel";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -96,7 +97,7 @@ const Home: FC = () => {
 				<Stack sx={{ flexGrow: 1, width: "100%", gap: 5 }}>
 					{/* Image Slides */}
 					<SectionWrapper>
-						<ProjectSlider
+						{/* <ProjectSlider
 							settings={{
 								// autoplay: true,
 								speed: 500,
@@ -107,8 +108,9 @@ const Home: FC = () => {
 									md: `${theme.spacing(78)}`,
 								}),
 							}}
-						>
-							{sliderImages.map((i) => (
+						> */}
+							<Carousel slides={sliderImages}/>
+							{/* {sliderImages.map((i) => (
 								<Image
 									key={i.src}
 									image={{
@@ -120,7 +122,7 @@ const Home: FC = () => {
 									}}
 								/>
 							))}
-						</ProjectSlider>
+						</ProjectSlider> */}
 					</SectionWrapper>
 
 					{/* Notification Slides */}
