@@ -6,7 +6,7 @@ import type { SectionWrapperProps } from "./types";
 
 const headerSx: SxProps<Theme> = {
 	fontWeight: "bold",
-	color: "primary.main",
+	color: "primary.light",
 	textAlign: "center",
 	width: "100%",
 	fontFamily: 'inter',

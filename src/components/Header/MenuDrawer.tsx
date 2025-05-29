@@ -40,7 +40,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 			>
 				<Typography
 					variant="h6"
-					sx={{ fontWeight: "bold", color: "primary.main" }}
+					sx={{ fontWeight: "bold", color: "primary.light" }}
 				>
 					{title}
 				</Typography>
@@ -56,7 +56,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 							"& .MuiTypography-root": {
 								fontWeight: isActive(item.path) ? "bold" : "normal",
 							},
-							color: isActive(item.path) ? "primary.main" : "text.primary",
+							color: isActive(item.path) ? "primary.light" : "text.primary",
 							bgcolor: isActive(item.path) ? "action.selected" : "transparent",
 							"&:hover": { bgcolor: "action.hover" },
 						}}
@@ -64,7 +64,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						{item.icon && (
 							<ListItemIcon
 								sx={{
-									color: isActive(item.path) ? "primary.main" : "text.primary",
+									color: isActive(item.path) ? "primary.light" : "text.primary",
 								}}
 							>
 								{item.icon}
@@ -79,7 +79,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 					component={"a"}
 					href={LOGIN_URL}
 					sx={{
-						color: isActive(LOGIN_URL) ? "primary.main" : "text.primary",
+						color: isActive(LOGIN_URL) ? "primary.light" : "text.primary",
 						bgcolor: isActive(LOGIN_URL) ? "action.selected" : "transparent",
 						"&:hover": { bgcolor: "action.hover" },
 					}}

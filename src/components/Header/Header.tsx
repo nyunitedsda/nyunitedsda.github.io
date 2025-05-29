@@ -119,7 +119,7 @@ const Header: FC = () => {
 								sx={{
 									// my: 2,
 									// mx: 1,
-									color: isActive(item.path) ? "primary.main" : "text.primary",
+									color: isActive(item.path) ? "primary.light" : "text.primary",
 									display: "flex",
 									fontWeight: isActive(item.path) ? "bold" : "normal",
 									fontSize: (theme) => theme.typography.body1,
@@ -132,7 +132,7 @@ const Header: FC = () => {
 											left: "25%",
 											width: "50%",
 											height: "3px",
-											bgcolor: "primary.main",
+											bgcolor: "primary.light",
 											borderRadius: "3px 3px 0 0",
 										}
 										: {},

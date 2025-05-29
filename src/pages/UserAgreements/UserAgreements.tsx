@@ -47,12 +47,18 @@ const UserAgreements: FC = () => {
 				<>
 					<Tabs
 						aria-label="Terms and policies"
-						indicatorColor="primary"
+						// indicatorColor="primary"
 						onChange={handleChange}
-						textColor="primary"
+						// textColor="primary"
 						value={selectedTab}
 						sx={{
 							borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+							'& .MuiTabs-indicator': {
+								color: 'primary.light',
+							},
+							'& .Mui-selected': {
+								color: theme => `${theme.palette.primary.light} !important`,
+							}
 						}}
 					>
 						{agreements.map((i) => (
@@ -60,7 +66,13 @@ const UserAgreements: FC = () => {
 						))}
 					</Tabs>
 					{agreements.map((i) => (
-						<TabPanel index={i.id} key={i.label} value={selectedTab}>
+						<TabPanel enableStack stackProps={{
+							sx: {
+								'& a': {
+									color: 'primary.light',
+								}
+							}
+						}}index={i.id} key={i.label} value={selectedTab}>
 							{typeof i.content === "string" ? (
 								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
 							) : (

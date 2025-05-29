@@ -25,7 +25,7 @@ const noteSx: SxProps<Theme> = {
 	display: "flex",
 	alignItems: "center",
 	gap: 2,
-	"& svg": { color: "primary.main" },
+	"& svg": { color: "primary.light" },
 }
 
 const NoteSection: FC<Section> = ({ icon, content, title }) => (

@@ -2,12 +2,12 @@
 
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isToday from "dayjs/plugin/isToday";
 import { type FC, useEffect, useState } from "react";
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 
 dayjs.extend(isToday);
 dayjs.extend(isSameOrAfter);
@@ -72,7 +72,7 @@ const LiveBroadcast: FC = () => {
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
-							// controls="1"
+						// controls="1"
 						></iframe>
 						{/* </Box> */}
 					</Paper>
@@ -109,7 +109,7 @@ const LiveBroadcast: FC = () => {
 								variant="body1"
 								sx={{
 									mt: 3,
-									"& i": { color: "primary.main", fontWeight: "bold" },
+									"& i": { color: "primary.light", fontWeight: "bold" },
 								}}
 								dangerouslySetInnerHTML={{
 									__html: `Join us on <i>${nextServiceDate.format("dddd MMM Do, h:mm a")}</i> for our live worship service.`,
@@ -117,7 +117,7 @@ const LiveBroadcast: FC = () => {
 							/>
 						</Paper>
 					</Grid>
-					<Grid size={{ xs: 12, md: 8 }} className="fade-in">
+					{/* <Grid size={{ xs: 12, md: 8 }} className="fade-in">
 						<Paper
 							elevation={3}
 							sx={{
@@ -157,7 +157,7 @@ const LiveBroadcast: FC = () => {
 								></iframe>
 							</Box>
 						</Paper>
-					</Grid>
+					</Grid> */}
 				</Grid>
 			)}
 			{/* </Container> */}

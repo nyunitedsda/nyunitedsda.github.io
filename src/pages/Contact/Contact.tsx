@@ -28,7 +28,7 @@ const Contact: FC = () => {
 			<Paper elevation={3} sx={{ p: 4, mb: 2, mt: 4 }}>
 				<Typography
 					variant="h5"
-					sx={{ mb: 4, color: "primary.main", fontWeight: "bold" }}
+					sx={{ mb: 4, color: "primary.light", fontWeight: "bold" }}
 				>
 					{COMPANY}
 				</Typography>
@@ -123,7 +123,7 @@ const Contact: FC = () => {
 						</Typography>
 						<Typography
 							component={"a"}
-							sx={{ textDecoration: "none", color: "primary.main" }}
+							sx={{ textDecoration: "none", color: "primary.light" }}
 							href="http://www.mta.info/nyct"
 						>
 							{TRIP_PLANNER}

@@ -2,9 +2,9 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
 import Slider, { type Settings } from "react-slick";
-import type { ProjectSliderProps } from "./types";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import type { ProjectSliderProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
 	"& .slick-list": {
@@ -28,17 +28,17 @@ const rootSx: SxProps<Theme> = {
 			fontSize: (theme) => `${theme.spacing(1)}`,
 		},
 		"& .slick-active button::before": {
-			color: "primary.main",
+			color: "primary.light",
 		},
 	},
 	"& .slick-arrow": {
-		// background: 'primary.main',
+		// background: 'primary.light',
 	},
 	"& .slick-prev": {
 		left: "-35px",
 	},
 	"& .slick-next:before, .slick-prev:before": {
-		color: { xs: "unset", md: "primary.main" },
+		color: { xs: "unset", md: "primary.light" },
 		fontSize: (theme) => `${theme.spacing(4.5)}`,
 	},
 };
