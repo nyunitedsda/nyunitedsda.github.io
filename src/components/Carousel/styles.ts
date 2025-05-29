@@ -61,10 +61,7 @@ const carouselStyle: SxProps<Theme> = {
 			touchAction: "pan-y pinch-zoom",
 
 			'& .embla__slide': {
-				// flex: '0 0 100%',
-				// display: 'flex',
-				// justifyContent: 'center',
-				// alignItems: 'center',
+				flex: '0 0 100%',
 				width: '100%',
 				mx: 'auto',
 				'& img': {
