@@ -43,12 +43,25 @@ const Home: FC = () => {
 					{/* Image Slides */}
 					<SectionWrapper>
 
-						<Carousel>
+						<Carousel sx={{
+							// '& .embla__viewport': {
+
+							// 	height: { xs: '350px', sm: 'unset' },
+							// 	'& .embla__container': {
+							// 		height: '100%',
+							// 		display: 'flex',
+
+							// 		'& img': {
+							// 			maxHeight: '350px',
+							// 		},
+							// 	},
+							// },
+						}}>
 							{sliderImages.map((i) => (
-								<div className="embla__slide" key={i.src}>
+								<Stack direction='row' className="embla__slide" key={i.src}>
 
 									<img className="embla__slide__number" src={i.src} alt={i.alt ?? `${i.src}-image`} />
-								</div>
+								</Stack>
 							))}
 						</Carousel>
 					</SectionWrapper>

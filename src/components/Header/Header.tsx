@@ -6,17 +6,19 @@ import {
 	Container,
 	Drawer,
 	IconButton,
+	MenuItem,
 	type SxProps,
 	type Theme,
 	Toolbar,
 	Typography,
 } from "@mui/material";
-import { useCallback, useMemo, useState, type FC } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import logo from "../../assets/img/NY United Logo small.png";
 import siteRoutes, { authRoutes } from "../../hooks/routes/siteRoutes";
 import type { Route, RouteMenu } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import useColorTheme from "../../hooks/theme/useColorTheme";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
 
@@ -25,6 +27,7 @@ const brandingSx: SxProps<Theme> = {
 	fontWeight: 700,
 	textDecoration: "none",
 	fontFamily: "Inter",
+	color: 'primary.light'
 };
 
 const logoSx: SxProps<Theme> = {
@@ -51,9 +54,10 @@ const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
+	const { toggleMode } = useColorTheme();
 
 	const handleDrawerToggle = useCallback(() => {
-		setDrawerOpen(!drawerOpen);
+		setDrawerOpen((d) => !d);
 	}, []);
 
 	const loginAuthRoute = useMemo(() => {
@@ -100,7 +104,6 @@ const Header: FC = () => {
 							variant="h6"
 							component={"a"}
 							href={homeRoute.path}
-							color="primary"
 							sx={brandingSx}
 						>
 							{WEBSITE_TITLE}
@@ -114,8 +117,8 @@ const Header: FC = () => {
 								key={item.name}
 								href={item.path}
 								sx={{
-									my: 2,
-									mx: 1,
+									// my: 2,
+									// mx: 1,
 									color: isActive(item.path) ? "primary.main" : "text.primary",
 									display: "flex",
 									fontWeight: isActive(item.path) ? "bold" : "normal",
@@ -123,15 +126,15 @@ const Header: FC = () => {
 									// fontWeight: 'bold',
 									"&:after": isActive(item.path)
 										? {
-												content: '""',
-												position: "absolute",
-												bottom: 0,
-												left: "25%",
-												width: "50%",
-												height: "3px",
-												bgcolor: "primary.main",
-												borderRadius: "3px 3px 0 0",
-											}
+											content: '""',
+											position: "absolute",
+											bottom: 0,
+											left: "25%",
+											width: "50%",
+											height: "3px",
+											bgcolor: "primary.main",
+											borderRadius: "3px 3px 0 0",
+										}
 										: {},
 								}}
 							>
@@ -140,10 +143,10 @@ const Header: FC = () => {
 						))}
 					</Box>
 
-					<Box sx={{ display: { xs: "none", md: "flex" }, px: 2 }}>
+					<Box sx={{ display: { xs: "none", md: "flex" } }}>
 						<ThemeToggleButton />
 					</Box>
-					{loginAuthRoute && (
+					{/* {loginAuthRoute && (
 						<Box sx={{ flexGrow: 0 }}>
 							<Button
 								disabled
@@ -159,7 +162,7 @@ const Header: FC = () => {
 								{LOGIN}
 							</Button>
 						</Box>
-					)}
+					)} */}
 				</Toolbar>
 			</Container>
 
@@ -182,6 +185,13 @@ const Header: FC = () => {
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>
+				<MenuItem onClick={() => {
+					toggleMode()
+					handleDrawerToggle()
+				}} sx={{ display: "flex", p: 2, alignItems: 'center' }}>
+					<ThemeToggleButton />
+					<Typography>{`Theme`}</Typography>
+				</MenuItem>
 			</Drawer>
 		</AppBar>
 	);

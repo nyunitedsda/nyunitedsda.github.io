@@ -46,14 +46,14 @@ const Carousel: FC<CarouselProps> = (props) => {
       className="embla"
       sx={{ ...styles, ...(sx ? sx : {}) } as SxProps<Theme>}
     >
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+      <Stack direction='row' className="embla__viewport" ref={emblaRef}>
+        <Stack direction='row' className="embla__container">
           {
             children
           }
 
-        </div>
-      </div>
+        </Stack>
+      </Stack>
 
       <Stack className="embla__controls" spacing={{ xs: 1, sm: 3, }}
         direction={{ xs: 'column', sm: 'row' }}

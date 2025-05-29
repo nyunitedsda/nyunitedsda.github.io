@@ -58,16 +58,18 @@ const carouselStyle: SxProps<Theme> = {
 		overflow: "hidden",
 
 		"& .embla__container": {
-			display: "flex",
 			touchAction: "pan-y pinch-zoom",
 
 			'& .embla__slide': {
-				flex: '0 0 100%',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
+				// flex: '0 0 100%',
+				// display: 'flex',
+				// justifyContent: 'center',
+				// alignItems: 'center',
+				width: '100%',
+				mx: 'auto',
 				'& img': {
-					height: '100%',
+					height: { xs: 'auto', md: '100%'},
+					width: {xs: '100%', md: 'auto'},
 				}
 			},
 		},

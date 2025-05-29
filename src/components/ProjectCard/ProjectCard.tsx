@@ -22,6 +22,7 @@ const cardSx: SxProps<Theme> = (theme) => ({
 	maxWidth: `${theme.spacing(50)}`,
 	"& .MuiCardHeader-title": {
 		fontSize: "1.25rem",
+		fontFamily: 'inter',
 	},
 });
 

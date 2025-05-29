@@ -22,7 +22,7 @@ const FooterSegment: FC<FooterSegmentProps> = ({
 	title,
 }) => (
 	<Grid size={responsiveGridSize} sx={sx}>
-		<Typography variant="h6" fontWeight="bold" mb={2}>
+		<Typography variant="h6" fontWeight="bold" mb={2} fontFamily='inter'>
 			{title}
 		</Typography>
 		{subtitle && (
