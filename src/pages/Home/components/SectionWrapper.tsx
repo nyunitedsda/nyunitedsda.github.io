@@ -9,7 +9,7 @@ const headerSx: SxProps<Theme> = {
 	color: "primary.light",
 	textAlign: "center",
 	width: "100%",
-	fontFamily: 'inter',
+	fontFamily: "inter",
 };
 
 const SectionWrapper: FC<SectionWrapperProps> = ({

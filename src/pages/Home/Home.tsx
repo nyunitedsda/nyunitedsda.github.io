@@ -35,25 +35,26 @@ const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
 
 const Home: FC = () => {
-
 	return (
 		<>
 			<PageWrapper>
 				<Stack sx={{ flexGrow: 1, width: "100%", gap: 5 }}>
 					{/* Image Slides */}
 					<SectionWrapper>
-
-						<Carousel sx={{
-							'& .embla__slide': {
-
-								height: { xs: '350px', sm: 'unset' },
-							
-							},
-						}}>
+						<Carousel
+							sx={{
+								"& .embla__slide": {
+									height: { xs: "350px", sm: "unset" },
+								},
+							}}
+						>
 							{sliderImages.map((i) => (
-								<Stack direction='row' className="embla__slide" key={i.src}>
-
-									<img className="embla__slide__number" src={i.src} alt={i.alt ?? `${i.src}-image`} />
+								<Stack direction="row" className="embla__slide" key={i.src}>
+									<img
+										className="embla__slide__number"
+										src={i.src}
+										alt={i.alt ?? `${i.src}-image`}
+									/>
 								</Stack>
 							))}
 						</Carousel>
@@ -61,22 +62,18 @@ const Home: FC = () => {
 
 					{/* Notification Slides */}
 					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
-						<Carousel sx={{
-							'& .embla__viewport .embla__container': {
-								gap: 2,
-								py: 2,
-								px: 1,
-							},
-						}}>
-							{
-								notifications.map((i) => (
-									<NotificationCard
-										className="embla__slide"
-										key={i.id}
-										{...i}
-									/>
-								))
-							}
+						<Carousel
+							sx={{
+								"& .embla__viewport .embla__container": {
+									gap: 2,
+									py: 2,
+									px: 1,
+								},
+							}}
+						>
+							{notifications.map((i) => (
+								<NotificationCard className="embla__slide" key={i.id} {...i} />
+							))}
 						</Carousel>
 					</SectionWrapper>
 

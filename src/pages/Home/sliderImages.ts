@@ -1,20 +1,32 @@
 const elderImage = (await import("../../assets/webp-img/elder.webp")).default;
 const familyImage = (await import("../../assets/webp-img/family.webp")).default;
-const family2Image = (await import("../../assets/webp-img/family2.webp")).default;
+const family2Image = (await import("../../assets/webp-img/family2.webp"))
+	.default;
 const family3Image = (await import("../../assets/img/family3.jpg")).default;
 const family4Image = (await import("../../assets/img/family4.jpg")).default;
 const family5Image = (await import("../../assets/img/family5.jpg")).default;
-const givingGiftImage = (await import("../../assets/img/giving-gift.jpg")).default;
-const groupPrayImage = (await import("../../assets/webp-img/group-pray.webp")).default;
-const membersEmbraceImage = (await import("../../assets/img/members-embrace.jpg")).default;
-const membersEmbrace1Image = (await import("../../assets/img/members-embrace1.jpg")).default;
-const membersEmbrace2Image = (await import("../../assets/img/members-embrace2.jpg")).default;
+const givingGiftImage = (await import("../../assets/img/giving-gift.jpg"))
+	.default;
+const groupPrayImage = (await import("../../assets/webp-img/group-pray.webp"))
+	.default;
+const membersEmbraceImage = (
+	await import("../../assets/img/members-embrace.jpg")
+).default;
+const membersEmbrace1Image = (
+	await import("../../assets/img/members-embrace1.jpg")
+).default;
+const membersEmbrace2Image = (
+	await import("../../assets/img/members-embrace2.jpg")
+).default;
 const membersImage = (await import("../../assets/img/members.jpg")).default;
 const members3Image = (await import("../../assets/img/members3.jpg")).default;
 const members4Image = (await import("../../assets/img/members4.jpg")).default;
 const members6Image = (await import("../../assets/img/members6.jpg")).default;
-const singingSisterImage = (await import("../../assets/img/singing-sister.jpg")).default;
-const sisterPhotographyImage = (await import("../../assets/img/sister-photography.jpg")).default;
+const singingSisterImage = (await import("../../assets/img/singing-sister.jpg"))
+	.default;
+const sisterPhotographyImage = (
+	await import("../../assets/img/sister-photography.jpg")
+).default;
 const youthsImage = (await import("../../assets/img/youths.jpg")).default;
 const youths2Image = (await import("../../assets/img/youths2.jpg")).default;
 const youths3Image = (await import("../../assets/img/youths3.jpg")).default;

@@ -31,6 +31,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
@@ -38,6 +39,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <Donations />,
 		icon: <VolunteerActivismRounded />,
 		name: "Donations",
@@ -45,6 +47,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <Blog />,
 		icon: <ArticleRounded />,
 		name: "Blog",
@@ -52,6 +55,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <Contact />,
 		icon: <ContactMailRounded />,
 		name: "Contact",
@@ -59,6 +63,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <AboutUs />,
 		icon: <Diversity3Rounded />,
 		name: "About Us",
@@ -66,11 +71,13 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <UserAgreements />,
 		path: `${BASE_URL}legal/termsOfUse`,
 		errorElement: <Error />,
 	},
 	{
+		caseSensitive: true,
 		element: <UserAgreements />,
 		errorElement: <Error />,
 		path: `${BASE_URL}legal/privacy`,

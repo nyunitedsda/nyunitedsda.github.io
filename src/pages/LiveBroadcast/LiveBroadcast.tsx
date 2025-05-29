@@ -72,7 +72,7 @@ const LiveBroadcast: FC = () => {
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
-						// controls="1"
+							// controls="1"
 						></iframe>
 						{/* </Box> */}
 					</Paper>

@@ -53,12 +53,12 @@ const UserAgreements: FC = () => {
 						value={selectedTab}
 						sx={{
 							borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-							'& .MuiTabs-indicator': {
-								color: 'primary.light',
+							"& .MuiTabs-indicator": {
+								color: "primary.light",
 							},
-							'& .Mui-selected': {
-								color: theme => `${theme.palette.primary.light} !important`,
-							}
+							"& .Mui-selected": {
+								color: (theme) => `${theme.palette.primary.light} !important`,
+							},
 						}}
 					>
 						{agreements.map((i) => (
@@ -66,13 +66,19 @@ const UserAgreements: FC = () => {
 						))}
 					</Tabs>
 					{agreements.map((i) => (
-						<TabPanel enableStack stackProps={{
-							sx: {
-								'& a': {
-									color: 'primary.light',
-								}
-							}
-						}}index={i.id} key={i.label} value={selectedTab}>
+						<TabPanel
+							enableStack
+							stackProps={{
+								sx: {
+									"& a": {
+										color: "primary.light",
+									},
+								},
+							}}
+							index={i.id}
+							key={i.label}
+							value={selectedTab}
+						>
 							{typeof i.content === "string" ? (
 								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
 							) : (

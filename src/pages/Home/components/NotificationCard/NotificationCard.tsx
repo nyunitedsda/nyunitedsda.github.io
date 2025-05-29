@@ -26,10 +26,10 @@ const noteSx: SxProps<Theme> = {
 	alignItems: "center",
 	gap: 2,
 	"& svg": { color: "primary.light" },
-}
+};
 
 const NoteSection: FC<Section> = ({ icon, content, title }) => (
-	<Box sx={noteSx} >
+	<Box sx={noteSx}>
 		{icon && icon}
 		<Box sx={{ display: "flex", gap: 2 }}>
 			<Typography variant="body1" color="text.secondary" fontWeight="bold">
@@ -146,13 +146,13 @@ const NotificationCard: FC<NotificationCardProps> = (props) => {
 
 	return (
 		<ProjectCard
-			className={className ?? ''}
+			className={className ?? ""}
 			header={{
 				title,
 				sx: {
 					bgcolor: "primary.main",
 					color: "primary.contrastText",
-					width: '100%',
+					width: "100%",
 				},
 			}}
 			content={

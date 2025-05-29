@@ -2,7 +2,7 @@ import type { ButtonProps } from "@mui/material";
 
 interface CarouselArrowButtonProps extends ButtonProps {
 	arrowDirection: "next" | "prev";
-};
+}
 
 type UseCarouselArrowButtonsType = {
 	prevBtnDisabled: boolean;

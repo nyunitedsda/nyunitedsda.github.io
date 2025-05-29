@@ -10,7 +10,6 @@ import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 const HOME = "Home";
 
 const Error: FC = () => {
-
 	const { menuItems } = useFormattedRoutes();
 
 	const homeRoute = useMemo(() => {

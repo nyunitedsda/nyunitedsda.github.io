@@ -11,7 +11,7 @@ import type { PageWrapperProps } from "./types";
 const headerSx: SxProps<Theme> = {
 	fontWeight: "bold",
 	color: "primary.light",
-	fontFamily: 'inter',
+	fontFamily: "inter",
 };
 const containerSx: SxProps<Theme> = {
 	pt: 8,
@@ -34,8 +34,7 @@ const rootSx: SxProps<Theme> = {
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	const { header, subHeader, children } = props;
-	const theme = useTheme()
-		;
+	const theme = useTheme();
 	return (
 		<Stack sx={rootSx}>
 			<Header />

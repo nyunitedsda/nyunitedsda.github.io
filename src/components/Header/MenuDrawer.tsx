@@ -40,7 +40,11 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 			>
 				<Typography
 					variant="h5"
-					sx={{ fontWeight: "bold", color: "primary.light", fontFamily: 'inter' }}
+					sx={{
+						fontWeight: "bold",
+						color: "primary.light",
+						fontFamily: "inter",
+					}}
 				>
 					{title}
 				</Typography>
@@ -56,7 +60,9 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 							"& .MuiTypography-root": {
 								fontWeight: isActive(item.path) ? "bold" : "normal",
 							},
-							color: isActive(item.path) ? "primary.contrastText" : "text.secondary",
+							color: isActive(item.path)
+								? "primary.contrastText"
+								: "text.secondary",
 							bgcolor: isActive(item.path) ? "primary.light" : "transparent",
 							"&:hover": { bgcolor: "action.hover" },
 						}}
@@ -64,7 +70,9 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						{item.icon && (
 							<ListItemIcon
 								sx={{
-									color: isActive(item.path) ? "primary.contrastText" : "text.secondary",
+									color: isActive(item.path)
+										? "primary.contrastText"
+										: "text.secondary",
 								}}
 							>
 								{item.icon}
@@ -75,7 +83,6 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				))}
 
 				{/* TODO: Update menuItems with login  */}
-				
 			</List>
 		</Stack>
 	);

@@ -12,7 +12,7 @@ const cardContentSx: SxProps<Theme> = {
 	gap: 2,
 	flexGrow: 1,
 	overflowY: "auto",
-}
+};
 
 const cardSx: SxProps<Theme> = (theme) => ({
 	display: "flex",
@@ -22,23 +22,20 @@ const cardSx: SxProps<Theme> = (theme) => ({
 	maxWidth: `${theme.spacing(50)}`,
 	"& .MuiCardHeader-title": {
 		fontSize: "1.25rem",
-		fontFamily: 'inter',
+		fontFamily: "inter",
 	},
 });
 
-const ProjectCard: FC<CardProps> = (
-	{ actions, content, header, className }
-) => {
+const ProjectCard: FC<CardProps> = ({
+	actions,
+	content,
+	header,
+	className,
+}) => {
 	return (
 		<Card sx={cardSx} className={`card-animation ${className}`}>
 			<CardHeader {...header} />
-			{content && (
-				<CardContent
-					sx={cardContentSx}
-				>
-					{content}
-				</CardContent>
-			)}
+			{content && <CardContent sx={cardContentSx}>{content}</CardContent>}
 			{actions && <CardActions>{actions}</CardActions>}
 		</Card>
 	);

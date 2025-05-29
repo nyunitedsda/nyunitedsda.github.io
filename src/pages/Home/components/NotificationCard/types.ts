@@ -1,7 +1,7 @@
 import type { ChurchNotificationProps } from "../../notifications";
 
 interface NotificationCardProps extends ChurchNotificationProps {
-  className?: string;
+	className?: string;
 }
 
 export type { NotificationCardProps };

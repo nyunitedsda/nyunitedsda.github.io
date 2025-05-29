@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
-import CarouselArrowButtonn from './CarouselArrowButton';
+import { render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import CarouselArrowButton from "./CarouselArrowButton";
 
-describe('CarouselArrowButtonn', () => {  
-  it('renders CarouselArrowButtonn', () => {
-    const { getByText } = render(<CarouselArrowButtonn />);
+describe("CarouselArrowButton", () => {
+	it("renders CarouselArrowButton", () => {
+		const { getByText } = render(<CarouselArrowButton arrowDirection={"next"} />);
 
-    expect(getByText('CarouselArrowButtonn Component')).toBeInTheDocument();
-  });
+		expect(getByText("CarouselArrowButton Component")).toBeInTheDocument();
+	});
 });

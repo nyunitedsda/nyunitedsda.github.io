@@ -27,7 +27,7 @@ const brandingSx: SxProps<Theme> = {
 	fontWeight: 700,
 	textDecoration: "none",
 	fontFamily: "Inter",
-	color: 'primary.light'
+	color: "primary.light",
 };
 
 const logoSx: SxProps<Theme> = {
@@ -72,9 +72,15 @@ const Header: FC = () => {
 			position="sticky"
 			color="default"
 			elevation={1}
-			sx={{ bgcolor: "background.paper", height: theme => `${theme.spacing(8)}` }}
+			sx={{
+				bgcolor: "background.paper",
+				height: (theme) => `${theme.spacing(8)}`,
+			}}
 		>
-			<Container sx={{height: theme => `${theme.spacing(8)}`}} maxWidth="lg">
+			<Container
+				sx={{ height: (theme) => `${theme.spacing(8)}` }}
+				maxWidth="lg"
+			>
 				<Toolbar disableGutters>
 					<Box sx={logoSx}>
 						{/* Logo */}
@@ -118,15 +124,15 @@ const Header: FC = () => {
 									fontSize: (theme) => theme.typography.body1,
 									"&:after": isActive(item.path)
 										? {
-											content: '""',
-											position: "absolute",
-											bottom: 0,
-											left: "25%",
-											width: "50%",
-											height: "3px",
-											bgcolor: "primary.light",
-											borderRadius: "3px 3px 0 0",
-										}
+												content: '""',
+												position: "absolute",
+												bottom: 0,
+												left: "25%",
+												width: "50%",
+												height: "3px",
+												bgcolor: "primary.light",
+												borderRadius: "3px 3px 0 0",
+											}
 										: {},
 								}}
 							>
@@ -151,21 +157,19 @@ const Header: FC = () => {
 			>
 				<MenuDrawer
 					isActive={isActive}
-					menuItems={
-						[
-							...menuItems,
-
-						] as RouteMenu[]
-					}
+					menuItems={[...menuItems] as RouteMenu[]}
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>
-				<MenuItem onClick={() => {
-					toggleMode()
-					handleDrawerToggle()
-				}} sx={{ display: "flex", p: 2, alignItems: 'center' }}>
+				<MenuItem
+					onClick={() => {
+						toggleMode();
+						handleDrawerToggle();
+					}}
+					sx={{ display: "flex", p: 2, alignItems: "center" }}
+				>
 					<ThemeToggleButton />
-					<Typography sx={{ color: 'text.secondary' }}>{`Theme`}</Typography>
+					<Typography sx={{ color: "text.secondary" }}>{`Theme`}</Typography>
 				</MenuItem>
 			</Drawer>
 		</AppBar>

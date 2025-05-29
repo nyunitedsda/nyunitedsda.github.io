@@ -3,8 +3,8 @@ import type { EmblaOptionsType } from "embla-carousel";
 import type { PropsWithChildren } from "react";
 
 type CarouselProps = PropsWithChildren<{
-  options?: EmblaOptionsType;
-  sx?: SxProps<Theme>;
-}>
+	options?: EmblaOptionsType;
+	sx?: SxProps<Theme>;
+}>;
 
 export type { CarouselProps };
