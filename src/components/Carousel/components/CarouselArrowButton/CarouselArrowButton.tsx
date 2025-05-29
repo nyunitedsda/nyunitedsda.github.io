@@ -1,13 +1,15 @@
 import { memo, type FC } from 'react';
 import type { CarouselArrowButtonProps } from './types';
+import { IconButton } from '@mui/material';
 
 const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
   const { arrowDirection, children, ...restProps } = props
 
   return (
-    <button
+    <IconButton
       className={`embla__button embla__button--${arrowDirection}`}
       type="button"
+
       {...restProps}
     >
       {
@@ -28,7 +30,7 @@ const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
         )
       }
       {children}
-    </button>
+    </IconButton>
   )
 };
 

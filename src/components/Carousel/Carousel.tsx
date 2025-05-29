@@ -1,30 +1,19 @@
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import type { SxProps, Theme } from '@mui/material/styles';
+import type { EmblaCarouselType } from 'embla-carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
 import { type FC, useCallback } from 'react';
+import CarouselArrowButton from './components/CarouselArrowButton/CarouselArrowButton';
+import useCarouselArrowButtons from './components/CarouselArrowButton/useCarouselArrowButton';
 import CarouselDotButton from './components/CarouselDotButton/CarouselDotButton';
 import useDotButton from './components/CarouselDotButton/useDotButton';
+import styles from './styles';
 import type { CarouselProps } from './types';
-import useEmblaCarousel from 'embla-carousel-react';
-import type { EmblaCarouselType } from 'embla-carousel';
-import Autoplay from 'embla-carousel-autoplay'
-import useCarouselArrowButtons from './components/CarouselArrowButton/useCarouselArrowButton';
-import CarouselArrowButton from './components/CarouselArrowButton/CarouselArrowButton';
-
-const rootSx: SxProps<Theme> = {
-  '& .embla': {
-    overflow: "hidden",
-  },
-  "& .embla__container": {
-    display: 'flex',
-  },
-  '& .embla__slide': {
-    flex: '0 0 100%',
-    minWidth: 0,
-  },
-}
 
 const Carousel: FC<CarouselProps> = (props) => {
-  const { slides, options } = props
+  const { children, options, sx } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()])
 
   const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
@@ -52,25 +41,29 @@ const Carousel: FC<CarouselProps> = (props) => {
   } = useCarouselArrowButtons(emblaApi, onNavButtonClick)
 
   return (
-    <Box component="section" className="embla" sx={rootSx}>
+    <Box
+      component="section"
+      className="embla"
+      sx={{ ...styles, ...(sx ? sx : {}) } as SxProps<Theme>}
+    >
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((i) => (
-            <div className="embla__slide" key={i.src}>
-              <img className="embla__slide__number" src={i.src} alt={i.alt ?? `${i.src}-image`} />
-              {/* <div className="embla__slide__number">{index + 1}</div> */}
-            </div>
-          ))}
+          {
+            children
+          }
+
         </div>
       </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
+      <Stack className="embla__controls" spacing={{ xs: 1, sm: 3, }}
+        direction={{ xs: 'column', sm: 'row' }}
+      >
+        <Stack direction="row" className="embla__buttons">
           <CarouselArrowButton arrowDirection='prev' onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <CarouselArrowButton arrowDirection='next' onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
+        </Stack>
 
-        <div className="embla__dots">
+        <Stack direction="row" className="embla__dots">
           {scrollSnaps.map((_, index) => (
             <CarouselDotButton
               key={index}
@@ -80,8 +73,8 @@ const Carousel: FC<CarouselProps> = (props) => {
               )}
             />
           ))}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     </Box>
   )
 };

@@ -1,6 +1,6 @@
-import type { ComponentPropsWithRef } from "react";
+import type { ButtonProps } from "@mui/material";
 
-type CarouselArrowButtonProps = ComponentPropsWithRef<"button"> & {
+interface CarouselArrowButtonProps extends ButtonProps {
 	arrowDirection: "next" | "prev";
 };
 

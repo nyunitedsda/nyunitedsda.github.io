@@ -1,16 +1,15 @@
-const elderImage = (await import("../../assets/img/elder.jpg")).default;
-const familyImage = (await import("../../assets/img/family.jpg")).default;
-const family2Image = (await import("../../assets/img/family2.jpg")).default;
+const elderImage = (await import("../../assets/webp-img/elder.webp")).default;
+const familyImage = (await import("../../assets/webp-img/family.webp")).default;
+const family2Image = (await import("../../assets/webp-img/family2.webp")).default;
 const family3Image = (await import("../../assets/img/family3.jpg")).default;
 const family4Image = (await import("../../assets/img/family4.jpg")).default;
 const family5Image = (await import("../../assets/img/family5.jpg")).default;
 const givingGiftImage = (await import("../../assets/img/giving-gift.jpg")).default;
-const groupPrayImage = (await import("../../assets/img/group-pray.jpg")).default;
+const groupPrayImage = (await import("../../assets/webp-img/group-pray.webp")).default;
 const membersEmbraceImage = (await import("../../assets/img/members-embrace.jpg")).default;
 const membersEmbrace1Image = (await import("../../assets/img/members-embrace1.jpg")).default;
 const membersEmbrace2Image = (await import("../../assets/img/members-embrace2.jpg")).default;
 const membersImage = (await import("../../assets/img/members.jpg")).default;
-const members2Image = (await import("../../assets/img/members2.jpg")).default;
 const members3Image = (await import("../../assets/img/members3.jpg")).default;
 const members4Image = (await import("../../assets/img/members4.jpg")).default;
 const members6Image = (await import("../../assets/img/members6.jpg")).default;
@@ -30,7 +29,6 @@ export default [
 	{ src: givingGiftImage, alt: "Giving gift" },
 	{ src: groupPrayImage, alt: "Group pray" },
 	{ src: membersImage, alt: "Members" },
-	{ src: members2Image, alt: "Members 2" },
 	{ src: members3Image, alt: "Members 3" },
 	{ src: members4Image, alt: "Members 4" },
 	{ src: members6Image, alt: "Members 6" },
