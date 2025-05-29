@@ -31,7 +31,7 @@ const siteRoutes: Route[] = [
 		errorElement: <Error />,
 	},
 	{
-		caseSensitive: true,
+		// caseSensitive: true,
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
