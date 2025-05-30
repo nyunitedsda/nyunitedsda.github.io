@@ -13,7 +13,6 @@ export interface ChurchNotificationProps {
 	speaker?: string;
 	sermonTitle?: string;
 	addToCalendarLink?: string;
-	variant?: "primary" | "secondary" | "dark";
 }
 
 export const notifications: ChurchNotificationProps[] = [
@@ -24,7 +23,6 @@ export const notifications: ChurchNotificationProps[] = [
 		date: dayjs().day(6).format("MMM DD, YYYY"),
 		speaker: "Pastor John Lomacang",
 		sermonTitle: "STAND",
-		variant: "primary",
 	},
 	{
 		id: 2,
@@ -32,7 +30,6 @@ export const notifications: ChurchNotificationProps[] = [
 		title: "Wednesday Bible Study",
 		time: dayjs().day(3).hour(18).minute(30).format("dddd, h:mm a"),
 		location: "Fellowship Hall & Via Zoom",
-		variant: "dark",
 	},
 	{
 		id: 4,
@@ -42,7 +39,6 @@ export const notifications: ChurchNotificationProps[] = [
 		location: "Via phone conference",
 		phoneNumber: "971-224-6575",
 		conferenceCode: "519018",
-		variant: "dark",
 	},
 	{
 		id: 3,
@@ -52,6 +48,5 @@ export const notifications: ChurchNotificationProps[] = [
 		location: "Fellowship Hall",
 		description:
 			"The Thompsonville Christian Junior Academy is offering a soup and salad meal as a fundraiser every Wednesday before Wednesday Bible Study. Come out and support the school by having a meal before joining in Wednesday Bible Study.",
-		variant: "secondary",
 	},
 ];
