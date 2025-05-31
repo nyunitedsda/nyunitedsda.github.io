@@ -59,6 +59,21 @@ const Contact: FC = () => {
 					</Box>
 				</Box>
 
+				<Box sx={{ display: "flex", flexDirection: 'column', mb: 3 }}>
+					<Typography
+						variant="h5"
+						sx={{ fontWeight: "bold", mb: 2, color: "primary.light" }}
+					>
+						{'Mailing Address'}
+					</Typography>
+					<Typography
+						variant="body1"
+					>
+						{contactInfo.mailingAddress}
+
+					</Typography>
+				</Box>
+
 				<Box sx={{ display: "flex", alignItems: "center" }}>
 					{/* Services */}
 					<Grid size={{ xs: 12, sm: 6, md: 3 }}>
