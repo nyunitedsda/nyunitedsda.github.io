@@ -1,14 +1,6 @@
-import { LoginRounded } from "@mui/icons-material";
-import ArticleRounded from "@mui/icons-material/ArticleRounded";
-import ContactMailRounded from "@mui/icons-material/ContactMailRounded";
-import Diversity3Rounded from "@mui/icons-material/Diversity3Rounded";
-import HomeRounded from "@mui/icons-material/HomeRounded";
-import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
-import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import { lazy } from "react";
 import Error from "../../pages/Error/Error";
 import Login from "../../pages/Login/Login";
-import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 import type { Route } from "./types";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
@@ -19,62 +11,78 @@ const Home = lazy(() => import("../../pages/Home/Home"));
 const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
+const UserAgreements = lazy(
+	() => import("../../pages/UserAgreements/UserAgreements"),
+);
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "/"; // "/nyunitedsda/";
 
 const siteRoutes: Route[] = [
 	{
 		element: <Home />,
-		icon: <HomeRounded />,
+		errorElement: <Error />,
+		icon: "HomeRounded",
 		name: "Home",
 		path: `${BASE_URL}`,
-		errorElement: <Error />,
 	},
 	{
-		// caseSensitive: true,
+		// TODO: Review the menu names for streaming with Zinee
 		element: <LiveBroadcast />,
-		icon: <LiveTvRounded />,
+		icon: "LiveTvRounded",
 		name: "Watch Live",
-		path: `${BASE_URL}liveBroadcast`,
-		errorElement: <Error />,
+		path: `${BASE_URL}watch/live`,
+		children: [
+			{
+				element: <LiveBroadcast />,
+				errorElement: <Error />,
+				name: "Live Stream",
+				path: `${BASE_URL}watch/live`,
+			},
+			{
+				element: <LiveBroadcast />,
+				errorElement: <Error />,
+				name: "Archive Stream",
+				path: `${BASE_URL}watch/archive`,
+			},
+		],
 	},
 	{
 		caseSensitive: true,
 		element: <Donations />,
-		icon: <VolunteerActivismRounded />,
+		errorElement: <Error />,
+		icon: "VolunteerActivismRounded",
 		name: "Donations",
 		path: `${BASE_URL}donations`,
-		errorElement: <Error />,
 	},
 	{
 		caseSensitive: true,
 		element: <Blog />,
-		icon: <ArticleRounded />,
+		errorElement: <Error />,
+		icon: "ArticleRounded",
 		name: "Blog",
 		path: `${BASE_URL}blog`,
-		errorElement: <Error />,
 	},
 	{
 		caseSensitive: true,
 		element: <Contact />,
-		icon: <ContactMailRounded />,
+		errorElement: <Error />,
+		icon: "ContactMailRounded",
 		name: "Contact",
 		path: `${BASE_URL}contact`,
-		errorElement: <Error />,
 	},
 	{
 		caseSensitive: true,
 		element: <AboutUs />,
-		icon: <Diversity3Rounded />,
+		errorElement: <Error />,
+		icon: "Diversity3Rounded",
 		name: "About Us",
 		path: `${BASE_URL}aboutUs`,
-		errorElement: <Error />,
 	},
 	{
 		caseSensitive: true,
 		element: <UserAgreements />,
-		path: `${BASE_URL}legal/termsOfUse`,
 		errorElement: <Error />,
+		path: `${BASE_URL}legal/termsOfUse`,
 	},
 	{
 		caseSensitive: true,
@@ -91,7 +99,7 @@ const siteRoutes: Route[] = [
 export const authRoutes: Route[] = [
 	{
 		element: <Login />,
-		icon: <LoginRounded />,
+		icon: "LoginRounded",
 		name: "Login",
 		path: `${BASE_URL}login`,
 	},

@@ -1,24 +1,14 @@
-import { Grid, type SxProps, type Theme } from "@mui/material";
 import { type FC } from "react";
 import { useRoutes } from "react-router";
 import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
 
-const rootSx: SxProps<Theme> = {
-	width: "100%",
-	height: "100%",
-	overflowX: "hidden",
-	overflowY: "auto",
-};
+// FEATURE: Consider creating a hook that tracks the changes of the pathname and update the site title with the menu name
 
 const App: FC = () => {
 	const { routes } = useFormattedRoutes();
 	const element = useRoutes(routes);
-
-	return (
-		<Grid container sx={rootSx}>
-			{element}
-		</Grid>
-	);
+	
+	return <>{element}</>;
 };
 
 export default App;

@@ -32,6 +32,8 @@ const rootSx: SxProps<Theme> = {
 	backgroundColor: (theme) => theme.palette.background.paper,
 };
 
+// TODO: Reduce the containerSx pt for mobile
+
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	const { header, subHeader, children } = props;
 	const theme = useTheme();

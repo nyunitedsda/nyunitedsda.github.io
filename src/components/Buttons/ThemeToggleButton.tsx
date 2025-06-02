@@ -23,10 +23,12 @@ const ThemeToggleButton: FC = () => {
 	return (
 		<IconButton onClick={_handleBtnClick} title={`Switch to ${toggledMode}`}>
 			{mode === "dark" ? (
-				<LightModeRounded color="warning" />
+				<LightModeRounded
+					sx={{ color: (theme) => `${theme.palette.warning.main} !important` }}
+				/>
 			) : (
 				<DarkModeTwoTone
-					sx={{ color: (theme) => theme.palette.primary.light }}
+					sx={{ color: (theme) => `${theme.palette.primary.light} !important` }}
 				/>
 			)}
 		</IconButton>

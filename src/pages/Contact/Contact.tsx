@@ -59,19 +59,14 @@ const Contact: FC = () => {
 					</Box>
 				</Box>
 
-				<Box sx={{ display: "flex", flexDirection: 'column', mb: 3 }}>
+				<Box sx={{ display: "flex", flexDirection: "column", mb: 3 }}>
 					<Typography
 						variant="h5"
 						sx={{ fontWeight: "bold", mb: 2, color: "primary.light" }}
 					>
-						{'Mailing Address'}
+						{"Mailing Address"}
 					</Typography>
-					<Typography
-						variant="body1"
-					>
-						{contactInfo.mailingAddress}
-
-					</Typography>
+					<Typography variant="body1">{contactInfo.mailingAddress}</Typography>
 				</Box>
 
 				<Box sx={{ display: "flex", alignItems: "center" }}>
