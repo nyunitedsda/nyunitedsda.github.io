@@ -42,6 +42,10 @@ const Home: FC = () => {
 					{/* Image Slides */}
 					<SectionWrapper>
 						<Carousel
+							autoplay
+							options={{
+								// duration: 3000,
+							}}
 							sx={{
 								"& .embla__slide": {
 									height: { xs: "350px", sm: "unset" },

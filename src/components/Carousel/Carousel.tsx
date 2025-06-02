@@ -13,8 +13,13 @@ import styles from "./styles";
 import type { CarouselProps } from "./types";
 
 const Carousel: FC<CarouselProps> = (props) => {
-	const { children, options, sx } = props;
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()]);
+	const { children, options, sx, autoplay= false } = props;
+	const [emblaRef, emblaApi] = useEmblaCarousel(
+		options,
+		[
+			...(autoplay ? [Autoplay()] : []),
+		]
+		);
 
 	const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
 		const autoplay = emblaApi?.plugins()?.autoplay;
