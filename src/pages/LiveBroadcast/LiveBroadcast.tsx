@@ -8,6 +8,7 @@ import isToday from "dayjs/plugin/isToday";
 import { type FC, useEffect, useState } from "react";
 import CountdownTimer from "../../components/CountdownTimer/CountdownTimer";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import StreamPlayer from "./components/streamPlayers/LiveStream";
 
 dayjs.extend(isToday);
 dayjs.extend(isSameOrAfter);
@@ -44,7 +45,8 @@ const LiveBroadcast: FC = () => {
 
 	return (
 		<PageWrapper header={isLive ? LIVE_SERVICE : NEXT_SERVICE}>
-			{/* <Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}> */}
+			<StreamPlayer />
+			{/* <Container maxWidth="lg" sx={{ mt: 8, mb: 8, flexGrow: 1 }}> 
 			{isLive ? (
 				<Box className="fade-in" sx={{ mt: 4, height: "100%" }}>
 					<Paper
@@ -57,14 +59,25 @@ const LiveBroadcast: FC = () => {
 							width: "100%",
 						}}
 					>
-						{/* <Box
-							sx={{
-								position: "relative",
-								paddingTop: "56.25%",
-								width: "100%",
-							}}
-						> */}
-						<iframe
+
+
+
+						church 
+						<iframe 
+						id="sermon-cloud-embed" 
+						width="100%" 
+						height="100%" 
+						// frameBorder="0" 
+						// scrolling="no" 
+						allowFullScreen 
+						allow="autoplay" 
+						src="https://embeds.sermoncloud.com/new-york-united/live?theme=dark"
+						></iframe>
+						 <script src="https://embeds.sermoncloud.com/js/embeds"></script> 
+
+
+
+						 <iframe
 							width="100%"
 							height="100%"
 							src="https://www.youtube.com/embed/JGu1YKlIZwg?si=GXO8F19j9HExJ0ku"
@@ -73,12 +86,12 @@ const LiveBroadcast: FC = () => {
 							referrerPolicy="strict-origin-when-cross-origin"
 							allowFullScreen
 							// controls="1"
-						></iframe>
-						{/* </Box> */}
+						></iframe> 
+
 					</Paper>
 					<Typography variant="body1" sx={{ mt: 3, textAlign: "center" }}>
 						If you're having trouble with the stream, please refresh the page or
-						visit our {/* TODO: Get church Youtube channel */}
+						visit our {/* TODO: Get church Youtube channel 
 						<a
 							href="https://www.youtube.com/@newyorkunitedchurch3756/streams"
 							target="_blank"
@@ -117,7 +130,7 @@ const LiveBroadcast: FC = () => {
 							/>
 						</Paper>
 					</Grid>
-					{/* <Grid size={{ xs: 12, md: 8 }} className="fade-in">
+					<Grid size={{ xs: 12, md: 8 }} className="fade-in">
 						<Paper
 							elevation={3}
 							sx={{
@@ -157,10 +170,10 @@ const LiveBroadcast: FC = () => {
 								></iframe>
 							</Box>
 						</Paper>
-					</Grid> */}
+					</Grid> 
 				</Grid>
 			)}
-			{/* </Container> */}
+			 </Container> */}
 		</PageWrapper>
 	);
 };
