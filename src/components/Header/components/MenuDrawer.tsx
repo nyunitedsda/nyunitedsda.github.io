@@ -7,15 +7,15 @@ import LoginRounded from "@mui/icons-material/LoginRounded";
 import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { type FC, type ReactNode, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { menuDrawerStyles } from "../styles";
 import MenuDrawerItem from "./MenuDrawerItem";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 import type { MenuDrawerProps } from "./types";
+import OrganizationBranding from "./OrganizationBranding";
 
-const { rootSx, titleSx } = menuDrawerStyles;
+const { rootSx } = menuDrawerStyles;
 
 const MENU_ICON_LIST: Record<string, ReactNode> = {
 	ArticleRounded: <ArticleRounded />,
@@ -25,12 +25,11 @@ const MENU_ICON_LIST: Record<string, ReactNode> = {
 	LiveTvRounded: <LiveTvRounded />,
 	LoginRounded: <LoginRounded />,
 	VolunteerActivismRounded: <VolunteerActivismRounded />,
-}
+};
 
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
 	toggleDrawer,
-	title,
 	menuItems,
 }) => {
 	const navigate = useNavigate();
@@ -42,10 +41,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 
 	return (
 		<Stack onClick={toggleDrawer} sx={rootSx}>
-			{/* Title block */}
-			<Stack sx={titleSx}>
-				<Typography variant="h5">{title}</Typography>
-			</Stack>
+			<OrganizationBranding isLogoVisible={false} />
 
 			{/* Menu List */}
 			<List>
@@ -59,7 +55,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 								item?.children?.some((child) => isActive(child.path)) || false
 							}
 							onClick={handleClick}
-							icon={MENU_ICON_LIST[item?.icon as string]}							
+							icon={MENU_ICON_LIST[item?.icon as string]}
 						/>
 					) : (
 						<MenuDrawerItem
@@ -72,8 +68,6 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						/>
 					),
 				)}
-
-				
 			</List>
 		</Stack>
 	);

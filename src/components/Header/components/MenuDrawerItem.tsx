@@ -3,29 +3,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, type MouseEvent, useCallback } from "react";
+import { menuItemStyles } from "../styles";
 import type { MenuDrawerItemProps } from "./types";
 
-const activeSx: SxProps<Theme> = {
-	fontWeight: "bold",
-	color: "primary.contrastText",
-	bgcolor: "primary.light",
-	"& svg": {
-		color: "primary.contrastText",
-	},
-};
-
-const listButtonSx: SxProps<Theme> = {
-	borderRadius: 0.5,
-	color: "text.secondary",
-	bgcolor: "transparent",
-	"&:hover": {
-		// color: "primary.contrastText",
-		bgcolor: "action.hover",
-	},
-	"& svg": {
-		color: "text.secondary",
-	},
-};
+const { activeMenuItemSx, menuItemSx } = menuItemStyles;
 
 const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 	disabled = false,
@@ -47,10 +28,12 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 		<ListItemButton
 			disabled={disabled}
 			onClick={handleClick}
-			sx={{
-				...listButtonSx,
-				...(isActive ? activeSx : {}),
-			}}
+			sx={
+				{
+					...menuItemSx,
+					...(isActive ? activeMenuItemSx : {}),
+				} as SxProps<Theme>
+			}
 			aria-current={isActive ? "page" : undefined}
 		>
 			<ListItemIcon>{icon}</ListItemIcon>

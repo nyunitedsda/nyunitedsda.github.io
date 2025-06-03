@@ -1,30 +1,54 @@
 import type { SxProps, Theme } from "@mui/material/styles";
+import type { BrandingStyle } from "./components/types";
 
-export const activeMenuSx: SxProps<Theme> = {
-	"& .MuiTypography-root": {},
-	fontWeight: "bold",
-	color: "primary.contrastText",
-	backgroundColor: "primary.light",
-	"& svg": {
-		color: "primary.contrastText",
+type StyleExport = Record<string, SxProps<Theme>>;
+type MenuItemStyleExport = StyleExport & {
+	menuItemSx: SxProps<Theme>;
+	activeMenuItemSx: SxProps<Theme>;
+};
+
+export const brandingStyles: BrandingStyle = {
+	logoSx: { display: { xs: "none", md: "flex" } },
+	rootSx: {
+		flexGrow: 1,
+		display: { xs: "flex" },
+		alignItems: "center",
+		gap: 2,
+	},
+	brandingSx: {
+		flexGrow: 1,
+		fontWeight: 700,
+		textDecoration: "none",
+		fontFamily: "Inter",
+		color: "primary.light",
 	},
 };
 
-export const menuDefaultSx: SxProps<Theme> = {
-	borderRadius: 0.5,
-	color: "text.secondary",
-	backgroundColor: "transparent",
-	"&:hover": {
-		backgroundColor: "action.hover",
-		// 	color: "primary.contrastText",
-		// backgroundColor: "primary.light",
-	},
-	"& svg": {
+export const menuItemStyles: MenuItemStyleExport = {
+	menuItemSx: {
+		borderRadius: 0.5,
 		color: "text.secondary",
+		backgroundColor: "transparent",
+		"&:hover": {
+			backgroundColor: "action.hover",
+			// 	color: "primary.contrastText",
+			// backgroundColor: "primary.light",
+		},
+		"& svg": {
+			color: "text.secondary",
+		},
+	},
+	activeMenuItemSx: {
+		fontWeight: "bold",
+		color: "primary.contrastText",
+		backgroundColor: "primary.light",
+		"& svg": {
+			color: "primary.contrastText",
+		},
 	},
 };
 
-export const menuDrawerStyles: Record<string, SxProps<Theme>> = {
+export const menuDrawerStyles: StyleExport = {
 	titleSx: {
 		height: (theme) => `${theme.spacing(8)}`,
 		borderBottom: (theme) => `1px solid ${theme.palette.divider}`,

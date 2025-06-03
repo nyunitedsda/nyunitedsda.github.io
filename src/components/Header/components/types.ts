@@ -1,9 +1,9 @@
+import type { SxProps, Theme } from "@mui/material/styles";
 import type { MouseEvent, ReactNode } from "react";
 import type { RouteMenu } from "../../../hooks/routes/types";
 
 export interface MenuDrawerProps {
 	menuItems: RouteMenu[];
-	title: ReactNode;
 	isActive: (path: string) => boolean;
 	toggleDrawer: () => void;
 }
@@ -25,7 +25,12 @@ export interface SubMenuDrawerItemProps extends RouteMenu {
 
 export interface SidebarProps {
 	open: boolean;
-	title: String | ReactNode;
-	isActive: (path: string )=> boolean;
+	isActive: (path: string) => boolean;
 	onClose: () => void;
 }
+
+export type BrandingStyle = {
+	brandingSx: SxProps<Theme>;
+	rootSx: SxProps<Theme>;
+	logoSx: SxProps<Theme>;
+};

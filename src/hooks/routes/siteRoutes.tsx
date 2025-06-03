@@ -11,7 +11,9 @@ const Home = lazy(() => import("../../pages/Home/Home"));
 const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
-const UserAgreements = lazy(() => import("../../pages/UserAgreements/UserAgreements"));
+const UserAgreements = lazy(
+	() => import("../../pages/UserAgreements/UserAgreements"),
+);
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "/"; // "/nyunitedsda/";
 

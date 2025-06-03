@@ -60,7 +60,7 @@ const iconMap: Record<string, ReactNode> = {
 	Email: <Email fontSize="small" />,
 };
 
-// FEATURE: Enhance the footer links so older users know you can click the link 
+// FEATURE: Enhance the footer links so older users know you can click the link
 
 const Footer: FC = () => {
 	const { routes, menuItems } = useFormattedRoutes();
