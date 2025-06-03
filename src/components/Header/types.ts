@@ -16,3 +16,9 @@ export interface MenuDrawerItemProps {
 			text: string;
 			onClick: (event?: MouseEvent) => void;
 	};
+
+	export interface SubMenuDrawerItemProps extends RouteMenu {
+		isActiveChild: (path: string) => boolean;
+		isActiveParent: boolean;
+		onClick: (path: string) => void;
+	}

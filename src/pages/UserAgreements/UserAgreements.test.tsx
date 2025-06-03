@@ -55,7 +55,7 @@ describe.skip("UserAgreements", () => {
 		// By default, the first tab should be selected due to pathname "/terms"
 		render(<UserAgreements />);
 
-		screen.logTestingPlaygroundURL();
+
 		await waitFor(() => {
 			expect(screen.getByTestId("tabpanel-0")).toHaveTextContent(
 				"Terms Content",

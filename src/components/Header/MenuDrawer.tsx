@@ -56,7 +56,10 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 						(
 							<SubMenuDrawerItem
 								key={item.name}
-								isActive={isActive}
+								isActiveChild={isActive}
+								isActiveParent={
+									item?.children?.some((child) => isActive(child.path)) || false
+								}
 								onClick={handleClick}
 								{...item}
 							/>

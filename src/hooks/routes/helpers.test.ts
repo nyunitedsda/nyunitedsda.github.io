@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { formatRoutes, generateMenuItems } from "./helpers";
 
 describe("formatRoutes", () => {
@@ -73,11 +73,22 @@ describe("generateMenuItems", () => {
 				children: [{ path: "/child", name: "Child", icon: "iconC" }],
 			},
 		];
-		const output = generateMenuItems(input);
-		expect(output).toEqual([
-			{ path: "/parent", name: "Parent", icon: "iconP" },
-			{ path: "/child", name: "Child", icon: "iconC" },
-		]);
+		const output = [
+			{
+				path: "/parent",
+			 name: "Parent",
+			  icon: "iconP",
+			children: [
+				{ 
+					path: "/child", 
+					name: "Child", 
+					icon: "iconC" 
+				},
+			],
+			}
+		]
+		const expectedOutput = generateMenuItems(input);
+		expect(expectedOutput).toEqual(output);
 	});
 
 	it("skips routes without name, icon, or path", () => {

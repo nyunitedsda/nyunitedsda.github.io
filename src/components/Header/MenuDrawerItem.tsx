@@ -2,11 +2,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { FC } from "react";
+import { useCallback, type FC, type MouseEvent } from "react";
 import type { MenuDrawerItemProps } from "./types";
 
 const activeSx: SxProps<Theme> = {
-  "& .MuiTypography-root": {},
   fontWeight: 'bold',
   color: "primary.contrastText",
   bgcolor: "primary.light",
@@ -20,40 +19,46 @@ const listButtonSx: SxProps<Theme> = {
   color: "text.secondary",
   bgcolor: "transparent",
   "&:hover": {
+    // color: "primary.contrastText",
     bgcolor: "action.hover",
-    // 	color: "primary.contrastText",
-    // bgcolor: "primary.light",
   },
   '& svg': {
     color: "text.secondary",
   },
 }
 
-
-const MenuDrawItem: FC<MenuDrawerItemProps> = ({
-  disabled,
+const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
+  disabled = false,
   icon,
   isActive,
   onClick,
   text,
   expandedIcon,
-}) => (
+}) => {
+  
+ const handleClick = useCallback((event: MouseEvent) => {
+  event.stopPropagation();
+  if(!disabled) onClick(event);
+ }, [onClick]); 
+
+  return (
   <ListItemButton
-    className={isActive ? 'active-menu' : ''}
     disabled={disabled}
-    onClick={onClick}
+    onClick={handleClick}
     sx={{
       ...listButtonSx,
       ...(isActive ? activeSx : {})
     }}
+    aria-current={isActive ? 'page' : undefined}
   >
-
-    <ListItemIcon	>{icon}</ListItemIcon>
-
+    <ListItemIcon>{icon}</ListItemIcon>
     <ListItemText primary={text} />
-
-    {expandedIcon && (<ListItemIcon sx={{ justifyContent: 'flex-end' }}>{expandedIcon}</ListItemIcon>)}
-  </ListItemButton >
+    {expandedIcon && (
+      <ListItemIcon sx={{ justifyContent: 'flex-end' }}>
+        {expandedIcon}
+      </ListItemIcon>
+    )}
+  </ListItemButton>
 );
-
-export default MenuDrawItem;
+}
+export default MenuDrawerItem;

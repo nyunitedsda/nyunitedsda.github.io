@@ -1,23 +1,18 @@
 import ExpandLessRounded from '@mui/icons-material/ExpandLessRounded';
 import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded';
 import { type FC, type MouseEvent, useCallback, useState } from 'react';
-import type { RouteMenu } from '../../hooks/routes/types';
 import MenuDrawItem from './MenuDrawerItem';
-
-export interface SubMenuDrawerItemProps extends RouteMenu {
-  isActive: (path: string) => boolean;
-  onClick: (path: string) => void;
-}
+import type { SubMenuDrawerItemProps } from './types';
 
 const SubMenuDrawerItem: FC<SubMenuDrawerItemProps> = ({
   name,
-  isActive,
-  path,
+  isActiveChild,
+  isActiveParent,
   icon,
   children,
   onClick,
 }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(isActiveParent);
 
   const handleMenuExpanded = useCallback((e?: MouseEvent) => {
     e?.stopPropagation();
@@ -28,26 +23,34 @@ const SubMenuDrawerItem: FC<SubMenuDrawerItemProps> = ({
   return (
     <>
       <MenuDrawItem
+        aria-expanded={isExpanded}
+        aria-controls={`${name}-submenu`}
         expandedIcon={
           !isExpanded ?
-            (<ExpandMoreRounded />) :
-            (<ExpandLessRounded />)
+            <ExpandMoreRounded /> :
+            <ExpandLessRounded />
         }
         icon={icon}
-        isActive={isActive(path)}
+        isActive={isActiveParent}
         key={name}
         onClick={handleMenuExpanded}
         text={name}
       />
       {
-        isExpanded && children?.map((ch, i) => (
-          <MenuDrawItem
-            key={ch.name}
-            isActive={isActive(ch.path)}
-            onClick={() => onClick(ch.path)}
-            text={ch.name}
-          />
-        ))
+        isExpanded && (
+          <div id={`${name}-submenu`} role="group">
+            {
+              children?.map((ch) => (
+                <MenuDrawItem
+                  key={ch.name}
+                  isActive={isActiveChild(ch.path)}
+                  onClick={() => onClick(ch.path)}
+                  text={ch.name}
+                />
+              ))
+            }
+          </div>
+        )
       }
     </>
   );

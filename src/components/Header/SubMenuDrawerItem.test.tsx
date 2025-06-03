@@ -7,7 +7,8 @@ const mockOnClick = vi.fn();
 const defaultProps = {
   name: 'Parent',
   path: '/parent',
-  isActive: (path: string) => path === '/parent',
+  isActiveChild: (path: string) => path === '/parent',
+  isActiveParent: false,
   onClick: mockOnClick,
   icon: 'icon',
   children: [
@@ -38,7 +39,7 @@ describe('SubMenuDrawerItem', () => {
 
     expect(screen.queryAllByRole('button').length).toBe(1);
     const parent = screen.queryAllByRole('button')[0];
-    
+
     expect(parent).toBeInTheDocument();
 
     fireEvent.click(parent);
@@ -58,7 +59,7 @@ describe('SubMenuDrawerItem', () => {
     // First click to expand
     fireEvent.click(parent);
     expect(screen.queryAllByRole('button').length).toBe(3);
-    
+
     for (const n of name) {
       expect(screen.getByText(n)).toBeInTheDocument();
     }
@@ -69,30 +70,38 @@ describe('SubMenuDrawerItem', () => {
   });
 
   it('passes correct isActive state to items', () => {
-    const customIsActive = vi.fn().mockImplementation(path => path === '/parent/child1');
-    render(<SubMenuDrawerItem {...defaultProps} isActive={customIsActive} />);
+    const customIsActive = vi.fn().mockImplementation(path => path === defaultProps.children[0].path);
+    render(
+      <SubMenuDrawerItem
+        {...defaultProps}
+        isActiveChild={customIsActive}
+        isActiveParent={true}
+      />
+    );
 
-     const parent = screen.queryAllByRole('button')[0]; 
+    expect(screen.queryAllByRole('button').length).toBe(3);
+    const parent = screen.queryAllByRole('button')[0];
 
-     // Expand to see children
-    fireEvent.click(parent);
+    expect(parent).toHaveAttribute('aria-current', 'page');
 
-    expect(customIsActive).toHaveBeenCalledWith('/parent');
+
+    expect(screen.queryAllByRole('button')[1]).toHaveAttribute('aria-current', 'page');
 
     expect(customIsActive).toHaveBeenCalledWith('/parent/child1');
+
+    // Second child
+    expect(screen.queryAllByRole('button')[2]).not.toHaveAttribute('aria-current');
     expect(customIsActive).toHaveBeenCalledWith('/parent/child2');
   });
 
   it('triggers onClick with correct path when children are clicked', () => {
     const onClick = vi.fn();
-    render(<SubMenuDrawerItem {...defaultProps} onClick={onClick} />);
 
-    const parent = screen.queryAllByRole('button')[0];
-    // Expand to see children
-    fireEvent.click(parent);
+    render(<SubMenuDrawerItem {...defaultProps} onClick={onClick} isActiveParent={true} />);
 
     // Click on first child
-    const firstChild = parent.nextElementSibling as Element;
+    const firstChild = screen.queryAllByRole('button')[1];
+
     expect(firstChild).toHaveTextContent(defaultProps.children[0].name);
 
     fireEvent.click(firstChild);
