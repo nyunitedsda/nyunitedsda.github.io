@@ -82,7 +82,7 @@ describe('SubMenuDrawerItem', () => {
     expect(screen.queryAllByRole('button').length).toBe(3);
     const parent = screen.queryAllByRole('button')[0];
 
-    expect(parent).toHaveAttribute('aria-current', 'page');
+    expect(parent.hasAttribute('aria-current')).toBeFalsy();
 
 
     expect(screen.queryAllByRole('button')[1]).toHaveAttribute('aria-current', 'page');
@@ -92,6 +92,9 @@ describe('SubMenuDrawerItem', () => {
     // Second child
     expect(screen.queryAllByRole('button')[2]).not.toHaveAttribute('aria-current');
     expect(customIsActive).toHaveBeenCalledWith('/parent/child2');
+
+    fireEvent.click(parent);
+    expect(parent).toHaveAttribute('aria-current', 'page');
   });
 
   it('triggers onClick with correct path when children are clicked', () => {

@@ -32,10 +32,11 @@ const siteRoutes: Route[] = [
 
 	},
 	{
+		// TODO: Review the menu names for streaming with Zinee
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
-		path: `${BASE_URL}/watch`,
+		path: `${BASE_URL}watch/live`,
 		children: [
 			{
 				element: <LiveBroadcast />,

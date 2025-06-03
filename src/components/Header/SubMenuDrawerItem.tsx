@@ -31,7 +31,7 @@ const SubMenuDrawerItem: FC<SubMenuDrawerItemProps> = ({
             <ExpandLessRounded />
         }
         icon={icon}
-        isActive={isActiveParent}
+        isActive={!isExpanded && isActiveParent}
         key={name}
         onClick={handleMenuExpanded}
         text={name}

@@ -26,6 +26,12 @@ describe("formatRoutes", () => {
 	it("formats nested routes", () => {
 		const input = [
 			{
+				path: "/home",
+				element: "<Home />",
+				caseSensitive: false,
+				errorElement: undefined,
+			},
+			{
 				path: "/parent",
 				element: "<Parent />",
 				children: [{ path: "child", element: "<Child />", name: "Child" }],
@@ -34,18 +40,16 @@ describe("formatRoutes", () => {
 		const output = formatRoutes(input);
 		expect(output).toEqual([
 			{
-				path: "/parent",
-				element: "<Parent />",
+				path: "/home",
+				element: "<Home />",
 				caseSensitive: false,
 				errorElement: undefined,
-				children: [
-					{
-						path: "child",
-						element: "<Child />",
-						caseSensitive: false,
-						errorElement: undefined,
-					},
-				],
+			},
+			{
+				path: "child",
+				element: "<Child />",
+				caseSensitive: false,
+				errorElement: undefined,
 			},
 		]);
 	});
@@ -76,17 +80,17 @@ describe("generateMenuItems", () => {
 		const output = [
 			{
 				path: "/parent",
-			 name: "Parent",
-			  icon: "iconP",
-			children: [
-				{ 
-					path: "/child", 
-					name: "Child", 
-					icon: "iconC" 
-				},
-			],
-			}
-		]
+				name: "Parent",
+				icon: "iconP",
+				children: [
+					{
+						path: "/child",
+						name: "Child",
+						icon: "iconC",
+					},
+				],
+			},
+		];
 		const expectedOutput = generateMenuItems(input);
 		expect(expectedOutput).toEqual(output);
 	});

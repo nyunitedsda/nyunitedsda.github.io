@@ -43,10 +43,11 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
       (i) => pathname.indexOf(i.tag) > -1,
     );
 
-    if (!currentTab) {
-      navigate("/error");
-    } else if (
-      currentTab.href && selectedTab !== currentTab.id
+    // if (!currentTab) {
+    //   navigate("/error");
+    // } else 
+    if (
+     currentTab && currentTab.href && selectedTab !== currentTab.id
     ) {
       setSelectedTab(currentTab.id);
     }
