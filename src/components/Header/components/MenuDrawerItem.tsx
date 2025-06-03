@@ -2,7 +2,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { useCallback, type FC, type MouseEvent } from "react";
+import { type FC, type MouseEvent, useCallback } from "react";
 import type { MenuDrawerItemProps } from "./types";
 
 const activeSx: SxProps<Theme> = {

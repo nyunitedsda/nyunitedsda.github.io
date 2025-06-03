@@ -1,5 +1,5 @@
 import type { MouseEvent, ReactNode } from "react";
-import type { RouteMenu } from "../../hooks/routes/types";
+import type { RouteMenu } from "../../../hooks/routes/types";
 
 export interface MenuDrawerProps {
 	menuItems: RouteMenu[];

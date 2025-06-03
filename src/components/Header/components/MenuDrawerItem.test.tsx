@@ -1,8 +1,8 @@
-import MenuDrawerItem from "./MenuDrawerItem";
-import HomeIcon from "@mui/icons-material/Home";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { render, screen, fireEvent } from "../../utils/vitest-setup";
+import HomeIcon from "@mui/icons-material/Home";
 import { vi } from "vitest";
+import { fireEvent, render, screen } from "../../../utils/vitest-setup";
+import MenuDrawerItem from "./MenuDrawerItem";
 
 const mockOnClick = vi.fn();
 

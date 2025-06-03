@@ -23,3 +23,23 @@ export const menuDefaultSx: SxProps<Theme> = {
 		color: "text.secondary",
 	},
 };
+
+export const menuDrawerStyles: Record<string, SxProps<Theme>> = {
+	titleSx: {
+		height: (theme) => `${theme.spacing(8)}`,
+		borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+		justifyContent: "center",
+		"& h5": {
+			fontWeight: "bold",
+			color: "primary.light",
+			fontFamily: "inter",
+		},
+	},
+	rootSx: {
+		textAlign: "center",
+		width: 350,
+		height: "100%",
+		p: 1,
+		pt: 0,
+	},
+};

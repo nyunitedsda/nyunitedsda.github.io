@@ -1,6 +1,6 @@
 import { MemoryRouter } from "react-router";
 import { vi } from "vitest";
-import { fireEvent, render, screen } from "../../utils/vitest-setup";
+import { fireEvent, render, screen } from "../../../utils/vitest-setup";
 import MenuDrawer from "./MenuDrawer";
 import { MemoryRouter as ActualMemoryRouter } from "react-router";
 

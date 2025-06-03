@@ -8,7 +8,6 @@ import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRound
 import { lazy } from "react";
 import Error from "../../pages/Error/Error";
 import Login from "../../pages/Login/Login";
-import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 import type { Route } from "./types";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
@@ -19,6 +18,7 @@ const Home = lazy(() => import("../../pages/Home/Home"));
 const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
+const UserAgreements = lazy(() => import("../../pages/UserAgreements/UserAgreements"));
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "/"; // "/nyunitedsda/";
 

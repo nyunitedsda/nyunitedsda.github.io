@@ -1,17 +1,12 @@
-import { Menu } from "@mui/icons-material";
-import {
-	AppBar,
-	Box,
-	Button,
-	Container,
-	Drawer,
-	IconButton,
-	MenuItem,
-	type SxProps,
-	type Theme,
-	Toolbar,
-	Typography,
-} from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import type { SxProps, Theme } from "@mui/material";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import logo from "../../assets/img/NY United Logo small.png";
@@ -20,7 +15,9 @@ import type { RouteMenu } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import useColorTheme from "../../hooks/theme/useColorTheme";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
-import MenuDrawer from "./MenuDrawer";
+import MenuDrawer from "./components/MenuDrawer";
+import MenuDrawerItem from "./components/MenuDrawerItem";
+import { MenuRounded } from "@mui/icons-material";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -37,12 +34,51 @@ const logoSx: SxProps<Theme> = {
 	gap: 2,
 };
 
-const menuSx: SxProps<Theme> = {
-	flexGrow: 1,
+const desktopDisplaySx: SxProps<Theme> = {
 	display: { xs: "none", md: "flex" },
+}
+
+const desktopMenuSx: SxProps<Theme> = {
+	flexGrow: 1,
 	justifyContent: "center",
 	fontFamily: "Inter",
+	...desktopDisplaySx,
 };
+
+const rootSx: SxProps<Theme> = {
+	bgcolor: "background.paper",
+	height: (theme) => `${theme.spacing(8)}`,
+}
+
+const hamburgerMenuSx: SxProps<Theme> = {
+	display: {
+		xs: "flex",
+		md: "none",
+	},
+}
+
+const activeBtnSx: SxProps<Theme> = {
+	color: "primary.light",
+	fontWeight: 'bold',
+	"&:after": {
+		content: '""',
+		position: "absolute",
+		bottom: 0,
+		left: "25%",
+		width: "50%",
+		height: "3px",
+		bgcolor: "primary.light",
+		borderRadius: "3px 3px 0 0",
+	},
+}
+
+const regularBtnSx: SxProps<Theme> = {
+	color: "text.primary",
+	display: 'flex',
+	fontSize: (theme) => theme.typography.body1,
+}
+
+// FEATURE: Enhance and ensure consistency in the desktop and mobile menu items active and regular states
 
 const WEBSITE_TITLE =
 	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
@@ -65,17 +101,14 @@ const Header: FC = () => {
 
 	const isActive = useCallback((path: string) => {
 		return pathname === path;
-	}, []);
+	}, [pathname]);
 
 	return (
 		<AppBar
 			position="sticky"
 			color="default"
 			elevation={1}
-			sx={{
-				bgcolor: "background.paper",
-				height: (theme) => `${theme.spacing(8)}`,
-			}}
+			sx={rootSx}
 		>
 			<Container
 				sx={{ height: (theme) => `${theme.spacing(8)}` }}
@@ -90,14 +123,14 @@ const Header: FC = () => {
 
 						{/* Mobile Hamburger Menu */}
 						<IconButton
-							sx={{ display: { xs: "flex", md: "none" } }}
+							sx={hamburgerMenuSx}
 							aria-label="open drawer"
 							color="inherit"
 							edge="start"
 							onClick={handleDrawerToggle}
 							size="large"
 						>
-							<Menu />
+							<MenuRounded />
 						</IconButton>
 
 						{/* Company branding */}
@@ -112,28 +145,14 @@ const Header: FC = () => {
 					</Box>
 
 					{/* Menu */}
-					<Box sx={menuSx}>
+					<Box sx={desktopMenuSx}>
 						{menuItems.map((item) => (
 							<Button
 								key={item.name}
 								href={item.path}
 								sx={{
-									color: isActive(item.path) ? "primary.light" : "text.primary",
-									display: "flex",
-									fontWeight: isActive(item.path) ? "bold" : "normal",
-									fontSize: (theme) => theme.typography.body1,
-									"&:after": isActive(item.path)
-										? {
-												content: '""',
-												position: "absolute",
-												bottom: 0,
-												left: "25%",
-												width: "50%",
-												height: "3px",
-												bgcolor: "primary.light",
-												borderRadius: "3px 3px 0 0",
-											}
-										: {},
+									...regularBtnSx,
+									...(isActive(item.path) ? activeBtnSx : {}),
 								}}
 							>
 								{item.name}
@@ -141,7 +160,7 @@ const Header: FC = () => {
 						))}
 					</Box>
 
-					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+					<Box sx={desktopDisplaySx}>
 						<ThemeToggleButton />
 					</Box>
 				</Toolbar>
@@ -161,16 +180,17 @@ const Header: FC = () => {
 					toggleDrawer={handleDrawerToggle}
 					title={WEBSITE_TITLE}
 				/>
-				<MenuItem
+
+				{/* Bottom menu */}
+				<MenuDrawerItem
+					icon={<ThemeToggleButton />}
+					isActive={false}
 					onClick={() => {
 						toggleMode();
 						handleDrawerToggle();
 					}}
-					sx={{ display: "flex", p: 2, alignItems: "center" }}
-				>
-					<ThemeToggleButton />
-					<Typography sx={{ color: "text.secondary" }}>{`Theme`}</Typography>
-				</MenuItem>
+					text={`Theme`}
+				/>
 			</Drawer>
 		</AppBar>
 	);
