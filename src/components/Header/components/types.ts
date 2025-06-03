@@ -22,3 +22,10 @@ export interface SubMenuDrawerItemProps extends RouteMenu {
 	isActiveParent: boolean;
 	onClick: (path: string) => void;
 }
+
+export interface SidebarProps {
+	open: boolean;
+	title: String | ReactNode;
+	isActive: (path: string )=> boolean;
+	onClose: () => void;
+}

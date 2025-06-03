@@ -1,10 +1,3 @@
-import { LoginRounded } from "@mui/icons-material";
-import ArticleRounded from "@mui/icons-material/ArticleRounded";
-import ContactMailRounded from "@mui/icons-material/ContactMailRounded";
-import Diversity3Rounded from "@mui/icons-material/Diversity3Rounded";
-import HomeRounded from "@mui/icons-material/HomeRounded";
-import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
-import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import { lazy } from "react";
 import Error from "../../pages/Error/Error";
 import Login from "../../pages/Login/Login";
@@ -26,14 +19,14 @@ const siteRoutes: Route[] = [
 	{
 		element: <Home />,
 		errorElement: <Error />,
-		icon: <HomeRounded />,
+		icon: "HomeRounded",
 		name: "Home",
 		path: `${BASE_URL}`,
 	},
 	{
 		// TODO: Review the menu names for streaming with Zinee
 		element: <LiveBroadcast />,
-		icon: <LiveTvRounded />,
+		icon: "LiveTvRounded",
 		name: "Watch Live",
 		path: `${BASE_URL}watch/live`,
 		children: [
@@ -55,7 +48,7 @@ const siteRoutes: Route[] = [
 		caseSensitive: true,
 		element: <Donations />,
 		errorElement: <Error />,
-		icon: <VolunteerActivismRounded />,
+		icon: "VolunteerActivismRounded",
 		name: "Donations",
 		path: `${BASE_URL}donations`,
 	},
@@ -63,7 +56,7 @@ const siteRoutes: Route[] = [
 		caseSensitive: true,
 		element: <Blog />,
 		errorElement: <Error />,
-		icon: <ArticleRounded />,
+		icon: "ArticleRounded",
 		name: "Blog",
 		path: `${BASE_URL}blog`,
 	},
@@ -71,7 +64,7 @@ const siteRoutes: Route[] = [
 		caseSensitive: true,
 		element: <Contact />,
 		errorElement: <Error />,
-		icon: <ContactMailRounded />,
+		icon: "ContactMailRounded",
 		name: "Contact",
 		path: `${BASE_URL}contact`,
 	},
@@ -79,7 +72,7 @@ const siteRoutes: Route[] = [
 		caseSensitive: true,
 		element: <AboutUs />,
 		errorElement: <Error />,
-		icon: <Diversity3Rounded />,
+		icon: "Diversity3Rounded",
 		name: "About Us",
 		path: `${BASE_URL}aboutUs`,
 	},
@@ -104,7 +97,7 @@ const siteRoutes: Route[] = [
 export const authRoutes: Route[] = [
 	{
 		element: <Login />,
-		icon: <LoginRounded />,
+		icon: "LoginRounded",
 		name: "Login",
 		path: `${BASE_URL}login`,
 	},

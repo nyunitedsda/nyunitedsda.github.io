@@ -1,23 +1,19 @@
+import { MenuRounded } from "@mui/icons-material";
+import { type SxProps, type Theme, useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import type { SxProps, Theme } from "@mui/material";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import logo from "../../assets/img/NY United Logo small.png";
 import siteRoutes from "../../hooks/routes/siteRoutes";
-import type { RouteMenu } from "../../hooks/routes/types";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
-import useColorTheme from "../../hooks/theme/useColorTheme";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
-import MenuDrawer from "./components/MenuDrawer";
-import MenuDrawerItem from "./components/MenuDrawerItem";
-import { MenuRounded } from "@mui/icons-material";
+import Sidebar from "./components/Sidebar";
 
 const brandingSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -89,7 +85,7 @@ const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
-	const { toggleMode } = useColorTheme();
+	const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((d) => !d);
@@ -166,32 +162,16 @@ const Header: FC = () => {
 				</Toolbar>
 			</Container>
 
-			<Drawer
-				anchor="left"
-				open={drawerOpen}
-				onClose={handleDrawerToggle}
-				ModalProps={{
-					keepMounted: true, // Better open performance on mobile.
-				}}
-			>
-				<MenuDrawer
-					isActive={isActive}
-					menuItems={[...menuItems] as RouteMenu[]}
-					toggleDrawer={handleDrawerToggle}
-					title={WEBSITE_TITLE}
-				/>
-
-				{/* Bottom menu */}
-				<MenuDrawerItem
-					icon={<ThemeToggleButton />}
-					isActive={false}
-					onClick={() => {
-						toggleMode();
-						handleDrawerToggle();
-					}}
-					text={`Theme`}
-				/>
-			</Drawer>
+			{
+				drawerOpen && isMobile && (
+					<Sidebar
+						open={drawerOpen}
+						title={WEBSITE_TITLE}
+						onClose={handleDrawerToggle}
+						isActive={isActive}
+					/>
+				)
+			}
 		</AppBar>
 	);
 };
