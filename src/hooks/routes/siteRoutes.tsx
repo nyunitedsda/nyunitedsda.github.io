@@ -25,56 +25,73 @@ const BASE_URL = import.meta.env.VITE_BASE_URL || "/"; // "/nyunitedsda/";
 const siteRoutes: Route[] = [
 	{
 		element: <Home />,
+		errorElement: <Error />,
 		icon: <HomeRounded />,
 		name: "Home",
 		path: `${BASE_URL}`,
-		errorElement: <Error />,
+
 	},
 	{
-		// caseSensitive: true,
 		element: <LiveBroadcast />,
 		icon: <LiveTvRounded />,
 		name: "Watch Live",
-		path: `${BASE_URL}liveBroadcast`,
-		errorElement: <Error />,
+		path: `${BASE_URL}/watch`,
+		children: [
+			{
+				element: <LiveBroadcast />,
+				errorElement: <Error />,
+				name: 'Live Stream',
+				path: `${BASE_URL}watch/live`,
+			},
+			{
+				element: <LiveBroadcast />,
+				errorElement: <Error />,
+				name: 'Archive Stream',
+				path: `${BASE_URL}watch/archive`,
+			},
+		],
 	},
 	{
 		caseSensitive: true,
 		element: <Donations />,
+		errorElement: <Error />,
 		icon: <VolunteerActivismRounded />,
 		name: "Donations",
 		path: `${BASE_URL}donations`,
-		errorElement: <Error />,
+
 	},
 	{
 		caseSensitive: true,
 		element: <Blog />,
+		errorElement: <Error />,
 		icon: <ArticleRounded />,
 		name: "Blog",
 		path: `${BASE_URL}blog`,
-		errorElement: <Error />,
+
 	},
 	{
 		caseSensitive: true,
 		element: <Contact />,
+		errorElement: <Error />,
 		icon: <ContactMailRounded />,
 		name: "Contact",
 		path: `${BASE_URL}contact`,
-		errorElement: <Error />,
+
 	},
 	{
 		caseSensitive: true,
 		element: <AboutUs />,
+		errorElement: <Error />,
 		icon: <Diversity3Rounded />,
 		name: "About Us",
 		path: `${BASE_URL}aboutUs`,
-		errorElement: <Error />,
+
 	},
 	{
 		caseSensitive: true,
 		element: <UserAgreements />,
-		path: `${BASE_URL}legal/termsOfUse`,
 		errorElement: <Error />,
+		path: `${BASE_URL}legal/termsOfUse`,
 	},
 	{
 		caseSensitive: true,

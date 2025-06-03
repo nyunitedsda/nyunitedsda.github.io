@@ -1,5 +1,5 @@
 import type { RouteObject } from "react-router";
-import type { RouteMenu } from "./types";
+import type { Route, RouteMenu } from "./types";
 
 export const formatRoutes = (routes: any[]): RouteObject[] => {
 	return routes.map((i) => {
@@ -20,18 +20,29 @@ export const formatRoutes = (routes: any[]): RouteObject[] => {
 	});
 };
 
-export const generateMenuItems = (routes: any[]): RouteMenu[] => {
-	return routes.reduce<RouteMenu[]>((acc, i) => {
-		if ((i.name || i.icon) && i.path) {
-			acc.push({
-				name: i.name ?? "",
-				path: i.path ?? "",
-				icon: i.icon,
-			});
+export const generateMenuItems = (routes: Route[]): RouteMenu[] => {
+	return routes.reduce<RouteMenu[]>((acc, route) => {
+		// Skip routes without name or path
+		if (!route.path || (!route.name && !route?.icon)) {
+			return acc;
 		}
-		if (i.children) {
-			acc.push(...generateMenuItems(i.children));
+
+		// Create the menu item
+		const menuItem: RouteMenu = {
+			name: route.name ?? "",
+			path: route.path,
+			icon: route?.icon,
+		};
+
+		// Add children if they exist
+		if (route.children && route.children.length > 0) {
+			const subMenuItems = generateMenuItems(route.children);
+			if (subMenuItems.length > 0) {
+				menuItem.children = subMenuItems;
+			}
 		}
+
+		acc.push(menuItem);
 		return acc;
 	}, []);
 };

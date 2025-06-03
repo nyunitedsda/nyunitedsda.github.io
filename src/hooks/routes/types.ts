@@ -4,7 +4,8 @@ import type { RouteObject } from "react-router";
 export interface RouteMenu {
 	name: string;
 	path: string;
-	icon: ReactNode;
+	icon?: ReactNode;
+	children?: Omit<RouteMenu, "icon">[];
 }
 
 export interface FormattedRoutes {
@@ -12,7 +13,8 @@ export interface FormattedRoutes {
 	menuItems: RouteMenu[];
 }
 
-export type Route = RouteObject & {
+export type Route = Omit<RouteObject, "children"> & {
 	icon?: ReactNode;
 	name?: string;
+	children?: Route[];
 };

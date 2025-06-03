@@ -1,11 +1,11 @@
-import { ListItemButton, ListItemIcon } from "@mui/material";
 import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
+import MenuDrawItem from "./MenuDrawerItem";
+import SubMenuDrawerItem from "./SubMenuDrawerItem";
 import type { MenuDrawerProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
@@ -15,6 +15,18 @@ const rootSx: SxProps<Theme> = {
 	p: 1,
 	pt: 0,
 };
+
+const titleSx: SxProps<Theme> = {
+	height: (theme) => `${theme.spacing(8)}`,
+	borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+	justifyContent: "center",
+	'& h5': {
+		fontWeight: "bold",
+		color: "primary.light",
+		fontFamily: "inter",
+	},
+}
+
 
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
@@ -31,56 +43,34 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 
 	return (
 		<Stack onClick={toggleDrawer} sx={rootSx}>
-			<Stack
-				sx={{
-					height: (theme) => `${theme.spacing(8)}`,
-					borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-					justifyContent: "center",
-				}}
-			>
-				<Typography
-					variant="h5"
-					sx={{
-						fontWeight: "bold",
-						color: "primary.light",
-						fontFamily: "inter",
-					}}
-				>
-					{title}
-				</Typography>
+
+			{/* Title block */}
+			<Stack sx={titleSx}	>
+				<Typography variant="h5" >{title}</Typography>
 			</Stack>
+
+			{/* Menu List */}
 			<List>
-				{menuItems.map((item) => (
-					<ListItemButton
-						key={item.name}
-						disabled={item.name === "Login"}
-						onClick={() => handleClick(item.path)}
-						sx={{
-							borderRadius: 0.5,
-							"& .MuiTypography-root": {
-								fontWeight: isActive(item.path) ? "bold" : "normal",
-							},
-							color: isActive(item.path)
-								? "primary.contrastText"
-								: "text.secondary",
-							bgcolor: isActive(item.path) ? "primary.light" : "transparent",
-							"&:hover": { bgcolor: "action.hover" },
-						}}
-					>
-						{item.icon && (
-							<ListItemIcon
-								sx={{
-									color: isActive(item.path)
-										? "primary.contrastText"
-										: "text.secondary",
-								}}
-							>
-								{item.icon}
-							</ListItemIcon>
-						)}
-						<ListItemText primary={item.name} />
-					</ListItemButton>
-				))}
+				{
+					menuItems.map((item) => item?.children ?
+						(
+							<SubMenuDrawerItem
+								key={item.name}
+								isActive={isActive}
+								onClick={handleClick}
+								{...item}
+							/>
+						) : (
+							<MenuDrawItem
+								key={item.name}
+								isActive={isActive(item.path)}
+								disabled={item.name === "Login"}
+								onClick={() => handleClick(item.path)}
+								icon={item?.icon}
+								text={item.name}
+							/>
+						)
+					)}
 
 				{/* TODO: Update menuItems with login  */}
 			</List>

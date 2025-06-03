@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import type { RouteMenu } from "../../hooks/routes/types";
 
 export interface MenuDrawerProps {
@@ -7,3 +7,12 @@ export interface MenuDrawerProps {
 	isActive: (path: string) => boolean;
 	toggleDrawer: () => void;
 }
+
+export interface MenuDrawerItemProps {
+			disabled?: boolean;
+			icon?: ReactNode;
+			expandedIcon?: ReactNode;
+			isActive: boolean;
+			text: string;
+			onClick: (event?: MouseEvent) => void;
+	};
