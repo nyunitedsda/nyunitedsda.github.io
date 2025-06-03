@@ -42,7 +42,7 @@ const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const { menuItems } = useFormattedRoutes();
-	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((d) => !d);

@@ -3,6 +3,7 @@ import type { MouseEvent, ReactNode } from "react";
 import type { RouteMenu } from "../../../hooks/routes/types";
 
 export interface MenuDrawerProps {
+	footer?: MenuDrawerItemProps[];
 	menuItems: RouteMenu[];
 	isActive: (path: string) => boolean;
 	toggleDrawer: () => void;

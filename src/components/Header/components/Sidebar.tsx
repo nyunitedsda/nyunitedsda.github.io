@@ -1,11 +1,18 @@
 import Drawer from "@mui/material/Drawer";
-import { type FC, useCallback } from "react";
+import { type FC, useCallback, useMemo } from "react";
 import useFormattedRoutes from "../../../hooks/routes/useFormattedRoutes";
 import useColorTheme from "../../../hooks/theme/useColorTheme";
 import ThemeToggleButton from "../../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
-import MenuDrawerItem from "./MenuDrawerItem";
-import type { SidebarProps } from "./types";
+import type { MenuDrawerItemProps, SidebarProps } from "./types";
+
+const settingOptions: Omit<MenuDrawerItemProps, 'onClick'>[] = [
+	{
+		icon: <ThemeToggleButton />,
+		text: 'Theme',
+		isActive: false,
+	}
+];
 
 const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 	const { toggleMode } = useColorTheme();
@@ -14,6 +21,15 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 	const handleClick = useCallback(() => {
 		toggleMode();
 		onClose();
+	}, []);
+
+	const footerMenuItems = useMemo(() => {
+		const onClickHandlers: Record<string, () => void> = {
+			"Theme": handleClick,
+		}
+
+		return settingOptions.map((i) => ({ ...i, onClick: onClickHandlers[i.text] }))
+
 	}, []);
 
 	return (
@@ -29,14 +45,7 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 				isActive={isActive}
 				menuItems={menuItems}
 				toggleDrawer={onClose}
-			/>
-
-			{/* Bottom menu */}
-			<MenuDrawerItem
-				icon={<ThemeToggleButton />}
-				isActive={false}
-				onClick={handleClick}
-				text={`Theme`}
+				footer={footerMenuItems}
 			/>
 		</Drawer>
 	);

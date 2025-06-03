@@ -11,9 +11,9 @@ import { type FC, type ReactNode, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
 import { menuDrawerStyles } from "../styles";
 import MenuDrawerItem from "./MenuDrawerItem";
+import OrganizationBranding from "./OrganizationBranding";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 import type { MenuDrawerProps } from "./types";
-import OrganizationBranding from "./OrganizationBranding";
 
 const { rootSx } = menuDrawerStyles;
 
@@ -31,6 +31,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
 	toggleDrawer,
 	menuItems,
+	footer,
 }) => {
 	const navigate = useNavigate();
 
@@ -41,10 +42,16 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 
 	return (
 		<Stack onClick={toggleDrawer} sx={rootSx}>
-			<OrganizationBranding isLogoVisible={false} />
+			<OrganizationBranding
+				isLogoVisible={false}
+				sx={{
+					borderBottom: theme => `1px solid ${theme.palette.divider}`,
+				}}
+
+			/>
 
 			{/* Menu List */}
-			<List>
+			<List sx={{ flexGrow: 1 }}>
 				{menuItems.map((item) =>
 					item?.children ? (
 						<SubMenuDrawerItem
@@ -69,6 +76,20 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 					),
 				)}
 			</List>
+			{footer && (
+				<Stack sx={{
+					borderTop: theme => `1px solid ${theme.palette.divider}`,
+				}}>
+					{
+						footer?.map((i) => (
+							<MenuDrawerItem
+								{...i}
+								key={i.text}
+							/>
+						))
+					}
+				</Stack>
+			)}
 		</Stack>
 	);
 };

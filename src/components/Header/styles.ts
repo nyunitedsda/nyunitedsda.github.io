@@ -14,6 +14,7 @@ export const brandingStyles: BrandingStyle = {
 		display: { xs: "flex" },
 		alignItems: "center",
 		gap: 2,
+		maxHeight: (theme) => `${theme.spacing(8)}`,
 	},
 	brandingSx: {
 		flexGrow: 1,
