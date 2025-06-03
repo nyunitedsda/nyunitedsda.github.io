@@ -26,7 +26,8 @@ import {
 	getCopyright,
 	socialMediaInfo,
 } from "./footerData";
-import { getTermsAndPolicies } from "../../pages/UserAgreements/helpers";
+import { mapRoutesToTabs } from "../RoutedTabs/helpers";
+import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -59,11 +60,13 @@ const iconMap: Record<string, ReactNode> = {
 	Email: <Email fontSize="small" />,
 };
 
+// FEATURE: Enhance the footer links so older users know you can click the link 
+
 const Footer: FC = () => {
-	const { menuItems } = useFormattedRoutes();
+	const { routes, menuItems } = useFormattedRoutes();
 
 	const TERMS_AND_POLICIES = useMemo(() => {
-		return getTermsAndPolicies();
+		return mapRoutesToTabs(routes, LEGAL_TAB_LIST);
 	}, []);
 
 	return (
