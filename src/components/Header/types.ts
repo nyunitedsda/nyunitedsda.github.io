@@ -9,16 +9,16 @@ export interface MenuDrawerProps {
 }
 
 export interface MenuDrawerItemProps {
-			disabled?: boolean;
-			icon?: ReactNode;
-			expandedIcon?: ReactNode;
-			isActive: boolean;
-			text: string;
-			onClick: (event?: MouseEvent) => void;
-	};
+	disabled?: boolean;
+	icon?: ReactNode;
+	expandedIcon?: ReactNode;
+	isActive: boolean;
+	text: string;
+	onClick: (event?: MouseEvent) => void;
+}
 
-	export interface SubMenuDrawerItemProps extends RouteMenu {
-		isActiveChild: (path: string) => boolean;
-		isActiveParent: boolean;
-		onClick: (path: string) => void;
-	}
+export interface SubMenuDrawerItemProps extends RouteMenu {
+	isActiveChild: (path: string) => boolean;
+	isActiveParent: boolean;
+	onClick: (path: string) => void;
+}

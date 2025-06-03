@@ -3,10 +3,10 @@ import type { TabPanelProps } from "../TabPanel/types";
 import type { ReactNode } from "react";
 
 interface RoutedTabsProps {
-  tabItems: RouteTabsItem[];
-  tabsProps?: Omit<TabProps, 'children' | 'value' | 'onChange'>;
-  tabProps?: Omit<TabProps, 'value' | 'label'>;
-  tabPanelProps?: Omit<TabPanelProps, 'index' | 'value' | 'children'>;
+	tabItems: RouteTabsItem[];
+	tabsProps?: Omit<TabProps, "children" | "value" | "onChange">;
+	tabProps?: Omit<TabProps, "value" | "label">;
+	tabPanelProps?: Omit<TabPanelProps, "index" | "value" | "children">;
 }
 
 interface RouteTabsItem {

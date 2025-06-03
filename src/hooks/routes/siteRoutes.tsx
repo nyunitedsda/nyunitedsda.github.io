@@ -29,7 +29,6 @@ const siteRoutes: Route[] = [
 		icon: <HomeRounded />,
 		name: "Home",
 		path: `${BASE_URL}`,
-
 	},
 	{
 		// TODO: Review the menu names for streaming with Zinee
@@ -41,13 +40,13 @@ const siteRoutes: Route[] = [
 			{
 				element: <LiveBroadcast />,
 				errorElement: <Error />,
-				name: 'Live Stream',
+				name: "Live Stream",
 				path: `${BASE_URL}watch/live`,
 			},
 			{
 				element: <LiveBroadcast />,
 				errorElement: <Error />,
-				name: 'Archive Stream',
+				name: "Archive Stream",
 				path: `${BASE_URL}watch/archive`,
 			},
 		],
@@ -59,7 +58,6 @@ const siteRoutes: Route[] = [
 		icon: <VolunteerActivismRounded />,
 		name: "Donations",
 		path: `${BASE_URL}donations`,
-
 	},
 	{
 		caseSensitive: true,
@@ -68,7 +66,6 @@ const siteRoutes: Route[] = [
 		icon: <ArticleRounded />,
 		name: "Blog",
 		path: `${BASE_URL}blog`,
-
 	},
 	{
 		caseSensitive: true,
@@ -77,7 +74,6 @@ const siteRoutes: Route[] = [
 		icon: <ContactMailRounded />,
 		name: "Contact",
 		path: `${BASE_URL}contact`,
-
 	},
 	{
 		caseSensitive: true,
@@ -86,7 +82,6 @@ const siteRoutes: Route[] = [
 		icon: <Diversity3Rounded />,
 		name: "About Us",
 		path: `${BASE_URL}aboutUs`,
-
 	},
 	{
 		caseSensitive: true,
