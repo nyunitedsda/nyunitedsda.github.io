@@ -12,24 +12,6 @@ vi.mock("react-router", async () => ({
 	useNavigate: () => mockNavigate,
 }));
 
-vi.mock("./helpers", () => ({
-	getTermsAndPolicies: () => [
-		{
-			id: 1,
-			label: "Terms of Service",
-			tag: "terms",
-			href: "/terms",
-			content: "<div>Terms Content</div>",
-		},
-		{
-			id: 2,
-			label: "Privacy Policy",
-			tag: "privacy",
-			href: "/privacy",
-			content: "<div>Privacy Content</div>",
-		},
-	],
-}));
 
 vi.mock("../../components/PageWrapper/PageWrapper", () => ({
 	default: ({ children }: { children: React.ReactNode }) => (

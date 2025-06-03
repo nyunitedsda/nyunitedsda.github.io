@@ -1,5 +1,6 @@
 import type { TabProps } from "@mui/material";
 import type { TabPanelProps } from "../TabPanel/types";
+import type { ReactNode } from "react";
 
 interface RoutedTabsProps {
   tabItems: RouteTabsItem[];
@@ -12,7 +13,7 @@ interface RouteTabsItem {
 	id: number;
 	tag: string;
 	label: string;
-	content: string;
+	content: string | ReactNode;
 }
 
 interface RouteTabsWithHrefItem extends RouteTabsItem {
