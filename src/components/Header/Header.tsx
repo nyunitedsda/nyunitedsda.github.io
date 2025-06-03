@@ -1,5 +1,5 @@
 import MenuRounded from "@mui/icons-material/MenuRounded";
-import { type SxProps, type Theme, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -12,30 +12,9 @@ import MenuButton from "../Buttons/MenuButton";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
+import { headerStyles } from "./styles";
 
-const desktopDisplaySx: SxProps<Theme> = {
-	display: { xs: "none", md: "flex" },
-};
-
-const desktopMenuSx: SxProps<Theme> = {
-	flexGrow: 1,
-	justifyContent: "center",
-	fontFamily: "Inter",
-	...desktopDisplaySx,
-};
-
-const rootSx: SxProps<Theme> = {
-	bgcolor: "background.paper",
-	height: (theme) => `${theme.spacing(8)}`,
-};
-
-const hamburgerMenuSx: SxProps<Theme> = {
-	display: {
-		xs: "flex",
-		md: "none",
-	},
-};
-
+const {hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx} = headerStyles;
 // FEATURE: Enhance and ensure consistency in the desktop and mobile menu items active and regular states
 
 const Header: FC = () => {

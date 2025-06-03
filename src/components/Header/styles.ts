@@ -1,10 +1,32 @@
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { BrandingStyle } from "./components/types";
+import type { BrandingStyle, HeaderStyle } from "./components/types";
 
 type StyleExport = Record<string, SxProps<Theme>>;
 type MenuItemStyleExport = StyleExport & {
 	menuItemSx: SxProps<Theme>;
 	activeMenuItemSx: SxProps<Theme>;
+};
+
+export const headerStyles: HeaderStyle = {
+	hamburgerMenuSx: {
+		display: {
+			xs: "flex",
+			md: "none",
+		},
+	},
+	rootSx: {
+		backgroundColor: "background.paper",
+		height: (theme) => `${theme.spacing(8)}`,
+	},
+	desktopMenuSx: {
+		flexGrow: 1,
+		justifyContent: "center",
+		fontFamily: "Inter",
+		display: { xs: "none", md: "flex" },
+	},
+	desktopDisplaySx: {
+		display: { xs: "none", md: "flex" },
+	},
 };
 
 export const brandingStyles: BrandingStyle = {
@@ -42,7 +64,7 @@ export const menuItemStyles: MenuItemStyleExport = {
 	activeMenuItemSx: {
 		fontWeight: "bold",
 		color: "primary.contrastText",
-		backgroundColor: "primary.light",
+		backgroundColor: (theme) => `${theme.palette.primary.light}`,
 		"& svg": {
 			color: "primary.contrastText",
 		},

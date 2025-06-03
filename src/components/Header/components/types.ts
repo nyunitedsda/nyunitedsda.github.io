@@ -35,3 +35,4 @@ export type BrandingStyle = {
 	rootSx: SxProps<Theme>;
 	logoSx: SxProps<Theme>;
 };
+
