@@ -48,9 +48,6 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 	useEffect(() => {
 		const currentTab = tabs.find((i) => pathname.indexOf(i.tag) > -1);
 
-		// if (!currentTab) {
-		//   navigate("/error");
-		// } else
 		if (currentTab && currentTab.href && selectedTab !== currentTab.id) {
 			setSelectedTab(currentTab.id);
 		}
@@ -78,30 +75,32 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 						sx={{ ...tabsSx, ...tabsProps?.sx }}
 						value={selectedTab}
 					>
-						{tabs.map((i) => (
-							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />
-						))}
+						{
+							tabs.map((i) => (
+								<Tab
+									{...tabProps}
+									key={i.label}
+									label={i.label}
+									value={i.id}
+								/>
+							))
+						}
 					</Tabs>
 					{tabs.map((i) => (
 						<TabPanel
 							{...tabPanelProps}
-							enableStack={tabPanelProps?.enableStack ?? true}
 							index={i.id}
 							key={i.label}
-							stackProps={{
-								...tabPanelProps?.stackProps,
-								sx: {
-									...panelSx,
-									...tabPanelProps?.stackProps?.sx,
-								},
-							}}
+							sx={panelSx}
 							value={selectedTab}
 						>
-							{typeof i.content === "string" ? (
-								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
-							) : (
-								i.content
-							)}
+							{
+								typeof i.content === "string" ? (
+									<Box dangerouslySetInnerHTML={{ __html: i.content }} />
+								) : (
+									i.content
+								)
+							}
 						</TabPanel>
 					))}
 				</>

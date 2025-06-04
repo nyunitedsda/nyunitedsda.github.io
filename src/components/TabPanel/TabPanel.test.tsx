@@ -30,7 +30,7 @@ describe("TabPanel", () => {
 
 	it("wraps children in Stack when enableStack is true", () => {
 		const { container } = render(
-			<TabPanel value={0} index={0} enableStack>
+			<TabPanel value={0} index={0} >
 				Stacked Content
 			</TabPanel>,
 		);
@@ -38,23 +38,6 @@ describe("TabPanel", () => {
 		const stack = container.querySelector(".MuiStack-root");
 		expect(stack).toBeTruthy();
 		expect(stack?.textContent).toContain("Stacked Content");
-	});
-
-	it("passes stackProps to Stack", () => {
-		const { container } = render(
-			<TabPanel
-				value={0}
-				index={0}
-				enableStack
-				//@ts-ignore
-				stackProps={{ direction: "row", "data-testid": "custom-stack" }}
-			>
-				StackProps Content
-			</TabPanel>,
-		);
-		const stack = container.querySelector('[data-testid="custom-stack"]');
-		expect(stack).toBeTruthy();
-		expect(stack?.textContent).toContain("StackProps Content");
 	});
 
 	it("sets correct accessibility attributes", () => {
