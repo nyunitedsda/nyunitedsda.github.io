@@ -28,11 +28,14 @@ const subHeaderSx: SxProps<Theme> = {
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
-	minHeight: "100%",
+	minHeight: { xs: '100%', sm: "100vh" },
 	backgroundColor: (theme) => theme.palette.background.paper,
+	overflowY: 'auto',
+	height: '100%',
 };
 
 // TODO: Reduce the containerSx pt for mobile
+// FEATURE: Enhance scroll to top button style 
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	const { header, subHeader, children } = props;

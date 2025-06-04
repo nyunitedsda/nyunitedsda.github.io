@@ -42,6 +42,14 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 			ModalProps={{
 				keepMounted: true, // Better open performance on mobile.
 			}}
+			slotProps={{
+				paper: {
+					sx: {
+						maxWidth: 360,
+						width: '100%',
+					}
+				}
+			}}
 		>
 			<MenuDrawer
 				isActive={isActive}
