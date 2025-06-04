@@ -1,4 +1,3 @@
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
@@ -6,6 +5,7 @@ import type { FC, PropsWithChildren } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import PageContentContainer from "./PageContentContainer";
 import type { PageWrapperProps } from "./types";
 
 const headerSx: SxProps<Theme> = {
@@ -46,7 +46,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	return (
 		<Stack sx={rootSx}>
 			<Header />
-			<Container maxWidth="lg" sx={containerSx}>
+			<PageContentContainer sx={containerSx}>
 				{(header || subHeader) && (
 					<Stack spacing={2} sx={{ pb: 2 }} className="fade-in">
 						{header && (
@@ -64,7 +64,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 				<Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}>
 					{children}
 				</Stack>
-			</Container>
+			</PageContentContainer>
 
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />
