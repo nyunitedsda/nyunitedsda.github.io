@@ -1,27 +1,38 @@
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { type FC, memo } from "react";
+import type { SxProps, Theme } from "@mui/material/styles";
+import { type FC } from "react";
 import type { TabPanelProps } from "./types";
 
+const rootSx: SxProps<Theme> = {
+	border: '1px solid red',
+	height: '100%',
+	width: '100%',
+}
+
 const TabPanel: FC<TabPanelProps> = (props) => {
-	const { children, enableStack, index, stackProps, value, ...other } = props;
+	const { children, index, sx, value, ...other } = props;
 
 	return (
-		<Box
-			role="tabpanel"
-			hidden={value !== index}
-			id={`full-width-tabpanel-${index}`}
-			aria-labelledby={`full-width-tab-${index}`}
-			{...other}
-		>
-			{value === index &&
-				(enableStack ? (
-					<Stack {...stackProps}> {children} </Stack>
-				) : (
-					<>{children}</>
-				))}
-		</Box>
+		<>
+			{
+				value === index && (
+					<Stack
+						{...other}
+						aria-labelledby={`full-width-tab-${index}`}
+						hidden={value !== index}
+						id={`full-width-tabpanel-${index}`}
+						sx={[
+							rootSx,
+							...(sx ? Array.isArray(sx) ? sx : [sx] : [])
+						]}
+						role="tabpanel"
+					>
+						{children}
+					</Stack>
+				)
+			}
+		</>
 	);
 };
 
-export default memo(TabPanel);
+export default TabPanel;

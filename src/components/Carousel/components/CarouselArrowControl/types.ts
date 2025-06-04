@@ -1,4 +1,4 @@
-import type { ButtonProps } from "@mui/material";
+import type { ButtonProps } from "@mui/material/Button";
 
 interface CarouselArrowButtonProps extends ButtonProps {
 	arrowDirection: "next" | "prev";

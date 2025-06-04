@@ -2,7 +2,6 @@ import MenuRounded from "@mui/icons-material/MenuRounded";
 import { useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { type FC, useCallback, useState } from "react";
@@ -10,6 +9,7 @@ import { useLocation } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import MenuButton from "../Buttons/MenuButton";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import PageContentContainer from "../PageWrapper/PageContentContainer";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
 import { headerStyles } from "./styles";
@@ -37,7 +37,7 @@ const Header: FC = () => {
 
 	return (
 		<AppBar position="sticky" color="default" elevation={1} sx={rootSx}>
-			<Container
+			<PageContentContainer
 				sx={{ height: (theme) => `${theme.spacing(8)}` }}
 				maxWidth="lg"
 			>
@@ -75,7 +75,7 @@ const Header: FC = () => {
 						<ThemeToggleButton />
 					</Box>
 				</Toolbar>
-			</Container>
+			</PageContentContainer>
 			{drawerOpen && isMobile && (
 				<Sidebar
 					open={drawerOpen}

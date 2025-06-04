@@ -6,15 +6,18 @@ import Twitter from "@mui/icons-material/Twitter";
 import YouTube from "@mui/icons-material/YouTube";
 import { type SxProps, type Theme } from "@mui/material";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useMemo, type FC, type ReactNode } from "react";
+import { type FC, type ReactNode, useMemo } from "react";
 import services from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
+import PageContentContainer from "../PageWrapper/PageContentContainer";
+import { mapRoutesToTabs } from "../RoutedTabs/helpers";
 import FooterSegment from "./components/FooterSegment";
 import {
 	CONTACT_DATA,
@@ -26,14 +29,14 @@ import {
 	getCopyright,
 	socialMediaInfo,
 } from "./footerData";
-import { mapRoutesToTabs } from "../RoutedTabs/helpers";
-import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
 	color: "primary.contrastText",
+	// zIndex: 'inherit',
 	p: 2,
 	width: "100%",
+	// position: 'relative',
 	"& a": {
 		textDecoration: "none",
 		color: "inherit",
@@ -70,8 +73,8 @@ const Footer: FC = () => {
 	}, []);
 
 	return (
-		<Box component="footer" sx={footerSx}>
-			<Container maxWidth="lg">
+		<Stack sx={footerSx}>
+			<PageContentContainer >
 				<Grid container spacing={4}>
 					{/* Social Media */}
 					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO}>
@@ -151,8 +154,8 @@ const Footer: FC = () => {
 				<Typography variant="body2" align="center">
 					&copy; {getCopyright()}
 				</Typography>
-			</Container>
-		</Box>
+			</PageContentContainer>
+		</Stack>
 	);
 };
 

@@ -5,3 +5,4 @@
 <!-- FEATURE: Select a proper font for the website -->
 <!-- FEATURE: Select dark mode theme. tools: https://colorffy.com/dark-theme-generator?colors=177BC2-121212  -->
 <!-- FEATURE: Add transition to the SubMenuDrawerItem so the subItems smoothly open -->
+<!-- BUG: No scroll to top in Legal pages -->
