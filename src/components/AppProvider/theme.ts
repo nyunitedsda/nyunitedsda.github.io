@@ -44,6 +44,11 @@ const theme = responsiveFontSizes(
 					size: "medium",
 				},
 			},
+			MuiIconButton: {
+				defaultProps: {
+					size: "medium",
+				},
+			},
 			MuiCard: {
 				styleOverrides: {
 					root: {

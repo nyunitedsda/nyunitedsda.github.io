@@ -5,8 +5,7 @@ import type { EmblaCarouselType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { type FC, useCallback } from "react";
-import CarouselArrowButton from "./components/CarouselArrowButton/CarouselArrowButton";
-import useCarouselArrowButtons from "./components/CarouselArrowButton/useCarouselArrowButton";
+import { default as CarouselArrowControl } from "./components/CarouselArrowControl/CarouselArrowControl";
 import CarouselDotButton from "./components/CarouselDotButton/CarouselDotButton";
 import useDotButton from "./components/CarouselDotButton/useDotButton";
 import styles from "./styles";
@@ -35,12 +34,7 @@ const Carousel: FC<CarouselProps> = (props) => {
 		onNavButtonClick,
 	);
 
-	const {
-		prevBtnDisabled,
-		nextBtnDisabled,
-		onPrevButtonClick,
-		onNextButtonClick,
-	} = useCarouselArrowButtons(emblaApi, onNavButtonClick);
+
 
 	return (
 		<Box
@@ -59,18 +53,10 @@ const Carousel: FC<CarouselProps> = (props) => {
 				spacing={{ xs: 1, sm: 3 }}
 				direction={{ xs: "column", sm: "row" }}
 			>
-				<Stack direction="row" className="embla__buttons">
-					<CarouselArrowButton
-						arrowDirection="prev"
-						onClick={onPrevButtonClick}
-						disabled={prevBtnDisabled}
-					/>
-					<CarouselArrowButton
-						arrowDirection="next"
-						onClick={onNextButtonClick}
-						disabled={nextBtnDisabled}
-					/>
-				</Stack>
+				<CarouselArrowControl
+					api={emblaApi}
+					onButtonClick={onNavButtonClick}
+				/>
 
 				<Stack direction="row" className="embla__dots">
 					{scrollSnaps.map((_, index) => (

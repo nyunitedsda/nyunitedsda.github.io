@@ -32,6 +32,9 @@ const rootSx: SxProps<Theme> = {
 	backgroundColor: (theme) => theme.palette.background.paper,
 	overflowY: 'auto',
 	height: '100%',
+	position: 'absolute',
+	top: 0,
+	left: 0,
 };
 
 // TODO: Reduce the containerSx pt for mobile

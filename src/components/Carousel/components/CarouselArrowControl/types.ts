@@ -1,4 +1,5 @@
 import type { ButtonProps } from "@mui/material";
+import type { EmblaCarouselType } from "embla-carousel";
 
 interface CarouselArrowButtonProps extends ButtonProps {
 	arrowDirection: "next" | "prev";
@@ -11,4 +12,13 @@ type UseCarouselArrowButtonsType = {
 	onNextButtonClick: () => void;
 };
 
-export type { CarouselArrowButtonProps, UseCarouselArrowButtonsType };
+interface CarouselArrowControlProps {
+	api: EmblaCarouselType | undefined; //emblaApi
+	onButtonClick?: (emblaApi: EmblaCarouselType) => void;
+}
+
+export type {
+	CarouselArrowButtonProps,
+	CarouselArrowControlProps,
+	UseCarouselArrowButtonsType,
+};
