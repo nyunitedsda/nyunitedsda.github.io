@@ -6,8 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { type FC, useCallback } from "react";
 import { default as CarouselArrowControl } from "./components/CarouselArrowControl/CarouselArrowControl";
-import CarouselDotButton from "./components/CarouselDotButton/CarouselDotButton";
-import useDotButton from "./components/CarouselDotButton/useDotButton";
+import { default as CarouselDotControl } from "./components/CarouselDotControl/CarouselDotControl";
 import styles from "./styles";
 import type { CarouselProps } from "./types";
 
@@ -28,13 +27,6 @@ const Carousel: FC<CarouselProps> = (props) => {
 
 		resetOrStop();
 	}, []);
-
-	const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
-		emblaApi,
-		onNavButtonClick,
-	);
-
-
 
 	return (
 		<Box
@@ -58,17 +50,11 @@ const Carousel: FC<CarouselProps> = (props) => {
 					onButtonClick={onNavButtonClick}
 				/>
 
-				<Stack direction="row" className="embla__dots">
-					{scrollSnaps.map((_, index) => (
-						<CarouselDotButton
-							key={index}
-							onClick={() => onDotButtonClick(index)}
-							className={"embla__dot".concat(
-								index === selectedIndex ? " embla__dot--selected" : "",
-							)}
-						/>
-					))}
-				</Stack>
+				<CarouselDotControl
+					api={emblaApi}
+					onButtonClick={onNavButtonClick}
+				/>
+
 			</Stack>
 		</Box>
 	);

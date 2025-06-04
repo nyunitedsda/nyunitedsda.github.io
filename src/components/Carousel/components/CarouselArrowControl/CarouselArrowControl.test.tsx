@@ -2,10 +2,10 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import { render } from "../../../../utils/vitest-setup";
 import CarouselArrowControl from "./CarouselArrowControl";
-import type { CarouselArrowControlProps } from "./types";
+import type { CarouselControlProps } from "../../types";
 
 const mockButtonClick = vi.fn();
-const defaultProps: CarouselArrowControlProps = {
+const defaultProps: CarouselControlProps = {
 	api: {} as EmblaCarouselType,
 	onButtonClick: mockButtonClick,
 }

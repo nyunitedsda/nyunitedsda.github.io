@@ -3,7 +3,8 @@ import ArrowForwardIosRounded from "@mui/icons-material/ArrowForwardIosRounded";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { type FC } from "react";
-import type { CarouselArrowButtonProps, CarouselArrowControlProps } from "./types";
+import type { CarouselControlProps } from "../../types";
+import type { CarouselArrowButtonProps } from "./types";
 import useCarouselArrowButtons from "./useCarouselArrowButton";
 
 const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
@@ -27,7 +28,7 @@ const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
 };
 
 
-const CarouselArrowControl: FC<CarouselArrowControlProps> = ({ api, onButtonClick }) => {
+const CarouselArrowControl: FC<CarouselControlProps> = ({ api, onButtonClick }) => {
 	const {
 		prevBtnDisabled,
 		nextBtnDisabled,
