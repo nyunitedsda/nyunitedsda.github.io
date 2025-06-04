@@ -6,12 +6,12 @@ import ThemeToggleButton from "../../Buttons/ThemeToggleButton";
 import MenuDrawer from "./MenuDrawer";
 import type { MenuDrawerItemProps, SidebarProps } from "./types";
 
-const settingOptions: Omit<MenuDrawerItemProps, 'onClick'>[] = [
+const settingOptions: Omit<MenuDrawerItemProps, "onClick">[] = [
 	{
 		icon: <ThemeToggleButton />,
-		text: 'Theme',
+		text: "Theme",
 		isActive: false,
-	}
+	},
 ];
 
 const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
@@ -25,11 +25,13 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 
 	const footerMenuItems = useMemo(() => {
 		const onClickHandlers: Record<string, () => void> = {
-			"Theme": handleClick,
-		}
+			Theme: handleClick,
+		};
 
-		return settingOptions.map((i) => ({ ...i, onClick: onClickHandlers[i.text] }))
-
+		return settingOptions.map((i) => ({
+			...i,
+			onClick: onClickHandlers[i.text],
+		}));
 	}, []);
 
 	return (

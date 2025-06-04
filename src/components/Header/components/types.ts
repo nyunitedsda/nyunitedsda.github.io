@@ -41,4 +41,4 @@ export type HeaderStyle = {
 	rootSx: SxProps<Theme>;
 	desktopMenuSx: SxProps<Theme>;
 	desktopDisplaySx: SxProps<Theme>;
-}
+};

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { it, describe, expect } from "vitest";
-import StreamWrapper from "./StreamWrapper";
+import { describe, expect, it } from "vitest";
+import StreamWrapper from "./StreamDisplay";
 
 describe("StreamWrapper Component", () => {
 	it("it should render without error", async () => {

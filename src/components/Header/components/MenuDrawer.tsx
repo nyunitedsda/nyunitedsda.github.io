@@ -45,9 +45,8 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 			<OrganizationBranding
 				isLogoVisible={false}
 				sx={{
-					borderBottom: theme => `1px solid ${theme.palette.divider}`,
+					borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
 				}}
-
 			/>
 
 			{/* Menu List */}
@@ -77,17 +76,14 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				)}
 			</List>
 			{footer && (
-				<Stack sx={{
-					borderTop: theme => `1px solid ${theme.palette.divider}`,
-				}}>
-					{
-						footer?.map((i) => (
-							<MenuDrawerItem
-								{...i}
-								key={i.text}
-							/>
-						))
-					}
+				<Stack
+					sx={{
+						borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+					}}
+				>
+					{footer?.map((i) => (
+						<MenuDrawerItem {...i} key={i.text} />
+					))}
 				</Stack>
 			)}
 		</Stack>

@@ -1,3 +1,6 @@
-import type { PropsWithChildren } from "react";
+import type { StackProps } from "@mui/material/Stack";
+import type { IframeHTMLAttributes } from "react";
 
-export type StreamWrapperProps = PropsWithChildren<{}>;
+export interface StreamDisplayProps extends IframeHTMLAttributes<{}> {
+	stackProps?: StackProps;
+}

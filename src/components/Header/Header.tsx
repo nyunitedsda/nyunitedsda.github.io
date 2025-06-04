@@ -14,7 +14,8 @@ import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
 import { headerStyles } from "./styles";
 
-const {hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx} = headerStyles;
+const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
+	headerStyles;
 // FEATURE: Enhance and ensure consistency in the desktop and mobile menu items active and regular states
 
 const Header: FC = () => {
