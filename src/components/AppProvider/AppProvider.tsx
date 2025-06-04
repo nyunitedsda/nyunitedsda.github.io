@@ -7,7 +7,7 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<StrictMode>
 			<BrowserRouter>
-				<CssBaseline />
+				<CssBaseline enableColorScheme />
 				<ThemeProvider theme={theme}>{children}</ThemeProvider>
 			</BrowserRouter>
 		</StrictMode>

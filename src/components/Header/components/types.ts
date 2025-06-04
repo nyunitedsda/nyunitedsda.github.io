@@ -36,3 +36,9 @@ export type BrandingStyle = {
 	logoSx: SxProps<Theme>;
 };
 
+export type HeaderStyle = {
+	hamburgerMenuSx: SxProps<Theme>;
+	rootSx: SxProps<Theme>;
+	desktopMenuSx: SxProps<Theme>;
+	desktopDisplaySx: SxProps<Theme>;
+}
