@@ -1,36 +1,22 @@
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
+import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
-import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import type { PageWrapperProps } from "../../components/PageWrapper/types";
+import Header from "../../components/Header/Header";
 
-const headerSx: SxProps<Theme> = {
-	fontWeight: "bold",
-	color: "primary.light",
-	fontFamily: "inter",
-};
 const containerSx: SxProps<Theme> = {
 	pt: 8,
 	pb: 4,
 	flexGrow: 1,
-	// display: "flex",
-	// flexDirection: "column",
 	justifyContent: "flex-start",
 	minHeight: "100%",
 	height: "auto",
-	// position: 'relative',
 	ml: "auto",
 	mr: "auto",
 	maxWidth: "1200px",
 	width: "100%",
-	// zIndex: 'inherit',
-};
-const subHeaderSx: SxProps<Theme> = {
-	fontWeight: "bold",
-	color: "text.primary",
 };
 
 const rootSx: SxProps<Theme> = {
@@ -44,32 +30,15 @@ const rootSx: SxProps<Theme> = {
 // TODO: Reduce the containerSx pt for mobile
 // FEATURE: Enhance scroll to top button style
 
-const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
-	const { header, subHeader, children } = props;
+const PageWrapper: FC = () => {
 	const theme = useTheme();
+
 	return (
 		<Stack sx={rootSx}>
 			<Header />
 			<Stack sx={containerSx}>
-				{(header || subHeader) && (
-					<Stack spacing={2} sx={{ pb: 2 }} className="fade-in">
-						{header && (
-							<Typography variant="h3" component="h1" sx={headerSx}>
-								{header}
-							</Typography>
-						)}
-						{subHeader && (
-							<Typography variant="h6" sx={subHeaderSx}>
-								{subHeader}
-							</Typography>
-						)}
-					</Stack>
-				)}
-				{/* <Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}> */}
-				{children}
-				{/* </Stack> */}
+				<Outlet />
 			</Stack>
-
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />
 		</Stack>

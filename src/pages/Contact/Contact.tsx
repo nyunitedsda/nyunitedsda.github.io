@@ -3,8 +3,7 @@ import { Box, Grid, List, ListItem, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
-// import ContactForm from "../../components/ContactForm/ContactForm";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import PageTitle from "../../components/PageWrapper/PageTitle";
 import contactInfo from "../../constants/contactInfo";
 import services from "../../constants/services";
 
@@ -20,9 +19,12 @@ const BRIDGE =
 const COMPANY = "New York United Sabbath Day Adventist Church, Inc.";
 const SERVICES = "Services";
 
+// TODO: Refactor and clean Contact Page component
+
 const Contact: FC = () => {
 	return (
-		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
+		<>
+			<PageTitle title={HEADER} subtitle={SUBHEADER} />
 			{/* <ContactForm /> */}
 
 			<Paper elevation={3} sx={{ p: 4, mb: 2, mt: 4 }}>
@@ -141,7 +143,7 @@ const Contact: FC = () => {
 					</Stack>
 				</Stack>
 			</Paper>
-		</PageWrapper>
+		</>
 	);
 };
 

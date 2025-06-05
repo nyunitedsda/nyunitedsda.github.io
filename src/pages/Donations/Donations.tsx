@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import type { FC } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import PageTitle from "../../components/PageWrapper/PageTitle";
 
 const HEADER = "Donations";
 const SUBHEADER = "Ways to donate to New York United SDA Church";
@@ -26,7 +26,8 @@ const DONATION_OPTIONS = [
 
 const Donations: FC = () => {
 	return (
-		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
+		<>
+			<PageTitle title={HEADER} subtitle={SUBHEADER} />
 			<Stack spacing={2} className="fade-in">
 				<Typography>{DONATION_TEXT}</Typography>
 
@@ -39,7 +40,7 @@ const Donations: FC = () => {
 					/>
 				))}
 			</Stack>
-		</PageWrapper>
+		</>
 	);
 };
 

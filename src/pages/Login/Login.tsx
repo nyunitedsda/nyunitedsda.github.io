@@ -17,10 +17,10 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { type FC, useCallback, useState } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 // TODO: Clean up, format, review, complete component
 // TODO: Sanitize all input data.
+// TODO: Prepare to server query
 
 const Login: FC = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -63,7 +63,7 @@ const Login: FC = () => {
 	);
 
 	return (
-		<PageWrapper>
+		<>
 			<Box
 				sx={{
 					position: "relative",
@@ -265,7 +265,7 @@ const Login: FC = () => {
 					</Box> */}
 				</Paper>
 			</Container>
-		</PageWrapper>
+		</>
 	);
 };
 

@@ -9,15 +9,26 @@ import Donations from "../../pages/Donations/Donations";
 import Error from "../../pages/Error/Error.tsx";
 import Home from "../../pages/Home/Home";
 import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
+import { default as StreamWrapper } from '../../pages/LiveBroadcast/StreamWrapper.tsx';
 import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 
 const BASE_URL = "/";
 
 const MinimalLayout: FC = () => (
-	<Stack sx={{ width: "100%", height: "100%" }}>
+	<Stack sx={{ width: "100%", height: "100%", color: 'text.primary', }}>
 		<Outlet />
 	</Stack>
 );
+
+// const menuList template= [
+// {
+// 	(id / tag): 'home',
+// 		icon: <HomeRounded />,
+// 		children: [];
+// }
+// ]
+
+// NOTE: Id is used to find the routes that will be menu items
 
 // Public routes with main layout: blog/:id
 const mainLayoutRoutes: RouteObject[] = [
@@ -28,16 +39,6 @@ const mainLayoutRoutes: RouteObject[] = [
 				element: <Home />,
 				id: "home",
 				path: `${BASE_URL}`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "liveStream",
-				path: `${BASE_URL}watch-live`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "archiveStream",
-				path: `${BASE_URL}watch-archive`,
 			},
 			{
 				element: <Donations />,
@@ -71,6 +72,21 @@ const mainLayoutRoutes: RouteObject[] = [
 			},
 		],
 	},
+	{
+		element: <StreamWrapper />,
+		children: [
+			{
+				element: <LiveBroadcast />,
+				id: "liveStream",
+				path: `${BASE_URL}watch-live`,
+			},
+			{
+				element: <LiveBroadcast />,
+				id: "archiveStream",
+				path: `${BASE_URL}watch-archive`,
+			},
+		]
+	}
 ];
 
 // Error routes

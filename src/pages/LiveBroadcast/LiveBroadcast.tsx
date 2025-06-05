@@ -1,11 +1,10 @@
-import { useEffect, useMemo, type FC } from "react";
+import { type FC, useEffect, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import type { RouteTabsItem } from "../../components/RoutedTabs/types";
+import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import ArchiveStream from "./components/streamPlayers/ArchiveStream";
 import LiveStream from "./components/streamPlayers/LiveStream";
-import { useLocation, useNavigate } from "react-router";
-import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
-import PageWrapper from "./StreamWrapper";
 
 // const LIVE_SERVICE = "Live Worship Service";
 // const NEXT_SERVICE = "Join Us for Our Next Service";
@@ -50,12 +49,10 @@ const LiveBroadcast: FC = () => {
 	}, [watchRouteList, pathname]);
 
 	return (
-		<PageWrapper>
-			<RoutedTabs
-				tabsProps={{ "aria-label": "Terms and policies" }}
-				tabItems={TAB_LIST}
-			/>
-		</PageWrapper>
+		<RoutedTabs
+			tabsProps={{ "aria-label": "Terms and policies" }}
+			tabItems={TAB_LIST}
+		/>
 	);
 };
 

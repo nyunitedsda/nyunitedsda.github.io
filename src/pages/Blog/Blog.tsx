@@ -1,12 +1,12 @@
 import CalendarToday from "@mui/icons-material/CalendarToday";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useCallback, useMemo, useState } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import blogPosts from "./blogPosts";
 
@@ -15,6 +15,12 @@ const containerSx: SxProps<Theme> = {
 	display: "flex",
 	alignContent: "flex-start",
 	flexWrap: "wrap",
+};
+
+const paginationSx: SxProps<Theme> = {
+	justifyContent: "center",
+	bottom: 0,
+	mt: 6,
 };
 
 const DEFAULT_POST_PER_PAGE = 4;
@@ -50,7 +56,8 @@ const Blog: FC = () => {
 	);
 
 	return (
-		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
+		<>
+			<PageTitle title={HEADER} subtitle={SUBHEADER} />
 			<Grid container spacing={4} sx={containerSx}>
 				{currentPosts.map((post) => (
 					<Grid size={{ xs: 12, md: 6 }} key={post.id} className="blog-card">
@@ -77,7 +84,7 @@ const Blog: FC = () => {
 				))}
 			</Grid>
 
-			<Box sx={{ display: "flex", justifyContent: "center", bottom: 0, mt: 6 }}>
+			<Stack direction={"row"} sx={paginationSx}>
 				<Pagination
 					count={totalPages}
 					page={page}
@@ -85,8 +92,8 @@ const Blog: FC = () => {
 					color="primary"
 					size="large"
 				/>
-			</Box>
-		</PageWrapper>
+			</Stack>
+		</>
 	);
 };
 

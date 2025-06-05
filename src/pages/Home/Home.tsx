@@ -1,7 +1,6 @@
 import { Stack, type SxProps, type Theme } from "@mui/material";
 import { type FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import MinistryCard from "./components/MinistryCard";
 import NotificationCard from "./components/NotificationCard/NotificationCard";
 import SectionWrapper from "./components/SectionWrapper";
@@ -31,85 +30,86 @@ const cardContainerSx: SxProps<Theme> = {
 	},
 };
 
+const rootSx: SxProps<Theme> = {
+	flexGrow: 1,
+	width: "100%",
+	gap: 5,
+}
+
 const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
 
+// TODO: Simplify this Home page component 
+
 const Home: FC = () => {
 	return (
-		<>
-			<PageWrapper>
-				<Stack sx={{ flexGrow: 1, width: "100%", gap: 5 }}>
-					{/* Image Slides */}
-					<SectionWrapper>
-						<Carousel
-							autoplay
-							options={
-								{
-									// duration: 3000,
-								}
-							}
-							sx={{
-								"& .embla__slide": {
-									height: { xs: "350px", sm: "unset" },
-								},
-							}}
-						>
-							{sliderImages.map((i) => (
-								<Stack direction="row" className="embla__slide" key={i.src}>
-									<img
-										className="embla__slide__number"
-										src={i.src}
-										alt={i.alt ?? `${i.src}-image`}
-									/>
-								</Stack>
-							))}
-						</Carousel>
-					</SectionWrapper>
 
-					{/* Notification Slides */}
-					<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
-						<Carousel
-							sx={{
-								"& .embla__viewport .embla__container": {
-									gap: 2,
-									py: 2,
-									px: 1,
-								},
-							}}
-						>
-							{notifications.map((i) => (
-								<NotificationCard className="embla__slide" key={i.id} {...i} />
-							))}
-						</Carousel>
-					</SectionWrapper>
-
-					{/* Ministries content */}
-					<SectionWrapper header={MINISTRIES_HEADER}>
-						<Stack direction={{ xs: "column", md: "row" }} sx={cardContainerSx}>
-							{ministries.map((i) => (
-								<MinistryCard
-									{...{
-										header: { title: i.title },
-										content: i.content,
-										link: i.link,
-										image: {
-											root: {
-												sx: imageRootSx,
-											},
-											image: {
-												src: i.image,
-												alt: `${i.title} image`,
-											},
-										},
-									}}
-									key={`${i.title} image`}
-								/>
-							))}
+		<Stack sx={rootSx}>
+			{/* Image Slides */}
+			<SectionWrapper>
+				<Carousel
+					autoplay
+					sx={{
+						"& .embla__slide": {
+							height: { xs: "350px", sm: "unset" },
+						},
+					}}
+				>
+					{sliderImages.map((i) => (
+						<Stack direction="row" className="embla__slide" key={i.src}>
+							<img
+								className="embla__slide__number"
+								src={i.src}
+								alt={i.alt ?? `${i.src}-image`}
+							/>
 						</Stack>
-					</SectionWrapper>
+					))}
+				</Carousel>
+			</SectionWrapper>
+
+			{/* Notification Slides */}
+			<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
+				<Carousel
+					sx={{
+						"& .embla__viewport .embla__container": {
+							gap: 2,
+							py: 2,
+							px: 1,
+						},
+					}}
+				>
+					{notifications.map((i) => (
+						<NotificationCard className="embla__slide" key={i.id} {...i} />
+					))}
+				</Carousel>
+			</SectionWrapper>
+
+			{/* Ministries content */}
+			<SectionWrapper header={MINISTRIES_HEADER}>
+				<Stack direction={{ xs: "column", md: "row" }} sx={cardContainerSx}>
+					{ministries.map((i) => (
+						<MinistryCard
+							{...{
+								header: { title: i.title },
+								content: i.content,
+								link: i.link,
+								image: {
+									root: {
+										sx: imageRootSx,
+									},
+									image: {
+										src: i.image,
+										alt: `${i.title} image`,
+									},
+								},
+							}}
+							key={`${i.title} image`}
+						/>
+					))}
 				</Stack>
-			</PageWrapper>
-		</>
+			</SectionWrapper>
+		</Stack>
+
 	);
 };
 

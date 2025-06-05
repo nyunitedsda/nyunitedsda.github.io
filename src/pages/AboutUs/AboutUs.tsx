@@ -60,7 +60,6 @@ const AboutUs: FC = () => {
 					))}
 				</Stack>
 			</Stack>
-
 		</>
 	);
 };
