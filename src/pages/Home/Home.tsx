@@ -34,16 +34,15 @@ const rootSx: SxProps<Theme> = {
 	flexGrow: 1,
 	width: "100%",
 	gap: 5,
-}
+};
 
 const MINISTRIES_HEADER = "Ministries Links";
 const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
 
-// TODO: Simplify this Home page component 
+// TODO: Simplify this Home page component
 
 const Home: FC = () => {
 	return (
-
 		<Stack sx={rootSx}>
 			{/* Image Slides */}
 			<SectionWrapper>
@@ -109,7 +108,6 @@ const Home: FC = () => {
 				</Stack>
 			</SectionWrapper>
 		</Stack>
-
 	);
 };
 

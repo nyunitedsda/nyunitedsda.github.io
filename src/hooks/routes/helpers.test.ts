@@ -1,103 +1,122 @@
 import { describe, expect, it } from "vitest";
-import { formatRoutes, generateMenuItems } from "./helpers";
-
-describe("formatRoutes", () => {
-	it("formats a simple route", () => {
-		const input = [{ path: "/home", element: "<Home />", name: "Home" }];
-		const output = formatRoutes(input);
-		expect(output).toEqual([
-			{
-				path: "/home",
-				element: "<Home />",
-				caseSensitive: false,
-				errorElement: undefined,
-			},
-		]);
-	});
-
-	it("formats an index route", () => {
-		const input = [{ index: true, element: "<Index />", name: "Index" }];
-		const output = formatRoutes(input);
-		expect(output).toEqual([
-			{ index: true, element: "<Index />", errorElement: undefined },
-		]);
-	});
-
-	it("formats nested routes", () => {
-		const input = [
-			{
-				path: "/home",
-				element: "<Home />",
-				caseSensitive: false,
-				errorElement: undefined,
-			},
-			{
-				path: "/parent",
-				element: "<Parent />",
-				children: [{ path: "child", element: "<Child />", name: "Child" }],
-			},
-		];
-		const output = formatRoutes(input);
-		expect(output).toEqual([
-			{
-				path: "/home",
-				element: "<Home />",
-				caseSensitive: false,
-				errorElement: undefined,
-			},
-			{
-				path: "child",
-				element: "<Child />",
-				caseSensitive: false,
-				errorElement: undefined,
-			},
-		]);
-	});
-});
+import { extractRouteIdAndPath, generateMenuItems } from "./helpers";
 
 describe("generateMenuItems", () => {
 	it("generates menu items from routes", () => {
-		const input = [
-			{ path: "/home", name: "Home", icon: "icon1" },
-			{ path: "/about", name: "About", icon: "icon2" },
+		const menuList = [
+			{ id: "home", name: "Home", icon: "icon1" },
+			{ id: "about", name: "About", icon: "icon2" },
 		];
-		const output = generateMenuItems(input);
+		const routes = [
+			{ id: "home", path: "/home" },
+			{ id: "about", path: "/about" },
+		];
+		const output = generateMenuItems(menuList, routes);
 		expect(output).toEqual([
-			{ path: "/home", name: "Home", icon: "icon1" },
-			{ path: "/about", name: "About", icon: "icon2" },
+			{ id: "home", path: "/home", name: "Home", icon: "icon1" },
+			{ id: "about", path: "/about", name: "About", icon: "icon2" },
 		]);
 	});
 
 	it("handles nested routes", () => {
-		const input = [
+		const menuList = [
 			{
-				path: "/parent",
+				id: "parent",
 				name: "Parent",
 				icon: "iconP",
-				children: [{ path: "/child", name: "Child", icon: "iconC" }],
+				children: [{ id: "child", name: "Child", icon: "iconC" }],
 			},
 		];
-		const output = [
+		const routes = [
+			{ id: "parent", path: "/parent" },
+			{ id: "child", path: "/child" },
+		];
+		const output = generateMenuItems(menuList, routes);
+		expect(output).toEqual([
 			{
+				id: "parent",
 				path: "/parent",
 				name: "Parent",
 				icon: "iconP",
 				children: [
 					{
+						id: "child",
 						path: "/child",
 						name: "Child",
 						icon: "iconC",
 					},
 				],
 			},
-		];
-		const expectedOutput = generateMenuItems(input);
-		expect(expectedOutput).toEqual(output);
+		]);
 	});
 
-	it("skips routes without name, icon, or path", () => {
-		const input = [{ element: "<NoMenu />" }];
-		const output = generateMenuItems(input);
+	it("skips items without id", () => {
+		const menuList = [
+			{ name: "NoId", icon: "icon", id: "invalid" },
+			{ id: "valid", name: "Valid" },
+		];
+		const routes = [{ id: "valid", path: "/valid" }];
+		const output = generateMenuItems(menuList, routes);
+		expect(output).toEqual([{ id: "valid", path: "/valid", name: "Valid" }]);
+	});
+
+	it("handles empty routes array", () => {
+		const menuList = [{ id: "test", name: "Test" }];
+		const routes: any[] = [];
+		const output = generateMenuItems(menuList, routes);
 		expect(output).toEqual([]);
+	});
+
+	it("handles menu items with no matching route", () => {
+		const menuList = [{ id: "nomatch", name: "No Match" }];
+		const routes = [{ id: "different", path: "/different" }];
+		const output = generateMenuItems(menuList, routes);
+		expect(output).toEqual([]);
+	});
+
+	it("handles empty children arrays", () => {
+		const menuList = [{ id: "parent", name: "Parent", children: [] }];
+		const routes = [{ id: "parent", path: "/parent" }];
+		const output = generateMenuItems(menuList, routes);
+		expect(output).toEqual([{ id: "parent", path: "/parent", name: "Parent" }]);
+	});
+});
+
+describe("extractRouteIdAndPath", () => {
+	it("extracts id and path from routes", () => {
+		const routes = [
+			{ id: "home", path: "/home" },
+			{ id: "about", path: "/about" },
+		];
+		const result = extractRouteIdAndPath(routes);
+		expect(result).toEqual([
+			{ id: "home", path: "/home" },
+			{ id: "about", path: "/about" },
+		]);
+	});
+
+	it("handles nested routes", () => {
+		const routes = [
+			{
+				id: "parent",
+				path: "/parent",
+				children: [{ id: "child", path: "/child" }],
+			},
+		];
+		const result = extractRouteIdAndPath(routes);
+		expect(result).toEqual([
+			{ id: "parent", path: "/parent" },
+			{ id: "child", path: "/child" },
+		]);
+	});
+
+	it("skips routes without both id and path", () => {
+		const routes = [
+			{ id: "onlyId" },
+			{ path: "/onlyPath" },
+			{ id: "valid", path: "/valid" },
+		];
+		const result = extractRouteIdAndPath(routes);
+		expect(result).toEqual([{ id: "valid", path: "/valid" }]);
 	});
 });

@@ -9,25 +9,18 @@ import Donations from "../../pages/Donations/Donations";
 import Error from "../../pages/Error/Error.tsx";
 import Home from "../../pages/Home/Home";
 import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
-import { default as StreamWrapper } from '../../pages/LiveBroadcast/StreamWrapper.tsx';
+import { default as StreamWrapper } from "../../pages/LiveBroadcast/StreamWrapper.tsx";
 import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 
 const BASE_URL = "/";
 
 const MinimalLayout: FC = () => (
-	<Stack sx={{ width: "100%", height: "100%", color: 'text.primary', }}>
+	<Stack sx={{ width: "100%", height: "100%", color: "text.primary" }}>
 		<Outlet />
 	</Stack>
 );
 
-// const menuList template= [
-// {
-// 	(id / tag): 'home',
-// 		icon: <HomeRounded />,
-// 		children: [];
-// }
-// ]
-
+// TODO: Review the menu names for streaming with Zinee
 // NOTE: Id is used to find the routes that will be menu items
 
 // Public routes with main layout: blog/:id
@@ -85,8 +78,8 @@ const mainLayoutRoutes: RouteObject[] = [
 				id: "archiveStream",
 				path: `${BASE_URL}watch-archive`,
 			},
-		]
-	}
+		],
+	},
 ];
 
 // Error routes

@@ -32,8 +32,8 @@ const rootSx: SxProps<Theme> = {
 	justifyContent: "center",
 	height: "100%",
 	gap: 3,
-	'& .MuiTypography-root': {
-		color: 'text.primary',
+	"& .MuiTypography-root": {
+		color: "text.primary",
 	},
 };
 
@@ -63,7 +63,7 @@ const Error: FC = () => {
 
 	return (
 		<Stack spacing={3} sx={rootSx} className="fade-in">
-			<Stack alignItems={'center'} spacing={2}>
+			<Stack alignItems={"center"} spacing={2}>
 				<ErrorOutlineOutlined sx={errorIconSx} />
 				<Typography variant="h2" component="h1" fontWeight={"bold"}>
 					{ERROR_MSG}
