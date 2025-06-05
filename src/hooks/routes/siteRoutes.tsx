@@ -1,21 +1,15 @@
-import { lazy } from "react";
-import Error from "../../pages/Error/Error";
-import Login from "../../pages/Login/Login";
-import type { Route } from "./types";
+import Error from "../../pages/Error/Error.tsx";
+import Login from "../../pages/Login/Login.tsx";
+import type { Route } from "./types.ts";
+import AboutUs from "../../pages/AboutUs/AboutUs.tsx";
+import Blog from "../../pages/Blog/Blog.tsx";
+import Contact from "../../pages/Contact/Contact.tsx";
+import Donations from "../../pages/Donations/Donations.tsx";
+import Home from "../../pages/Home/Home.tsx";
+import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast.tsx";
+import UserAgreements from "../../pages/UserAgreements/UserAgreements.tsx";
 
-const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
-const Blog = lazy(() => import("../../pages/Blog/Blog"));
-const Contact = lazy(() => import("../../pages/Contact/Contact"));
-const Donations = lazy(() => import("../../pages/Donations/Donations"));
-const Home = lazy(() => import("../../pages/Home/Home"));
-const LiveBroadcast = lazy(
-	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
-);
-const UserAgreements = lazy(
-	() => import("../../pages/UserAgreements/UserAgreements"),
-);
-
-const BASE_URL = import.meta.env.VITE_BASE_URL || "/nyunitedsda/";
+const BASE_URL = "/";
 
 const siteRoutes: Route[] = [
 	{
@@ -47,7 +41,6 @@ const siteRoutes: Route[] = [
 		],
 	},
 	{
-		caseSensitive: true,
 		element: <Donations />,
 		errorElement: <Error />,
 		icon: "VolunteerActivismRounded",
@@ -55,7 +48,6 @@ const siteRoutes: Route[] = [
 		path: `${BASE_URL}donations`,
 	},
 	{
-		caseSensitive: true,
 		element: <Blog />,
 		errorElement: <Error />,
 		icon: "ArticleRounded",
@@ -63,7 +55,6 @@ const siteRoutes: Route[] = [
 		path: `${BASE_URL}blog`,
 	},
 	{
-		caseSensitive: true,
 		element: <Contact />,
 		errorElement: <Error />,
 		icon: "ContactMailRounded",
@@ -71,7 +62,6 @@ const siteRoutes: Route[] = [
 		path: `${BASE_URL}contact`,
 	},
 	{
-		caseSensitive: true,
 		element: <AboutUs />,
 		errorElement: <Error />,
 		icon: "Diversity3Rounded",
@@ -79,16 +69,14 @@ const siteRoutes: Route[] = [
 		path: `${BASE_URL}aboutUs`,
 	},
 	{
-		caseSensitive: true,
 		element: <UserAgreements />,
 		errorElement: <Error />,
-		path: `${BASE_URL}legal/termsOfUse`,
+		path: `${BASE_URL}termsOfUse`,
 	},
 	{
-		caseSensitive: true,
 		element: <UserAgreements />,
 		errorElement: <Error />,
-		path: `${BASE_URL}legal/privacy`,
+		path: `${BASE_URL}privacy`,
 	},
 	{
 		element: <Error />,

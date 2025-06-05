@@ -75,6 +75,13 @@ const theme = responsiveFontSizes(
 					},
 				},
 			},
+			MuiTypography: {
+				styleOverrides: {
+					root: ({ theme }) => ({
+						color: theme.palette.text.primary,
+					}),
+				},
+			},
 		},
 	}),
 );

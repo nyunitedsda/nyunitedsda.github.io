@@ -88,7 +88,7 @@ const Error: FC = () => {
 						component={"a"}
 						href={homeRoute.path}
 						size="large"
-						startIcon={<HomeRounded/>}
+						startIcon={<HomeRounded />}
 						variant="contained"
 					>
 						{`Return to ${homeRoute.name}`}

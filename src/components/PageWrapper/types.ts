@@ -3,4 +3,9 @@ interface PageWrapperProps {
 	subHeader?: string;
 }
 
-export type { PageWrapperProps };
+interface PageTitleProps {
+	title: string;
+	subtitle?: string;
+}
+
+export type { PageWrapperProps, PageTitleProps };

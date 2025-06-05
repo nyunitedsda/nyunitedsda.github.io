@@ -7,9 +7,6 @@
 
 :root {
 	/* Theme variables */
-	--text-primary: rgba(255, 255, 255, 0.87);
-	--bg-primary: #242424;
-
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
@@ -17,8 +14,6 @@
 	height: 100%;
 
 	color-scheme: light dark;
-	color: var(--text-primary);
-	background-color: var(--bg-primary);
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;

@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import PageTitle from "../../components/PageWrapper/PageTitle";
 import services from "../../constants/services";
 import {
 	HEADER,
@@ -16,7 +16,8 @@ import {
 
 const AboutUs: FC = () => {
 	return (
-		<PageWrapper header={HEADER} subHeader={SUBHEADER}>
+		<>
+			<PageTitle title={HEADER} subtitle={SUBHEADER} />
 			<Stack spacing={2} className="fade-in">
 				{aboutContent.map((i) => (
 					<Typography variant="body1" key={i}>
@@ -59,7 +60,8 @@ const AboutUs: FC = () => {
 					))}
 				</Stack>
 			</Stack>
-		</PageWrapper>
+
+		</>
 	);
 };
 
