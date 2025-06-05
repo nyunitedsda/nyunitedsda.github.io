@@ -1,11 +1,12 @@
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { type FC, memo } from "react";
+import { type FC } from "react";
 import type { TabPanelProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
-	flex: '1 1 100%',
 	border: '1px solid red',
+	height: '100%',
+	width: '100%',
 }
 
 const TabPanel: FC<TabPanelProps> = (props) => {
@@ -34,4 +35,4 @@ const TabPanel: FC<TabPanelProps> = (props) => {
 	);
 };
 
-export default memo(TabPanel);
+export default TabPanel;

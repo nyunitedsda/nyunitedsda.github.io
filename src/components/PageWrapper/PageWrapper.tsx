@@ -5,7 +5,7 @@ import type { FC, PropsWithChildren } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import PageContentContainer from "./PageContentContainer";
+// import PageContentContainer from "./PageContentContainer";
 import type { PageWrapperProps } from "./types";
 
 const headerSx: SxProps<Theme> = {
@@ -17,9 +17,17 @@ const containerSx: SxProps<Theme> = {
 	pt: 8,
 	pb: 4,
 	flexGrow: 1,
-	display: "flex",
-	flexDirection: "column",
+	// display: "flex",
+	// flexDirection: "column",
 	justifyContent: "flex-start",
+	// minHeight: '100%',
+	height: 'auto',
+	// position: 'relative',
+	ml: 'auto',
+	mr: 'auto',
+	maxWidth: '1200px',
+	width: '100%',
+	// zIndex: 'inherit',
 };
 const subHeaderSx: SxProps<Theme> = {
 	fontWeight: "bold",
@@ -28,13 +36,10 @@ const subHeaderSx: SxProps<Theme> = {
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
-	minHeight: { xs: '100%', sm: "100vh" },
+	minHeight: '100%',
 	backgroundColor: (theme) => theme.palette.background.paper,
 	overflowY: 'auto',
-	height: '100%',
-	position: 'absolute',
-	top: 0,
-	left: 0,
+	height: 'auto',
 };
 
 // TODO: Reduce the containerSx pt for mobile
@@ -46,7 +51,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	return (
 		<Stack sx={rootSx}>
 			<Header />
-			<PageContentContainer sx={containerSx}>
+			<Stack sx={containerSx}>
 				{(header || subHeader) && (
 					<Stack spacing={2} sx={{ pb: 2 }} className="fade-in">
 						{header && (
@@ -61,10 +66,10 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 						)}
 					</Stack>
 				)}
-				<Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}>
+				{/* <Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}> */}
 					{children}
-				</Stack>
-			</PageContentContainer>
+				{/* </Stack> */}
+			</Stack>
 
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />

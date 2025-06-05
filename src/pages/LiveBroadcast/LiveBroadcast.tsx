@@ -1,11 +1,11 @@
 import { useEffect, useMemo, type FC } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import type { RouteTabsItem } from "../../components/RoutedTabs/types";
 import ArchiveStream from "./components/streamPlayers/ArchiveStream";
 import LiveStream from "./components/streamPlayers/LiveStream";
 import { useLocation, useNavigate } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import PageWrapper from "./StreamWrapper";
 
 // const LIVE_SERVICE = "Live Worship Service";
 // const NEXT_SERVICE = "Join Us for Our Next Service";

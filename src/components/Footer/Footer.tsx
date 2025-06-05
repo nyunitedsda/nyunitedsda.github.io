@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type FC, type ReactNode, useMemo } from "react";
 import services from "../../constants/services";
@@ -32,8 +33,10 @@ import {
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
 	color: "primary.contrastText",
+	// zIndex: 'inherit',
 	p: 2,
 	width: "100%",
+	// position: 'relative',
 	"& a": {
 		textDecoration: "none",
 		color: "inherit",
@@ -70,7 +73,7 @@ const Footer: FC = () => {
 	}, []);
 
 	return (
-		<Box component="footer" sx={footerSx}>
+		<Stack sx={footerSx}>
 			<PageContentContainer >
 				<Grid container spacing={4}>
 					{/* Social Media */}
@@ -152,7 +155,7 @@ const Footer: FC = () => {
 					&copy; {getCopyright()}
 				</Typography>
 			</PageContentContainer>
-		</Box>
+		</Stack>
 	);
 };
 

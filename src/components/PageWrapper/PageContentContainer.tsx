@@ -9,6 +9,7 @@ const PageContentContainer: FC<Omit<ContainerProps, "MaxWidth">> = ({
   return (
     <Container
       maxWidth="lg"
+      sx={{ position: 'relative', height: '100%', minHeight: 'min-content' }}
       {...rest}
     >
       {children}

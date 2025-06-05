@@ -33,7 +33,7 @@ const carouselStyle: SxProps<Theme> = {
 			justifyContent: { xs: "center", sm: "flex-end" },
 			alignItems: "center",
 			gap: 1,
-			overflow: "clip",
+			overflow: "clip", // TODO: investigate
 
 			"& .embla__dot": {
 				touchAction: "manipulation",
