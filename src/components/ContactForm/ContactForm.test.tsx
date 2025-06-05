@@ -1,14 +1,13 @@
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { describe, expect, it } from "vitest";
 import ContactForm from "./ContactForm";
+import { render, screen } from "../../utils/vitest-setup";
 
 //TODO: Test ContactForm component
 
 describe("ContactForm", () => {
 	it("renders ContactForm", () => {
-		const { getByText } = render(<ContactForm />);
+		render(<ContactForm />);
 
-		expect(getByText("ContactForm Component")).toBeInTheDocument();
+		expect(screen.getByText("Send Message")).toBeInTheDocument();
 	});
 });

@@ -2,6 +2,7 @@ import Stack from "@mui/material/Stack";
 import type { FC } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
 import AboutUs from "../../pages/AboutUs/AboutUs";
 import Blog from "../../pages/Blog/Blog";
 import Contact from "../../pages/Contact/Contact";
@@ -9,7 +10,6 @@ import Donations from "../../pages/Donations/Donations";
 import Error from "../../pages/Error/Error.tsx";
 import Home from "../../pages/Home/Home";
 import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
-import { default as StreamWrapper } from "../../pages/LiveBroadcast/StreamWrapper.tsx";
 import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 
 const BASE_URL = "/";

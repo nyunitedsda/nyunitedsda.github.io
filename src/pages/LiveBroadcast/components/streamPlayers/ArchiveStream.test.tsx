@@ -1,4 +1,3 @@
-
 import { vi } from "vitest";
 import { render, screen } from "../../../../utils/vitest-setup";
 import ArchiveStream from "./ArchiveStream";
@@ -6,9 +5,8 @@ import StreamDisplay from "./StreamDisplay";
 
 // Mock the StreamDisplay component
 vi.mock("./StreamDisplay", () => ({
-	default: vi.fn(() => <div data-testid="mock-stream-display" />)
+	default: vi.fn(() => <div data-testid="mock-stream-display" />),
 }));
-
 
 describe("ArchiveStream", () => {
 	beforeEach(() => {
@@ -22,9 +20,9 @@ describe("ArchiveStream", () => {
 			{
 				id: "sermon-cloud-embed",
 				title: "Sermons Grid",
-				src: "https://embeds.sermoncloud.com/new-york-united/sermons?view=grid"
+				src: "https://embeds.sermoncloud.com/new-york-united/sermons?view=grid",
 			},
-			undefined
+			undefined,
 		);
 	});
 

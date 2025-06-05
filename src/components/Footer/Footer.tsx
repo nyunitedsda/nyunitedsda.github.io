@@ -33,13 +33,18 @@ import {
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
 	color: "primary.contrastText",
+	"& *": {
+		// color: 'inherit',
+		color: (theme) => `${theme.palette.primary.contrastText} !important`,
+	},
 	// zIndex: 'inherit',
 	p: 2,
 	width: "100%",
 	// position: 'relative',
 	"& a": {
 		textDecoration: "none",
-		color: "inherit",
+		// color: "inherit",
+		color: "primary.contrastText",
 	},
 };
 

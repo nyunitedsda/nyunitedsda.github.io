@@ -58,7 +58,6 @@ export const generateMenuItems = (
 			// Find matching route to get path
 			const matchingRoute = routes.find((route) => route.id === id);
 
-			if (!matchingRoute) return null;
 			// Create base menu item with a default path value
 			let menuItem: RouteMenu = {
 				name: name || "",

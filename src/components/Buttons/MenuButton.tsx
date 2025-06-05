@@ -1,9 +1,11 @@
+import ExpandLessRounded from "@mui/icons-material/ExpandLessRounded";
+import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import type { SxProps, Theme } from "@mui/material/styles";
 import {
@@ -35,6 +37,18 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 			: isActive(path);
 	}, [menuItems, path]);
 
+	const endIcon = useMemo(
+		() =>
+			menuItems ? (
+				isMenuVisible ? (
+					<ExpandLessRounded />
+				) : (
+					<ExpandMoreRounded />
+				)
+			) : undefined,
+		[menuItems, isMenuVisible],
+	);
+
 	const handleMenuClose = useCallback(() => {
 		setIsMenuVisible(false);
 	}, []);
@@ -55,7 +69,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		<>
 			<Button
 				{...buttonProps}
-				onClick={menuItems ? handleMenuOpen : buttonProps?.onClick}
+				endIcon={endIcon}
+				onMouseOver={menuItems ? handleMenuOpen : buttonProps?.onClick}
 				href={!menuItems ? path : undefined}
 				ref={buttonRef}
 				sx={
@@ -72,7 +87,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 					sx={{ zIndex: 1 }}
 					open={isMenuVisible}
 					anchorEl={buttonRef.current}
-					role={undefined}
+					role={"menu"}
 					placement="bottom-end"
 					transition
 					disablePortal
@@ -85,7 +100,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 									placement === "bottom" ? "center top" : "center bottom",
 							}}
 						>
-							<Paper>
+							<Card sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}>
 								<ClickAwayListener onClickAway={handleMenuClose}>
 									<MenuList id="split-button-menu" autoFocusItem>
 										{menuItems?.map((i) => (
@@ -105,7 +120,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 										))}
 									</MenuList>
 								</ClickAwayListener>
-							</Paper>
+							</Card>
 						</Grow>
 					)}
 				</Popper>

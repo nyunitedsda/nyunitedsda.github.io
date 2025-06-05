@@ -49,8 +49,8 @@ export const brandingStyles: BrandingStyle = {
 
 export const menuItemStyles: MenuItemStyleExport = {
 	menuItemSx: {
-		borderRadius: 0.5,
-		color: "text.secondary",
+		pl: 3,
+		color: "text.primary",
 		backgroundColor: "transparent",
 		"&:hover": {
 			backgroundColor: "action.hover",
@@ -58,7 +58,7 @@ export const menuItemStyles: MenuItemStyleExport = {
 			// backgroundColor: "primary.light",
 		},
 		"& svg": {
-			color: "text.secondary",
+			color: "text.primary",
 		},
 	},
 	activeMenuItemSx: {
