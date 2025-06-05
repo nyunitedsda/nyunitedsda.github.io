@@ -30,7 +30,7 @@ describe("TabPanel", () => {
 
 	it("wraps children in Stack when enableStack is true", () => {
 		const { container } = render(
-			<TabPanel value={0} index={0} >
+			<TabPanel value={0} index={0}>
 				Stacked Content
 			</TabPanel>,
 		);

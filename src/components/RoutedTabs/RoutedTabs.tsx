@@ -75,16 +75,9 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 						sx={{ ...tabsSx, ...tabsProps?.sx }}
 						value={selectedTab}
 					>
-						{
-							tabs.map((i) => (
-								<Tab
-									{...tabProps}
-									key={i.label}
-									label={i.label}
-									value={i.id}
-								/>
-							))
-						}
+						{tabs.map((i) => (
+							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />
+						))}
 					</Tabs>
 					{tabs.map((i) => (
 						<TabPanel
@@ -94,13 +87,11 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 							sx={panelSx}
 							value={selectedTab}
 						>
-							{
-								typeof i.content === "string" ? (
-									<Box dangerouslySetInnerHTML={{ __html: i.content }} />
-								) : (
-									i.content
-								)
-							}
+							{typeof i.content === "string" ? (
+								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
+							) : (
+								i.content
+							)}
 						</TabPanel>
 					))}
 				</>

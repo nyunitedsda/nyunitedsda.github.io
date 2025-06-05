@@ -21,12 +21,12 @@ const containerSx: SxProps<Theme> = {
 	// flexDirection: "column",
 	justifyContent: "flex-start",
 	// minHeight: '100%',
-	height: 'auto',
+	height: "auto",
 	// position: 'relative',
-	ml: 'auto',
-	mr: 'auto',
-	maxWidth: '1200px',
-	width: '100%',
+	ml: "auto",
+	mr: "auto",
+	maxWidth: "1200px",
+	width: "100%",
 	// zIndex: 'inherit',
 };
 const subHeaderSx: SxProps<Theme> = {
@@ -36,14 +36,14 @@ const subHeaderSx: SxProps<Theme> = {
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
-	minHeight: '100%',
+	minHeight: "100%",
 	backgroundColor: (theme) => theme.palette.background.paper,
-	overflowY: 'auto',
-	height: 'auto',
+	overflowY: "auto",
+	height: "auto",
 };
 
 // TODO: Reduce the containerSx pt for mobile
-// FEATURE: Enhance scroll to top button style 
+// FEATURE: Enhance scroll to top button style
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 	const { header, subHeader, children } = props;
@@ -67,7 +67,7 @@ const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
 					</Stack>
 				)}
 				{/* <Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}> */}
-					{children}
+				{children}
 				{/* </Stack> */}
 			</Stack>
 

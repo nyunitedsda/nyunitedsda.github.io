@@ -74,7 +74,7 @@ const Footer: FC = () => {
 
 	return (
 		<Stack sx={footerSx}>
-			<PageContentContainer >
+			<PageContentContainer>
 				<Grid container spacing={4}>
 					{/* Social Media */}
 					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO}>

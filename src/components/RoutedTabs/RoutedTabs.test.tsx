@@ -4,7 +4,7 @@ import RoutedTabs from "./RoutedTabs";
 
 describe("RoutedTabs", () => {
 	it("renders RoutedTabs", () => {
-		const { getByText } = render(<RoutedTabs />);
+		const { getByText } = render(<RoutedTabs tabItems={[]} />);
 
 		expect(getByText("RoutedTabs Component")).toBeInTheDocument();
 	});

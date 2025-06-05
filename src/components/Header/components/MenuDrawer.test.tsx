@@ -1,8 +1,7 @@
-import { MemoryRouter } from "react-router";
+import { MemoryRouter as ActualMemoryRouter, MemoryRouter } from "react-router";
 import { vi } from "vitest";
 import { fireEvent, render, screen } from "../../../utils/vitest-setup";
 import MenuDrawer from "./MenuDrawer";
-import { MemoryRouter as ActualMemoryRouter } from "react-router";
 
 // Mock the child components
 vi.mock("./MenuDrawerItem", () => ({
@@ -91,7 +90,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -106,7 +104,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -123,7 +120,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -138,7 +134,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -154,7 +149,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -169,7 +163,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,
@@ -187,7 +180,6 @@ describe.skip("MenuDrawer", () => {
 				<MenuDrawer
 					isActive={isActiveMock}
 					toggleDrawer={toggleDrawerMock}
-					title="Test Title"
 					menuItems={mockMenuItems}
 				/>
 			</MemoryRouter>,

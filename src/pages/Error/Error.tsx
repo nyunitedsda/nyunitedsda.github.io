@@ -1,5 +1,7 @@
-import { ErrorOutlineOutlined, RefreshOutlined } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
+import HomeRounded from "@mui/icons-material/HomeRounded";
+import RefreshOutlined from "@mui/icons-material/RefreshOutlined";
+import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -86,7 +88,7 @@ const Error: FC = () => {
 						component={"a"}
 						href={homeRoute.path}
 						size="large"
-						startIcon={homeRoute.icon}
+						startIcon={<HomeRounded/>}
 						variant="contained"
 					>
 						{`Return to ${homeRoute.name}`}

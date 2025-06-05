@@ -84,7 +84,7 @@ export const menuDrawerStyles: StyleExport = {
 	},
 	rootSx: {
 		textAlign: "center",
-		width: '100%',
+		width: "100%",
 		height: "100%",
 		p: 1,
 		pt: 0,

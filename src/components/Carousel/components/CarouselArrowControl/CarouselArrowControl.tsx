@@ -27,8 +27,10 @@ const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
 	);
 };
 
-
-const CarouselArrowControl: FC<CarouselControlProps> = ({ api, onButtonClick }) => {
+const CarouselArrowControl: FC<CarouselControlProps> = ({
+	api,
+	onButtonClick,
+}) => {
 	const {
 		prevBtnDisabled,
 		nextBtnDisabled,
@@ -41,7 +43,7 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({ api, onButtonClick }) 
 			className="embla__buttons"
 			direction="row"
 			sx={{
-				justifyContent: { xs: 'space-between', md: 'flex-start' },
+				justifyContent: { xs: "space-between", md: "flex-start" },
 			}}
 		>
 			<CarouselArrowButton
@@ -56,6 +58,6 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({ api, onButtonClick }) 
 			/>
 		</Stack>
 	);
-}
+};
 
 export default CarouselArrowControl;

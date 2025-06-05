@@ -15,7 +15,7 @@ const UserAgreements = lazy(
 	() => import("../../pages/UserAgreements/UserAgreements"),
 );
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "/"; // "/nyunitedsda/";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "/nyunitedsda/";
 
 const siteRoutes: Route[] = [
 	{

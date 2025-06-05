@@ -7,74 +7,73 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import type { PageWrapperProps } from "../../components/PageWrapper/types";
 
-
 const headerSx: SxProps<Theme> = {
-  fontWeight: "bold",
-  color: "primary.light",
-  fontFamily: "inter",
+	fontWeight: "bold",
+	color: "primary.light",
+	fontFamily: "inter",
 };
 const containerSx: SxProps<Theme> = {
-  pt: 8,
-  pb: 4,
-  flexGrow: 1,
-  // display: "flex",
-  // flexDirection: "column",
-  justifyContent: "flex-start",
-  minHeight: '100%',
-  height: 'auto',
-  // position: 'relative',
-  ml: 'auto',
-  mr: 'auto',
-  maxWidth: '1200px',
-  width: '100%',
-  // zIndex: 'inherit',
+	pt: 8,
+	pb: 4,
+	flexGrow: 1,
+	// display: "flex",
+	// flexDirection: "column",
+	justifyContent: "flex-start",
+	minHeight: "100%",
+	height: "auto",
+	// position: 'relative',
+	ml: "auto",
+	mr: "auto",
+	maxWidth: "1200px",
+	width: "100%",
+	// zIndex: 'inherit',
 };
 const subHeaderSx: SxProps<Theme> = {
-  fontWeight: "bold",
-  color: "text.primary",
+	fontWeight: "bold",
+	color: "text.primary",
 };
 
 const rootSx: SxProps<Theme> = {
-  width: "100%",
-  minHeight: '100%',
-  backgroundColor: (theme) => theme.palette.background.paper,
-  overflowY: 'auto',
-  height: 'auto',
+	width: "100%",
+	minHeight: "100%",
+	backgroundColor: (theme) => theme.palette.background.paper,
+	overflowY: "auto",
+	height: "auto",
 };
 
 // TODO: Reduce the containerSx pt for mobile
-// FEATURE: Enhance scroll to top button style 
+// FEATURE: Enhance scroll to top button style
 
 const PageWrapper: FC<PropsWithChildren<PageWrapperProps>> = (props) => {
-  const { header, subHeader, children } = props;
-  const theme = useTheme();
-  return (
-    <Stack sx={rootSx}>
-      <Header />
-      <Stack sx={containerSx}>
-        {(header || subHeader) && (
-          <Stack spacing={2} sx={{ pb: 2 }} className="fade-in">
-            {header && (
-              <Typography variant="h3" component="h1" sx={headerSx}>
-                {header}
-              </Typography>
-            )}
-            {subHeader && (
-              <Typography variant="h6" sx={subHeaderSx}>
-                {subHeader}
-              </Typography>
-            )}
-          </Stack>
-        )}
-        {/* <Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}> */}
-          {children}
-        {/* </Stack> */}
-      </Stack>
+	const { header, subHeader, children } = props;
+	const theme = useTheme();
+	return (
+		<Stack sx={rootSx}>
+			<Header />
+			<Stack sx={containerSx}>
+				{(header || subHeader) && (
+					<Stack spacing={2} sx={{ pb: 2 }} className="fade-in">
+						{header && (
+							<Typography variant="h3" component="h1" sx={headerSx}>
+								{header}
+							</Typography>
+						)}
+						{subHeader && (
+							<Typography variant="h6" sx={subHeaderSx}>
+								{subHeader}
+							</Typography>
+						)}
+					</Stack>
+				)}
+				{/* <Stack sx={{ flexGrow: 1, gap: 2, color: "text.primary" }}> */}
+				{children}
+				{/* </Stack> */}
+			</Stack>
 
-      <ScrollToTop smooth top={30} color={theme.palette.primary.light} />
-      <Footer />
-    </Stack>
-  );
+			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
+			<Footer />
+		</Stack>
+	);
 };
 
 export default PageWrapper;

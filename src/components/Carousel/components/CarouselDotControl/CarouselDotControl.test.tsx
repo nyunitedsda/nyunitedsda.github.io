@@ -8,7 +8,7 @@ const mockButtonClick = vi.fn();
 const defaultProps: CarouselControlProps = {
 	api: {} as EmblaCarouselType,
 	onButtonClick: mockButtonClick,
-}
+};
 
 describe("CarouselDotControl", () => {
 	it("renders CarouselDotControl", () => {

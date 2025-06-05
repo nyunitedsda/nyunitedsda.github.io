@@ -46,9 +46,9 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 				paper: {
 					sx: {
 						maxWidth: 360,
-						width: '100%',
-					}
-				}
+						width: "100%",
+					},
+				},
 			}}
 		>
 			<MenuDrawer

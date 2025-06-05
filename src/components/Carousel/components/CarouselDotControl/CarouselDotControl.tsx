@@ -14,18 +14,17 @@ const CarouselDotButton: FC<CarouselDotButtonProps> = (props) => {
 	);
 };
 
-const CarouselDotControl: FC<CarouselControlProps> = ({ api, onButtonClick }) => {
-
+const CarouselDotControl: FC<CarouselControlProps> = ({
+	api,
+	onButtonClick,
+}) => {
 	const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton({
 		api,
 		onButtonClick,
 	});
 
 	return (
-		<Stack
-			className="embla__dots"
-			direction="row"
-		>
+		<Stack className="embla__dots" direction="row">
 			{scrollSnaps.map((_, index) => (
 				<CarouselDotButton
 					key={index}
@@ -37,6 +36,6 @@ const CarouselDotControl: FC<CarouselControlProps> = ({ api, onButtonClick }) =>
 			))}
 		</Stack>
 	);
-}
+};
 
 export default CarouselDotControl;

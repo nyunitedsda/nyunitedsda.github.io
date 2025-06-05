@@ -45,16 +45,9 @@ const Carousel: FC<CarouselProps> = (props) => {
 				spacing={{ xs: 1, sm: 3 }}
 				direction={{ xs: "column", sm: "row" }}
 			>
-				<CarouselArrowControl
-					api={emblaApi}
-					onButtonClick={onNavButtonClick}
-				/>
+				<CarouselArrowControl api={emblaApi} onButtonClick={onNavButtonClick} />
 
-				<CarouselDotControl
-					api={emblaApi}
-					onButtonClick={onNavButtonClick}
-				/>
-
+				<CarouselDotControl api={emblaApi} onButtonClick={onNavButtonClick} />
 			</Stack>
 		</Box>
 	);
