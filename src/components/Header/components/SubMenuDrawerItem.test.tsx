@@ -5,6 +5,7 @@ import SubMenuDrawerItem from "./SubMenuDrawerItem";
 
 const mockOnClick = vi.fn();
 const defaultProps = {
+	id: "parent",
 	name: "Parent",
 	path: "/parent",
 	isActiveChild: (path: string) => path === "/parent",
@@ -12,8 +13,8 @@ const defaultProps = {
 	onClick: mockOnClick,
 	icon: "icon",
 	children: [
-		{ name: "Child 1", path: "/parent/child1" },
-		{ name: "Child 2", path: "/parent/child2" },
+		{ id: "child1", name: "Child 1", path: "/parent/child1" },
+		{ id: "child2", name: "Child 2", path: "/parent/child2" },
 	],
 };
 

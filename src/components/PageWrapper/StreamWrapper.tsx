@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import { type FC, Suspense } from "react";
+import { type FC } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
@@ -37,9 +37,7 @@ const PageWrapper: FC = () => {
 		<Stack sx={rootSx}>
 			<Header />
 			<Stack sx={containerSx}>
-				<Suspense fallback={<div>Loading...</div>}>
-					<Outlet />
-				</Suspense>
+				<Outlet/>
 			</Stack>
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />

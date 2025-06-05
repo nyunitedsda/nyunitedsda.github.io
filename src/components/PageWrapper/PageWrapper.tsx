@@ -1,10 +1,11 @@
 import Stack from "@mui/material/Stack";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import { Suspense, type FC } from "react";
+import { type FC } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import ProjectSuspense from "../ProjectSuspense/ProjectSuspense";
 
 const containerSx: SxProps<Theme> = {
 	flexGrow: 1,
@@ -14,7 +15,8 @@ const containerSx: SxProps<Theme> = {
 	ml: "auto",
 	mr: "auto",
 	pb: 4,
-	pt: 8,
+	pt: { xs: 4, md: 8 },
+	px: 2,
 	width: "100%",
 };
 
@@ -35,9 +37,9 @@ const PageWrapper: FC = () => {
 		<Stack sx={rootSx}>
 			<Header />
 			<Stack sx={containerSx}>
-				<Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
+				<ProjectSuspense>
+					<Outlet />
+				</ProjectSuspense>
 			</Stack>
 
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />

@@ -66,16 +66,17 @@ describe.skip("MenuDrawer", () => {
 	const isActiveMock = (path: string) => path === "/active-path";
 
 	const mockMenuItems = [
-		{ name: "Home", path: "/home", icon: "home-icon" },
-		{ name: "About", path: "/active-path", icon: "about-icon" },
-		{ name: "Login", path: "/login", icon: "login-icon" },
+		{ id: "home", name: "Home", path: "/home", icon: "home-icon" },
+		{ id: "about", name: "About", path: "/active-path", icon: "about-icon" },
+		{ id: "login", name: "Login", path: "/login", icon: "login-icon" },
 		{
+			id: "services",
 			name: "Services",
 			path: "/services",
 			icon: "services-icon",
 			children: [
-				{ name: "Service 1", path: "/service1" },
-				{ name: "Service 2", path: "/service2" },
+				{ id: "service1", name: "Service 1", path: "/service1" },
+				{ id: "service2", name: "Service 2", path: "/service2" },
 			],
 		},
 	];
