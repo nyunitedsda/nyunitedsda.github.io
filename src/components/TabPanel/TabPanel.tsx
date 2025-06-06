@@ -1,11 +1,11 @@
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC } from "react";
+import RingLoader from "../Loaders/RingLoader";
 import type { TabPanelProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
-	border: "1px solid red",
-	height: "100%",
+	flexGrow: 1,
 	width: "100%",
 };
 
@@ -14,6 +14,7 @@ const TabPanel: FC<TabPanelProps> = (props) => {
 
 	return (
 		<>
+			{(!value || !index) && <RingLoader />}
 			{value === index && (
 				<Stack
 					{...other}

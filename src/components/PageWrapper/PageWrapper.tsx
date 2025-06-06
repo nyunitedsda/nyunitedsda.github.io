@@ -9,7 +9,7 @@ import ProjectSuspense from "../ProjectSuspense/ProjectSuspense";
 
 const containerSx: SxProps<Theme> = {
 	flexGrow: 1,
-	height: "auto",
+	// height: "auto",
 	justifyContent: "flex-start",
 	maxWidth: "1200px",
 	ml: "auto",

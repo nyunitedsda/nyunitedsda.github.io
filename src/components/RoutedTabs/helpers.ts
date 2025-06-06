@@ -1,10 +1,28 @@
-import type { Route } from "../../hooks/routes/types";
+import type { RouteObject } from "react-router";
 import type { RouteTabsItem, RouteTabsWithHrefItem } from "./types";
 
-const mapRoutesToTabs = (routes: Route[], tabList: RouteTabsItem[]) => {
+const flattenRoutes = (routes: RouteObject[]): RouteObject[] => {
+	const result: RouteObject[] = [];
+
+	routes.forEach((route) => {
+		if (route.path) {
+			result.push(route);
+		}
+
+		if (route.children) {
+			result.push(...flattenRoutes(route.children));
+		}
+	});
+
+	return result;
+};
+
+const mapRoutesToTabs = (routes: RouteObject[], tabList: RouteTabsItem[]) => {
+	const flatRoutes = flattenRoutes(routes);
+
 	return tabList
 		.map((x) => {
-			const route = routes.find((i) => i.path?.includes(x.tag));
+			const route = flatRoutes.find((i) => i.path?.includes(x.tag));
 			return route ? { ...x, href: route.path } : undefined;
 		})
 		.filter(

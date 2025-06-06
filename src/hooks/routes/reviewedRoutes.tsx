@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import { lazy, type FC } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
+// import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
 // import AboutUs from "../../pages/AboutUs/AboutUs";
 // import Blog from "../../pages/Blog/Blog";
 // import Contact from "../../pages/Contact/Contact";
@@ -75,11 +75,6 @@ const mainLayoutRoutes: RouteObject[] = [
 				id: "privacy",
 				path: `${BASE_URL}privacy`,
 			},
-		],
-	},
-	{
-		element: <StreamWrapper />,
-		children: [
 			{
 				element: <LiveBroadcast />,
 				id: "liveStream",
@@ -92,6 +87,21 @@ const mainLayoutRoutes: RouteObject[] = [
 			},
 		],
 	},
+	// {
+	// 	element: <StreamWrapper />,
+	// 	children: [
+	// 		{
+	// 			element: <LiveBroadcast />,
+	// 			id: "liveStream",
+	// 			path: `${BASE_URL}watch-live`,
+	// 		},
+	// 		{
+	// 			element: <LiveBroadcast />,
+	// 			id: "archiveStream",
+	// 			path: `${BASE_URL}watch-archive`,
+	// 		},
+	// 	],
+	// },
 ];
 
 // Error routes
