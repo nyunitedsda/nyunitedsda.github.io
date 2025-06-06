@@ -32,7 +32,7 @@ import {
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
-	color: "primary.contrastText",
+	color: "primary.contrastText !important",
 	"& *": {
 		// color: 'inherit',
 		color: (theme) => `${theme.palette.primary.contrastText} !important`,
