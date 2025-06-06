@@ -6,17 +6,18 @@ import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import ProjectSuspense from "../ProjectSuspense/ProjectSuspense";
+import PageContentContainer from "./PageContentContainer";
 
 const containerSx: SxProps<Theme> = {
+	display: 'flex',
+	flexDirection: 'column',
 	flexGrow: 1,
-	// height: "auto",
+	height: "auto",
 	justifyContent: "flex-start",
 	maxWidth: "1200px",
 	ml: "auto",
 	mr: "auto",
-	pb: 4,
-	pt: { xs: 4, md: 8 },
-	px: 2,
+	p: 2,
 	width: "100%",
 };
 
@@ -36,11 +37,11 @@ const PageWrapper: FC = () => {
 	return (
 		<Stack sx={rootSx}>
 			<Header />
-			<Stack sx={containerSx}>
+			<PageContentContainer sx={containerSx}>
 				<ProjectSuspense>
 					<Outlet />
 				</ProjectSuspense>
-			</Stack>
+			</PageContentContainer>
 
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />

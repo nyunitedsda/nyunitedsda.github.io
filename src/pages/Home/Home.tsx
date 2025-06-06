@@ -34,6 +34,7 @@ const rootSx: SxProps<Theme> = {
 	flexGrow: 1,
 	width: "100%",
 	gap: 5,
+	pb: 2,
 };
 
 const MINISTRIES_HEADER = "Ministries Links";
