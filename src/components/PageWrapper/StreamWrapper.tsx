@@ -37,7 +37,7 @@ const PageWrapper: FC = () => {
 		<Stack sx={rootSx}>
 			<Header />
 			<Stack sx={containerSx}>
-				<Outlet/>
+				<Outlet />
 			</Stack>
 			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />

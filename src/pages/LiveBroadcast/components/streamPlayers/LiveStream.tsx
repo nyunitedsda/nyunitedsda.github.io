@@ -9,10 +9,12 @@ const LiveStream: FC = () => {
 
 	const streamSrc = useMemo(
 		() =>
-			mode === "dark" ? "https://embeds.sermoncloud.com/new-york-united/live?theme=dark" : "https://embeds.sermoncloud.com/new-york-united/live?theme=light"
-		, [mode],
+			mode === "dark"
+				? "https://embeds.sermoncloud.com/new-york-united/live?theme=dark"
+				: "https://embeds.sermoncloud.com/new-york-united/live?theme=light",
+		[mode],
 	);
-	console.log(' streamSrc: ', streamSrc);
+	console.log(" streamSrc: ", streamSrc);
 
 	return (
 		<StreamDisplay

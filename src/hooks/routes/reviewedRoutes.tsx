@@ -20,7 +20,9 @@ const Error = lazy(() => import("../../pages/Error/Error.tsx"));
 const Home = lazy(() => import("../../pages/Home/Home"));
 // const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
 // const StreamWrapper = lazy(() => import("../../pages/LiveBroadcast/StreamWrapper.tsx"));
-const UserAgreements = lazy(() => import("../../pages/UserAgreements/UserAgreements"));
+const UserAgreements = lazy(
+	() => import("../../pages/UserAgreements/UserAgreements"),
+);
 
 const BASE_URL = "/";
 

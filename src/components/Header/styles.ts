@@ -3,11 +3,20 @@ import type { BrandingStyle, HeaderStyle } from "./components/types";
 
 type StyleExport = Record<string, SxProps<Theme>>;
 type MenuItemStyleExport = StyleExport & {
-	menuItemSx: SxProps<Theme>;
 	activeMenuItemSx: SxProps<Theme>;
+	menuItemSx: SxProps<Theme>;
 };
 
 export const headerStyles: HeaderStyle = {
+	desktopDisplaySx: {
+		display: { xs: "none", md: "flex" },
+	},
+	desktopMenuSx: {
+		display: { xs: "none", md: "flex" },
+		flexGrow: 1,
+		fontFamily: "Inter",
+		justifyContent: "center",
+	},
 	hamburgerMenuSx: {
 		display: {
 			xs: "flex",
@@ -16,77 +25,66 @@ export const headerStyles: HeaderStyle = {
 	},
 	rootSx: {
 		backgroundColor: "background.paper",
-		height: (theme) => `${theme.spacing(8)}`,
-	},
-	desktopMenuSx: {
-		flexGrow: 1,
-		justifyContent: "center",
-		fontFamily: "Inter",
-		display: { xs: "none", md: "flex" },
-	},
-	desktopDisplaySx: {
-		display: { xs: "none", md: "flex" },
+		height: (theme) => theme.spacing(8),
 	},
 };
 
 export const brandingStyles: BrandingStyle = {
-	logoSx: { display: { xs: "none", md: "flex" } },
-	rootSx: {
-		flexGrow: 1,
-		display: { xs: "flex" },
-		alignItems: "center",
-		gap: 2,
-		maxHeight: (theme) => `${theme.spacing(8)}`,
-	},
 	brandingSx: {
+		color: "primary.light",
 		flexGrow: 1,
+		fontFamily: "Inter",
 		fontWeight: 700,
 		textDecoration: "none",
-		fontFamily: "Inter",
-		color: "primary.light",
+	},
+	logoSx: { display: { xs: "none", md: "flex" } },
+	rootSx: {
+		alignItems: "center",
+		display: { xs: "flex" },
+		flexGrow: 1,
+		gap: 2,
+		maxHeight: (theme) => theme.spacing(8),
 	},
 };
 
 export const menuItemStyles: MenuItemStyleExport = {
+	activeMenuItemSx: {
+		backgroundColor: (theme) => theme.palette.primary.light,
+		color: "primary.contrastText",
+		fontWeight: "bold",
+		"& svg": {
+			color: "primary.contrastText",
+		},
+	},
 	menuItemSx: {
-		pl: 3,
-		color: "text.primary",
 		backgroundColor: "transparent",
+		color: "text.primary",
+		pl: 3,
 		"&:hover": {
 			backgroundColor: "action.hover",
-			// 	color: "primary.contrastText",
-			// backgroundColor: "primary.light",
 		},
 		"& svg": {
 			color: "text.primary",
 		},
 	},
-	activeMenuItemSx: {
-		fontWeight: "bold",
-		color: "primary.contrastText",
-		backgroundColor: (theme) => `${theme.palette.primary.light}`,
-		"& svg": {
-			color: "primary.contrastText",
-		},
-	},
 };
 
 export const menuDrawerStyles: StyleExport = {
-	titleSx: {
-		height: (theme) => `${theme.spacing(8)}`,
-		borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-		justifyContent: "center",
-		"& h5": {
-			fontWeight: "bold",
-			color: "primary.light",
-			fontFamily: "inter",
-		},
-	},
 	rootSx: {
-		textAlign: "center",
-		width: "100%",
 		height: "100%",
 		p: 1,
 		pt: 0,
+		textAlign: "center",
+		width: "100%",
+	},
+	titleSx: {
+		borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+		height: (theme) => theme.spacing(8),
+		justifyContent: "center",
+		"& h5": {
+			color: "primary.light",
+			fontFamily: "inter",
+			fontWeight: "bold",
+		},
 	},
 };
