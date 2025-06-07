@@ -12,9 +12,9 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"lint": "biome lint --write ./src",
-		"format": "biome check --staged - --write ./src/",
+		"format": "biome check --staged - --write ./src",
 		"preview": "vite preview",
-		"deploy": "gh-pages -d build",
+		"deploy": "gh-pages -d deploy",
 		"test": "vitest"
 	},
 	"dependencies": {
