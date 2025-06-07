@@ -1,6 +1,6 @@
 import type { TabProps } from "@mui/material";
-import type { TabPanelProps } from "../TabPanel/types";
 import type { ReactNode } from "react";
+import type { TabPanelProps } from "../TabPanel/types";
 
 interface RoutedTabsProps {
 	tabItems: RouteTabsItem[];

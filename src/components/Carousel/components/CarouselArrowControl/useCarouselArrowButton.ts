@@ -1,6 +1,6 @@
+import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
 import type { UseCarouselArrowButtonsType } from "./types";
-import type { EmblaCarouselType } from "embla-carousel";
 
 const useCarouselArrowButtons = (
 	emblaApi: EmblaCarouselType | undefined,

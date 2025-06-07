@@ -1,9 +1,9 @@
+import { useMemo } from "react";
 import type { RouteObject } from "react-router";
 import { extractRouteIdAndPath, generateMenuItems } from "./helpers";
-import type { FormattedRoutes, RouteMenu } from "./types";
 import pathlessMenuItems from "./pathlessMenuItems";
 import siteRoutes from "./reviewedRoutes";
-import { useMemo } from "react";
+import type { FormattedRoutes, RouteMenu } from "./types";
 
 /**
  * Custom hook to retrieve formatted routes and corresponding menu items for the application.

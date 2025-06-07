@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useMemo } from "react";
-import logo from "../../../assets/img/NY United Logo small.png";
+import logo from "../../../assets/NY United Logo small.png";
 import useFormattedRoutes from "../../../hooks/routes/useFormattedRoutes";
 import { brandingStyles } from "../styles";
 

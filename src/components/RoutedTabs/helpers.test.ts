@@ -1,4 +1,4 @@
-import type { Route } from "../../hooks/routes/types.ts";
+import type { RouteObject } from "react-router";
 import { mapRoutesToTabs } from "./helpers.ts";
 import type { RouteTabsItem } from "./types.ts";
 
@@ -6,10 +6,10 @@ const defaultElement = "element";
 
 describe("mapRoutesToTabs", () => {
 	it("maps routes to tabs correctly", () => {
-		const routes: Route[] = [
-			{ path: "/terms-of-service", element: defaultElement },
-			{ path: "/privacy-policy", element: defaultElement },
-			{ path: "/other-page", element: defaultElement },
+		const routes: RouteObject[] = [
+			{ index: false, path: "/terms-of-service", element: defaultElement },
+			{index: false,  path: "/privacy-policy", element: defaultElement },
+			{ index: false, path: "/other-page", element: defaultElement },
 		];
 
 		const tabList: RouteTabsItem[] = [
@@ -43,7 +43,7 @@ describe("mapRoutesToTabs", () => {
 	});
 
 	it("returns empty array when no matches found", () => {
-		const routes: Route[] = [{ path: "/other-route", element: defaultElement }];
+		const routes: RouteObject[] = [{ path: "/other-route", element: defaultElement }];
 
 		const tabList: RouteTabsItem[] = [
 			{

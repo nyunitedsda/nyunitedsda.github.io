@@ -1,5 +1,5 @@
-import type { MenuButtonStyle } from "./types";
 import { alpha } from "@mui/material/styles";
+import type { MenuButtonStyle } from "./types";
 
 export const menuButtonStyles: MenuButtonStyle = {
 	activeBtnSx: {

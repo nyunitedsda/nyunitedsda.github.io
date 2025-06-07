@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
-import ContactForm from "./ContactForm";
 import { render, screen } from "../../utils/vitest-setup";
+import ContactForm from "./ContactForm";
 
 //TODO: Test ContactForm component
 

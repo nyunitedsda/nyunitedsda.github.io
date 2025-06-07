@@ -9,8 +9,8 @@ import ProjectSuspense from "../ProjectSuspense/ProjectSuspense";
 import PageContentContainer from "./PageContentContainer";
 
 const containerSx: SxProps<Theme> = {
-	display: 'flex',
-	flexDirection: 'column',
+	display: "flex",
+	flexDirection: "column",
 	flexGrow: 1,
 	height: "auto",
 	justifyContent: "flex-start",

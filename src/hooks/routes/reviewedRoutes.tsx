@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import { lazy, type FC } from "react";
+import { type FC, lazy } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 // import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
@@ -9,7 +9,7 @@ import PageWrapper from "../../components/PageWrapper/PageWrapper";
 // import Donations from "../../pages/Donations/Donations";
 // import Error from "../../pages/Error/Error.tsx";
 // import Home from "../../pages/Home/Home";
-import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
+// import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
 // import UserAgreements from "../../pages/UserAgreements/UserAgreements";
 
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
@@ -18,13 +18,13 @@ const Contact = lazy(() => import("../../pages/Contact/Contact"));
 const Donations = lazy(() => import("../../pages/Donations/Donations"));
 const Error = lazy(() => import("../../pages/Error/Error.tsx"));
 const Home = lazy(() => import("../../pages/Home/Home"));
-// const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
+const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
 // const StreamWrapper = lazy(() => import("../../pages/LiveBroadcast/StreamWrapper.tsx"));
 const UserAgreements = lazy(
 	() => import("../../pages/UserAgreements/UserAgreements"),
 );
 
-const BASE_URL = "/";
+const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
 
 const MinimalLayout: FC = () => (
 	<Stack sx={{ width: "100%", height: "100%", color: "text.primary" }}>

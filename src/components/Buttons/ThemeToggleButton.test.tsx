@@ -1,17 +1,17 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/vitest";
+import { useColorScheme } from "@mui/material/styles";
+import { vi } from "vitest";
 import {
+	type Mock,
 	describe,
 	expect,
 	fireEvent,
 	it,
 	render,
 	screen,
-	type Mock,
 } from "../../utils/vitest-setup";
-import { useColorScheme } from "@mui/material/styles";
 import ThemeToggleButton from "./ThemeToggleButton";
-import { vi } from "vitest";
 
 // Mock BEFORE importing the hook/component
 vi.mock("@mui/material/styles", async () => {

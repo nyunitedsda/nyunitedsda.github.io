@@ -1,9 +1,9 @@
-import { describe, expect, it, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
-import useFormattedRoutes from "./useFormattedRoutes";
+import { describe, expect, it, vi } from "vitest";
 import * as helpers from "./helpers";
 import pathlessMenuItems from "./pathlessMenuItems";
 import siteRoutes from "./reviewedRoutes";
+import useFormattedRoutes from "./useFormattedRoutes";
 
 // Mock dependencies
 vi.mock("./helpers", () => ({
