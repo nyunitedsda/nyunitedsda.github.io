@@ -14,7 +14,7 @@
 		"lint": "biome lint --write ./src",
 		"format": "biome check --staged - --write ./src",
 		"preview": "vite preview",
-		"deploy": "gh-pages -d deploy",
+		"deploy": "gh-pages -d dist",
 		"test": "vitest"
 	},
 	"dependencies": {
