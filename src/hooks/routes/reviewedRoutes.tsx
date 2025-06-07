@@ -2,6 +2,7 @@ import Stack from "@mui/material/Stack";
 import { type FC, lazy } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+const BlogDetails = lazy(() =>  import("../../pages/Blog/BlogDetails"));
 // import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
 // import AboutUs from "../../pages/AboutUs/AboutUs";
 // import Blog from "../../pages/Blog/Blog";
@@ -54,6 +55,11 @@ const mainLayoutRoutes: RouteObject[] = [
 				element: <Blog />,
 				id: "blogs",
 				path: `${BASE_URL}blog`,
+			},
+			{
+				element: <BlogDetails />,
+				id: "blogDetails",
+				path: `${BASE_URL}blog/:id`,
 			},
 			{
 				element: <Contact />,
