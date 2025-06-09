@@ -27,3 +27,4 @@ dist-ssr
 tmp/
 
 stats.html
+.vite

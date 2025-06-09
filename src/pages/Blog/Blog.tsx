@@ -11,10 +11,19 @@ import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import blogPosts from "./blogPosts";
 
 const containerSx: SxProps<Theme> = {
-	flexGrow: 1,
-	display: "flex",
 	alignContent: "flex-start",
+	display: "flex",
+	flexGrow: 1,
 	flexWrap: "wrap",
+	"& .MuiCard-root": {
+		height: (theme) => `${theme.spacing(32.5)}`,
+		// overflow: "hidden",
+		textOverflow: "ellipsis",
+		whiteSpace: "break-spaces",
+		'& svg, .MuiButton-root': {
+			color: 'primary.light',
+		}
+	},
 };
 
 const paginationSx: SxProps<Theme> = {
@@ -27,6 +36,7 @@ const DEFAULT_POST_PER_PAGE = 4;
 const HEADER = "Our Blog";
 const SUBHEADER =
 	"Insights, reflections, and spiritual guidance from our church community.";
+const PREVIEW_LENGTH = 140;
 
 // FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button
 // FEATURE: Add the ability to change the pagination of blog post
@@ -59,22 +69,27 @@ const Blog: FC = () => {
 		<>
 			<PageTitle title={HEADER} subtitle={SUBHEADER} />
 			<Grid container spacing={4} sx={containerSx}>
-				{currentPosts.map((post) => (
-					<Grid size={{ xs: 12, md: 6 }} key={post.id} className="blog-card">
+				{currentPosts.map(({ id, title, author, content, publishDate }) => (
+					<Grid size={{ xs: 12, md: 6 }} key={id} className="blog-card">
 						<ProjectCard
 							header={{
-								title: post.title,
-								subheader: `${new Date(post.date).toLocaleDateString()} | ${post.author}`,
-								avatar: <CalendarToday color="primary" />,
+								title,
+								subheader: `${new Date(publishDate).toLocaleDateString()} | ${author}`,
+								avatar: <CalendarToday />,
 							}}
-							content={<Typography variant="body1">{post.excerpt}</Typography>}
+							content={
+								<Typography variant="body1">
+									{content.length > PREVIEW_LENGTH
+										? `${content.slice(0, PREVIEW_LENGTH)}...`
+										: content}
+								</Typography>
+							}
 							actions={
 								<Button
-									disabled
 									size="small"
 									color="primary"
 									component={"a"}
-									href={`/blog/${post.slug}`}
+									href={`/blog/${id}`}
 								>
 									Read More
 								</Button>
