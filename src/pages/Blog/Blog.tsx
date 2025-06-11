@@ -17,12 +17,12 @@ const containerSx: SxProps<Theme> = {
 	flexWrap: "wrap",
 	"& .MuiCard-root": {
 		height: (theme) => `${theme.spacing(32.5)}`,
-		// overflow: "hidden",
+		justifySelf: 'center',
 		textOverflow: "ellipsis",
 		whiteSpace: "break-spaces",
-		'& svg, .MuiButton-root': {
-			color: 'primary.light',
-		}
+		"& svg, .MuiButton-root": {
+			color: "primary.light",
+		},
 	},
 };
 

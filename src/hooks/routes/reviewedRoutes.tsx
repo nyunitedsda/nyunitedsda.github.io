@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import { type FC, lazy } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import BlogDetails from "../../pages/Blog/BlogDetails.tsx";
+const BlogDetails = lazy(() =>  import("../../pages/Blog/BlogDetails"));
 // import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
 // import AboutUs from "../../pages/AboutUs/AboutUs";
 // import Blog from "../../pages/Blog/Blog";
