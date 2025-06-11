@@ -1,5 +1,3 @@
-// TODO: Review the menu names for streaming with Zinee
-
 import type { PathlessMenu } from "./types";
 
 const pathlessMenuItems: PathlessMenu[] = [

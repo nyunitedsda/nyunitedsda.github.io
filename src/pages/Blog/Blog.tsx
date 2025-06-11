@@ -17,7 +17,7 @@ const containerSx: SxProps<Theme> = {
 	flexWrap: "wrap",
 	"& .MuiCard-root": {
 		height: (theme) => `${theme.spacing(32.5)}`,
-		justifySelf: 'center',
+		justifySelf: "center",
 		textOverflow: "ellipsis",
 		whiteSpace: "break-spaces",
 		"& svg, .MuiButton-root": {
@@ -37,9 +37,6 @@ const HEADER = "Our Blog";
 const SUBHEADER =
 	"Insights, reflections, and spiritual guidance from our church community.";
 const PREVIEW_LENGTH = 140;
-
-// FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button
-// FEATURE: Add the ability to change the pagination of blog post
 
 const Blog: FC = () => {
 	const [page, setPage] = useState(1);

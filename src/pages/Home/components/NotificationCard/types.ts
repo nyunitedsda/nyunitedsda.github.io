@@ -1,7 +1,14 @@
-import type { ChurchNotificationProps } from "../../notifications";
+import type { ReactNode } from "react";
+import type { EventAnnouncement } from "../../types";
 
-interface NotificationCardProps extends ChurchNotificationProps {
+type NotificationCardProps = EventAnnouncement & {
 	className?: string;
+};
+
+interface NoteSectionProps {
+	icon?: ReactNode;
+	content: ReactNode;
+	title: string;
 }
 
-export type { NotificationCardProps };
+export type { NotificationCardProps, NoteSectionProps };

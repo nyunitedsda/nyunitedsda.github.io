@@ -1,8 +1,6 @@
 import { type FC, useMemo, useState } from "react";
 import StreamDisplay from "./StreamDisplay";
 
-// FEATURE: Consider giving the user the options of `Grid` or `Series` archive layout [button, dropdown , switch]
-
 // DOC_NOTES: Archive stream Content location - https://https://my.churchstreaming.tv/StreamingSettings/embed/
 
 const ArchiveStream: FC = () => {

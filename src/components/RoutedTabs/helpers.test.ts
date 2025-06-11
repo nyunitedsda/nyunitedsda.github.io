@@ -8,7 +8,7 @@ describe("mapRoutesToTabs", () => {
 	it("maps routes to tabs correctly", () => {
 		const routes: RouteObject[] = [
 			{ index: false, path: "/terms-of-service", element: defaultElement },
-			{index: false,  path: "/privacy-policy", element: defaultElement },
+			{ index: false, path: "/privacy-policy", element: defaultElement },
 			{ index: false, path: "/other-page", element: defaultElement },
 		];
 
@@ -43,7 +43,9 @@ describe("mapRoutesToTabs", () => {
 	});
 
 	it("returns empty array when no matches found", () => {
-		const routes: RouteObject[] = [{ path: "/other-route", element: defaultElement }];
+		const routes: RouteObject[] = [
+			{ path: "/other-route", element: defaultElement },
+		];
 
 		const tabList: RouteTabsItem[] = [
 			{

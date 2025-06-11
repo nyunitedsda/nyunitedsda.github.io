@@ -6,8 +6,9 @@ import type { NotificationCardProps } from "./types";
 const defaultProps = {
 	id: 1,
 	icon: <div data-testid="icon">{"A"}</div>,
-	type: "service" as NotificationCardProps["type"],
+	type: "event" as NotificationCardProps["type"],
 	title: "Test Title",
+	location: 'home',
 };
 
 describe("NotificationCard", () => {

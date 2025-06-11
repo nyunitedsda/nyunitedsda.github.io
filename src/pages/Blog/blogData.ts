@@ -1,8 +1,7 @@
 import type { BlogType } from "./types";
 
-
 export const blogPost: BlogType = {
-	id: 1, 
+	id: 1,
 	title: "Edification and Growth of Our Members and Visitors",
 	author: "SUPERUSER ACCOUNT",
 	publishDate: "March 15, 2024",
@@ -39,5 +38,5 @@ export const authorMetaInfo = [
 	"publishDate",
 	"views",
 	"comments",
-	"rating"
+	"rating",
 ];

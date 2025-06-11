@@ -1,10 +1,11 @@
-import { alpha } from "@mui/material/styles";
 import type { MenuButtonStyle } from "./types";
 
 export const menuButtonStyles: MenuButtonStyle = {
 	activeBtnSx: {
-		color: "primary.light",
-		fontWeight: "bold",
+		"&": {
+			color: "primary.light",
+			fontWeight: "bold",
+		},
 		"&:after": {
 			content: '""',
 			position: "absolute",
@@ -19,9 +20,9 @@ export const menuButtonStyles: MenuButtonStyle = {
 	buttonSx: {
 		color: "text.primary",
 		display: "flex",
-		fontSize: (theme) => theme.typography.body1,
+		fontSize: (theme) => theme.typography.body1.fontSize,
 		"&:hover": {
-			backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.38),
+			border: (theme) => `0.1px solid ${theme.palette.primary.light}`,
 		},
 	},
 };

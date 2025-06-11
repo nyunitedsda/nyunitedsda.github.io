@@ -48,8 +48,6 @@ const PRAY_MSG =
 	'"The LORD is my strength and my shield; my heart trusts in him, and he helps me." - <i>Psalm 28:7</i>';
 const REFRESH = "Refresh Page";
 
-// TODO: Check Error Page text color
-
 const Error: FC = () => {
 	const { menuItems } = useFormattedRoutes();
 

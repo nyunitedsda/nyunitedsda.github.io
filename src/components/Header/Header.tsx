@@ -16,7 +16,6 @@ import { headerStyles } from "./styles";
 
 const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
 	headerStyles;
-// FEATURE: Enhance and ensure consistency in the desktop and mobile menu items active and regular states
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
@@ -70,7 +69,6 @@ const Header: FC = () => {
 						))}
 					</Box>
 
-					{/* FEATURE: Add a More options Button for text warp in the menu button */}
 					<Box sx={desktopDisplaySx}>
 						<ThemeToggleButton />
 					</Box>

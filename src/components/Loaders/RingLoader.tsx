@@ -28,7 +28,6 @@ const RingLoader: FC<RingLoaderProps> = (props) => {
 			<Loader
 				color={alpha(theme.palette.primary.main, 0.6)}
 				cssOverride={override}
-				// size={150}
 				aria-label="Loading Spinner"
 				data-testid="loader"
 				{...props}

@@ -1,5 +1,5 @@
 import { Stack, type SxProps, type Theme } from "@mui/material";
-import { type FC } from "react";
+import type { FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import MinistryCard from "./components/MinistryCard";
 import NotificationCard from "./components/NotificationCard/NotificationCard";
@@ -38,9 +38,7 @@ const rootSx: SxProps<Theme> = {
 };
 
 const MINISTRIES_HEADER = "Ministries Links";
-const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
-
-// TODO: Simplify this Home page component
+const LATEST_NOTIFICATIONS_HEADER = "Announcements";
 
 const Home: FC = () => {
 	return (
@@ -58,6 +56,7 @@ const Home: FC = () => {
 					{sliderImages.map((i) => (
 						<Stack direction="row" className="embla__slide" key={i.src}>
 							<img
+								loading="lazy"
 								className="embla__slide__number"
 								src={i.src}
 								alt={i.alt ?? `${i.src}-image`}

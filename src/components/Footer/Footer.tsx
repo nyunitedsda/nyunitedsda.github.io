@@ -34,16 +34,12 @@ const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
 	color: "primary.contrastText !important",
 	"& *": {
-		// color: 'inherit',
 		color: (theme) => `${theme.palette.primary.contrastText} !important`,
 	},
-	// zIndex: 'inherit',
 	p: 2,
 	width: "100%",
-	// position: 'relative',
 	"& a": {
 		textDecoration: "none",
-		// color: "inherit",
 		color: "primary.contrastText",
 	},
 };
@@ -67,8 +63,6 @@ const iconMap: Record<string, ReactNode> = {
 	Phone: <Phone fontSize="small" />,
 	Email: <Email fontSize="small" />,
 };
-
-// FEATURE: Enhance the footer links so older users know you can click the link
 
 const Footer: FC = () => {
 	const { routes, menuItems } = useFormattedRoutes();

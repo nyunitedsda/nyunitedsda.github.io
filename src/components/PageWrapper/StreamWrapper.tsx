@@ -27,8 +27,6 @@ const rootSx: SxProps<Theme> = {
 	height: "auto",
 };
 
-// TODO: Reduce the containerSx pt for mobile
-// FEATURE: Enhance scroll to top button style
 
 const PageWrapper: FC = () => {
 	const theme = useTheme();

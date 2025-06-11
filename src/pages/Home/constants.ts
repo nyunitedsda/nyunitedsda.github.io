@@ -19,27 +19,6 @@ export const notifications = [
 	},
 ];
 
-export const services = [
-	{
-		id: 1,
-		day: "Sunday",
-		time: "9:00 AM & 11:00 AM",
-		name: "Sunday Worship",
-	},
-	{
-		id: 2,
-		day: "Wednesday",
-		time: "7:00 PM",
-		name: "Midweek Service",
-	},
-	{
-		id: 3,
-		day: "Friday",
-		time: "6:30 PM",
-		name: "Youth Group",
-	},
-];
-
 export const ministries = [
 	{
 		title: "Revive Reform Ministry",

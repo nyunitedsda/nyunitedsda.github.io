@@ -16,11 +16,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type FC, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import { authorMetaInfo } from "./blogData";
 import blogPosts from "./blogPosts";
 import type { BlogType } from "./types";
-import RingLoader from "../../components/Loaders/RingLoader";
 
 const ICONS = {
 	author: <AccountCircleOutlined />,
@@ -155,7 +155,7 @@ const BlogDetails: FC = () => {
 							</Box>
 						</>
 					) : (
-						<RingLoader/>
+						<RingLoader />
 					)}
 				</>
 			</Stack>

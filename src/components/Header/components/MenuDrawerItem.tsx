@@ -1,12 +1,8 @@
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import type { SxProps, Theme } from "@mui/material/styles";
+import MenuItem from "@mui/material/MenuItem";
 import { type FC, type MouseEvent, useCallback } from "react";
-import { menuItemStyles } from "../styles";
 import type { MenuDrawerItemProps } from "./types";
-
-const { activeMenuItemSx, menuItemSx } = menuItemStyles;
 
 const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 	disabled = false,
@@ -25,15 +21,10 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 	);
 
 	return (
-		<ListItemButton
+		<MenuItem
 			disabled={disabled}
 			onClick={handleClick}
-			sx={
-				{
-					...menuItemSx,
-					...(isActive ? activeMenuItemSx : {}),
-				} as SxProps<Theme>
-			}
+			selected={isActive}
 			aria-current={isActive ? "page" : undefined}
 		>
 			<ListItemIcon>{icon}</ListItemIcon>
@@ -43,7 +34,7 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 					{expandedIcon}
 				</ListItemIcon>
 			)}
-		</ListItemButton>
+		</MenuItem>
 	);
 };
 export default MenuDrawerItem;

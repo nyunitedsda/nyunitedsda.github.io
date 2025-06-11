@@ -11,3 +11,4 @@ export const LEGAL_TAB_LIST: RouteTabsItem[] = [
 		content: privacyStatement,
 	},
 ];
+

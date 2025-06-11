@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import { type FC } from "react";
+import type { FC } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
 import Footer from "../Footer/Footer";
@@ -28,9 +28,6 @@ const rootSx: SxProps<Theme> = {
 	overflowY: "auto",
 	width: "100%",
 };
-
-// TODO: Reduce the containerSx pt for mobile
-// FEATURE: Enhance scroll to top button style
 
 const PageWrapper: FC = () => {
 	const theme = useTheme();
