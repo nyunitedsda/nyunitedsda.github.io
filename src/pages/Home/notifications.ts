@@ -1,51 +1,45 @@
 import dayjs from "dayjs";
+import type { EventAnnouncement } from "./types";
 
-export interface ChurchNotificationProps {
-	id: number;
-	type: "event" | "service" | "announcement";
-	title: string;
-	date?: string;
-	time?: string;
-	location?: string;
-	description?: string;
-	phoneNumber?: string;
-	conferenceCode?: string;
-	speaker?: string;
-	sermonTitle?: string;
-	addToCalendarLink?: string;
-}
-
-export const notifications: ChurchNotificationProps[] = [
+export const notifications: EventAnnouncement[] = [
 	{
 		id: 1,
 		type: "service",
 		title: "Church Service",
-		date: dayjs().day(6).format("MMM DD, YYYY"),
+		event_date: dayjs().day(6),
 		speaker: "Pastor John Lomacang",
-		sermonTitle: "STAND",
+		sermon: "STAND",
+		recurring: false,
+		date_format: "MMM D, YYYY",
 	},
 	{
 		id: 2,
 		type: "event",
 		title: "Wednesday Bible Study",
-		time: dayjs().day(3).hour(18).minute(30).format("dddd, h:mm a"),
+		event_date: dayjs().day(3).hour(18).minute(30),
 		location: "Fellowship Hall & Via Zoom",
+		recurring: true,
+		date_format: "dddd, h:mm a",
 	},
 	{
 		id: 4,
-		type: "event",
+		type: "virtual",
 		title: "Prayer Meeting",
-		time: dayjs().day(2).hour(18).minute(30).format("dddd, h:mm a"),
+		event_date: dayjs().day(2).hour(18).minute(30),
 		location: "Via phone conference",
 		phoneNumber: "971-224-6575",
-		conferenceCode: "519018",
+		conference_code: "519018",
+		recurring: true,
+		date_format: "dddd, h:mm a",
 	},
 	{
 		id: 3,
 		type: "event",
 		title: "TVCJA Soup and Salad Fundraiser",
-		time: dayjs().day(3).hour(17).minute(45).format("dddd, h:mm a"),
+		event_date: dayjs().day(3).hour(17).minute(45),
 		location: "Fellowship Hall",
+		recurring: true,
+		date_format: "dddd, h:mm a",
 		description:
 			"The Thompsonville Christian Junior Academy is offering a soup and salad meal as a fundraiser every Wednesday before Wednesday Bible Study. Come out and support the school by having a meal before joining in Wednesday Bible Study.",
 	},

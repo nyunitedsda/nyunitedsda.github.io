@@ -1,6 +1,6 @@
 export interface BlogType {
 	id: number;
-  title: string;
+	title: string;
 	author: string;
 	publishDate: string;
 	views?: number;

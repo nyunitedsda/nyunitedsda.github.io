@@ -3,7 +3,7 @@ import contactInfo from "../../constants/contactInfo";
 
 // const {MODE} = import.meta.env
 
-const WEBSITE_TITLE = 
+const WEBSITE_TITLE =
 	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
 
 const socialMediaInfo = [
@@ -28,8 +28,6 @@ const socialMediaInfo = [
 		icon: "YouTube",
 	},
 ];
-
-
 
 const MOTTO = "A place of worship, community, and spiritual growth.";
 const QUICK_LINKS = "Quick Links";

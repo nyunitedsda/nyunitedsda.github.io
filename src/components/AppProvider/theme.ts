@@ -1,8 +1,5 @@
-"use client";
+import { alpha, createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-
-// Create a theme instance with spiritual and welcoming colors
 const theme = responsiveFontSizes(
 	createTheme({
 		colorSchemes: {
@@ -33,12 +30,55 @@ const theme = responsiveFontSizes(
 			borderRadius: 8,
 		},
 		components: {
+			MuiMenuItem: {
+				styleOverrides: {
+					root: ({ theme }) => ({
+						"&": {
+							height: theme.spacing(6),
+							paddingLeft: `${theme.spacing(2)}`,
+							borderRadius: 3,
+						},
+						"&.Mui-selected": {
+							fontWeight: "bold",
+							backgroundColor: `${theme.palette.primary.light}`,
+							color: `${theme.palette.primary.contrastText} !important`,
+							"& svg": {
+								color: theme.palette.primary.contrastText,
+							},
+							"&:hover": {
+								backgroundColor: alpha(theme.palette.primary.main, 0.7),
+							},
+						},
+						"&:not(.Mui-selected):hover": {
+							backgroundColor: alpha(theme.palette.primary.light, 0.7),
+							color: theme.palette.primary.contrastText,
+						},
+					}),
+				},
+			},
+			MuiListItemText: {
+				styleOverrides: {
+					root: ({ theme }) => ({
+						paddingLeft: `${theme.spacing(1)}`,
+						"& .MuiTypography-root": {
+							textAlign: "start",
+						},
+					}),
+				},
+			},
+			MuiButtonBase: {
+				styleOverrides: {
+					root: {},
+				},
+			},
 			MuiButton: {
 				styleOverrides: {
-					root: {
-						textTransform: "none",
-						fontWeight: 600,
-					},
+					root: ({ theme }) => ({
+						"&": {
+							color: theme.palette.text.primary,
+							fontSize: theme.typography.body1.fontSize,
+						},
+					}),
 				},
 				defaultProps: {
 					size: "medium",
@@ -78,7 +118,9 @@ const theme = responsiveFontSizes(
 			MuiTypography: {
 				styleOverrides: {
 					root: ({ theme }) => ({
-						color: theme.palette.text.primary,
+						"& :not(.Mui-selected)": {
+							color: theme.palette.text.primary,
+						},
 					}),
 				},
 			},

@@ -6,9 +6,17 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useCallback, useMemo, useState } from "react";
+import { performQuery } from "../../api/queryData";
+import { getArticles } from "../../api/request/articles";
+import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
-import blogPosts from "./blogPosts";
+import {
+	BLOG_HEADER,
+	BLOG_PREVIEW_LENGTH,
+	BLOG_SUBHEADER,
+	DEFAULT_POST_PER_PAGE,
+} from "./blogConstant";
 
 const containerSx: SxProps<Theme> = {
 	alignContent: "flex-start",
@@ -17,7 +25,7 @@ const containerSx: SxProps<Theme> = {
 	flexWrap: "wrap",
 	"& .MuiCard-root": {
 		height: (theme) => `${theme.spacing(32.5)}`,
-		justifySelf: 'center',
+		justifySelf: "center",
 		textOverflow: "ellipsis",
 		whiteSpace: "break-spaces",
 		"& svg, .MuiButton-root": {
@@ -32,29 +40,22 @@ const paginationSx: SxProps<Theme> = {
 	mt: 6,
 };
 
-const DEFAULT_POST_PER_PAGE = 4;
-const HEADER = "Our Blog";
-const SUBHEADER =
-	"Insights, reflections, and spiritual guidance from our church community.";
-const PREVIEW_LENGTH = 140;
-
-// FEATURE: Add the blog display page, with route, api call, and render enable the `Read more` button
-// FEATURE: Add the ability to change the pagination of blog post
-
 const Blog: FC = () => {
 	const [page, setPage] = useState(1);
 	const [postsPerPage, _setPostsPerPage] = useState<number>(
 		DEFAULT_POST_PER_PAGE,
 	);
 
+	const { isLoading, data } = performQuery(["get-articles"], getArticles);
+
 	const totalPages = useMemo(
-		() => Math.ceil(blogPosts.length / postsPerPage),
-		[blogPosts, postsPerPage],
+		() => Math.ceil((data ?? []).length / postsPerPage),
+		[data, postsPerPage],
 	);
 
 	const currentPosts = useMemo(
-		() => blogPosts.slice((page - 1) * postsPerPage, page * postsPerPage),
-		[blogPosts, postsPerPage, page],
+		() => (data ?? []).slice((page - 1) * postsPerPage, page * postsPerPage),
+		[data, postsPerPage, page],
 	);
 
 	const handlePageChange = useCallback(
@@ -67,36 +68,49 @@ const Blog: FC = () => {
 
 	return (
 		<>
-			<PageTitle title={HEADER} subtitle={SUBHEADER} />
+			<PageTitle title={BLOG_HEADER} subtitle={BLOG_SUBHEADER} />
 			<Grid container spacing={4} sx={containerSx}>
-				{currentPosts.map(({ id, title, author, content, publishDate }) => (
-					<Grid size={{ xs: 12, md: 6 }} key={id} className="blog-card">
-						<ProjectCard
-							header={{
-								title,
-								subheader: `${new Date(publishDate).toLocaleDateString()} | ${author}`,
-								avatar: <CalendarToday />,
-							}}
-							content={
-								<Typography variant="body1">
-									{content.length > PREVIEW_LENGTH
-										? `${content.slice(0, PREVIEW_LENGTH)}...`
-										: content}
-								</Typography>
-							}
-							actions={
-								<Button
-									size="small"
-									color="primary"
-									component={"a"}
-									href={`/blog/${id}`}
-								>
-									Read More
-								</Button>
-							}
-						/>
-					</Grid>
-				))}
+				{isLoading ? (
+					<RingLoader />
+				) : (
+					currentPosts.map(
+						({ id, title, author_id: author, content, publishDate }) => (
+							<Grid size={{ xs: 12, md: 6 }} key={id} className="blog-card">
+								<ProjectCard
+									header={{
+										title,
+										subheader: `${new Date(publishDate).toLocaleDateString()} | ${author}`,
+										avatar: <CalendarToday />,
+									}}
+									content={
+										<Typography
+											component="div"
+											variant="body1"
+											sx={{ "& p": { m: 0 } }}
+											dangerouslySetInnerHTML={{
+												__html: `${
+													content.length > BLOG_PREVIEW_LENGTH
+														? content.slice(0, BLOG_PREVIEW_LENGTH)
+														: content
+												}`,
+											}}
+										/>
+									}
+									actions={
+										<Button
+											size="small"
+											color="primary"
+											component={"a"}
+											href={`/blog/${id}`}
+										>
+											Read More
+										</Button>
+									}
+								/>
+							</Grid>
+						),
+					)
+				)}
 			</Grid>
 
 			<Stack direction={"row"} sx={paginationSx}>

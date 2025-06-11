@@ -11,7 +11,7 @@ import {
 	render,
 	screen,
 } from "../../utils/vitest-setup";
-import ThemeToggleButton from "./ThemeToggleButton";
+import ThemeToggleButton from "./ThemeToggleButton1";
 
 // Mock BEFORE importing the hook/component
 vi.mock("@mui/material/styles", async () => {

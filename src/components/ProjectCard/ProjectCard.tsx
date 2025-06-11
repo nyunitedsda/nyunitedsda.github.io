@@ -12,6 +12,7 @@ const cardContentSx: SxProps<Theme> = {
 	gap: 2,
 	flexGrow: 1,
 	overflowY: "auto",
+	py: 1,
 };
 
 const cardSx: SxProps<Theme> = (theme) => ({

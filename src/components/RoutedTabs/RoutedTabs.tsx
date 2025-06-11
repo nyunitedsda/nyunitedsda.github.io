@@ -24,6 +24,7 @@ const panelSx: SxProps<Theme> = {
 };
 
 const tabsSx: SxProps<Theme> = {
+	color: 'text.primary',
 	borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
 	"& .MuiTabs-indicator": {
 		color: "primary.light",

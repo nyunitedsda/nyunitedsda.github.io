@@ -10,24 +10,6 @@ const carouselStyle: SxProps<Theme> = {
 		gap: { xs: 1, sm: 3 },
 		p: 2,
 
-		// "& .embla__buttons": {
-		// 	alignItems: "center",
-		// 	justifyContent: {
-		// 		xs: "space-around",
-		// 		sm: "flex-start",
-		// 	},
-
-		// 	"& .MuiButtonBase-root:not(.Mui-disabled)": {
-		// 		// Insert your styles for elements without the .Mui-disabled class here.
-		// 		color: "primary.main",
-		// 	},
-
-		// 	"& .embla__button__svg": {
-		// 		// width: (theme) => `${theme.spacing(2)}`,
-		// 		// height: (theme) => `${theme.spacing(2)}`,
-		// 	},
-		// },
-
 		"& .embla__dots": {
 			flexGrow: 1,
 			justifyContent: { xs: "center", sm: "flex-end" },

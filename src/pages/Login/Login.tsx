@@ -18,10 +18,6 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { type FC, useCallback, useState } from "react";
 
-// TODO: Clean up, format, review, complete component
-// TODO: Sanitize all input data.
-// TODO: Prepare to server query
-
 const Login: FC = () => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const [isLogin, _setIsLogin] = useState<boolean>(true);

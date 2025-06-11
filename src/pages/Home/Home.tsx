@@ -1,8 +1,8 @@
 import { Stack, type SxProps, type Theme } from "@mui/material";
-import { type FC } from "react";
+import type { FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
+import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
 import MinistryCard from "./components/MinistryCard";
-import NotificationCard from "./components/NotificationCard/NotificationCard";
 import SectionWrapper from "./components/SectionWrapper";
 import { ministries } from "./constants";
 import { notifications } from "./notifications";
@@ -38,11 +38,9 @@ const rootSx: SxProps<Theme> = {
 };
 
 const MINISTRIES_HEADER = "Ministries Links";
-const LATEST_NOTIFICATIONS_HEADER = "Latest Notifications";
-
-// TODO: Simplify this Home page component
 
 const Home: FC = () => {
+	console.log("notifications: ", notifications);
 	return (
 		<Stack sx={rootSx}>
 			{/* Image Slides */}
@@ -58,6 +56,7 @@ const Home: FC = () => {
 					{sliderImages.map((i) => (
 						<Stack direction="row" className="embla__slide" key={i.src}>
 							<img
+								loading="lazy"
 								className="embla__slide__number"
 								src={i.src}
 								alt={i.alt ?? `${i.src}-image`}
@@ -68,7 +67,8 @@ const Home: FC = () => {
 			</SectionWrapper>
 
 			{/* Notification Slides */}
-			<SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
+			<PageAnnouncements />
+			{/* <SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
 				<Carousel
 					sx={{
 						"& .embla__viewport .embla__container": {
@@ -82,7 +82,7 @@ const Home: FC = () => {
 						<NotificationCard className="embla__slide" key={i.id} {...i} />
 					))}
 				</Carousel>
-			</SectionWrapper>
+			</SectionWrapper> */}
 
 			{/* Ministries content */}
 			<SectionWrapper header={MINISTRIES_HEADER}>

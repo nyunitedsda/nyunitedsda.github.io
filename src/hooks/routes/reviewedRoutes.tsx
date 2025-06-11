@@ -2,25 +2,16 @@ import Stack from "@mui/material/Stack";
 import { type FC, lazy } from "react";
 import { Outlet, type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-const BlogDetails = lazy(() =>  import("../../pages/Blog/BlogDetails"));
-// import { default as StreamWrapper } from "../../components/PageWrapper/StreamWrapper.tsx";
-// import AboutUs from "../../pages/AboutUs/AboutUs";
-// import Blog from "../../pages/Blog/Blog";
-// import Contact from "../../pages/Contact/Contact";
-// import Donations from "../../pages/Donations/Donations";
-// import Error from "../../pages/Error/Error.tsx";
-// import Home from "../../pages/Home/Home";
-// import LiveBroadcast from "../../pages/LiveBroadcast/LiveBroadcast";
-// import UserAgreements from "../../pages/UserAgreements/UserAgreements";
-
+const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
 const Contact = lazy(() => import("../../pages/Contact/Contact"));
 const Donations = lazy(() => import("../../pages/Donations/Donations"));
 const Error = lazy(() => import("../../pages/Error/Error.tsx"));
 const Home = lazy(() => import("../../pages/Home/Home"));
-const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
-// const StreamWrapper = lazy(() => import("../../pages/LiveBroadcast/StreamWrapper.tsx"));
+const LiveBroadcast = lazy(
+	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
+);
 const UserAgreements = lazy(
 	() => import("../../pages/UserAgreements/UserAgreements"),
 );
@@ -33,7 +24,6 @@ const MinimalLayout: FC = () => (
 	</Stack>
 );
 
-// TODO: Review the menu names for streaming with Zinee
 // NOTE: Id is used to find the routes that will be menu items
 
 // Public routes with main layout: blog/:id

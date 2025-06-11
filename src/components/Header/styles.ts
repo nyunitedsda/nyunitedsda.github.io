@@ -2,10 +2,6 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import type { BrandingStyle, HeaderStyle } from "./components/types";
 
 type StyleExport = Record<string, SxProps<Theme>>;
-type MenuItemStyleExport = StyleExport & {
-	activeMenuItemSx: SxProps<Theme>;
-	menuItemSx: SxProps<Theme>;
-};
 
 export const headerStyles: HeaderStyle = {
 	desktopDisplaySx: {
@@ -44,28 +40,6 @@ export const brandingStyles: BrandingStyle = {
 		flexGrow: 1,
 		gap: 2,
 		maxHeight: (theme) => theme.spacing(8),
-	},
-};
-
-export const menuItemStyles: MenuItemStyleExport = {
-	activeMenuItemSx: {
-		backgroundColor: (theme) => theme.palette.primary.light,
-		color: "primary.contrastText",
-		fontWeight: "bold",
-		"& svg": {
-			color: "primary.contrastText",
-		},
-	},
-	menuItemSx: {
-		backgroundColor: "transparent",
-		color: "text.primary",
-		pl: 3,
-		"&:hover": {
-			backgroundColor: "action.hover",
-		},
-		"& svg": {
-			color: "text.primary",
-		},
 	},
 };
 

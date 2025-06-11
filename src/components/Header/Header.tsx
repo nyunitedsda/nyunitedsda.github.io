@@ -8,7 +8,7 @@ import { type FC, useCallback, useState } from "react";
 import { useLocation } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import MenuButton from "../Buttons/MenuButton";
-import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import ThemeToggleButton from "../Buttons/ThemeToggleButton1";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
@@ -16,7 +16,6 @@ import { headerStyles } from "./styles";
 
 const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
 	headerStyles;
-// FEATURE: Enhance and ensure consistency in the desktop and mobile menu items active and regular states
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
@@ -70,7 +69,6 @@ const Header: FC = () => {
 						))}
 					</Box>
 
-					{/* FEATURE: Add a More options Button for text warp in the menu button */}
 					<Box sx={desktopDisplaySx}>
 						<ThemeToggleButton />
 					</Box>

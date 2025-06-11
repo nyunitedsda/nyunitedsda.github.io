@@ -1,10 +1,13 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { type FC } from "react";
+import type { FC } from "react";
 import Image from "../../../components/Image/Image";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
+import { cardStyles } from "./AnnouncementCard/cardStyles";
 import type { MinistryCardProps } from "./types";
+
+const { headerSx } = cardStyles;
 
 const contentSx: SxProps<Theme> = {
 	display: "flex",
@@ -22,10 +25,7 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
 		<ProjectCard
 			header={{
 				...header,
-				sx: {
-					bgcolor: "primary.main",
-					color: "primary.contrastText",
-				},
+				sx: headerSx,
 			}}
 			content={
 				<Box sx={contentSx}>

@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
+import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Popper from "@mui/material/Popper";
@@ -12,17 +13,16 @@ import {
 	type FC,
 	type MouseEvent,
 	useCallback,
+	useEffect,
 	useMemo,
 	useRef,
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import { menuItemStyles } from "../Header/styles";
 import { menuButtonStyles } from "./styles";
 import type { MenuButtonProps } from "./types";
 
 const { activeBtnSx, buttonSx } = menuButtonStyles;
-const { activeMenuItemSx, menuItemSx } = menuItemStyles;
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
 	const { isActive, path, children, buttonProps, menuItems } = props;
@@ -35,7 +35,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		return menuItems && menuItems?.length > 0
 			? menuItems.some((i) => isActive(i.path))
 			: isActive(path);
-	}, [menuItems, path]);
+	}, [menuItems, path, isActive]);
 
 	const endIcon = useMemo(
 		() =>
@@ -65,12 +65,28 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		[handleMenuClose],
 	);
 
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape" && isMenuVisible) {
+				handleMenuClose();
+			}
+		};
+
+		document.addEventListener("keydown", handleKeyDown);
+		return () => {
+			document.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [isMenuVisible, handleMenuClose]);
+
 	return (
 		<>
 			<Button
 				{...buttonProps}
+				id="MenuBtn"
+				aria-haspopup={menuItems ? "true" : undefined}
+				aria-expanded={isMenuVisible ? "true" : undefined}
 				endIcon={endIcon}
-				onMouseOver={menuItems ? handleMenuOpen : buttonProps?.onClick}
+				onClick={menuItems ? handleMenuOpen : buttonProps?.onClick}
 				href={!menuItems ? path : undefined}
 				ref={buttonRef}
 				sx={
@@ -80,7 +96,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 					} as SxProps<Theme>
 				}
 			>
-				{children} {/* name */}
+				{children}
 			</Button>
 			{isMenuVisible && menuItems && (
 				<Popper
@@ -108,14 +124,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 												key={i.name}
 												selected={isActive(i.path)}
 												onClick={(event) => handleMenuItemSelect(event, i.path)}
-												sx={
-													{
-														...menuItemSx,
-														...(isActive(i.path) ? activeMenuItemSx : {}),
-													} as SxProps<Theme>
-												}
 											>
-												{i.name}
+												<ListItemText primary={i.name} />
 											</MenuItem>
 										))}
 									</MenuList>
