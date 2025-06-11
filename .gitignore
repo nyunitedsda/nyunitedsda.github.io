@@ -29,9 +29,3 @@ tmp/
 stats.html
 .vite
 *webconfigcontent.ts
-
-
-  ├── .env                 # Shared variables
-  ├── .env.development     # Development-only 
-  ├── .env.test            # Testing-specific
-  └── .env.production      # Production-only
