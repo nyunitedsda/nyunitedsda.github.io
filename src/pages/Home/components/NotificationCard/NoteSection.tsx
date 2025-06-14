@@ -17,10 +17,12 @@ const NoteSection: FC<NoteSectionProps> = ({ icon, content, title }) => (
 	<Box sx={noteSx}>
 		{icon && icon}
 		<Box sx={contentSx}>
-			<Typography variant="body1" color="text.secondary" fontWeight="bold">
-				{title}
-			</Typography>
-			<Typography variant="body1">{content}</Typography>
+			{title && (
+				<Typography variant="body1" color="text.secondary" fontWeight="bold">
+					{title}
+				</Typography>
+			)}
+			{content && <Typography variant="body1">{content}</Typography>}
 		</Box>
 	</Box>
 );

@@ -1,13 +1,20 @@
-import { Email, LocationOn, Phone } from "@mui/icons-material";
-import { Box, Grid, Typography } from "@mui/material";
+import {
+	Email,
+	EmailOutlined,
+	LocationOn,
+	LocationOnOutlined,
+	Phone,
+	PhoneOutlined,
+} from "@mui/icons-material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import type { FC } from "react";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import contactInfo from "../../constants/contactInfo";
 import services from "../../constants/services";
+import NoteSection from "../Home/components/NotificationCard/NoteSection";
 import MapDirection from "./components/MapDirection";
 import { COMPANY, HEADER, SERVICES, SUBHEADER } from "./constants";
-import NoteSection from "../Home/components/NotificationCard/NoteSection";
 
 const Contact: FC = () => {
 	return (
@@ -23,34 +30,60 @@ const Contact: FC = () => {
 					{COMPANY}
 				</Typography>
 
-{/* address */}
-				<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-					<LocationOn color="primary" sx={{ mr: 2, fontSize: 24 }} />
-					<Box>
-						<Typography variant="body1" sx={{ mb: 1 }}>
-							{contactInfo.street}
-						</Typography>
-						<Typography variant="body1" sx={{ mb: 1 }}>
-							{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
-						</Typography>
+				{/* address */}
+				<Stack sx={{ mb: 2, gap: 1 }}>
+					{[
+						{
+							icon: <LocationOnOutlined />,
+							content: (
+								<>
+									<Typography variant="body1">{contactInfo.street}</Typography>
+									<Typography variant="body1">
+										{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
+									</Typography>
+								</>
+							),
+						},
+						{
+							icon: <PhoneOutlined />,
+							content: contactInfo.phone,
+						},
+						{
+							icon: <EmailOutlined />,
+							content: contactInfo.email,
+						},
+					].map((i) => (
+						<NoteSection {...i} key={i?.content?.toString()} />
+					))}
+
+					{/* <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+						<LocationOn color="primary" sx={{ mr: 2, fontSize: 24 }} />
+						<Box>
+							<Typography variant="body1" sx={{ mb: 1 }}>
+								{contactInfo.street}
+							</Typography>
+							<Typography variant="body1" sx={{ mb: 1 }}>
+								{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
+							</Typography>
+						</Box>
+					</Box> */}
+
+					{/* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+						<Phone color="primary" sx={{ mr: 2, fontSize: 24 }} />
+						<Box>
+							<Typography variant="body1">{contactInfo.phone}</Typography>
+						</Box>
 					</Box>
-				</Box>
 
-				<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-					<Phone color="primary" sx={{ mr: 2, fontSize: 24 }} />
-					<Box>
-						<Typography variant="body1">{contactInfo.phone}</Typography>
-					</Box>
-				</Box>
+					<NoteSection content={contactInfo.email} icon={<Email />} title="" /> */}
+				</Stack>
 
-
-			<NoteSection content={contactInfo.email} icon={<Email />} title=""/>
-				<Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+				{/* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
 					<Email color="primary" sx={{ mr: 2, fontSize: 24 }} />
 					<Box>
 						<Typography variant="body1">{contactInfo.email}</Typography>
 					</Box>
-				</Box>
+				</Box> */}
 
 				<Box sx={{ display: "flex", flexDirection: "column", mb: 3 }}>
 					<Typography
