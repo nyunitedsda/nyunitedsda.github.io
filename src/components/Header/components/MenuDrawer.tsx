@@ -9,6 +9,7 @@ import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import { type FC, type ReactNode, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
+import ThemeToggleButton from "../../Buttons/ThemeToggleButton1";
 import { menuDrawerStyles } from "../styles";
 import MenuDrawerItem from "./MenuDrawerItem";
 import OrganizationBranding from "./OrganizationBranding";
@@ -75,17 +76,17 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 					),
 				)}
 			</List>
-			{footer && (
-				<Stack
-					sx={{
-						borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-					}}
-				>
-					{footer?.map((i) => (
-						<MenuDrawerItem {...i} key={i.text} />
-					))}
-				</Stack>
-			)}
+
+			<Stack
+				sx={{
+					borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+				}}
+			>
+				<ThemeToggleButton expanded />
+				{footer?.map((i) => (
+					<MenuDrawerItem {...i} key={i.text} />
+				))}
+			</Stack>
 		</Stack>
 	);
 };
