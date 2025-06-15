@@ -11,12 +11,7 @@ import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./components/ContactSection";
 import MapDirection from "./components/MapDirection";
 import ServiceTimes from "./components/ServiceTimes";
-import {
-	COMPANY,
-	HEADER,
-	MAILING_ADDRESS_TITLE,
-	SUBHEADER,
-} from "./constants";
+import { COMPANY, HEADER, MAILING_ADDRESS_TITLE, SUBHEADER } from "./constants";
 
 const contactDetailSx: SxProps<Theme> = {
 	display: "flex",

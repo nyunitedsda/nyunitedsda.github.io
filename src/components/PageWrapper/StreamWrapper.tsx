@@ -27,7 +27,6 @@ const rootSx: SxProps<Theme> = {
 	height: "auto",
 };
 
-
 const PageWrapper: FC = () => {
 	const theme = useTheme();
 

@@ -5,11 +5,11 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useMemo } from "react";
 import ProjectCard from "../../../../components/ProjectCard/ProjectCard";
 import NoteSection from "./NoteSection";
+import { cardStyles } from "./cardStyles";
 import { createFormattedContent } from "./helpers";
 import type { AnnouncementCardProps } from "./types";
-import { cardStyles } from "./cardStyles";
 
-const {headerSx} = cardStyles;
+const { headerSx } = cardStyles;
 
 const descriptionSx: SxProps<Theme> = {
 	pt: 2,

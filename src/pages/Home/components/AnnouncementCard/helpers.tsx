@@ -70,7 +70,7 @@ const createFormattedContent = (props: EventAnnouncement): Section[] => {
 				};
 			}
 		}
-		if(section) elements.push(section);
+		if (section) elements.push(section);
 	});
 	return elements;
 };

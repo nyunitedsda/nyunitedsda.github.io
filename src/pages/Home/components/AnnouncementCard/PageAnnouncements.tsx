@@ -15,7 +15,7 @@ const PageAnnouncements: FC = () => {
 		getAnnouncements,
 	);
 
-  console.log('data: ', data);
+	console.log("data: ", data);
 	return (
 		<SectionWrapper header={PAGE_ANNOUNCEMENT_HEADER}>
 			<Carousel

@@ -73,6 +73,6 @@ export type Announcement = {
 	author_id: number;
 	/** Date and time when the event will occur */
 	event_date?: Date;
-  /** Display date format for event_date */
-  date_format: string;
+	/** Display date format for event_date */
+	date_format: string;
 };

@@ -22,7 +22,7 @@ const getDatabaseList = async <T extends { id: number }>(
 };
 
 const getDatabaseItem = async <T extends { id: number }>(
-  id: number,
+	id: number,
 	entity: DatabaseEntity,
 ): Promise<T> => {
 	try {
@@ -38,4 +38,4 @@ const getDatabaseItem = async <T extends { id: number }>(
 		return Promise.reject(error);
 	}
 };
-export {getDatabaseItem, getDatabaseList };
+export { getDatabaseItem, getDatabaseList };
