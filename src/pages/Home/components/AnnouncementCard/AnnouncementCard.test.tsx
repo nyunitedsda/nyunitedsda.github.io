@@ -1,19 +1,23 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import NotificationCard from "./AnnouncementCard";
-import type { NotificationCardProps } from "./types";
+import AnnouncementCard from "./AnnouncementCard";
+import type { AnnouncementCardProps } from "./types";
 
 const defaultProps = {
 	id: 1,
 	icon: <div data-testid="icon">{"A"}</div>,
-	type: "event" as NotificationCardProps["type"],
+	type: "event",
 	title: "Test Title",
 	location: "home",
+	recurring: true,
+	date_format: "MMM YYY",
 };
 
 describe("NotificationCard", () => {
 	it("renders NotificationCard", () => {
-		const { getByText } = render(<NotificationCard {...defaultProps} />);
+		const { getByText } = render(
+			<AnnouncementCard {...(defaultProps as AnnouncementCardProps)} />,
+		);
 
 		expect(getByText("NotificationCard Component")).toBeInTheDocument();
 	});

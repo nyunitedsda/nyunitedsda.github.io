@@ -2,7 +2,6 @@ import { Stack, Typography } from "@mui/material";
 import type { FC } from "react";
 import { performQuery } from "../../api/queryData";
 import { getDonations } from "../../api/request/donations";
-import type { Donations } from "../../api/request/types";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
@@ -10,6 +9,8 @@ import {
 	DONATION_SUBHEADER,
 	DONATION_TEXT,
 } from "../../constants/donationConstant";
+
+import type { Donations as DonationsType } from "../../api/request/types";
 
 const Donations: FC = () => {
 	const { isLoading, data } = performQuery(["get-donations"], getDonations);
@@ -31,7 +32,7 @@ const Donations: FC = () => {
 				)}
 
 				{!isLoading &&
-					(data || ([] as Donations[])).map((i) => (
+					(data || ([] as DonationsType[])).map((i) => (
 						<Typography
 							key={i.title}
 							color="text.primary"
