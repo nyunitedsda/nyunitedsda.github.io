@@ -1,10 +1,12 @@
 import Stack from "@mui/material/Stack";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import type { FC } from "react";
+import { type FC, useContext } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
+import MessageContext from "../../contexts/MessageContext/context";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import NotificationBanner from "../NotificationBanner/NotificationBanner";
 import ProjectSuspense from "../ProjectSuspense/ProjectSuspense";
 import PageContentContainer from "./PageContentContainer";
 
@@ -31,8 +33,22 @@ const rootSx: SxProps<Theme> = {
 
 const PageWrapper: FC = () => {
 	const theme = useTheme();
+	const { notifications } = useContext(MessageContext);
 	return (
 		<Stack sx={rootSx}>
+			{notifications.map((i) => (
+				<NotificationBanner
+					dismissible
+					id={i.id}
+					key={i.id}
+					message="Learn about Material 3"
+					open
+					severity="success"
+					showIcon
+					title="The latest version of MUI"
+				/>
+				// <Notification {...i} key={i.id} />
+			))}
 			<Header />
 			<PageContentContainer sx={containerSx}>
 				<ProjectSuspense>

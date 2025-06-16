@@ -45,7 +45,7 @@ const Header: FC = () => {
 					<IconButton
 						sx={hamburgerMenuSx}
 						aria-label="open drawer"
-						color="inherit"
+						color="primary"
 						edge="start"
 						onClick={handleDrawerToggle}
 						size="large"
