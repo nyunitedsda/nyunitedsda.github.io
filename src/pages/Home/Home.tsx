@@ -7,6 +7,7 @@ import SectionWrapper from "./components/SectionWrapper";
 import { ministries } from "./constants";
 import { notifications } from "./notifications";
 import sliderImages from "./sliderImages";
+import { performMutation } from "../../api/queryData";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -40,7 +41,10 @@ const rootSx: SxProps<Theme> = {
 const MINISTRIES_HEADER = "Ministries Links";
 
 const Home: FC = () => {
-	console.log("notifications: ", notifications);
+
+// const {data} = performMutation(['delete-donation-by-id', {id: 14}], )
+
+
 	return (
 		<Stack sx={rootSx}>
 			{/* Image Slides */}

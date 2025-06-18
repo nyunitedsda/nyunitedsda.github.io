@@ -8,20 +8,20 @@ import {
 	useQuery,
 } from "@tanstack/react-query";
 
-function performQuery<TQueryFnData = unknown, TError = unknown>(
+const performQuery = <TQueryFnData = unknown, TError = unknown>(
 	key: QueryKey,
 	queryFn: QueryFunction<TQueryFnData, QueryKey>,
 	options?: Omit<
 		QueryOptions<TQueryFnData, TError, TQueryFnData, QueryKey>,
 		"queryKey" | "queryFn"
 	>,
-) {
+) => {
 	return useQuery<TQueryFnData, TError, TQueryFnData, QueryKey>({
 		queryKey: key,
 		queryFn,
 		...options,
 	});
-}
+};
 
 function performMutation<
 	TData = unknown,

@@ -29,7 +29,9 @@ const socialMediaInfo = [
 	},
 ];
 
-const MOTTO = "A place of worship, community, and spiritual growth.";
+const MOTTO = `<p>Behold the fowls of the air... are you not much better than they? Matthew 6:26</p>
+
+"Remember, No One Is Out Of God's Reach""`;
 const QUICK_LINKS = "Quick Links";
 const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
