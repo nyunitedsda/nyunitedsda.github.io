@@ -9,15 +9,15 @@ const pathlessMenuItems: PathlessMenu[] = [
 	{
 		id: "watch",
 		icon: "LiveTvRounded",
-		name: "Watch Live",
+		name: "Watch",
 		children: [
 			{
 				id: "liveStream",
-				name: "Live Stream",
+				name: "Watch Live",
 			},
 			{
 				id: "archiveStream",
-				name: "Archive Stream",
+				name: "Watch Archive",
 			},
 		],
 	},

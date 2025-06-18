@@ -25,11 +25,16 @@ const panelSx: SxProps<Theme> = {
 
 const tabsSx: SxProps<Theme> = {
 	color: "text.primary",
+
 	borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+	"& .MuiTab-root": {
+		fontSize: "1rem",
+	},
 	"& .MuiTabs-indicator": {
 		color: "primary.light",
 	},
 	"& .Mui-selected": {
+		fontWeight: "bold",
 		color: (theme) => `${theme.palette.primary.light} !important`,
 	},
 };
@@ -49,7 +54,7 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 	useEffect(() => {
 		const currentTab = tabs.find((i) => pathname.indexOf(i.tag) > -1);
 
-		if (currentTab && currentTab.href && selectedTab !== currentTab.id) {
+		if (currentTab?.href && selectedTab !== currentTab.id) {
 			setSelectedTab(currentTab.id);
 		}
 	}, [tabs, selectedTab, pathname, navigate]);
