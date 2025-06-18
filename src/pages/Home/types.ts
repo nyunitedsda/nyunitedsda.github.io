@@ -1,6 +1,6 @@
 import type { Dayjs } from "dayjs";
 
-export type AnnounceType = "event" | "service" | "virtual";
+export type AnnounceType = "event" | "service" | "conference" | "zoom";
 
 interface AnnouncementDetail {
 	description?: string;
@@ -13,12 +13,17 @@ interface AnnouncementDetail {
 }
 
 // TODO: add a field for
-
-export interface VirtualEvent extends AnnouncementDetail {
+export interface ZoomEvent extends AnnouncementDetail {
+	zoomId: string;
+	passcode: string;
+	location: "Zoom";
+	type: "zoom";
+}
+export interface ConferenceEvent extends AnnouncementDetail {
 	conference_code?: string;
 	location?: string;
-	phoneNumber: string;
-	type: "virtual";
+	phone_number: string;
+	type: "conference";
 }
 
 export interface ServiceEvent extends AnnouncementDetail {
@@ -34,4 +39,8 @@ export interface StandardEvent extends AnnouncementDetail {
 }
 
 // Create a full announcement type
-export type EventAnnouncement = VirtualEvent | ServiceEvent | StandardEvent;
+export type EventAnnouncement =
+	| ConferenceEvent
+	| ServiceEvent
+	| ZoomEvent
+	| StandardEvent;

@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import type { ReactNode } from "react";
 import type {
+	ConferenceEvent,
 	EventAnnouncement,
 	ServiceEvent,
 	StandardEvent,
-	VirtualEvent,
 } from "../../types";
 
 import {
@@ -22,7 +22,7 @@ type Section = {
 	content: ReactNode;
 };
 
-type NoteKeys = keyof Partial<VirtualEvent & ServiceEvent & StandardEvent>;
+type NoteKeys = keyof Partial<ConferenceEvent & ServiceEvent & StandardEvent>;
 
 const WHEN = "When";
 const WHERE = "Where";

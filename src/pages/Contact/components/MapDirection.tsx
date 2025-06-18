@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
-import { TRIP_PLANNER } from "../constants";
+import { TRIP_PLANNER } from "../../../constants/contact";
 
 const rootSx: SxProps<Theme> = {
 	p: 2,

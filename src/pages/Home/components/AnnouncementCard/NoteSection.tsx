@@ -11,12 +11,17 @@ const noteSx: SxProps<Theme> = {
 	"& svg": { color: "primary.light" },
 };
 
-const contentSx: SxProps<Theme> = { display: "flex", gap: 2 };
+const contentSx: SxProps<Theme> = { display: "flex", rowGap: 0, columnGap: 2 };
 
-const NoteSection: FC<NoteSectionProps> = ({ icon, content, title }) => (
+const NoteSection: FC<NoteSectionProps> = ({
+	icon,
+	content,
+	title,
+	columnLayout = false,
+}) => (
 	<Box sx={noteSx}>
 		{icon && icon}
-		<Box sx={contentSx}>
+		<Box sx={[contentSx, { flexDirection: columnLayout ? "column" : "row" }]}>
 			{title && (
 				<Typography
 					variant="body1"

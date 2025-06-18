@@ -9,6 +9,7 @@ interface NoteSectionProps {
 	icon?: ReactNode;
 	content: ReactNode;
 	title?: string;
+	columnLayout?: boolean;
 }
 
 export type { AnnouncementCardProps, NoteSectionProps };

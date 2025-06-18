@@ -13,21 +13,21 @@ import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type FC, type ReactNode, useMemo } from "react";
+import { CONTACT_DATA, CONTACT_US } from "../../constants/contact";
+import {
+	MOTTO,
+	QUICK_LINKS,
+	WEBSITE_TITLE,
+	socialMediaInfo,
+} from "../../constants/footer";
 import services, { SERVICES } from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import NoteSection from "../../pages/Home/components/AnnouncementCard/NoteSection";
 import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import { mapRoutesToTabs } from "../RoutedTabs/helpers";
 import FooterSegment from "./components/FooterSegment";
-import {
-	CONTACT_DATA,
-	CONTACT_US,
-	MOTTO,
-	QUICK_LINKS,
-	WEBSITE_TITLE,
-	getCopyright,
-	socialMediaInfo,
-} from "./footerData";
+import { getCopyright } from "./helpers";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -141,21 +141,15 @@ const Footer: FC = () => {
 
 					{/* Contacts */}
 					<FooterSegment title={CONTACT_US}>
-						{CONTACT_DATA.map((i) =>
-							i.icon ? (
-								<Box {...i.attributes} key={i.content}>
-									{iconMap[i.icon]}
-									<Typography
-										variant="body2"
-										dangerouslySetInnerHTML={{ __html: i.content }}
-									/>
-								</Box>
-							) : (
-								<Typography key={i.content} variant="body2">
-									{i.content}
-								</Typography>
-							),
-						)}
+						{CONTACT_DATA.map((i) => (
+							<NoteSection
+								{...i}
+								columnLayout
+								title={i.title}
+								icon={i?.icon ? iconMap[i.icon] : undefined}
+								key={i.content}
+							/>
+						))}
 					</FooterSegment>
 				</Grid>
 

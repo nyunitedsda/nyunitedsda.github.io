@@ -23,11 +23,11 @@ export const notifications: EventAnnouncement[] = [
 	},
 	{
 		id: 4,
-		type: "virtual",
+		type: "conference",
 		title: "Prayer Meeting",
 		event_date: dayjs().day(2).hour(18).minute(30),
 		location: "Via phone conference",
-		phoneNumber: "971-224-6575",
+		phone_number: "971-224-6575",
 		conference_code: "519018",
 		recurring: true,
 		date_format: "dddd, h:mm a",

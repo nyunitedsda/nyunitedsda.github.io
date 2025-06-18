@@ -7,12 +7,17 @@ import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
 import PageTitle from "../../components/PageWrapper/PageTitle";
-import contactInfo from "../../constants/contactInfo";
+import {
+	CHURCH_NAME,
+	CONTACT_PAGE_SUBTITLE,
+	CONTACT_PAGE_TITLE,
+	MAILING_ADDRESS_TITLE,
+	contactInfo,
+} from "../../constants/contact";
 import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./components/ContactSection";
 import MapDirection from "./components/MapDirection";
 import ServiceTimes from "./components/ServiceTimes";
-import { COMPANY, HEADER, MAILING_ADDRESS_TITLE, SUBHEADER } from "./constants";
 
 const contactDetailSx: SxProps<Theme> = {
 	display: "flex",
@@ -28,12 +33,11 @@ const contactDetailSx: SxProps<Theme> = {
 const Contact: FC = () => {
 	return (
 		<>
-			<PageTitle title={HEADER} subtitle={SUBHEADER} />
-			{/* <ContactForm /> */}
+			<PageTitle title={CONTACT_PAGE_TITLE} subtitle={CONTACT_PAGE_SUBTITLE} />
 
 			<Paper elevation={3} sx={contactDetailSx}>
 				{/* address */}
-				<ContactSection title={COMPANY}>
+				<ContactSection title={CHURCH_NAME}>
 					<Stack direction="row" gap={2}>
 						<Stack justifyContent="center">
 							<LocationOnOutlined color="primary" />
@@ -57,7 +61,7 @@ const Contact: FC = () => {
 							id: 3,
 							icon: <AlternateEmailOutlined />,
 							component: "a",
-							href: `tel:${contactInfo.email}`,
+							href: `mailto:${contactInfo.email}`,
 							content: contactInfo.email,
 						},
 					].map(({ id, ...rest }) => (
@@ -67,8 +71,10 @@ const Contact: FC = () => {
 
 				<ContactSection title={MAILING_ADDRESS_TITLE}>
 					<NoteSection
-						content={contactInfo.mailingAddress}
+						columnLayout
+						content={contactInfo.mail_address}
 						icon={<EmailOutlined color="primary" />}
+						title={contactInfo.mail_recipient}
 					/>
 				</ContactSection>
 
