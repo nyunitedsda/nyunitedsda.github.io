@@ -19,11 +19,10 @@ const PageAnnouncements: FC = () => {
 	return (
 		<SectionWrapper header={PAGE_ANNOUNCEMENT_HEADER}>
 			<Carousel
-			autoplay
-			options={{
-				loop: true,
-				
-			}}
+				autoplay
+				options={{
+					loop: true,
+				}}
 				sx={{
 					"& .embla__viewport .embla__container": {
 						gap: 2,

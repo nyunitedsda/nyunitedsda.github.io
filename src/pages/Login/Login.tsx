@@ -1,6 +1,5 @@
 import {
 	AlternateEmailOutlined,
-	EmailOutlined,
 	LockOutlined,
 	VisibilityOffOutlined,
 	VisibilityOutlined,

@@ -1,7 +1,6 @@
 import type { FC } from "react";
-import services from "../../../constants/services";
+import services, { SERVICES } from "../../../constants/services";
 import NoteSection from "../../Home/components/AnnouncementCard/NoteSection";
-import { SERVICES } from "../constants";
 import ContactSection from "./ContactSection";
 
 const ServiceTimes: FC = () => {

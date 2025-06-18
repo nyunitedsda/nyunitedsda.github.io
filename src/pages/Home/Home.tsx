@@ -5,9 +5,7 @@ import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
 import MinistryCard from "./components/MinistryCard";
 import SectionWrapper from "./components/SectionWrapper";
 import { ministries } from "./constants";
-import { notifications } from "./notifications";
 import sliderImages from "./sliderImages";
-import { performMutation } from "../../api/queryData";
 
 const imageRootSx: SxProps<Theme> = {
 	width: "100%",
@@ -41,19 +39,17 @@ const rootSx: SxProps<Theme> = {
 const MINISTRIES_HEADER = "Ministries Links";
 
 const Home: FC = () => {
-
-// const {data} = performMutation(['delete-donation-by-id', {id: 14}], )
-
+	// const {data} = performMutation(['delete-donation-by-id', {id: 14}], )
 
 	return (
 		<Stack sx={rootSx}>
 			{/* Image Slides */}
 			<SectionWrapper>
 				<Carousel
-				options={{
-					align: 'center',
-					startIndex: 0,
-				}}
+					options={{
+						align: "center",
+						startIndex: 0,
+					}}
 					sx={{
 						"& .embla__slide": {
 							height: { xs: "350px", sm: "unset" },
