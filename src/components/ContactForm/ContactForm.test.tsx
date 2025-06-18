@@ -6,6 +6,6 @@ describe("ContactForm", () => {
 	it("renders ContactForm", () => {
 		render(<ContactForm />);
 
-		expect(screen.getByText("Send Message")).toBeInTheDocument();
+		expect(screen.getByText("Send Notification")).toBeInTheDocument();
 	});
 });

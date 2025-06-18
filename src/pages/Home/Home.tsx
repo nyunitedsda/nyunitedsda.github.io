@@ -1,4 +1,4 @@
-import { Stack, type SxProps, type Theme } from "@mui/material";
+import { Stack, TextField, type SxProps, type Theme } from "@mui/material";
 import type { FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
@@ -43,6 +43,11 @@ const Home: FC = () => {
 
 	return (
 		<Stack sx={rootSx}>
+			<TextField
+				// type="datetime-local"
+				type="checkbox"
+/>
+
 			{/* Image Slides */}
 			<SectionWrapper>
 				<Carousel
@@ -71,21 +76,6 @@ const Home: FC = () => {
 
 			{/* Notification Slides */}
 			<PageAnnouncements />
-			{/* <SectionWrapper header={LATEST_NOTIFICATIONS_HEADER}>
-				<Carousel
-					sx={{
-						"& .embla__viewport .embla__container": {
-							gap: 2,
-							py: 2,
-							px: 1,
-						},
-					}}
-				>
-					{notifications.map((i) => (
-						<NotificationCard className="embla__slide" key={i.id} {...i} />
-					))}
-				</Carousel>
-			</SectionWrapper> */}
 
 			{/* Ministries content */}
 			<SectionWrapper header={MINISTRIES_HEADER}>

@@ -3,7 +3,7 @@ import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
 import { type FC, useContext } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
-import MessageContext from "../../contexts/MessageContext/context";
+import NotificationContext from "../../contexts/NotificationContext/context";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import NotificationBanner from "../NotificationBanner/NotificationBanner";
@@ -33,7 +33,7 @@ const rootSx: SxProps<Theme> = {
 
 const PageWrapper: FC = () => {
 	const theme = useTheme();
-	const { notifications } = useContext(MessageContext);
+	const { notifications } = useContext(NotificationContext);
 	return (
 		<Stack sx={rootSx}>
 			{notifications.map((i) => (

@@ -1,4 +1,8 @@
-export type NotificationSeverity = "info" | "warning" | "error" | "success";
+export type NotificationSeverity =
+	| "information"  // Neutral, informational messages for users
+	| "caution"      // Warning messages that advise careful attention
+	| "error"        // Critical error messages when something goes wrong
+	| "success";     // Positive messages confirming an action succeeded
 export type NotificationPosition = "top" | "bottom";
 export type NotificationVariant = "banner" | "sticky" | "popup";
 
@@ -20,10 +24,6 @@ interface NotificationProps {
 	 */
 	severity?: NotificationSeverity;
 	/**
-	 * Whether the notification can be dismissed
-	 */
-	dismissible?: boolean;
-	/**
 	 * Whether the notification should be shown
 	 */
 	open?: boolean;
@@ -31,34 +31,22 @@ interface NotificationProps {
 	 * Callback when notification is closed
 	 */
 	onClose?: () => void;
-	/**
-	 * Optional action button text
-	 */
-	actionText?: string;
-	/**
-	 * Optional action button link
-	 */
-	actionLink?: string;
-	/**
-	 * Optional action button click handler
-	 */
-	onActionClick?: () => void;
-	/**
-	 * Display variant
-	 */
-	variant?: NotificationVariant;
-	/**
-	 * Position for sticky and popup variants
-	 */
-	position?: NotificationPosition;
-	/**
-	 * Auto hide duration in milliseconds (0 for no auto-hide)
-	 */
-	autoHideDuration?: number;
-	/**
-	 * Whether to show the notification icon
-	 */
-	showIcon?: boolean;
+/**
+ * The date and time when the notification will expire
+ * If not provided, the notification will not expire automatically 
+ */
+	expires_at?: Date;
 }
 
 export type { NotificationProps };
+
+/**
+ create a mysql table  and sequelize model for `notifications`  with  these columns: 
+- id: primary key
+- message: varchar with an apropriate lenght, not null,, unique
+- title: short text nullable
+- severity: not null a forigen key table severity (id)
+- expires_at: date nullable
+- created_date: date not null, created on record creation
+- modified_date: nullable set and updated on record update* 
+ */

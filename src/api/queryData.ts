@@ -8,6 +8,7 @@ import {
 	useQuery,
 } from "@tanstack/react-query";
 
+// Standard query hook
 const performQuery = <TQueryFnData = unknown, TError = unknown>(
 	key: QueryKey,
 	queryFn: QueryFunction<TQueryFnData, QueryKey>,
@@ -23,6 +24,7 @@ const performQuery = <TQueryFnData = unknown, TError = unknown>(
 	});
 };
 
+// Standard mutation hook
 function performMutation<
 	TData = unknown,
 	TError = unknown,

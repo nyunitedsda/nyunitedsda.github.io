@@ -10,10 +10,14 @@ import {
 	DONATION_TEXT,
 } from "../../constants/donationConstant";
 
+import { getDatabaseList } from "../../api/request/commonQueries";
 import type { Donations as DonationsType } from "../../api/request/types";
 
 const Donations: FC = () => {
-	const { isLoading, data } = performQuery(["get-donations"], getDonations);
+	const { isLoading, data } = performQuery(
+		["get-donations"],
+		async () => await getDatabaseList<DonationsType>("donations"),
+	);
 
 	return (
 		<>

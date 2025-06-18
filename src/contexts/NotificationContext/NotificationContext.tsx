@@ -7,12 +7,12 @@ import {
 } from "react";
 import type { NotificationProps } from "../../components/NotificationBanner/types";
 import context from "./context";
-import type { MessageContextProps } from "./types";
+import type { NotificationContextProps } from "./types";
 
 const { Provider } = context;
 const MAX_NOTIFICATIONS = 3;
 
-const MessageProvider: FC<PropsWithChildren> = ({ children }) => {
+const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [notificationList, setNotificationList] = useState<NotificationProps[]>(
 		[
 			{
@@ -50,7 +50,7 @@ const MessageProvider: FC<PropsWithChildren> = ({ children }) => {
 		setNotificationList([]);
 	}, []);
 
-	const value: MessageContextProps = useMemo(
+	const value: NotificationContextProps = useMemo(
 		() => ({
 			notifications,
 			registerNotification,
@@ -63,4 +63,4 @@ const MessageProvider: FC<PropsWithChildren> = ({ children }) => {
 	return <Provider value={value}>{children}</Provider>;
 };
 
-export default MessageProvider;
+export default NotificationProvider;

@@ -7,14 +7,24 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
 import { type FC, useCallback, useContext, useState } from "react";
-import MessageContext from "../../contexts/MessageContext/context";
+import NotificationContext from "../../contexts/NotificationContext/context";
 import { selectSeverityIcon } from "./components/helpers";
-import type { NotificationProps } from "./types";
+import type { NotificationProps, NotificationSeverity } from "./types";
 
 export type NotificationBannerProps = NotificationProps & {};
 
+const severityColors: Record<
+	NotificationSeverity,
+	"info" | "warning" | "error" | "success"
+> = {
+	information: "info",
+	caution: "warning",
+	error: "error",
+	success: "success",
+};
+
 const rootSx = ({
-	severity = "info",
+	severity = "information",
 	theme,
 }: {
 	theme: Theme;
@@ -28,8 +38,8 @@ const rootSx = ({
 		alignItems: "center",
 		flexDirection: "row",
 		flexWrap: "nowrap",
-		backgroundColor: (theme) => theme.palette[severity].light,
-		color: theme.palette[severity].contrastText,
+		backgroundColor: (theme) => theme.palette[severityColors[severity]].light,
+		color: theme.palette[severityColors[severity]].contrastText,
 		px: 2,
 		py: 0.5,
 		gap: 2,
@@ -37,8 +47,8 @@ const rootSx = ({
 });
 
 const NotificationBanner: FC<NotificationBannerProps> = (props) => {
-	const { id, dismissible, message, open, showIcon, severity, title } = props;
-	const { dismissNotification } = useContext(MessageContext);
+	const { id, message, open, severity, title } = props;
+	const { dismissNotification } = useContext(NotificationContext);
 
 	const [isVisible, setIsVisible] = useState<boolean>(open ?? false);
 
@@ -62,11 +72,8 @@ const NotificationBanner: FC<NotificationBannerProps> = (props) => {
 						in={isVisible}
 						sx={[(theme: Theme) => rootSx({ severity, theme })]}
 					>
-						{showIcon && (
-							<Stack sx={{ maxWidth: 32 }}>
-								{selectSeverityIcon(severity)}
-							</Stack>
-						)}
+						<Stack sx={{ maxWidth: 32 }}>{selectSeverityIcon(severity)}</Stack>
+
 						<Stack sx={{ flexGrow: 1 }}>
 							{title && (
 								<Typography fontWeight="bold" variant="subtitle1">
@@ -75,16 +82,15 @@ const NotificationBanner: FC<NotificationBannerProps> = (props) => {
 							)}
 							<Typography variant="subtitle2">{message}</Typography>
 						</Stack>
-						{dismissible && (
-							<IconButton
-								size="small"
-								aria-label="close"
-								color="inherit"
-								onClick={_handleClose}
-							>
-								<CloseOutlined />
-							</IconButton>
-						)}
+
+						<IconButton
+							size="small"
+							aria-label="close"
+							color="inherit"
+							onClick={_handleClose}
+						>
+							<CloseOutlined />
+						</IconButton>
 					</Collapse>
 				</Stack>
 			)}

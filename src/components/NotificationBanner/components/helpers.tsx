@@ -15,13 +15,16 @@ const CheckCircleOutlineOutlined = lazy(
 );
 
 const severityIcons: Record<NotificationSeverity, ReactNode> = {
-	info: <InfoOutlineRounded sx={{ color:"info.contrastText" }}/>,
-	warning: <WarningOutlined sx={{ color:"warning.contrastText" }}/>,
-	error: <ErrorOutlineOutlined sx={{ color:"error.contrastText" }}/>,
-	success: <CheckCircleOutlineOutlined sx={{ color:"success.contrastText" }}/>,
+	information: <InfoOutlineRounded sx={{ color: "info.contrastText" }} />,
+	caution: <WarningOutlined sx={{ color: "warning.contrastText" }} />,
+	error: <ErrorOutlineOutlined sx={{ color: "error.contrastText" }} />,
+	success: (
+		<CheckCircleOutlineOutlined sx={{ color: "success.contrastText" }} />
+	),
 };
 
-const selectSeverityIcon = (severity: NotificationProps["severity"] = "info") =>
-	severityIcons[severity];
+const selectSeverityIcon = (
+	severity: NotificationProps["severity"] = "information",
+) => severityIcons[severity];
 
 export { selectSeverityIcon };
