@@ -47,8 +47,9 @@ const carouselStyle: SxProps<Theme> = {
 				width: "100%",
 				mx: "auto",
 				"& img": {
-					height: { xs: "auto", md: "100%" },
-					width: { xs: "100%", md: "auto" },
+					borderRadius: 0.5,
+					height: { xs: "auto", md: "auto" },
+					width: { xs: "100%", md: "100%" },
 				},
 			},
 		},

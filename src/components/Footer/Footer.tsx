@@ -1,10 +1,10 @@
-import Email from "@mui/icons-material/Email";
+import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
 import YouTube from "@mui/icons-material/YouTube";
-import { type SxProps, type Theme } from "@mui/material";
+import type { SxProps, Theme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
@@ -13,7 +13,7 @@ import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type FC, type ReactNode, useMemo } from "react";
-import services from "../../constants/services";
+import services, { SERVICES } from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
@@ -24,7 +24,6 @@ import {
 	CONTACT_US,
 	MOTTO,
 	QUICK_LINKS,
-	SERVICE_TIMES,
 	WEBSITE_TITLE,
 	getCopyright,
 	socialMediaInfo,
@@ -61,7 +60,8 @@ const iconMap: Record<string, ReactNode> = {
 	Twitter: <Twitter />,
 	YouTube: <YouTube />,
 	Phone: <Phone fontSize="small" />,
-	Email: <Email fontSize="small" />,
+	Email: <AlternateEmailOutlined fontSize="small" />,
+	Mail: <EmailOutlined fontSize="small" />,
 };
 
 const Footer: FC = () => {
@@ -76,7 +76,7 @@ const Footer: FC = () => {
 			<PageContentContainer>
 				<Grid container spacing={4}>
 					{/* Social Media */}
-					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO}>
+					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO.text}>
 						<>
 							{TERMS_AND_POLICIES.map((i) => (
 								<Typography
@@ -95,10 +95,18 @@ const Footer: FC = () => {
 									<IconButton
 										aria-label={i.label}
 										component="a"
+										disabled={i.disabled}
 										href={i.href}
 										key={i.label}
 										size="small"
-										target="_blank"
+										sx={{
+											"& .MuiSvgIcon-root": {
+												...(i.icon === "YouTube"
+													? { fill: "red !important" }
+													: {}),
+											},
+										}}
+										target="__blank"
 										title={i.label}
 									>
 										{iconMap[i.icon]}
@@ -123,7 +131,7 @@ const Footer: FC = () => {
 					</FooterSegment>
 
 					{/* Services */}
-					<FooterSegment title={SERVICE_TIMES}>
+					<FooterSegment title={SERVICES}>
 						{services.map((i) => (
 							<Typography key={i.title} variant="body2">
 								<strong>{`${i.title}: `}</strong> {i.time}
@@ -137,7 +145,10 @@ const Footer: FC = () => {
 							i.icon ? (
 								<Box {...i.attributes} key={i.content}>
 									{iconMap[i.icon]}
-									<Typography variant="body2">{i.content}</Typography>
+									<Typography
+										variant="body2"
+										dangerouslySetInnerHTML={{ __html: i.content }}
+									/>
 								</Box>
 							) : (
 								<Typography key={i.content} variant="body2">

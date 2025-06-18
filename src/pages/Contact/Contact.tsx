@@ -1,7 +1,8 @@
-import EmailOutlined from "@mui/icons-material/EmailOutlined";
+import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
@@ -33,33 +34,42 @@ const Contact: FC = () => {
 			<Paper elevation={3} sx={contactDetailSx}>
 				{/* address */}
 				<ContactSection title={COMPANY}>
+					<Stack direction="row" gap={2}>
+						<Stack justifyContent="center">
+							<LocationOnOutlined color="primary" />
+						</Stack>
+						<Stack>
+							<Typography variant="body1">{contactInfo.street}</Typography>
+							<Typography variant="body1">
+								{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
+							</Typography>
+						</Stack>
+					</Stack>
 					{[
 						{
-							icon: <LocationOnOutlined />,
-							content: (
-								<>
-									<Typography variant="body1">{contactInfo.street}</Typography>
-									<Typography variant="body1">
-										{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
-									</Typography>
-								</>
-							),
-						},
-						{
+							id: 2,
 							icon: <PhoneOutlined />,
+							component: "a",
+							href: `tel:${contactInfo.phone}`,
 							content: contactInfo.phone,
 						},
 						{
-							icon: <EmailOutlined />,
+							id: 3,
+							icon: <AlternateEmailOutlined />,
+							component: "a",
+							href: `tel:${contactInfo.email}`,
 							content: contactInfo.email,
 						},
-					].map((i) => (
-						<NoteSection {...i} key={i?.content?.toString()} />
+					].map(({ id, ...rest }) => (
+						<NoteSection {...rest} key={id} />
 					))}
 				</ContactSection>
 
 				<ContactSection title={MAILING_ADDRESS_TITLE}>
-					<Typography variant="body1">{contactInfo.mailingAddress}</Typography>
+					<NoteSection
+						content={contactInfo.mailingAddress}
+						icon={<EmailOutlined color="primary" />}
+					/>
 				</ContactSection>
 
 				<ServiceTimes />

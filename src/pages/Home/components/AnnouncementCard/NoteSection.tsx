@@ -18,14 +18,19 @@ const NoteSection: FC<NoteSectionProps> = ({ icon, content, title }) => (
 		{icon && icon}
 		<Box sx={contentSx}>
 			{title && (
-				<Typography variant="body1" color="text.primary" fontWeight="bold">
-					{title}
-				</Typography>
+				<Typography
+					variant="body1"
+					color="text.primary"
+					fontWeight="bold"
+					dangerouslySetInnerHTML={{ __html: title }}
+				/>
 			)}
 			{content && (
-				<Typography color="text.primary" variant="body1">
-					{content}
-				</Typography>
+				<Typography
+					color="text.primary"
+					variant="body1"
+					dangerouslySetInnerHTML={{ __html: content }}
+				/>
 			)}
 		</Box>
 	</Box>

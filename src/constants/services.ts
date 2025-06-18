@@ -8,4 +8,5 @@ const services = [
 	{ time: "3:00 pm (On Special Days)", title: "AYS" },
 ];
 
+export const SERVICES = "Regular Service Times";
 export default services;

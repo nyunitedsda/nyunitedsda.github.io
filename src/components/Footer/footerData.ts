@@ -1,3 +1,4 @@
+import type { SxProps } from "@mui/material";
 import dayjs from "dayjs";
 import contactInfo from "../../constants/contactInfo";
 
@@ -11,16 +12,19 @@ const socialMediaInfo = [
 		label: "Facebook",
 		href: "https://facebook.com",
 		icon: "Facebook",
+		disabled: true,
 	},
 	{
 		label: "Instagram",
 		href: "https://instagram.com",
 		icon: "Instagram",
+		disabled: true,
 	},
 	{
 		label: "Twitter",
 		href: "https://twitter.com",
 		icon: "Twitter",
+		disabled: true,
 	},
 	{
 		label: "YouTube",
@@ -29,11 +33,11 @@ const socialMediaInfo = [
 	},
 ];
 
-const MOTTO = `<p>Behold the fowls of the air... are you not much better than they? Matthew 6:26</p>
-
-"Remember, No One Is Out Of God's Reach""`;
+const MOTTO = {
+	verse: `Behold the fowls of the air... are you not much better than they? Matthew 6:26`,
+	text: "Remember, No One Is Beyond God's Reach",
+};
 const QUICK_LINKS = "Quick Links";
-const SERVICE_TIMES = "Service Times";
 const CONTACT_US = "Contact Us";
 
 const CONTACT_DATA = [
@@ -61,6 +65,19 @@ const CONTACT_DATA = [
 		content: contactInfo.email,
 		icon: "Email",
 	},
+	{
+		attributes: {
+			component: "div",
+			sx: {
+				display: "flex",
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 1,
+			} as SxProps,
+		},
+		content: contactInfo?.mailingAddress,
+		icon: "Mail",
+	},
 ];
 
 const getCopyright = () =>
@@ -72,7 +89,6 @@ export {
 	getCopyright,
 	MOTTO,
 	QUICK_LINKS,
-	SERVICE_TIMES,
 	socialMediaInfo,
 	WEBSITE_TITLE,
 };

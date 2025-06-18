@@ -1,4 +1,5 @@
 import {
+	AlternateEmailOutlined,
 	EmailOutlined,
 	LockOutlined,
 	VisibilityOffOutlined,
@@ -131,7 +132,7 @@ const Login: FC = () => {
 										input: {
 											startAdornment: (
 												<InputAdornment position="start">
-													<EmailOutlined color="primary" />
+													<AlternateEmailOutlined color="primary" />
 												</InputAdornment>
 											),
 										},

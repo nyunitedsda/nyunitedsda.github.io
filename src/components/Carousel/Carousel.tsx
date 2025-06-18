@@ -17,13 +17,13 @@ const Carousel: FC<CarouselProps> = (props) => {
 	]);
 
 	const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
-		const autoplay = emblaApi?.plugins()?.autoplay;
-		if (!autoplay) return;
+		const autoPlay = emblaApi?.plugins()?.autoplay;
+		if (!autoPlay) return;
 
 		const resetOrStop =
-			autoplay.options.stopOnInteraction === false
-				? autoplay.reset
-				: autoplay.stop;
+			autoPlay.options.stopOnInteraction === false
+				? autoPlay.reset
+				: autoPlay.stop;
 
 		resetOrStop();
 	}, []);

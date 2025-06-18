@@ -19,7 +19,7 @@ const containerSx: SxProps<Theme> = {
 	maxWidth: "1200px",
 	ml: "auto",
 	mr: "auto",
-	p: 2,
+	p: { xs: 1, md: 2 },
 	width: "100%",
 };
 
