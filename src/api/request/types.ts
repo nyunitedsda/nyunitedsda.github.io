@@ -2,12 +2,13 @@ export type DatabaseEntity =
 	| "donations"
 	| "users"
 	| "articles"
-	| "announcements";
+	| "announcements"
+	| "notifications";
 
 /**
  * Represents an donation payment method in the system
  */
-export interface Donations {
+export interface DonationType {
 	id: number;
 	title: string;
 	description: string;
@@ -16,7 +17,7 @@ export interface Donations {
 /**
  * Represents an article in the system
  */
-export type Article = {
+export type ArticleType = {
 	/** Unique identifier (auto-incremented) */
 	id: number;
 	/** Article title */
@@ -43,16 +44,18 @@ export type Article = {
 	modified_at?: Date;
 };
 
+export type EventType = "event" | "service" | "conference" | "zoom";
+
 /**
  * Represents an announcement in the system
  */
-export type Announcement = {
+export type AnnouncementType = {
 	/** Unique identifier (auto-incremented) */
 	id: number;
 	/** Announcement title */
 	title: string;
 	/** Type of announcement */
-	type: "event" | "service" | "virtual";
+	type: EventType;
 	/** Optional description of the announcement */
 	description?: string;
 	/** Physical location where the event will take place */
@@ -75,4 +78,66 @@ export type Announcement = {
 	event_date?: Date;
 	/** Display date format for event_date */
 	date_format: string;
+	/** Optional Zoom meeting ID for virtual events */
+	zoom_id?: string;
+	/** Optional passcode for Zoom meetings */
+	passcode?: string;
 };
+
+/**
+ * Represents a notification severity level
+ * Used to categorize notifications by their importance or urgency
+ * "information" for neutral messages,
+ * "caution" for warnings, "error" for critical issues,
+ * and "success" for positive confirmations.
+ */
+export type NotificationSeverity =
+	| "information"
+	| "caution"
+	| "error"
+	| "success";
+
+/**
+ * Represents an option for notification severity.
+ *
+ * @remarks
+ * This type defines the structure of an option that includes a unique identifier, a severity value,
+ * and a human-readable label used to identify a particular notification severity in the application.
+ *
+ * @property id - The unique identifier for the notification severity option.
+ * @property value - The notification severity value; typically, this corresponds to one of the defined
+ * severity levels.
+ * @property label - A descriptive text label representing the notification severity.
+ */
+export type NotificationSeverityOption = {
+	id: number;
+	value: NotificationSeverity;
+	label: string;
+};
+/**
+ * Represents a notification in the system
+ * Notifications can be used to inform users about important events, updates, or actions required.
+ */
+export interface NotificationType {
+	/**
+	 * Unique identifier for the notification
+	 */
+	id: number;
+	/**
+	 * The main message to display
+	 */
+	message: string;
+	/**
+	 * Optional title for the notification
+	 */
+	title?: string;
+	/**
+	 * The severity level of the notification
+	 */
+	severity?: NotificationSeverity;
+	/**
+	 * The date and time when the notification will expire
+	 * If not provided, the notification will not expire automatically
+	 */
+	expires_at?: Date;
+}

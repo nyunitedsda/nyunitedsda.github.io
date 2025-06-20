@@ -1,11 +1,10 @@
-interface PageWrapperProps {
-	header?: string;
-	subHeader?: string;
-}
+import type { ReactNode } from "react";
 
 interface PageTitleProps {
-	title: string;
+	handleClick?: () => void;
+	icon?: ReactNode;
 	subtitle?: string;
+	title: string;
 }
 
-export type { PageWrapperProps, PageTitleProps };
+export type { PageTitleProps };

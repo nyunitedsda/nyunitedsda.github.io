@@ -1,7 +1,6 @@
 import { Stack, Typography } from "@mui/material";
-import type { FC } from "react";
+import { type FC } from "react";
 import { performQuery } from "../../api/queryData";
-import { getDonations } from "../../api/request/donations";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
@@ -11,12 +10,12 @@ import {
 } from "../../constants/donationConstant";
 
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { Donations as DonationsType } from "../../api/request/types";
+import type { DonationType } from "../../api/request/types";
 
 const Donations: FC = () => {
 	const { isLoading, data } = performQuery(
 		["get-donations"],
-		async () => await getDatabaseList<DonationsType>("donations"),
+		async () => await getDatabaseList<DonationType>("donations"),
 	);
 
 	return (
@@ -36,7 +35,10 @@ const Donations: FC = () => {
 				)}
 
 				{!isLoading &&
-					(data || ([] as DonationsType[])).map((i) => (
+					(Array.isArray(data)
+						? data
+						: data?.data || ([] as DonationType[])
+					).map((i) => (
 						<Typography
 							key={i.title}
 							color="text.primary"

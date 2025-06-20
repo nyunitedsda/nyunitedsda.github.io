@@ -1,12 +1,13 @@
 import type { Dayjs } from "dayjs";
+import type { EventType } from "../../api/request/types";
 
-export type AnnounceType = "event" | "service" | "conference" | "zoom";
+
 
 interface AnnouncementDetail {
 	description?: string;
 	id: number;
 	title: string;
-	type: AnnounceType;
+	type: EventType;
 	event_date?: Dayjs;
 	recurring: boolean;
 	date_format: string;
@@ -14,7 +15,7 @@ interface AnnouncementDetail {
 
 // TODO: add a field for
 export interface ZoomEvent extends AnnouncementDetail {
-	zoomId: string;
+	zoom_id: string;
 	passcode: string;
 	location: "Zoom";
 	type: "zoom";

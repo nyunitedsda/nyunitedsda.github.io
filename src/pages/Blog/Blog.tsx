@@ -5,9 +5,10 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useMemo, useState } from "react";
-import { performQuery } from "../../api/queryData";
-import { getArticles } from "../../api/request/articles";
+import { getDatabaseList } from "../../api/request/commonQueries";
+import type { ArticleType } from "../../api/request/types";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -46,14 +47,18 @@ const Blog: FC = () => {
 		DEFAULT_POST_PER_PAGE,
 	);
 
-	const { isLoading, data } = performQuery(["get-articles"], getArticles);
+	const { isLoading, data } = useQuery({
+		queryKey: ["get-articles"],
+		queryFn: async () => await getDatabaseList("articles"),
+		select: (response) => (response.data as ArticleType[]) || [],
+	});
 
 	const totalPages = useMemo(
-		() => Math.ceil((data ?? []).length / postsPerPage),
+		() => Math.ceil((data || []).length / postsPerPage),
 		[data, postsPerPage],
 	);
 
-	const currentPosts = useMemo(
+	const currentPosts: ArticleType[] = useMemo(
 		() => (data ?? []).slice((page - 1) * postsPerPage, page * postsPerPage),
 		[data, postsPerPage, page],
 	);
@@ -75,7 +80,7 @@ const Blog: FC = () => {
 				) : (
 					currentPosts.map(
 						({ id, title, author_id: author, content, publishDate }) => (
-							<Grid size={{ xs: 12, md: 6 }} key={id} className="blog-card">
+							<Grid size={{ xs: 12, md: 6 }} key={id}>
 								<ProjectCard
 									header={{
 										title,

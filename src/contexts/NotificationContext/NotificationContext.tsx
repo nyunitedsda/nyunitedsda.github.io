@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import {
 	type FC,
 	type PropsWithChildren,
@@ -5,34 +7,41 @@ import {
 	useMemo,
 	useState,
 } from "react";
+import { getDatabaseList } from "../../api/request/commonQueries";
+import type { NotificationType } from "../../api/request/types";
 import type { NotificationProps } from "../../components/NotificationBanner/types";
-import context from "./context";
+import { Provider } from "./context";
 import type { NotificationContextProps } from "./types";
 
-const { Provider } = context;
 const MAX_NOTIFICATIONS = 3;
 
 const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [notificationList, setNotificationList] = useState<NotificationProps[]>(
-		[
-			{
-				id: "3",
-			} as NotificationProps,
-			{
-				id: "23",
-			} as NotificationProps,
-			{
-				id: "34",
-			} as NotificationProps,
-			{
-				id: "4",
-			} as NotificationProps,
-		],
+	const { enqueueSnackbar } = useSnackbar();
+
+	const [notificationList, setNotificationList] = useState<NotificationType[]>(
+		[],
 	);
 
+	useQuery({
+		queryKey: ["notifications"],
+		queryFn: async () =>
+			await getDatabaseList<NotificationType>("notifications")
+				.then((res) => {
+					if (res?.data) {
+						setNotificationList(res.data);
+					}
+					return res.data;
+				})
+				.catch((error) => {
+					enqueueSnackbar(String(error), { variant: "error" });
+					Promise.reject(error);
+				}),
+		staleTime: 1000 * 60 * 5, // 5 minutes
+		refetchOnMount: true,
+	});
 	const notifications = useMemo(
 		() =>
-			notificationList.length > MAX_NOTIFICATIONS
+			(notificationList.length ?? 0) > MAX_NOTIFICATIONS
 				? notificationList.slice(0, MAX_NOTIFICATIONS)
 				: notificationList,
 		[notificationList],
@@ -57,7 +66,12 @@ const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 			dismissNotification,
 			clearNotification,
 		}),
-		[notifications],
+		[
+			notifications,
+			registerNotification,
+			dismissNotification,
+			clearNotification,
+		],
 	);
 
 	return <Provider value={value}>{children}</Provider>;

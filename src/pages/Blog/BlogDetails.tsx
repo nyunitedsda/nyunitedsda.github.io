@@ -13,15 +13,15 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { useParams } from "react-router";
-import { performQuery } from "../../api/queryData";
-import { getArticleById } from "../../api/request/articles";
-import type { Article } from "../../api/request/types";
+import { getDatabaseItem } from "../../api/request/commonQueries";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import { authorMetaInfo } from "./blogData";
+import type { ArticleType } from "../../api/request/types";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -42,16 +42,21 @@ const ICONS = {
 const BlogDetails: FC = () => {
 	const { id } = useParams();
 
-	const { isLoading, data } = performQuery<Article>(
-		["get-article-id", id],
-		({ queryKey }) => getArticleById(queryKey[1] as number),
-	);
+	const { isLoading, data } = useQuery({
+		queryKey: ["get-article-id", id],
+		queryFn: async () => {
+			const response = await getDatabaseItem('articles', parseInt(id as string, 10));
+			// If your API returns an array, pick the first item
+			return (Array.isArray(response.data) ? response.data[0] : response.data) as ArticleType;
+		},
+});
 
 	return (
 		<Stack spacing={2}>
 			<PageTitle title="Blog Details" />
 			<Stack spacing={2} sx={{ "& a, svg": { color: "primary.light" } }}>
 				{/* Back Button */}
+				
 				<Button
 					variant="text"
 					startIcon={<ArrowBackIosNewSharp />}
@@ -86,7 +91,7 @@ const BlogDetails: FC = () => {
 								spacing={2}
 							>
 								{authorMetaInfo.map((i) =>
-									data?.[i as keyof Article] ? (
+									data?.[i as keyof ArticleType] ? (
 										<Stack
 											direction={"row"}
 											spacing={1}
@@ -102,7 +107,7 @@ const BlogDetails: FC = () => {
 												sx={{ fontWeight: "bold", color: "text.secondary" }}
 											>
 												{(() => {
-													const value = (data as Article)?.[i as keyof Article];
+													const value = data[i as keyof ArticleType];
 													return value instanceof Date
 														? value.toLocaleDateString()
 														: value;
