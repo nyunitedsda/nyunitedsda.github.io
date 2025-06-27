@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik } from "formik";
+import ConfirmationButton from "../../components/Buttons/ConfirmationButton";
 import type { FormContainerProps } from "./types";
 
 const childrenSx: SxProps<Theme> = {
@@ -9,6 +10,23 @@ const childrenSx: SxProps<Theme> = {
 	maxWidth: 600,
 	overflowY: "auto",
 	pt: 1,
+	backgroundColor: "inherit",
+};
+
+const actionSx: SxProps<Theme> = {
+	mt: 3,
+	position: "sticky",
+	bottom: 0,
+	backgroundColor: "inherit",
+	flexGrow: 0,
+};
+
+const CANCEL_CONFIRMATION = {
+	confirmationTitle: "Confirm Cancel",
+	confirmationContent:
+		"Are you sure you want to cancel? All changes will be lost.",
+	confirmLabel: "Yes",
+	cancelLabel: "No",
 };
 
 const FormContainer = <T extends { id?: number }>({
@@ -27,7 +45,7 @@ const FormContainer = <T extends { id?: number }>({
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
 		>
-			{({ isSubmitting }) => (
+			{({ isSubmitting, dirty }) => (
 				<Form style={{ width: "100%" }}>
 					<Stack spacing={2} sx={childrenSx}>
 						{children}
@@ -38,12 +56,18 @@ const FormContainer = <T extends { id?: number }>({
 						direction="row"
 						spacing={2}
 						justifyContent="flex-end"
-						sx={{ mt: 3 }}
+						sx={actionSx}
 					>
 						{onCancel && (
-							<Button variant="outlined" color="secondary" onClick={onCancel}>
+							<ConfirmationButton
+								shouldConfirm={dirty}
+								variant="outlined"
+								color="secondary"
+								onClick={onCancel}
+								{...CANCEL_CONFIRMATION}
+							>
 								{cancelButtonText}
-							</Button>
+							</ConfirmationButton>
 						)}
 						<Button
 							type="submit"

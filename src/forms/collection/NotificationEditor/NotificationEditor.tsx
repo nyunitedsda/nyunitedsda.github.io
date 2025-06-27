@@ -41,7 +41,7 @@ const severityOptions: NotificationSeverityOption[] = [
 	{ id: 4, value: "success", label: "Success" },
 ];
 
-const NotificationEditor: FC<EditorProps<NotificationType>> = ({
+const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 	open,
 	entity,
 	onClose,

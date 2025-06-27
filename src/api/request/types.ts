@@ -3,7 +3,11 @@ export type DatabaseEntity =
 	| "users"
 	| "articles"
 	| "announcements"
-	| "notifications";
+	| "notifications"
+	| "services"
+	| "contacts";
+
+export type UserRole = "admin" | "guest" | "moderator";
 
 /**
  * Represents a user in the system
@@ -18,7 +22,7 @@ export interface UserType {
 	/** User's last name */
 	lastName?: string;
 	/** User's role in the system */
-	role: "admin" | "user" | "moderator";
+	role: UserRole;
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */
@@ -162,4 +166,48 @@ export interface NotificationType {
 	 * If not provided, the notification will not expire automatically
 	 */
 	expires_at?: Date;
+}
+
+/**
+ * Represents a service in the system
+ */
+export interface ServiceType {
+	/** Unique identifier (auto-incremented) */
+	id: number;
+	/** Time when the service takes place */
+	time: string;
+	/** Title of the service */
+	title: string;
+	/** Timestamp when the service was created */
+	created_at?: Date;
+	/** Timestamp when the service was last modified */
+	modified_at?: Date;
+}
+
+/**
+ * Represents contact information in the system
+ */
+export interface ContactInfoType {
+	/** Unique identifier (auto-incremented) */
+	id: number;
+	/** Contact email address */
+	email: string;
+	/** Contact phone number */
+	phone: string;
+	/** Street address */
+	street: string;
+	/** City */
+	city: string;
+	/** ZIP/postal code */
+	zip_code: string;
+	/** Country */
+	country: string;
+	/** Optional mailing address */
+	mail_address?: string;
+	/** Optional mailing recipient name */
+	mailing_recipient?: string;
+	/** Timestamp when the contact info was created */
+	created_at?: Date;
+	/** Timestamp when the contact info was last modified */
+	modified_at?: Date;
 }

@@ -75,7 +75,7 @@ const theme = responsiveFontSizes(
 				styleOverrides: {
 					root: ({ theme }) => ({
 						"&": {
-							color: theme.palette.text.primary,
+							// color: theme.palette.text.primary,
 							fontSize: theme.typography.body1.fontSize,
 						},
 					}),

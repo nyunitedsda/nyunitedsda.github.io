@@ -17,9 +17,7 @@ vi.mock("./pathlessMenuItems", () => {
 		{ id: "home", name: "Home" },
 		{ id: "about", name: "About" },
 	];
-	const protectedMenuItems = [
-		{ id: "admin", name: "Administration" },
-	];
+	const protectedMenuItems = [{ id: "admin", name: "Administration" }];
 	return {
 		default: pathlessMenuItems,
 		protectedMenuItems,
@@ -31,9 +29,7 @@ vi.mock("./reviewedRoutes", () => {
 		{ id: "home", path: "/home" },
 		{ id: "about", path: "/about" },
 	];
-	const protectedRoutes = [
-		{ id: "admin", path: "/admin" },
-	];
+	const protectedRoutes = [{ id: "admin", path: "/admin" }];
 	return {
 		default: siteRoutes,
 		protectedRoutes,
@@ -210,7 +206,9 @@ describe("useFormattedRoutes", () => {
 		// Mock useAuthentication to return the variable
 		mockUseAuthentication.mockImplementation(() => ({
 			isAuthenticated: isAuthenticatedValue,
-			user: isAuthenticatedValue ? { id: 1, email: "test@example.com", role: "admin" } as any : null,
+			user: isAuthenticatedValue
+				? ({ id: 1, email: "test@example.com", role: "admin" } as any)
+				: null,
 			isLoading: false,
 			login: vi.fn(),
 			register: vi.fn(),

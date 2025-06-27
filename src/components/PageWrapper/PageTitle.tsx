@@ -1,14 +1,13 @@
+import AddOutlined from "@mui/icons-material/AddOutlined";
+import Button, { type ButtonProps } from "@mui/material/Button";
+import type { FabProps } from "@mui/material/Fab";
+import Fab from "@mui/material/Fab";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMemo, type FC } from "react";
 import type { PageTitleProps } from "./types";
-import Fab from "@mui/material/Fab";
-import IconButton from "@mui/material/IconButton";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import type { FabProps } from "@mui/material/Fab";
-import type { IconButtonProps } from "@mui/material/IconButton";
-import AddOutlined from "@mui/icons-material/AddOutlined";
 
 const titleSx: SxProps<Theme> = {
 	fontWeight: "bold",
@@ -38,9 +37,17 @@ const PageTitle: FC<PageTitleProps> = ({
 			"aria-label": `Create new ${title}`,
 			color: "primary",
 			onClick: handleClick,
-			children: icon ?? <AddOutlined />,
+			...(isMobile
+				? {
+						children: icon ?? <AddOutlined />,
+					}
+				: {
+						children: "Create",
+						startIcon: icon ?? <AddOutlined />,
+						variant: "contained",
+					}),
 		}),
-		[handleClick, icon, title],
+		[handleClick, icon, title, isMobile],
 	);
 
 	return (
@@ -56,7 +63,7 @@ const PageTitle: FC<PageTitleProps> = ({
 				)}
 			</Stack>
 			{!isMobile && handleClick && (
-				<IconButton {...(buttonAttributes as IconButtonProps)} />
+				<Button {...(buttonAttributes as ButtonProps)} />
 			)}
 			{isMobile && handleClick && (
 				<Fab

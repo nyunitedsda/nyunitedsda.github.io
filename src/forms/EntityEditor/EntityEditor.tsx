@@ -1,12 +1,19 @@
+import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useSnackbar } from "notistack";
 import { useEffect, useMemo, useState } from "react";
 import { createEntity, updateEntity } from "../../api/request/commonMutations";
 import { getDatabaseItem } from "../../api/request/commonQueries";
 import RingLoader from "../../components/Loaders/RingLoader";
 import FormContainer from "../FormBuilder/FormContainer";
 import type { EntityEditorProps } from "./types";
-import { useSnackbar } from "notistack";
 
+const titleSx: SxProps<Theme> = {
+	position: "sticky",
+	top: 0,
+	backgroundColor: "inherit",
+	zIndex: 1,
+};
 const EntityEditor = <T extends { id?: number }>({
 	entity,
 	id,
@@ -95,7 +102,7 @@ const EntityEditor = <T extends { id?: number }>({
 	return (
 		<>
 			{title && (
-				<Typography variant="h6" gutterBottom>
+				<Typography variant="h6" gutterBottom sx={titleSx}>
 					{title}
 				</Typography>
 			)}

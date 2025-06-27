@@ -8,13 +8,10 @@ import {
 	type SyntheticEvent,
 	useCallback,
 	useEffect,
-	useMemo,
 	useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router";
-import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import { useLocation, useNavigate, useParams } from "react-router";
 import TabPanel from "../TabPanel/TabPanel";
-import { mapRoutesToTabs } from "./helpers";
 import type { RoutedTabsProps } from "./types";
 
 const panelSx: SxProps<Theme> = {
@@ -40,61 +37,78 @@ const tabsSx: SxProps<Theme> = {
 };
 
 const RoutedTabs: FC<RoutedTabsProps> = (props) => {
-	const { tabItems, tabsProps, tabProps, tabPanelProps } = props;
+	const { baseUrl, tabItems, tabsProps, tabProps, tabPanelProps } = props;
 
-	const [selectedTab, setSelectedTab] = useState<number>();
-	const { pathname } = useLocation();
+	const [selectedTabId, setSelectedTabId] = useState<number>();
+	const { tab } = useParams();
 	const navigate = useNavigate();
-	const { routes } = useFormattedRoutes();
-
-	const tabs = useMemo(() => {
-		return mapRoutesToTabs(routes, tabItems);
-	}, [routes, tabItems]);
+	const { pathname } = useLocation();
 
 	useEffect(() => {
-		const currentTab = tabs.find((i) => pathname.indexOf(i.tag) > -1);
+		if (tabItems.length === 0) return;
 
-		if (currentTab?.href && selectedTab !== currentTab.id) {
-			setSelectedTab(currentTab.id);
+		try {
+			let currentTab = tabItems.find((i) => i.tag === tab);
+
+			if (!currentTab) {
+				currentTab = tabItems.find((i) => i.tag === pathname.split("/").pop());
+			}
+
+			if (currentTab?.id) {
+				setSelectedTabId(currentTab.id);
+			} else if (pathname.includes(baseUrl)) {
+				// If no matching tab found but we're on the base URL, default to first tab
+				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
+				setSelectedTabId(tabItems[0].id);
+			}
+		} catch (error) {
+			console.error("Error setting selected tab:", error);
+			if (pathname.includes(baseUrl) && tabItems.length > 0) {
+				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
+				setSelectedTabId(tabItems[0].id);
+			}
 		}
-	}, [tabs, selectedTab, pathname, navigate]);
+	}, [baseUrl, tab, pathname, tabItems, navigate]);
 
 	const handleChange = useCallback(
 		(_event: SyntheticEvent, newValue: number) => {
 			try {
-				const path = tabs.find((i) => i.id === newValue)?.href;
-				if (path) navigate(path);
+				const path = tabItems.find((i) => i.id === newValue)?.tag;
+				if (path) navigate(`${baseUrl}/${path}`);
 			} catch (error) {
 				console.error(error);
 			}
 		},
-		[navigate, tabs],
+		[navigate, tabItems, baseUrl],
 	);
 
 	return (
 		<>
-			{selectedTab ? (
+			{selectedTabId ? (
 				<>
 					<Tabs
 						{...(tabsProps as TabsProps)}
 						onChange={handleChange}
 						sx={{ ...tabsSx, ...tabsProps?.sx }}
-						value={selectedTab}
+						value={selectedTabId}
+						variant="scrollable"
 					>
-						{tabs.map((i) => (
+						{tabItems.map((i) => (
 							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />
 						))}
 					</Tabs>
-					{tabs.map((i) => (
+					{tabItems.map((i) => (
 						<TabPanel
 							{...tabPanelProps}
 							index={i.id}
 							key={i.label}
 							sx={panelSx}
-							value={selectedTab}
+							value={selectedTabId}
 						>
 							{typeof i.content === "string" ? (
 								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
+							) : typeof i.content === "function" ? (
+								<i.content />
 							) : (
 								i.content
 							)}

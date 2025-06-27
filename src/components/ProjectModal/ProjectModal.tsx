@@ -1,7 +1,7 @@
 import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
+import Stack from "@mui/material/Stack";
 import type { FC } from "react";
 import type { ProjectModalProps } from "./types";
 
@@ -15,9 +15,8 @@ const modalStyle = {
 	maxHeight: "90vh",
 	overflow: "auto",
 	bgcolor: "background.paper",
-	borderRadius: 2,
+	borderRadius: 1,
 	boxShadow: 24,
-	p: 4,
 };
 
 const ProjectModal: FC<ProjectModalProps> = ({
@@ -25,6 +24,7 @@ const ProjectModal: FC<ProjectModalProps> = ({
 	children,
 	onClose,
 	open,
+	zeroPadding = false,
 }) => {
 	return (
 		<Modal
@@ -34,6 +34,11 @@ const ProjectModal: FC<ProjectModalProps> = ({
 			onClose={onClose}
 			closeAfterTransition
 			slots={{ backdrop: Backdrop }}
+			onKeyDown={(event) => {
+				if (event.key === "Escape") {
+					onClose();
+				}
+			}}
 			slotProps={{
 				backdrop: {
 					timeout: 500,
@@ -41,7 +46,7 @@ const ProjectModal: FC<ProjectModalProps> = ({
 			}}
 		>
 			<Fade in={open}>
-				<Box sx={modalStyle}>{children}</Box>
+				<Stack sx={{ ...modalStyle, p: zeroPadding ? 0 : 2 }}>{children}</Stack>
 			</Fade>
 		</Modal>
 	);
