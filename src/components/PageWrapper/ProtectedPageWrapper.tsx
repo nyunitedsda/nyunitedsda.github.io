@@ -1,16 +1,20 @@
 import { type FC } from "react";
 import PageWrapper from "./PageWrapper";
 import useAuthentication from "../../hooks/auth/useAuthentication";
+import { Navigate } from "react-router";
+import RingLoader from "../Loaders/RingLoader";
 
 const ProtectedPageWrapper: FC = () => {
-	const { isAuthenticated, user, isLoading } = useAuthentication();
+	const { isAuthenticated, isLoading } = useAuthentication();
 
+	if (isLoading){
+		return <RingLoader />;
+	}
+	if (!isAuthenticated) {
+		return <Navigate to="/login" state={{ from: location }} replace />;
+	}
 
-if (!isAuthenticated) {
-	
-}
-	
-	return (		<PageWrapper/>	);
+	return <PageWrapper />;
 };
 
 export default ProtectedPageWrapper;

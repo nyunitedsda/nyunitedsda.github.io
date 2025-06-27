@@ -15,54 +15,53 @@ import UserManagement from "./components/UserManagement";
  * and the content to be rendered when the tab is active.
  */
 export const ADMIN_TAB_LIST: RouteTabsItem[] = [
-  {
-    id: 1, 
-    tag: 'users',
-    label: 'User',
-    content: createElement(UserManagement)
-  },
-  {
-    id: 2,
-    tag: 'notifications',
-    label: 'Notification',
-    content: createElement(NotificationManagement)
-  },
-   {
-    id: 3,
-    tag: 'announcements',
-    label: 'Announcement',
-    content: createElement(AnnouncementManagement)
-  },
-  {
-    id: 4,
-    tag: 'services',
-    label: 'Service',
-    content: createElement(ServiceManagement)
-  },
-  
-  {
-    id: 5,
-    tag: 'contacts',
-    label: 'Contact Info',
-    content: createElement(ContactManagement)
-  },
-  {
-    id: 6,
-    tag: 'donations',
-    label: 'Donation',
-    content: createElement(DonationManagement)
-  },
-  {
-    id: 7,
-    tag: 'blogs',
-    label: 'Blog',
-    content: createElement(BlogManagement)
-  },
-  {
-    id: 8,
-    tag: 'settings',
-    label: 'Setting',
-    content: createElement(SettingManagement)
-  },
-];
+	{
+		id: 1,
+		tag: "users",
+		label: "User",
+		content: createElement(UserManagement),
+	},
+	{
+		id: 2,
+		tag: "notifications",
+		label: "Notification",
+		content: createElement(NotificationManagement),
+	},
+	{
+		id: 3,
+		tag: "announcements",
+		label: "Announcement",
+		content: createElement(AnnouncementManagement),
+	},
+	{
+		id: 4,
+		tag: "services",
+		label: "Service",
+		content: createElement(ServiceManagement),
+	},
 
+	{
+		id: 5,
+		tag: "contacts",
+		label: "Contact Info",
+		content: createElement(ContactManagement),
+	},
+	{
+		id: 6,
+		tag: "donations",
+		label: "Donation",
+		content: createElement(DonationManagement),
+	},
+	{
+		id: 7,
+		tag: "blogs",
+		label: "Blog",
+		content: createElement(BlogManagement),
+	},
+	{
+		id: 8,
+		tag: "settings",
+		label: "Setting",
+		content: createElement(SettingManagement),
+	},
+];

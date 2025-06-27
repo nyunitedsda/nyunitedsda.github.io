@@ -5,6 +5,7 @@ import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import ProtectedPageWrapper from "../../components/PageWrapper/ProtectedPageWrapper.tsx";
 import Administration from "../../pages/Admin/Administration.tsx";
 import Login from "../../pages/Login/Login.tsx";
+import UnauthorizedError from "../../pages/Error/UnauthorizedError.tsx";
 const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
@@ -121,6 +122,10 @@ const fallbackRoutes: RouteObject[] = [
 			{
 				element: <Login />,
 				path: `${BASE_URL}login`,
+			},
+			{
+				element: <UnauthorizedError/>,
+				path: `${BASE_URL}unauthorized`,
 			},
 			{
 				element: <Error />,
