@@ -1,9 +1,10 @@
 import type { FC } from "react";
 import { useRoutes } from "react-router";
-import siteRoutes from "./hooks/routes/reviewedRoutes";
+import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
 
 const App: FC = () => {
-	const element = useRoutes(siteRoutes);
+	const {routes} = useFormattedRoutes();
+	const element = useRoutes(routes);
 
 	return <>{element}</>;
 };

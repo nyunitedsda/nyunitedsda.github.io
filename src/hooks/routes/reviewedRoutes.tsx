@@ -1,7 +1,10 @@
-import Stack from "@mui/material/Stack";
-import { type FC, lazy } from "react";
-import { Outlet, type RouteObject } from "react-router";
+import { lazy } from "react";
+import { type RouteObject } from "react-router";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import Login from "../../pages/Login/Login.tsx";
+import ProtectedPageWrapper from "../../components/PageWrapper/ProtectedPageWrapper.tsx";
+import Administration from "../../pages/Admin/Administration.tsx";
+import MinimalPageWrapper from "../../components/PageWrapper/MinimalPageWrapper.tsx";
 const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
@@ -18,15 +21,11 @@ const UserAgreements = lazy(
 
 const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
 
-const MinimalLayout: FC = () => (
-	<Stack sx={{ width: "100%", height: "100%", color: "text.primary" }}>
-		<Outlet />
-	</Stack>
-);
-
-// NOTE: Id is used to find the routes that will be menu items
-
-// Public routes with main layout: blog/:id
+/**
+ * Main layout routes that do not require authentication
+ * These routes will have Header and Footer in layout
+ * Id property is used to find the routes that will be menu items
+ */
 const mainLayoutRoutes: RouteObject[] = [
 	{
 		element: <PageWrapper />,
@@ -83,28 +82,36 @@ const mainLayoutRoutes: RouteObject[] = [
 			},
 		],
 	},
-	// {
-	// 	element: <StreamWrapper />,
-	// 	children: [
-	// 		{
-	// 			element: <LiveBroadcast />,
-	// 			id: "liveStream",
-	// 			path: `${BASE_URL}watch-live`,
-	// 		},
-	// 		{
-	// 			element: <LiveBroadcast />,
-	// 			id: "archiveStream",
-	// 			path: `${BASE_URL}watch-archive`,
-	// 		},
-	// 	],
-	// },
 ];
 
-// Error routes
-const errorRoutes: RouteObject[] = [
+/**
+ * Protected routes that require authentication
+ */
+export const protectedRoutes: RouteObject[] = [
 	{
-		element: <MinimalLayout />,
+		element: <ProtectedPageWrapper />,
 		children: [
+			{
+				element: <Administration />,
+				id: "admin",
+				path: `${BASE_URL}admin/:tab?`,
+			},
+		],
+	},
+];
+
+/**
+ * Routes that do not require authentication,
+ * also do not need Header or footer in layout
+ */
+const fallbackRoutes: RouteObject[] = [
+	{
+		element: <MinimalPageWrapper />,
+		children: [
+			{
+				element: <Login />,
+				path: `${BASE_URL}login`,
+			},
 			{
 				element: <Error />,
 				path: "*",
@@ -113,6 +120,6 @@ const errorRoutes: RouteObject[] = [
 	},
 ];
 
-const siteRoutes: RouteObject[] = [...mainLayoutRoutes, ...errorRoutes];
+const siteRoutes: RouteObject[] = [...mainLayoutRoutes, ...fallbackRoutes];
 
 export default siteRoutes;

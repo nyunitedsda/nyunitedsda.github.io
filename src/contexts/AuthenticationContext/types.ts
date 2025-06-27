@@ -1,6 +1,11 @@
 import type { PropsWithChildren } from "react";
 
 /**
+ * Represents the role of a user in the system
+ */
+export type UserRole = "admin" |"guest" |  "moderator";
+
+/**
  * Represents a user in the system
  */
 export interface UserType {
@@ -13,7 +18,7 @@ export interface UserType {
 	/** User's last name */
 	lastName?: string;
 	/** User's role in the system */
-	role: "admin" | "user" | "moderator";
+	role: UserRole;
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */

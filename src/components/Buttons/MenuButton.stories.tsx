@@ -6,7 +6,13 @@ const meta: Meta<typeof MenuButton> = {
 	title: "Components/Buttons/MenuButton",
 	component: MenuButton,
 	tags: ["autodocs"],
-	decorators: [(Story) => <div style={{width: '150px'}}><Story /></div>],
+	decorators: [
+		(Story) => (
+			<div style={{ width: "150px" }}>
+				<Story />
+			</div>
+		),
+	],
 	argTypes: {
 		isActive: { control: false },
 		path: { control: "text" },
@@ -30,7 +36,7 @@ export const NoMenu: Story = {
 		children: "Go Home",
 		path: "",
 		isActive: () => true,
-		buttonProps: { onClick: ()=> ({})},
+		buttonProps: { onClick: () => ({}) },
 		menuItems: undefined,
 	},
 };

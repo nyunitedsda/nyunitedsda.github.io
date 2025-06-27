@@ -1,18 +1,18 @@
 import { useSnackbar } from "notistack";
 import {
-    type FC,
-    type PropsWithChildren,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
+	type FC,
+	type PropsWithChildren,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
 } from "react";
 import { Provider } from "./context";
 import type {
-    AuthenticationContextProps,
-    LoginCredentials,
-    RegisterData,
-    UserType,
+	AuthenticationContextProps,
+	LoginCredentials,
+	RegisterData,
+	UserType,
 } from "./types";
 
 // Storage keys for persistence
@@ -59,7 +59,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 
 				// TODO: Replace with actual API call
 				// const response = await authAPI.login(credentials);
-				
+
 				// Mock authentication for now
 				const mockUser: UserType = {
 					id: 1,
@@ -88,14 +88,14 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			} catch (error) {
 				enqueueSnackbar(
 					error instanceof Error ? error.message : "Login failed",
-					{ variant: "error" }
+					{ variant: "error" },
 				);
 				throw error;
 			} finally {
 				setIsLoading(false);
 			}
 		},
-		[enqueueSnackbar]
+		[enqueueSnackbar],
 	);
 
 	const register = useCallback(
@@ -112,7 +112,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 					email: data.email,
 					firstName: data.firstName,
 					lastName: data.lastName,
-					role: "user",
+					role: "guest",
 					emailVerified: false,
 					createdAt: new Date(),
 					updatedAt: new Date(),
@@ -134,14 +134,14 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			} catch (error) {
 				enqueueSnackbar(
 					error instanceof Error ? error.message : "Registration failed",
-					{ variant: "error" }
+					{ variant: "error" },
 				);
 				throw error;
 			} finally {
 				setIsLoading(false);
 			}
 		},
-		[enqueueSnackbar]
+		[enqueueSnackbar],
 	);
 
 	const logout = useCallback(() => {
@@ -161,7 +161,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const refreshAuth = useCallback(async () => {
 		try {
 			const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-			
+
 			if (!refreshToken) {
 				throw new Error("No refresh token available");
 			}
@@ -197,7 +197,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			logout,
 			refreshAuth,
 		}),
-		[user, isLoading, isAuthenticated, login, register, logout, refreshAuth]
+		[user, isLoading, isAuthenticated, login, register, logout, refreshAuth],
 	);
 
 	return <Provider value={value}>{children}</Provider>;

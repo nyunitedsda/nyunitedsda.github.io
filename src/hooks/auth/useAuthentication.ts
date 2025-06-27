@@ -12,7 +12,7 @@ const useAuthentication = (): AuthenticationContextProps => {
 
 	if (!contextValue) {
 		throw new Error(
-			"useAuthentication must be used within an AuthenticationProvider"
+			"useAuthentication must be used within an AuthenticationProvider",
 		);
 	}
 

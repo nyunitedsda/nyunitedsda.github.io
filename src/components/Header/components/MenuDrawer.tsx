@@ -15,6 +15,7 @@ import MenuDrawerItem from "./MenuDrawerItem";
 import OrganizationBranding from "./OrganizationBranding";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 import type { MenuDrawerProps } from "./types";
+import { AdminPanelSettingsOutlined } from "@mui/icons-material";
 
 const { rootSx } = menuDrawerStyles;
 
@@ -26,6 +27,7 @@ const MENU_ICON_LIST: Record<string, ReactNode> = {
 	LiveTvRounded: <LiveTvRounded />,
 	LoginRounded: <LoginRounded />,
 	VolunteerActivismRounded: <VolunteerActivismRounded />,
+	AdminPanelSettingsOutlined: <AdminPanelSettingsOutlined />,
 };
 
 const MenuDrawer: FC<MenuDrawerProps> = ({
