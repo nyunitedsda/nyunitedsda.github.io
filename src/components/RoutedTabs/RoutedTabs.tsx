@@ -8,13 +8,10 @@ import {
 	type SyntheticEvent,
 	useCallback,
 	useEffect,
-	useMemo,
 	useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router";
-import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import { useNavigate, useParams } from "react-router";
 import TabPanel from "../TabPanel/TabPanel";
-import { mapRoutesToTabs } from "./helpers";
 import type { RoutedTabsProps } from "./types";
 
 const panelSx: SxProps<Theme> = {
@@ -40,64 +37,65 @@ const tabsSx: SxProps<Theme> = {
 };
 
 const RoutedTabs: FC<RoutedTabsProps> = (props) => {
-	const { tabItems, tabsProps, tabProps, tabPanelProps } = props;
+	const {baseUrl, tabItems, tabsProps, tabProps, tabPanelProps } = props;
 
-	const [selectedTab, setSelectedTab] = useState<number>();
-	const { pathname } = useLocation();
+	const [selectedTabId, setSelectedTabId] = useState<number>();
+	const {tab} = useParams();
 	const navigate = useNavigate();
-	const { routes } = useFormattedRoutes();
-
-	const tabs = useMemo(() => {
-		return mapRoutesToTabs(routes, tabItems);
-	}, [routes, tabItems]);
-
+	
 	useEffect(() => {
-		const currentTab = tabs.find((i) => pathname.indexOf(i.tag) > -1);
+		const currentTab = tabItems.filter((i) => {
+			return i.tag === tab;
+	})[0];
 
-		if (currentTab?.href && selectedTab !== currentTab.id) {
-			setSelectedTab(currentTab.id);
+		if (selectedTabId !== currentTab.id) {
+			setSelectedTabId(currentTab.id);
 		}
-	}, [tabs, selectedTab, pathname, navigate]);
+
+	}, [baseUrl, selectedTabId, tab]);
 
 	const handleChange = useCallback(
 		(_event: SyntheticEvent, newValue: number) => {
 			try {
-				const path = tabs.find((i) => i.id === newValue)?.href;
-				if (path) navigate(path);
+				const path = tabItems.find((i) => i.id === newValue)?.tag;
+				if (path) navigate(`${baseUrl}/${path}`);
 			} catch (error) {
 				console.error(error);
 			}
 		},
-		[navigate, tabs],
+		[navigate, tabItems],
 	);
 
 	return (
 		<>
-			{selectedTab ? (
+			{selectedTabId ? (
 				<>
 					<Tabs
 						{...(tabsProps as TabsProps)}
 						onChange={handleChange}
 						sx={{ ...tabsSx, ...tabsProps?.sx }}
-						value={selectedTab}
+						value={selectedTabId}
 					>
-						{tabs.map((i) => (
+						{tabItems.map((i) => (
 							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />
 						))}
 					</Tabs>
-					{tabs.map((i) => (
+					{tabItems.map((i) => (
 						<TabPanel
 							{...tabPanelProps}
 							index={i.id}
 							key={i.label}
 							sx={panelSx}
-							value={selectedTab}
+							value={selectedTabId}
 						>
 							{typeof i.content === "string" ? (
 								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
+							) : typeof i.content === "function" ? (
+								<i.content />
 							) : (
 								i.content
 							)}
+							
 						</TabPanel>
 					))}
 				</>

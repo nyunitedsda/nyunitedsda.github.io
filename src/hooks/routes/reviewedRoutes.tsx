@@ -62,23 +62,13 @@ const mainLayoutRoutes: RouteObject[] = [
 			},
 			{
 				element: <UserAgreements />,
-				id: "termsOfUse",
-				path: `${BASE_URL}termsOfUse`,
-			},
-			{
-				element: <UserAgreements />,
-				id: "privacy",
-				path: `${BASE_URL}privacy`,
+				id: "policy",
+				path: `${BASE_URL}policy/:tab?`,
 			},
 			{
 				element: <LiveBroadcast />,
 				id: "liveStream",
-				path: `${BASE_URL}watch-live`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "archiveStream",
-				path: `${BASE_URL}watch-archive`,
+				path: `${BASE_URL}watch/:tab?`,
 			},
 		],
 	},

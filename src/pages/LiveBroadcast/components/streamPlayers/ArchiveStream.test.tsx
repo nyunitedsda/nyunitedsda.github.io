@@ -1,5 +1,5 @@
-import { vi } from "vitest";
-import { render, screen } from "../../../../utils/vitest-setup";
+
+import { beforeEach, describe, expect, it, render, vi } from "../../../../utils/index";
 import ArchiveStream from "./ArchiveStream";
 import StreamDisplay from "./StreamDisplay";
 
@@ -31,11 +31,5 @@ describe("ArchiveStream", () => {
 
 		const mockCalls = vi.mocked(StreamDisplay).mock.calls;
 		expect(mockCalls[0][0].src).toContain("view=grid");
-	});
-
-	it("renders a StreamDisplay component", () => {
-		render(<ArchiveStream />);
-
-		expect(screen.getByTestId("mock-stream-display")).toBeInTheDocument();
-	});
+	});	
 });

@@ -1,8 +1,9 @@
 import type { TabProps } from "@mui/material";
-import type { ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import type { TabPanelProps } from "../TabPanel/types";
 
 interface RoutedTabsProps {
+	baseUrl?: string;
 	tabItems: RouteTabsItem[];
 	tabsProps?: Omit<TabProps, "children" | "value" | "onChange">;
 	tabProps?: Omit<TabProps, "value" | "label">;
@@ -13,7 +14,7 @@ interface RouteTabsItem {
 	id: number;
 	tag: string;
 	label: string;
-	content: string | ReactNode;
+	content: string | ReactNode | FC;
 }
 
 interface RouteTabsWithHrefItem extends RouteTabsItem {
