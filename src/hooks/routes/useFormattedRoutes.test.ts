@@ -2,8 +2,8 @@ import { renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import useAuthentication from "../auth/useAuthentication";
 import * as helpers from "./helpers";
-import pathlessMenuItems, { protectedMenuItems } from "./pathlessMenuItems";
-import siteRoutes, { protectedRoutes } from "./reviewedRoutes";
+import pathlessMenuItems from "./pathlessMenuItems";
+import siteRoutes from "./reviewedRoutes";
 import useFormattedRoutes from "./useFormattedRoutes";
 
 // Mock dependencies
