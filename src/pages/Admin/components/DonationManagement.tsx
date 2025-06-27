@@ -4,14 +4,14 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import { deleteEntity } from "../../api/request/commonMutations";
-import { getDatabaseList } from "../../api/request/commonQueries";
-import type { DonationType } from "../../api/request/types";
-import ConfirmationDialog from "../../components/ConfirmationDialog/ConfirmationDialog";
-import RingLoader from "../../components/Loaders/RingLoader";
-import PageTitle from "../../components/PageWrapper/PageTitle";
-import DonationEditor from "../../forms/collection/DonationEditor/DonationEditor";
-import DonationItem from "../Donations/components/DonationItem";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { getDatabaseList } from "../../../api/request/commonQueries";
+import type { DonationType } from "../../../api/request/types";
+import ConfirmationDialog from "../../../components/ConfirmationDialog/ConfirmationDialog";
+import RingLoader from "../../../components/Loaders/RingLoader";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
+import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
+import DonationItem from "../../Donations/components/DonationItem";
 
 const listSx: SxProps<Theme> = {
 	p: 2,
