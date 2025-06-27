@@ -6,6 +6,28 @@ export type DatabaseEntity =
 	| "notifications";
 
 /**
+ * Represents a user in the system
+ */
+export interface UserType {
+	/** Unique identifier for the user */
+	id: number;
+	/** User's email address */
+	email: string;
+	/** User's first name */
+	firstName?: string;
+	/** User's last name */
+	lastName?: string;
+	/** User's role in the system */
+	role: "admin" | "user" | "moderator";
+	/** Whether the user's email is verified */
+	emailVerified?: boolean;
+	/** Timestamp when the user was created */
+	createdAt?: Date;
+	/** Timestamp when the user was last updated */
+	updatedAt?: Date;
+}
+
+/**
  * Represents an donation payment method in the system
  */
 export interface DonationType {
