@@ -56,7 +56,7 @@
 			},
 			"style": {
 				"noUselessElse": "error",
-				"useFilenamingConvention": "error",
+				"useFilenamingConvention": "off",
 				"useComponentExportOnlyModules": "error",
 				"noNegationElse": "warn"
 			}

@@ -19,7 +19,7 @@ const calculateRemainingTime = (countdownTarget: Dayjs) => {
 			seconds: Math.floor((difference / 1000) % 60),
 		};
 	}
-		return INITIAL_TIMER_VALUES;
+	return INITIAL_TIMER_VALUES;
 };
 
 const formatTimeUnits = (time: TimeLeft): TimeUnit[] => [
