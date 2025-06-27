@@ -47,7 +47,6 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.0.2",
-		"@chromatic-com/storybook": "1",
 		"@storybook/addon-essentials": "8.3.6",
 		"@storybook/addon-links": "8.3.6",
 		"@storybook/react": "8.3.6",
