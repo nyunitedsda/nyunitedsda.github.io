@@ -9,7 +9,7 @@ import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import { type FC, type ReactNode, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
-import ThemeToggleButton from "../../Buttons/ThemeToggleButton1";
+import ThemeToggleButton from "../../Buttons/ThemeToggleButton";
 import { menuDrawerStyles } from "../styles";
 import MenuDrawerItem from "./MenuDrawerItem";
 import OrganizationBranding from "./OrganizationBranding";

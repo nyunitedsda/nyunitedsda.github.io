@@ -8,7 +8,7 @@ import { type FC, useCallback, useState } from "react";
 import { useLocation } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import MenuButton from "../Buttons/MenuButton";
-import ThemeToggleButton from "../Buttons/ThemeToggleButton1";
+import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";

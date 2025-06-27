@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import "@testing-library/jest-dom/vitest";
 import { useColorScheme } from "@mui/material/styles";
 import { vi } from "vitest";
 import {
@@ -10,8 +8,8 @@ import {
 	it,
 	render,
 	screen,
-} from "../../utils/vitest-setup";
-import ThemeToggleButton from "./ThemeToggleButton1";
+} from "../../utils/index";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 // Mock BEFORE importing the hook/component
 vi.mock("@mui/material/styles", async () => {
