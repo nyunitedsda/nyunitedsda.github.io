@@ -1,17 +1,15 @@
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik } from "formik";
-import { type ReactNode } from "react";
+import type { FormContainerProps } from "./types";
 
-interface FormContainerProps<T> {
-	cancelButtonText?: string;
-	children: ReactNode;
-	initialValues: T;
-	submitButtonText?: string;
-	validationSchema: any;
-	onSubmit: (values: T) => void | Promise<any>;
-	onCancel?: () => void;
-}
+const childrenSx: SxProps<Theme> = {
+	width: "100%",
+	maxWidth: 600,
+	overflowY: "auto",
+	pt: 1,
+};
 
 const FormContainer = <T extends { id?: number }>({
 	initialValues,
@@ -30,8 +28,10 @@ const FormContainer = <T extends { id?: number }>({
 			onSubmit={onSubmit}
 		>
 			{({ isSubmitting }) => (
-				<Form>
-					{children}
+				<Form style={{ width: "100%" }}>
+					<Stack spacing={2} sx={childrenSx}>
+						{children}
+					</Stack>
 
 					{/* TODO: add a confirm cancel */}
 					<Stack

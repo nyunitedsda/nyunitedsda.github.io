@@ -9,7 +9,6 @@ import EntityEditor from "../../EntityEditor/EntityEditor";
 import { default as InputField } from "../../Input/FormField";
 import type { EditorProps } from "../types";
 
-
 const defaultValues: Partial<NotificationType> = {
 	title: "",
 	message: "",
@@ -95,7 +94,7 @@ const NotificationEditor: FC<EditorProps<NotificationType>> = ({
 					fieldType="select"
 					items={severityOptions}
 					renderItemLabel={(item) => item.label}
-					valueResolver={(item) => item.id}
+					valueResolver={(item) => item.value}
 				/>
 
 				<InputField

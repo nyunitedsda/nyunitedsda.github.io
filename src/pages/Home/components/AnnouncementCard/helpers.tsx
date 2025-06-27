@@ -55,7 +55,7 @@ const createFormattedContent = (props: EventAnnouncement): Section[] => {
 	NOTIFICATION_KEYS.forEach((key) => {
 		let section: Section | undefined;
 
-		if (!!props[key as keyof EventAnnouncement]) {
+		if (props[key as keyof EventAnnouncement]) {
 			section = {
 				...NOTIFICATION_ATTRIBUTES[key as NoteKeys],
 				content: props?.[key as keyof EventAnnouncement] as ReactNode,

@@ -45,18 +45,23 @@ const BlogDetails: FC = () => {
 	const { isLoading, data } = useQuery({
 		queryKey: ["get-article-id", id],
 		queryFn: async () => {
-			const response = await getDatabaseItem('articles', parseInt(id as string, 10));
+			const response = await getDatabaseItem(
+				"articles",
+				parseInt(id as string, 10),
+			);
 			// If your API returns an array, pick the first item
-			return (Array.isArray(response.data) ? response.data[0] : response.data) as ArticleType;
+			return (
+				Array.isArray(response.data) ? response.data[0] : response.data
+			) as ArticleType;
 		},
-});
+	});
 
 	return (
 		<Stack spacing={2}>
 			<PageTitle title="Blog Details" />
 			<Stack spacing={2} sx={{ "& a, svg": { color: "primary.light" } }}>
 				{/* Back Button */}
-				
+
 				<Button
 					variant="text"
 					startIcon={<ArrowBackIosNewSharp />}

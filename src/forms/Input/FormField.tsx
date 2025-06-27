@@ -7,6 +7,7 @@ import SelectField from "./SelectField";
 import type { InputFieldProps } from "./types";
 
 const InputField: FC<InputFieldProps> = ({
+	dependencies,
 	name,
 	label,
 	type = "text",
@@ -20,6 +21,11 @@ const InputField: FC<InputFieldProps> = ({
 		[meta.error, meta.touched],
 	);
 
+	const isDisabled = useMemo(() => {
+		if (!dependencies || dependencies.length === 0) return false;
+		return dependencies.some((dep) => !field.value[dep]);
+	}, [dependencies, field.value]);
+
 	switch (fieldType) {
 		case "text":
 			return (
@@ -27,6 +33,7 @@ const InputField: FC<InputFieldProps> = ({
 					{...field}
 					{...props}
 					label={label}
+					disabled={props.disabled || isDisabled}
 					type={type}
 					error={!!errorText}
 					helperText={errorText}
@@ -41,6 +48,7 @@ const InputField: FC<InputFieldProps> = ({
 					{...field}
 					{...props}
 					label={label}
+					disabled={props.disabled || isDisabled}
 					error={errorText}
 					items={props.items || []}
 					valueResolver={
@@ -59,26 +67,41 @@ const InputField: FC<InputFieldProps> = ({
 				<FormControlLabel
 					{...field}
 					{...props}
+					disabled={props.disabled || isDisabled}
 					control={<Checkbox />}
 					label={label}
 				/>
 			);
+		case "datetime-local":
+			return (
+				<TextField
+					{...field}
+					{...props}
+					label={label}
+					type="datetime-local"
+					error={!!errorText}
+					disabled={props.disabled || isDisabled}
+					helperText={errorText}
+					fullWidth
+					margin="normal"
+				/>
+			);
 
 		default:
-			break;
+			return (
+				<TextField
+					{...field}
+					{...props}
+					label={label}
+					type={type}
+					error={!!errorText}
+					disabled={props.disabled || isDisabled}
+					helperText={errorText}
+					fullWidth
+					margin="normal"
+				/>
+			);
 	}
-
-	return (
-		<TextField
-			{...field}
-			{...props}
-			label={label}
-			error={!!errorText}
-			helperText={errorText}
-			fullWidth
-			margin="normal"
-		/>
-	);
 };
 
 export default InputField;

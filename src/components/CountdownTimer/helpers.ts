@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import type { TimeLeft, TimeUnit } from "./types";
 
 const INITIAL_TIMER_VALUES = {
@@ -18,9 +18,8 @@ const calculateRemainingTime = (countdownTarget: Dayjs) => {
 			minutes: Math.floor((difference / 1000 / 60) % 60),
 			seconds: Math.floor((difference / 1000) % 60),
 		};
-	} else {
-		return INITIAL_TIMER_VALUES;
 	}
+		return INITIAL_TIMER_VALUES;
 };
 
 const formatTimeUnits = (time: TimeLeft): TimeUnit[] => [

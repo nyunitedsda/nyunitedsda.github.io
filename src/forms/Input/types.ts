@@ -6,6 +6,7 @@ export type FormFieldType =
 	| "radio";
 
 export interface InputFieldProps {
+	dependencies?: string[]; // Fields that this field depends on
 	name: string;
 	label: string;
 	type?: string;

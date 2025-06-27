@@ -2,7 +2,7 @@ import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRounded from "@mui/icons-material/ArrowForwardIosRounded";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { type FC } from "react";
+import type { FC } from "react";
 import type { CarouselControlProps } from "../../types";
 import type { CarouselArrowButtonProps } from "./types";
 import useCarouselArrowButtons from "./useCarouselArrowButton";

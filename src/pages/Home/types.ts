@@ -1,8 +1,6 @@
 import type { Dayjs } from "dayjs";
 import type { EventType } from "../../api/request/types";
 
-
-
 interface AnnouncementDetail {
 	description?: string;
 	id: number;

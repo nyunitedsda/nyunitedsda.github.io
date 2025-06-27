@@ -25,7 +25,7 @@ const SubMenuDrawerItem: FC<SubMenuDrawerItemProps> = ({
 				aria-expanded={isExpanded}
 				aria-controls={`${name}-submenu`}
 				expandedIcon={
-					!isExpanded ? <ExpandMoreRounded /> : <ExpandLessRounded />
+					isExpanded ? <ExpandLessRounded /> : <ExpandMoreRounded />
 				}
 				icon={icon}
 				isActive={!isExpanded && isActiveParent}

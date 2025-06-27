@@ -98,11 +98,7 @@ const NotificationAdmin: FC = () => {
 						width="100%"
 						sx={listSx}
 					>
-						{!data?.data?.length ? (
-							<Typography color="text.secondary" variant="body2">
-								{EMPTY_NOTIFICATIONS_TEXT}
-							</Typography>
-						) : (
+						{data?.data?.length ? (
 							data.data.map((notification) => (
 								<DonationItem
 									key={notification.id}
@@ -112,6 +108,10 @@ const NotificationAdmin: FC = () => {
 									onDelete={() => setDeleteItemId(notification.id)}
 								/>
 							))
+						) : (
+							<Typography color="text.secondary" variant="body2">
+								{EMPTY_NOTIFICATIONS_TEXT}
+							</Typography>
 						)}
 					</Stack>
 				)}

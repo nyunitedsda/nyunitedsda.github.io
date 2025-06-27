@@ -26,10 +26,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "strictNullChecks": true,
-    "types": [
-      "vitest/globals",
-      "vitest/jsdom"
-    ]
+    "types": []
   },
   "include": [
     "src"

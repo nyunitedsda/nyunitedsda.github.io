@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { type FC } from "react";
+import type { FC } from "react";
 import { performQuery } from "../../api/queryData";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";

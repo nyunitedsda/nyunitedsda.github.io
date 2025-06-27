@@ -1,5 +1,5 @@
 import Container, { type ContainerProps } from "@mui/material/Container";
-import { type FC } from "react";
+import type { FC } from "react";
 
 const PageContentContainer: FC<Omit<ContainerProps, "MaxWidth">> = ({
 	children,

@@ -87,7 +87,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 				aria-expanded={isMenuVisible ? "true" : undefined}
 				endIcon={endIcon}
 				onClick={menuItems ? handleMenuOpen : buttonProps?.onClick}
-				href={!menuItems ? path : undefined}
+				href={menuItems ? undefined : path}
 				ref={buttonRef}
 				sx={
 					{
