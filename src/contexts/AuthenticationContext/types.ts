@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 /**
  * Represents the role of a user in the system
  */
-export type UserRole = "admin" |"guest" |  "moderator";
+export type UserRole = "admin" | "guest" | "moderator";
 
 /**
  * Represents a user in the system

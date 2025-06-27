@@ -3,7 +3,7 @@ import type { FC, ReactNode } from "react";
 import type { TabPanelProps } from "../TabPanel/types";
 
 interface RoutedTabsProps {
-	baseUrl?: string;
+	baseUrl: string;
 	tabItems: RouteTabsItem[];
 	tabsProps?: Omit<TabProps, "children" | "value" | "onChange">;
 	tabProps?: Omit<TabProps, "value" | "label">;

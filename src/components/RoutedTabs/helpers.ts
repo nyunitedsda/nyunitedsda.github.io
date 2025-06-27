@@ -18,10 +18,10 @@ const flattenRoutes = (routes: RouteObject[]): RouteObject[] => {
 };
 
 /**
- * 
- * @param routes 
- * @param tabList 
- * @returns 
+ *
+ * @param routes
+ * @param tabList
+ * @returns
  */
 const mapRoutesToTabs = (routes: RouteObject[], tabList: RouteTabsItem[]) => {
 	const flatRoutes = flattenRoutes(routes);

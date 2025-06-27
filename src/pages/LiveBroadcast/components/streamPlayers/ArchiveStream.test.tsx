@@ -1,5 +1,11 @@
-
-import { beforeEach, describe, expect, it, render, vi } from "../../../../utils/index";
+import {
+	beforeEach,
+	describe,
+	expect,
+	it,
+	render,
+	vi,
+} from "../../../../utils/index";
 import ArchiveStream from "./ArchiveStream";
 import StreamDisplay from "./StreamDisplay";
 
@@ -31,5 +37,5 @@ describe("ArchiveStream", () => {
 
 		const mockCalls = vi.mocked(StreamDisplay).mock.calls;
 		expect(mockCalls[0][0].src).toContain("view=grid");
-	});	
+	});
 });

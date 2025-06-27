@@ -1,10 +1,10 @@
 import { lazy } from "react";
 import { type RouteObject } from "react-router";
+import MinimalPageWrapper from "../../components/PageWrapper/MinimalPageWrapper.tsx";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import Login from "../../pages/Login/Login.tsx";
 import ProtectedPageWrapper from "../../components/PageWrapper/ProtectedPageWrapper.tsx";
 import Administration from "../../pages/Admin/Administration.tsx";
-import MinimalPageWrapper from "../../components/PageWrapper/MinimalPageWrapper.tsx";
+import Login from "../../pages/Login/Login.tsx";
 const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
@@ -66,9 +66,29 @@ const mainLayoutRoutes: RouteObject[] = [
 				path: `${BASE_URL}policy/:tab?`,
 			},
 			{
+				element: <UserAgreements />,
+				id: "termsOfUse",
+				path: `${BASE_URL}policy/termsOfUse`,
+			},
+			{
+				element: <UserAgreements />,
+				id: "privacy",
+				path: `${BASE_URL}policy/privacy`,
+			},
+			{
 				element: <LiveBroadcast />,
 				id: "liveStream",
 				path: `${BASE_URL}watch/:tab?`,
+			},
+			{
+				element: <LiveBroadcast />,
+				id: "live",
+				path: `${BASE_URL}watch/live`,
+			},
+			{
+				element: <LiveBroadcast />,
+				id: "archive",
+				path: `${BASE_URL}watch/archive`,
 			},
 		],
 	},

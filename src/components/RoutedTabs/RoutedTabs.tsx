@@ -10,7 +10,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import TabPanel from "../TabPanel/TabPanel";
 import type { RoutedTabsProps } from "./types";
 
@@ -37,22 +37,30 @@ const tabsSx: SxProps<Theme> = {
 };
 
 const RoutedTabs: FC<RoutedTabsProps> = (props) => {
-	const {baseUrl, tabItems, tabsProps, tabProps, tabPanelProps } = props;
+	const { baseUrl, tabItems, tabsProps, tabProps, tabPanelProps } = props;
 
 	const [selectedTabId, setSelectedTabId] = useState<number>();
-	const {tab} = useParams();
+	const { tab } = useParams();
 	const navigate = useNavigate();
-	
+	const { pathname } = useLocation();
+
 	useEffect(() => {
-		const currentTab = tabItems.filter((i) => {
-			return i.tag === tab;
-	})[0];
+		try {
+			const currentTab = tabItems.filter((i) => {
+				return i.tag === tab;
+			})[0];
 
-		if (selectedTabId !== currentTab.id) {
-			setSelectedTabId(currentTab.id);
+			if (selectedTabId !== currentTab.id) {
+				setSelectedTabId(currentTab.id);
+			}
+		} catch (error) {
+			console.error("Error setting selected tab:", error);
+			if (pathname.includes(baseUrl)) {
+				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
+				setSelectedTabId(tabItems[0].id);
+			}
 		}
-
-	}, [baseUrl, selectedTabId, tab]);
+	}, [baseUrl, selectedTabId, tab, pathname, tabItems, navigate]);
 
 	const handleChange = useCallback(
 		(_event: SyntheticEvent, newValue: number) => {
@@ -95,7 +103,6 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 							) : (
 								i.content
 							)}
-							
 						</TabPanel>
 					))}
 				</>

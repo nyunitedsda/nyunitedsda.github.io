@@ -26,7 +26,9 @@ const useFormattedRoutes = (): FormattedRoutes => {
 			? [...siteRoutes, ...protectedRoutes]
 			: siteRoutes;
 
-		const menuList = isAuthenticated ? [...pathlessMenuItems, ...protectedMenuItems] : pathlessMenuItems;	
+		const menuList = isAuthenticated
+			? [...pathlessMenuItems, ...protectedMenuItems]
+			: pathlessMenuItems;
 
 		const routeIdAndPath = extractRouteIdAndPath(finalRoutes);
 
