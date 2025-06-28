@@ -1,7 +1,6 @@
 import type { ButtonProps } from "@mui/material/Button";
-import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi,  screen, waitFor, render } from "../../utils/index.ts";
-// import { render } from "../../utils/vitest-setup.tsx";
+import { beforeEach, describe, expect, it, vi,  screen, waitFor,  fireEvent } from "../../utils/index.ts";
+import { render } from "../../utils/vitest-setup.tsx";
 import MenuButton from "./MenuButton";
 import type { MenuButtonProps } from "./types";
 
@@ -19,7 +18,7 @@ vi.mock("./styles", () => ({
 	},
 }));
 
-describe.skip("MenuButton", () => {
+describe("MenuButton", () => {
 	const defaultProps: MenuButtonProps = {
 		isActive: (path) => path === "/active",
 		path: "/home",
@@ -95,11 +94,11 @@ describe.skip("MenuButton", () => {
 	});
 
 	it("opens menu when clicked", async () => {
-		const user = userEvent.setup();
+		
 		render(<MenuButton {...menuItemsProps} />);
 
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 
 		// Menu should be visible with menu items
 		const menu = screen.getByRole("menu");
@@ -113,7 +112,7 @@ describe.skip("MenuButton", () => {
 	});
 
 	it("closes menu when clicking outside", async () => {
-		const user = userEvent.setup();
+		
 		render(
 			<div>
 				<div data-testid="outside">Outside</div>
@@ -123,11 +122,11 @@ describe.skip("MenuButton", () => {
 
 		// Open the menu
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 		expect(screen.getByRole("menu")).toBeInTheDocument();
 
 		// Click outside
-		await user.click(screen.getByTestId("outside"));
+		fireEvent.click(screen.getByTestId("outside"));
 
 		// Menu should be closed
 		await waitFor(() => {
@@ -136,16 +135,16 @@ describe.skip("MenuButton", () => {
 	});
 
 	it("closes menu when pressing Escape key", async () => {
-		const user = userEvent.setup();
+		
 		render(<MenuButton {...menuItemsProps} />);
 
 		// Open the menu
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 		expect(screen.getByRole("menu")).toBeInTheDocument();
 
 		// Press Escape key
-		await user.keyboard("{Escape}");
+		fireEvent.keyDown(document, { key: 'Escape', code: 'Escape' });
 
 		// Menu should be closed
 		await waitFor(() => {
@@ -154,15 +153,15 @@ describe.skip("MenuButton", () => {
 	});
 
 	it("navigates when menu item is clicked", async () => {
-		const user = userEvent.setup();
+		
 		render(<MenuButton {...menuItemsProps} />);
 
 		// Open the menu
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 
 		// Click on menu item
-		await user.click(screen.getByText("Item 1"));
+		fireEvent.click(screen.getByText("Item 1"));
 
 		// Should navigate
 		expect(mockNavigate).toHaveBeenCalledWith("/item1");
@@ -174,12 +173,12 @@ describe.skip("MenuButton", () => {
 	});
 
 	it("highlights active menu item", async () => {
-		const user = userEvent.setup();
+		
 		render(<MenuButton {...menuItemsProps} />);
 
 		// Open the menu
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 
 		// Find all menu items
 		// const menuItems = screen.getAllByRole('menuitem');
@@ -196,11 +195,11 @@ describe.skip("MenuButton", () => {
 			buttonProps: { onClick: onClickMock },
 		};
 
-		const user = userEvent.setup();
+		
 		render(<MenuButton {...customProps} />);
 
 		const button = screen.getByRole("button");
-		await user.click(button);
+		fireEvent.click(button);
 
 		expect(onClickMock).toHaveBeenCalled();
 	});
