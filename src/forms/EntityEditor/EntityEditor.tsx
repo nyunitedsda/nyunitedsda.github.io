@@ -95,7 +95,16 @@ const EntityEditor = <T extends { id?: number }>({
 	return (
 		<>
 			{title && (
-				<Typography variant="h6" gutterBottom>
+				<Typography
+					variant="h6"
+					gutterBottom
+					sx={{
+						position: "sticky",
+						top: 0,
+						backgroundColor: "background.paper",
+						zIndex: 1,
+					}}
+				>
 					{title}
 				</Typography>
 			)}

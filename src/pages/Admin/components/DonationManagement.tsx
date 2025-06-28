@@ -42,9 +42,7 @@ const DonationAdmin: FC = () => {
 			}}
 			ItemComponent={DonationItem}
 			EditorComponent={WrappedDonationEditor}
-			getItemTitle={(donation: DonationType) =>
-				donation?.title as string
-			}
+			getItemTitle={(donation: DonationType) => donation?.title as string}
 			getItemSubtitle={(donation: DonationType) =>
 				donation.description as string
 			}

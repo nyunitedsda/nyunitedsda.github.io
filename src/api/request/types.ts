@@ -4,7 +4,8 @@ export type DatabaseEntity =
 	| "articles"
 	| "announcements"
 	| "notifications"
-	| "services";
+	| "services"
+	| "contacts";
 
 /**
  * Represents a user in the system
@@ -178,5 +179,33 @@ export interface ServiceType {
 	/** Timestamp when the service was created */
 	created_at?: Date;
 	/** Timestamp when the service was last modified */
+	modified_at?: Date;
+}
+
+/**
+ * Represents contact information in the system
+ */
+export interface ContactInfoType {
+	/** Unique identifier (auto-incremented) */
+	id: number;
+	/** Contact email address */
+	email: string;
+	/** Contact phone number */
+	phone: string;
+	/** Street address */
+	street: string;
+	/** City */
+	city: string;
+	/** ZIP/postal code */
+	zip_code: string;
+	/** Country */
+	country: string;
+	/** Optional mailing address */
+	mail_address?: string;
+	/** Optional mailing recipient name */
+	mailing_recipient?: string;
+	/** Timestamp when the contact info was created */
+	created_at?: Date;
+	/** Timestamp when the contact info was last modified */
 	modified_at?: Date;
 }

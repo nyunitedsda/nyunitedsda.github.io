@@ -44,15 +44,11 @@ const ServiceManagement: FC = () => {
 			}}
 			ItemComponent={DonationItem}
 			EditorComponent={WrappedServiceEditor}
-			getItemTitle={(service: ServiceType) =>
-				service?.title as string
-			}
-			getItemSubtitle={(service: ServiceType) =>
-				service.time as string
-			}
+			getItemTitle={(service: ServiceType) => service?.title as string}
+			getItemSubtitle={(service: ServiceType) => service.time as string}
 			createNewEntity={() => ({
 				title: "",
-				time: ""
+				time: "",
 			})}
 			successMessages={{
 				save: "Service saved successfully",

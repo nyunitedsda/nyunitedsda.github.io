@@ -44,19 +44,15 @@ const BlogManagement: FC = () => {
 			}}
 			ItemComponent={DonationItem}
 			EditorComponent={WrappedBlogEditor}
-			getItemTitle={(article: ArticleType) =>
-				article?.title as string
-			}
-			getItemSubtitle={(article: ArticleType) =>
-				article.category as string
-			}
-			createNewEntity={() => ({ 
-				title: "", 
-				category: "", 
-				img_src: "", 
+			getItemTitle={(article: ArticleType) => article?.title as string}
+			getItemSubtitle={(article: ArticleType) => article.category as string}
+			createNewEntity={() => ({
+				title: "",
+				category: "",
+				img_src: "",
 				content: "",
 				author_id: 1,
-				publishDate: new Date().toISOString()
+				publishDate: new Date().toISOString(),
 			})}
 			successMessages={{
 				save: "Article saved successfully",

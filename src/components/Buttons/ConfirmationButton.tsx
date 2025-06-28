@@ -1,0 +1,56 @@
+import Button from "@mui/material/Button";
+import { useCallback, useState, type FC } from "react";
+import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
+import type { ConfirmationButtonProps } from "./types";
+
+const ConfirmationButton: FC<ConfirmationButtonProps> = ({
+	shouldConfirm = false,
+	confirmationTitle = "Confirm Action",
+	confirmationContent = "Are you sure you want to proceed?",
+	cancelLabel = "Cancel",
+	confirmLabel = "Confirm",
+	onClick,
+	children,
+	...buttonProps
+}) => {
+	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+	const handleButtonClick = useCallback(() => {
+		if (shouldConfirm) {
+			setIsDialogOpen(true);
+		} else {
+			onClick?.();
+		}
+	}, [shouldConfirm, onClick]);
+
+	const handleDialogClose = useCallback(() => {
+		setIsDialogOpen(false);
+	}, []);
+
+	const handleConfirm = useCallback(() => {
+		setIsDialogOpen(false);
+		onClick?.();
+	}, [onClick]);
+
+	return (
+		<>
+			<Button {...buttonProps} onClick={handleButtonClick}>
+				{children}
+			</Button>
+
+			{shouldConfirm && (
+				<ConfirmationDialog
+					title={confirmationTitle}
+					content={confirmationContent}
+					open={isDialogOpen}
+					cancelLabel={cancelLabel}
+					confirmLabel={confirmLabel}
+					onClose={handleDialogClose}
+					onConfirm={handleConfirm}
+				/>
+			)}
+		</>
+	);
+};
+
+export default ConfirmationButton;

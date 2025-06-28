@@ -14,3 +14,12 @@ export type MenuButtonStyle = {
 	activeBtnSx: SxProps<Theme>;
 	buttonSx: SxProps<Theme>;
 };
+
+export type ConfirmationButtonProps = ButtonProps & {
+	shouldConfirm?: boolean;
+	confirmationTitle?: string;
+	confirmationContent?: string;
+	cancelLabel?: string;
+	confirmLabel?: string;
+	onClick?: () => void;
+};

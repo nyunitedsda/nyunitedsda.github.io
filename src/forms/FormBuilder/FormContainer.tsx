@@ -38,7 +38,13 @@ const FormContainer = <T extends { id?: number }>({
 						direction="row"
 						spacing={2}
 						justifyContent="flex-end"
-						sx={{ mt: 3 }}
+						sx={{
+							mt: 3,
+							position: "sticky",
+							bottom: 0,
+							backgroundColor: "background.paper",
+							flexGrow: 0,
+						}}
 					>
 						{onCancel && (
 							<Button variant="outlined" color="secondary" onClick={onCancel}>
@@ -51,6 +57,10 @@ const FormContainer = <T extends { id?: number }>({
 							color="primary"
 							disabled={isSubmitting}
 							fullWidth={!onCancel}
+							sx={{
+								color: (theme) =>
+									`${theme.palette.primary.contrastText} !important`,
+							}}
 						>
 							{isSubmitting ? "Submitting..." : submitButtonText}
 						</Button>

@@ -56,7 +56,7 @@ const AnnouncementManagement: FC = () => {
 				description: "",
 				recurring: false,
 				date_format: "MM/DD/YYYY",
-				author_id: 1
+				author_id: 1,
 			})}
 			successMessages={{
 				save: "Announcement saved successfully",
