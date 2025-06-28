@@ -1,5 +1,12 @@
-import { render } from "../../../utils/vitest-setup";
+import { render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import AppProvider from "../../../components/AppProvider/AppProvider";
 import FooterSegment from "./FooterSegment";
+
+// Custom render function that wraps with AppProvider
+const customRender = (ui: React.ReactElement, options = {}) => {
+  return render(ui, { wrapper: AppProvider, ...options });
+};
 
 describe("FooterSegment", () => {
 	const title = "Test Title";
@@ -8,7 +15,7 @@ describe("FooterSegment", () => {
 	const sx = { backgroundColor: "red" };
 
 	it("renders the title in Typography h6", () => {
-		const { getByText } = render(
+		const { getByText } = customRender(
 			<FooterSegment title={title}>{children}</FooterSegment>,
 		);
 		const titleElement = getByText(title);
@@ -17,7 +24,7 @@ describe("FooterSegment", () => {
 	});
 
 	it("renders the subtitle if provided", () => {
-		const { getByText } = render(
+		const { getByText } = customRender(
 			<FooterSegment title={title} subtitle={subtitle}>
 				{children}
 			</FooterSegment>,
@@ -28,21 +35,21 @@ describe("FooterSegment", () => {
 	});
 
 	it("does not render subtitle Typography if subtitle is not provided", () => {
-		const { queryByText } = render(
+		const { queryByText } = customRender(
 			<FooterSegment title={title}>{children}</FooterSegment>,
 		);
 		expect(queryByText(subtitle)).toBeNull();
 	});
 
 	it("renders children inside Box", () => {
-		const { getByTestId } = render(
+		const { getByTestId } = customRender(
 			<FooterSegment title={title}>{children}</FooterSegment>,
 		);
 		expect(getByTestId("child")).toBeInTheDocument();
 	});
 
 	it("passes sx prop to Grid", () => {
-		const { container } = render(
+		const { container } = customRender(
 			<FooterSegment title={title} sx={sx}>
 				{children}
 			</FooterSegment>,
