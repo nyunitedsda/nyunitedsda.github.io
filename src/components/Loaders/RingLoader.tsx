@@ -11,13 +11,16 @@ import type { RingLoaderProps } from "./types";
 
 const override: CSSProperties = {
 	display: "block",
-	margin: "auto",
+	margin: "50% auto",
 	height: "100%",
 };
 
 const rootSx: SxProps<Theme> = {
 	height: "100%",
 	width: "100%",
+	justifyContent: "center",
+	alignItems: "center",
+	backgroundColor: "inherit",
 };
 
 const RingLoader: FC<RingLoaderProps> = (props) => {

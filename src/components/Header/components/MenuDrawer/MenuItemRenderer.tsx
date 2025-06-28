@@ -11,7 +11,6 @@ import type { RouteMenu } from "../../../../hooks/routes/types";
 import MenuDrawerItem from "../MenuDrawerItem";
 import SubMenuDrawerItem from "../SubMenuDrawerItem";
 
-
 interface MenuItemRendererProps {
 	item: RouteMenu;
 	isActive: (path: string) => boolean;
@@ -34,8 +33,6 @@ const MenuItemRenderer: FC<MenuItemRendererProps> = ({
 	isActive,
 	handleClick,
 }) => {
-
- 
 	return item?.children ? (
 		<SubMenuDrawerItem
 			{...item}

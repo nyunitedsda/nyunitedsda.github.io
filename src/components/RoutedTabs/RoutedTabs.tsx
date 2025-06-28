@@ -57,7 +57,6 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 			if (currentTab?.id) {
 				setSelectedTabId(currentTab.id);
 			} else if (pathname.includes(baseUrl)) {
-				
 				// If no matching tab found but we're on the base URL, default to first tab
 				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
 				setSelectedTabId(tabItems[0].id);

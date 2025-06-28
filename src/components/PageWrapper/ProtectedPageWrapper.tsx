@@ -7,7 +7,7 @@ import RingLoader from "../Loaders/RingLoader";
 const ProtectedPageWrapper: FC = () => {
 	const { isAuthenticated, isLoading } = useAuthentication();
 
-	if (isLoading){
+	if (isLoading) {
 		return <RingLoader />;
 	}
 	if (!isAuthenticated) {

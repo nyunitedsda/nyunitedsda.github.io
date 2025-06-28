@@ -11,8 +11,6 @@ import type { MenuDrawerProps } from "./types";
 
 const { rootSx } = menuDrawerStyles;
 
-
-
 const MenuDrawer: FC<MenuDrawerProps> = ({
 	isActive,
 	toggleDrawer,
@@ -21,10 +19,13 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 }) => {
 	const navigate = useNavigate();
 
-	const handleClick = useCallback((path: string) => {
-		navigate(path);
-		toggleDrawer();
-	}, [navigate, toggleDrawer]);
+	const handleClick = useCallback(
+		(path: string) => {
+			navigate(path);
+			toggleDrawer();
+		},
+		[navigate, toggleDrawer],
+	);
 
 	return (
 		<Stack onClick={toggleDrawer} sx={rootSx}>

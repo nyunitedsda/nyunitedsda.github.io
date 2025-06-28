@@ -2,9 +2,15 @@ import { lazy } from "react";
 import { type RouteObject } from "react-router";
 
 // Lazy load all page wrappers for better code splitting
-const MinimalPageWrapper = lazy(() => import("../../components/PageWrapper/MinimalPageWrapper"));
-const PageWrapper = lazy(() => import("../../components/PageWrapper/PageWrapper"));
-const ProtectedPageWrapper = lazy(() => import("../../components/PageWrapper/ProtectedPageWrapper"));
+const MinimalPageWrapper = lazy(
+	() => import("../../components/PageWrapper/MinimalPageWrapper"),
+);
+const PageWrapper = lazy(
+	() => import("../../components/PageWrapper/PageWrapper"),
+);
+const ProtectedPageWrapper = lazy(
+	() => import("../../components/PageWrapper/ProtectedPageWrapper"),
+);
 
 // Lazy load all page components for optimal performance
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
@@ -15,22 +21,29 @@ const Contact = lazy(() => import("../../pages/Contact/Contact"));
 const Donations = lazy(() => import("../../pages/Donations/Donations"));
 const Error = lazy(() => import("../../pages/Error/Error"));
 const Home = lazy(() => import("../../pages/Home/Home"));
-const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
+const LiveBroadcast = lazy(
+	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
+);
 const Login = lazy(() => import("../../pages/Login/Login"));
-const UnauthorizedError = lazy(() => import("../../pages/Error/UnauthorizedError"));
-const UserAgreements = lazy(() => import("../../pages/UserAgreements/UserAgreements"));
+const UnauthorizedError = lazy(
+	() => import("../../pages/Error/UnauthorizedError"),
+);
+const UserAgreements = lazy(
+	() => import("../../pages/UserAgreements/UserAgreements"),
+);
 
 // Constants
 const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
 
 // Helper function to create consistent route paths
-const createPath = (path: string): string => `${BASE_URL}${path}`.replace(/\/+/g, '/');
+const createPath = (path: string): string =>
+	`${BASE_URL}${path}`.replace(/\/+/g, "/");
 
 // Helper function to create route objects with consistent structure
 const createRoute = (
 	element: React.ReactElement,
 	path: string,
-	id?: string
+	id?: string,
 ): RouteWithId => ({
 	element,
 	path: createPath(path),
@@ -69,9 +82,7 @@ const mainLayoutRoutes: RouteWithId[] = [
 export const protectedRoutes: RouteWithId[] = [
 	{
 		element: <ProtectedPageWrapper />,
-		children: [
-			createRoute(<Administration />, "admin/:tab?", "admin"),
-		],
+		children: [createRoute(<Administration />, "admin/:tab?", "admin")],
 	},
 ];
 

@@ -8,7 +8,12 @@ import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router";
-import { ERROR_MSG, APOLOGY_MSG, DESCRIPTION_MSG, ERROR_BUTTONS } from "./constants";
+import {
+	ERROR_MSG,
+	APOLOGY_MSG,
+	DESCRIPTION_MSG,
+	ERROR_BUTTONS,
+} from "./constants";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",
@@ -41,7 +46,6 @@ const rootSx: SxProps<Theme> = {
 const apologySx: SxProps<Theme> = {
 	color: "text.secondary",
 };
-
 
 const UnauthorizedError: FC = () => {
 	const navigate = useNavigate();

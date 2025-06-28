@@ -16,7 +16,7 @@ export const extractRouteIdAndPath = (
 
 	function traverse(route: RouteObject | RouteWithId) {
 		// Check if the current route has both id and path
-		if ('id' in route && route.id && route.path) {
+		if ("id" in route && route.id && route.path) {
 			result.push({
 				id: route.id,
 				path: route.path,
@@ -55,16 +55,16 @@ export const generateMenuItems = (
 	if (menuList.length === 0 || routes.length === 0) return [];
 
 	// Create a Map for O(1) route lookups instead of O(n) array searches
-	const routeMap = new Map(routes.map(route => [route.id, route.path]));
+	const routeMap = new Map(routes.map((route) => [route.id, route.path]));
 
 	const processMenuItem = (menuItem: PathlessMenu): RouteMenu | null => {
 		const { id, name, children, icon } = menuItem;
-		
+
 		if (!id) return null;
 
 		// Get path from the optimized Map lookup
 		const path = routeMap.get(id);
-		
+
 		// Skip menu items without matching routes
 		if (!path) return null;
 
@@ -81,7 +81,7 @@ export const generateMenuItems = (
 			const childMenuItems = children
 				.map(processMenuItem)
 				.filter((item): item is RouteMenu => item !== null);
-			
+
 			if (childMenuItems.length > 0) {
 				routeMenuItem.children = childMenuItems;
 			}
@@ -108,7 +108,7 @@ export const findRouteById = (
 ): RouteWithId | undefined => {
 	for (const route of routes) {
 		// Check current route
-		if ('id' in route && route.id === targetId) {
+		if ("id" in route && route.id === targetId) {
 			return route as RouteWithId;
 		}
 
@@ -126,19 +126,21 @@ export const findRouteById = (
  * @param routes - Array of routes to extract IDs from
  * @returns Array of all route IDs
  */
-export const getAllRouteIds = (routes: (RouteObject | RouteWithId)[]): string[] => {
+export const getAllRouteIds = (
+	routes: (RouteObject | RouteWithId)[],
+): string[] => {
 	const ids: string[] = [];
-	
+
 	function traverse(route: RouteObject | RouteWithId) {
-		if ('id' in route && route.id) {
+		if ("id" in route && route.id) {
 			ids.push(route.id);
 		}
-		
+
 		if (route.children && route.children.length > 0) {
 			route.children.forEach(traverse);
 		}
 	}
-	
+
 	routes.forEach(traverse);
 	return ids;
 };
@@ -153,7 +155,7 @@ export const validateMenuRoutes = (
 	menuList: PathlessMenu[],
 	routes: Array<{ id: string; path: string }>,
 ): { valid: boolean; missingRoutes: string[]; validCount: number } => {
-	const routeIds = new Set(routes.map(route => route.id));
+	const routeIds = new Set(routes.map((route) => route.id));
 	const missingRoutes: string[] = [];
 	let validCount = 0;
 
@@ -165,7 +167,7 @@ export const validateMenuRoutes = (
 				missingRoutes.push(item.id);
 			}
 		}
-		
+
 		if (item.children) {
 			item.children.forEach(validateMenuItem);
 		}

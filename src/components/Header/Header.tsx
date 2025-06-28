@@ -27,7 +27,8 @@ const Header: FC = () => {
 	const { menuItems } = useFormattedRoutes();
 	const theme = useTheme();
 	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
-	const [optionAnchorEl, setOptionAnchorEl] = useState<null | HTMLButtonElement>(null);
+	const [optionAnchorEl, setOptionAnchorEl] =
+		useState<null | HTMLButtonElement>(null);
 
 	// Handle window resize for responsive menu calculation
 	useEffect(() => {
@@ -35,13 +36,16 @@ const Header: FC = () => {
 			setWindowWidth(window.innerWidth);
 		};
 
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const handleClick = useCallback((path: string) => {
-		navigate(path);
-	}, [navigate]);
+	const handleClick = useCallback(
+		(path: string) => {
+			navigate(path);
+		},
+		[navigate],
+	);
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((prev) => !prev);
@@ -51,9 +55,12 @@ const Header: FC = () => {
 		setOptionAnchorEl(null);
 	}, []);
 
-	const handleOptionsMenuOpen = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-		setOptionAnchorEl(event.currentTarget);
-	}, []);
+	const handleOptionsMenuOpen = useCallback(
+		(event: React.MouseEvent<HTMLButtonElement>) => {
+			setOptionAnchorEl(event.currentTarget);
+		},
+		[],
+	);
 
 	const isActive = useCallback(
 		(path: string) => {
@@ -61,21 +68,21 @@ const Header: FC = () => {
 			if (pathname === path) {
 				return true;
 			}
-			
+
 			// Handle routes with parameters (e.g., :tab, :id, etc.)
-			if (path.includes(':')) {
+			if (path.includes(":")) {
 				// Remove optional parameter indicators (?) and replace parameters with regex
 				const pathPattern = path
-					.replace(/\/:[^/?]+\?/g, '(?:/[^/]+)?') // Handle optional parameters like /:tab?
-					.replace(/\/:[^/?]+/g, '/[^/]+')       // Handle required parameters like /:id
-					.replace(/\//g, '\\/');                // Escape forward slashes
-				
+					.replace(/\/:[^/?]+\?/g, "(?:/[^/]+)?") // Handle optional parameters like /:tab?
+					.replace(/\/:[^/?]+/g, "/[^/]+") // Handle required parameters like /:id
+					.replace(/\//g, "\\/"); // Escape forward slashes
+
 				const regex = new RegExp(`^${pathPattern}$`);
 				return regex.test(pathname);
 			}
-			
+
 			// Handle base path inclusion for routes that might be parent routes
-			return pathname.startsWith(path + '/');
+			return pathname.startsWith(path + "/");
 		},
 		[pathname],
 	);
@@ -85,7 +92,7 @@ const Header: FC = () => {
 		if (windowWidth < theme.breakpoints.values.md) {
 			return {
 				dynamicMenuList: [],
-				desktopMenuItems: menuItems
+				desktopMenuItems: menuItems,
 			};
 		}
 
@@ -99,14 +106,14 @@ const Header: FC = () => {
 		if (maxVisibleItems >= menuItems.length) {
 			return {
 				dynamicMenuList: [],
-				desktopMenuItems: menuItems
+				desktopMenuItems: menuItems,
 			};
 		}
 
 		// Split items between visible and dropdown menu
 		return {
 			dynamicMenuList: menuItems.slice(maxVisibleItems),
-			desktopMenuItems: menuItems.slice(0, maxVisibleItems)
+			desktopMenuItems: menuItems.slice(0, maxVisibleItems),
 		};
 	}, [windowWidth, theme.breakpoints.values.md, menuItems]);
 
