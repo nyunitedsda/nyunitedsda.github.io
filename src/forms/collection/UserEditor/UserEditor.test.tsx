@@ -8,12 +8,8 @@ describe("UserEditor", () => {
 	it("renders UserEditor", () => {
 		render(
 			<SnackbarProvider>
-				<UserEditor 
-					open={true} 
-					onClose={() => {}} 
-					onSuccess={() => {}} 
-				/>
-			</SnackbarProvider>
+				<UserEditor open={true} onClose={() => {}} onSuccess={() => {}} />
+			</SnackbarProvider>,
 		);
 	});
 });

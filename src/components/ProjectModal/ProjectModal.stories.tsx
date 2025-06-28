@@ -251,21 +251,265 @@ export const WithScrollableContent: Story = {
 	},
 };
 
-// Static open modal for testing
-export const StaticOpen: Story = {
+// Static closed modal for testing controls
+export const StaticClosed: Story = {
 	args: {
-		open: true,
+		open: false,
 		ariaText: "static-modal",
 		onClose: () => {},
 		children: (
 			<>
 				<Typography variant="h5" component="h2" gutterBottom>
-					Static Open Modal
+					Static Closed Modal
 				</Typography>
 				<Typography variant="body1">
-					This modal is always open for testing purposes.
+					This modal is closed by default. Use the 'open' control to test it.
 				</Typography>
 			</>
 		),
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "A static modal for testing the controls panel. Toggle the 'open' control to see the modal."
+			},
+		},
+	},
+};
+
+// Church event registration modal
+export const EventRegistration: Story = {
+	render: (args) => (
+		<InteractiveModal {...args}>
+			<Typography variant="h5" component="h2" gutterBottom>
+				Register for Bible Study
+			</Typography>
+			<Typography variant="body1" paragraph>
+				Join us for our weekly Bible study every Wednesday at 7:00 PM.
+			</Typography>
+			<Box
+				component="form"
+				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+			>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Full Name *
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							Enter your name
+						</Typography>
+					</Box>
+				</Box>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Email Address *
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							your.email@example.com
+						</Typography>
+					</Box>
+				</Box>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Phone Number
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							(555) 123-4567
+						</Typography>
+					</Box>
+				</Box>
+				<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", mt: 2 }}>
+					<Button variant="outlined">Cancel</Button>
+					<Button variant="contained" color="primary">
+						Register
+					</Button>
+				</Box>
+			</Box>
+		</InteractiveModal>
+	),
+	args: {
+		ariaText: "event-registration-modal",
+	},
+};
+
+// Prayer request modal
+export const PrayerRequest: Story = {
+	render: (args) => (
+		<InteractiveModal {...args}>
+			<Typography variant="h5" component="h2" gutterBottom color="primary">
+				🙏 Submit Prayer Request
+			</Typography>
+			<Typography variant="body2" color="text.secondary" paragraph>
+				Share your prayer request with our church community. All requests are kept confidential.
+			</Typography>
+			<Box
+				component="form"
+				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+			>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Your Name (Optional)
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							Anonymous is okay
+						</Typography>
+					</Box>
+				</Box>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Prayer Request *
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							minHeight: 100,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							Please share what you'd like us to pray for...
+						</Typography>
+					</Box>
+				</Box>
+				<Box sx={{ 
+					p: 2, 
+					bgcolor: "info.light", 
+					borderRadius: 1,
+					border: 1,
+					borderColor: "info.main"
+				}}>
+					<Typography variant="caption" color="info.contrastText">
+						💝 Your privacy is important to us. Prayer requests are only shared with our prayer team.
+					</Typography>
+				</Box>
+				<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
+					<Button variant="outlined">Cancel</Button>
+					<Button variant="contained" color="primary">
+						Submit Request
+					</Button>
+				</Box>
+			</Box>
+		</InteractiveModal>
+	),
+	args: {
+		ariaText: "prayer-request-modal",
+	},
+};
+
+// Donation modal
+export const DonationModal: Story = {
+	render: (args) => (
+		<InteractiveModal {...args}>
+			<Typography variant="h5" component="h2" gutterBottom color="success.main">
+				💝 Make a Donation
+			</Typography>
+			<Typography variant="body1" paragraph>
+				Support our church ministries and community outreach programs.
+			</Typography>
+			<Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Donation Amount
+					</Typography>
+					<Box sx={{ display: "flex", gap: 1, mb: 2 }}>
+						{["$25", "$50", "$100", "$250"].map((amount) => (
+							<Button key={amount} variant="outlined" size="small">
+								{amount}
+							</Button>
+						))}
+					</Box>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							Custom amount: $___
+						</Typography>
+					</Box>
+				</Box>
+				<Box>
+					<Typography variant="body2" gutterBottom>
+						Designation (Optional)
+					</Typography>
+					<Box
+						sx={{
+							border: 1,
+							borderColor: "divider",
+							borderRadius: 1,
+							p: 1,
+							bgcolor: "background.default",
+						}}
+					>
+						<Typography variant="body2" color="text.secondary">
+							General Fund, Missions, Youth Ministry, etc.
+						</Typography>
+					</Box>
+				</Box>
+				<Box sx={{ 
+					p: 2, 
+					bgcolor: "success.light", 
+					borderRadius: 1,
+					border: 1,
+					borderColor: "success.main"
+				}}>
+					<Typography variant="caption" color="success.contrastText">
+						🔒 Secure donation processing • Tax-deductible receipts provided
+					</Typography>
+				</Box>
+				<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
+					<Button variant="outlined">Cancel</Button>
+					<Button variant="contained" color="success">
+						Continue to Payment
+					</Button>
+				</Box>
+			</Box>
+		</InteractiveModal>
+	),
+	args: {
+		ariaText: "donation-modal",
 	},
 };

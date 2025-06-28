@@ -44,9 +44,7 @@ const ContactManagement: FC = () => {
 			}}
 			ItemComponent={DonationItem}
 			EditorComponent={WrappedContactEditor}
-			getItemTitle={(contact: ContactInfoType) =>
-				contact?.email as string
-			}
+			getItemTitle={(contact: ContactInfoType) => contact?.email as string}
 			getItemSubtitle={(contact: ContactInfoType) =>
 				`${contact.street}, ${contact.city}, ${contact.zip_code}` as string
 			}

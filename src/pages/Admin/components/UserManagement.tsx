@@ -44,11 +44,9 @@ const UserManagement: FC = () => {
 			}}
 			ItemComponent={DonationItem}
 			EditorComponent={WrappedUserEditor}
-			getItemTitle={(user: UserType) =>
-				user?.email as string
-			}
+			getItemTitle={(user: UserType) => user?.email as string}
 			getItemSubtitle={(user: UserType) =>
-				`${user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'No name'} - ${user.role}` as string
+				`${user.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : "No name"} - ${user.role}` as string
 			}
 			createNewEntity={() => ({
 				email: "",

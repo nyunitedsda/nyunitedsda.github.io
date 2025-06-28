@@ -1,6 +1,7 @@
 import type { ButtonProps } from "@mui/material/Button";
+import type { IconButtonProps } from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import type { RouteMenu } from "../../hooks/routes/types";
 
 export type MenuButtonProps = PropsWithChildren<{
@@ -15,10 +16,13 @@ export type MenuButtonStyle = {
 	buttonSx: SxProps<Theme>;
 };
 
-export type ConfirmationButtonProps = ButtonProps & {
+export type ConfirmationButtonProps = (
+	| ({ variant?: "button" } & ButtonProps)
+	| ({ variant: "icon" } & IconButtonProps)
+) & {
 	shouldConfirm?: boolean;
 	confirmationTitle?: string;
-	confirmationContent?: string;
+	confirmationContent?: ReactNode;
 	cancelLabel?: string;
 	confirmLabel?: string;
 	onClick?: () => void;

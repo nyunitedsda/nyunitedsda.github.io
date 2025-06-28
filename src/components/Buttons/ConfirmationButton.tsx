@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import { useCallback, useState, type FC } from "react";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import type { ConfirmationButtonProps } from "./types";
@@ -11,6 +12,7 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 	confirmLabel = "Confirm",
 	onClick,
 	children,
+	variant = "button",
 	...buttonProps
 }) => {
 	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -34,9 +36,15 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 
 	return (
 		<>
-			<Button {...buttonProps} onClick={handleButtonClick}>
-				{children}
-			</Button>
+			{variant === "icon" ? (
+				<IconButton {...(buttonProps as any)} onClick={handleButtonClick}>
+					{children}
+				</IconButton>
+			) : (
+				<Button {...(buttonProps as any)} onClick={handleButtonClick}>
+					{children}
+				</Button>
+			)}
 
 			{shouldConfirm && (
 				<ConfirmationDialog

@@ -100,7 +100,8 @@ export const EditModeAdminUser: Story = {
 		open: true,
 		entity: sampleAdminUser,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Admin user updated:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Admin user updated:", data),
 	},
 };
 
@@ -110,7 +111,8 @@ export const EditModeModeratorUser: Story = {
 		open: true,
 		entity: sampleModeratorUser,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Moderator user updated:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Moderator user updated:", data),
 	},
 };
 
@@ -120,7 +122,8 @@ export const EditModeGuestUser: Story = {
 		open: true,
 		entity: sampleGuestUser,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Guest user updated:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Guest user updated:", data),
 	},
 };
 
@@ -130,7 +133,8 @@ export const EditModeMinimalUser: Story = {
 		open: true,
 		entity: sampleMinimalUser,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Minimal user updated:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Minimal user updated:", data),
 	},
 };
 
@@ -157,7 +161,8 @@ export const CreateModePreFilled: Story = {
 			emailVerified: false,
 		} as UserType,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Pre-filled user created:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Pre-filled user created:", data),
 	},
 };
 
@@ -174,6 +179,7 @@ export const VerifiedUser: Story = {
 			emailVerified: true,
 		} as UserType,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) => console.log("Verified user updated:", data),
+		onSuccess: (data: Partial<UserType>) =>
+			console.log("Verified user updated:", data),
 	},
 };
