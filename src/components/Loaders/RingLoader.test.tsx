@@ -1,11 +1,25 @@
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { render } from "../../utils/vitest-setup.tsx";
 import RingLoader from "./RingLoader";
 
 describe("RingLoader", () => {
 	it("renders RingLoader", () => {
-		const { getByText } = render(<RingLoader />);
+		const { getByTestId } = render(<RingLoader loading={true} />);
 
-		expect(getByText("RingLoader Component")).toBeInTheDocument();
+		expect(getByTestId("loader")).toBeInTheDocument();
+	});
+
+	it("renders with custom size", () => {
+		const { getByTestId } = render(<RingLoader loading={true} size={80} />);
+		const loader = getByTestId("loader");
+
+		expect(loader).toBeInTheDocument();
+		expect(loader).toHaveStyle({ width: "80px" });
+	});
+
+	it("does not render when loading is false", () => {
+		const { queryByTestId } = render(<RingLoader loading={false} />);
+
+		expect(queryByTestId("loader")).not.toBeInTheDocument();
 	});
 });
