@@ -1,96 +1,64 @@
 import { lazy } from "react";
 import { type RouteObject } from "react-router";
-import MinimalPageWrapper from "../../components/PageWrapper/MinimalPageWrapper.tsx";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import ProtectedPageWrapper from "../../components/PageWrapper/ProtectedPageWrapper.tsx";
-import Administration from "../../pages/Admin/Administration.tsx";
-import Login from "../../pages/Login/Login.tsx";
-import UnauthorizedError from "../../pages/Error/UnauthorizedError.tsx";
-const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
+
+// Lazy load all page wrappers for better code splitting
+const MinimalPageWrapper = lazy(() => import("../../components/PageWrapper/MinimalPageWrapper"));
+const PageWrapper = lazy(() => import("../../components/PageWrapper/PageWrapper"));
+const ProtectedPageWrapper = lazy(() => import("../../components/PageWrapper/ProtectedPageWrapper"));
+
+// Lazy load all page components for optimal performance
 const AboutUs = lazy(() => import("../../pages/AboutUs/AboutUs"));
+const Administration = lazy(() => import("../../pages/Admin/Administration"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
+const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const Contact = lazy(() => import("../../pages/Contact/Contact"));
 const Donations = lazy(() => import("../../pages/Donations/Donations"));
-const Error = lazy(() => import("../../pages/Error/Error.tsx"));
+const Error = lazy(() => import("../../pages/Error/Error"));
 const Home = lazy(() => import("../../pages/Home/Home"));
-const LiveBroadcast = lazy(
-	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
-);
-const UserAgreements = lazy(
-	() => import("../../pages/UserAgreements/UserAgreements"),
-);
+const LiveBroadcast = lazy(() => import("../../pages/LiveBroadcast/LiveBroadcast"));
+const Login = lazy(() => import("../../pages/Login/Login"));
+const UnauthorizedError = lazy(() => import("../../pages/Error/UnauthorizedError"));
+const UserAgreements = lazy(() => import("../../pages/UserAgreements/UserAgreements"));
 
+// Constants
 const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
+
+// Helper function to create consistent route paths
+const createPath = (path: string): string => `${BASE_URL}${path}`.replace(/\/+/g, '/');
+
+// Helper function to create route objects with consistent structure
+const createRoute = (
+	element: React.ReactElement,
+	path: string,
+	id?: string
+): RouteWithId => ({
+	element,
+	path: createPath(path),
+	...(id && { id }),
+});
+
+// Type for routes with id property
+type RouteWithId = RouteObject & { id?: string };
 
 /**
  * Main layout routes that do not require authentication
  * These routes will have Header and Footer in layout
  * Id property is used to find the routes that will be menu items
  */
-const mainLayoutRoutes: RouteObject[] = [
+const mainLayoutRoutes: RouteWithId[] = [
 	{
 		element: <PageWrapper />,
 		children: [
-			{
-				element: <Home />,
-				id: "home",
-				path: `${BASE_URL}`,
-			},
-			{
-				element: <Donations />,
-				id: "donations",
-				path: `${BASE_URL}donations`,
-			},
-			{
-				element: <Blog />,
-				id: "blogs",
-				path: `${BASE_URL}blog`,
-			},
-			{
-				element: <BlogDetails />,
-				id: "blogDetails",
-				path: `${BASE_URL}blog/:id`,
-			},
-			{
-				element: <Contact />,
-				id: "contact",
-				path: `${BASE_URL}contact`,
-			},
-			{
-				element: <AboutUs />,
-				id: "aboutUs",
-				path: `${BASE_URL}aboutUs`,
-			},
-			{
-				element: <UserAgreements />,
-				id: "policy",
-				path: `${BASE_URL}policy/:tab?`,
-			},
-			{
-				element: <UserAgreements />,
-				id: "termsOfUse",
-				path: `${BASE_URL}policy/termsOfUse`,
-			},
-			{
-				element: <UserAgreements />,
-				id: "privacy",
-				path: `${BASE_URL}policy/privacy`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "liveStream",
-				path: `${BASE_URL}watch/:tab?`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "live",
-				path: `${BASE_URL}watch/live`,
-			},
-			{
-				element: <LiveBroadcast />,
-				id: "archive",
-				path: `${BASE_URL}watch/archive`,
-			},
+			createRoute(<Home />, "", "home"),
+			createRoute(<Donations />, "donations", "donations"),
+			createRoute(<Blog />, "blog", "blogs"),
+			createRoute(<BlogDetails />, "blog/:id", "blogDetails"),
+			createRoute(<Contact />, "contact", "contact"),
+			createRoute(<AboutUs />, "aboutUs", "aboutUs"),
+			createRoute(<UserAgreements />, "policy/:tab?", "policy"),
+			createRoute(<LiveBroadcast />, "watch/:tab?", "watch"),
+			createRoute(<LiveBroadcast />, "watch/live", "liveStream"),
+			createRoute(<LiveBroadcast />, "watch/archive", "archiveStream"),
 		],
 	},
 ];
@@ -98,15 +66,11 @@ const mainLayoutRoutes: RouteObject[] = [
 /**
  * Protected routes that require authentication
  */
-export const protectedRoutes: RouteObject[] = [
+export const protectedRoutes: RouteWithId[] = [
 	{
 		element: <ProtectedPageWrapper />,
 		children: [
-			{
-				element: <Administration />,
-				id: "admin",
-				path: `${BASE_URL}admin/:tab?`,
-			},
+			createRoute(<Administration />, "admin/:tab?", "admin"),
 		],
 	},
 ];
@@ -119,22 +83,39 @@ const fallbackRoutes: RouteObject[] = [
 	{
 		element: <MinimalPageWrapper />,
 		children: [
-			{
-				element: <Login />,
-				path: `${BASE_URL}login`,
-			},
-			{
-				element: <UnauthorizedError/>,
-				path: `${BASE_URL}unauthorized`,
-			},
-			{
-				element: <Error />,
-				path: "*",
-			},
+			createRoute(<Login />, "login"),
+			createRoute(<UnauthorizedError />, "unauthorized"),
+			{ element: <Error />, path: "*" }, // Wildcard route doesn't need helper
 		],
 	},
 ];
 
-const siteRoutes: RouteObject[] = [...mainLayoutRoutes, ...fallbackRoutes];
+// Combine all routes for export
+const siteRoutes: RouteObject[] = [
+	...mainLayoutRoutes,
+	...protectedRoutes,
+	...fallbackRoutes,
+];
 
+// Export individual route arrays for flexibility
+export { fallbackRoutes, mainLayoutRoutes };
+
+// Export the main routes configuration
 export default siteRoutes;
+
+// Export helper functions for external use
+export { createPath, createRoute };
+
+// Export route constants for consistency
+export const ROUTE_PATHS = {
+	HOME: createPath(""),
+	DONATIONS: createPath("donations"),
+	BLOG: createPath("blog"),
+	CONTACT: createPath("contact"),
+	ABOUT_US: createPath("aboutUs"),
+	POLICY: createPath("policy"),
+	WATCH: createPath("watch"),
+	ADMIN: createPath("admin"),
+	LOGIN: createPath("login"),
+	UNAUTHORIZED: createPath("unauthorized"),
+} as const;

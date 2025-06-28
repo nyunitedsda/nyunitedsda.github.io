@@ -45,22 +45,31 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 	const { pathname } = useLocation();
 
 	useEffect(() => {
-		try {
-			const currentTab = tabItems.filter((i) => {
-				return i.tag === tab;
-			})[0];
+		if (tabItems.length === 0) return;
 
-			if (selectedTabId !== currentTab.id) {
+		try {
+			let currentTab = tabItems.find((i) => i.tag === tab);
+
+			if (!currentTab) {
+				currentTab = tabItems.find((i) => i.tag === pathname.split("/").pop());
+			}
+
+			if (currentTab?.id) {
 				setSelectedTabId(currentTab.id);
+			} else if (pathname.includes(baseUrl)) {
+				
+				// If no matching tab found but we're on the base URL, default to first tab
+				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
+				setSelectedTabId(tabItems[0].id);
 			}
 		} catch (error) {
 			console.error("Error setting selected tab:", error);
-			if (pathname.includes(baseUrl)) {
+			if (pathname.includes(baseUrl) && tabItems.length > 0) {
 				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
 				setSelectedTabId(tabItems[0].id);
 			}
 		}
-	}, [baseUrl, selectedTabId, tab, pathname, tabItems, navigate]);
+	}, [baseUrl, tab, pathname, tabItems, navigate]);
 
 	const handleChange = useCallback(
 		(_event: SyntheticEvent, newValue: number) => {
@@ -71,7 +80,7 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 				console.error(error);
 			}
 		},
-		[navigate, tabItems],
+		[navigate, tabItems, baseUrl],
 	);
 
 	return (
@@ -83,6 +92,7 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 						onChange={handleChange}
 						sx={{ ...tabsSx, ...tabsProps?.sx }}
 						value={selectedTabId}
+						variant="scrollable"
 					>
 						{tabItems.map((i) => (
 							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />

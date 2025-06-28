@@ -6,7 +6,7 @@ import { ADMIN_TAB_LIST } from "./constants";
 const Administration: FC<AdministrationProps> = () => {
 	return (
 		<RoutedTabs
-			baseUrl="/watch"
+			baseUrl="/admin"
 			tabsProps={{ "aria-label": "Media streaming" }}
 			tabItems={ADMIN_TAB_LIST}
 		/>
