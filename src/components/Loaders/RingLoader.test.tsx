@@ -1,12 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, screen } from "../../utils/index.ts";
 import { render } from "../../utils/vitest-setup.tsx";
 import RingLoader from "./RingLoader";
 
 describe("RingLoader", () => {
 	it("renders RingLoader", () => {
-		const { getByTestId } = render(<RingLoader loading={true} />);
-
-		expect(getByTestId("loader")).toBeInTheDocument();
+		 render(<RingLoader loading={true} />);
+		expect(screen.getByTestId("loader")).toBeInTheDocument();
 	});
 
 	it("renders with custom size", () => {
