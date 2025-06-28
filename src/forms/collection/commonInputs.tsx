@@ -16,6 +16,11 @@ export const configurePasswordInput = ({
 	label: label ?? "Password",
 	fieldType: "text",
 	type: "password",
+	sx: {
+		"& .MuiInputBase-inputAdornedEnd": {
+			color: "primary.contrastText",
+		},
+	},
 	InputProps: {
 		startAdornment: (
 			<InputAdornment position="start">
@@ -24,6 +29,7 @@ export const configurePasswordInput = ({
 				</Suspense>
 			</InputAdornment>
 		),
+		
 	},
 });
 

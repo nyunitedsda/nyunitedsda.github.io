@@ -171,7 +171,8 @@ export const CreateMode: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "**🆕 Create a new service** - Click the button to open the service form and create a new church service schedule.",
+				story:
+					"**🆕 Create a new service** - Click the button to open the service form and create a new church service schedule.",
 			},
 			source: {
 				code: `
@@ -299,7 +300,9 @@ export const ClosedModal: Story = {
 	render: () => {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<ServiceType | undefined>(undefined);
+			const [selectedEntity, setSelectedEntity] = useState<
+				ServiceType | undefined
+			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -310,19 +313,38 @@ export const ClosedModal: Story = {
 
 			return (
 				<div style={{ padding: "20px" }}>
-					<div style={{ marginBottom: "20px", padding: "16px", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
-						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>👻 Service Editor State Demo</h4>
+					<div
+						style={{
+							marginBottom: "20px",
+							padding: "16px",
+							backgroundColor: "#f8f9fa",
+							borderRadius: "8px",
+						}}
+					>
+						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>
+							👻 Service Editor State Demo
+						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
 							Select a service type and click the button to see the editor open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
-							<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+							<label
+								style={{
+									display: "block",
+									marginBottom: "8px",
+									fontWeight: "bold",
+								}}
+							>
 								Pre-select service for modal:
 							</label>
 							<select
 								title="Select service type for modal"
-								value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-								onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+								value={entityOptions.findIndex(
+									(opt) => opt.value === selectedEntity,
+								)}
+								onChange={(e) =>
+									setSelectedEntity(entityOptions[Number(e.target.value)].value)
+								}
 								style={{
 									padding: "8px 12px",
 									fontSize: "14px",

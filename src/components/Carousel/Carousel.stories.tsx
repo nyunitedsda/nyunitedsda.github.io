@@ -8,11 +8,31 @@ import Carousel from "./Carousel";
 
 // Sample images from the project's assets
 const sampleImages = [
-	{ src: "/src/assets/webp-img/family.webp", alt: "Family", title: "Church Family" },
-	{ src: "/src/assets/webp-img/members.webp", alt: "Members", title: "Our Members" },
-	{ src: "/src/assets/webp-img/youths.webp", alt: "Youth", title: "Youth Ministry" },
-	{ src: "/src/assets/webp-img/group-pray.webp", alt: "Prayer", title: "Prayer Group" },
-	{ src: "/src/assets/webp-img/giving-gift.webp", alt: "Giving", title: "Giving Back" },
+	{
+		src: "/src/assets/webp-img/family.webp",
+		alt: "Family",
+		title: "Church Family",
+	},
+	{
+		src: "/src/assets/webp-img/members.webp",
+		alt: "Members",
+		title: "Our Members",
+	},
+	{
+		src: "/src/assets/webp-img/youths.webp",
+		alt: "Youth",
+		title: "Youth Ministry",
+	},
+	{
+		src: "/src/assets/webp-img/group-pray.webp",
+		alt: "Prayer",
+		title: "Prayer Group",
+	},
+	{
+		src: "/src/assets/webp-img/giving-gift.webp",
+		alt: "Giving",
+		title: "Giving Back",
+	},
 ];
 
 const meta: Meta<typeof Carousel> = {
@@ -55,7 +75,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample slide component for stories
-const SampleSlide = ({ image, index }: { image: typeof sampleImages[0]; index: number }) => (
+const SampleSlide = ({
+	image,
+	index,
+}: {
+	image: (typeof sampleImages)[0];
+	index: number;
+}) => (
 	<Box
 		sx={{
 			flex: "0 0 100%",
@@ -84,7 +110,15 @@ const SampleSlide = ({ image, index }: { image: typeof sampleImages[0]; index: n
 );
 
 // Text-only slide component
-const TextSlide = ({ title, content, index }: { title: string; content: string; index: number }) => (
+const TextSlide = ({
+	title,
+	content,
+	index,
+}: {
+	title: string;
+	content: string;
+	index: number;
+}) => (
 	<Box
 		sx={{
 			flex: "0 0 100%",
@@ -92,7 +126,14 @@ const TextSlide = ({ title, content, index }: { title: string; content: string; 
 			padding: 2,
 		}}
 	>
-		<Card sx={{ height: "250px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+		<Card
+			sx={{
+				height: "250px",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
 			<CardContent sx={{ textAlign: "center" }}>
 				<Typography variant="h4" component="div" gutterBottom>
 					{title}
@@ -156,9 +197,7 @@ export const TextSlides: Story = {
 export const SingleSlide: Story = {
 	args: {
 		autoplay: false,
-		children: [
-			<SampleSlide key={0} image={sampleImages[0]} index={0} />
-		],
+		children: [<SampleSlide key={0} image={sampleImages[0]} index={0} />],
 	} as any,
 };
 
@@ -202,9 +241,7 @@ export const WithCustomOptions: Story = {
 						sx={{ objectFit: "cover" }}
 					/>
 					<CardContent>
-						<Typography variant="body2">
-							{image.title}
-						</Typography>
+						<Typography variant="body2">{image.title}</Typography>
 					</CardContent>
 				</Card>
 			</Box>
@@ -227,9 +264,11 @@ export const WithCustomStyling: Story = {
 				borderRadius: "0 0 12px 12px",
 			},
 		},
-		children: sampleImages.slice(0, 3).map((image, index) => (
-			<SampleSlide key={index} image={image} index={index} />
-		)),
+		children: sampleImages
+			.slice(0, 3)
+			.map((image, index) => (
+				<SampleSlide key={index} image={image} index={index} />
+			)),
 	} as any,
 };
 

@@ -5,7 +5,7 @@ import FooterSegment from "./FooterSegment";
 
 // Custom render function that wraps with AppProvider
 const customRender = (ui: React.ReactElement, options = {}) => {
-  return render(ui, { wrapper: AppProvider, ...options });
+	return render(ui, { wrapper: AppProvider, ...options });
 };
 
 describe("FooterSegment", () => {

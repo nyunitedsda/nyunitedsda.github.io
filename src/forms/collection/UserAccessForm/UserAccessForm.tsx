@@ -72,10 +72,6 @@ const UserAccessForm: FC<UserAccessFormProps> = ({ type = "login" }) => {
 			submitButtonText={buttonText}
 		>
 			<Stack spacing={3}>
-				<InputField {...usernameProps} />
-
-				<InputField {...passwordProps} />
-
 				{type === "login" && (
 					<InputField
 						name="rememberMe"

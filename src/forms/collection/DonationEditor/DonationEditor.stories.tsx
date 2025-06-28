@@ -10,12 +10,14 @@ const sampleDonations: Partial<DonationType>[] = [
 	{
 		id: 1,
 		title: "Tithe",
-		description: "Regular tithe contributions to support the ministry and church operations",
+		description:
+			"Regular tithe contributions to support the ministry and church operations",
 	},
 	{
 		id: 2,
 		title: "Building Fund",
-		description: "Special offerings for church building and renovation projects",
+		description:
+			"Special offerings for church building and renovation projects",
 	},
 	{
 		id: 3,
@@ -67,16 +69,19 @@ const InteractiveWrapper = ({
 				{entity?.id ? `Edit ${entity.title}` : "Create New Donation Method"}
 			</Button>
 			{entity && (
-				<div style={{ marginBottom: "20px", padding: "10px", border: "1px solid #ccc", borderRadius: "4px" }}>
+				<div
+					style={{
+						marginBottom: "20px",
+						padding: "10px",
+						border: "1px solid #ccc",
+						borderRadius: "4px",
+					}}
+				>
 					<h4>Selected Donation: {entity.title}</h4>
 					<p>{entity.description}</p>
 				</div>
 			)}
-			<DonationEditor
-				open={isOpen}
-				entity={entity}
-				onClose={handleClose}
-			/>
+			<DonationEditor open={isOpen} entity={entity} onClose={handleClose} />
 		</div>
 	);
 };
@@ -137,7 +142,8 @@ export const Create: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Click the button to open the donation editor in create mode. Fill out the form to add a new donation method.",
+				story:
+					"Click the button to open the donation editor in create mode. Fill out the form to add a new donation method.",
 			},
 		},
 	},
@@ -148,14 +154,21 @@ export const Create: Story = {
  */
 export const Playground: Story = {
 	render: (args) => {
-		const [selectedEntity, setSelectedEntity] = useState<Partial<DonationType> | undefined>(
-			sampleDonations[0]
-		);
+		const [selectedEntity, setSelectedEntity] = useState<
+			Partial<DonationType> | undefined
+		>(sampleDonations[0]);
 
 		return (
 			<div style={{ padding: "20px" }}>
 				<div style={{ marginBottom: "20px" }}>
-					<label htmlFor="entity-select" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+					<label
+						htmlFor="entity-select"
+						style={{
+							display: "block",
+							marginBottom: "8px",
+							fontWeight: "bold",
+						}}
+					>
 						Select a donation method to edit:
 					</label>
 					<select
@@ -163,7 +176,9 @@ export const Playground: Story = {
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);
-							const entity = id ? sampleDonations.find(d => d.id === id) : undefined;
+							const entity = id
+								? sampleDonations.find((d) => d.id === id)
+								: undefined;
 							setSelectedEntity(entity);
 						}}
 						style={{ padding: "8px", marginRight: "10px", minWidth: "200px" }}
@@ -183,7 +198,8 @@ export const Playground: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Select a donation method from the dropdown to edit, or choose 'Create New' to add a new donation method. Click the button to open the editor.",
+				story:
+					"Select a donation method from the dropdown to edit, or choose 'Create New' to add a new donation method. Click the button to open the editor.",
 			},
 		},
 	},
@@ -200,7 +216,8 @@ export const Edit: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Click the button to edit an existing donation method. The form will be pre-populated with the current values.",
+				story:
+					"Click the button to edit an existing donation method. The form will be pre-populated with the current values.",
 			},
 		},
 	},
@@ -211,17 +228,26 @@ export const Edit: Story = {
  */
 export const ClosedModal: Story = {
 	render: (args) => {
-		const [selectedEntity, setSelectedEntity] = useState<Partial<DonationType> | undefined>(
-			sampleDonations[1]
-		);
+		const [selectedEntity, setSelectedEntity] = useState<
+			Partial<DonationType> | undefined
+		>(sampleDonations[1]);
 
 		return (
 			<div style={{ padding: "20px" }}>
 				<h3>Donation Editor - Closed State</h3>
-				<p>This story demonstrates the closed state of the donation editor modal.</p>
-				
+				<p>
+					This story demonstrates the closed state of the donation editor modal.
+				</p>
+
 				<div style={{ marginBottom: "20px" }}>
-					<label htmlFor="entity-select-closed" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+					<label
+						htmlFor="entity-select-closed"
+						style={{
+							display: "block",
+							marginBottom: "8px",
+							fontWeight: "bold",
+						}}
+					>
 						Select a donation method:
 					</label>
 					<select
@@ -229,7 +255,9 @@ export const ClosedModal: Story = {
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);
-							const entity = id ? sampleDonations.find(d => d.id === id) : undefined;
+							const entity = id
+								? sampleDonations.find((d) => d.id === id)
+								: undefined;
 							setSelectedEntity(entity);
 						}}
 						style={{ padding: "8px", marginRight: "10px", minWidth: "200px" }}
@@ -253,7 +281,8 @@ export const ClosedModal: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "The modal starts closed. Select a donation method and click the button to open the editor. This represents the typical user interaction pattern.",
+				story:
+					"The modal starts closed. Select a donation method and click the button to open the editor. This represents the typical user interaction pattern.",
 			},
 		},
 	},
@@ -278,7 +307,9 @@ export const SampleData: Story = {
 							backgroundColor: "#f9f9f9",
 						}}
 					>
-						<h4 style={{ margin: "0 0 8px 0", color: "#333" }}>{donation.title}</h4>
+						<h4 style={{ margin: "0 0 8px 0", color: "#333" }}>
+							{donation.title}
+						</h4>
 						<p style={{ margin: "0", color: "#666" }}>{donation.description}</p>
 						<small style={{ color: "#999" }}>ID: {donation.id}</small>
 					</div>
@@ -289,7 +320,8 @@ export const SampleData: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "A reference of all sample donation methods used in the stories. These represent typical donation categories in a church management system.",
+				story:
+					"A reference of all sample donation methods used in the stories. These represent typical donation categories in a church management system.",
 			},
 		},
 	},

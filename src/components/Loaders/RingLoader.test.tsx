@@ -4,7 +4,7 @@ import RingLoader from "./RingLoader";
 
 describe("RingLoader", () => {
 	it("renders RingLoader", () => {
-		 render(<RingLoader loading={true} />);
+		render(<RingLoader loading={true} />);
 		expect(screen.getByTestId("loader")).toBeInTheDocument();
 	});
 

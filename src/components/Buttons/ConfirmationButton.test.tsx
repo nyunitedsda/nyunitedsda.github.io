@@ -180,12 +180,12 @@ describe("ConfirmationButton", () => {
 				confirmVariant="icon"
 				shouldConfirm={false}
 			>
-				<span>Icon</span>	
-			</ConfirmationButton>,	
+				<span>Icon</span>
+			</ConfirmationButton>,
 		);
 		const iconButton = screen.getByRole("button", { name: "Icon" });
 		fireEvent.click(iconButton);
-		expect(defaultProps.onClick).toHaveBeenCalledTimes(1);		
+		expect(defaultProps.onClick).toHaveBeenCalledTimes(1);
 	});
 	it("does not show confirmation dialog when confirmVariant is 'icon' and shouldConfirm is false", () => {
 		render(
@@ -202,6 +202,8 @@ describe("ConfirmationButton", () => {
 		fireEvent.click(iconButton);
 
 		expect(screen.queryByText("Confirm Action")).not.toBeInTheDocument();
-		expect(screen.queryByText("Are you sure you want to proceed?")).not.toBeInTheDocument();
+		expect(
+			screen.queryByText("Are you sure you want to proceed?"),
+		).not.toBeInTheDocument();
 	});
 });

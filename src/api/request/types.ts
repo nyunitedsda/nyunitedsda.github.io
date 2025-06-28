@@ -16,13 +16,19 @@ export interface UserType {
 	/** Unique identifier for the user */
 	id: number;
 	/** User's email address */
-	email: string;
+	email?: string;
 	/** User's first name */
 	firstName?: string;
 	/** User's last name */
 	lastName?: string;
+	/** User's username */
+	username: string;
+	/** User's password hash */
+	password?: string;
 	/** User's role in the system */
 	role: UserRole;
+	/**  */
+	remember_me: boolean;
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */

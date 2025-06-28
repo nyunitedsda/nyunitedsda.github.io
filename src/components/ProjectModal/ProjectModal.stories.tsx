@@ -271,7 +271,8 @@ export const StaticClosed: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "A static modal for testing the controls panel. Toggle the 'open' control to see the modal."
+				story:
+					"A static modal for testing the controls panel. Toggle the 'open' control to see the modal.",
 			},
 		},
 	},
@@ -345,7 +346,9 @@ export const EventRegistration: Story = {
 						</Typography>
 					</Box>
 				</Box>
-				<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", mt: 2 }}>
+				<Box
+					sx={{ display: "flex", gap: 1, justifyContent: "flex-end", mt: 2 }}
+				>
 					<Button variant="outlined">Cancel</Button>
 					<Button variant="contained" color="primary">
 						Register
@@ -367,7 +370,8 @@ export const PrayerRequest: Story = {
 				🙏 Submit Prayer Request
 			</Typography>
 			<Typography variant="body2" color="text.secondary" paragraph>
-				Share your prayer request with our church community. All requests are kept confidential.
+				Share your prayer request with our church community. All requests are
+				kept confidential.
 			</Typography>
 			<Box
 				component="form"
@@ -410,15 +414,18 @@ export const PrayerRequest: Story = {
 						</Typography>
 					</Box>
 				</Box>
-				<Box sx={{ 
-					p: 2, 
-					bgcolor: "info.light", 
-					borderRadius: 1,
-					border: 1,
-					borderColor: "info.main"
-				}}>
+				<Box
+					sx={{
+						p: 2,
+						bgcolor: "info.light",
+						borderRadius: 1,
+						border: 1,
+						borderColor: "info.main",
+					}}
+				>
 					<Typography variant="caption" color="info.contrastText">
-						💝 Your privacy is important to us. Prayer requests are only shared with our prayer team.
+						💝 Your privacy is important to us. Prayer requests are only shared
+						with our prayer team.
 					</Typography>
 				</Box>
 				<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
@@ -489,13 +496,15 @@ export const DonationModal: Story = {
 						</Typography>
 					</Box>
 				</Box>
-				<Box sx={{ 
-					p: 2, 
-					bgcolor: "success.light", 
-					borderRadius: 1,
-					border: 1,
-					borderColor: "success.main"
-				}}>
+				<Box
+					sx={{
+						p: 2,
+						bgcolor: "success.light",
+						borderRadius: 1,
+						border: 1,
+						borderColor: "success.main",
+					}}
+				>
 					<Typography variant="caption" color="success.contrastText">
 						🔒 Secure donation processing • Tax-deductible receipts provided
 					</Typography>

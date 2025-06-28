@@ -46,10 +46,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Interactive wrapper component for stories
-const InteractiveWrapper = ({ 
-	children, 
-	buttonText = "Open Dialog" 
-}: { 
+const InteractiveWrapper = ({
+	children,
+	buttonText = "Open Dialog",
+}: {
 	children: (props: { open: boolean; onClose: () => void }) => React.ReactNode;
 	buttonText?: string;
 }) => {
@@ -105,7 +105,8 @@ export const DeleteConfirmation: Story = {
 	),
 	args: {
 		title: "Delete Item",
-		content: "This action cannot be undone. Are you sure you want to delete this item?",
+		content:
+			"This action cannot be undone. Are you sure you want to delete this item?",
 		cancelLabel: "Cancel",
 		confirmLabel: "Delete",
 	},
@@ -155,19 +156,17 @@ export const LongContent: Story = {
 		title: "Terms and Conditions",
 		content: (
 			<Typography variant="body2">
-				By proceeding, you agree to our terms and conditions. This includes but is not limited to:
+				By proceeding, you agree to our terms and conditions. This includes but
+				is not limited to:
+				<br />
+				<br />• Data processing and storage policies
+				<br />• User behavior guidelines
+				<br />• Privacy protection measures
+				<br />• Service availability terms
 				<br />
 				<br />
-				• Data processing and storage policies
-				<br />
-				• User behavior guidelines
-				<br />
-				• Privacy protection measures
-				<br />
-				• Service availability terms
-				<br />
-				<br />
-				Please read our full terms of service for complete details. Do you accept these terms?
+				Please read our full terms of service for complete details. Do you
+				accept these terms?
 			</Typography>
 		),
 		cancelLabel: "Decline",
@@ -235,7 +234,8 @@ export const Interactive: Story = {
 	),
 	args: {
 		title: "Interactive Dialog",
-		content: "Click the button to open this dialog. Try the confirm and cancel actions!",
+		content:
+			"Click the button to open this dialog. Try the confirm and cancel actions!",
 		cancelLabel: "Cancel",
 		confirmLabel: "Confirm",
 	},
@@ -260,7 +260,7 @@ export const MultipleActions: Story = {
 					/>
 				)}
 			</InteractiveWrapper>
-			
+
 			<InteractiveWrapper buttonText="Save Changes">
 				{({ open, onClose }) => (
 					<ConfirmationDialog
@@ -277,7 +277,7 @@ export const MultipleActions: Story = {
 					/>
 				)}
 			</InteractiveWrapper>
-			
+
 			<InteractiveWrapper buttonText="Sign Out">
 				{({ open, onClose }) => (
 					<ConfirmationDialog
@@ -301,7 +301,8 @@ export const MultipleActions: Story = {
 export const StaticClosed: Story = {
 	args: {
 		title: "Hidden Dialog",
-		content: "This dialog is closed by default. Toggle the 'open' control to see it.",
+		content:
+			"This dialog is closed by default. Toggle the 'open' control to see it.",
 		open: false,
 		onConfirm: action("confirmed"),
 		onClose: action("closed"),
@@ -309,7 +310,8 @@ export const StaticClosed: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Example of the dialog in its closed state. Use the controls to open it and test the interaction."
+				story:
+					"Example of the dialog in its closed state. Use the controls to open it and test the interaction.",
 			},
 		},
 	},
