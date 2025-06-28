@@ -3,7 +3,8 @@ export type DatabaseEntity =
 	| "users"
 	| "articles"
 	| "announcements"
-	| "notifications";
+	| "notifications"
+	| "services";
 
 /**
  * Represents a user in the system
@@ -162,4 +163,20 @@ export interface NotificationType {
 	 * If not provided, the notification will not expire automatically
 	 */
 	expires_at?: Date;
+}
+
+/**
+ * Represents a service in the system
+ */
+export interface ServiceType {
+	/** Unique identifier (auto-incremented) */
+	id: number;
+	/** Time when the service takes place */
+	time: string;
+	/** Title of the service */
+	title: string;
+	/** Timestamp when the service was created */
+	created_at?: Date;
+	/** Timestamp when the service was last modified */
+	modified_at?: Date;
 }

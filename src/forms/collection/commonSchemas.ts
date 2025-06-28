@@ -15,6 +15,6 @@ export const titleSchema = Yup.string()
 	.required("Title is required");
 
 export const descriptionSchema = Yup.string()
-	.min(10, "Value must be at least 10 characters")
+	.min(3, "Value must be at least 10 characters")
 	.max(500, "Value must be at most 255 characters")
 	.required("Value is required");
