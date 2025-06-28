@@ -7,6 +7,8 @@ export type DatabaseEntity =
 	| "services"
 	| "contacts";
 
+export type UserRole = "admin" | "guest" | "moderator";
+
 /**
  * Represents a user in the system
  */
@@ -20,7 +22,7 @@ export interface UserType {
 	/** User's last name */
 	lastName?: string;
 	/** User's role in the system */
-	role: "admin" | "user" | "moderator";
+	role: UserRole;
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */
