@@ -3,9 +3,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
-import UserAccessForm from "../../forms/collection/UserAccessForm/UserAccessForm";
 import ProjectModal from "../ProjectModal/ProjectModal";
 import type { RegisterModalProps } from "./types";
+import RegisterForm from "../../forms/collection/RegisterForm/RegisterForm";
 
 const containerSx: SxProps<Theme> = {
 	borderRadius: 2,
@@ -33,7 +33,7 @@ const RegisterModal: FC<RegisterModalProps> = ({ open, onClose }) => {
 				<Typography variant="h6">{REGISTRATION_HEADER.subtitle}</Typography>
 			</Stack>
 			<Paper elevation={0} sx={containerSx}>
-				<UserAccessForm type="register" />
+				<RegisterForm />
 			</Paper>
 		</ProjectModal>
 	);

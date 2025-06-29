@@ -17,8 +17,12 @@ export interface UserType {
 	firstName?: string;
 	/** User's last name */
 	lastName?: string;
+	/** User's username */
+	username?: string;
 	/** User's role in the system */
 	role: UserRole;
+	/** List of permissions assigned to the user */
+	permissions?: string[];
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */

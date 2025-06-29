@@ -1,3 +1,6 @@
+/**
+ * @file Types for the API request and response structures
+ */
 export type DatabaseEntity =
 	| "donations"
 	| "users"
@@ -7,6 +10,27 @@ export type DatabaseEntity =
 	| "services"
 	| "contacts";
 
+export type AccessLevel = "read" | "write" | "delete" | "modify";
+
+/**
+ * Represents a permission string in the format: role.entity.access
+ * Example: "admin.users.read"
+ */
+export type PermissionString = `${Exclude<UserRole, "guest">}.${DatabaseEntity}.${AccessLevel}`;
+
+/**
+ * Interface for application permission
+ */
+export interface Permission {
+  /** The unique permission identifier string */
+  id: PermissionString;
+  /** Human-readable description of the permission */
+  description: string;
+}
+
+/**
+ * Represents the role of a user in the system
+ */
 export type UserRole = "admin" | "guest" | "moderator";
 
 /**
@@ -22,13 +46,15 @@ export interface UserType {
 	/** User's last name */
 	lastName?: string;
 	/** User's username */
-	username: string;
+	username?: string;
 	/** User's password hash */
 	password?: string;
 	/** User's role in the system */
 	role: UserRole;
-	/**  */
-	remember_me: boolean;
+	/** Remember user on this device */
+	remember_me?: boolean;
+	/** List of permissions assigned to the user */
+	permissions?: PermissionString[];
 	/** Whether the user's email is verified */
 	emailVerified?: boolean;
 	/** Timestamp when the user was created */

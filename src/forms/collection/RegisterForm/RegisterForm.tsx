@@ -7,7 +7,6 @@ import {
 	configureUsernameInput,
 } from "../commonInputs";
 import { registerSchema } from "./schema";
-import type { UserAccessFormProps } from "./types";
 
 const initialRegisterValues = {
 	id: undefined,
@@ -21,7 +20,7 @@ const CONFIRM_PASSWORD = "Confirm Password";
 const REGISTER = "Register";
 const ACCEPT_TERMS = "I accept the terms and conditions";
 
-const RegisterForm: FC<UserAccessFormProps> = () => {
+const RegisterForm: FC = () => {
 	const {
 		buttonText,
 		confirmPasswordProps,
@@ -34,8 +33,9 @@ const RegisterForm: FC<UserAccessFormProps> = () => {
 			buttonText: REGISTER,
 			initialValues: initialRegisterValues,
 			validationSchema: registerSchema,
-			passwordProps: configurePasswordInput(),
+			
 			usernameProps: configureUsernameInput(),
+			passwordProps: configurePasswordInput(),
 			confirmPasswordProps: configurePasswordInput({
 				name: "confirmPassword",
 				label: CONFIRM_PASSWORD,

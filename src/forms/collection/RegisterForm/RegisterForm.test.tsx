@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import UserAccessForm from "./UserAccessForm";
+import UserAccessForm from "./RegisterForm";
 
 describe("UserAccessForm", () => {
 	it("renders UserAccessForm", () => {
