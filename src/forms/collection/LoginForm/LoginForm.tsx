@@ -4,8 +4,8 @@ import type { UserType } from "../../../api/request/types";
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";
 import {
-  configurePasswordInput,
-  configureUsernameInput,
+	configurePasswordInput,
+	configureUsernameInput,
 } from "../commonInputs";
 import { loginSchema } from "./schema";
 
@@ -47,10 +47,11 @@ const LoginForm: FC = () => {
 					name="remember_me"
 					label={REMEMBER_ME}
 					fieldType="checkbox"
-          sx={{ '& .MuiFormControlLabel-root': { 
-            color: "text.primary",
-          }
-         }}
+					sx={{
+						"& .MuiFormControlLabel-root": {
+							color: "text.primary",
+						},
+					}}
 				/>
 			</Stack>
 		</FormContainer>

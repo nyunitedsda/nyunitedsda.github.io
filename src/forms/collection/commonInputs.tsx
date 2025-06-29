@@ -29,7 +29,6 @@ export const configurePasswordInput = ({
 				</Suspense>
 			</InputAdornment>
 		),
-		
 	},
 });
 
