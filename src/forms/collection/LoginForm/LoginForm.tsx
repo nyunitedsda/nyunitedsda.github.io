@@ -47,7 +47,10 @@ const LoginForm: FC = () => {
 					name="remember_me"
 					label={REMEMBER_ME}
 					fieldType="checkbox"
-          sx={{ '& .MuiFormControlLabel-root': { color: "text.primary"} }}
+          sx={{ '& .MuiFormControlLabel-root': { 
+            color: "text.primary",
+          }
+         }}
 				/>
 			</Stack>
 		</FormContainer>

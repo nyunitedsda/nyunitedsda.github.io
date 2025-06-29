@@ -36,8 +36,6 @@ const UserAccessForm: FC<UserAccessFormProps> = ({ type = "login" }) => {
 		buttonText,
 		confirmPasswordProps,
 		initialValues,
-		passwordProps,
-		usernameProps,
 		validationSchema,
 	} = useMemo(
 		() => ({
