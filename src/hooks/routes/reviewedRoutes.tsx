@@ -25,6 +25,7 @@ const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
 const Login = lazy(() => import("../../pages/Login/Login"));
+const StorybookPage = lazy(() => import("../../pages/Storybook/StorybookPage"));
 const UnauthorizedError = lazy(
 	() => import("../../pages/Error/UnauthorizedError"),
 );
@@ -82,7 +83,10 @@ const mainLayoutRoutes: RouteWithId[] = [
 export const protectedRoutes: RouteWithId[] = [
 	{
 		element: <ProtectedPageWrapper />,
-		children: [createRoute(<Administration />, "admin/:tab?", "admin")],
+		children: [
+			createRoute(<Administration />, "admin/:tab?", "admin"),
+			createRoute(<StorybookPage />, "storybook", "storybook"),
+		],
 	},
 ];
 
@@ -129,4 +133,5 @@ export const ROUTE_PATHS = {
 	ADMIN: createPath("admin"),
 	LOGIN: createPath("login"),
 	UNAUTHORIZED: createPath("unauthorized"),
+	STORYBOOK: createPath("storybook"),
 } as const;
