@@ -10,7 +10,8 @@ const sampleTechArticle: ArticleType = {
 	title: "The Future of Church Technology",
 	category: "Technology",
 	img_src: "https://example.com/tech-article.jpg",
-	content: "In today's digital age, churches are embracing technology to reach more people and enhance worship experiences. From live streaming services to interactive prayer apps, the possibilities are endless...",
+	content:
+		"In today's digital age, churches are embracing technology to reach more people and enhance worship experiences. From live streaming services to interactive prayer apps, the possibilities are endless...",
 	author_id: 1,
 	publishDate: new Date("2025-06-01T00:00:00").toISOString(),
 	created_at: new Date("2025-06-01T00:00:00"),
@@ -22,7 +23,8 @@ const sampleFaithArticle: ArticleType = {
 	title: "Walking in Faith: A Journey of Trust",
 	category: "Faith & Spirituality",
 	img_src: "https://example.com/faith-article.jpg",
-	content: "Faith is not just a belief; it's a way of life. When we walk in faith, we learn to trust in God's plan even when the path ahead seems uncertain. This journey of faith transforms not only our lives but also the lives of those around us...",
+	content:
+		"Faith is not just a belief; it's a way of life. When we walk in faith, we learn to trust in God's plan even when the path ahead seems uncertain. This journey of faith transforms not only our lives but also the lives of those around us...",
 	author_id: 2,
 	publishDate: new Date("2025-06-10T00:00:00").toISOString(),
 	created_at: new Date("2025-06-10T00:00:00"),
@@ -34,7 +36,8 @@ const sampleCommunityArticle: ArticleType = {
 	title: "Building Stronger Church Communities",
 	category: "Community",
 	img_src: "https://example.com/community-article.jpg",
-	content: "A strong church community is built on fellowship, mutual support, and shared purpose. Through various outreach programs, small group meetings, and community service projects, we can create bonds that last a lifetime...",
+	content:
+		"A strong church community is built on fellowship, mutual support, and shared purpose. Through various outreach programs, small group meetings, and community service projects, we can create bonds that last a lifetime...",
 	author_id: 1,
 	publishDate: new Date("2025-06-20T00:00:00").toISOString(),
 	created_at: new Date("2025-06-20T00:00:00"),
@@ -102,7 +105,13 @@ const meta: Meta<typeof BlogEditor> = {
 	decorators: [
 		(Story) => (
 			<SnackbarProvider maxSnack={3}>
-				<div style={{ minHeight: "100vh", padding: "20px", backgroundColor: "#f5f5f5" }}>
+				<div
+					style={{
+						minHeight: "100vh",
+						padding: "20px",
+						backgroundColor: "#f5f5f5",
+					}}
+				>
 					<Story />
 				</div>
 			</SnackbarProvider>
@@ -181,13 +190,13 @@ export const CreateMode: Story = {
 	args: {
 		entity: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Article created:", data),
+		onSuccess: (data: ArticleType) => console.log("Article created:", data),
 	},
 	parameters: {
 		docs: {
 			description: {
-				story: "**🆕 Create a new article** - Click the button to open the blog editor and start writing from scratch.",
+				story:
+					"**🆕 Create a new article** - Click the button to open the blog editor and start writing from scratch.",
 			},
 			source: {
 				code: `
@@ -216,7 +225,9 @@ export const Playground: Story = {
 	render: (args) => {
 		const PlaygroundWrapper = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<ArticleType | undefined>(args.entity);
+			const [selectedEntity, setSelectedEntity] = useState<
+				ArticleType | undefined
+			>(args.entity);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -228,13 +239,23 @@ export const Playground: Story = {
 			return (
 				<div style={{ padding: "20px" }}>
 					<div style={{ marginBottom: "20px" }}>
-						<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+						<label
+							style={{
+								display: "block",
+								marginBottom: "8px",
+								fontWeight: "bold",
+							}}
+						>
 							Select Article Type:
 						</label>
 						<select
 							title="Select article type"
-							value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-							onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+							value={entityOptions.findIndex(
+								(opt) => opt.value === selectedEntity,
+							)}
+							onChange={(e) =>
+								setSelectedEntity(entityOptions[Number(e.target.value)].value)
+							}
 							style={{
 								padding: "8px 12px",
 								fontSize: "14px",
@@ -283,8 +304,7 @@ export const Playground: Story = {
 	args: {
 		entity: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Article saved:", data),
+		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -480,8 +500,7 @@ export const FormValidationDemo: Story = {
 			publishDate: new Date().toISOString(),
 		} as ArticleType,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Article saved:", data),
+		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -507,7 +526,9 @@ export const ClosedModal: Story = {
 	render: () => {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<ArticleType | undefined>(undefined);
+			const [selectedEntity, setSelectedEntity] = useState<
+				ArticleType | undefined
+			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -518,19 +539,39 @@ export const ClosedModal: Story = {
 
 			return (
 				<div style={{ padding: "20px" }}>
-					<div style={{ marginBottom: "20px", padding: "16px", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
-						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>👻 Component State Demo</h4>
+					<div
+						style={{
+							marginBottom: "20px",
+							padding: "16px",
+							backgroundColor: "#f8f9fa",
+							borderRadius: "8px",
+						}}
+					>
+						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>
+							👻 Component State Demo
+						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
-							This demonstrates the component's default closed state. Select an article type and click the button to see it open.
+							This demonstrates the component's default closed state. Select an
+							article type and click the button to see it open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
-							<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+							<label
+								style={{
+									display: "block",
+									marginBottom: "8px",
+									fontWeight: "bold",
+								}}
+							>
 								Pre-select article for modal:
 							</label>
 							<select
 								title="Select article type for modal"
-								value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-								onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+								value={entityOptions.findIndex(
+									(opt) => opt.value === selectedEntity,
+								)}
+								onChange={(e) =>
+									setSelectedEntity(entityOptions[Number(e.target.value)].value)
+								}
 								style={{
 									padding: "8px 12px",
 									fontSize: "14px",

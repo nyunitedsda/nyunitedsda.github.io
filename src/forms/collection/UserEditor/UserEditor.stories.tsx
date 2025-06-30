@@ -103,7 +103,8 @@ export const CreateMode: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "**🆕 Create a new user** - Click the button to open the user form and start from scratch.",
+				story:
+					"**🆕 Create a new user** - Click the button to open the user form and start from scratch.",
 			},
 			source: {
 				code: `
@@ -264,31 +265,59 @@ export const ClosedModal: Story = {
 	render: () => {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<Partial<UserType> | undefined>(undefined);
+			const [selectedEntity, setSelectedEntity] = useState<
+				Partial<UserType> | undefined
+			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
 				{ label: "Admin User", value: sampleAdminUser as Partial<UserType> },
-				{ label: "Moderator User", value: sampleModeratorUser as Partial<UserType> },
+				{
+					label: "Moderator User",
+					value: sampleModeratorUser as Partial<UserType>,
+				},
 				{ label: "Guest User", value: sampleGuestUser as Partial<UserType> },
-				{ label: "Minimal User", value: sampleMinimalUser as Partial<UserType> },
+				{
+					label: "Minimal User",
+					value: sampleMinimalUser as Partial<UserType>,
+				},
 			];
 
 			return (
 				<div style={{ padding: "20px" }}>
-					<div style={{ marginBottom: "20px", padding: "16px", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
-						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>👻 Component State Demo</h4>
+					<div
+						style={{
+							marginBottom: "20px",
+							padding: "16px",
+							backgroundColor: "#f8f9fa",
+							borderRadius: "8px",
+						}}
+					>
+						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>
+							👻 Component State Demo
+						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
-							This demonstrates the component's default closed state. Select a user type and click the button to see it open.
+							This demonstrates the component's default closed state. Select a
+							user type and click the button to see it open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
-							<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+							<label
+								style={{
+									display: "block",
+									marginBottom: "8px",
+									fontWeight: "bold",
+								}}
+							>
 								Pre-select user for modal:
 							</label>
 							<select
 								title="Select user type for modal"
-								value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-								onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+								value={entityOptions.findIndex(
+									(opt) => opt.value === selectedEntity,
+								)}
+								onChange={(e) =>
+									setSelectedEntity(entityOptions[Number(e.target.value)].value)
+								}
 								style={{
 									padding: "8px 12px",
 									fontSize: "14px",

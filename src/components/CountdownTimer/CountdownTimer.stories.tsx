@@ -28,7 +28,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Helper function to create future dates
-const createFutureDate = (amount: number, unit: "minutes" | "hours" | "days" | "weeks" | "months") => {
+const createFutureDate = (
+	amount: number,
+	unit: "minutes" | "hours" | "days" | "weeks" | "months",
+) => {
 	return dayjs().add(amount, unit);
 };
 
@@ -39,7 +42,8 @@ export const Default: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "A countdown timer showing time remaining until a target date (7 days from now)."
+				story:
+					"A countdown timer showing time remaining until a target date (7 days from now).",
 			},
 		},
 	},
@@ -52,7 +56,7 @@ export const ShortCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown with less than an hour remaining (30 minutes)."
+				story: "Countdown with less than an hour remaining (30 minutes).",
 			},
 		},
 	},
@@ -65,7 +69,7 @@ export const MediumCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown with more than a day remaining (25 hours)."
+				story: "Countdown with more than a day remaining (25 hours).",
 			},
 		},
 	},
@@ -78,7 +82,7 @@ export const LongCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Long countdown showing many days remaining (45 days)."
+				story: "Long countdown showing many days remaining (45 days).",
 			},
 		},
 	},
@@ -91,7 +95,7 @@ export const VeryLongCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Very long countdown for events far in the future (6 months)."
+				story: "Very long countdown for events far in the future (6 months).",
 			},
 		},
 	},
@@ -104,7 +108,8 @@ export const AlmostExpired: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown that's almost expired (2 minutes remaining). Watch it tick down!"
+				story:
+					"Countdown that's almost expired (2 minutes remaining). Watch it tick down!",
 			},
 		},
 	},
@@ -117,7 +122,8 @@ export const Expired: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown for a date that has already passed. Should show all zeros."
+				story:
+					"Countdown for a date that has already passed. Should show all zeros.",
 			},
 		},
 	},
@@ -127,8 +133,10 @@ export const Expired: Story = {
 export const ChurchServiceCountdown: Story = {
 	render: () => {
 		const nextSunday = dayjs().day(7).hour(10).minute(0).second(0);
-		const targetDate = nextSunday.isAfter(dayjs()) ? nextSunday : nextSunday.add(1, "week");
-		
+		const targetDate = nextSunday.isAfter(dayjs())
+			? nextSunday
+			: nextSunday.add(1, "week");
+
 		return (
 			<Paper sx={{ p: 3, textAlign: "center" }}>
 				<Typography variant="h4" gutterBottom color="primary">
@@ -144,7 +152,7 @@ export const ChurchServiceCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown to the next Sunday church service at 10:00 AM."
+				story: "Countdown to the next Sunday church service at 10:00 AM.",
 			},
 		},
 	},
@@ -154,10 +162,19 @@ export const ChristmasCountdown: Story = {
 	render: () => {
 		const currentYear = dayjs().year();
 		const christmas = dayjs(`${currentYear}-12-25`);
-		const targetDate = christmas.isAfter(dayjs()) ? christmas : christmas.add(1, "year");
-		
+		const targetDate = christmas.isAfter(dayjs())
+			? christmas
+			: christmas.add(1, "year");
+
 		return (
-			<Paper sx={{ p: 3, textAlign: "center", bgcolor: "error.light", color: "error.contrastText" }}>
+			<Paper
+				sx={{
+					p: 3,
+					textAlign: "center",
+					bgcolor: "error.light",
+					color: "error.contrastText",
+				}}
+			>
 				<Typography variant="h4" gutterBottom>
 					🎄 Christmas Celebration
 				</Typography>
@@ -171,7 +188,7 @@ export const ChristmasCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown to Christmas Day celebration."
+				story: "Countdown to Christmas Day celebration.",
 			},
 		},
 	},
@@ -184,9 +201,16 @@ export const EasterCountdown: Story = {
 		const currentYear = dayjs().year();
 		const easter = dayjs(`${currentYear}-04-01`).day(7); // Approximate Easter
 		const targetDate = easter.isAfter(dayjs()) ? easter : easter.add(1, "year");
-		
+
 		return (
-			<Paper sx={{ p: 3, textAlign: "center", bgcolor: "success.light", color: "success.contrastText" }}>
+			<Paper
+				sx={{
+					p: 3,
+					textAlign: "center",
+					bgcolor: "success.light",
+					color: "success.contrastText",
+				}}
+			>
 				<Typography variant="h4" gutterBottom>
 					🐣 Easter Celebration
 				</Typography>
@@ -200,7 +224,7 @@ export const EasterCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown to Easter Sunday celebration."
+				story: "Countdown to Easter Sunday celebration.",
 			},
 		},
 	},
@@ -209,9 +233,16 @@ export const EasterCountdown: Story = {
 export const ConferenceCountdown: Story = {
 	render: () => {
 		const conference = createFutureDate(2, "months");
-		
+
 		return (
-			<Paper sx={{ p: 3, textAlign: "center", bgcolor: "secondary.light", color: "secondary.contrastText" }}>
+			<Paper
+				sx={{
+					p: 3,
+					textAlign: "center",
+					bgcolor: "secondary.light",
+					color: "secondary.contrastText",
+				}}
+			>
 				<Typography variant="h4" gutterBottom>
 					📖 Annual Conference
 				</Typography>
@@ -228,7 +259,7 @@ export const ConferenceCountdown: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Countdown to an annual church conference event."
+				story: "Countdown to an annual church conference event.",
 			},
 		},
 	},
@@ -243,14 +274,14 @@ export const MultipleEvents: Story = {
 				</Typography>
 				<CountdownTimer targetDate={createFutureDate(6, "hours")} />
 			</Paper>
-			
+
 			<Paper sx={{ p: 2, textAlign: "center" }}>
 				<Typography variant="h6" gutterBottom color="secondary">
 					Youth Meeting
 				</Typography>
 				<CountdownTimer targetDate={createFutureDate(3, "days")} />
 			</Paper>
-			
+
 			<Paper sx={{ p: 2, textAlign: "center" }}>
 				<Typography variant="h6" gutterBottom color="success.main">
 					Community Outreach
@@ -262,7 +293,7 @@ export const MultipleEvents: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Multiple countdown timers for different church events."
+				story: "Multiple countdown timers for different church events.",
 			},
 		},
 	},
@@ -274,15 +305,21 @@ export const ResponsiveLayout: Story = {
 	},
 	decorators: [
 		(Story) => (
-			<Box sx={{ 
-				padding: 2, 
-				resize: "horizontal", 
-				overflow: "auto", 
-				border: "1px dashed #ccc",
-				minWidth: "300px",
-				maxWidth: "100%",
-			}}>
-				<Typography variant="caption" display="block" sx={{ mb: 2, color: "text.secondary" }}>
+			<Box
+				sx={{
+					padding: 2,
+					resize: "horizontal",
+					overflow: "auto",
+					border: "1px dashed #ccc",
+					minWidth: "300px",
+					maxWidth: "100%",
+				}}
+			>
+				<Typography
+					variant="caption"
+					display="block"
+					sx={{ mb: 2, color: "text.secondary" }}
+				>
 					Resize this container to test responsiveness
 				</Typography>
 				<Story />
@@ -292,7 +329,8 @@ export const ResponsiveLayout: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Test the countdown timer's responsive behavior by resizing the container."
+				story:
+					"Test the countdown timer's responsive behavior by resizing the container.",
 			},
 		},
 	},

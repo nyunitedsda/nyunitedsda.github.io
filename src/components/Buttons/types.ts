@@ -17,8 +17,8 @@ export type MenuButtonStyle = {
 };
 
 export type ConfirmationButtonProps = (
-	| ({ variant?: "button" } & ButtonProps)
-	| ({ variant: "icon" } & IconButtonProps)
+	| ({ confirmVariant?: "button" } & ButtonProps)
+	| ({ confirmVariant: "icon" } & IconButtonProps)
 ) & {
 	shouldConfirm?: boolean;
 	confirmationTitle?: string;

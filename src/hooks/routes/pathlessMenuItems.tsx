@@ -49,6 +49,11 @@ export const protectedMenuItems: PathlessMenu[] = [
 		icon: "AdminPanelSettingsOutlined",
 		name: "Administration",
 	},
+	{
+		id: "storybook",
+		icon: "WidgetsRounded",
+		name: "Component Library",
+	},
 ];
 
 export default pathlessMenuItems;

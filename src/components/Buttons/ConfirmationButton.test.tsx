@@ -4,11 +4,12 @@ import {
 	expect,
 	fireEvent,
 	it,
-	render,
 	screen,
 	vi,
 	waitFor,
 } from "../../utils/index";
+
+import { render } from "../../utils/vitest-setup.tsx";
 import ConfirmationButton from "./ConfirmationButton";
 
 describe("ConfirmationButton", () => {
@@ -154,5 +155,55 @@ describe("ConfirmationButton", () => {
 		expect(button).toBeDisabled();
 		expect(button).toHaveClass("MuiButton-outlined");
 		expect(button).toHaveClass("MuiButton-colorSecondary");
+	});
+
+	it('renders as an IconButton when confirmVariant is "icon"', () => {
+		render(
+			<ConfirmationButton
+				{...defaultProps}
+				confirmVariant="icon"
+				shouldConfirm={true}
+			>
+				<span>Icon</span>
+			</ConfirmationButton>,
+		);
+
+		const iconButton = screen.getByRole("button", { name: "Icon" });
+		expect(iconButton).toBeInTheDocument();
+		expect(iconButton.tagName).toBe("BUTTON");
+		expect(iconButton).toHaveClass("MuiIconButton-root");
+	});
+	it("calls onClick when confirmVariant is 'icon' and shouldConfirm is false", () => {
+		render(
+			<ConfirmationButton
+				{...defaultProps}
+				confirmVariant="icon"
+				shouldConfirm={false}
+			>
+				<span>Icon</span>
+			</ConfirmationButton>,
+		);
+		const iconButton = screen.getByRole("button", { name: "Icon" });
+		fireEvent.click(iconButton);
+		expect(defaultProps.onClick).toHaveBeenCalledTimes(1);
+	});
+	it("does not show confirmation dialog when confirmVariant is 'icon' and shouldConfirm is false", () => {
+		render(
+			<ConfirmationButton
+				{...defaultProps}
+				confirmVariant="icon"
+				shouldConfirm={false}
+			>
+				<span>Icon</span>
+			</ConfirmationButton>,
+		);
+
+		const iconButton = screen.getByRole("button", { name: "Icon" });
+		fireEvent.click(iconButton);
+
+		expect(screen.queryByText("Confirm Action")).not.toBeInTheDocument();
+		expect(
+			screen.queryByText("Are you sure you want to proceed?"),
+		).not.toBeInTheDocument();
 	});
 });

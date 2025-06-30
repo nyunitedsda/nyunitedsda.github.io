@@ -19,7 +19,8 @@
 		"preview": "vite preview",
 		"test": "vitest",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build"
+		"build-storybook": "storybook build",
+		"build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
 	},
 	"engines": {
 		"node": "20.18.0"
@@ -66,7 +67,8 @@
 		"globals": "^16.0.0",
 		"jsdom": "^26.1.0",
 		"rollup-plugin-visualizer": "^6.0.1",
-		"storybook": "8.3.6",
+		"shx": "^0.4.0",
+		"storybook": "^8.6.14",
 		"typescript": "~5.8.3",
 		"vite": "^6.3.5",
 		"vitest": "^3.2.4"

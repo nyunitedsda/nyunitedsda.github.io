@@ -12,7 +12,7 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 	confirmLabel = "Confirm",
 	onClick,
 	children,
-	variant = "button",
+	confirmVariant = "button",
 	...buttonProps
 }) => {
 	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -36,7 +36,7 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 
 	return (
 		<>
-			{variant === "icon" ? (
+			{confirmVariant === "icon" ? (
 				<IconButton {...(buttonProps as any)} onClick={handleButtonClick}>
 					{children}
 				</IconButton>

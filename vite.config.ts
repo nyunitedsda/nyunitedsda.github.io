@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import generateWebConfig from "./src/constants/webconfigcontent";
+import generateWebConfig from "./src/constants/webconfigcontent.ts";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
 					closeBundle() {
 						fs.writeFileSync(
 							path.resolve(__dirname, "dist/web.config"),
-							generateWebConfig(),
+							generateWebConfig,
 						);
 					},
 				},

@@ -63,11 +63,11 @@ const sampleZoomAnnouncement: AnnouncementType = {
 };
 
 // Interactive wrapper component with open button
-const InteractiveWrapper = ({ 
-	entity, 
-	onClose, 
+const InteractiveWrapper = ({
+	entity,
+	onClose,
 	onSuccess,
-	buttonText = "Open Editor"
+	buttonText = "Open Editor",
 }: {
 	entity?: AnnouncementType;
 	onClose?: () => void;
@@ -123,7 +123,13 @@ const meta: Meta<typeof AnnouncementEditor> = {
 	decorators: [
 		(Story) => (
 			<SnackbarProvider maxSnack={3}>
-				<div style={{ minHeight: "100vh", padding: "20px", backgroundColor: "#f5f5f5" }}>
+				<div
+					style={{
+						minHeight: "100vh",
+						padding: "20px",
+						backgroundColor: "#f5f5f5",
+					}}
+				>
 					<Story />
 				</div>
 			</SnackbarProvider>
@@ -208,7 +214,8 @@ export const CreateMode: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "**🆕 Create a new announcement** - Click the button to open the form and start from scratch. Build any type of announcement with dynamic form fields.",
+				story:
+					"**🆕 Create a new announcement** - Click the button to open the form and start from scratch. Build any type of announcement with dynamic form fields.",
 			},
 			source: {
 				code: `
@@ -237,7 +244,9 @@ export const Playground: Story = {
 	render: (args) => {
 		const PlaygroundWrapper = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<AnnouncementType | undefined>(args.entity);
+			const [selectedEntity, setSelectedEntity] = useState<
+				AnnouncementType | undefined
+			>(args.entity);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -250,13 +259,23 @@ export const Playground: Story = {
 			return (
 				<div style={{ padding: "20px" }}>
 					<div style={{ marginBottom: "20px" }}>
-						<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+						<label
+							style={{
+								display: "block",
+								marginBottom: "8px",
+								fontWeight: "bold",
+							}}
+						>
 							Select Announcement Type:
 						</label>
 						<select
 							title="Select announcement type"
-							value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-							onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+							value={entityOptions.findIndex(
+								(opt) => opt.value === selectedEntity,
+							)}
+							onChange={(e) =>
+								setSelectedEntity(entityOptions[Number(e.target.value)].value)
+							}
 							style={{
 								padding: "8px 12px",
 								fontSize: "14px",
@@ -666,7 +685,9 @@ export const ClosedModal: Story = {
 	render: () => {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<AnnouncementType | undefined>(undefined);
+			const [selectedEntity, setSelectedEntity] = useState<
+				AnnouncementType | undefined
+			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -678,19 +699,39 @@ export const ClosedModal: Story = {
 
 			return (
 				<div style={{ padding: "20px" }}>
-					<div style={{ marginBottom: "20px", padding: "16px", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
-						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>👻 Component State Demo</h4>
+					<div
+						style={{
+							marginBottom: "20px",
+							padding: "16px",
+							backgroundColor: "#f8f9fa",
+							borderRadius: "8px",
+						}}
+					>
+						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>
+							👻 Component State Demo
+						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
-							This demonstrates the component's default closed state. Select an entity type and click the button to see it open.
+							This demonstrates the component's default closed state. Select an
+							entity type and click the button to see it open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
-							<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+							<label
+								style={{
+									display: "block",
+									marginBottom: "8px",
+									fontWeight: "bold",
+								}}
+							>
 								Pre-select data for modal:
 							</label>
 							<select
 								title="Select announcement type for modal"
-								value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-								onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+								value={entityOptions.findIndex(
+									(opt) => opt.value === selectedEntity,
+								)}
+								onChange={(e) =>
+									setSelectedEntity(entityOptions[Number(e.target.value)].value)
+								}
 								style={{
 									padding: "8px 12px",
 									fontSize: "14px",
@@ -907,7 +948,13 @@ export const MobileView: Story = {
 // Dark theme demo (if supported)
 export const DarkTheme: Story = {
 	render: (args) => (
-		<div style={{ backgroundColor: "#1a1a1a", minHeight: "100vh", padding: "20px" }}>
+		<div
+			style={{
+				backgroundColor: "#1a1a1a",
+				minHeight: "100vh",
+				padding: "20px",
+			}}
+		>
 			<SnackbarProvider maxSnack={3}>
 				<InteractiveWrapper
 					entity={args.entity}

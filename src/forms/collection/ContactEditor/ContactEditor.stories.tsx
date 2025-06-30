@@ -114,7 +114,7 @@ const meta: Meta<typeof ContactEditor> = {
 			</SnackbarProvider>
 		),
 	],
-		argTypes: {
+	argTypes: {
 		open: {
 			control: "boolean",
 			description: "Whether the modal is open",
@@ -190,7 +190,8 @@ export const CreateMode: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "**🆕 Create a new contact** - Click the button to open the contact form and start from scratch.",
+				story:
+					"**🆕 Create a new contact** - Click the button to open the contact form and start from scratch.",
 			},
 			source: {
 				code: `
@@ -318,7 +319,9 @@ export const ClosedModal: Story = {
 	render: () => {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
-			const [selectedEntity, setSelectedEntity] = useState<ContactInfoType | undefined>(undefined);
+			const [selectedEntity, setSelectedEntity] = useState<
+				ContactInfoType | undefined
+			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -329,19 +332,39 @@ export const ClosedModal: Story = {
 
 			return (
 				<div style={{ padding: "20px" }}>
-					<div style={{ marginBottom: "20px", padding: "16px", backgroundColor: "#f8f9fa", borderRadius: "8px" }}>
-						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>👻 Component State Demo</h4>
+					<div
+						style={{
+							marginBottom: "20px",
+							padding: "16px",
+							backgroundColor: "#f8f9fa",
+							borderRadius: "8px",
+						}}
+					>
+						<h4 style={{ margin: "0 0 12px 0", color: "#333" }}>
+							👻 Component State Demo
+						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
-							This demonstrates the component's default closed state. Select a contact type and click the button to see it open.
+							This demonstrates the component's default closed state. Select a
+							contact type and click the button to see it open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
-							<label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+							<label
+								style={{
+									display: "block",
+									marginBottom: "8px",
+									fontWeight: "bold",
+								}}
+							>
 								Pre-select contact for modal:
 							</label>
 							<select
 								title="Select contact type for modal"
-								value={entityOptions.findIndex(opt => opt.value === selectedEntity)}
-								onChange={(e) => setSelectedEntity(entityOptions[Number(e.target.value)].value)}
+								value={entityOptions.findIndex(
+									(opt) => opt.value === selectedEntity,
+								)}
+								onChange={(e) =>
+									setSelectedEntity(entityOptions[Number(e.target.value)].value)
+								}
 								style={{
 									padding: "8px 12px",
 									fontSize: "14px",
