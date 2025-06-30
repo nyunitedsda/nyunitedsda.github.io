@@ -1,5 +1,14 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { type RouteObject } from "react-router";
+import RingLoader from "../../components/Loaders/RingLoader";
+
+
+// Helper function to wrap components with Suspense
+const lazyLoad = (Component: React.LazyExoticComponent<any>) => (
+	<Suspense fallback={<RingLoader  />}>
+		<Component />
+	</Suspense>
+);
 
 // Lazy load all page wrappers for better code splitting
 const MinimalPageWrapper = lazy(
@@ -61,18 +70,18 @@ type RouteWithId = RouteObject & { id?: string };
  */
 const mainLayoutRoutes: RouteWithId[] = [
 	{
-		element: <PageWrapper />,
+		element: lazyLoad(PageWrapper),
 		children: [
-			createRoute(<Home />, "", "home"),
-			createRoute(<Donations />, "donations", "donations"),
-			createRoute(<Blog />, "blog", "blogs"),
-			createRoute(<BlogDetails />, "blog/:id", "blogDetails"),
-			createRoute(<Contact />, "contact", "contact"),
-			createRoute(<AboutUs />, "aboutUs", "aboutUs"),
-			createRoute(<UserAgreements />, "policy/:tab?", "policy"),
-			createRoute(<LiveBroadcast />, "watch/:tab?", "watch"),
-			createRoute(<LiveBroadcast />, "watch/live", "liveStream"),
-			createRoute(<LiveBroadcast />, "watch/archive", "archiveStream"),
+			createRoute(lazyLoad(Home), "", "home"),
+			createRoute(lazyLoad(Donations), "donations", "donations"),
+			createRoute(lazyLoad(Blog), "blog", "blogs"),
+			createRoute(lazyLoad(BlogDetails), "blog/:id", "blogDetails"),
+			createRoute(lazyLoad(Contact), "contact", "contact"),
+			createRoute(lazyLoad(AboutUs), "aboutUs", "aboutUs"),
+			createRoute(lazyLoad(UserAgreements), "policy/:tab?", "policy"),
+			createRoute(lazyLoad(LiveBroadcast), "watch/:tab?", "watch"),
+			createRoute(lazyLoad(LiveBroadcast), "watch/live", "liveStream"),
+			createRoute(lazyLoad(LiveBroadcast), "watch/archive", "archiveStream"),
 		],
 	},
 ];
@@ -82,10 +91,10 @@ const mainLayoutRoutes: RouteWithId[] = [
  */
 export const protectedRoutes: RouteWithId[] = [
 	{
-		element: <ProtectedPageWrapper />,
+		element: lazyLoad(ProtectedPageWrapper),
 		children: [
-			createRoute(<Administration />, "admin/:tab?", "admin"),
-			createRoute(<StorybookPage />, "storybook", "storybook"),
+			createRoute(lazyLoad(Administration), "admin/:tab?", "admin"),
+			createRoute(lazyLoad(StorybookPage), "storybook", "storybook"),
 		],
 	},
 ];
@@ -96,11 +105,11 @@ export const protectedRoutes: RouteWithId[] = [
  */
 const fallbackRoutes: RouteObject[] = [
 	{
-		element: <MinimalPageWrapper />,
+		element: lazyLoad(MinimalPageWrapper),
 		children: [
-			createRoute(<Login />, "login"),
-			createRoute(<UnauthorizedError />, "unauthorized"),
-			{ element: <Error />, path: "*" }, // Wildcard route doesn't need helper
+			createRoute(lazyLoad(Login), "login"),
+			createRoute(lazyLoad(UnauthorizedError), "unauthorized"),
+			{ element: lazyLoad(Error), path: "*" }, // Wildcard route doesn't need helper
 		],
 	},
 ];

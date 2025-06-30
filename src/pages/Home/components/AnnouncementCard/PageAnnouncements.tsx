@@ -15,6 +15,10 @@ const PageAnnouncements: FC = () => {
 		queryFn: async () =>
 			await getDatabaseList<EventAnnouncement>("announcements"),
 		select: (res) => (res.data as EventAnnouncement[]) || [],
+		// Improve performance with proper caching
+		staleTime: 5 * 60 * 1000, // 5 minutes
+		retry: 2,
+		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 	});
 
 	return (
@@ -36,11 +40,9 @@ const PageAnnouncements: FC = () => {
 					((data ?? []) as EventAnnouncement[]).map((i) => (
 						<AnnouncementCard className="embla__slide" key={i.id} {...i} />
 					))
-				) : (
-					// <Stack direction={"row"} sx={{alignItems: "center", justifyItems: "center", width: "100%", minHeight: 200, }} >
+				) : (					
 					<RingLoader />
-					// </Stack>
-				)}
+									)}
 			</Carousel>
 		</SectionWrapper>
 	);
