@@ -10,6 +10,7 @@
 	"author": "Nial Hope",
 	"scripts": {
 		"build": "tsc -b && vite build",
+		"build:analyze": "ANALYZE=true tsc -b && vite build",
 		"check": "biome check --apply .",
 		"deploy": "gh-pages -d dist",
 		"dev": "vite",

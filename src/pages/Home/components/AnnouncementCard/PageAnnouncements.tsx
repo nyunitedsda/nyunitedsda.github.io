@@ -17,6 +17,10 @@ const PageAnnouncements: FC = () => {
 		select: (res) => (res.data as EventAnnouncement[]) || [],
 		// Improve performance with proper caching
 		staleTime: 5 * 60 * 1000, // 5 minutes
+		gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+		// Show stale data while refetching to avoid loading screen flash
+		placeholderData: (previousData) => previousData,
+		// Retry failed requests with exponential backoff
 		retry: 2,
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 	});
@@ -40,9 +44,9 @@ const PageAnnouncements: FC = () => {
 					((data ?? []) as EventAnnouncement[]).map((i) => (
 						<AnnouncementCard className="embla__slide" key={i.id} {...i} />
 					))
-				) : (					
+				) : (
 					<RingLoader />
-									)}
+				)}
 			</Carousel>
 		</SectionWrapper>
 	);

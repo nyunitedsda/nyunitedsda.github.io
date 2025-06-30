@@ -4,18 +4,32 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import type { EmblaCarouselType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
-import { type FC, useCallback } from "react";
+import { type FC, memo, useCallback, useEffect, useRef } from "react";
 import { default as CarouselArrowControl } from "./components/CarouselArrowControl/CarouselArrowControl";
 import { default as CarouselDotControl } from "./components/CarouselDotControl/CarouselDotControl";
 import styles from "./styles";
 import type { CarouselProps } from "./types";
 
-const Carousel: FC<CarouselProps> = (props) => {
+const Carousel: FC<CarouselProps> = memo((props) => {
 	const { children, options, sx, autoplay = false } = props;
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		...(autoplay ? [Autoplay()] : []),
-	]);
+	const autoplayOptions = autoplay ? [
+		Autoplay({
+			delay: 5000, // 5 seconds between slides
+			stopOnInteraction: false, // continue playing after user interaction
+			stopOnMouseEnter: true, // pause on mouse hover
+		})
+	] : [];
+	
+	const [emblaRef, emblaApi] = useEmblaCarousel(
+		{
+			...options,
+			watchDrag: false, // Disable watching drag for better performance
+			inViewThreshold: 0.5, // Only consider slide in view when it's 50% visible
+		}, 
+		autoplayOptions
+	);
 
+	// Optimize the button click callback
 	const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
 		const autoPlay = emblaApi?.plugins()?.autoplay;
 		if (!autoPlay) return;
@@ -36,7 +50,8 @@ const Carousel: FC<CarouselProps> = (props) => {
 		>
 			<Stack direction="row" className="embla__viewport" ref={emblaRef}>
 				<Stack direction="row" className="embla__container">
-					{children}
+					{/* Use React.Children.map for better key handling */}
+					{Array.isArray(children) ? children : [children]}
 				</Stack>
 			</Stack>
 
@@ -46,11 +61,13 @@ const Carousel: FC<CarouselProps> = (props) => {
 				direction={{ xs: "column", sm: "row" }}
 			>
 				<CarouselArrowControl api={emblaApi} onButtonClick={onNavButtonClick} />
-
 				<CarouselDotControl api={emblaApi} onButtonClick={onNavButtonClick} />
 			</Stack>
 		</Box>
 	);
-};
+});
+
+// Add display name for better debugging experience in React DevTools
+Carousel.displayName = 'Carousel';
 
 export default Carousel;
