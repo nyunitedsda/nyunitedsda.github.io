@@ -82,8 +82,7 @@ export const WithContainer: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story:
-					"Image with custom container styling using the root Box props.",
+				story: "Image with custom container styling using the root Box props.",
 			},
 		},
 	},
@@ -145,7 +144,13 @@ export const SmallThumbnail: Story = {
 
 export const Gallery: Story = {
 	render: () => (
-		<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
+		<Box
+			sx={{
+				display: "grid",
+				gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+				gap: 2,
+			}}
+		>
 			{[
 				{ src: "src/assets/img/family2.webp", alt: "Family moment 1" },
 				{ src: "src/assets/img/family3.webp", alt: "Family moment 2" },
@@ -258,7 +263,9 @@ export const LoadingStates: Story = {
 			<Box>
 				<h4>Working Image</h4>
 				<Image
-					root={{ sx: { maxWidth: 300, border: "1px solid #ccc", borderRadius: 1 } }}
+					root={{
+						sx: { maxWidth: 300, border: "1px solid #ccc", borderRadius: 1 },
+					}}
 					image={{
 						src: "src/assets/img/youths2.webp",
 						alt: "Youth activities",
@@ -268,7 +275,9 @@ export const LoadingStates: Story = {
 			<Box>
 				<h4>Broken Image (for testing error states)</h4>
 				<Image
-					root={{ sx: { maxWidth: 300, border: "1px solid #ccc", borderRadius: 1 } }}
+					root={{
+						sx: { maxWidth: 300, border: "1px solid #ccc", borderRadius: 1 },
+					}}
 					image={{
 						src: "src/assets/img/non-existent-image.jpg",
 						alt: "This image doesn't exist",
@@ -289,7 +298,13 @@ export const LoadingStates: Story = {
 
 export const DifferentFormats: Story = {
 	render: () => (
-		<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 2 }}>
+		<Box
+			sx={{
+				display: "grid",
+				gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+				gap: 2,
+			}}
+		>
 			<Box>
 				<h5>WebP Image (native)</h5>
 				<Image

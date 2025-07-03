@@ -14,7 +14,7 @@ describe("Image Component", () => {
 
 	it("renders a basic image", () => {
 		render(<Image {...defaultProps} />);
-		
+
 		const img = screen.getByRole("img", { name: "Test image" });
 		expect(img).toBeInTheDocument();
 		expect(img).toHaveAttribute("src", "test-image.jpg");
@@ -27,23 +27,23 @@ describe("Image Component", () => {
 				src: "test-image.jpg",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
-    const img = screen.getByRole("presentation");
+
+		const img = screen.getByRole("presentation");
 		expect(img).toHaveAttribute("alt", "");
 	});
 
 	it("applies lazy loading by default", () => {
 		render(<Image {...defaultProps} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveAttribute("loading", "lazy");
 	});
 
 	it("applies default styles", () => {
 		render(<Image {...defaultProps} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveStyle({
 			objectFit: "scale-down",
@@ -62,9 +62,9 @@ describe("Image Component", () => {
 				height: 600,
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveAttribute("width", "800");
 		expect(img).toHaveAttribute("height", "600");
@@ -77,18 +77,18 @@ describe("Image Component", () => {
 				alt: "Test image",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		// Should render a picture element with WebP source
 		const picture = screen.getByRole("img").closest("picture");
 		expect(picture).toBeInTheDocument();
-		
+
 		// Check for WebP source
 		const webpSource = picture?.querySelector('source[type="image/webp"]');
 		expect(webpSource).toBeInTheDocument();
 		expect(webpSource).toHaveAttribute("srcset", "test-image.webp");
-		
+
 		// Check for original format source
 		const originalSource = picture?.querySelector('source[type="image/jpg"]');
 		expect(originalSource).toBeInTheDocument();
@@ -102,13 +102,13 @@ describe("Image Component", () => {
 				alt: "Test image",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const picture = screen.getByRole("img").closest("picture");
 		const webpSource = picture?.querySelector('source[type="image/webp"]');
 		const originalSource = picture?.querySelector('source[type="image/png"]');
-		
+
 		expect(webpSource).toHaveAttribute("srcset", "test-image.webp");
 		expect(originalSource).toHaveAttribute("srcset", "test-image.png");
 	});
@@ -120,13 +120,13 @@ describe("Image Component", () => {
 				alt: "Test image",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const picture = screen.getByRole("img").closest("picture");
 		const webpSource = picture?.querySelector('source[type="image/webp"]');
 		const originalSource = picture?.querySelector('source[type="image/jpeg"]');
-		
+
 		expect(webpSource).toHaveAttribute("srcset", "test-image.webp");
 		expect(originalSource).toHaveAttribute("srcset", "test-image.jpeg");
 	});
@@ -138,12 +138,12 @@ describe("Image Component", () => {
 				alt: "Test SVG",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveAttribute("src", "test-image.svg");
-		
+
 		// Should not be wrapped in a picture element
 		const picture = img.closest("picture");
 		expect(picture).not.toBeInTheDocument();
@@ -156,12 +156,12 @@ describe("Image Component", () => {
 				alt: "Already WebP",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveAttribute("src", "test-image.webp");
-		
+
 		// Should not be wrapped in a picture element
 		const picture = img.closest("picture");
 		expect(picture).not.toBeInTheDocument();
@@ -178,9 +178,9 @@ describe("Image Component", () => {
 				alt: "Test image",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img.parentElement).toBeInTheDocument();
 		expect(img.parentElement).toContainElement(img);
@@ -195,9 +195,9 @@ describe("Image Component", () => {
 				title: "Custom title",
 			} as any, // Type assertion to allow additional props
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByTestId("custom-img");
 		expect(img).toHaveAttribute("title", "Custom title");
 	});
@@ -209,13 +209,13 @@ describe("Image Component", () => {
 				alt: "Empty src",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
-    screen.logTestingPlaygroundURL();
-		const img = screen.getByRole('img', {
-  name: /empty src/i
-});
+
+		screen.logTestingPlaygroundURL();
+		const img = screen.getByRole("img", {
+			name: /empty src/i,
+		});
 		expect(img.getAttribute("src")).toBeNull();
 		expect(img).toHaveAttribute("alt", "Empty src");
 	});
@@ -227,12 +227,12 @@ describe("Image Component", () => {
 				alt: "Uppercase extension",
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const picture = screen.getByRole("img").closest("picture");
 		const webpSource = picture?.querySelector('source[type="image/webp"]');
-		
+
 		expect(webpSource).toHaveAttribute("srcset", "test-image.webp");
 	});
 
@@ -245,9 +245,9 @@ describe("Image Component", () => {
 				height: 800,
 			},
 		};
-		
+
 		render(<Image {...props} />);
-		
+
 		const img = screen.getByRole("img");
 		expect(img).toHaveAttribute("width", "1200");
 		expect(img).toHaveAttribute("height", "800");

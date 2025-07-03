@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
-  calculateAspectRatio,
-  generateSizes,
-  generateSrcSet,
-  getWebpPath,
+	calculateAspectRatio,
+	generateSizes,
+	generateSrcSet,
+	getWebpPath,
 } from "./imageUtils";
 
 describe("imageUtils", () => {
@@ -80,7 +80,9 @@ describe("imageUtils", () => {
 
 		it("generates srcSet with custom sizes", () => {
 			const result = generateSrcSet("images/photo.jpg", [480, 800]);
-			expect(result).toBe("images/photo-480.jpg 480w, images/photo-800.jpg 800w");
+			expect(result).toBe(
+				"images/photo-480.jpg 480w, images/photo-800.jpg 800w",
+			);
 		});
 
 		it("uses custom extension when provided", () => {
@@ -126,7 +128,9 @@ describe("imageUtils", () => {
 	describe("generateSizes", () => {
 		it("returns responsive sizes string", () => {
 			const result = generateSizes();
-			expect(result).toBe("(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw");
+			expect(result).toBe(
+				"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+			);
 		});
 
 		it("always returns the same string (no parameters)", () => {

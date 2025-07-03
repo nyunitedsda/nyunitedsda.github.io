@@ -1,22 +1,23 @@
-import { StorybookConfig } from "@storybook/react-vite"; // Importing types from Storybook for TypeScript support;
+import { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  framework: {
-    name: "@storybook/react-vite",
-    options: {}
-  },
+  framework: "@storybook/react-vite",
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
+    '@storybook/addon-links',
   ],
   core: {
     disableTelemetry: true,
   },
+  docs: {
+    autodocs: true,
+    defaultName: 'Documentation',
+  },
   typescript: {
-    reactDocgen: 'react-docgen-typescript'
-  }
+    reactDocgen: 'react-docgen-typescript',
+    check: false,
+  },
 };
 
 export default config;

@@ -37,10 +37,13 @@ export const generateSrcSet = (
 
 	const basePathWithoutExt = basePath.replace(/\.\w+$/, "");
 	let ext = extension;
-  if (!ext) {
-    const dotIndex = basePath.lastIndexOf('.');
-    ext = (dotIndex !== -1 && dotIndex > basePath.lastIndexOf('/')) ? basePath.substring(dotIndex + 1) : "jpg";
-  }
+	if (!ext) {
+		const dotIndex = basePath.lastIndexOf(".");
+		ext =
+			dotIndex !== -1 && dotIndex > basePath.lastIndexOf("/")
+				? basePath.substring(dotIndex + 1)
+				: "jpg";
+	}
 
 	return sizes
 		.map((size) => `${basePathWithoutExt}-${size}.${ext} ${size}w`)

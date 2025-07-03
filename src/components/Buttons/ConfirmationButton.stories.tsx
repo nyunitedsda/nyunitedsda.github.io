@@ -6,6 +6,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SnackbarProvider } from "notistack";
 import ConfirmationButton from "./ConfirmationButton";
 
+let argTypes;
 // Define the meta for the story
 const meta: Meta<typeof ConfirmationButton> = {
 	title: "Components/Buttons/ConfirmationButton",
@@ -20,54 +21,7 @@ const meta: Meta<typeof ConfirmationButton> = {
 			</SnackbarProvider>
 		),
 	],
-	argTypes: {
-		shouldConfirm: {
-			control: "boolean",
-			description:
-				"Whether to show confirmation dialog before executing onClick",
-			defaultValue: false,
-		},
-		confirmationTitle: {
-			control: "text",
-			description: "Title for the confirmation dialog",
-			defaultValue: "Confirm Action",
-		},
-		confirmationContent: {
-			control: "text",
-			description: "Content/message for the confirmation dialog",
-			defaultValue: "Are you sure you want to proceed?",
-		},
-		cancelLabel: {
-			control: "text",
-			description: "Label for the cancel button",
-			defaultValue: "Cancel",
-		},
-		confirmLabel: {
-			control: "text",
-			description: "Label for the confirm button",
-			defaultValue: "Confirm",
-		},
-		onClick: {
-			action: "clicked",
-			description:
-				"Function called when button is clicked (after confirmation if needed)",
-		},
-		variant: {
-			control: "select",
-			options: ["button", "icon"],
-			description: "Button type: regular button or icon button",
-			defaultValue: "button",
-		},
-		color: {
-			control: "select",
-			options: ["primary", "secondary", "error", "warning", "info", "success"],
-			defaultValue: "primary",
-		},
-		disabled: {
-			control: "boolean",
-			defaultValue: false,
-		},
-	},
+	argTypes,
 };
 
 export default meta;
@@ -81,7 +35,7 @@ export const WithoutConfirmation: Story = {
 		variant: "button",
 		color: "primary",
 		onClick: () => console.log("Button clicked directly!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Button with confirmation dialog
@@ -97,7 +51,7 @@ export const WithConfirmation: Story = {
 		cancelLabel: "Cancel",
 		confirmLabel: "Delete",
 		onClick: () => console.log("Item deleted!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Save action with confirmation
@@ -112,7 +66,7 @@ export const SaveWithConfirmation: Story = {
 		cancelLabel: "Cancel",
 		confirmLabel: "Save",
 		onClick: () => console.log("Changes saved!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Logout action with confirmation
@@ -128,7 +82,7 @@ export const LogoutWithConfirmation: Story = {
 		cancelLabel: "Stay",
 		confirmLabel: "Logout",
 		onClick: () => console.log("User logged out!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Icon button without confirmation
@@ -139,7 +93,7 @@ export const IconButtonWithoutConfirmation: Story = {
 		variant: "icon",
 		color: "primary",
 		onClick: () => console.log("Edit icon clicked!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Icon button with confirmation - Delete
@@ -155,7 +109,7 @@ export const DeleteIconWithConfirmation: Story = {
 		cancelLabel: "Cancel",
 		confirmLabel: "Delete",
 		onClick: () => console.log("Item deleted via icon!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Icon button with confirmation - Save
@@ -170,7 +124,7 @@ export const SaveIconWithConfirmation: Story = {
 		cancelLabel: "Cancel",
 		confirmLabel: "Save",
 		onClick: () => console.log("Changes saved via icon!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Icon button with confirmation - Logout
@@ -186,7 +140,7 @@ export const LogoutIconWithConfirmation: Story = {
 		cancelLabel: "Stay",
 		confirmLabel: "Logout",
 		onClick: () => console.log("User logged out via icon!"),
-	} as any,
+	} as Story["args"],
 };
 
 // Disabled button state
@@ -200,7 +154,7 @@ export const DisabledButton: Story = {
 		confirmationTitle: "Disabled Action",
 		confirmationContent: "This action is disabled.",
 		onClick: () => console.log("This should not be called"),
-	} as any,
+	} as Story["args"],
 };
 
 // Disabled icon button
@@ -214,5 +168,53 @@ export const DisabledIconButton: Story = {
 		confirmationTitle: "Disabled Delete",
 		confirmationContent: "This delete action is disabled.",
 		onClick: () => console.log("This should not be called"),
-	} as any,
+	} as Story["args"],
+};
+
+argTypes = {
+	shouldConfirm: {
+		control: "boolean",
+		description: "Whether to show confirmation dialog before executing onClick",
+		defaultValue: false,
+	},
+	confirmationTitle: {
+		control: "text",
+		description: "Title for the confirmation dialog",
+		defaultValue: "Confirm Action",
+	},
+	confirmationContent: {
+		control: "text",
+		description: "Content/message for the confirmation dialog",
+		defaultValue: "Are you sure you want to proceed?",
+	},
+	cancelLabel: {
+		control: "text",
+		description: "Label for the cancel button",
+		defaultValue: "Cancel",
+	},
+	confirmLabel: {
+		control: "text",
+		description: "Label for the confirm button",
+		defaultValue: "Confirm",
+	},
+	onClick: {
+		action: "clicked",
+		description:
+			"Function called when button is clicked (after confirmation if needed)",
+	},
+	variant: {
+		control: "select",
+		options: ["button", "icon"],
+		description: "Button type: regular button or icon button",
+		defaultValue: "button",
+	},
+	color: {
+		control: "select",
+		options: ["primary", "secondary", "error", "warning", "info", "success"],
+		defaultValue: "primary",
+	},
+	disabled: {
+		control: "boolean",
+		defaultValue: false,
+	},
 };

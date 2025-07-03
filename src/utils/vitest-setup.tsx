@@ -1,6 +1,7 @@
 import { type RenderOptions, render } from "@testing-library/react";
 import type { ReactElement } from "react";
 import AppProvider from "../components/AppProvider/AppProvider";
+import "@testing-library/jest-dom";
 
 /**
  * Custom render function for testing React components.
