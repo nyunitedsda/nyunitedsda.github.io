@@ -2,10 +2,9 @@ import { lazy, Suspense } from "react";
 import { type RouteObject } from "react-router";
 import RingLoader from "../../components/Loaders/RingLoader";
 
-
 // Helper function to wrap components with Suspense
 const lazyLoad = (Component: React.LazyExoticComponent<any>) => (
-	<Suspense fallback={<RingLoader  />}>
+	<Suspense fallback={<RingLoader />}>
 		<Component />
 	</Suspense>
 );

@@ -52,7 +52,7 @@ export const protectedMenuItems: PathlessMenu[] = [
 	{
 		id: "storybook",
 		icon: "WidgetsRounded",
-		name: "Component Library",
+		name: "Library",
 	},
 ];
 

@@ -9,25 +9,28 @@ import theme from "./theme";
 
 // Configure the query client with performance optimizations
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000, // 1 minute
-      gcTime: 5 * 60 * 1000, // 5 minutes
-      retry: 1,
-      refetchOnWindowFocus: false, // Don't refetch when window regains focus (better UX)
-    },
-    mutations: {
-      retry: 1,
-    },
-  },
+	defaultOptions: {
+		queries: {
+			staleTime: 60 * 1000, // 1 minute
+			gcTime: 5 * 60 * 1000, // 5 minutes
+			retry: 1,
+			refetchOnWindowFocus: false, // Don't refetch when window regains focus (better UX)
+		},
+		mutations: {
+			retry: 1,
+		},
+	},
 });
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders
-	const snackbarAnchor = useMemo(() => ({ 
-		vertical: "bottom" as const, 
-		horizontal: "right" as const 
-	}), []);
+	const snackbarAnchor = useMemo(
+		() => ({
+			vertical: "bottom" as const,
+			horizontal: "right" as const,
+		}),
+		[],
+	);
 
 	return (
 		<StrictMode>
