@@ -23,6 +23,14 @@ const meta: Meta<typeof Image> = {
 			description: "Image configuration object",
 		},
 	},
+	parameters: {
+			docs: {
+				description: {
+					component:
+						"Image component that supports lazy loading, WebP format, and responsive design. Automatically detects WebP support and provides fallbacks.",
+				},
+			},
+		},
 };
 
 export default meta;

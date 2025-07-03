@@ -3,8 +3,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SaveIcon from "@mui/icons-material/Save";
 import type { Meta, StoryObj } from "@storybook/react";
-import { SnackbarProvider } from "notistack";
 import ConfirmationButton from "./ConfirmationButton";
+
+ const StoryWrapper = (Story: React.ComponentType) => (
+			<div style={{ padding: "20px" }}>
+				<Story />
+			</div>
+		);
 
 let argTypes;
 // Define the meta for the story
@@ -12,16 +17,16 @@ const meta: Meta<typeof ConfirmationButton> = {
 	title: "Components/Buttons/ConfirmationButton",
 	component: ConfirmationButton,
 	tags: ["autodocs"],
-	decorators: [
-		(Story) => (
-			<SnackbarProvider maxSnack={3}>
-				<div style={{ padding: "20px" }}>
-					<Story />
-				</div>
-			</SnackbarProvider>
-		),
-	],
+	decorators: [StoryWrapper],
 	argTypes,
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"A button component that can optionally show a confirmation dialog before executing the onClick action. It supports both regular buttons and icon buttons, with customizable confirmation messages and labels.",
+			},
+		},
+	},
 };
 
 export default meta;
@@ -32,10 +37,19 @@ export const WithoutConfirmation: Story = {
 	args: {
 		shouldConfirm: false,
 		children: "Regular Button",
+		icon: <EditIcon />,
 		variant: "button",
 		color: "primary",
 		onClick: () => console.log("Button clicked directly!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A regular button that does not require confirmation before executing the onClick action.",
+			},
+		},
+	},
 };
 
 // Button with confirmation dialog
@@ -52,6 +66,14 @@ export const WithConfirmation: Story = {
 		confirmLabel: "Delete",
 		onClick: () => console.log("Item deleted!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A button that shows a confirmation dialog before executing the onClick action. Useful for destructive actions like deleting items.",
+			},
+		},
+	},
 };
 
 // Save action with confirmation
@@ -67,6 +89,14 @@ export const SaveWithConfirmation: Story = {
 		confirmLabel: "Save",
 		onClick: () => console.log("Changes saved!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A button that shows a confirmation dialog before saving changes. Useful for ensuring users want to commit their changes.",
+			},
+		},
+	},
 };
 
 // Logout action with confirmation
@@ -83,6 +113,14 @@ export const LogoutWithConfirmation: Story = {
 		confirmLabel: "Logout",
 		onClick: () => console.log("User logged out!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A button that shows a confirmation dialog before logging out. Useful for preventing accidental logouts.",
+			},
+		},
+	},
 };
 
 // Icon button without confirmation
@@ -110,6 +148,14 @@ export const DeleteIconWithConfirmation: Story = {
 		confirmLabel: "Delete",
 		onClick: () => console.log("Item deleted via icon!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"An icon button that shows a confirmation dialog before executing the onClick action. Useful for destructive actions like deleting items.",
+			},
+		},
+	},
 };
 
 // Icon button with confirmation - Save
@@ -125,6 +171,14 @@ export const SaveIconWithConfirmation: Story = {
 		confirmLabel: "Save",
 		onClick: () => console.log("Changes saved via icon!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"An icon button that shows a confirmation dialog before saving changes. Useful for ensuring users want to commit their changes.",
+			},
+		},
+	},
 };
 
 // Icon button with confirmation - Logout
@@ -141,6 +195,14 @@ export const LogoutIconWithConfirmation: Story = {
 		confirmLabel: "Logout",
 		onClick: () => console.log("User logged out via icon!"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"An icon button that shows a confirmation dialog before logging out. Useful for preventing accidental logouts.",
+			},
+		},
+	},
 };
 
 // Disabled button state
@@ -155,6 +217,14 @@ export const DisabledButton: Story = {
 		confirmationContent: "This action is disabled.",
 		onClick: () => console.log("This should not be called"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A button that is disabled and does not respond to clicks. Useful for indicating unavailable actions.",
+			},
+		},
+	},
 };
 
 // Disabled icon button
@@ -169,6 +239,14 @@ export const DisabledIconButton: Story = {
 		confirmationContent: "This delete action is disabled.",
 		onClick: () => console.log("This should not be called"),
 	} as Story["args"],
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"An icon button that is disabled and does not respond to clicks. Useful for indicating unavailable actions.",
+			},
+		},
+	},
 };
 
 argTypes = {

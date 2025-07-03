@@ -20,8 +20,6 @@
 		"preview": "vite preview",
 		"test": "vitest",
 		"storybook": "storybook dev -p 6006",
-		"storybook:clean": "rimraf node_modules/.cache/storybook && storybook dev -p 6006 --no-open",
-		"storybook:fix": "node scripts/fix-storybook.js",
 		"build-storybook": "storybook build",
 		"build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
 	},
