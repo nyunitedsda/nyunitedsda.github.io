@@ -40,6 +40,14 @@ const meta: Meta<typeof ConfirmationDialog> = {
 			description: "Callback when dialog is closed",
 		},
 	},
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"A reusable confirmation dialog component for user actions. Supports custom titles, content, and button labels.",
+			},
+		},
+	},
 };
 
 export default meta;
@@ -70,6 +78,8 @@ export const Default: Story = {
 		<InteractiveWrapper buttonText="Open Dialog">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -85,6 +95,14 @@ export const Default: Story = {
 		title: "Confirm Action",
 		content: "Are you sure you want to proceed with this action?",
 	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"The default confirmation dialog with standard title and content. Uses default button labels 'Cancel' and 'Confirm'.",
+			},
+		},
+	},
 };
 
 export const DeleteConfirmation: Story = {
@@ -92,6 +110,8 @@ export const DeleteConfirmation: Story = {
 		<InteractiveWrapper buttonText="Delete Item">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -110,6 +130,14 @@ export const DeleteConfirmation: Story = {
 		cancelLabel: "Cancel",
 		confirmLabel: "Delete",
 	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A destructive action confirmation dialog for delete operations. Features warning text and custom button labels to clearly indicate the permanent nature of the action.",
+			},
+		},
+	},
 };
 
 export const CustomLabels: Story = {
@@ -117,6 +145,8 @@ export const CustomLabels: Story = {
 		<InteractiveWrapper buttonText="Check Unsaved Changes">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -134,6 +164,14 @@ export const CustomLabels: Story = {
 		cancelLabel: "Don't Save",
 		confirmLabel: "Save Changes",
 	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Demonstrates custom button labels for context-specific actions. Shows how to use meaningful labels like 'Don't Save' and 'Save Changes' instead of generic 'Cancel' and 'Confirm'.",
+			},
+		},
+	},
 };
 
 export const LongContent: Story = {
@@ -141,6 +179,8 @@ export const LongContent: Story = {
 		<InteractiveWrapper buttonText="View Terms & Conditions">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -172,6 +212,14 @@ export const LongContent: Story = {
 		cancelLabel: "Decline",
 		confirmLabel: "Accept",
 	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Example with longer content text that demonstrates how the dialog handles extensive information. Shows how the dialog layout adapts to accommodate more detailed content.",
+			},
+		},
+	},
 };
 
 export const WithReactContent: Story = {
@@ -179,6 +227,8 @@ export const WithReactContent: Story = {
 		<InteractiveWrapper buttonText="⚠️ Delete Account">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -214,6 +264,14 @@ export const WithReactContent: Story = {
 		cancelLabel: "Keep Account",
 		confirmLabel: "Delete Forever",
 	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Demonstrates using React components as content instead of plain text. Shows how to create rich, formatted content with typography, lists, colors, and complex layouts within the dialog.",
+			},
+		},
+	},
 };
 
 export const Interactive: Story = {
@@ -221,6 +279,8 @@ export const Interactive: Story = {
 		<InteractiveWrapper>
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					title={args.title}
+					content={args.content}
 					{...args}
 					open={open}
 					onClose={onClose}
@@ -238,6 +298,14 @@ export const Interactive: Story = {
 			"Click the button to open this dialog. Try the confirm and cancel actions!",
 		cancelLabel: "Cancel",
 		confirmLabel: "Confirm",
+	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"A playground story for interactive testing. Use this to experiment with the dialog component and test different interactions in a controlled environment.",
+			},
+		},
 	},
 };
 
@@ -296,6 +364,14 @@ export const MultipleActions: Story = {
 			</InteractiveWrapper>
 		</Box>
 	),
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Multiple confirmation dialogs showcasing different use cases side by side. Demonstrates various scenarios like deletion, saving changes, and signing out with appropriate messaging and button labels.",
+			},
+		},
+	},
 };
 
 export const StaticClosed: Story = {
