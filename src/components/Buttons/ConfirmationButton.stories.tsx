@@ -5,11 +5,11 @@ import SaveIcon from "@mui/icons-material/Save";
 import type { Meta, StoryObj } from "@storybook/react";
 import ConfirmationButton from "./ConfirmationButton";
 
- const StoryWrapper = (Story: React.ComponentType) => (
-			<div style={{ padding: "20px" }}>
-				<Story />
-			</div>
-		);
+const StoryWrapper = (Story: React.ComponentType) => (
+	<div style={{ padding: "20px" }}>
+		<Story />
+	</div>
+);
 
 let argTypes;
 // Define the meta for the story

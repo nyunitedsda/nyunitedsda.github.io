@@ -1,6 +1,6 @@
-import type { ButtonProps } from "@mui/material/Button";
+import type { IconButtonProps } from "@mui/material/IconButton";
 
-interface CarouselArrowButtonProps extends ButtonProps {
+interface CarouselArrowButtonProps extends IconButtonProps {
 	arrowDirection: "next" | "prev";
 }
 

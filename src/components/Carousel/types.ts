@@ -1,7 +1,8 @@
+import type { IconButtonProps } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import type { AutoplayOptionsType } from "embla-carousel-autoplay";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 type CarouselProps = PropsWithChildren<
 	| {
@@ -20,5 +21,8 @@ type CarouselProps = PropsWithChildren<
 interface CarouselControlProps {
 	api: EmblaCarouselType | undefined; //emblaApi
 	onButtonClick?: (emblaApi: EmblaCarouselType) => void;
+	prevIcon?: ReactNode;
+	nextIcon?: ReactNode;
+	buttonProps?: Exclude<IconButtonProps, "children">;
 }
 export type { CarouselProps, CarouselControlProps };

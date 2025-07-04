@@ -1,5 +1,4 @@
 import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
-import ArrowForwardIosRounded from "@mui/icons-material/ArrowForwardIosRounded";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
@@ -16,12 +15,8 @@ const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
 			type="button"
 			color="primary"
 			{...restProps}
+			size={restProps?.size}
 		>
-			{arrowDirection === "next" ? (
-				<ArrowForwardIosRounded />
-			) : (
-				<ArrowBackIosNewRounded />
-			)}
 			{children}
 		</IconButton>
 	);
@@ -30,6 +25,9 @@ const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
 const CarouselArrowControl: FC<CarouselControlProps> = ({
 	api,
 	onButtonClick,
+	prevIcon,
+	nextIcon,
+	buttonProps,
 }) => {
 	const {
 		prevBtnDisabled,
@@ -47,14 +45,18 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({
 			}}
 		>
 			<CarouselArrowButton
+				{...buttonProps}
 				arrowDirection="prev"
 				disabled={prevBtnDisabled}
 				onClick={onPrevButtonClick}
+				children={prevIcon || <ArrowBackIosNewRounded />}
 			/>
 			<CarouselArrowButton
+				{...buttonProps}
 				arrowDirection="next"
 				disabled={nextBtnDisabled}
 				onClick={onNextButtonClick}
+				children={nextIcon || <ArrowBackIosNewRounded sx={{transform: "rotate(180deg)"}} />}
 			/>
 		</Stack>
 	);

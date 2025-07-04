@@ -5,32 +5,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import type { Meta, StoryObj } from "@storybook/react";
 import Carousel from "./Carousel";
+import sliderImages from "../../pages/Home/sliderImages";
 
 // Sample images from the project's assets
 const sampleImages = [
 	{
-		src: "/src/assets/webp-img/family.webp",
-		alt: "Family",
+		...sliderImages[0],
 		title: "Church Family",
 	},
 	{
-		src: "/src/assets/webp-img/members.webp",
-		alt: "Members",
+		...sliderImages[8],
 		title: "Our Members",
 	},
 	{
-		src: "/src/assets/webp-img/youths.webp",
-		alt: "Youth",
+		...sliderImages[16],
 		title: "Youth Ministry",
 	},
 	{
-		src: "/src/assets/webp-img/group-pray.webp",
-		alt: "Prayer",
+		...sliderImages[6],
 		title: "Prayer Group",
 	},
 	{
-		src: "/src/assets/webp-img/giving-gift.webp",
-		alt: "Giving",
+		...sliderImages[7],
 		title: "Giving Back",
 	},
 ];
@@ -46,6 +42,14 @@ const meta: Meta<typeof Carousel> = {
 			</Box>
 		),
 	],
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"Embla carousel component with autoplay functionality. Supports custom options and Material-UI styling.",
+			},
+		},
+	},
 	argTypes: {
 		autoplay: {
 			control: "boolean",
@@ -156,6 +160,13 @@ export const Default: Story = {
 			<SampleSlide key={index} image={image} index={index} />
 		)),
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story: "Default carousel with sample images. Autoplay is disabled.",
+			},
+		},
+	},
 };
 
 export const WithAutoplay: Story = {
@@ -165,6 +176,14 @@ export const WithAutoplay: Story = {
 		children: sampleImages.map((image, index) => (
 			<SampleSlide key={index} image={image} index={index} />
 		)),
+	},
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with autoplay enabled. Slides will change automatically.",
+			},
+		},
 	},
 };
 
@@ -192,6 +211,14 @@ export const TextSlides: Story = {
 			/>,
 		],
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with text-only slides. Useful for announcements or messages.",
+			},
+		},
+	},
 };
 
 export const SingleSlide: Story = {
@@ -199,6 +226,14 @@ export const SingleSlide: Story = {
 		autoplay: false,
 		children: [<SampleSlide key={0} image={sampleImages[0]} index={0} />],
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with a single slide. Useful for highlighting important content.",
+			},
+		},
+	},
 };
 
 export const ManySlides: Story = {
@@ -213,6 +248,14 @@ export const ManySlides: Story = {
 			)),
 		],
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with many slides. Demonstrates how the carousel handles multiple items.",
+			},
+		},
+	},
 };
 
 export const WithCustomOptions: Story = {
@@ -247,6 +290,14 @@ export const WithCustomOptions: Story = {
 			</Box>
 		)),
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with custom options. Adjusts alignment and scroll behavior.",
+			},
+		},
+	},
 };
 
 export const WithCustomStyling: Story = {
@@ -270,6 +321,14 @@ export const WithCustomStyling: Story = {
 				<SampleSlide key={index} image={image} index={index} />
 			)),
 	} as any,
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Carousel with custom Material-UI styling. Demonstrates how to apply styles using the sx prop.",
+			},
+		},
+	},
 };
 
 export const FastAutoplay: Story = {
@@ -281,5 +340,12 @@ export const FastAutoplay: Story = {
 		children: sampleImages.map((image, index) => (
 			<SampleSlide key={index} image={image} index={index} />
 		)),
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: "Carousel with fast autoplay. Slides change every 2 seconds.",
+			},
+		},
 	},
 };

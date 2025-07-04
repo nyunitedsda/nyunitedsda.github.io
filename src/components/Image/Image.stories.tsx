@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 import Image from "./Image";
+import sliderImages from "../../pages/Home/sliderImages";
 
 const meta: Meta<typeof Image> = {
 	title: "Components/Image",
@@ -24,13 +25,13 @@ const meta: Meta<typeof Image> = {
 		},
 	},
 	parameters: {
-			docs: {
-				description: {
-					component:
-						"Image component that supports lazy loading, WebP format, and responsive design. Automatically detects WebP support and provides fallbacks.",
-				},
+		docs: {
+			description: {
+				component:
+					"Image component that supports lazy loading, WebP format, and responsive design. Automatically detects WebP support and provides fallbacks.",
 			},
 		},
+	},
 };
 
 export default meta;
@@ -38,10 +39,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-		image: {
-			src: "src/assets/img/family.webp",
-			alt: "Family gathering at church",
-		},
+		image: sliderImages[1],
 	},
 	parameters: {
 		docs: {
@@ -56,8 +54,7 @@ export const Default: Story = {
 export const WithDimensions: Story = {
 	args: {
 		image: {
-			src: "src/assets/img/members.webp",
-			alt: "Church members gathering",
+			...sliderImages[8],
 			width: 600,
 			height: 400,
 		},
@@ -82,10 +79,7 @@ export const WithContainer: Story = {
 				backgroundColor: "#f5f5f5",
 			},
 		},
-		image: {
-			src: "src/assets/img/youths.webp",
-			alt: "Youth group activities",
-		},
+		image: sliderImages[17],
 	},
 	parameters: {
 		docs: {
@@ -107,10 +101,7 @@ export const ResponsiveCard: Story = {
 				boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
 			},
 		},
-		image: {
-			src: "src/assets/img/group-pray.webp",
-			alt: "Group prayer session",
-		},
+		image: sliderImages[7],		
 	},
 	parameters: {
 		docs: {
@@ -131,11 +122,14 @@ export const SmallThumbnail: Story = {
 				border: "1px solid #ccc",
 				borderRadius: "50%",
 				overflow: "hidden",
+				display: 'flex',	
+				'& img': {
+					objectFit: "fill !important",
+				},			
 			},
 		},
 		image: {
-			src: "src/assets/img/elder.webp",
-			alt: "Church elder portrait",
+			...sliderImages[0],
 			width: 120,
 			height: 120,
 		},
@@ -159,12 +153,7 @@ export const Gallery: Story = {
 				gap: 2,
 			}}
 		>
-			{[
-				{ src: "src/assets/img/family2.webp", alt: "Family moment 1" },
-				{ src: "src/assets/img/family3.webp", alt: "Family moment 2" },
-				{ src: "src/assets/img/family4.webp", alt: "Family moment 3" },
-				{ src: "src/assets/img/family5.webp", alt: "Family moment 4" },
-			].map((img, index) => (
+			{ sliderImages.slice(1, 6).map((img, index) => (
 				<Image
 					key={index}
 					root={{
@@ -202,8 +191,7 @@ export const HeroImage: Story = {
 			},
 		},
 		image: {
-			src: "src/assets/img/singing-sister.webp",
-			alt: "Sister singing during worship",
+			...sliderImages[15],
 			width: 800,
 			height: 300,
 		},
@@ -252,7 +240,7 @@ export const WithLogo: Story = {
 export const WithoutAlt: Story = {
 	args: {
 		image: {
-			src: "src/assets/img/members3.webp",
+			src: sliderImages[2].src,
 		},
 	},
 	parameters: {
@@ -274,10 +262,7 @@ export const LoadingStates: Story = {
 					root={{
 						sx: { maxWidth: 300, border: "1px solid #ccc", borderRadius: 1 },
 					}}
-					image={{
-						src: "src/assets/img/youths2.webp",
-						alt: "Youth activities",
-					}}
+					image={sliderImages[18]}
 				/>
 			</Box>
 			<Box>
@@ -317,10 +302,7 @@ export const DifferentFormats: Story = {
 				<h5>WebP Image (native)</h5>
 				<Image
 					root={{ sx: { border: "1px solid #ccc", borderRadius: 1 } }}
-					image={{
-						src: "src/assets/img/members4.webp",
-						alt: "WebP format image",
-					}}
+					image={sliderImages[5]}
 				/>
 			</Box>
 			<Box>

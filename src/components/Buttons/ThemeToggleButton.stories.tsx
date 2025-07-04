@@ -30,19 +30,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	parameters: {
-		docs: {	
+		docs: {
 			description: {
-				story: "A basic theme toggle button that switches between light and dark modes.",
+				story:
+					"A basic theme toggle button that switches between light and dark modes.",
 			},
 		},
-	}
+	},
 };
 
 export const Expanded: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "An expanded version of the theme toggle button that shows additional options.",
+				story:
+					"An expanded version of the theme toggle button that shows additional options.",
 			},
 		},
 	},

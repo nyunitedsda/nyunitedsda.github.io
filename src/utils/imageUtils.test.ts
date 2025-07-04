@@ -96,7 +96,7 @@ describe("imageUtils", () => {
 			const result = generateSrcSet("images/photo", [320]);
 			// When there's no extension, split('.').pop() returns the whole filename
 			// which gets used as the extension - this is likely a bug in the function
-			expect(result).toBe("images/photo-320.images/photo 320w");
+			expect(result).toBe("images/photo-320.jpg 320w");
 		});
 
 		it("extracts extension from original path", () => {

@@ -15,7 +15,7 @@ export default defineConfig({
 		name: "nyunitedsda",
 		printConsoleTrace: true,
 		root: ".",
-		setupFiles: ["./src/utils/vitest-setup.ts", "./src/utils/vitest-setup.tsx"],
+		setupFiles: ["./src/utils/vitest-setup.tsx"],
 		unstubEnvs: true,
 		unstubGlobals: true,
 	},
