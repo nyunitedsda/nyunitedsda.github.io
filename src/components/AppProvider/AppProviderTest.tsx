@@ -1,9 +1,10 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
-import { BrowserRouter } from "react-router";
+import { MemoryRouter } from "react-router";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
 import theme from "./theme";
+import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 
 // Create a separate query client for testing to avoid state pollution
 const createTestQueryClient = () =>
@@ -43,12 +44,12 @@ const AppProviderTest: FC<AppProviderTestProps> = ({
 	return (
 		<StrictMode>
 			<QueryClientProvider client={queryClient}>
-				<BrowserRouter>
+				<AuthenticationProvider>
 					<ThemeProvider theme={theme}>
 						<CssBaseline enableColorScheme />
 						<NotificationProvider>{children}</NotificationProvider>
 					</ThemeProvider>
-				</BrowserRouter>
+				</AuthenticationProvider>
 			</QueryClientProvider>
 		</StrictMode>
 	);

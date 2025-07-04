@@ -2,6 +2,7 @@ import { Controls, Description, Primary, Stories, Subtitle, Title } from '@story
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import AppProviderTest from '../src/components/AppProvider/AppProviderTest';
+import GlobalNavigationProvider from './GlobalNavigationProvider';
 
 
 const preview: Preview = {
@@ -11,12 +12,16 @@ const preview: Preview = {
   },
 
   decorators: [
-    // 👇 Defining the decorator in the preview file applies it to all stories
+    // 👇 Global navigation provider for addon-links integration
     (Story, context) =>
       React.createElement(
-        AppProviderTest,
-        null,
-        React.createElement(Story, context.args),
+        GlobalNavigationProvider,
+        { context },
+        React.createElement(
+          AppProviderTest,
+          null,
+          React.createElement(Story, context.args),
+        ),
       ),
   ],
   tags: ['autodocs'],

@@ -3,10 +3,7 @@ import type { RouteObject } from "react-router";
 import useAuthentication from "../auth/useAuthentication";
 import { extractRouteIdAndPath, generateMenuItems } from "./helpers";
 import pathlessMenuItems, { protectedMenuItems } from "./pathlessMenuItems";
-import siteRoutes, {
-	fallbackRoutes,
-	mainLayoutRoutes,
-} from "./reviewedRoutes";
+import siteRoutes, { fallbackRoutes, mainLayoutRoutes } from "./reviewedRoutes";
 import type { FormattedRoutes, RouteMenu } from "./types";
 
 /**
