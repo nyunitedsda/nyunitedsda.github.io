@@ -3,7 +3,10 @@ import type { RouteObject } from "react-router";
 import useAuthentication from "../auth/useAuthentication";
 import { extractRouteIdAndPath, generateMenuItems } from "./helpers";
 import pathlessMenuItems, { protectedMenuItems } from "./pathlessMenuItems";
-import siteRoutes, { protectedRoutes } from "./reviewedRoutes";
+import siteRoutes, {
+	fallbackRoutes,
+	mainLayoutRoutes,
+} from "./reviewedRoutes";
 import type { FormattedRoutes, RouteMenu } from "./types";
 
 /**
@@ -23,8 +26,8 @@ const useFormattedRoutes = (): FormattedRoutes => {
 
 	const { finalRoutes, menuItemList } = useMemo(() => {
 		const finalRoutes: RouteObject[] = isAuthenticated
-			? [...siteRoutes, ...protectedRoutes]
-			: siteRoutes;
+			? siteRoutes
+			: [...mainLayoutRoutes, ...fallbackRoutes];
 
 		const menuList = isAuthenticated
 			? [...pathlessMenuItems, ...protectedMenuItems]

@@ -1,4 +1,3 @@
-
 import { ExitToAppOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import { action } from "@storybook/addon-actions";
@@ -327,12 +326,12 @@ export const WithCustomIcons: Story = {
 			<CarouselArrowControl
 				api={api as any}
 				onButtonClick={action("onButtonClick")}
-				prevIcon={<ExitToAppOutlined sx={{transform: "rotate(180deg)"}} />}
+				prevIcon={<ExitToAppOutlined sx={{ transform: "rotate(180deg)" }} />}
 				nextIcon={<ExitToAppOutlined />}
-        buttonProps={{
-          size: "large",
-          color: "error"
-        }}
+				buttonProps={{
+					size: "large",
+					color: "error",
+				}}
 			/>
 		);
 	},

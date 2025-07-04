@@ -1,15 +1,18 @@
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 import Footer from "./Footer";
+import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 
 // Simple decorator to provide layout context
 const FooterDecorator = (Story: any) => {
 	return (
-		<Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
-			<Box sx={{ pt: 4 }}>
-				<Story />
+		<AuthenticationProvider>
+			<Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
+				<Box sx={{ pt: 4 }}>
+					<Story />
+				</Box>
 			</Box>
-		</Box>
+		</AuthenticationProvider>
 	);
 };
 

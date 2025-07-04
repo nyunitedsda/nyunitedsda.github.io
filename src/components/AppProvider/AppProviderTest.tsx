@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
-import { MemoryRouter } from "react-router";
+import { BrowserRouter } from "react-router";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
 import theme from "./theme";
 
@@ -32,8 +32,6 @@ interface AppProviderTestProps extends PropsWithChildren {
 
 const AppProviderTest: FC<AppProviderTestProps> = ({
 	children,
-	initialEntries = ["/"],
-	initialIndex = 0,
 	queryClient: customQueryClient,
 }) => {
 	// Use custom query client or create a new test client
@@ -45,15 +43,12 @@ const AppProviderTest: FC<AppProviderTestProps> = ({
 	return (
 		<StrictMode>
 			<QueryClientProvider client={queryClient}>
-				<MemoryRouter
-					initialEntries={initialEntries}
-					initialIndex={initialIndex}
-				>
+				<BrowserRouter>
 					<ThemeProvider theme={theme}>
 						<CssBaseline enableColorScheme />
 						<NotificationProvider>{children}</NotificationProvider>
 					</ThemeProvider>
-				</MemoryRouter>
+				</BrowserRouter>
 			</QueryClientProvider>
 		</StrictMode>
 	);

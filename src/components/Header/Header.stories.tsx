@@ -1,34 +1,13 @@
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 import Header from "./Header";
+import { withLinks } from "@storybook/addon-links";
 
-// Decorator to provide necessary context and layout
-const HeaderDecorator = (Story: any) => {
-	return (
-		<Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
-			<Story />
-			<Box sx={{ p: 3, mt: 2 }}>
-				<Box
-					sx={{
-						p: 2,
-						bgcolor: "grey.100",
-						borderRadius: 1,
-						textAlign: "center",
-						color: "text.secondary",
-					}}
-				>
-					Content area below header - The header is sticky and will remain at
-					the top when scrolling.
-				</Box>
-			</Box>
-		</Box>
-	);
-};
 
 const meta: Meta<typeof Header> = {
 	title: "Components/Header",
 	component: Header,
-	decorators: [HeaderDecorator],
+	// decorators: [withLinks],
 	parameters: {
 		layout: "fullscreen",
 		docs: {
@@ -40,8 +19,14 @@ const meta: Meta<typeof Header> = {
 		backgrounds: {
 			disable: true, // We handle background in decorator
 		},
+		// Add stable story configuration to prevent HMR issues
+		storySort: {
+			order: ["Components", ["Header"]],
+		},
 	},
 	tags: ["autodocs"],
+	// Add explicit story ID to prevent HMR mismatches
+	id: "components-header",
 };
 
 export default meta;
@@ -77,7 +62,7 @@ export const AboutPage: Story = {
 		docs: {
 			description: {
 				story:
-					"Header showing navigation. Active state will reflect the current application route.",
+					"Header showing navigation with About Us page active. Notice how the About Us navigation item is highlighted to show the current page.",
 			},
 		},
 	},
@@ -88,7 +73,8 @@ export const DonationsPage: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Header for the donations section of the website.",
+				story:
+					"Header for the donations section showing active donations navigation state.",
 			},
 		},
 	},
@@ -99,7 +85,8 @@ export const ContactPage: Story = {
 	parameters: {
 		docs: {
 			description: {
-				story: "Header for the contact page with full navigation access.",
+				story:
+					"Header for the contact page with contact navigation highlighted.",
 			},
 		},
 	},
@@ -111,7 +98,7 @@ export const BlogPage: Story = {
 		docs: {
 			description: {
 				story:
-					"Header for the blog section with navigation to all church pages.",
+					"Header for the blog section with blog navigation highlighted to show active state.",
 			},
 		},
 	},
@@ -203,7 +190,7 @@ export const ActiveNavigation: Story = {
 		docs: {
 			description: {
 				story:
-					"Shows how navigation items appear when active. The current page's navigation item is highlighted based on the application's current route.",
+					"Shows how navigation items appear when active. In this example, the About Us page is active, demonstrating how the header highlights the current page navigation item.",
 			},
 		},
 	},
@@ -222,9 +209,22 @@ export const ActiveNavigation: Story = {
 				>
 					<strong>Active Navigation Example</strong>
 					<br />
-					Navigation state reflects the current application route
+					Currently on About Us page - notice the highlighted navigation item
 				</Box>
 				<Story />
+				<Box sx={{ p: 3, mt: 2 }}>
+					<Box
+						sx={{
+							p: 2,
+							bgcolor: "grey.100",
+							borderRadius: 1,
+							textAlign: "center",
+							color: "text.secondary",
+						}}
+					>
+						The About Us navigation item should be highlighted/active
+					</Box>
+				</Box>
 			</Box>
 		),
 	],
@@ -258,6 +258,19 @@ export const BrandingFocus: Story = {
 					New York United Sabbath Day Adventist Church
 				</Box>
 				<Story />
+				<Box sx={{ p: 3, mt: 2 }}>
+					<Box
+						sx={{
+							p: 2,
+							bgcolor: "grey.100",
+							borderRadius: 1,
+							textAlign: "center",
+							color: "text.secondary",
+						}}
+					>
+						Click on the church logo to navigate to the home page
+					</Box>
+				</Box>
 			</Box>
 		),
 	],
@@ -305,6 +318,53 @@ export const InteractiveDemo: Story = {
 						scrolling
 					</Box>
 				))}
+			</Box>
+		),
+	],
+};
+
+export const MultipleRouteStates: Story = {
+	name: "Route Navigation Demo",
+	parameters: {
+		docs: {
+			description: {
+				story:
+					"Demonstrates how the header behaves with different route states. This story shows the header starting on the home page with interactive navigation to different sections.",
+			},
+		},
+	},
+	decorators: [
+		(Story) => (
+			<Box>
+				<Box
+					sx={{
+						p: 2,
+						mb: 2,
+						bgcolor: "info.light",
+						color: "info.contrastText",
+						borderRadius: 1,
+						textAlign: "center",
+					}}
+				>
+					<strong>Route Navigation Demo</strong>
+					<br />
+					Click on different navigation items to see active states change
+				</Box>
+				<Story />
+				<Box sx={{ p: 3, mt: 2 }}>
+					<Box
+						sx={{
+							p: 2,
+							bgcolor: "grey.100",
+							borderRadius: 1,
+							textAlign: "center",
+							color: "text.secondary",
+						}}
+					>
+						Navigation is fully functional - try clicking different menu items
+						to see route changes
+					</Box>
+				</Box>
 			</Box>
 		),
 	],

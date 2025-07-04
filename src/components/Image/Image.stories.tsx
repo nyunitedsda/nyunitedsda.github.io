@@ -101,7 +101,7 @@ export const ResponsiveCard: Story = {
 				boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
 			},
 		},
-		image: sliderImages[7],		
+		image: sliderImages[7],
 	},
 	parameters: {
 		docs: {
@@ -122,10 +122,10 @@ export const SmallThumbnail: Story = {
 				border: "1px solid #ccc",
 				borderRadius: "50%",
 				overflow: "hidden",
-				display: 'flex',	
-				'& img': {
+				display: "flex",
+				"& img": {
 					objectFit: "fill !important",
-				},			
+				},
 			},
 		},
 		image: {
@@ -153,7 +153,7 @@ export const Gallery: Story = {
 				gap: 2,
 			}}
 		>
-			{ sliderImages.slice(1, 6).map((img, index) => (
+			{sliderImages.slice(1, 6).map((img, index) => (
 				<Image
 					key={index}
 					root={{

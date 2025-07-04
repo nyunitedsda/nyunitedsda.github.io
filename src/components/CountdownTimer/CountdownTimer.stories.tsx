@@ -22,6 +22,14 @@ const meta: Meta<typeof CountdownTimer> = {
 			description: "Dayjs object representing the target countdown date",
 		},
 	},
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"CountdownTimer component that displays the time remaining until a specified target date. It updates every second and handles various time formats.",
+			},
+		},
+	},
 };
 
 export default meta;

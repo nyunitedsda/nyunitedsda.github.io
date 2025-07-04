@@ -56,7 +56,11 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({
 				arrowDirection="next"
 				disabled={nextBtnDisabled}
 				onClick={onNextButtonClick}
-				children={nextIcon || <ArrowBackIosNewRounded sx={{transform: "rotate(180deg)"}} />}
+				children={
+					nextIcon || (
+						<ArrowBackIosNewRounded sx={{ transform: "rotate(180deg)" }} />
+					)
+				}
 			/>
 		</Stack>
 	);
