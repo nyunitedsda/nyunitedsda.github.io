@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
-import { fireEvent, render, screen } from "../../../utils/vitest-setup";
+import { describe, expect, fireEvent, it, screen } from "../../../utils/index";
+import { render } from "../../../utils/vitest-setup";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 
 const mockOnClick = vi.fn();
@@ -23,28 +24,41 @@ describe("SubMenuDrawerItem", () => {
 		render(<SubMenuDrawerItem {...defaultProps} />);
 
 		expect(screen.getByTestId("ExpandMoreRoundedIcon")).toBeInTheDocument();
-		expect(screen.queryAllByRole("button").length).toBe(1);
+		expect(
+			screen.getAllByRole("menuitem", {
+				name: /icon parent/i,
+			}).length,
+		).toBe(1);
 		expect(screen.getByText(defaultProps.name)).toBeInTheDocument();
 	});
 
 	it("initially renders in collapsed state (children not visible)", () => {
 		render(<SubMenuDrawerItem {...defaultProps} />);
 
-		expect(screen.queryAllByRole("button").length).toBe(1);
+		expect(
+			screen.getAllByRole("menuitem", {
+				name: /icon parent/i,
+			}).length,
+		).toBe(1);
 		expect(screen.getByTestId("ExpandMoreRoundedIcon")).toBeInTheDocument();
 	});
 
 	it("expands when clicked to show children", () => {
 		render(<SubMenuDrawerItem {...defaultProps} />);
 
-		expect(screen.queryAllByRole("button").length).toBe(1);
-		const parent = screen.queryAllByRole("button")[0];
+		expect(
+			screen.getAllByRole("menuitem", {
+				name: /icon parent/i,
+			}).length,
+		).toBe(1);
+
+		const parent = screen.queryAllByRole("menuitem")[0];
 
 		expect(parent).toBeInTheDocument();
 
 		fireEvent.click(parent);
 
-		expect(screen.queryAllByRole("button").length).toBe(3);
+		expect(screen.queryAllByRole("menuitem").length).toBe(3);
 	});
 
 	it("collapses when clicked again", () => {
@@ -53,12 +67,12 @@ describe("SubMenuDrawerItem", () => {
 
 		render(<SubMenuDrawerItem {...defaultProps} />);
 
-		expect(screen.queryAllByRole("button").length).toBe(1);
-		const parent = screen.queryAllByRole("button")[0];
+		expect(screen.queryAllByRole("menuitem").length).toBe(1);
+		const parent = screen.queryAllByRole("menuitem")[0];
 
 		// First click to expand
 		fireEvent.click(parent);
-		expect(screen.queryAllByRole("button").length).toBe(3);
+		expect(screen.queryAllByRole("menuitem").length).toBe(3);
 
 		for (const n of name) {
 			expect(screen.getByText(n)).toBeInTheDocument();
@@ -66,7 +80,7 @@ describe("SubMenuDrawerItem", () => {
 
 		// Second click to collapse
 		fireEvent.click(parent);
-		expect(screen.queryAllByRole("button").length).toBe(1);
+		expect(screen.queryAllByRole("menuitem").length).toBe(1);
 	});
 
 	it("passes correct isActive state to items", () => {
@@ -81,12 +95,12 @@ describe("SubMenuDrawerItem", () => {
 			/>,
 		);
 
-		expect(screen.queryAllByRole("button").length).toBe(3);
-		const parent = screen.queryAllByRole("button")[0];
+		expect(screen.queryAllByRole("menuitem").length).toBe(3);
+		const parent = screen.queryAllByRole("menuitem")[0];
 
 		expect(parent.hasAttribute("aria-current")).toBeFalsy();
 
-		expect(screen.queryAllByRole("button")[1]).toHaveAttribute(
+		expect(screen.queryAllByRole("menuitem")[1]).toHaveAttribute(
 			"aria-current",
 			"page",
 		);
@@ -94,7 +108,7 @@ describe("SubMenuDrawerItem", () => {
 		expect(customIsActive).toHaveBeenCalledWith("/parent/child1");
 
 		// Second child
-		expect(screen.queryAllByRole("button")[2]).not.toHaveAttribute(
+		expect(screen.queryAllByRole("menuitem")[2]).not.toHaveAttribute(
 			"aria-current",
 		);
 		expect(customIsActive).toHaveBeenCalledWith("/parent/child2");
@@ -115,7 +129,7 @@ describe("SubMenuDrawerItem", () => {
 		);
 
 		// Click on first child
-		const firstChild = screen.queryAllByRole("button")[1];
+		const firstChild = screen.queryAllByRole("menuitem")[1];
 
 		expect(firstChild).toHaveTextContent(defaultProps.children[0].name);
 

@@ -15,6 +15,7 @@ const Carousel: FC<CarouselProps> = memo((props) => {
 	const autoplayOptions = autoplay
 		? [
 				Autoplay({
+					playOnInit: true,
 					delay: 5000, // 5 seconds between slides
 					stopOnInteraction: false, // continue playing after user interaction
 					stopOnMouseEnter: true, // pause on mouse hover
@@ -52,8 +53,7 @@ const Carousel: FC<CarouselProps> = memo((props) => {
 		>
 			<Stack direction="row" className="embla__viewport" ref={emblaRef}>
 				<Stack direction="row" className="embla__container">
-					{/* Use React.Children.map for better key handling */}
-					{Array.isArray(children) ? children : [children]}
+					{children}
 				</Stack>
 			</Stack>
 

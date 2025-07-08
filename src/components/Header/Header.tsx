@@ -1,11 +1,18 @@
 import { MoreVertOutlined } from "@mui/icons-material";
 import MenuRounded from "@mui/icons-material/MenuRounded";
-import { Menu, useMediaQuery, useTheme } from "@mui/material";
+import { Button, Menu, useMediaQuery, useTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
-import { type FC, useCallback, useEffect, useMemo, useState } from "react";
+import {
+	createRef,
+	type FC,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import MenuButton from "../Buttons/MenuButton";
@@ -15,6 +22,9 @@ import MenuItemRenderer from "./components/MenuDrawer/MenuItemRenderer";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
 import { headerStyles } from "./styles";
+import LoginButton from "../Buttons/LoginButton";
+
+const LOGIN_TITLE = "Login";
 
 const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
 	headerStyles;
@@ -29,6 +39,7 @@ const Header: FC = () => {
 	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 	const [optionAnchorEl, setOptionAnchorEl] =
 		useState<null | HTMLButtonElement>(null);
+	const appBarRef = useMemo(() => createRef<HTMLDivElement>(), []);
 
 	// Handle window resize for responsive menu calculation
 	useEffect(() => {
@@ -88,8 +99,9 @@ const Header: FC = () => {
 	);
 
 	const { dynamicMenuList, desktopMenuItems } = useMemo(() => {
-		// Return all items for mobile view
-		if (windowWidth < theme.breakpoints.values.md) {
+		const baseWidth = 465;
+		let appBarWidth = appBarRef?.current?.offsetWidth || 0;
+		if (appBarWidth < baseWidth) {
 			return {
 				dynamicMenuList: [],
 				desktopMenuItems: menuItems,
@@ -97,10 +109,10 @@ const Header: FC = () => {
 		}
 
 		// Calculate how many menu items can fit based on screen width
-		const baseItemCount = 5;
-		const availableWidth = windowWidth - theme.breakpoints.values.md;
+		// const baseItemCount = 5;
+		const availableWidth = appBarWidth - baseWidth;
 		const additionalItems = Math.floor(availableWidth / 100);
-		const maxVisibleItems = baseItemCount + Math.max(0, additionalItems);
+		const maxVisibleItems = Math.max(0, additionalItems);
 
 		// If all items can fit, show them all
 		if (maxVisibleItems >= menuItems.length) {
@@ -115,13 +127,24 @@ const Header: FC = () => {
 			dynamicMenuList: menuItems.slice(maxVisibleItems),
 			desktopMenuItems: menuItems.slice(0, maxVisibleItems),
 		};
-	}, [windowWidth, theme.breakpoints.values.md, menuItems]);
+	}, [
+		windowWidth,
+		theme.breakpoints.values.md,
+		menuItems,
+		appBarRef?.current?.offsetWidth,
+	]);
 
 	// Memoize the menu open state for better performance
 	const isOptionsMenuOpen = Boolean(optionAnchorEl);
 
 	return (
-		<AppBar position="sticky" color="default" elevation={1} sx={rootSx}>
+		<AppBar
+			ref={appBarRef}
+			position="sticky"
+			color="default"
+			elevation={1}
+			sx={rootSx}
+		>
 			<PageContentContainer
 				sx={{ height: (theme) => `${theme.spacing(8)}` }}
 				maxWidth="lg"
@@ -165,7 +188,10 @@ const Header: FC = () => {
 								<MoreVertOutlined color="primary" />
 							</IconButton>
 						) : (
-							<ThemeToggleButton />
+							<>
+								<ThemeToggleButton />
+								<LoginButton />
+							</>
 						)}
 					</Box>
 				</Toolbar>
@@ -193,6 +219,7 @@ const Header: FC = () => {
 						/>
 					))}
 					<ThemeToggleButton expanded />
+					<LoginButton />
 				</Menu>
 			)}
 			{drawerOpen && isMobile && (

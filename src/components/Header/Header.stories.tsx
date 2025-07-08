@@ -5,18 +5,22 @@ import type { FC, PropsWithChildren } from "react";
 import Header from "./Header";
 import Box from "@mui/material/Box";
 
+const storyLinks = "http://localhost:6006/?path=/story/components-header--";
+
 const DEFAULT_ROUTE_MAP = {
-	"/": "Default",
-	"/home": "HomePage",
-	"/about": "AboutPage",
-	"/aboutUs": "AboutPage",
-	"/donations": "DonationsPage",
-	"/contact": "ContactPage",
-	"/blog": "BlogPage",
-	"/blogs": "BlogPage",
-	"/watch": "Default",
-	"/liveStream": "Default",
-	"/archiveStream": "Default",
+	[`${storyLinks}default`]: "Default",
+	[`${storyLinks}home-page`]: "HomePage",
+	[`${storyLinks}about-page`]: "AboutPage",
+	[`${storyLinks}donations-page`]: "DonationsPage",
+	[`${storyLinks}contact-page`]: "ContactPage",
+	[`${storyLinks}blog-page`]: "BlogPage",
+	[`${storyLinks}mobile-view&globals=viewport:mobile1`]: "MobileView",
+	[`${storyLinks}tablet-view&globals=viewport:tablet`]: "TabletView",
+	[`${storyLinks}desktop-view&globals=viewport:desktop`]: "DesktopView",
+	[`${storyLinks}responsive-demo`]: "ResponsiveDemo",
+	[`${storyLinks}active-navigation`]: "ActiveNavigation",
+	[`${storyLinks}branding-focus`]: "BrandingFocus",
+	[`${storyLinks}interactive-demo`]: "InteractiveDemo",
 };
 
 const globalNavigation = {
@@ -48,7 +52,7 @@ const meta: Meta<typeof Header> = {
 		docs: {
 			description: {
 				component:
-					"The Header component provides navigation for the church website. It features responsive design with a hamburger menu on mobile, desktop navigation menu, and organization branding. The header is sticky and includes theme toggle functionality. \n\n**Navigation Options:**\n- **Global Navigation** (Recommended): Automatic navigation via the global Storybook provider - no wrapper needed\n- **HeaderWithLinks Component**: Legacy wrapper component for custom navigation scenarios\n\nSee `.storybook/GlobalNavigation.README.md` for global navigation documentation.",
+					"The Header component provides navigation for the church website. It features responsive design with a hamburger menu on mobile, desktop navigation menu, and organization branding. The header is sticky and includes theme toggle functionality. \n\n**Navigation Options:**\n- **Global Navigation** (Recommended): Automatic navigation via the global Storybook provider - no wrapper needed\n\nSee `.storybook/GlobalNavigation.README.md` for global navigation documentation.",
 			},
 		},
 		backgrounds: {
@@ -93,6 +97,7 @@ export const Default: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -113,10 +118,11 @@ export const HomePage: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
-					"Header on the home page using the legacy HeaderWithLinks wrapper component. This approach is still supported but the global navigation method is now recommended. Click on navigation items to see how they link to other header states using addon-links.",
+					"Click on navigation items to see how they link to other header states using addon-links.",
 			},
 		},
 	},
@@ -126,13 +132,14 @@ export const AboutPage: Story = {
 	name: "About Page",
 	render: () => (
 		<>
-		<Header/>
-		<ContentWrapper>
-			<p>About Us page content goes here.</p>
+			<Header />
+			<ContentWrapper>
+				<p>About Us page content goes here.</p>
 			</ContentWrapper>
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -153,6 +160,7 @@ export const DonationsPage: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -173,6 +181,7 @@ export const ContactPage: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -193,6 +202,7 @@ export const BlogPage: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -217,6 +227,7 @@ export const MobileView: Story = {
 			defaultViewport: "mobile1",
 		},
 		docs: {
+			globalNavigation,
 			description: {
 				story:
 					"Header optimized for mobile devices showing the hamburger menu button, compact logo, and theme toggle. Click the hamburger menu to see the mobile navigation drawer. Navigation links are functional and use addon-links.",
@@ -240,6 +251,7 @@ export const TabletView: Story = {
 			defaultViewport: "tablet",
 		},
 		docs: {
+			globalNavigation,
 			description: {
 				story:
 					"Header layout on tablet devices. Shows the transition between mobile and desktop layouts with responsive menu behavior. Navigation links work seamlessly with addon-links.",
@@ -259,6 +271,7 @@ export const DesktopView: Story = {
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		viewport: {
 			defaultViewport: "desktop",
 		},
@@ -277,7 +290,7 @@ export const ResponsiveDemo: Story = {
 		<>
 			<Header />
 			<ContentWrapper>
-				<Box	 			
+				<Box
 					sx={{
 						p: 2,
 						mb: 2,
@@ -293,11 +306,11 @@ export const ResponsiveDemo: Story = {
 					Resize the viewport to see the header adapt between mobile and desktop
 					layouts. Navigation links are functional!
 				</Box>
-				
 			</ContentWrapper>
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
@@ -325,8 +338,9 @@ export const ActiveNavigation: Story = {
 				>
 					<strong>Active Navigation States Demo</strong>
 					<br />
-					This example shows how navigation items appear when active with functional
-					navigation links. Click on the About Us link to see the active state.
+					This example shows how navigation items appear when active with
+					functional navigation links. Click on the About Us link to see the
+					active state.
 				</Box>
 			</ContentWrapper>
 		</>
@@ -335,7 +349,7 @@ export const ActiveNavigation: Story = {
 		docs: {
 			description: {
 				story:
-					"Shows how navigation items appear when active with functional navigation links. This example demonstrates the About Us page active state. The HeaderWithLinks component automatically provides the correct routing context.",
+					"Shows how navigation items appear when active with functional navigation links. This example demonstrates the About Us page active state.",
 			},
 		},
 	},
@@ -359,16 +373,18 @@ export const BrandingFocus: Story = {
 				>
 					<strong>Church Branding Focus</strong>
 					<br />
-					This example highlights the church branding elements with custom route mapping.
+					This example highlights the church branding elements with custom route
+					mapping.
 				</Box>
 			</ContentWrapper>
 		</>
 	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:
-					"Highlights the church branding elements with custom route mapping. This example shows how HeaderWithLinks can be configured with custom navigation routes. The component supports extensible route-to-story mapping for different use cases.",
+					"Highlights the church branding elements with custom route mapping. The component supports extensible route-to-story mapping for different use cases.",
 			},
 		},
 	},
@@ -378,7 +394,7 @@ export const InteractiveDemo: Story = {
 	name: "Interactive Demo",
 	render: () => (
 		<>
-			<Header/>
+			<Header />
 			<ContentWrapper>
 				<div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
 					<h3>Interactive Header Demo</h3>
@@ -408,9 +424,10 @@ export const InteractiveDemo: Story = {
 					</div>
 				</div>
 			</ContentWrapper>
-			</>
-		),	
+		</>
+	),
 	parameters: {
+		globalNavigation,
 		docs: {
 			description: {
 				story:

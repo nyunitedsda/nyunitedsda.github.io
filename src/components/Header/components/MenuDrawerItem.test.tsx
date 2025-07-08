@@ -1,8 +1,15 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import { vi } from "vitest";
-import { fireEvent, render, screen } from "../../../utils/vitest-setup";
+import { render } from "../../../utils/vitest-setup.tsx";
 import MenuDrawerItem from "./MenuDrawerItem";
+import {
+	describe,
+	expect,
+	fireEvent,
+	it,
+	screen,
+} from "../../../utils/index.ts";
 
 const mockOnClick = vi.fn();
 
@@ -24,14 +31,14 @@ describe("MenuDrawerItem", () => {
 	it("applies active styling when isActive is true", () => {
 		render(<MenuDrawerItem {...defaultProps} isActive={true} />);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("menuitem");
 		expect(button).toHaveAttribute("aria-current", "page");
 	});
 
 	it("does not apply active styling when isActive is false", () => {
 		render(<MenuDrawerItem {...defaultProps} />);
 
-		const button = screen.getByRole("button");
+		const button = screen.getByRole("menuitem");
 		expect(button).not.toHaveAttribute("aria-current");
 	});
 
@@ -39,16 +46,16 @@ describe("MenuDrawerItem", () => {
 		const onClickMock = vi.fn();
 		render(<MenuDrawerItem {...defaultProps} onClick={onClickMock} />);
 
-		fireEvent.click(screen.getByRole("button"));
+		fireEvent.click(screen.getByRole("menuitem"));
 		expect(onClickMock).toHaveBeenCalledTimes(1);
 	});
 
 	it("does not call onClick when disabled", () => {
 		render(<MenuDrawerItem {...defaultProps} disabled={true} />);
 
-		expect(screen.getByRole("button")).toHaveClass("Mui-disabled");
-		expect(screen.getByRole("button").ariaDisabled).toEqual("true");
-		fireEvent.click(screen.getByRole("button"));
+		expect(screen.getByRole("menuitem")).toHaveClass("Mui-disabled");
+		expect(screen.getByRole("menuitem").ariaDisabled).toEqual("true");
+		fireEvent.click(screen.getByRole("menuitem"));
 		expect(mockOnClick).not.toHaveBeenCalled();
 	});
 

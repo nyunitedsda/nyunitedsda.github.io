@@ -11,8 +11,10 @@ export type UserRole = "admin" | "guest" | "moderator";
 export interface UserType {
 	/** Unique identifier for the user */
 	id: number;
+	/** User's username */
+	username: string;
 	/** User's email address */
-	email: string;
+	email?: string;
 	/** User's first name */
 	firstName?: string;
 	/** User's last name */
@@ -20,7 +22,9 @@ export interface UserType {
 	/** User's role in the system */
 	role: UserRole;
 	/** Whether the user's email is verified */
-	emailVerified?: boolean;
+	permissions?: string[];
+	/** Timestamp when the user was last login */
+	last_login?: string;
 	/** Timestamp when the user was created */
 	createdAt?: Date;
 	/** Timestamp when the user was last updated */
@@ -31,15 +35,26 @@ export interface UserType {
  * Authentication credentials for login
  */
 export interface LoginCredentials {
-	email: string;
+	id?: number;
+	username: string;
 	password: string;
+	remember_me?: boolean;
+}
+
+/**
+ * Login API response
+ */
+export interface LoginResponse extends AuthTokenResponse {
+	message: string;
+	user: UserType;
 }
 
 /**
  * Registration data for new users
  */
 export interface RegisterData {
-	email: string;
+	email?: string;
+	username: string;
 	password: string;
 	firstName?: string;
 	lastName?: string;

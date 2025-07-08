@@ -103,7 +103,6 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 					sx={{ zIndex: 1 }}
 					open={isMenuVisible}
 					anchorEl={buttonRef.current}
-					role={"menu"}
 					placement="bottom-end"
 					transition
 					disablePortal
@@ -116,9 +115,11 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 									placement === "bottom" ? "center top" : "center bottom",
 							}}
 						>
-							<Card sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}>
-								<ClickAwayListener onClickAway={handleMenuClose}>
-									<MenuList id="split-button-menu" autoFocusItem>
+							<ClickAwayListener onClickAway={handleMenuClose}>
+								<Card
+									sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}
+								>
+									<MenuList id="split-button-menu" role="menu" autoFocusItem>
 										{menuItems?.map((i) => (
 											<MenuItem
 												key={i.name}
@@ -129,8 +130,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 											</MenuItem>
 										))}
 									</MenuList>
-								</ClickAwayListener>
-							</Card>
+								</Card>
+							</ClickAwayListener>
 						</Grow>
 					)}
 				</Popper>

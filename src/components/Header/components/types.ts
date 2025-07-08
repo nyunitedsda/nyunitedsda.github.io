@@ -14,6 +14,7 @@ export interface MenuDrawerItemProps {
 	icon?: ReactNode;
 	expandedIcon?: ReactNode;
 	isActive: boolean;
+	path?: string;
 	text: string;
 	onClick: (event?: MouseEvent) => void;
 }

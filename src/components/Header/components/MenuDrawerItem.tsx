@@ -11,6 +11,7 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 	onClick,
 	text,
 	expandedIcon,
+	path = "",
 }) => {
 	const handleClick = useCallback(
 		(event: MouseEvent) => {
@@ -26,6 +27,7 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 			onClick={handleClick}
 			selected={isActive}
 			aria-current={isActive ? "page" : undefined}
+			data-path={path}
 		>
 			<ListItemIcon>{icon}</ListItemIcon>
 			<ListItemText primary={text} />

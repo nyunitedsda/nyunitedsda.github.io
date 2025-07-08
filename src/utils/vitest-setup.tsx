@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { type RenderOptions, render } from "@testing-library/react";
 import type { ReactElement } from "react";
 import AppProvider from "../components/AppProvider/AppProvider";

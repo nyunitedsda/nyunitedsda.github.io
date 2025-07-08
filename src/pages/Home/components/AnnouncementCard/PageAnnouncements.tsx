@@ -25,12 +25,16 @@ const PageAnnouncements: FC = () => {
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 	});
 
+	console.log("Announcements data:", data);
+
 	return (
 		<SectionWrapper header={PAGE_ANNOUNCEMENT_HEADER}>
 			<Carousel
 				autoplay
 				options={{
 					loop: true,
+					containScroll: "trimSnaps",
+					dragFree: true,
 				}}
 				sx={{
 					"& .embla__viewport .embla__container": {

@@ -32,7 +32,7 @@ const sampleImages = [
 ];
 
 const meta: Meta<typeof Carousel> = {
-	title: "Components/Carousel",
+	title: "Components/Carousel/Carousel",
 	component: Carousel,
 	tags: ["autodocs"],
 	decorators: [

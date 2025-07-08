@@ -2,6 +2,7 @@ import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import { type FC, memo, useCallback } from "react";
 import { useNavigate } from "react-router";
+import LoginButton from "../../Buttons/LoginButton";
 import ThemeToggleButton from "../../Buttons/ThemeToggleButton";
 import { menuDrawerStyles } from "../styles";
 import MenuItemRenderer from "./MenuDrawer/MenuItemRenderer";
@@ -54,6 +55,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 				}}
 			>
 				<ThemeToggleButton expanded />
+				<LoginButton />
 				{footer?.map((i) => (
 					<MenuDrawerItem {...i} key={i.text} />
 				))}

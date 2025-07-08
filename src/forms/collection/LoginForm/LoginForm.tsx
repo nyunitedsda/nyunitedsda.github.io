@@ -1,6 +1,8 @@
 import Stack from "@mui/material/Stack";
 import { useCallback, useMemo, type FC } from "react";
-import type { UserType } from "../../../api/request/types";
+import { useNavigate } from "react-router";
+import { useAuthentication } from "../../../contexts/AuthenticationContext";
+import type { LoginCredentials } from "../../../contexts/AuthenticationContext/types";
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";
 import {
@@ -11,13 +13,16 @@ import { loginSchema } from "./schema";
 
 const REMEMBER_ME = "Remember me";
 const SIGN_IN = "Sign In";
-const DEFAULT_VALUES: Partial<UserType> = {
+const DEFAULT_VALUES: LoginCredentials = {
 	username: "",
 	password: "",
 	remember_me: false,
 };
 
 const LoginForm: FC = () => {
+	const { login } = useAuthentication();
+	const navigate = useNavigate();
+
 	const { passwordProps, usernameProps } = useMemo(
 		() => ({
 			passwordProps: configurePasswordInput(),
@@ -26,10 +31,10 @@ const LoginForm: FC = () => {
 		[],
 	);
 
-	const _handleSubmit = useCallback(() => {
-		// TODO: Implement form submission logic
-		// Handle form submission logic here for login or registration
-		// This could involve calling an API, updating state, etc.
+	const _handleSubmit = useCallback(async (values: LoginCredentials) => {
+		await login(values).then(() => {
+			navigate("/admin/users");
+		});
 	}, []);
 
 	return (

@@ -6,9 +6,9 @@ import {
 	expect,
 	fireEvent,
 	it,
-	render,
 	screen,
 } from "../../utils/index";
+import { render } from "../../utils/vitest-setup.tsx";
 import ThemeToggleButton from "./ThemeToggleButton";
 
 // Mock BEFORE importing the hook/component
