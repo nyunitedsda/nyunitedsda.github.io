@@ -1,7 +1,6 @@
-// import "@testing-library/jest-dom";
-// import "@testing-library/jest-dom/vitest";
+import { screen, fireEvent } from "../../../utils/index.ts";
 import { describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen } from "../../../utils/vitest-setup";
+import { render } from "../../../utils/vitest-setup";
 import DonationItem from "./DonationItem";
 
 describe("DonationItem", () => {

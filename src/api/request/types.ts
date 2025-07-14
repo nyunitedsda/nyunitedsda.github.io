@@ -1,3 +1,10 @@
+/**
+ * Represents the available database entities in the system
+ *
+ * @remarks
+ * This type defines all the valid entity names that can be used for
+ * database operations throughout the application.
+ */
 export type DatabaseEntity =
 	| "donations"
 	| "users"
@@ -5,42 +12,88 @@ export type DatabaseEntity =
 	| "announcements"
 	| "notifications"
 	| "services"
+	| "roles"
 	| "contacts";
 
+/**
+ * Represents the available user roles in the system
+ *
+ * @remarks
+ * Defines the hierarchy of user permissions:
+ * - "admin": Full system access and management capabilities
+ * - "moderator": Content management and user moderation
+ * - "guest": Limited read-only access
+ */
 export type UserRole = "admin" | "guest" | "moderator";
 
 /**
+ * Represents a user role option in the system
+ *
+ * @remarks
+ * This type defines the structure of a user role option that includes metadata
+ * about a specific role, such as its permissions and status. Used for role
+ * management and assignment in the application.
+ *
+ * @property id - Unique identifier for the role option
+ * @property name - The role type (admin, guest, or moderator)
+ * @property description - Optional human-readable description of the role
+ * @property permissions - Optional array of permission strings granted to this role
+ * @property is_active - Optional flag indicating if the role is currently active/enabled
+ */
+export type UserRoleOption = {
+	id: number;
+	name: UserRole;
+	description?: string;
+	permissions?: string[];
+	is_active?: boolean;
+};
+
+/**
  * Represents a user in the system
+ *
+ * @remarks
+ * This interface defines the complete user model including authentication,
+ * profile information, and system metadata. Used for user management
+ * and authentication throughout the application.
+ *
+ * @property id - Unique identifier for the user
+ * @property email - User's email address (optional for some user types)
+ * @property firstName - User's first name (optional)
+ * @property lastName - User's last name (optional)
+ * @property username - User's unique username (required)
+ * @property password - User's password hash (optional for security)
+ * @property role - User's role in the system (admin, moderator, or guest)
+ * @property permissions - Array of specific permissions granted to the user
+ * @property remember_me - Whether the user has opted for "Remember Me" functionality
+ * @property emailVerified - Whether the user's email address has been verified
+ * @property createdAt - Timestamp when the user account was created
+ * @property updatedAt - Timestamp when the user account was last updated
  */
 export interface UserType {
-	/** Unique identifier for the user */
 	id: number;
-	/** User's email address */
 	email?: string;
-	/** User's first name */
 	firstName?: string;
-	/** User's last name */
 	lastName?: string;
-	/** User's username */
 	username: string;
-	/** User's password hash */
 	password?: string;
-	/** User's role in the system */
 	role: UserRole;
-	/** User's permissions in the system */
 	permissions?: string[];
-	/** Whether the user has opted for "Remember Me" functionality */
 	remember_me: boolean;
-	/** Whether the user's email is verified */
 	emailVerified?: boolean;
-	/** Timestamp when the user was created */
 	createdAt?: Date;
-	/** Timestamp when the user was last updated */
 	updatedAt?: Date;
 }
 
 /**
- * Represents an donation payment method in the system
+ * Represents a donation payment method in the system
+ *
+ * @remarks
+ * This interface defines the structure of donation options available
+ * to users for making contributions to the organization.
+ *
+ * @property id - Unique identifier for the donation type
+ * @property title - Display name of the donation method
+ * @property description - Detailed description of the donation option
  */
 export interface DonationType {
 	id: number;
@@ -50,80 +103,105 @@ export interface DonationType {
 
 /**
  * Represents an article in the system
+ *
+ * @remarks
+ * This type defines the complete structure of articles/blog posts in the system,
+ * including content, metadata, and engagement metrics. Used for content
+ * management and display throughout the application.
+ *
+ * @property id - Unique identifier (auto-incremented)
+ * @property title - Article title
+ * @property author_id - ID of the author who wrote the article
+ * @property publishDate - Date when the article was published
+ * @property views - Number of views the article has received
+ * @property comments - Number of comments on the article
+ * @property rating - Rating of the article (out of 5.00)
+ * @property category - Article category for organization
+ * @property img_src - Path or URL to the article's featured image
+ * @property content - Full HTML/text content of the article
+ * @property created_at - Timestamp when the article was created
+ * @property modified_at - Timestamp when the article was last modified
  */
 export type ArticleType = {
-	/** Unique identifier (auto-incremented) */
 	id: number;
-	/** Article title */
 	title: string;
-	/** ID of the author who wrote the article */
 	author_id: number;
-	/** Date when the article was published */
 	publishDate: Date | string;
-	/** Number of views the article has received */
 	views?: number;
-	/** Number of comments on the article */
 	comments?: number;
-	/** Rating of the article (out of 5.00) */
 	rating?: number | null;
-	/** Article category */
 	category?: string | null;
-	/** Path or URL to the article's image */
 	img_src?: string | null;
-	/** Full HTML/text content of the article */
 	content: string;
-	/** Timestamp when the article was created */
 	created_at?: Date;
-	/** Timestamp when the article was last modified */
 	modified_at?: Date;
 };
 
+/**
+ * Represents the available event types in the system
+ *
+ * @remarks
+ * Defines the different types of events that can be announced:
+ * - "event": General events and activities
+ * - "service": Religious services and worship
+ * - "conference": Conferences and meetings
+ * - "zoom": Virtual meetings via Zoom
+ */
 export type EventType = "event" | "service" | "conference" | "zoom";
 
 /**
  * Represents an announcement in the system
+ *
+ * @remarks
+ * This type defines the structure of announcements for events, services,
+ * and other activities. Supports both physical and virtual events with
+ * comprehensive scheduling and contact information.
+ *
+ * @property id - Unique identifier (auto-incremented)
+ * @property title - Announcement title
+ * @property type - Type of announcement (event, service, conference, zoom)
+ * @property description - Optional description of the announcement
+ * @property location - Physical location where the event will take place
+ * @property conference_code - Conference code for virtual events
+ * @property phone_number - Contact phone number
+ * @property sermon - Sermon title or topic for religious services
+ * @property speaker - Name of the speaker or presenter
+ * @property recurring - Whether the event repeats on a schedule
+ * @property created_at - When the announcement was created
+ * @property author_id - ID of the author who created the announcement
+ * @property event_date - Date and time when the event will occur
+ * @property date_format - Display format for the event date
+ * @property zoom_id - Zoom meeting ID for virtual events
+ * @property passcode - Passcode for Zoom meetings
  */
 export type AnnouncementType = {
-	/** Unique identifier (auto-incremented) */
 	id: number;
-	/** Announcement title */
 	title: string;
-	/** Type of announcement */
 	type: EventType;
-	/** Optional description of the announcement */
 	description?: string;
-	/** Physical location where the event will take place */
 	location?: string;
-	/** Conference code for virtual events */
 	conference_code?: string;
-	/** Contact phone number */
 	phone_number?: string;
-	/** Sermon title or topic */
 	sermon?: string;
-	/** Name of the speaker */
 	speaker?: string;
-	/** Whether the event is recurring */
 	recurring?: boolean;
-	/** When the announcement was created */
 	created_at?: Date;
-	/** ID of the author who created the announcement */
 	author_id: number;
-	/** Date and time when the event will occur */
 	event_date?: Date;
-	/** Display date format for event_date */
 	date_format: string;
-	/** Optional Zoom meeting ID for virtual events */
 	zoom_id?: string;
-	/** Optional passcode for Zoom meetings */
 	passcode?: string;
 };
 
 /**
  * Represents a notification severity level
- * Used to categorize notifications by their importance or urgency
- * "information" for neutral messages,
- * "caution" for warnings, "error" for critical issues,
- * and "success" for positive confirmations.
+ *
+ * @remarks
+ * Used to categorize notifications by their importance or urgency:
+ * - "information": Neutral informational messages
+ * - "caution": Warning messages requiring attention
+ * - "error": Critical issues requiring immediate action
+ * - "success": Positive confirmations and successful operations
  */
 export type NotificationSeverity =
 	| "information"
@@ -132,90 +210,96 @@ export type NotificationSeverity =
 	| "success";
 
 /**
- * Represents an option for notification severity.
+ * Represents an option for notification severity
  *
  * @remarks
- * This type defines the structure of an option that includes a unique identifier, a severity value,
- * and a human-readable label used to identify a particular notification severity in the application.
+ * This type defines the structure of a notification severity option that includes
+ * a unique identifier, a severity value, and a human-readable label. Used for
+ * building UI components and managing notification severity selections.
  *
- * @property id - The unique identifier for the notification severity option.
- * @property value - The notification severity value; typically, this corresponds to one of the defined
- * severity levels.
- * @property label - A descriptive text label representing the notification severity.
+ * @property id - The unique identifier for the notification severity option
+ * @property value - The notification severity value from NotificationSeverity type
+ * @property label - A descriptive text label representing the notification severity
  */
 export type NotificationSeverityOption = {
 	id: number;
 	value: NotificationSeverity;
 	label: string;
 };
+
 /**
  * Represents a notification in the system
- * Notifications can be used to inform users about important events, updates, or actions required.
+ *
+ * @remarks
+ * Notifications are used to inform users about important events, updates,
+ * or actions required. They can have different severity levels and optional
+ * expiration dates for automatic cleanup.
+ *
+ * @property id - Unique identifier for the notification
+ * @property message - The main message content to display
+ * @property title - Optional title for the notification
+ * @property severity - The severity level of the notification
+ * @property expires_at - Date and time when the notification expires (optional)
  */
 export interface NotificationType {
-	/**
-	 * Unique identifier for the notification
-	 */
 	id: number;
-	/**
-	 * The main message to display
-	 */
 	message: string;
-	/**
-	 * Optional title for the notification
-	 */
 	title?: string;
-	/**
-	 * The severity level of the notification
-	 */
 	severity?: NotificationSeverity;
-	/**
-	 * The date and time when the notification will expire
-	 * If not provided, the notification will not expire automatically
-	 */
 	expires_at?: Date;
 }
 
 /**
  * Represents a service in the system
+ *
+ * @remarks
+ * This interface defines the structure of religious services and events
+ * offered by the organization, including scheduling and descriptive information.
+ *
+ * @property id - Unique identifier (auto-incremented)
+ * @property time - Time when the service takes place
+ * @property title - Title or name of the service
+ * @property created_at - Timestamp when the service was created
+ * @property modified_at - Timestamp when the service was last modified
  */
 export interface ServiceType {
-	/** Unique identifier (auto-incremented) */
 	id: number;
-	/** Time when the service takes place */
 	time: string;
-	/** Title of the service */
 	title: string;
-	/** Timestamp when the service was created */
 	created_at?: Date;
-	/** Timestamp when the service was last modified */
 	modified_at?: Date;
 }
 
 /**
  * Represents contact information in the system
+ *
+ * @remarks
+ * This interface defines the structure of contact information for the organization,
+ * including physical address, digital contact methods, and mailing details.
+ * Used for displaying contact information and handling correspondence.
+ *
+ * @property id - Unique identifier (auto-incremented)
+ * @property email - Contact email address
+ * @property phone - Contact phone number
+ * @property street - Street address
+ * @property city - City name
+ * @property zip_code - ZIP or postal code
+ * @property country - Country name
+ * @property mail_address - Optional separate mailing address
+ * @property mailing_recipient - Optional name for mailing recipient
+ * @property created_at - Timestamp when the contact info was created
+ * @property modified_at - Timestamp when the contact info was last modified
  */
 export interface ContactInfoType {
-	/** Unique identifier (auto-incremented) */
 	id: number;
-	/** Contact email address */
 	email: string;
-	/** Contact phone number */
 	phone: string;
-	/** Street address */
 	street: string;
-	/** City */
 	city: string;
-	/** ZIP/postal code */
 	zip_code: string;
-	/** Country */
 	country: string;
-	/** Optional mailing address */
 	mail_address?: string;
-	/** Optional mailing recipient name */
 	mailing_recipient?: string;
-	/** Timestamp when the contact info was created */
 	created_at?: Date;
-	/** Timestamp when the contact info was last modified */
 	modified_at?: Date;
 }

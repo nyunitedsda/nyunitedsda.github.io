@@ -1,78 +1,99 @@
-import { type FC, useMemo } from "react";
-import type { UserRole, UserType } from "../../../api/request/types";
+import Typography from "@mui/material/Typography";
+import type { SxProps, Theme } from "@mui/material/styles";
+import { useSnackbar } from "notistack";
+import { type FC, useCallback, useEffect, useState } from "react";
+import {
+	getDatabaseList,
+	updateUser,
+} from "../../../api/request/commonQueries";
+import type { UserRoleOption, UserType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import EntityEditor from "../../EntityEditor/EntityEditor";
+import FormContainer from "../../FormBuilder/FormContainer";
 import { default as InputField } from "../../Input/FormField";
-import type { EditorProps } from "../types";
 import userSchema from "./schema";
 
-const defaultValues: Partial<UserType> = {
-	email: "",
-	firstName: "",
-	lastName: "",
-	role: "guest",
-	emailVerified: false,
-};
-
-const EDIT_TITLE = "Edit User";
-const ADD_TITLE = "Add User";
-const ENTITY_NAME = "users";
-const BUTTON_TEXT = "Save";
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";
 const LAST_NAME_FIELD_LABEL = "Last Name";
 const ROLE_FIELD_LABEL = "User Role";
 const EMAIL_VERIFIED_FIELD_LABEL = "Email Verified";
 
-interface RoleOption {
-	id: number;
-	value: UserRole;
-	label: string;
+const titleSx: SxProps<Theme> = {
+	position: "sticky",
+	top: 0,
+	backgroundColor: "inherit",
+	zIndex: 1,
+};
+
+// const roleOptions: RoleOption[] = [
+// 	{ id: 1, value: "guest", label: "Guest" },
+// 	{ id: 2, value: "moderator", label: "Moderator" },
+// 	{ id: 3, value: "admin", label: "Administrator" },
+// ];
+
+interface UserEditorProps {
+	initialValues: UserType;
+	open: boolean;
+	onClose: () => void;
+	onSuccess?: (data?: UserType) => void;
 }
+const TITLE = "Edit User";
 
-const roleOptions: RoleOption[] = [
-	{ id: 1, value: "guest", label: "Guest" },
-	{ id: 2, value: "moderator", label: "Moderator" },
-	{ id: 3, value: "admin", label: "Administrator" },
-];
-
-const UserEditor: FC<EditorProps<Partial<UserType>>> = ({
+const UserEditor: FC<UserEditorProps> = ({
 	open,
-	entity,
+	initialValues,
 	onClose,
 	onSuccess,
 }) => {
-	const { initialValues, title } = useMemo(
-		() =>
-			entity && Object.hasOwn(entity, "id")
-				? {
-						initialValues: entity,
-						title: EDIT_TITLE,
-					}
-				: {
-						initialValues: defaultValues,
-						title: ADD_TITLE,
-					},
-		[entity],
-	);
+	const { enqueueSnackbar } = useSnackbar();
+
+	const [roles, setRoles] = useState<UserRoleOption[]>([]);
+
+	useEffect(() => {
+		getDatabaseList<UserRoleOption>("roles").then((data) => {
+			if (data) {
+				setRoles(data as unknown as UserRoleOption[]);
+			}
+		});
+	}, []);
+
+	const _handleSubmit = useCallback((values: UserType) => {
+		const { id, ...rest } = values;
+		updateUser(id, rest).then((result) => {
+			if (!result) {
+				enqueueSnackbar("Failed to update user", { variant: "error" });
+				return;
+			}
+			// If onSuccess callback is provided, call it with the result
+
+			if (onSuccess) {
+				onSuccess(result);
+				enqueueSnackbar("User updated successfully", { variant: "success" });
+				onClose();
+			}
+		});
+	}, []);
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
-			<EntityEditor
-				defaultValues={initialValues}
-				entity={ENTITY_NAME}
-				id={entity?.id}
-				submitButtonText={BUTTON_TEXT}
-				title={title}
+			<Typography variant="h6" gutterBottom sx={titleSx}>
+				{TITLE}
+			</Typography>
+
+			<FormContainer
+				initialValues={initialValues}
 				validationSchema={userSchema}
+				onSubmit={_handleSubmit}
+				submitButtonText="Save"
 				onCancel={onClose}
-				onSuccess={(data) => {
-					console.log("User saved successfully:", data);
-					if (onSuccess) {
-						onSuccess(data as UserType);
-					}
-				}}
 			>
+				<InputField
+					name="username"
+					label="Username"
+					fieldType="text"
+					placeholder="Enter username"
+				/>
+
 				<InputField
 					name="email"
 					label={EMAIL_FIELD_LABEL}
@@ -99,9 +120,9 @@ const UserEditor: FC<EditorProps<Partial<UserType>>> = ({
 					name="role"
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
-					items={roleOptions}
-					renderItemLabel={(item) => item.label}
-					valueResolver={(item) => item.value}
+					items={roles ?? []}
+					renderItemLabel={(item) => item.name}
+					valueResolver={(item) => item.id}
 				/>
 
 				<InputField
@@ -109,7 +130,13 @@ const UserEditor: FC<EditorProps<Partial<UserType>>> = ({
 					label={EMAIL_VERIFIED_FIELD_LABEL}
 					fieldType="checkbox"
 				/>
-			</EntityEditor>
+				<InputField
+					name="remember_me"
+					label="Remember Me"
+					fieldType="checkbox"
+					helperText="Enable 'Remember Me' functionality for this user"
+				/>
+			</FormContainer>
 		</ProjectModal>
 	);
 };

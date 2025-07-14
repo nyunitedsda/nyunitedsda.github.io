@@ -9,6 +9,8 @@ import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
 import type { DatabaseEntity, UserType } from "./types";
 
+const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
+
 const getDatabaseList = async <T extends { id: number }>(
 	entity: DatabaseEntity,
 	config?: AxiosRequestConfig,
@@ -47,11 +49,11 @@ const loginUser = async (
 ): Promise<LoginResponse> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/login",
+			`${AUTH_API_URL}login`,
 			credentials,
 			config,
 		);
-		return response?.data.data || response?.data;
+		return response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("login", "users", error);
 	}
@@ -66,7 +68,7 @@ const registerUser = async (
 ): Promise<{ user: UserType; tokens: AuthTokenResponse }> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/register",
+			`${AUTH_API_URL}register`,
 			userData,
 			config,
 		);
@@ -85,7 +87,7 @@ const refreshAuthToken = async (
 ): Promise<AuthTokenResponse> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/refresh",
+			`${AUTH_API_URL}refresh`,
 			{ refreshToken },
 			config,
 		);
@@ -102,7 +104,11 @@ const logoutUser = async (
 	config?: AxiosRequestConfig,
 ): Promise<{ message: string }> => {
 	try {
-		const response = await axiosInstance.post("/api/auth/logout", {}, config);
+		const response = await axiosInstance.post(
+			`${AUTH_API_URL}logout`,
+			{},
+			config,
+		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("logout", "users", error);
@@ -116,10 +122,46 @@ const getCurrentUser = async (
 	config?: AxiosRequestConfig,
 ): Promise<UserType> => {
 	try {
-		const response = await axiosInstance.get("/api/auth/me", config);
+		const response = await axiosInstance.get(`${AUTH_API_URL}profile`, config);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("getCurrentUser", "users", error);
+	}
+};
+
+/**
+ * Update user profile
+ */
+const updateUser = async (
+	userId: number,
+	userData: Partial<UserType>,
+	config?: AxiosRequestConfig,
+): Promise<UserType> => {
+	try {
+		const response = await axiosInstance.put(
+			`${AUTH_API_URL}${userId}`,
+			userData,
+			config,
+		);
+		return response?.data.data || response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("updateUser", "users", error);
+	}
+};
+
+/**
+ * Get all users
+ */
+const getAllUsers = async (
+	config?: AxiosRequestConfig,
+): Promise<AxiosResponse<UserType[], any>> => {
+	try {
+		console.log("config: ", config);
+
+		const response = await axiosInstance.get(`${AUTH_API_URL}users`, config);
+		return response?.data || response;
+	} catch (error: unknown) {
+		return handleOperationError("getAllUsers", "users", error);
 	}
 };
 
@@ -132,7 +174,7 @@ const requestPasswordReset = async (
 ): Promise<{ message: string }> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/forgot-password",
+			`${AUTH_API_URL}forgot-password`,
 			{ email },
 			config,
 		);
@@ -152,7 +194,7 @@ const resetPassword = async (
 ): Promise<{ message: string }> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/reset-password",
+			`${AUTH_API_URL}reset-password`,
 			{ token, password: newPassword },
 			config,
 		);
@@ -171,7 +213,7 @@ const verifyEmail = async (
 ): Promise<{ message: string }> => {
 	try {
 		const response = await axiosInstance.post(
-			"/api/auth/verify-email",
+			`${AUTH_API_URL}verify-email`,
 			{ token },
 			config,
 		);
@@ -182,6 +224,7 @@ const verifyEmail = async (
 };
 
 export {
+	getAllUsers,
 	getCurrentUser,
 	getDatabaseItem,
 	getDatabaseList,
@@ -192,5 +235,6 @@ export {
 	registerUser,
 	requestPasswordReset,
 	resetPassword,
+	updateUser,
 	verifyEmail,
 };

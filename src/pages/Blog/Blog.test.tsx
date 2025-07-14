@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "../../utils/vitest-setup";
+import { render } from "../../utils/vitest-setup";
 import Blog from "./Blog";
+import { describe, expect, it, screen } from "../../utils/index.ts";
 
 describe("Blog", () => {
 	it("renders Blog", () => {

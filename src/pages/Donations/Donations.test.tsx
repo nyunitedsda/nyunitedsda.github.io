@@ -1,5 +1,6 @@
-import { render, screen } from "../../utils/vitest-setup";
+import { render } from "../../utils/vitest-setup";
 import Donations from "./Donations";
+import { describe, it, expect, screen, beforeEach } from "../../utils/index.ts";
 
 describe("Donations component", () => {
 	beforeEach(() => {
@@ -7,8 +8,7 @@ describe("Donations component", () => {
 	});
 
 	it("renders the page title with correct header and subheader", () => {
-		// PageTitle is a custom component, so we'll need to verify its props
-		// This assumes PageTitle renders its title and subtitle as visible text
+		render(<Donations />);
 		expect(screen.getByText("Donations")).toBeInTheDocument();
 		expect(
 			screen.getByText("Ways to donate to New York United SDA Church"),
@@ -16,6 +16,7 @@ describe("Donations component", () => {
 	});
 
 	it("renders the donation text", () => {
+		render(<Donations />);
 		expect(
 			screen.getByText(
 				"There are several ways one can give including safe, secure and convenient methods of giving online. Please see below:",
@@ -24,14 +25,17 @@ describe("Donations component", () => {
 	});
 
 	it("renders all donation options", () => {
-		// Check that each donation method is rendered
+		render(<Donations />);
+
+		screen.logTestingPlaygroundURL();
 		expect(screen.getByText(/During Services:/)).toBeInTheDocument();
 		expect(screen.getByText(/By Mail:/)).toBeInTheDocument();
 		expect(screen.getByText(/Online Giving:/)).toBeInTheDocument();
 	});
 
-	it("renders donation descriptions with correct formatting", () => {
-		// Check for parts of each description to verify they're rendered
+	it("renders donations descriptions with correct formatting", () => {
+		render(<Donations />);
+		
 		expect(screen.getByText(/Simply place cash or checks/)).toBeInTheDocument();
 		expect(screen.getByText(/Please mail your donation/)).toBeInTheDocument();
 		expect(

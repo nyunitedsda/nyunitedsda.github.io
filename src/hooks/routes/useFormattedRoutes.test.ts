@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import useAuthentication from "../auth/useAuthentication";
 import * as helpers from "./helpers";
 import pathlessMenuItems from "./pathlessMenuItems";
-import siteRoutes from "./reviewedRoutes";
 import useFormattedRoutes from "./useFormattedRoutes";
 
 // Mock dependencies
@@ -29,10 +28,17 @@ vi.mock("./reviewedRoutes", () => {
 		{ id: "home", path: "/home" },
 		{ id: "about", path: "/about" },
 	];
+	const mainLayoutRoutes = [
+		{ id: "home", path: "/home" },
+		{ id: "about", path: "/about" },
+	];
 	const protectedRoutes = [{ id: "admin", path: "/admin" }];
+	const fallbackRoutes = [{ id: "error", path: "*" }];
 	return {
 		default: siteRoutes,
+		mainLayoutRoutes,
 		protectedRoutes,
+		fallbackRoutes,
 	};
 });
 
@@ -91,7 +97,13 @@ describe("useFormattedRoutes", () => {
 		renderHook(() => useFormattedRoutes());
 
 		expect(helpers.extractRouteIdAndPath).toHaveBeenCalledTimes(1);
-		expect(helpers.extractRouteIdAndPath).toHaveBeenCalledWith(siteRoutes);
+		// When unauthenticated, it should call with combined mainLayoutRoutes and fallbackRoutes
+		const expectedRoutes = [
+			{ id: "home", path: "/home" },
+			{ id: "about", path: "/about" },
+			{ id: "error", path: "*" },
+		];
+		expect(helpers.extractRouteIdAndPath).toHaveBeenCalledWith(expectedRoutes);
 	});
 
 	it("calls extractRouteIdAndPath with combined routes when authenticated", () => {

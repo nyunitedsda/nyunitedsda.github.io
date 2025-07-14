@@ -10,9 +10,9 @@ const LoginButton: FC = () => {
 	return (
 		<Button
 			// variant="outlined"
-      fullWidth
+			fullWidth
 			color="primary"
-      sx={{color: "primary.light"}}
+			sx={{ color: "primary.light" }}
 			onClick={() => navigate("/login")}
 			startIcon={<LoginOutlined />}
 		>

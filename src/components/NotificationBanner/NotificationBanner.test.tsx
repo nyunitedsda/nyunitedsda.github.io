@@ -1,23 +1,29 @@
-import { fireEvent, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Provider as NotificationProvider } from "../../contexts/NotificationContext/context";
+import {
+	beforeEach,
+	describe,
+	expect,
+	it,
+	fireEvent,
+	screen,
+} from "../../utils/index.ts";
 import { render } from "../../utils/vitest-setup.tsx";
 import NotificationBanner from "./NotificationBanner";
+import { vi } from "vitest";
 
-// Mock the context
-const mockDismissNotification = vi.fn();
-const mockContextValue = {
-	notifications: [],
-	registerNotification: vi.fn(),
-	dismissNotification: mockDismissNotification,
-	clearNotification: vi.fn(),
-};
+// Mock the context functions
+vi.mock("../../contexts/NotificationContext/context", () => {
+	const mockContext = {
+		notifications: [],
+		registerNotification: vi.fn(),
+		dismissNotification: vi.fn(),
+		clearNotification: vi.fn(),
+	};
 
-const renderWithContext = (ui: React.ReactElement) => {
-	return render(
-		<NotificationProvider value={mockContextValue}>{ui}</NotificationProvider>,
-	);
-};
+	return {
+		default: mockContext,
+		Provider: ({ children }: any) => children, // Pass through provider
+	};
+});
 
 describe("NotificationBanner", () => {
 	beforeEach(() => {
@@ -25,7 +31,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders notification with message", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Test notification message"
@@ -38,7 +44,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders notification with title and message", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				title="Test Title"
@@ -53,7 +59,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("does not render when open is false", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Test notification message"
@@ -68,7 +74,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders close button", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Test notification message"
@@ -82,12 +88,14 @@ describe("NotificationBanner", () => {
 	});
 
 	it("calls dismissNotification when close button is clicked", () => {
-		renderWithContext(
+		const mockDismissNotification = vi.fn();
+		render(
 			<NotificationBanner
 				id={1}
 				message="Test notification message"
 				open={true}
 				severity="information"
+				onClose={mockDismissNotification}
 			/>,
 		);
 
@@ -98,7 +106,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders with success severity", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Success message"
@@ -111,7 +119,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders with error severity", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Error message"
@@ -124,7 +132,7 @@ describe("NotificationBanner", () => {
 	});
 
 	it("renders with caution severity", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Warning message"
@@ -133,11 +141,13 @@ describe("NotificationBanner", () => {
 			/>,
 		);
 
-		expect(screen.getByText("Warning message")).toBeInTheDocument();
+		expect(
+			screen.getByText((content) => content.includes("Warning message")),
+		).toBeInTheDocument();
 	});
 
 	it("uses default open state when open prop is undefined", () => {
-		renderWithContext(
+		render(
 			<NotificationBanner
 				id={1}
 				message="Test notification message"

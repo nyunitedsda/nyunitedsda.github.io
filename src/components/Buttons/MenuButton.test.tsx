@@ -1,7 +1,6 @@
 import type { ButtonProps } from "@mui/material/Button";
 import { vi } from "vitest";
 import {
-	act,
 	beforeEach,
 	describe,
 	expect,

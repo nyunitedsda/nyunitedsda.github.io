@@ -15,6 +15,7 @@ import type {
 	RegisterData,
 } from "../../contexts/AuthenticationContext/types";
 import { useSnackbar } from "notistack";
+import { clearTokens, storeTokens } from "../../utils";
 
 /**
  * Authentication API hooks using React Query
@@ -36,15 +37,14 @@ export const useLogin = () => {
 				variant: "success",
 			});
 			// Store tokens in localStorage
-			localStorage.setItem("accessToken", data.accessToken);
-			localStorage.setItem("refreshToken", data.refreshToken);
+			storeTokens(data.accessToken, data.refreshToken);
+			console.log("data: ", data);
 		},
 		onError: (error) => {
 			console.error("Login failed:", error);
 			enqueueSnackbar(error.message, { variant: "error" });
 			// Clear any existing auth data
-			localStorage.removeItem("accessToken");
-			localStorage.removeItem("refreshToken");
+			clearTokens();
 			queryClient.removeQueries({ queryKey: ["user"] });
 		},
 	});

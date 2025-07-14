@@ -1,6 +1,14 @@
 import { vi } from "vitest";
 import useColorTheme from "../../../../hooks/theme/useColorTheme";
-import { type Mock, render, screen } from "../../../../utils/vitest-setup";
+import { render } from "../../../../utils/vitest-setup";
+import {
+	beforeEach,
+	describe,
+	expect,
+	type Mock,
+	screen,
+	test,
+} from "../../../../utils/index.ts";
 import LiveStream from "./LiveStream";
 import StreamDisplay from "./StreamDisplay";
 

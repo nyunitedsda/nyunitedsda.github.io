@@ -8,6 +8,7 @@ export default defineConfig({
 			reportsDirectory: "./src/utils/coverage",
 			enabled: true,
 		},
+		include: ["*src/**/*.test.ts", "*src/**/*.test.tsx"],
 		css: true,
 		environment: "jsdom",
 		globals: true,

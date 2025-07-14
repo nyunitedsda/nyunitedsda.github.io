@@ -4,7 +4,14 @@ import RegisterModal from "./RegisterModal";
 
 describe("RegisterModal", () => {
 	it("renders RegisterModal", () => {
-		const { getByText } = render(<RegisterModal />);
+		const { getByText } = render(
+			<RegisterModal
+				open={false}
+				onClose={function (): void {
+					throw new Error("Function not implemented.");
+				}}
+			/>,
+		);
 
 		expect(getByText("RegisterModal Component")).toBeInTheDocument();
 	});

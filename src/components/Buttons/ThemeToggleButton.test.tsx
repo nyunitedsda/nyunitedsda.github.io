@@ -7,7 +7,7 @@ import {
 	fireEvent,
 	it,
 	screen,
-} from "../../utils/index";
+} from "../../utils/index.ts";
 import { render } from "../../utils/vitest-setup.tsx";
 import ThemeToggleButton from "./ThemeToggleButton";
 

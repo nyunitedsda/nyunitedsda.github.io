@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router";
 import { mapRoutesToTabs } from "./helpers.ts";
 import type { RouteTabsItem } from "./types.ts";
+import { describe, expect, it } from "../../utils/index.ts";
 
 const defaultElement = "element";
 

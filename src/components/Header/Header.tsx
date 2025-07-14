@@ -1,6 +1,6 @@
 import { MoreVertOutlined } from "@mui/icons-material";
 import MenuRounded from "@mui/icons-material/MenuRounded";
-import { Button, Menu, useMediaQuery, useTheme } from "@mui/material";
+import { Menu, useMediaQuery, useTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -23,8 +23,6 @@ import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
 import { headerStyles } from "./styles";
 import LoginButton from "../Buttons/LoginButton";
-
-const LOGIN_TITLE = "Login";
 
 const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
 	headerStyles;

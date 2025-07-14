@@ -1,8 +1,10 @@
 import * as Yup from "yup";
+import { nameSchema } from "../commonSchemas";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default Yup.object().shape({
+	username: nameSchema,
 	email: Yup.string()
 		.required("Email is required")
 		.max(100, "Email must be 100 characters or less")
@@ -24,5 +26,8 @@ export default Yup.object().shape({
 		.required("Role is required"),
 	emailVerified: Yup.boolean()
 		.required("Email verification status is required")
+		.default(false),
+	remember_me: Yup.boolean()
+		.required("Remember Me status is required")
 		.default(false),
 });

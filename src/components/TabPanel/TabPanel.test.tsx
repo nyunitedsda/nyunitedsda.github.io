@@ -1,3 +1,4 @@
+import { describe, expect, it } from "../../utils/index.ts";
 import { render } from "../../utils/vitest-setup";
 import TabPanel from "./TabPanel";
 
@@ -28,16 +29,24 @@ describe("TabPanel", () => {
 		expect(queryByTextHidden("Hidden Content")).not.toBeInTheDocument();
 	});
 
-	it("wraps children in Stack when enableStack is true", () => {
-		const { container } = render(
+	it("wraps children in Stack when value equals index", () => {
+		const { container, getByText } = render(
 			<TabPanel value={0} index={0}>
 				Stacked Content
 			</TabPanel>,
 		);
-		// MUI Stack renders as a div with data-testid="Stack" or class "MuiStack-root"
+
+		// First verify the content is present
+		expect(getByText("Stacked Content")).toBeInTheDocument();
+
+		// Check for the Stack component - it should be the direct parent of the text
 		const stack = container.querySelector(".MuiStack-root");
-		expect(stack).toBeTruthy();
-		expect(stack?.textContent).toContain("Stacked Content");
+		if (!stack) {
+			// If no MuiStack-root, check if it's a different structure
+			console.log("Container HTML:", container.innerHTML);
+		}
+		expect(stack).not.toBeNull();
+		expect(stack).toContainHTML("Stacked Content");
 	});
 
 	it("sets correct accessibility attributes", () => {

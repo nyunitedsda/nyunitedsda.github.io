@@ -18,6 +18,8 @@ import type {
 	RegisterData,
 	UserType,
 } from "./types";
+import { useSnackbar } from "notistack";
+import { clearTokens, storeTokens } from "../../utils";
 
 // Storage keys for persistence
 const ACCESS_TOKEN_KEY = "accessToken";
@@ -25,6 +27,7 @@ const REFRESH_TOKEN_KEY = "refreshToken";
 const USER_KEY = "auth_user";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
+	const { enqueueSnackbar } = useSnackbar();
 	const [user, setUser] = useState<UserType | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -63,7 +66,15 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			const { user } = response;
 
 			setUser(user);
+			storeTokens(response.accessToken, response.refreshToken);
+			enqueueSnackbar(response?.message || "Login successful", {
+				variant: "success",
+			});
 		} catch (error) {
+			clearTokens();
+			enqueueSnackbar((error as any)?.message || "Login failed", {
+				variant: "error",
+			});
 			throw error;
 		} finally {
 			setIsLoading(false);

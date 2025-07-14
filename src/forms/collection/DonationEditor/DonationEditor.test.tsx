@@ -4,7 +4,14 @@ import DonationEditor from "./DonationEditor";
 
 describe("DonationEditor", () => {
 	it("renders DonationEditor", () => {
-		const { getByText } = render(<DonationEditor />);
+		const { getByText } = render(
+			<DonationEditor
+				open={false}
+				onClose={function (): void {
+					throw new Error("Function not implemented.");
+				}}
+			/>,
+		);
 
 		expect(getByText("DonationEditor Component")).toBeInTheDocument();
 	});

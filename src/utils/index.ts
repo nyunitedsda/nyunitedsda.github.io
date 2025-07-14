@@ -3,4 +3,5 @@ export * from "@testing-library/react";
 export * from "@testing-library/user-event";
 export { default as userEvent } from "@testing-library/user-event";
 export * from "vitest";
+export * from "./authUtils";
 export { render } from "./vitest-setup.tsx";
