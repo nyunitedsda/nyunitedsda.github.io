@@ -1,12 +1,12 @@
 import {
-    beforeEach,
-    describe,
-    expect,
-    fireEvent,
-    it,
-    screen,
-    vi,
-    waitFor,
+	beforeEach,
+	describe,
+	expect,
+	fireEvent,
+	it,
+	screen,
+	vi,
+	waitFor,
 } from "../../test/index";
 import { render } from "../../test/vitest-setup.tsx";
 import ConfirmationButton from "./ConfirmationButton";
@@ -22,7 +22,7 @@ describe("ConfirmationButton", () => {
 	});
 
 	it("renders the button with children", () => {
-		render(<ConfirmationButton {...defaultProps} />);
+		render(<ConfirmationButton {...defaultProps} />, { excludeProviders: ["All"]});
 
 		expect(
 			screen.getByRole("button", {
@@ -32,7 +32,7 @@ describe("ConfirmationButton", () => {
 	});
 
 	it("calls onClick directly when shouldConfirm is false", () => {
-		render(<ConfirmationButton {...defaultProps} shouldConfirm={false} />);
+		render(<ConfirmationButton {...defaultProps} shouldConfirm={false} />, { excludeProviders: ["All"]});
 
 		const button = screen.getByRole("button", { name: "Test Button" });
 		fireEvent.click(button);
@@ -41,7 +41,7 @@ describe("ConfirmationButton", () => {
 	});
 
 	it("calls onClick directly when shouldConfirm is not provided (defaults to false)", () => {
-		render(<ConfirmationButton {...defaultProps} />);
+		render(<ConfirmationButton {...defaultProps} />, { excludeProviders: ["All"]});
 
 		const button = screen.getByRole("button", { name: "Test Button" });
 		fireEvent.click(button);
@@ -56,7 +56,7 @@ describe("ConfirmationButton", () => {
 				shouldConfirm={true}
 				confirmationTitle="Test Confirmation"
 				confirmationContent="Are you sure?"
-			/>,
+			/>, { excludeProviders: ["All"]}
 		);
 
 		const button = screen.getByRole("button", { name: "Test Button" });
@@ -73,7 +73,7 @@ describe("ConfirmationButton", () => {
 				{...defaultProps}
 				shouldConfirm={true}
 				confirmationTitle="Test Confirmation"
-			/>,
+			/>, { excludeProviders: ["All"]}
 		);
 
 		const button = screen.getByRole("button", { name: "Test Button" });
@@ -95,7 +95,7 @@ describe("ConfirmationButton", () => {
 				{...defaultProps}
 				shouldConfirm={true}
 				confirmationTitle="Test Confirmation"
-			/>,
+			/>, { excludeProviders: ["All"]}
 		);
 
 		const button = screen.getByRole("button", { name: "Test Button" });
@@ -118,7 +118,7 @@ describe("ConfirmationButton", () => {
 				shouldConfirm={true}
 				cancelLabel="No"
 				confirmLabel="Yes"
-			/>,
+			/>, { excludeProviders: ["All"]}
 		);
 
 		const button = screen.getByRole("button", { name: "Test Button" });
@@ -147,7 +147,7 @@ describe("ConfirmationButton", () => {
 				variant="outlined"
 				color="secondary"
 				disabled={true}
-			/>,
+			/>, { excludeProviders: ["All"]}
 		);
 
 		const button = screen.getByRole("button", { name: "Test Button" });
@@ -164,7 +164,7 @@ describe("ConfirmationButton", () => {
 				shouldConfirm={true}
 			>
 				<span>Icon</span>
-			</ConfirmationButton>,
+			</ConfirmationButton>, { excludeProviders: ["All"]}
 		);
 
 		const iconButton = screen.getByRole("button", { name: "Icon" });
@@ -180,7 +180,7 @@ describe("ConfirmationButton", () => {
 				shouldConfirm={false}
 			>
 				<span>Icon</span>
-			</ConfirmationButton>,
+			</ConfirmationButton>, { excludeProviders: ["All"]}
 		);
 		const iconButton = screen.getByRole("button", { name: "Icon" });
 		fireEvent.click(iconButton);
@@ -194,7 +194,7 @@ describe("ConfirmationButton", () => {
 				shouldConfirm={false}
 			>
 				<span>Icon</span>
-			</ConfirmationButton>,
+			</ConfirmationButton>, { excludeProviders: ["All"]}
 		);
 
 		const iconButton = screen.getByRole("button", { name: "Icon" });
