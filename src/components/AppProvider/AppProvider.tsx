@@ -1,26 +1,14 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
 import { BrowserRouter } from "react-router";
 import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
 import theme from "./theme";
+import queryClient from "./queryClient";
 
-// Configure the query client with performance optimizations
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			staleTime: 60 * 1000, // 1 minute
-			gcTime: 5 * 60 * 1000, // 5 minutes
-			retry: 1,
-			refetchOnWindowFocus: false, // Don't refetch when window regains focus (better UX)
-		},
-		mutations: {
-			retry: 1,
-		},
-	},
-});
+
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders
