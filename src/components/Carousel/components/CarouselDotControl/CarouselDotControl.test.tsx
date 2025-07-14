@@ -1,15 +1,15 @@
 import type { EmblaCarouselType } from "embla-carousel";
+import { vi } from "vitest";
 import {
-	beforeEach,
-	describe,
-	expect,
-	it,
-	screen,
-} from "../../../../utils/index.ts";
-import { render } from "../../../../utils/vitest-setup.tsx";
+    beforeEach,
+    describe,
+    expect,
+    it,
+    screen,
+} from "../../../../test/index.ts";
+import { render } from "../../../../test/vitest-setup.tsx";
 import type { CarouselControlProps } from "../../types";
 import CarouselDotControl from "./CarouselDotControl";
-import { vi } from "vitest";
 
 // Mock the useDotButton hook
 vi.mock("./useDotButton", () => ({

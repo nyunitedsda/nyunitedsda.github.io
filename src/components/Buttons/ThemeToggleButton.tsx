@@ -1,7 +1,7 @@
-import { DarkModeRounded } from "@mui/icons-material";
+import DarkModeRounded from "@mui/icons-material/DarkModeRounded";
 import DarkModeTwoTone from "@mui/icons-material/DarkModeTwoTone";
 import LightModeRounded from "@mui/icons-material/LightModeRounded";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
@@ -15,7 +15,6 @@ import {
 } from "react";
 
 import day from "./daytheme.svg";
-// import night from ""
 
 const expandedBtnSx: SxProps<Theme> = {
 	position: "relative",
@@ -28,9 +27,6 @@ const expandedBtnSx: SxProps<Theme> = {
 	width: 120,
 	border: (theme) => `2px inset ${theme.palette.divider}`,
 	background: `center / 110%  no-repeat url('${day}')`,
-	// ...(theme => theme.applyStyles('dark', {
-	// 	background: `url('${night}')`,
-	// }))
 };
 
 const sunSx: SxProps<Theme> = {

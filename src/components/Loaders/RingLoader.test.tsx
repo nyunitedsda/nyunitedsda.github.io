@@ -1,5 +1,5 @@
-import { describe, expect, it, screen } from "../../utils/index.ts";
-import { render } from "../../utils/vitest-setup.tsx";
+import { describe, expect, it, screen } from "../../test/index.ts";
+import { render } from "../../test/vitest-setup.tsx";
 import RingLoader from "./RingLoader";
 
 describe("RingLoader", () => {

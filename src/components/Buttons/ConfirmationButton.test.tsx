@@ -1,14 +1,14 @@
 import {
-	beforeEach,
-	describe,
-	expect,
-	fireEvent,
-	it,
-	screen,
-	vi,
-	waitFor,
-} from "../../utils/index";
-import { render } from "../../utils/vitest-setup.tsx";
+    beforeEach,
+    describe,
+    expect,
+    fireEvent,
+    it,
+    screen,
+    vi,
+    waitFor,
+} from "../../test/index";
+import { render } from "../../test/vitest-setup.tsx";
 import ConfirmationButton from "./ConfirmationButton";
 
 describe("ConfirmationButton", () => {

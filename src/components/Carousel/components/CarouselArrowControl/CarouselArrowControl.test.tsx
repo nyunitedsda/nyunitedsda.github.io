@@ -1,14 +1,14 @@
 import type { EmblaCarouselType } from "embla-carousel";
 import {
-	beforeEach,
-	describe,
-	expect,
-	fireEvent,
-	it,
-	screen,
-	vi,
-} from "../../../../utils/index.ts";
-import { render } from "../../../../utils/vitest-setup.tsx";
+    beforeEach,
+    describe,
+    expect,
+    fireEvent,
+    it,
+    screen,
+    vi,
+} from "../../../../test/index.ts";
+import { render } from "../../../../test/vitest-setup.tsx";
 import type { CarouselControlProps } from "../../types.ts";
 import CarouselArrowControl from "./CarouselArrowControl.tsx";
 

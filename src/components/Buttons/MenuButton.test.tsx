@@ -1,6 +1,7 @@
 import type { ButtonProps } from "@mui/material/Button";
 import { vi } from "vitest";
 import {
+	act,
 	beforeEach,
 	describe,
 	expect,
@@ -8,8 +9,8 @@ import {
 	it,
 	screen,
 	waitFor,
-} from "../../utils/index.ts";
-import { render } from "../../utils/vitest-setup.tsx";
+} from "../../test/index.ts";
+import { render } from "../../test/vitest-setup.tsx";
 import MenuButton from "./MenuButton";
 import type { MenuButtonProps } from "./types";
 
@@ -27,8 +28,7 @@ vi.mock("./styles", () => ({
 	},
 }));
 
-describe("MenuButton", () => {
-	const defaultProps: MenuButtonProps = {
+const defaultProps: MenuButtonProps = {
 		isActive: (path) => path === "/active",
 		path: "/home",
 		children: "Menu Label",
@@ -56,19 +56,26 @@ describe("MenuButton", () => {
 		],
 	};
 
+
+describe("MenuButton", () => {
+	
 	beforeEach(() => {
 		vi.clearAllMocks();
 	});
 
 	it("renders as a button with correct label", () => {
-		render(<MenuButton {...defaultProps} />);
+		act(() => {
+			render(<MenuButton {...defaultProps} />);		
+		});
 
 		const button = screen.getByText("Menu Label");
 		expect(button).toBeInTheDocument();
 	});
 
 	it("uses href attribute when no menuItems are provided", () => {
-		render(<MenuButton {...defaultProps} />);
+		act(() => {
+			render(<MenuButton {...defaultProps} />);		
+		});
 
 		expect(
 			screen.getByRole("link", {
@@ -133,7 +140,7 @@ describe("MenuButton", () => {
 	});
 
 	it("closes menu when clicking outside", async () => {
-		const { container } = render(
+		render(
 			<div data-testid="outside" style={{ padding: "100px" }}>
 				<div>Outside</div>
 				<MenuButton {...menuItemsProps} />
@@ -247,7 +254,9 @@ describe("MenuButton", () => {
 	});
 
 	it("renders as a regular link when no menuItems are provided", () => {
-		render(<MenuButton {...defaultProps} />);
+		act(() => {
+			render(<MenuButton {...defaultProps} />);		
+		});
 
 		// Should be rendered as a link, not a dropdown button
 		const link = screen.getByRole("link", { name: "Menu Label" });

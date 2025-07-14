@@ -1,14 +1,14 @@
-import {
-	beforeEach,
-	describe,
-	expect,
-	it,
-	fireEvent,
-	screen,
-} from "../../utils/index.ts";
-import { render } from "../../utils/vitest-setup.tsx";
-import NotificationBanner from "./NotificationBanner";
 import { vi } from "vitest";
+import {
+    beforeEach,
+    describe,
+    expect,
+    fireEvent,
+    it,
+    screen,
+} from "../../test/index.ts";
+import { render } from "../../test/vitest-setup.tsx";
+import NotificationBanner from "./NotificationBanner";
 
 // Mock the context functions
 vi.mock("../../contexts/NotificationContext/context", () => {

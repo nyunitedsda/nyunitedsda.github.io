@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { render } from "../../utils/vitest-setup.tsx";
+import { render } from "../../test/vitest-setup.tsx";
 import RoutedTabs from "./RoutedTabs";
 
 describe("RoutedTabs", () => {

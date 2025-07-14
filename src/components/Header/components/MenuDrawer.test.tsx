@@ -1,14 +1,14 @@
 import { MemoryRouter as ActualMemoryRouter, MemoryRouter } from "react-router";
 import { vi } from "vitest";
-import { render } from "../../../utils/vitest-setup";
 import {
-	describe,
-	it,
-	expect,
-	beforeEach,
-	screen,
-	fireEvent,
-} from "../../../utils/index.ts";
+    beforeEach,
+    describe,
+    expect,
+    fireEvent,
+    it,
+    screen,
+} from "../../../test/index.ts";
+import { render } from "../../../test/vitest-setup.tsx";
 import MenuDrawer from "./MenuDrawer";
 
 // Mock the child components

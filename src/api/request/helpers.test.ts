@@ -1,13 +1,13 @@
+import { vi } from "vitest";
+import {
+    afterEach,
+    beforeEach,
+    describe,
+    expect,
+    it,
+} from "../../test/index.ts";
 import { handleOperationError } from "./helpers.ts";
 import type { DatabaseEntity } from "./types.ts";
-import {
-	describe,
-	beforeEach,
-	afterEach,
-	expect,
-	it,
-} from "../../utils/index.ts";
-import { vi } from "vitest";
 
 describe("handleOperationError", () => {
 	// Spy on console.error to verify it's called correctly

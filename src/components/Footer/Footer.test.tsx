@@ -1,6 +1,6 @@
 import { vi } from "vitest";
-import { render } from "../../utils/vitest-setup";
-import { describe, expect, screen, it } from "../../utils/index.ts";
+import { describe, expect, it, screen } from "../../test/index.ts";
+import { render } from "../../test/vitest-setup.tsx";
 import Footer from "./Footer";
 
 // Mock dependencies

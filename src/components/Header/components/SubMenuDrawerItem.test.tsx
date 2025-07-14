@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
-import { describe, expect, fireEvent, it, screen } from "../../../utils/index";
-import { render } from "../../../utils/vitest-setup";
+import { describe, expect, fireEvent, it, screen } from "../../../test/index";
+import { render } from "../../../test/vitest-setup";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 
 const mockOnClick = vi.fn();

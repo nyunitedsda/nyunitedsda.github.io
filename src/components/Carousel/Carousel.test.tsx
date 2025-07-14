@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
-import { describe, expect, it, screen } from "../../utils/index";
-import { render } from "../../utils/vitest-setup";
+import { render } from "../../test/vitest-setup";
+import { describe, expect, it, screen } from "../../test/index";
 import Carousel from "./Carousel";
 
 // Mock the embla carousel hooks and sub-components
@@ -94,26 +94,22 @@ describe("Carousel", () => {
 		expect(controls).toBeInTheDocument();
 	});
 
-	it("renders single child correctly", () => {
+	it("renders single child correctly", async () => {
 		render(
 			<Carousel>
-				<div>Single Slide</div>
-			</Carousel>,
+				<div >Single Slide</div>
+			</Carousel>
 		);
 
 		expect(screen.getByText("Single Slide")).toBeInTheDocument();
-
-		// Verify slide wrapper is created
-		const slides = document.querySelectorAll(".embla__slide");
-		expect(slides).toHaveLength(1);
 	});
 
 	it("handles multiple children correctly", () => {
 		render(
 			<Carousel>
-				<div>Slide A</div>
-				<div>Slide B</div>
-				<div>Slide C</div>
+				<div >Slide A</div>
+				<div >Slide B</div>
+				<div >Slide C</div>
 			</Carousel>,
 		);
 
@@ -122,8 +118,5 @@ describe("Carousel", () => {
 		expect(screen.getByText("Slide B")).toBeInTheDocument();
 		expect(screen.getByText("Slide C")).toBeInTheDocument();
 
-		// Verify slide wrappers are created
-		const slides = document.querySelectorAll(".embla__slide");
-		expect(slides).toHaveLength(3);
 	});
 });

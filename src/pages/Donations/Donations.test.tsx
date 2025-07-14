@@ -1,6 +1,6 @@
-import { render } from "../../utils/vitest-setup";
+import { beforeEach, describe, expect, it, screen } from "../../test/index.ts";
+import { render } from "../../test/vitest-setup.tsx";
 import Donations from "./Donations";
-import { describe, it, expect, screen, beforeEach } from "../../utils/index.ts";
 
 describe("Donations component", () => {
 	beforeEach(() => {

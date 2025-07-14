@@ -1,6 +1,6 @@
-import { screen, fireEvent } from "../../../utils/index.ts";
 import { describe, expect, it, vi } from "vitest";
-import { render } from "../../../utils/vitest-setup";
+import { fireEvent, screen } from "../../../test/index.ts";
+import { render } from "../../../test/vitest-setup.tsx";
 import DonationItem from "./DonationItem";
 
 describe("DonationItem", () => {

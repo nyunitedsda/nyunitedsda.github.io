@@ -1,4 +1,5 @@
 import { useColorScheme } from "@mui/material/styles";
+import { render } from "@testing-library/react";
 import { vi } from "vitest";
 import {
 	type Mock,
@@ -7,13 +8,11 @@ import {
 	fireEvent,
 	it,
 	screen,
-} from "../../utils/index.ts";
-import { render } from "../../utils/vitest-setup.tsx";
+} from "../../test/index.ts";
 import ThemeToggleButton from "./ThemeToggleButton";
 
-// Mock BEFORE importing the hook/component
+
 vi.mock("@mui/material/styles", async () => {
-	// Import the actual module to preserve other exports
 	const actual = await vi.importActual<typeof import("@mui/material/styles")>(
 		"@mui/material/styles",
 	);

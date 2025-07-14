@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { SnackbarProvider } from "notistack";
-import { render } from "../../../utils/vitest-setup";
-import UserEditor from "./UserEditor";
+import { render } from "../../../test/vitest-setup";
 import { describe, it } from "../../../utils";
+import UserEditor from "./UserEditor";
 
 describe("UserEditor", () => {
 	it("renders UserEditor", () => {

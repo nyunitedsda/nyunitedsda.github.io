@@ -1,15 +1,15 @@
 import { useLocation, useNavigate } from "react-router";
 import { type Mock, vi } from "vitest";
 import {
-	beforeEach,
-	describe,
-	expect,
-	fireEvent,
-	it,
-	render,
-	screen,
-	waitFor,
-} from "../../utils/index.ts";
+    beforeEach,
+    describe,
+    expect,
+    fireEvent,
+    it,
+    render,
+    screen,
+    waitFor,
+} from "../../test/index.ts";
 import UserAgreements from "./UserAgreements";
 const mockNavigate = vi.fn();
 const mockLocation = vi.fn();
