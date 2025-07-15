@@ -1,8 +1,8 @@
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { useCallback, useState, type FC } from "react";
-import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
-import type { ConfirmationButtonProps } from "./types";
+import ConfirmationDialog from "../../ConfirmationDialog/ConfirmationDialog";
+import type { ConfirmationButtonProps } from "../types";
 
 const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 	shouldConfirm = false,

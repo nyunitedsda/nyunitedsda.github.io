@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { RouteMenu } from "../../hooks/routes/types";
+import type { RouteMenu } from "../../../hooks/routes/types";
 import MenuButton from "./MenuButton";
 
 const meta: Meta<typeof MenuButton> = {
@@ -55,7 +55,7 @@ export const ActiveMenuItem: Story = {
 	args: {
 		children: "My Menu",
 		menuItems: sampleMenuItems,
-		isActive: (p) => p === "/contact",
+		isActive: (p: string) => p === "/contact",
 		buttonProps: {},
 		path: "",
 	},

@@ -9,10 +9,10 @@ import {
 	it,
 	screen,
 	waitFor,
-} from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
-import MenuButton from "./MenuButton";
-import type { MenuButtonProps } from "./types";
+} from "../../../test/index.ts";
+import { render } from "../../../test/vitest-setup.tsx";
+import MenuButton from "./index.ts";
+import type { MenuButtonProps } from "../types.ts";
 
 // Mock react-router's useNavigate
 const mockNavigate = vi.fn();

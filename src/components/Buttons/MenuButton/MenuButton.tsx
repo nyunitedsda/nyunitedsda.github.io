@@ -19,8 +19,8 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import { menuButtonStyles } from "./styles";
-import type { MenuButtonProps } from "./types";
+import { menuButtonStyles } from "../styles";
+import type { MenuButtonProps } from "../types";
 
 const { activeBtnSx, buttonSx } = menuButtonStyles;
 

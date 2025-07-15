@@ -6,23 +6,23 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import {
-	createRef,
-	type FC,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
+  createRef,
+  type FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import { useLocation, useNavigate } from "react-router";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
-import MenuButton from "../Buttons/MenuButton";
+import LoginButton from "../Buttons/LoginButton/LoginButton";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import MenuItemRenderer from "./components/MenuDrawer/MenuItemRenderer";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
 import { headerStyles } from "./styles";
-import LoginButton from "../Buttons/LoginButton";
+import MenuButton from "../Buttons/MenuButton";
 
 const { hamburgerMenuSx, rootSx, desktopMenuSx, desktopDisplaySx } =
 	headerStyles;

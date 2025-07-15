@@ -7,9 +7,9 @@ import {
 	screen,
 	vi,
 	waitFor,
-} from "../../test/index";
-import { render } from "../../test/vitest-setup.tsx";
-import ConfirmationButton from "./ConfirmationButton";
+} from "../../../test/index";
+import { render } from "../../../test/vitest-setup.tsx";
+import ConfirmationButton from "./ConfirmationButton.tsx";
 
 describe("ConfirmationButton", () => {
 	const defaultProps = {

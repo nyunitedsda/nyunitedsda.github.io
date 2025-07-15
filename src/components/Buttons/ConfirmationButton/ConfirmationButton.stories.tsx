@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -12,6 +13,7 @@ const StoryWrapper = (Story: React.ComponentType) => (
 );
 
 let argTypes;
+
 // Define the meta for the story
 const meta: Meta<typeof ConfirmationButton> = {
 	title: "Components/Buttons/ConfirmationButton",
@@ -37,8 +39,7 @@ export const WithoutConfirmation: Story = {
 	args: {
 		shouldConfirm: false,
 		children: "Regular Button",
-		icon: <EditIcon />,
-		variant: "button",
+		confirmVariant: "button",
 		color: "primary",
 		onClick: () => console.log("Button clicked directly!"),
 	} as Story["args"],
@@ -57,7 +58,7 @@ export const WithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: "Delete Item",
-		variant: "button",
+		confirmVariant: "button",
 		color: "error",
 		confirmationTitle: "Delete Item",
 		confirmationContent:
@@ -81,7 +82,7 @@ export const SaveWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: "Save Changes",
-		variant: "button",
+		confirmVariant: "button",
 		color: "primary",
 		confirmationTitle: "Save Changes",
 		confirmationContent: "Are you sure you want to save these changes?",
@@ -104,7 +105,7 @@ export const LogoutWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: "Logout",
-		variant: "button",
+		confirmVariant: "button",
 		color: "secondary",
 		confirmationTitle: "Logout",
 		confirmationContent:
@@ -128,7 +129,7 @@ export const IconButtonWithoutConfirmation: Story = {
 	args: {
 		shouldConfirm: false,
 		children: <EditIcon />,
-		variant: "icon",
+		confirmVariant: "icon",
 		color: "primary",
 		onClick: () => console.log("Edit icon clicked!"),
 	} as Story["args"],
@@ -139,7 +140,7 @@ export const DeleteIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: <DeleteIcon />,
-		variant: "icon",
+		confirmVariant: "icon",
 		color: "error",
 		confirmationTitle: "Delete Item",
 		confirmationContent:
@@ -163,7 +164,7 @@ export const SaveIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: <SaveIcon />,
-		variant: "icon",
+		confirmVariant: "icon",
 		color: "primary",
 		confirmationTitle: "Save Changes",
 		confirmationContent: "Are you sure you want to save these changes?",
@@ -186,7 +187,7 @@ export const LogoutIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
 		children: <LogoutIcon />,
-		variant: "icon",
+		confirmVariant: "icon",
 		color: "secondary",
 		confirmationTitle: "Logout",
 		confirmationContent:
@@ -210,7 +211,7 @@ export const DisabledButton: Story = {
 	args: {
 		shouldConfirm: true,
 		children: "Disabled Action",
-		variant: "button",
+		confirmVariant: "button",
 		color: "primary",
 		disabled: true,
 		confirmationTitle: "Disabled Action",
@@ -232,7 +233,7 @@ export const DisabledIconButton: Story = {
 	args: {
 		shouldConfirm: true,
 		children: <DeleteIcon />,
-		variant: "icon",
+		confirmVariant: "icon",
 		color: "error",
 		disabled: true,
 		confirmationTitle: "Disabled Delete",
@@ -280,7 +281,7 @@ argTypes = {
 		description:
 			"Function called when button is clicked (after confirmation if needed)",
 	},
-	variant: {
+	confirmVariant: {
 		control: "select",
 		options: ["button", "icon"],
 		description: "Button type: regular button or icon button",
@@ -294,5 +295,26 @@ argTypes = {
 	disabled: {
 		control: "boolean",
 		defaultValue: false,
+	},
+	children: {
+		control: "select",
+		options: {
+			"Test Button": "Test Button",
+			"Add Icon": "AddIcon",
+			"Edit Icon": "EditIcon", 
+			"Delete Icon": "DeleteIcon",
+			"Save Icon": "SaveIcon",
+			"Logout Icon": "LogoutIcon",
+		},
+		mapping: {
+			"Test Button": "Test Button",
+			"AddIcon": <AddIcon />,
+			"EditIcon": <EditIcon />,
+			"DeleteIcon": <DeleteIcon />,
+			"SaveIcon": <SaveIcon />,
+			"LogoutIcon": <LogoutIcon />,
+		},
+		description: "Content of the button (text for button variant, icon for icon variant)",
+		defaultValue: "Test Button",
 	},
 };

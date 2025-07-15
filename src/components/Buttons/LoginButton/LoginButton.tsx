@@ -9,7 +9,6 @@ const LoginButton: FC = () => {
 	const navigate = useNavigate();
 	return (
 		<Button
-			// variant="outlined"
 			fullWidth
 			color="primary"
 			sx={{ color: "primary.light" }}
