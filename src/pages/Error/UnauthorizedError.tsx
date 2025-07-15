@@ -4,15 +4,15 @@ import LockOutlined from "@mui/icons-material/LockOutlined";
 import Box from "@mui/material/Box";
 import Button, { type ButtonProps } from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router";
 import {
-	ERROR_MSG,
 	APOLOGY_MSG,
 	DESCRIPTION_MSG,
 	ERROR_BUTTONS,
+	ERROR_MSG,
 } from "./constants";
 
 const actionSx: SxProps<Theme> = {

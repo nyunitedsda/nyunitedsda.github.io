@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from "react";
+import { type FC, useEffect, useState } from "react";
 import { getAllUsers } from "../../../api/request/commonQueries";
 import type { UserType } from "../../../api/request/types";
 import { createAuthConfig } from "../../../utils/authUtils";

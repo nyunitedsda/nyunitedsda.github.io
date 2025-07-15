@@ -1,14 +1,14 @@
 import "@testing-library/jest-dom";
 import dayjs from "dayjs";
 import {
-    act,
-    afterEach,
-    beforeEach,
-    describe,
-    expect,
-    it,
-    screen,
-    vi,
+	act,
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	screen,
+	vi,
 } from "../../test/index.ts";
 import { render } from "../../test/vitest-setup.tsx";
 import CountdownTimer from "./CountdownTimer";

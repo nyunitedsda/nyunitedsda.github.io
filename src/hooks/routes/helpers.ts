@@ -118,7 +118,7 @@ export const findRouteById = (
 			if (found) return found;
 		}
 	}
-	return undefined;
+	return;
 };
 
 /**

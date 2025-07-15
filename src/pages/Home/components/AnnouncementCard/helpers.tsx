@@ -1,12 +1,3 @@
-import dayjs from "dayjs";
-import type { ReactNode } from "react";
-import type {
-	ConferenceEvent,
-	EventAnnouncement,
-	ServiceEvent,
-	StandardEvent,
-} from "../../types";
-
 import {
 	AutoStoriesOutlined,
 	CodeOutlined,
@@ -15,6 +6,14 @@ import {
 	Person3Outlined,
 	PhoneOutlined,
 } from "@mui/icons-material";
+import dayjs from "dayjs";
+import type { ReactNode } from "react";
+import type {
+	ConferenceEvent,
+	EventAnnouncement,
+	ServiceEvent,
+	StandardEvent,
+} from "../../types";
 
 type Section = {
 	title: string;

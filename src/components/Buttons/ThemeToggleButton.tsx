@@ -1,11 +1,11 @@
 import DarkModeRounded from "@mui/icons-material/DarkModeRounded";
 import DarkModeTwoTone from "@mui/icons-material/DarkModeTwoTone";
 import LightModeRounded from "@mui/icons-material/LightModeRounded";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import { type SxProps, type Theme, useColorScheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import {
 	type FC,
 	type MouseEvent,

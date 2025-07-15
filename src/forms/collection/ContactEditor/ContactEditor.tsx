@@ -1,4 +1,4 @@
-import { useMemo, type FC } from "react";
+import { type FC, useMemo } from "react";
 import type { ContactInfoType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import EntityEditor from "../../EntityEditor/EntityEditor";

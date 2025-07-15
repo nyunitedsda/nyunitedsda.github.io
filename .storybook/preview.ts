@@ -1,7 +1,7 @@
 import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/blocks';
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import AppProviderTest from '../src/components/AppProvider/AppProviderTest';
+import DynamicProvider from '../src/test/ProviderWrapper';
 import GlobalNavigationProvider from './GlobalNavigationProvider';
 
 
@@ -12,17 +12,22 @@ const preview: Preview = {
   },
 
   decorators: [
-    // 👇 Global navigation provider for addon-links integration
-    (Story, context) =>
-      React.createElement(
+    // Global navigation provider for addon-links integration
+    (Story, context) => {
+      // ExcludeProviders from context (parameters or args), always exclude 'Router' by default
+      const contextExcludes = context.parameters?.excludeProviders || context.args?.excludeProviders || [];
+      const excludeProviders = Array.from(new Set(["Router", ...contextExcludes]));
+
+      return React.createElement(
         GlobalNavigationProvider,
         { context },
         React.createElement(
-          AppProviderTest,
-          null,
-          React.createElement(Story, context.args),
-        ),
-      ),
+          DynamicProvider,
+          { excludeProviders },
+          React.createElement(Story, context.args)
+        )
+      );
+    },
   ],
   tags: ['autodocs'],
   parameters: {

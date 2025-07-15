@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import type { SxProps, Theme } from "@mui/material/styles";
 import Tab from "@mui/material/Tab";
 import Tabs, { type TabsProps } from "@mui/material/Tabs";
-import type { SxProps, Theme } from "@mui/material/styles";
 import {
 	type FC,
 	type SyntheticEvent,

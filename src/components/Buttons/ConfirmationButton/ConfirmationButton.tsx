@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { useCallback, useState, type FC } from "react";
+import { type FC, useCallback, useState } from "react";
 import ConfirmationDialog from "../../ConfirmationDialog/ConfirmationDialog";
 import type { ConfirmationButtonProps } from "../types";
 

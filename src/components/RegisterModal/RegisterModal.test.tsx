@@ -7,7 +7,7 @@ describe("RegisterModal", () => {
 		const { getByText } = render(
 			<RegisterModal
 				open={false}
-				onClose={function (): void {
+				onClose={(): void => {
 					throw new Error("Function not implemented.");
 				}}
 			/>,

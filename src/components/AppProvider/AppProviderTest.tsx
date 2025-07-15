@@ -1,9 +1,9 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
+import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
 import theme from "./theme";
-import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 
 // Create a separate query client for testing to avoid state pollution
 const createTestQueryClient = () =>

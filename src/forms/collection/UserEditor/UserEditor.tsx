@@ -1,5 +1,5 @@
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useEffect, useState } from "react";
 import {

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
-import Footer from "./Footer";
 import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
+import Footer from "./Footer";
 
 // Simple decorator to provide layout context
 const FooterDecorator = (Story: any) => {

@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import type { AdministrationProps } from "./types";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import { ADMIN_TAB_LIST } from "./constants";
+import type { AdministrationProps } from "./types";
 
 const Administration: FC<AdministrationProps> = () => {
 	return (

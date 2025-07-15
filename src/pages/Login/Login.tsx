@@ -1,13 +1,16 @@
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import LoginForm from "../../forms/collection/LoginForm/LoginForm";
 
 const containerSx: SxProps<Theme> = {
 	borderRadius: 2,
 	p: 4,
+	display: "flex",
+	flexDirection: "column",
+	gap: 2,
 };
 
 const headerSx: SxProps<Theme> = {

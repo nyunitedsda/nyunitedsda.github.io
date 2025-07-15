@@ -1,10 +1,10 @@
-import { useMemo, type FC } from "react";
+import { type FC, useMemo } from "react";
+import type { AnnouncementType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import EntityEditor from "../../EntityEditor/EntityEditor";
-import type { AnnouncementType } from "../../../api/request/types";
+import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import announcementSchema from "./schema";
-import InputField from "../../Input/FormField";
 
 const EDIT_TITLE = "Edit Announcement";
 const ADD_TITLE = "Add Announcement";

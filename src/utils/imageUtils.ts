@@ -9,7 +9,7 @@
  * @returns The webp path if it follows the convention
  */
 export const getWebpPath = (imagePath: string): string | undefined => {
-	if (!imagePath) return undefined;
+	if (!imagePath) return;
 
 	// For images already in webp format
 	if (imagePath.toLowerCase().endsWith(".webp")) return imagePath;
@@ -18,7 +18,7 @@ export const getWebpPath = (imagePath: string): string | undefined => {
 	const webpPath = imagePath.replace(/\.(jpg|jpeg|png|gif)$/i, ".webp");
 	if (webpPath !== imagePath) return webpPath;
 
-	return undefined;
+	return;
 };
 
 /**

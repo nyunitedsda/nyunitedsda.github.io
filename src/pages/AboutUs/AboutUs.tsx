@@ -5,12 +5,12 @@ import PageTitle from "../../components/PageWrapper/PageTitle";
 import ContactSection from "../Contact/components/ContactSection";
 import ServiceTimes from "../Contact/components/ServiceTimes";
 import {
-	HEADER,
-	SUBHEADER,
 	aboutContent,
 	details,
+	HEADER,
 	organization,
 	organizationContent,
+	SUBHEADER,
 } from "./constants";
 
 const AboutUs: FC = () => {

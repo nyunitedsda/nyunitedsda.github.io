@@ -3,16 +3,16 @@ import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
 	CHURCH_NAME,
 	CONTACT_PAGE_SUBTITLE,
 	CONTACT_PAGE_TITLE,
-	MAILING_ADDRESS_TITLE,
 	contactInfo,
+	MAILING_ADDRESS_TITLE,
 } from "../../constants/contact";
 import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./components/ContactSection";

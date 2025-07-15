@@ -6,7 +6,7 @@ import HomeRounded from "@mui/icons-material/HomeRounded";
 import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
 import LoginRounded from "@mui/icons-material/LoginRounded";
 import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
-import { type FC, type ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import type { RouteMenu } from "../../../../hooks/routes/types";
 import MenuDrawerItem from "../MenuDrawerItem";
 import SubMenuDrawerItem from "../SubMenuDrawerItem";

@@ -35,7 +35,7 @@ describe("Donations component", () => {
 
 	it("renders donations descriptions with correct formatting", () => {
 		render(<Donations />);
-		
+
 		expect(screen.getByText(/Simply place cash or checks/)).toBeInTheDocument();
 		expect(screen.getByText(/Please mail your donation/)).toBeInTheDocument();
 		expect(

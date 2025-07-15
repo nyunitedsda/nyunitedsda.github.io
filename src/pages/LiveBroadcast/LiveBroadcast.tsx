@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import { TAB_LIST } from "./constants";
 

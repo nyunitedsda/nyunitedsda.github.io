@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { type FC, memo } from "react";
 import type { SectionWrapperProps } from "./types";
 

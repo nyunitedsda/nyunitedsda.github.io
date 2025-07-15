@@ -1,6 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import type { FC } from "react";
 import { performQuery } from "../../api/queryData";
+import { getDatabaseList } from "../../api/request/commonQueries";
+import type { DonationType } from "../../api/request/types";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
@@ -8,9 +10,6 @@ import {
 	DONATION_SUBHEADER,
 	DONATION_TEXT,
 } from "../../constants/donationConstant";
-
-import { getDatabaseList } from "../../api/request/commonQueries";
-import type { DonationType } from "../../api/request/types";
 
 const Donations: FC = () => {
 	const { isLoading, data } = performQuery(

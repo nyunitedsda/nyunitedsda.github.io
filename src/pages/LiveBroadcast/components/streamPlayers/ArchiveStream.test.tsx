@@ -1,10 +1,10 @@
 import {
-    beforeEach,
-    describe,
-    expect,
-    it,
-    render,
-    vi,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	render,
+	vi,
 } from "../../../../test/index";
 import ArchiveStream from "./ArchiveStream";
 import StreamDisplay from "./StreamDisplay";

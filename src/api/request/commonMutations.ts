@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
 import axiosInstance from "../axiosInstance";
-import type { DatabaseEntity } from "./types";
 import { handleOperationError } from "./helpers";
+import type { DatabaseEntity } from "./types";
 
 // Create entity
 const createEntity = async <T extends object>(

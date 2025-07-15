@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import type { ReactElement } from "react";
-import { type FC, type PropsWithChildren } from "react";
+import type { FC, PropsWithChildren, ReactElement } from "react";
 
 import "./__mock__";
 import DynamicProvider from "./ProviderWrapper";

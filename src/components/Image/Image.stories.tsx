@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
-import Image from "./Image";
 import sliderImages from "../../pages/Home/sliderImages";
+import Image from "./Image";
 
 const meta: Meta<typeof Image> = {
 	title: "Components/Image",

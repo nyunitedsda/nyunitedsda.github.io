@@ -7,7 +7,7 @@ describe("AnnouncementEditor", () => {
 		const { getByText } = render(
 			<AnnouncementEditor
 				open={false}
-				onClose={function (): void {
+				onClose={(): void => {
 					throw new Error("Function not implemented.");
 				}}
 			/>,

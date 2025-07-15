@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import { useCallback, useMemo, type FC } from "react";
+import { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useAuthentication } from "../../../contexts/AuthenticationContext";
 import type { LoginCredentials } from "../../../contexts/AuthenticationContext/types";

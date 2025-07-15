@@ -2,11 +2,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import { vi } from "vitest";
 import {
-    describe,
-    expect,
-    fireEvent,
-    it,
-    screen,
+	describe,
+	expect,
+	fireEvent,
+	it,
+	screen,
 } from "../../../test/index.ts";
 import { render } from "../../../test/vitest-setup.tsx";
 import MenuDrawerItem from "./MenuDrawerItem";

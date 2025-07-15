@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import {
 	type FC,
 	type PropsWithChildren,
@@ -7,10 +8,11 @@ import {
 	useState,
 } from "react";
 import {
-	loginUser,
 	refreshAuthToken,
 	registerUser,
 } from "../../api/request/commonQueries";
+import { useLogin } from "../../hooks/auth";
+import { clearTokens, storeTokens } from "../../utils";
 import { Provider } from "./context";
 import type {
 	AuthenticationContextProps,
@@ -18,8 +20,6 @@ import type {
 	RegisterData,
 	UserType,
 } from "./types";
-import { useSnackbar } from "notistack";
-import { clearTokens, storeTokens } from "../../utils";
 
 // Storage keys for persistence
 const ACCESS_TOKEN_KEY = "accessToken";
@@ -28,6 +28,8 @@ const USER_KEY = "auth_user";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { enqueueSnackbar } = useSnackbar();
+	const loginUser = useLogin();
+
 	const [user, setUser] = useState<UserType | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -57,29 +59,32 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		initializeAuth();
 	}, []);
 
-	const login = useCallback(async (credentials: LoginCredentials) => {
-		try {
+	const login = useCallback(
+		async (credentials: LoginCredentials) => {
+			// try {
 			setIsLoading(true);
 
-			// Call the actual login API
-			const response = await loginUser(credentials);
+			// Call the actual login API using useLogin mutation
+			const response = await loginUser.mutateAsync(credentials);
 			const { user } = response;
 
 			setUser(user);
-			storeTokens(response.accessToken, response.refreshToken);
-			enqueueSnackbar(response?.message || "Login successful", {
-				variant: "success",
-			});
-		} catch (error) {
-			clearTokens();
-			enqueueSnackbar((error as any)?.message || "Login failed", {
-				variant: "error",
-			});
-			throw error;
-		} finally {
+			// storeTokens(response.accessToken, response.refreshToken);
+			// enqueueSnackbar(response?.message || "Login successful", {
+			// 	variant: "success",
+			// });
+			// } catch (error) {
+			// 	clearTokens();
+			// 	enqueueSnackbar((error as any)?.message || "Login failed", {
+			// 		variant: "error",
+			// 	});
+			// 	throw error;
+			// } finally {
 			setIsLoading(false);
-		}
-	}, []);
+			// }
+		},
+		[loginUser, enqueueSnackbar],
+	);
 
 	const register = useCallback(async (data: RegisterData) => {
 		try {

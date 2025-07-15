@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import Image from "../../../components/Image/Image";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";

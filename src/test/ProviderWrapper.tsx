@@ -1,18 +1,14 @@
-import { StrictMode, useMemo, type FC } from "react";
-import type { DynamicProviderProps, ExcludedProvider } from "./types";
-import { QueryClientProvider } from "@tanstack/react-query";
-import NotificationProvider from "../contexts/NotificationContext/NotificationContext";
-import { SnackbarProvider } from "notistack";
-import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import theme from "../components/AppProvider/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { SnackbarProvider } from "notistack";
+import { type FC, StrictMode, useMemo } from "react";
 import { MemoryRouter } from "react-router";
-import AuthenticationProvider from "../contexts/AuthenticationContext/AuthenticationContext";
 import queryClient from "../components/AppProvider/queryClient";
-
-
-
-
+import theme from "../components/AppProvider/theme";
+import AuthenticationProvider from "../contexts/AuthenticationContext/AuthenticationContext";
+import NotificationProvider from "../contexts/NotificationContext/NotificationContext";
+import type { DynamicProviderProps, ExcludedProvider } from "./types";
 
 const DynamicProvider: FC<DynamicProviderProps> = ({
 	children,
@@ -43,41 +39,39 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 	// Build the provider tree dynamically
 	let wrappedChildren = children;
 
-	if (shouldExclude('All')) {
+	if (shouldExclude("All")) {
 		return <StrictMode>{wrappedChildren}</StrictMode>;
 	}
 
 	// Apply providers in reverse order (innermost to outermost)
-	if (!shouldExclude('Notification')) {
+	if (!shouldExclude("Notification")) {
 		wrappedChildren = (
 			<NotificationProvider>{wrappedChildren}</NotificationProvider>
 		);
 	}
 
-
-	if (!shouldExclude('Theme')) {
+	if (!shouldExclude("Theme")) {
 		wrappedChildren = (
 			<ThemeProvider theme={theme}>
 				<CssBaseline enableColorScheme />
-				{wrappedChildren}</ThemeProvider>
+				{wrappedChildren}
+			</ThemeProvider>
 		);
 	}
 
-	
-
-	if (!shouldExclude('Router')) {
+	if (!shouldExclude("Router")) {
 		wrappedChildren = (
 			<MemoryRouter {...routerProps}>{wrappedChildren}</MemoryRouter>
 		);
 	}
 
-	if (!shouldExclude('Authentication')) {
+	if (!shouldExclude("Authentication")) {
 		wrappedChildren = (
 			<AuthenticationProvider>{wrappedChildren}</AuthenticationProvider>
 		);
 	}
 
-	if (!shouldExclude('Snackbar')) {
+	if (!shouldExclude("Snackbar")) {
 		wrappedChildren = (
 			<SnackbarProvider
 				maxSnack={3}
@@ -93,7 +87,7 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 		);
 	}
 
-	if (!shouldExclude('QueryClient') || !shouldExclude('Authentication')) {
+	if (!shouldExclude("QueryClient") || !shouldExclude("Authentication")) {
 		wrappedChildren = (
 			<QueryClientProvider client={queryClient}>
 				{wrappedChildren}

@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
-import { render, type RenderOptions } from "@testing-library/react";
-import { type ReactElement, type ReactNode } from "react";
+import { type RenderOptions, render } from "@testing-library/react";
+import type { ReactElement, ReactNode } from "react";
 import AppProviderTest from "./AppProviderTest";
 
 interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {

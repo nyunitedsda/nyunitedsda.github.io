@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import UserAccessForm from "../../forms/collection/UserAccessForm/UserAccessForm";
 import ProjectModal from "../ProjectModal/ProjectModal";

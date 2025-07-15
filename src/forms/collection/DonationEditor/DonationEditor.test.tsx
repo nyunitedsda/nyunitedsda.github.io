@@ -7,7 +7,7 @@ describe("DonationEditor", () => {
 		const { getByText } = render(
 			<DonationEditor
 				open={false}
-				onClose={function (): void {
+				onClose={(): void => {
 					throw new Error("Function not implemented.");
 				}}
 			/>,

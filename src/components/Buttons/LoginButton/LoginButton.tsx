@@ -1,6 +1,6 @@
 import LoginOutlined from "@mui/icons-material/LoginOutlined";
 import Button from "@mui/material/Button";
-import { memo, type FC } from "react";
+import { type FC, memo } from "react";
 import { useNavigate } from "react-router";
 
 const LOGIN_TITLE = "Login";

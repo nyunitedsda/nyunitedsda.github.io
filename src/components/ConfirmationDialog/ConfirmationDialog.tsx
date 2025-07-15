@@ -1,10 +1,10 @@
-import { memo, type FC } from "react";
-import type { ConfirmationDialogProps } from "./types";
-import ProjectModal from "../ProjectModal/ProjectModal";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import { type FC, memo } from "react";
+import ProjectModal from "../ProjectModal/ProjectModal";
+import type { ConfirmationDialogProps } from "./types";
 
 const ConfirmationDialog: FC<ConfirmationDialogProps> = ({
 	title,

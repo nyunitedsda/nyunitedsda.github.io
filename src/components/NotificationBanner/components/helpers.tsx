@@ -1,4 +1,4 @@
-import { type ReactNode, lazy } from "react";
+import { lazy, type ReactNode } from "react";
 import type { NotificationProps, NotificationSeverity } from "../types";
 
 const InfoOutlineRounded = lazy(

@@ -1,9 +1,9 @@
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { linkTo } from "@storybook/addon-links";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { FC, PropsWithChildren } from "react";
 import Header from "./Header";
-import Box from "@mui/material/Box";
 
 const storyLinks = "http://localhost:6006/?path=/story/components-header--";
 

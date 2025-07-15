@@ -301,20 +301,21 @@ argTypes = {
 		options: {
 			"Test Button": "Test Button",
 			"Add Icon": "AddIcon",
-			"Edit Icon": "EditIcon", 
+			"Edit Icon": "EditIcon",
 			"Delete Icon": "DeleteIcon",
 			"Save Icon": "SaveIcon",
 			"Logout Icon": "LogoutIcon",
 		},
 		mapping: {
 			"Test Button": "Test Button",
-			"AddIcon": <AddIcon />,
-			"EditIcon": <EditIcon />,
-			"DeleteIcon": <DeleteIcon />,
-			"SaveIcon": <SaveIcon />,
-			"LogoutIcon": <LogoutIcon />,
+			AddIcon: <AddIcon />,
+			EditIcon: <EditIcon />,
+			DeleteIcon: <DeleteIcon />,
+			SaveIcon: <SaveIcon />,
+			LogoutIcon: <LogoutIcon />,
 		},
-		description: "Content of the button (text for button variant, icon for icon variant)",
+		description:
+			"Content of the button (text for button variant, icon for icon variant)",
 		defaultValue: "Test Button",
 	},
 };

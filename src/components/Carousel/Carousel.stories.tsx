@@ -4,8 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import type { Meta, StoryObj } from "@storybook/react";
-import Carousel from "./Carousel";
 import sliderImages from "../../pages/Home/sliderImages";
+import Carousel from "./Carousel";
 
 // Sample images from the project's assets
 const sampleImages = [

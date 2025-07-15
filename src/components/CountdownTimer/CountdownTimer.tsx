@@ -1,12 +1,12 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { type FC, useEffect, useMemo, useState } from "react";
 import {
-	INITIAL_TIMER_VALUES,
 	calculateRemainingTime,
 	formatTimeUnits,
+	INITIAL_TIMER_VALUES,
 } from "./helpers";
 import type { CountdownTimerProps, TimeLeft } from "./types";
 

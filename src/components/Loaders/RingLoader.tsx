@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack";
 import {
+	alpha,
 	type SxProps,
 	type Theme,
-	alpha,
 	useTheme,
 } from "@mui/material/styles";
 import type { CSSProperties, FC } from "react";

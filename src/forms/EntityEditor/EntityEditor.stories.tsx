@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SnackbarProvider } from "notistack";
 import * as yup from "yup";
-import InputField from "../Input/FormField";
-import EntityEditor from "./EntityEditor";
-
 // Types
 import type { DonationType } from "../../api/request/types";
+import InputField from "../Input/FormField";
+import EntityEditor from "./EntityEditor";
 
 // Wrapper component to avoid React children serialization issues
 const EntityEditorWrapper = (props: any) => (

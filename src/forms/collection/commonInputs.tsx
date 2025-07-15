@@ -1,5 +1,5 @@
 import InputAdornment from "@mui/material/InputAdornment";
-import { Suspense, lazy } from "react";
+import { lazy, Suspense } from "react";
 import type { InputFieldProps } from "../Input/types";
 import PlaceholderIcon from "./PlaceholderIcon";
 

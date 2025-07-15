@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
 import {
-    afterAll,
-    beforeAll,
-    describe,
-    expect,
-    it,
-    vi,
+	afterAll,
+	beforeAll,
+	describe,
+	expect,
+	it,
+	vi,
 } from "../../test/index.ts";
 import {
-    INITIAL_TIMER_VALUES,
-    calculateRemainingTime,
-    formatTimeUnits,
+	calculateRemainingTime,
+	formatTimeUnits,
+	INITIAL_TIMER_VALUES,
 } from "./helpers";
 import type { TimeLeft } from "./types";
 

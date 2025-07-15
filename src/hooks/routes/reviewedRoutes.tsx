@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { type RouteObject } from "react-router";
+import type { RouteObject } from "react-router";
 import RingLoader from "../../components/Loaders/RingLoader";
 
 // Helper function to wrap components with Suspense
@@ -81,6 +81,8 @@ const mainLayoutRoutes: RouteWithId[] = [
 			createRoute(lazyLoad(LiveBroadcast), "watch/:tab?", "watch"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/live", "liveStream"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/archive", "archiveStream"),
+			createRoute(lazyLoad(Administration), "admin/:tab?", "admin"),
+			createRoute(lazyLoad(Login), "login"),
 		],
 	},
 ];
@@ -106,7 +108,6 @@ const fallbackRoutes: RouteObject[] = [
 	{
 		element: lazyLoad(MinimalPageWrapper),
 		children: [
-			createRoute(lazyLoad(Login), "login"),
 			createRoute(lazyLoad(UnauthorizedError), "unauthorized"),
 			{ element: lazyLoad(Error), path: "*" }, // Wildcard route doesn't need helper
 		],

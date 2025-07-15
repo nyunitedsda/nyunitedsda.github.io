@@ -11,17 +11,17 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { useParams } from "react-router";
 import { getDatabaseItem } from "../../api/request/commonQueries";
+import type { ArticleType } from "../../api/request/types";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import { authorMetaInfo } from "./blogData";
-import type { ArticleType } from "../../api/request/types";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",

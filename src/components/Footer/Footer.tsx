@@ -17,8 +17,8 @@ import { CONTACT_DATA, CONTACT_US } from "../../constants/contact";
 import {
 	MOTTO,
 	QUICK_LINKS,
-	WEBSITE_TITLE,
 	socialMediaInfo,
+	WEBSITE_TITLE,
 } from "../../constants/footer";
 import services, { SERVICES } from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";

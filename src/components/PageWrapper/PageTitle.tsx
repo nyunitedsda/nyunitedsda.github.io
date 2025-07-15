@@ -3,10 +3,10 @@ import Button, { type ButtonProps } from "@mui/material/Button";
 import type { FabProps } from "@mui/material/Fab";
 import Fab from "@mui/material/Fab";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useMemo, type FC } from "react";
+import { type FC, useMemo } from "react";
 import type { PageTitleProps } from "./types";
 
 const titleSx: SxProps<Theme> = {

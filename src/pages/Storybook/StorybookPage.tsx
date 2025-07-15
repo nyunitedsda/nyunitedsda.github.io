@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { lazy, Suspense, type FC } from "react";
+import Typography from "@mui/material/Typography";
+import { type FC, lazy, Suspense } from "react";
 import RingLoader from "../../components/Loaders/RingLoader";
 
 const StorybookIframe = lazy(() => import("./StorybookIframe.tsx"));

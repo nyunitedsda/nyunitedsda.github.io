@@ -11,8 +11,8 @@ import {
 	waitFor,
 } from "../../../test/index.ts";
 import { render } from "../../../test/vitest-setup.tsx";
-import MenuButton from "./index.ts";
 import type { MenuButtonProps } from "../types.ts";
+import MenuButton from "./index.ts";
 
 // Mock react-router's useNavigate
 const mockNavigate = vi.fn();
@@ -29,43 +29,41 @@ vi.mock("./styles", () => ({
 }));
 
 const defaultProps: MenuButtonProps = {
-		isActive: (path) => path === "/active",
-		path: "/home",
-		children: "Menu Label",
-		buttonProps: { "data-testid": "button" } as Omit<ButtonProps, "children">,
-	};
+	isActive: (path) => path === "/active",
+	path: "/home",
+	children: "Menu Label",
+	buttonProps: { "data-testid": "button" } as Omit<ButtonProps, "children">,
+};
 
-	const menuItemsProps: MenuButtonProps = {
-		...defaultProps,
-		menuItems: [
-			{
-				name: "Item 1",
-				path: "/item1",
-				id: "",
-			},
-			{
-				name: "Item 2",
-				path: "/item2",
-				id: "",
-			},
-			{
-				name: "Active Item",
-				path: "/active",
-				id: "",
-			},
-		],
-	};
-
+const menuItemsProps: MenuButtonProps = {
+	...defaultProps,
+	menuItems: [
+		{
+			name: "Item 1",
+			path: "/item1",
+			id: "",
+		},
+		{
+			name: "Item 2",
+			path: "/item2",
+			id: "",
+		},
+		{
+			name: "Active Item",
+			path: "/active",
+			id: "",
+		},
+	],
+};
 
 describe("MenuButton", () => {
-	
 	beforeEach(() => {
 		vi.clearAllMocks();
 	});
 
 	it("renders as a button with correct label", () => {
 		act(() => {
-			render(<MenuButton {...defaultProps} />);		
+			render(<MenuButton {...defaultProps} />);
 		});
 
 		const button = screen.getByText("Menu Label");
@@ -74,7 +72,7 @@ describe("MenuButton", () => {
 
 	it("uses href attribute when no menuItems are provided", () => {
 		act(() => {
-			render(<MenuButton {...defaultProps} />);		
+			render(<MenuButton {...defaultProps} />);
 		});
 
 		expect(
@@ -255,7 +253,7 @@ describe("MenuButton", () => {
 
 	it("renders as a regular link when no menuItems are provided", () => {
 		act(() => {
-			render(<MenuButton {...defaultProps} />);		
+			render(<MenuButton {...defaultProps} />);
 		});
 
 		// Should be rendered as a link, not a dropdown button

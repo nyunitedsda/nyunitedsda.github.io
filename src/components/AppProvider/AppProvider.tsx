@@ -8,8 +8,6 @@ import NotificationProvider from "../../contexts/NotificationContext/Notificatio
 import queryClient from "./queryClient";
 import theme from "./theme";
 
-
-
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders
 	const snackbarAnchor = useMemo(
@@ -22,21 +20,21 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 
 	return (
 		<StrictMode>
-				<QueryClientProvider client={queryClient}>
-					<SnackbarProvider
-								maxSnack={3}
-								anchorOrigin={snackbarAnchor}
-								// Prevent excessive DOM nodes with autoHideDuration
-								autoHideDuration={5000}
-								// Prevent layout shifts
-								preventDuplicate
-								dense
-							>
+			<QueryClientProvider client={queryClient}>
+				<SnackbarProvider
+					maxSnack={3}
+					anchorOrigin={snackbarAnchor}
+					// Prevent excessive DOM nodes with autoHideDuration
+					autoHideDuration={5000}
+					// Prevent layout shifts
+					preventDuplicate
+					dense
+				>
 					<AuthenticationProvider>
 						<BrowserRouter>
 							<ThemeProvider theme={theme}>
 								{/* Using enableColorScheme for better dark/light mode handling */}
-								<CssBaseline enableColorScheme />								
+								<CssBaseline enableColorScheme />
 								<NotificationProvider>{children}</NotificationProvider>
 							</ThemeProvider>
 						</BrowserRouter>

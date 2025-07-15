@@ -1,16 +1,15 @@
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import type { Theme } from "@mui/material/styles";
-
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
+import type { Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
 import { type FC, useCallback, useContext, useState } from "react";
+import type { NotificationSeverity } from "../../api/request/types";
 import NotificationContext from "../../contexts/NotificationContext/context";
 import { selectSeverityIcon } from "./components/helpers";
 import type { NotificationProps } from "./types";
-import type { NotificationSeverity } from "../../api/request/types";
 
 export type NotificationBannerProps = NotificationProps & {};
 

@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import {
 	getCurrentUser,
 	loginUser,
@@ -14,7 +15,6 @@ import type {
 	LoginResponse,
 	RegisterData,
 } from "../../contexts/AuthenticationContext/types";
-import { useSnackbar } from "notistack";
 import { clearTokens, storeTokens } from "../../utils";
 
 /**

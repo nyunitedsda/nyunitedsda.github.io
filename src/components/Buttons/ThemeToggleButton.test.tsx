@@ -2,15 +2,14 @@ import { useColorScheme } from "@mui/material/styles";
 import { render } from "@testing-library/react";
 import { vi } from "vitest";
 import {
-	type Mock,
 	describe,
 	expect,
 	fireEvent,
 	it,
+	type Mock,
 	screen,
 } from "../../test/index.ts";
 import ThemeToggleButton from "./ThemeToggleButton";
-
 
 vi.mock("@mui/material/styles", async () => {
 	const actual = await vi.importActual<typeof import("@mui/material/styles")>(

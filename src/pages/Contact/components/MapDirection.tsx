@@ -2,8 +2,8 @@ import { OpenInNew } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import { TRIP_PLANNER } from "../../../constants/contact";
 
