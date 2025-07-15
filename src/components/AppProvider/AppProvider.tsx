@@ -5,8 +5,8 @@ import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
 import { BrowserRouter } from "react-router";
 import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
-import theme from "./theme";
 import queryClient from "./queryClient";
+import theme from "./theme";
 
 
 
@@ -22,13 +22,8 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 
 	return (
 		<StrictMode>
-			<AuthenticationProvider>
-				<BrowserRouter>
-					<QueryClientProvider client={queryClient}>
-						<ThemeProvider theme={theme}>
-							{/* Using enableColorScheme for better dark/light mode handling */}
-							<CssBaseline enableColorScheme />
-							<SnackbarProvider
+				<QueryClientProvider client={queryClient}>
+					<SnackbarProvider
 								maxSnack={3}
 								anchorOrigin={snackbarAnchor}
 								// Prevent excessive DOM nodes with autoHideDuration
@@ -37,12 +32,17 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 								preventDuplicate
 								dense
 							>
+					<AuthenticationProvider>
+						<BrowserRouter>
+							<ThemeProvider theme={theme}>
+								{/* Using enableColorScheme for better dark/light mode handling */}
+								<CssBaseline enableColorScheme />								
 								<NotificationProvider>{children}</NotificationProvider>
-							</SnackbarProvider>
-						</ThemeProvider>
-					</QueryClientProvider>
-				</BrowserRouter>
-			</AuthenticationProvider>
+							</ThemeProvider>
+						</BrowserRouter>
+					</AuthenticationProvider>
+				</SnackbarProvider>
+			</QueryClientProvider>
 		</StrictMode>
 	);
 };

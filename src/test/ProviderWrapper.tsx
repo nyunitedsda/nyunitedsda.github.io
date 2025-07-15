@@ -54,6 +54,29 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 		);
 	}
 
+
+	if (!shouldExclude('Theme')) {
+		wrappedChildren = (
+			<ThemeProvider theme={theme}>
+				<CssBaseline enableColorScheme />
+				{wrappedChildren}</ThemeProvider>
+		);
+	}
+
+	
+
+	if (!shouldExclude('Router')) {
+		wrappedChildren = (
+			<MemoryRouter {...routerProps}>{wrappedChildren}</MemoryRouter>
+		);
+	}
+
+	if (!shouldExclude('Authentication')) {
+		wrappedChildren = (
+			<AuthenticationProvider>{wrappedChildren}</AuthenticationProvider>
+		);
+	}
+
 	if (!shouldExclude('Snackbar')) {
 		wrappedChildren = (
 			<SnackbarProvider
@@ -70,31 +93,11 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 		);
 	}
 
-	if (!shouldExclude('Theme')) {
-		wrappedChildren = (
-			<ThemeProvider theme={theme}>
-				<CssBaseline enableColorScheme />
-				{wrappedChildren}</ThemeProvider>
-		);
-	}
-
-	if (!shouldExclude('QueryClient')) {
+	if (!shouldExclude('QueryClient') || !shouldExclude('Authentication')) {
 		wrappedChildren = (
 			<QueryClientProvider client={queryClient}>
 				{wrappedChildren}
 			</QueryClientProvider>
-		);
-	}
-
-	if (!shouldExclude('Router')) {
-		wrappedChildren = (
-			<MemoryRouter {...routerProps}>{wrappedChildren}</MemoryRouter>
-		);
-	}
-
-	if (!shouldExclude('Authentication')) {
-		wrappedChildren = (
-			<AuthenticationProvider>{wrappedChildren}</AuthenticationProvider>
 		);
 	}
 
