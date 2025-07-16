@@ -12,7 +12,6 @@ import {
 	registerUser,
 } from "../../api/request/commonQueries";
 import { useLogin } from "../../hooks/auth";
-import { clearTokens, storeTokens } from "../../utils";
 import { Provider } from "./context";
 import type {
 	AuthenticationContextProps,
@@ -69,19 +68,8 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			const { user } = response;
 
 			setUser(user);
-			// storeTokens(response.accessToken, response.refreshToken);
-			// enqueueSnackbar(response?.message || "Login successful", {
-			// 	variant: "success",
-			// });
-			// } catch (error) {
-			// 	clearTokens();
-			// 	enqueueSnackbar((error as any)?.message || "Login failed", {
-			// 		variant: "error",
-			// 	});
-			// 	throw error;
-			// } finally {
+
 			setIsLoading(false);
-			// }
 		},
 		[loginUser, enqueueSnackbar],
 	);
