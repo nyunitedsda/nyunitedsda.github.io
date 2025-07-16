@@ -31,12 +31,12 @@ const sampleSabbathService: ServiceType = {
 
 // Interactive wrapper component with open button
 const InteractiveWrapper = ({
-	entity,
+	data,
 	onClose,
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	entity?: ServiceType;
+	data?: ServiceType;
 	onClose?: () => void;
 	onSuccess?: (data: ServiceType) => void;
 	buttonText?: string;
@@ -74,7 +74,7 @@ const InteractiveWrapper = ({
 			</button>
 			<ServiceEditor
 				open={open}
-				entity={entity}
+				data={data}
 				onClose={handleClose}
 				onSuccess={handleSuccess}
 			/>
@@ -106,9 +106,9 @@ const meta: Meta<typeof ServiceEditor> = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		entity: {
+		data: {
 			control: "object",
-			description: "Service entity to edit (undefined for create mode)",
+			description: "Service data to edit (undefined for create mode)",
 			table: {
 				type: { summary: "ServiceType | undefined" },
 				defaultValue: { summary: "undefined" },
@@ -157,14 +157,14 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🆕 Create New Service"
 		/>
 	),
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ServiceType) => console.log("Service created:", data),
 	},
@@ -184,7 +184,7 @@ const [open, setOpen] = useState(false);
 
 <ServiceEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);
@@ -200,14 +200,14 @@ const [open, setOpen] = useState(false);
 export const EditModeSundayService: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="☀️ Edit Sunday Service"
 		/>
 	),
 	args: {
-		entity: sampleSundayService,
+		data: sampleSundayService,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ServiceType) =>
 			console.log("Sunday service updated:", data),
@@ -233,14 +233,14 @@ export const EditModeSundayService: Story = {
 export const EditModeWednesdayService: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📖 Edit Bible Study"
 		/>
 	),
 	args: {
-		entity: sampleWednesdayService,
+		data: sampleWednesdayService,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ServiceType) =>
 			console.log("Wednesday service updated:", data),
@@ -266,14 +266,14 @@ export const EditModeWednesdayService: Story = {
 export const EditModeSabbathSchool: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📚 Edit Sabbath School"
 		/>
 	),
 	args: {
-		entity: sampleSabbathService,
+		data: sampleSabbathService,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ServiceType) =>
 			console.log("Sabbath school updated:", data),
@@ -378,7 +378,7 @@ export const ClosedModal: Story = {
 					</button>
 					<ServiceEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Service saved:", data);
@@ -392,7 +392,7 @@ export const ClosedModal: Story = {
 		return <ClosedModalDemo />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ServiceType) => console.log("Service saved:", data),
 	},
@@ -417,14 +417,14 @@ export const ClosedModal: Story = {
 export const CreateModePreFilled: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🌅 Create Evening Service"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			title: "Evening Prayer Service",
 			time: "6:00 PM",

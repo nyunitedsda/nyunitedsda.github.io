@@ -13,18 +13,18 @@ const EMPTY_ARTICLES_TEXT = "No articles available.";
 // Wrapper component to handle type compatibility
 const WrappedBlogEditor = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }: {
 	open: boolean;
-	entity?: Partial<ArticleType>;
+	data?: Partial<ArticleType>;
 	onClose: () => void;
 	onSuccess?: (data?: ArticleType) => void;
 }) => (
 	<BlogEditor
 		open={open}
-		entity={entity as ArticleType}
+		data={data as ArticleType}
 		onClose={onClose}
 		onSuccess={onSuccess ? () => onSuccess() : undefined}
 	/>

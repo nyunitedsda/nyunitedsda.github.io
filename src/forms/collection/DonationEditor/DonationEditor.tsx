@@ -7,7 +7,7 @@ import InputField from "../../Input/FormField";
 
 export interface DonationEditorProps {
 	open: boolean;
-	entity?: Partial<DonationType>;
+	data?: Partial<DonationType>;
 	onClose: () => void;
 }
 
@@ -28,27 +28,27 @@ const BUTTON_TEXT = "Save";
 const TITLE_FIELD_LABEL = "How would you like to title this donation?";
 const DESCRIPTION_FIELD_LABEL = "Please describe the donation method";
 
-const DonationEditor: FC<DonationEditorProps> = ({ open, entity, onClose }) => {
+const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
 	const { initialValues, title } = useMemo(
 		() =>
-			entity && Object.hasOwn(entity, "id")
+			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: entity,
+						initialValues: data,
 						title: EDIT_TITLE,
 					}
 				: {
 						initialValues: defaultValues,
 						title: ADD_TITLE,
 					},
-		[entity],
+		[data],
 	);
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				entity={ENTITY_NAME}
-				id={entity?.id}
+				data={ENTITY_NAME}
+				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
 				validationSchema={donationSchema}

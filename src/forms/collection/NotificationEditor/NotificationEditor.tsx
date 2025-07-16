@@ -1,9 +1,13 @@
+import { Palette } from "@mui/icons-material";
+import { ListItemIcon, ListItemText, type Palette as PaletteType, type SimplePaletteColorOptions } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 import { type FC, useMemo } from "react";
 import * as Yup from "yup";
 import type {
 	NotificationSeverityOption,
 	NotificationType,
 } from "../../../api/request/types";
+import theme from "../../../components/AppProvider/theme";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import { default as InputField } from "../../Input/FormField";
@@ -41,32 +45,40 @@ const severityOptions: NotificationSeverityOption[] = [
 	{ id: 4, value: "success", label: "Success" },
 ];
 
+// Map severity values to palette keys
+const severityPaletteKey: Record<string, keyof PaletteType> = {
+	information: "info",
+	caution: "warning",
+	error: "error",
+	success: "success",
+};
+
 const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }) => {
 	const { initialValues, title } = useMemo(
 		() =>
-			entity && Object.hasOwn(entity, "id")
+			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: entity,
+						initialValues: data,
 						title: EDIT_TITLE,
 					}
 				: {
 						initialValues: defaultValues,
 						title: ADD_TITLE,
 					},
-		[entity],
+		[data],
 	);
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				entity={ENTITY_NAME}
-				id={entity?.id}
+				data={ENTITY_NAME}
+				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
 				validationSchema={notificationSchema}
@@ -85,15 +97,41 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 					label={MESSAGE_FIELD_LABEL}
 					fieldType="text"
 					multiline
-					minRows={4}
-				/>
-
+					/>
 				<InputField
+					renderItemLabel={(item) => {
+						const paletteKey = severityPaletteKey[item.value] || "info";
+						return (
+							<MenuItem
+								key={item.id}
+								sx={{
+									width: "100%",
+									color: (theme.palette[paletteKey] as SimplePaletteColorOptions).main,
+								}}
+								value={item.value}
+							>
+								<ListItemIcon sx={{ color: (theme.palette[paletteKey] as SimplePaletteColorOptions).main }}><Palette /></ListItemIcon>
+								<ListItemText primary={item.label} />
+							</MenuItem>
+						);
+					}}
 					name="severity"
 					label={SEVERITY_FIELD_LABEL}
 					fieldType="select"
 					items={severityOptions}
-					renderItemLabel={(item) => item.label}
+					sx={{
+						'& .MuiButtonBase-root-MuiMenuItem-root': {
+							pl: 0,
+							pr: 0,
+						},
+						'& .MuiList-root': {
+							px: 0,
+							'& .MuiMenuItem-root': {
+								width: "100%",
+								px: 0,
+							},
+					},
+					}}
 					valueResolver={(item) => item.value}
 				/>
 

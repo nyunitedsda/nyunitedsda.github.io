@@ -32,30 +32,30 @@ const eventTypes = [
 
 const AnnouncementEditor: FC<EditorProps<AnnouncementType>> = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }) => {
 	const { initialValues, title } = useMemo(
 		() =>
-			entity && Object.hasOwn(entity, "id")
+			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: entity,
+						initialValues: data,
 						title: EDIT_TITLE,
 					}
 				: {
 						initialValues: defaultValues,
 						title: ADD_TITLE,
 					},
-		[entity],
+		[data],
 	);
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				entity={ENTITY_NAME}
-				id={entity?.id}
+				data={ENTITY_NAME}
+				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
 				validationSchema={announcementSchema}

@@ -16,12 +16,12 @@ const sampleNotification: NotificationType = {
 
 // Interactive wrapper component with open button
 const InteractiveWrapper = ({
-	entity,
+	data,
 	onClose,
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	entity?: Partial<NotificationType>;
+	data?: Partial<NotificationType>;
 	onClose?: () => void;
 	onSuccess?: (data: Partial<NotificationType>) => void;
 	buttonText?: string;
@@ -59,7 +59,7 @@ const InteractiveWrapper = ({
 			</button>
 			<NotificationEditor
 				open={open}
-				entity={entity}
+				data={data}
 				onClose={handleClose}
 				onSuccess={handleSuccess}
 			/>
@@ -90,9 +90,9 @@ const meta: Meta<typeof NotificationEditor> = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		entity: {
+		data: {
 			control: "object",
-			description: "Notification entity to edit (undefined for create mode)",
+			description: "Notification data to edit (undefined for create mode)",
 			table: {
 				type: { summary: "NotificationType | undefined" },
 				defaultValue: { summary: "undefined" },
@@ -142,14 +142,14 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🆕 Create New Notification"
 		/>
 	),
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationType>) =>
 			console.log("Notification created:", data),
@@ -170,7 +170,7 @@ const [open, setOpen] = useState(false);
 
 <NotificationEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);
@@ -186,14 +186,14 @@ const [open, setOpen] = useState(false);
 export const EditMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📝 Edit Notification"
 		/>
 	),
 	args: {
-		entity: sampleNotification as Partial<NotificationType>,
+		data: sampleNotification as Partial<NotificationType>,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationType>) =>
 			console.log("Notification updated:", data),
@@ -219,14 +219,14 @@ export const EditMode: Story = {
 export const EditModeError: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🚨 Edit Error Notification"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			...sampleNotification,
 			id: 2,
 			message:
@@ -258,14 +258,14 @@ export const EditModeError: Story = {
 export const EditModeSuccess: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="✅ Edit Success Notification"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			...sampleNotification,
 			id: 3,
 			message: "The system update has been completed successfully.",
@@ -296,14 +296,14 @@ export const EditModeSuccess: Story = {
 export const EditModeCaution: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="⚠️ Edit Caution Notification"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			...sampleNotification,
 			id: 4,
 			message: "Your session will expire in 5 minutes. Please save your work.",
@@ -443,7 +443,7 @@ export const ClosedModal: Story = {
 					</button>
 					<NotificationEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Notification saved:", data);
@@ -457,7 +457,7 @@ export const ClosedModal: Story = {
 		return <ClosedModalDemo />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationType>) =>
 			console.log("Notification saved:", data),

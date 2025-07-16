@@ -49,12 +49,12 @@ const sampleMinimalContact: ContactInfoType = {
 
 // Interactive wrapper component with open button
 const InteractiveWrapper = ({
-	entity,
+	data,
 	onClose,
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	entity?: ContactInfoType;
+	data?: ContactInfoType;
 	onClose?: () => void;
 	onSuccess?: (data: ContactInfoType) => void;
 	buttonText?: string;
@@ -92,7 +92,7 @@ const InteractiveWrapper = ({
 			</button>
 			<ContactEditor
 				open={open}
-				entity={entity}
+				data={data}
 				onClose={handleClose}
 				onSuccess={handleSuccess}
 			/>
@@ -124,9 +124,9 @@ const meta: Meta<typeof ContactEditor> = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		entity: {
+		data: {
 			control: "object",
-			description: "Contact entity to edit (undefined for create mode)",
+			description: "Contact data to edit (undefined for create mode)",
 			table: {
 				type: { summary: "ContactInfoType | undefined" },
 				defaultValue: { summary: "undefined" },
@@ -176,14 +176,14 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🆕 Create New Contact"
 		/>
 	),
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ContactInfoType) => console.log("Contact created:", data),
 	},
@@ -203,7 +203,7 @@ const [open, setOpen] = useState(false);
 
 <ContactEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);
@@ -219,14 +219,14 @@ const [open, setOpen] = useState(false);
 export const EditModeChurchContact: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="⛪ Edit Church Contact"
 		/>
 	),
 	args: {
-		entity: sampleChurchContact,
+		data: sampleChurchContact,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ContactInfoType) =>
 			console.log("Church contact updated:", data),
@@ -252,14 +252,14 @@ export const EditModeChurchContact: Story = {
 export const EditModePastorContact: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="👨‍💼 Edit Pastor Contact"
 		/>
 	),
 	args: {
-		entity: samplePastorContact,
+		data: samplePastorContact,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ContactInfoType) =>
 			console.log("Pastor contact updated:", data),
@@ -285,14 +285,14 @@ export const EditModePastorContact: Story = {
 export const EditModeMinimalContact: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📝 Edit Minimal Contact"
 		/>
 	),
 	args: {
-		entity: sampleMinimalContact,
+		data: sampleMinimalContact,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ContactInfoType) =>
 			console.log("Minimal contact updated:", data),
@@ -398,7 +398,7 @@ export const ClosedModal: Story = {
 					</button>
 					<ContactEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Contact saved:", data);
@@ -412,7 +412,7 @@ export const ClosedModal: Story = {
 		return <ClosedModalDemo />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ContactInfoType) => console.log("Contact saved:", data),
 	},
@@ -437,14 +437,14 @@ export const ClosedModal: Story = {
 export const CreateModePreFilled: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📝 Create Pre-filled Contact"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			email: "example@church.org",
 			phone: "+1-555-000-0000",
@@ -480,14 +480,14 @@ export const CreateModePreFilled: Story = {
 export const InternationalContact: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🌍 Edit International Contact"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 4,
 			email: "international@example.org",
 			phone: "+44-20-7946-0958",

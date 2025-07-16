@@ -13,18 +13,18 @@ const EMPTY_SERVICES_TEXT = "No services available.";
 // Wrapper component to handle type compatibility
 const WrappedServiceEditor = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }: {
 	open: boolean;
-	entity?: Partial<ServiceType>;
+	data?: Partial<ServiceType>;
 	onClose: () => void;
 	onSuccess?: (data?: ServiceType) => void;
 }) => (
 	<ServiceEditor
 		open={open}
-		entity={entity as ServiceType}
+		data={data as ServiceType}
 		onClose={onClose}
 		onSuccess={onSuccess ? () => onSuccess() : undefined}
 	/>

@@ -46,12 +46,12 @@ const sampleCommunityArticle: ArticleType = {
 
 // Interactive wrapper component with open button
 const InteractiveWrapper = ({
-	entity,
+	data,
 	onClose,
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	entity?: ArticleType;
+	data?: ArticleType;
 	onClose?: () => void;
 	onSuccess?: (data: ArticleType) => void;
 	buttonText?: string;
@@ -89,7 +89,7 @@ const InteractiveWrapper = ({
 			</button>
 			<BlogEditor
 				open={open}
-				entity={entity}
+				data={data}
 				onClose={handleClose}
 				onSuccess={handleSuccess}
 			/>
@@ -127,9 +127,9 @@ const meta: Meta<typeof BlogEditor> = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		entity: {
+		data: {
 			control: "object",
-			description: "Article entity to edit (undefined for create mode)",
+			description: "Article data to edit (undefined for create mode)",
 			table: {
 				type: { summary: "ArticleType | undefined" },
 				defaultValue: { summary: "undefined" },
@@ -181,14 +181,14 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🆕 Create New Article"
 		/>
 	),
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) => console.log("Article created:", data),
 	},
@@ -208,7 +208,7 @@ const [open, setOpen] = useState(false);
 
 <BlogEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);
@@ -227,7 +227,7 @@ export const Playground: Story = {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
 				ArticleType | undefined
-			>(args.entity);
+			>(args.data);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -288,7 +288,7 @@ export const Playground: Story = {
 					</button>
 					<BlogEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Article saved:", data);
@@ -302,7 +302,7 @@ export const Playground: Story = {
 		return <PlaygroundWrapper />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
 	},
@@ -329,14 +329,14 @@ export const Playground: Story = {
 export const EditModeTechnology: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="💻 Edit Tech Article"
 		/>
 	),
 	args: {
-		entity: sampleTechArticle,
+		data: sampleTechArticle,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) =>
 			console.log("Tech article updated:", data),
@@ -362,14 +362,14 @@ export const EditModeTechnology: Story = {
 export const EditModeFaith: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🙏 Edit Faith Article"
 		/>
 	),
 	args: {
-		entity: sampleFaithArticle,
+		data: sampleFaithArticle,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) =>
 			console.log("Faith article updated:", data),
@@ -395,14 +395,14 @@ export const EditModeFaith: Story = {
 export const EditModeCommunity: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="👥 Edit Community Article"
 		/>
 	),
 	args: {
-		entity: sampleCommunityArticle,
+		data: sampleCommunityArticle,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) =>
 			console.log("Community article updated:", data),
@@ -428,14 +428,14 @@ export const EditModeCommunity: Story = {
 export const LongContentArticle: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📄 Edit Long Article"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			...sampleFaithArticle,
 			id: 4,
 			title: "The Complete Guide to Christian Living",
@@ -483,14 +483,14 @@ This guide provides practical steps and biblical insights for each of these impo
 export const FormValidationDemo: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🚨 Test Form Validation"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			title: "", // Empty to trigger validation
 			category: "",
@@ -605,7 +605,7 @@ export const ClosedModal: Story = {
 					</button>
 					<BlogEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Article saved:", data);
@@ -619,7 +619,7 @@ export const ClosedModal: Story = {
 		return <ClosedModalDemo />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
 	},

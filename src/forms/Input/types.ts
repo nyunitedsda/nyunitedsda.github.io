@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type FormFieldType =
 	| "text"
 	| "datetime-local"
@@ -15,6 +17,6 @@ export interface InputFieldProps {
 	rows?: number;
 	items?: any[]; // For select fields, the items to display
 	valueResolver?: (item: any) => string | number; // Function to resolve the value for select options
-	renderItemLabel?: (item: any) => string; // Function to render the label
+	renderItemLabel?: (item: any) => ReactNode; // Function to render the label
 	[x: string]: any;
 }

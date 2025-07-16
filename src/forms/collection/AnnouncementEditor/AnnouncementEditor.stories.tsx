@@ -64,12 +64,12 @@ const sampleZoomAnnouncement: AnnouncementType = {
 
 // Interactive wrapper component with open button
 const InteractiveWrapper = ({
-	entity,
+	data,
 	onClose,
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	entity?: AnnouncementType;
+	data?: AnnouncementType;
 	onClose?: () => void;
 	onSuccess?: (data: AnnouncementType) => void;
 	buttonText?: string;
@@ -107,7 +107,7 @@ const InteractiveWrapper = ({
 			</button>
 			<AnnouncementEditor
 				open={open}
-				entity={entity}
+				data={data}
 				onClose={handleClose}
 				onSuccess={handleSuccess}
 			/>
@@ -145,9 +145,9 @@ const meta: Meta<typeof AnnouncementEditor> = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		entity: {
+		data: {
 			control: "object",
-			description: "Announcement entity to edit (undefined for create mode)",
+			description: "Announcement data to edit (undefined for create mode)",
 			table: {
 				type: { summary: "AnnouncementType | undefined" },
 				defaultValue: { summary: "undefined" },
@@ -199,14 +199,14 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🆕 Create New Announcement"
 		/>
 	),
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Announcement created:", data),
@@ -227,7 +227,7 @@ const [open, setOpen] = useState(false);
 
 <AnnouncementEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);
@@ -246,7 +246,7 @@ export const Playground: Story = {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
 				AnnouncementType | undefined
-			>(args.entity);
+			>(args.data);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -308,7 +308,7 @@ export const Playground: Story = {
 					</button>
 					<AnnouncementEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Announcement saved:", data);
@@ -322,7 +322,7 @@ export const Playground: Story = {
 		return <PlaygroundWrapper />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Announcement saved:", data),
@@ -345,9 +345,9 @@ export const Playground: Story = {
 			source: {
 				code: `
 const [open, setOpen] = useState(false);
-const [entity, setEntity] = useState(undefined);
+const [data, setEntity] = useState(undefined);
 
-// Dynamic entity selection
+// Dynamic data selection
 <select onChange={(e) => setEntity(options[e.target.value])}>
   <option value="undefined">Create Mode</option>
   <option value="event">Event</option>
@@ -361,7 +361,7 @@ const [entity, setEntity] = useState(undefined);
 
 <AnnouncementEditor
   open={open}
-  entity={entity}
+  data={data}
   onClose={() => setOpen(false)}
   onSuccess={handleSuccess}
 />`,
@@ -374,14 +374,14 @@ const [entity, setEntity] = useState(undefined);
 export const EditModeEvent: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📅 Edit Event Announcement"
 		/>
 	),
 	args: {
-		entity: sampleEventAnnouncement,
+		data: sampleEventAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Event announcement updated:", data),
@@ -418,7 +418,7 @@ const eventData = {
 
 <AnnouncementEditor
   open={open}
-  entity={eventData}
+  data={eventData}
   onClose={handleClose}
   onSuccess={handleUpdate}
 />`,
@@ -431,14 +431,14 @@ const eventData = {
 export const EditModeService: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="⛪ Edit Service Announcement"
 		/>
 	),
 	args: {
-		entity: sampleServiceAnnouncement,
+		data: sampleServiceAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Service announcement updated:", data),
@@ -480,14 +480,14 @@ const serviceData = {
 export const EditModeConference: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🏛️ Edit Conference Announcement"
 		/>
 	),
 	args: {
-		entity: sampleConferenceAnnouncement,
+		data: sampleConferenceAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Conference announcement updated:", data),
@@ -529,14 +529,14 @@ const conferenceData = {
 export const EditModeZoom: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="💻 Edit Zoom Meeting"
 		/>
 	),
 	args: {
-		entity: sampleZoomAnnouncement,
+		data: sampleZoomAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Zoom announcement updated:", data),
@@ -578,14 +578,14 @@ const zoomData = {
 export const RecurringEvent: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🔄 View Recurring Event"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			...sampleEventAnnouncement,
 			id: 5,
 			title: "Weekly Prayer Meeting",
@@ -618,14 +618,14 @@ export const RecurringEvent: Story = {
 export const FormValidationDemo: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="🚨 Test Form Validation"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			title: "", // Empty to trigger validation
 			type: "event",
@@ -672,7 +672,7 @@ const invalidEntity = {
 // Form will show validation errors
 <AnnouncementEditor
   open={open}
-  entity={invalidEntity}
+  data={invalidEntity}
   // ... other props
 />`,
 			},
@@ -712,7 +712,7 @@ export const ClosedModal: Story = {
 						</h4>
 						<p style={{ margin: "0 0 16px 0", color: "#666" }}>
 							This demonstrates the component's default closed state. Select an
-							entity type and click the button to see it open.
+							data type and click the button to see it open.
 						</p>
 						<div style={{ marginBottom: "12px" }}>
 							<label
@@ -765,7 +765,7 @@ export const ClosedModal: Story = {
 					</button>
 					<AnnouncementEditor
 						open={open}
-						entity={selectedEntity}
+						data={selectedEntity}
 						onClose={() => setOpen(false)}
 						onSuccess={(data) => {
 							console.log("Announcement saved:", data);
@@ -779,7 +779,7 @@ export const ClosedModal: Story = {
 		return <ClosedModalDemo />;
 	},
 	args: {
-		entity: undefined,
+		data: undefined,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Announcement saved:", data),
@@ -802,12 +802,12 @@ export const ClosedModal: Story = {
 			source: {
 				code: `
 const [open, setOpen] = useState(false); // 👈 Starts closed
-const [entity, setEntity] = useState(undefined);
+const [data, setEntity] = useState(undefined);
 
 // Component starts closed
 <AnnouncementEditor
   open={open} // false by default
-  entity={entity}
+  data={data}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     handleSuccess(data);
@@ -828,14 +828,14 @@ const [entity, setEntity] = useState(undefined);
 export const CreateModeService: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="⛪ Create Service Announcement"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			title: "",
 			type: "service",
@@ -869,14 +869,14 @@ export const CreateModeService: Story = {
 export const CreateModeZoom: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="💻 Create Zoom Meeting"
 		/>
 	),
 	args: {
-		entity: {
+		data: {
 			id: 0,
 			title: "",
 			type: "zoom",
@@ -911,14 +911,14 @@ export const CreateModeZoom: Story = {
 export const MobileView: Story = {
 	render: (args) => (
 		<InteractiveWrapper
-			entity={args.entity}
+			data={args.data}
 			onClose={args.onClose}
 			onSuccess={args.onSuccess}
 			buttonText="📱 Test Mobile View"
 		/>
 	),
 	args: {
-		entity: sampleEventAnnouncement,
+		data: sampleEventAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Announcement updated:", data),
@@ -957,7 +957,7 @@ export const DarkTheme: Story = {
 		>
 			<SnackbarProvider maxSnack={3}>
 				<InteractiveWrapper
-					entity={args.entity}
+					data={args.data}
 					onClose={args.onClose}
 					onSuccess={args.onSuccess}
 					buttonText="🌙 Test Dark Theme"
@@ -966,7 +966,7 @@ export const DarkTheme: Story = {
 		</div>
 	),
 	args: {
-		entity: sampleConferenceAnnouncement,
+		data: sampleConferenceAnnouncement,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: AnnouncementType) =>
 			console.log("Announcement updated:", data),

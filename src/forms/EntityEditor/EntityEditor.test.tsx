@@ -6,7 +6,7 @@ describe("GenericEntityModificationForm", () => {
 	it("renders GenericEntityModificationForm", () => {
 		const { getByText } = render(
 			<EntityEditor
-				entity={"donations"}
+				data={"donations"}
 				validationSchema={undefined}
 				defaultValues={{
 					id: undefined,

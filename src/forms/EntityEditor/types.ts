@@ -3,12 +3,12 @@ import type { DatabaseEntity } from "../../api/request/types";
 
 interface EntityEditorProps<T extends { id?: number }> {
 	/**
-	 * The database entity type
+	 * The database data type
 	 */
-	entity: DatabaseEntity;
+	data: DatabaseEntity;
 
 	/**
-	 * ID of entity to update (if updating existing entity)
+	 * ID of data to update (if updating existing data)
 	 */
 	id?: number;
 
@@ -18,7 +18,7 @@ interface EntityEditorProps<T extends { id?: number }> {
 	validationSchema: any;
 
 	/**
-	 * Default/initial values for entity
+	 * Default/initial values for data
 	 */
 	defaultValues: T;
 

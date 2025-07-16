@@ -23,6 +23,7 @@ const InputField: FC<InputFieldProps> = ({
 
 	const isDisabled = useMemo(() => {
 		if (!dependencies || dependencies.length === 0) return false;
+		if (typeof field.value !== "object" || field.value === null) return true;
 		return dependencies.some((dep) => !field.value[dep]);
 	}, [dependencies, field.value]);
 
@@ -55,10 +56,10 @@ const InputField: FC<InputFieldProps> = ({
 						props.valueResolver ||
 						((item: { value: number | string }) => item.value)
 					}
-					renderItemLabel={
-						props.renderItemLabel ||
-						((item: { value: string | number }) => String(item.value))
-					}
+			renderItemLabel={
+				(props.renderItemLabel as ((item: { value: string | number }) => string)) ||
+				((item: { value: string | number }) => String(item.value))
+			}
 				/>
 			);
 

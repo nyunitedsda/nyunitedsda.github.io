@@ -60,7 +60,7 @@ type Story = StoryObj<typeof meta>;
 // Create mode story
 export const CreateMode: Story = {
 	args: {
-		entity: "donations",
+		data: "donations",
 		validationSchema: testSchema,
 		defaultValues: createModeDefaults,
 		title: "Create New Item",
@@ -74,7 +74,7 @@ export const CreateMode: Story = {
 // Edit mode story
 export const EditMode: Story = {
 	args: {
-		entity: "donations",
+		data: "donations",
 		id: 123,
 		validationSchema: testSchema,
 		defaultValues: defaultValues,
@@ -107,7 +107,7 @@ export const EditMode: Story = {
 // Loading state story
 export const LoadingState: Story = {
 	args: {
-		entity: "donations",
+		data: "donations",
 		id: 456, // Provide ID to trigger loading state
 		validationSchema: testSchema,
 		defaultValues: defaultValues,

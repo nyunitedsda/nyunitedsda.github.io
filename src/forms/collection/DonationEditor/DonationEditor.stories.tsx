@@ -40,10 +40,10 @@ const sampleDonations: Partial<DonationType>[] = [
  * Interactive wrapper component to demonstrate the DonationEditor modal
  */
 const InteractiveWrapper = ({
-	entity,
+	data,
 	...args
 }: {
-	entity?: Partial<DonationType>;
+	data?: Partial<DonationType>;
 	open?: boolean;
 }) => {
 	const [isOpen, setIsOpen] = useState(args.open || false);
@@ -66,9 +66,9 @@ const InteractiveWrapper = ({
 				onClick={handleOpen}
 				style={{ marginBottom: "20px" }}
 			>
-				{entity?.id ? `Edit ${entity.title}` : "Create New Donation Method"}
+				{data?.id ? `Edit ${data.title}` : "Create New Donation Method"}
 			</Button>
-			{entity && (
+			{data && (
 				<div
 					style={{
 						marginBottom: "20px",
@@ -77,11 +77,11 @@ const InteractiveWrapper = ({
 						borderRadius: "4px",
 					}}
 				>
-					<h4>Selected Donation: {entity.title}</h4>
-					<p>{entity.description}</p>
+					<h4>Selected Donation: {data.title}</h4>
+					<p>{data.description}</p>
 				</div>
 			)}
-			<DonationEditor open={isOpen} entity={entity} onClose={handleClose} />
+			<DonationEditor open={isOpen} data={data} onClose={handleClose} />
 		</div>
 	);
 };
@@ -113,7 +113,7 @@ All stories use an interactive button to open the modal, making the documentatio
 			control: "boolean",
 			description: "Whether the modal is open",
 		},
-		entity: {
+		data: {
 			control: "object",
 			description: "The donation data to edit (undefined for create mode)",
 		},
@@ -137,7 +137,7 @@ type Story = StoryObj<typeof meta>;
 export const Create: Story = {
 	render: (args) => <InteractiveWrapper {...args} />,
 	args: {
-		entity: undefined,
+		data: undefined,
 	},
 	parameters: {
 		docs: {
@@ -150,7 +150,7 @@ export const Create: Story = {
 };
 
 /**
- * Interactive playground with entity selection
+ * Interactive playground with data selection
  */
 export const Playground: Story = {
 	render: (args) => {
@@ -162,7 +162,7 @@ export const Playground: Story = {
 			<div style={{ padding: "20px" }}>
 				<div style={{ marginBottom: "20px" }}>
 					<label
-						htmlFor="entity-select"
+						htmlFor="data-select"
 						style={{
 							display: "block",
 							marginBottom: "8px",
@@ -172,14 +172,14 @@ export const Playground: Story = {
 						Select a donation method to edit:
 					</label>
 					<select
-						id="entity-select"
+						id="data-select"
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);
-							const entity = id
+							const data = id
 								? sampleDonations.find((d) => d.id === id)
 								: undefined;
-							setSelectedEntity(entity);
+							setSelectedEntity(data);
 						}}
 						style={{ padding: "8px", marginRight: "10px", minWidth: "200px" }}
 					>
@@ -191,7 +191,7 @@ export const Playground: Story = {
 						))}
 					</select>
 				</div>
-				<InteractiveWrapper {...args} entity={selectedEntity} />
+				<InteractiveWrapper {...args} data={selectedEntity} />
 			</div>
 		);
 	},
@@ -211,7 +211,7 @@ export const Playground: Story = {
 export const Edit: Story = {
 	render: (args) => <InteractiveWrapper {...args} />,
 	args: {
-		entity: sampleDonations[0],
+		data: sampleDonations[0],
 	},
 	parameters: {
 		docs: {
@@ -224,7 +224,7 @@ export const Edit: Story = {
 };
 
 /**
- * Closed modal with entity selection
+ * Closed modal with data selection
  */
 export const ClosedModal: Story = {
 	render: (args) => {
@@ -241,7 +241,7 @@ export const ClosedModal: Story = {
 
 				<div style={{ marginBottom: "20px" }}>
 					<label
-						htmlFor="entity-select-closed"
+						htmlFor="data-select-closed"
 						style={{
 							display: "block",
 							marginBottom: "8px",
@@ -251,14 +251,14 @@ export const ClosedModal: Story = {
 						Select a donation method:
 					</label>
 					<select
-						id="entity-select-closed"
+						id="data-select-closed"
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);
-							const entity = id
+							const data = id
 								? sampleDonations.find((d) => d.id === id)
 								: undefined;
-							setSelectedEntity(entity);
+							setSelectedEntity(data);
 						}}
 						style={{ padding: "8px", marginRight: "10px", minWidth: "200px" }}
 					>
@@ -271,7 +271,7 @@ export const ClosedModal: Story = {
 					</select>
 				</div>
 
-				<InteractiveWrapper {...args} entity={selectedEntity} />
+				<InteractiveWrapper {...args} data={selectedEntity} />
 			</div>
 		);
 	},

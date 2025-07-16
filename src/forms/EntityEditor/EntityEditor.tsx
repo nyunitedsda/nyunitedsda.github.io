@@ -15,7 +15,7 @@ const titleSx: SxProps<Theme> = {
 	zIndex: 1,
 };
 const EntityEditor = <T extends { id?: number }>({
-	entity,
+	data,
 	id,
 	validationSchema,
 	defaultValues,
@@ -38,7 +38,7 @@ const EntityEditor = <T extends { id?: number }>({
 		if (id) {
 			setIsLoading(true);
 
-			getDatabaseItem<T & { id: number }>(entity, id)
+			getDatabaseItem<T & { id: number }>(data, id)
 				.then((data) => {
 					if (data) {
 						setInitialValues((data?.data ?? data) as unknown as T);
@@ -46,7 +46,7 @@ const EntityEditor = <T extends { id?: number }>({
 				})
 				.catch((err) => {
 					enqueueSnackbar(
-						`Failed to load ${entity}: ${err.message || "Unknown error"}`,
+						`Failed to load ${data}: ${err.message || "Unknown error"}`,
 						{ variant: "error" },
 					);
 				})
@@ -54,27 +54,27 @@ const EntityEditor = <T extends { id?: number }>({
 					setIsLoading(false);
 				});
 		}
-	}, [entity, id]);
+	}, [data, id]);
 
 	const handleSubmit = async (values: T) => {
 		try {
 			let result: T;
 
 			if (isEditMode && id) {
-				// Update existing entity
+				// Update existing data
 				result = await updateEntity<T & { id: number }>(
-					entity,
+					data,
 					id,
 					values as T & { id: number },
 				);
 
-				enqueueSnackbar(`${entity} updated successfully`, {
+				enqueueSnackbar(`${data} updated successfully`, {
 					variant: "success",
 				});
 			} else {
-				// Create new entity
-				result = await createEntity<T>(entity, values as Omit<T, "id">);
-				enqueueSnackbar(`New ${entity} created successfully`, {
+				// Create new data
+				result = await createEntity<T>(data, values as Omit<T, "id">);
+				enqueueSnackbar(`New ${data} created successfully`, {
 					variant: "success",
 				});
 			}
@@ -85,7 +85,7 @@ const EntityEditor = <T extends { id?: number }>({
 			}
 		} catch (err: any) {
 			enqueueSnackbar(
-				`Failed to ${isEditMode ? "update" : "create"} ${entity}: ${err.message || "Unknown error"}`,
+				`Failed to ${isEditMode ? "update" : "create"} ${data}: ${err.message || "Unknown error"}`,
 				{ variant: "error" },
 			);
 		}
@@ -95,8 +95,8 @@ const EntityEditor = <T extends { id?: number }>({
 	const buttonText = useMemo(
 		() =>
 			submitButtonText ??
-			(isEditMode ? `Update ${entity}` : `Create ${entity}`),
-		[submitButtonText, isEditMode, entity],
+			(isEditMode ? `Update ${data}` : `Create ${data}`),
+		[submitButtonText, isEditMode, data],
 	);
 
 	return (
@@ -110,7 +110,7 @@ const EntityEditor = <T extends { id?: number }>({
 			{isLoading ? (
 				<>
 					<RingLoader />
-					<Typography variant="body1">{`Loading ${entity} data...`}</Typography>
+					<Typography variant="body1">{`Loading ${data} data...`}</Typography>
 				</>
 			) : (
 				<FormContainer

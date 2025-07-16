@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import type { UserType } from "../../../api/request/types";
+import type { NotificationType, UserType } from "../../../api/request/types";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 import { Checkbox } from "@mui/material";
 
@@ -18,4 +18,15 @@ const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 	},
 ];
 
-export { userColumns };
+const notificationsColumns: ColumnDefinition<Partial<NotificationType>>[] = [
+	{ id: "title", field: "title", title: "Title" },
+	{ id: "message", field: "message", title: "Message" },
+	{ id: "severity", field: "severity", title: "Severity" },
+	{
+		id: "expires_at",
+		field: "expires_at",
+		title: "Expiration Date",
+	},
+];
+
+export { userColumns, notificationsColumns };

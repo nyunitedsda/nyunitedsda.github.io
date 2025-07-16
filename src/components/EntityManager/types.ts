@@ -12,7 +12,7 @@ export interface ItemComponentProps {
 
 export interface EditorComponentProps<T> {
 	open: boolean;
-	entity?: Partial<T>;
+	data?: Partial<T>;
 	onClose: () => void;
 	onSuccess?: (data?: T) => void;
 }

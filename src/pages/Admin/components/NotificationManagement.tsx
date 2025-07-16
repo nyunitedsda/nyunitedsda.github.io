@@ -1,61 +1,79 @@
-import type { FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import type { NotificationType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
+import DataTable from "../../../components/DataTable/DataTable";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import { initialValues } from "../../../test/mock_data/notifications";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { notificationsColumns } from "./constants";
+import { createAuthConfig } from "../../../utils/authUtils";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 
 const NOTIFICATION_SUBHEADER = "Manage application notifications";
-const DELETE_ITEM_TITLE = "Delete Notification";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this notification? This action cannot be undone.";
-const EMPTY_NOTIFICATIONS_TEXT = "No notifications available.";
 
-// Wrapper component to handle type compatibility
-const WrappedNotificationEditor = ({
-	open,
-	entity,
-	onClose,
-	onSuccess,
-}: {
-	open: boolean;
-	entity?: Partial<NotificationType>;
-	onClose: () => void;
-	onSuccess?: (data?: NotificationType) => void;
-}) => (
-	<NotificationEditor
-		open={open}
-		entity={entity}
-		onClose={onClose}
-		onSuccess={onSuccess ? () => onSuccess() : undefined}
-	/>
-);
 
 const NotificationAdmin: FC = () => {
+	const [createOpen, setCreateOpen] = useState<Partial<NotificationType> | null>(null);
+	const [notificationsData, setNotificationsData] = useState<Partial<NotificationType>[]>([]);
+
+useEffect(() => {
+		const authConfig = createAuthConfig();
+
+		getDatabaseList<NotificationType>('notifications', authConfig)
+			.then((res) => {
+				if (Array.isArray(res?.data)) {
+					setNotificationsData(res.data);
+				} else {
+					console.error("Unexpected response format:", res);
+					setNotificationsData([]);
+				}
+			})
+			.catch((error) => {
+				console.error("Failed to fetch users:", error);
+				setNotificationsData([]);
+			});
+	}, []);
+
+
+	const _handleDelete = (id: number) => {
+		deleteEntity<NotificationType>("notifications", id)
+			.then((res) => {
+				console.log("Notification deleted successfully:", res);
+
+				console.log(`Deleting notification with ID: ${id}`);
+				setCreateOpen(null); // Close the editor after deletion
+			})
+			.catch((error) => {
+				console.error("Error deleting notification:", error);
+			});
+	};
+
 	return (
-		<EntityManager<NotificationType>
-			entityName="notifications"
-			queryKey="admin-notifications"
-			title=""
-			subtitle={NOTIFICATION_SUBHEADER}
-			emptyText={EMPTY_NOTIFICATIONS_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedNotificationEditor}
-			getItemTitle={(notification: NotificationType) =>
-				notification?.title as string
-			}
-			getItemSubtitle={(notification: NotificationType) =>
-				notification.message as string
-			}
-			createNewEntity={() => ({ title: "", message: "" })}
-			successMessages={{
-				save: "Notification saved successfully",
-				delete: "Notification deleted successfully",
-			}}
-		/>
+		<>
+			<PageTitle
+				title=""
+				subtitle={NOTIFICATION_SUBHEADER}
+				handleClick={() => setCreateOpen(initialValues)}
+			/>
+
+			<DataTable
+				data={notificationsData}
+				columns={notificationsColumns}
+				onEdit={(d) => setCreateOpen(d)}
+				onDelete={(d) => _handleDelete(d?.id as number)}
+				onView={(d) => setCreateOpen(d)}
+			/>
+
+			{createOpen && (
+				<NotificationEditor
+					open={!!createOpen}
+					data={createOpen}
+					onClose={() => setCreateOpen(null)}
+				/>
+			)}
+		</>
+
+
 	);
 };
 

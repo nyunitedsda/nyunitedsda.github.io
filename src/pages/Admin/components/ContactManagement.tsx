@@ -13,18 +13,18 @@ const EMPTY_CONTACTS_TEXT = "No contact information available.";
 // Wrapper component to handle type compatibility
 const WrappedContactEditor = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }: {
 	open: boolean;
-	entity?: Partial<ContactInfoType>;
+	data?: Partial<ContactInfoType>;
 	onClose: () => void;
 	onSuccess?: (data?: ContactInfoType) => void;
 }) => (
 	<ContactEditor
 		open={open}
-		entity={entity as ContactInfoType}
+		data={data as ContactInfoType}
 		onClose={onClose}
 		onSuccess={onSuccess ? () => onSuccess() : undefined}
 	/>

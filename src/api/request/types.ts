@@ -134,8 +134,8 @@ export type ArticleType = {
 	category?: string | null;
 	img_src?: string | null;
 	content: string;
-	created_at?: Date;
-	modified_at?: Date;
+	created_at?: string;
+	modified_at?: string;
 };
 
 /**
@@ -170,7 +170,7 @@ export type EventType = "event" | "service" | "conference" | "zoom";
  * @property recurring - Whether the event repeats on a schedule
  * @property created_at - When the announcement was created
  * @property author_id - ID of the author who created the announcement
- * @property event_date - Date and time when the event will occur
+ * @property event_date - string and time when the event will occur
  * @property date_format - Display format for the event date
  * @property zoom_id - Zoom meeting ID for virtual events
  * @property passcode - Passcode for Zoom meetings
@@ -186,7 +186,7 @@ export type AnnouncementType = {
 	sermon?: string;
 	speaker?: string;
 	recurring?: boolean;
-	created_at?: Date;
+	created_at?: string;
 	author_id: number;
 	event_date?: Date;
 	date_format: string;
@@ -247,7 +247,7 @@ export interface NotificationType {
 	message: string;
 	title?: string;
 	severity?: NotificationSeverity;
-	expires_at?: Date;
+	expires_at?: string;
 }
 
 /**
@@ -267,8 +267,8 @@ export interface ServiceType {
 	id: number;
 	time: string;
 	title: string;
-	created_at?: Date;
-	modified_at?: Date;
+	created_at?: string;
+	modified_at?: string;
 }
 
 /**
@@ -301,6 +301,6 @@ export interface ContactInfoType {
 	country: string;
 	mail_address?: string;
 	mailing_recipient?: string;
-	created_at?: Date;
-	modified_at?: Date;
+	created_at?: string;
+	modified_at?: string;
 }

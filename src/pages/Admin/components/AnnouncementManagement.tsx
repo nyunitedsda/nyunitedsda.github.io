@@ -13,18 +13,18 @@ const EMPTY_ANNOUNCEMENTS_TEXT = "No announcements available.";
 // Wrapper component to handle type compatibility
 const WrappedAnnouncementEditor = ({
 	open,
-	entity,
+	data,
 	onClose,
 	onSuccess,
 }: {
 	open: boolean;
-	entity?: Partial<AnnouncementType>;
+	data?: Partial<AnnouncementType>;
 	onClose: () => void;
 	onSuccess?: (data?: AnnouncementType) => void;
 }) => (
 	<AnnouncementEditor
 		open={open}
-		entity={entity as AnnouncementType}
+		data={data as AnnouncementType}
 		onClose={onClose}
 		onSuccess={onSuccess ? () => onSuccess() : undefined}
 	/>

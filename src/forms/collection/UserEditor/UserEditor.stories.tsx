@@ -68,7 +68,7 @@ const [open, setOpen] = useState(false);
 
 <UserEditor
   open={open}
-  entity={undefined}
+  data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
     console.log("Created:", data);

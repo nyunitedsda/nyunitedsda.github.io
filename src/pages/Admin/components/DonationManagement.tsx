@@ -13,17 +13,17 @@ const EMPTY_DONATIONS_TEXT = "No donation methods available.";
 // Wrapper component to handle type compatibility
 const WrappedDonationEditor = ({
 	open,
-	entity,
+	data,
 	onClose,
 }: {
 	open: boolean;
-	entity?: Partial<DonationType>;
+	data?: Partial<DonationType>;
 	onClose: () => void;
 	onSuccess?: (data?: DonationType) => void;
 }) => (
 	<DonationEditor
 		open={open}
-		entity={entity as DonationType}
+		data={data as DonationType}
 		onClose={onClose}
 	/>
 );
