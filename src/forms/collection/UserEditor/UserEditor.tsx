@@ -1,7 +1,8 @@
+import { capitalize } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import {
 	getDatabaseList,
 	updateUser,
@@ -11,6 +12,7 @@ import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import FormContainer from "../../FormBuilder/FormContainer";
 import { default as InputField } from "../../Input/FormField";
 import userSchema from "./schema";
+import type { UserEditorProps } from "./types";
 
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";
@@ -25,19 +27,8 @@ const titleSx: SxProps<Theme> = {
 	zIndex: 1,
 };
 
-// const roleOptions: RoleOption[] = [
-// 	{ id: 1, value: "guest", label: "Guest" },
-// 	{ id: 2, value: "moderator", label: "Moderator" },
-// 	{ id: 3, value: "admin", label: "Administrator" },
-// ];
-
-interface UserEditorProps {
-	initialValues: UserType;
-	open: boolean;
-	onClose: () => void;
-	onSuccess?: (data?: UserType) => void;
-}
-const TITLE = "Edit User";
+const EDIT_TITLE = "Edit User";
+const CREATE_TITLE = "Create New User";
 
 const UserEditor: FC<UserEditorProps> = ({
 	open,
@@ -50,12 +41,17 @@ const UserEditor: FC<UserEditorProps> = ({
 	const [roles, setRoles] = useState<UserRoleOption[]>([]);
 
 	useEffect(() => {
-		getDatabaseList<UserRoleOption>("roles").then((data) => {
-			if (data) {
-				setRoles(data as unknown as UserRoleOption[]);
+		(async () => {
+			const response = await getDatabaseList<UserRoleOption>("roles");
+			if (response) {
+				setRoles(response.data as unknown as UserRoleOption[]);
 			}
-		});
+		})();
 	}, []);
+
+	const title = useMemo(() => {
+		return initialValues?.id ? EDIT_TITLE : CREATE_TITLE;
+	}, [initialValues]);
 
 	const _handleSubmit = useCallback((values: UserType) => {
 		const { id, ...rest } = values;
@@ -77,7 +73,7 @@ const UserEditor: FC<UserEditorProps> = ({
 	return (
 		<ProjectModal open={open} onClose={onClose}>
 			<Typography variant="h6" gutterBottom sx={titleSx}>
-				{TITLE}
+				{title}
 			</Typography>
 
 			<FormContainer
@@ -121,8 +117,8 @@ const UserEditor: FC<UserEditorProps> = ({
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
 					items={roles ?? []}
-					renderItemLabel={(item) => item.name}
-					valueResolver={(item) => item.id}
+					renderItemLabel={(item) => capitalize(item.name)}
+					valueResolver={(item) => item.name}
 				/>
 
 				<InputField
@@ -134,7 +130,6 @@ const UserEditor: FC<UserEditorProps> = ({
 					name="remember_me"
 					label="Remember Me"
 					fieldType="checkbox"
-					helperText="Enable 'Remember Me' functionality for this user"
 				/>
 			</FormContainer>
 		</ProjectModal>

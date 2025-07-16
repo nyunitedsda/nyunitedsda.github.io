@@ -80,8 +80,9 @@ export interface UserType {
 	permissions?: string[];
 	remember_me: boolean;
 	emailVerified?: boolean;
-	createdAt?: Date;
-	updatedAt?: Date;
+	createdAt?: string;
+	updatedAt?: string;
+	is_active?: boolean;
 }
 
 /**

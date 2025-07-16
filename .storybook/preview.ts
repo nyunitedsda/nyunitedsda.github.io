@@ -3,10 +3,11 @@ import type { Preview } from '@storybook/react';
 import React from 'react';
 import DynamicProvider from '../src/test/ProviderWrapper';
 import GlobalNavigationProvider from './GlobalNavigationProvider';
+import globalMockConfigs from './mockAddonConfigs';
 
 
 const preview: Preview = {
-  globals: {
+  initialGlobals: {
     theme: 'light',
     pageLayout: 'default',
   },
@@ -31,6 +32,7 @@ const preview: Preview = {
   ],
   tags: ['autodocs'],
   parameters: {
+    globalMockConfigs, // Mock configurations for API responses
     docs: {
       components: {
         Title,
@@ -41,8 +43,7 @@ const preview: Preview = {
         Stories,
       },
       defaultName: 'Documentation',
-      toc: { 
-        
+      toc: {         
         title: 'Table Of Content',
       }, // 👈 Enables the table of contents      
     },

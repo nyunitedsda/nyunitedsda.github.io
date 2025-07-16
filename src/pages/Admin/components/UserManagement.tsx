@@ -1,84 +1,77 @@
-import { type FC, useEffect, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
+import { deleteEntity } from "../../../api/request/commonMutations";
 import { getAllUsers } from "../../../api/request/commonQueries";
 import type { UserType } from "../../../api/request/types";
+import DataTable from "../../../components/DataTable/DataTable";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
+import UserEditor from "../../../forms/collection/UserEditor";
+import { initialValues } from "../../../test/mock_data/users";
 import { createAuthConfig } from "../../../utils/authUtils";
+import { userColumns } from "./constants";
 
 const USER_SUBHEADER = "Manage system users and their permissions";
-const DELETE_ITEM_TITLE = "Delete User";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this user? This action cannot be undone.";
-const EMPTY_USERS_TEXT = "No users available.";
-
-// Wrapper component to handle type compatibility
-// const WrappedUserEditor = ({
-// 	open,
-// 	entity,
-// 	onClose,
-// 	onSuccess,
-// }: {
-// 	open: boolean;
-// 	entity?: Partial<UserType>;
-// 	onClose: () => void;
-// 	onSuccess?: (data?: UserType) => void;
-// }) => (
-// 	<UserEditor
-// 		open={open}
-// 		entity={entity as UserType}
-// 		onClose={onClose}
-// 		onSuccess={onSuccess ? () => onSuccess() : undefined}
-// 	/>
-// );
 
 const UserManagement: FC = () => {
-	const [userData, setUserData] = useState<UserType[]>([]);
+	const [userData, setUserData] = useState<Partial<UserType>[]>([]);
+	const [createUserOpen, setCreateUserOpen] =
+		useState<Partial<UserType> | null>(null);
 
 	useEffect(() => {
 		const authConfig = createAuthConfig();
 
-		console.log("authConfig: ", authConfig);
 		getAllUsers(authConfig)
-			.then((data) => {
-				if (data) {
-					setUserData(data as unknown as UserType[]);
+			.then((res) => {
+				if (Array.isArray(res?.data)) {
+					setUserData(res.data);
+				} else {
+					console.error("Unexpected response format:", res);
+					setUserData([]);
 				}
 			})
 			.catch((error) => {
 				console.error("Failed to fetch users:", error);
+				setUserData([]);
 			});
 	}, []);
 
 	console.log("userData: ", userData);
 
+	const _handleDeleteUser = useCallback((id: number) => {
+		const authConfig = createAuthConfig();
+
+		deleteEntity("users", id, authConfig)
+			.then(() => {
+				setUserData((prev) => prev.filter((user) => user?.id !== id));
+			})
+			.catch((error) => {
+				console.error("Failed to delete user:", error);
+			});
+	}, []);
+
 	return (
-		// <EntityManager<UserType>
-		// 	entityName="users"
-		// 	queryKey="admin-users"
-		// 	title=""
-		// 	subtitle={USER_SUBHEADER}
-		// 	emptyText={EMPTY_USERS_TEXT}
-		// 	deleteConfirmation={{
-		// 		title: DELETE_ITEM_TITLE,
-		// 		message: DELETE_CONFIRMATION_TEXT,
-		// 	}}
-		// 	ItemComponent={DonationItem}
-		// 	EditorComponent={WrappedUserEditor}
-		// 	getItemTitle={(user: UserType) => user?.username as string}
-		// 	getItemSubtitle={(user: UserType) =>
-		// 		`${user.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : "No name"} - ${user.role}` as string
-		// 	}
-		// 	createNewEntity={() => ({
-		// 		email: "",
-		// 		firstName: "",
-		// 		lastName: "",
-		// 		role: "guest",
-		// 		emailVerified: false,
-		// 	})}
-		// 	successMessages={{
-		// 		save: "User saved successfully",
-		// 		delete: "User deleted successfully",
-		// 	}}
-		// />
-		<></>
+		<>
+			<PageTitle
+				title=""
+				subtitle={USER_SUBHEADER}
+				handleClick={() => setCreateUserOpen(initialValues)}
+			/>
+
+			<DataTable
+				data={userData}
+				columns={userColumns}
+				onEdit={(d) => setCreateUserOpen(d)}
+				onDelete={(d) => _handleDeleteUser(d?.id as number)}
+				onView={(d) => setCreateUserOpen(d)}
+			/>
+
+			{createUserOpen && (
+				<UserEditor
+					open={!!createUserOpen}
+					initialValues={createUserOpen as UserType}
+					onClose={() => setCreateUserOpen(null)}
+				/>
+			)}
+		</>
 	);
 };
 

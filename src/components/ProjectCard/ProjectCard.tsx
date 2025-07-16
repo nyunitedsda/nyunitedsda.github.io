@@ -21,9 +21,6 @@ const cardSx: SxProps<Theme> = (theme) => ({
 	boxShadow: 5,
 	borderRadius: 1,
 	maxWidth: `${theme.spacing(50)}`,
-	"& .MuiCardHeader-root": {
-		color: (theme) => `${theme.palette.primary.contrastText} !important`,
-	},
 	"& .MuiCardHeader-title": {
 		fontSize: "1.25rem",
 		fontFamily: "inter",

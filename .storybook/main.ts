@@ -6,6 +6,7 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-links',
+    'storybook-addon-mock',
   ],
   core: {
     disableTelemetry: true,
