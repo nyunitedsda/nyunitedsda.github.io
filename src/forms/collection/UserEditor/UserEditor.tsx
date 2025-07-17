@@ -32,7 +32,7 @@ const CREATE_TITLE = "Create New User";
 
 const UserEditor: FC<UserEditorProps> = ({
 	open,
-	initialValues,
+	data,
 	onClose,
 	onSuccess,
 }) => {
@@ -50,8 +50,8 @@ const UserEditor: FC<UserEditorProps> = ({
 	}, []);
 
 	const title = useMemo(() => {
-		return initialValues?.id ? EDIT_TITLE : CREATE_TITLE;
-	}, [initialValues]);
+		return data?.id ? EDIT_TITLE : CREATE_TITLE;
+	}, [data]);
 
 	const _handleSubmit = useCallback((values: UserType) => {
 		const { id, ...rest } = values;
@@ -77,7 +77,7 @@ const UserEditor: FC<UserEditorProps> = ({
 			</Typography>
 
 			<FormContainer
-				initialValues={initialValues}
+				initialValues={data || {}}
 				validationSchema={userSchema}
 				onSubmit={_handleSubmit}
 				submitButtonText="Save"

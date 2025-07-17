@@ -1,69 +1,46 @@
-import type { FC } from "react";
+import { useCallback, useState, type FC } from "react";
 import type { AnnouncementType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
 import AnnouncementEditor from "../../../forms/collection/AnnouncementEditor/AnnouncementEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
+import DataTable from "../../../components/DataTable/DataTable";
+import announcementColumns from "../constants/announcementColumns";
+import { initialAnnouncement } from "../../../test/mock_data/announcements";
 
-const ANNOUNCEMENT_SUBHEADER = "Manage church announcements and events";
-const DELETE_ITEM_TITLE = "Delete Announcement";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this announcement? This action cannot be undone.";
-const EMPTY_ANNOUNCEMENTS_TEXT = "No announcements available.";
+const SUBHEADER = "Manage church announcements and events";
 
-// Wrapper component to handle type compatibility
-const WrappedAnnouncementEditor = ({
-	open,
-	data,
-	onClose,
-	onSuccess,
-}: {
-	open: boolean;
-	data?: Partial<AnnouncementType>;
-	onClose: () => void;
-	onSuccess?: (data?: AnnouncementType) => void;
-}) => (
-	<AnnouncementEditor
-		open={open}
-		data={data as AnnouncementType}
-		onClose={onClose}
-		onSuccess={onSuccess ? () => onSuccess() : undefined}
-	/>
-);
+
 
 const AnnouncementManagement: FC = () => {
-	return (
-		<EntityManager<AnnouncementType>
-			entityName="announcements"
-			queryKey="admin-announcements"
-			title=""
-			subtitle={ANNOUNCEMENT_SUBHEADER}
-			emptyText={EMPTY_ANNOUNCEMENTS_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedAnnouncementEditor}
-			getItemTitle={(announcement: AnnouncementType) =>
-				announcement?.title as string
-			}
-			getItemSubtitle={(announcement: AnnouncementType) =>
-				announcement.type as string
-			}
-			createNewEntity={() => ({
-				title: "",
-				type: "event",
-				description: "",
-				recurring: false,
-				date_format: "MM/DD/YYYY",
-				author_id: 1,
-			})}
-			successMessages={{
-				save: "Announcement saved successfully",
-				delete: "Announcement deleted successfully",
-			}}
-		/>
+const [editorContent, setEditorContent] = useState<AnnouncementType | null>(null);
+
+const _handleDelete  = useCallback((id: number) => {}, []);
+
+return (
+		<>
+			<PageTitle
+				title=""
+				subtitle={SUBHEADER}
+				handleClick={() => setEditorContent(initialAnnouncement)}
+			/>
+
+			<DataTable
+				columns={announcementColumns}
+				data={userData}
+				onDelete={(d) => _handleDelete(d?.id as number)}
+				onEdit={(d) => setEditorContent(d)}
+				onView={(d) => setEditorContent(d)}
+			/>
+
+			{editorContent && (
+				<AnnouncementEditor
+					open={!!editorContent}
+					data={editorContent as AnnouncementType}
+					onClose={() => setEditorContent(null)}
+				/>
+			)}
+		</>
 	);
+
 };
 
 export default AnnouncementManagement;

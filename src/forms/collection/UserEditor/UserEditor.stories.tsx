@@ -17,7 +17,7 @@ const meta: Meta<typeof UserEditor> = {
 			description: "Whether the modal is open",
 			defaultValue: false,
 		},
-		initialValues: {
+		data: {
 			control: "object",
 			description: "Initial values for the form fields",
 			defaultValue: initialValues,
@@ -44,7 +44,7 @@ export const CreateMode: Story = {
 		</InteractiveStory>
 	),
 	args: {
-		initialValues: initialValues,
+		data: initialValues,
 		buttonText: "🆕 Create New User",
 		extraProps: {
 			onClose: () => console.log("Modal closed"),
@@ -88,7 +88,7 @@ export const EditModeAdminUser: Story = {
 		</InteractiveStory>
 	),
 	args: {
-		initialValues: userData[0],
+		data: userData[0],
 		buttonText: "👑 Edit Admin User",
 		extraProps: {
 			onClose: () => console.log("Modal closed"),
@@ -121,7 +121,7 @@ export const EditModeModeratorUser: Story = {
 		</InteractiveStory>
 	),
 	args: {
-		initialValues:
+		data:
 			userData.find((user) => user.role === "moderator") || initialValues,
 		buttonText: "🛡️ Edit Moderator User",
 		extraProps: {
@@ -156,7 +156,7 @@ export const EditModeGuestUser: Story = {
 	),
 	args: {
 		buttonText: "👤 Edit Guest User",
-		initialValues:
+		data:
 			userData.find((user) => user.role === "guest") || initialValues,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<UserType>) =>
@@ -188,7 +188,7 @@ export const EditModeMinimalUser: Story = {
 	),
 	args: {
 		buttonText: "📝 Edit Minimal User",
-		initialValues:
+		data:
 			userData.find((user) => user.username === "minimaluser") || initialValues,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<UserType>) =>

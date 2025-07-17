@@ -67,7 +67,7 @@ const UserManagement: FC = () => {
 			{createUserOpen && (
 				<UserEditor
 					open={!!createUserOpen}
-					initialValues={createUserOpen as UserType}
+					data={createUserOpen as UserType}
 					onClose={() => setCreateUserOpen(null)}
 				/>
 			)}
