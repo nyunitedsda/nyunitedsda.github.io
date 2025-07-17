@@ -41,6 +41,11 @@ const pathlessMenuItems: PathlessMenu[] = [
 		name: "About Us",
 		id: "aboutUs",
 	},
+	// {
+	// 	id: "admin",
+	// 	icon: "AdminPanelSettingsOutlined",
+	// 	name: "Administration",
+	// },
 ];
 
 export const protectedMenuItems: PathlessMenu[] = [

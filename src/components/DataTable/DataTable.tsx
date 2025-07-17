@@ -23,7 +23,8 @@ const rootSx: SxProps<Theme> = {
 	flexDirection: "column",
 	bgcolor: "background.paper",
 	borderRadius: 1,
-	boxShadow: 1,
+	boxShadow: 4,
+	flexGrow: 1,
 	overflow: "hidden",
 	height: "100%",
 	display: { xs: "none", md: "flex" },
@@ -34,10 +35,13 @@ const rootSx: SxProps<Theme> = {
 			fontWeight: "bold",
 		},
 	},
-	"& .MuiTableBody-root": {
-		flexGrow: 1,
-	},
+	// "& .MuiTableBody-root": {
+	// 	flexGrow: 1,
+	// },
 };
+
+// FEATURE: Add accordion support for expandable rows in mobile view
+// This will allow users to expand rows for more details in a mobile-friendly manner
 
 const defaultAlign = "left" as TableCellProps["align"];
 
@@ -96,7 +100,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 					))}
 				</ButtonGroup>
 			</Stack>
-			<Table size={density} aria-label="data table" sx={{ flexGrow: 1 }}>
+			<Table size={density} aria-label="data table">
 				<TableHead>
 					<TableRow>
 						{formattedColumns.map((col) => (
@@ -127,7 +131,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 							</TableRow>
 						))
 					) : (
-						<TableRow sx={{ minHeight: "200px", height: "200px" }}>
+						<TableRow>
 							<TableCell colSpan={formattedColumns.length} align="center">
 								No data available
 							</TableCell>

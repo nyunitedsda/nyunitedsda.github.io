@@ -8,6 +8,7 @@ import UserEditor from "../../../forms/collection/UserEditor";
 import { initialValues } from "../../../test/mock_data/users";
 import { createAuthConfig } from "../../../utils/authUtils";
 import userColumns from "../constants/userColumns";
+import useToken from "../../../hooks/auth/useToken";
 
 const USER_SUBHEADER = "Manage system users and their permissions";
 
@@ -15,9 +16,11 @@ const UserManagement: FC = () => {
 	const [userData, setUserData] = useState<Partial<UserType>[]>([]);
 	const [createUserOpen, setCreateUserOpen] =
 		useState<Partial<UserType> | null>(null);
+	const { accessToken } = useToken();
+
 
 	useEffect(() => {
-		const authConfig = createAuthConfig();
+		const authConfig = createAuthConfig(accessToken);
 
 		getAllUsers(authConfig)
 			.then((res) => {
@@ -37,7 +40,7 @@ const UserManagement: FC = () => {
 	console.log("userData: ", userData);
 
 	const _handleDeleteUser = useCallback((id: number) => {
-		const authConfig = createAuthConfig();
+		const authConfig = createAuthConfig(accessToken);
 
 		deleteEntity("users", id, authConfig)
 			.then(() => {

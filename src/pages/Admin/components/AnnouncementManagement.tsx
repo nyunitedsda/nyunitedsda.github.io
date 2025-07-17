@@ -34,9 +34,9 @@ const AnnouncementManagement: FC = () => {
 			});
 	}, []);
 
-const _handleDelete = useCallback((id: number) => {
-  // TODO: Implement delete logic
-}, []);
+	const _handleDelete = useCallback((id: number) => {
+		// TODO: Implement delete logic
+	}, []);
 
 	return (
 		<>
@@ -46,16 +46,20 @@ const _handleDelete = useCallback((id: number) => {
 				handleClick={() => setEditorContent(initialAnnouncement)}
 			/>
 
-		<DataTable
-			columns={announcementColumns}
-			data={data.map((item) => ({
-			  ...item,
-			  event_date: item.event_date ? (typeof item.event_date === "string" ? item.event_date : item.event_date.toISOString()) : ""
-			}))}
-			onDelete={(d) => _handleDelete((d as any)?.id as number)}
-			onEdit={(d) => setEditorContent(d as unknown as AnnouncementType)}
-			onView={(d) => setEditorContent(d as unknown as AnnouncementType)}
-		/>
+			<DataTable
+				columns={announcementColumns}
+				data={data.map((item) => ({
+					...item,
+					event_date: item.event_date
+						? typeof item.event_date === "string"
+							? item.event_date
+							: item.event_date.toISOString()
+						: "",
+				}))}
+				onDelete={(d) => _handleDelete((d as any)?.id as number)}
+				onEdit={(d) => setEditorContent(d as unknown as AnnouncementType)}
+				onView={(d) => setEditorContent(d as unknown as AnnouncementType)}
+			/>
 
 			{editorContent && (
 				<AnnouncementEditor

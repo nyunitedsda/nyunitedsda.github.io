@@ -7,60 +7,67 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import {
-	refreshAuthToken,
-	registerUser,
-} from "../../api/request/commonQueries";
-import { useLogin } from "../../hooks/auth";
+import { useAuthStatus, useCurrentUser, useLogin, useRefreshToken, useRegister } from "../../hooks/auth";
+import useToken from "../../hooks/auth/useToken";
+import useLocalStorage from "../../hooks/storage/useLocalStorage";
+import { AUTH_CONSTANTS } from "./constant";
 import { Provider } from "./context";
 import type {
 	AuthenticationContextProps,
 	LoginCredentials,
 	RegisterData,
-	UserType,
 } from "./types";
+import type { UserType } from "../../api/request/types";
 
-// Storage keys for persistence
-const ACCESS_TOKEN_KEY = "accessToken";
-const REFRESH_TOKEN_KEY = "refreshToken";
-const USER_KEY = "auth_user";
+const { USER_KEY } = AUTH_CONSTANTS;
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
+	const [] = useLocalStorage(USER_KEY);
+	const { accessToken, refreshToken, clearTokens } = useToken();
+	const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
 	const { enqueueSnackbar } = useSnackbar();
+	const { isAuthenticated, refreshAuthStatus } = useAuthStatus();
 	const loginUser = useLogin();
+	const refreshAuthToken = useRefreshToken();
+	const registerUser = useRegister();
 
 	const [user, setUser] = useState<UserType | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const isAuthenticated = useMemo(() => user !== null, [user]);
-
-	// Initialize authentication state from localStorage
+	// Check authentication status every 5 minutes if accessToken is available
 	useEffect(() => {
-		const initializeAuth = () => {
-			try {
-				const storedUser = localStorage.getItem(USER_KEY);
-				const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-
-				if (storedUser && accessToken) {
-					setUser(JSON.parse(storedUser));
+		if (!accessToken) return;
+		const interval = setInterval(
+			() => {
+				if (accessToken) {
+					refreshAuthStatus && refreshAuthStatus();
 				}
-			} catch (error) {
-				console.error("Failed to initialize authentication:", error);
-				// Clear potentially corrupted data
-				localStorage.removeItem(USER_KEY);
-				localStorage.removeItem(ACCESS_TOKEN_KEY);
-				localStorage.removeItem(REFRESH_TOKEN_KEY);
-			} finally {
-				setIsLoading(false);
-			}
-		};
+			},
+			5 * 60 * 1000,
+		);
+		return () => clearInterval(interval);
+	}, [accessToken, refreshAuthStatus]);
 
-		initializeAuth();
-	}, []);
+	// Keep user state in sync with currentUser and userKey
+	useEffect(() => {
+		if (accessToken) {
+			if (!user && currentUser) {
+				setUser(currentUser);
+			} else if (!user && refetchCurrentUser) {
+				setIsLoading(true);
+				refetchCurrentUser().then((result: any) => {
+					setUser(result?.data || null);
+					setIsLoading(false);
+				});
+			}
+		} else {
+			setUser(null);
+			clearTokens();
+		}
+	}, [ accessToken, currentUser, refetchCurrentUser]);
 
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
-			// try {
 			setIsLoading(true);
 
 			// Call the actual login API using useLogin mutation
@@ -68,7 +75,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			const { user } = response;
 
 			setUser(user);
-
 			setIsLoading(false);
 		},
 		[loginUser, enqueueSnackbar],
@@ -79,7 +85,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			setIsLoading(true);
 
 			// Call the actual register API
-			const response = await registerUser(data);
+			const response = await registerUser.mutateAsync(data);
 			const { user } = response;
 			setUser(user);
 		} catch (error) {
@@ -99,16 +105,13 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 
 	const refreshAuth = useCallback(async () => {
 		try {
-			const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-
 			if (!refreshToken) {
 				throw new Error("No refresh token available");
 			}
 
-			// Call the actual refresh API
-			await refreshAuthToken(refreshToken);
+			await refreshAuthToken?.mutateAsync();
 		} catch (error) {
-			logout(); // Force logout on refresh failure
+			logout();
 			throw error;
 		}
 	}, [logout]);
