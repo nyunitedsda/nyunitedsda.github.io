@@ -21,11 +21,7 @@ const WrappedDonationEditor = ({
 	onClose: () => void;
 	onSuccess?: (data?: DonationType) => void;
 }) => (
-	<DonationEditor
-		open={open}
-		data={data as DonationType}
-		onClose={onClose}
-	/>
+	<DonationEditor open={open} data={data as DonationType} onClose={onClose} />
 );
 
 const DonationAdmin: FC = () => {

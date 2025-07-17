@@ -24,4 +24,3 @@ const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 ];
 
 export default userColumns;
-

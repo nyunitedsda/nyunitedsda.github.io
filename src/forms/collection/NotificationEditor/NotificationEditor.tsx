@@ -1,5 +1,10 @@
 import { Palette } from "@mui/icons-material";
-import { ListItemIcon, ListItemText, type Palette as PaletteType, type SimplePaletteColorOptions } from "@mui/material";
+import {
+	ListItemIcon,
+	ListItemText,
+	type Palette as PaletteType,
+	type SimplePaletteColorOptions,
+} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { type FC, useMemo } from "react";
 import * as Yup from "yup";
@@ -97,7 +102,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 					label={MESSAGE_FIELD_LABEL}
 					fieldType="text"
 					multiline
-					/>
+				/>
 				<InputField
 					renderItemLabel={(item) => {
 						const paletteKey = severityPaletteKey[item.value] || "info";
@@ -106,11 +111,21 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 								key={item.id}
 								sx={{
 									width: "100%",
-									color: (theme.palette[paletteKey] as SimplePaletteColorOptions).main,
+									color: (
+										theme.palette[paletteKey] as SimplePaletteColorOptions
+									).main,
 								}}
 								value={item.value}
 							>
-								<ListItemIcon sx={{ color: (theme.palette[paletteKey] as SimplePaletteColorOptions).main }}><Palette /></ListItemIcon>
+								<ListItemIcon
+									sx={{
+										color: (
+											theme.palette[paletteKey] as SimplePaletteColorOptions
+										).main,
+									}}
+								>
+									<Palette />
+								</ListItemIcon>
 								<ListItemText primary={item.label} />
 							</MenuItem>
 						);
@@ -120,17 +135,17 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 					fieldType="select"
 					items={severityOptions}
 					sx={{
-						'& .MuiButtonBase-root-MuiMenuItem-root': {
+						"& .MuiButtonBase-root-MuiMenuItem-root": {
 							pl: 0,
 							pr: 0,
 						},
-						'& .MuiList-root': {
+						"& .MuiList-root": {
 							px: 0,
-							'& .MuiMenuItem-root': {
+							"& .MuiMenuItem-root": {
 								width: "100%",
 								px: 0,
 							},
-					},
+						},
 					}}
 					valueResolver={(item) => item.value}
 				/>

@@ -11,15 +11,17 @@ import notificationsColumns from "../constants/notificationsColumns";
 
 const NOTIFICATION_SUBHEADER = "Manage application notifications";
 
-
 const NotificationAdmin: FC = () => {
-	const [createOpen, setCreateOpen] = useState<Partial<NotificationType> | null>(null);
-	const [notificationsData, setNotificationsData] = useState<Partial<NotificationType>[]>([]);
+	const [createOpen, setCreateOpen] =
+		useState<Partial<NotificationType> | null>(null);
+	const [notificationsData, setNotificationsData] = useState<
+		Partial<NotificationType>[]
+	>([]);
 
-useEffect(() => {
+	useEffect(() => {
 		const authConfig = createAuthConfig();
 
-		getDatabaseList<NotificationType>('notifications', authConfig)
+		getDatabaseList<NotificationType>("notifications", authConfig)
 			.then((res) => {
 				if (Array.isArray(res?.data)) {
 					setNotificationsData(res.data);
@@ -33,7 +35,6 @@ useEffect(() => {
 				setNotificationsData([]);
 			});
 	}, []);
-
 
 	const _handleDelete = (id: number) => {
 		deleteEntity<NotificationType>("notifications", id)
@@ -72,8 +73,6 @@ useEffect(() => {
 				/>
 			)}
 		</>
-
-
 	);
 };
 

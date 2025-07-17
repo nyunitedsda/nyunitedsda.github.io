@@ -56,10 +56,12 @@ const InputField: FC<InputFieldProps> = ({
 						props.valueResolver ||
 						((item: { value: number | string }) => item.value)
 					}
-			renderItemLabel={
-				(props.renderItemLabel as ((item: { value: string | number }) => string)) ||
-				((item: { value: string | number }) => String(item.value))
-			}
+					renderItemLabel={
+						(props.renderItemLabel as (item: {
+							value: string | number;
+						}) => string) ||
+						((item: { value: string | number }) => String(item.value))
+					}
 				/>
 			);
 

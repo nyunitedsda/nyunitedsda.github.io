@@ -94,8 +94,7 @@ const EntityEditor = <T extends { id?: number }>({
 	// Default submit button text based on mode if not provided
 	const buttonText = useMemo(
 		() =>
-			submitButtonText ??
-			(isEditMode ? `Update ${data}` : `Create ${data}`),
+			submitButtonText ?? (isEditMode ? `Update ${data}` : `Create ${data}`),
 		[submitButtonText, isEditMode, data],
 	);
 

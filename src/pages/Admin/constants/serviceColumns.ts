@@ -7,8 +7,8 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
  * The field corresponds to the property in the ServiceType interface.
  */
 const serviceColumns: ColumnDefinition<Partial<ServiceType>>[] = [
-  { id: "title", field: "title", title: "Title" },
-  { id: "time", field: "time", title: "Time" },
+	{ id: "title", field: "title", title: "Title" },
+	{ id: "time", field: "time", title: "Time" },
 ];
 
 export default serviceColumns;

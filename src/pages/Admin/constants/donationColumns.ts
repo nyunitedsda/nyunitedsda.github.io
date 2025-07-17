@@ -7,8 +7,8 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
  * The field corresponds to the property in the DonationType interface.
  */
 const donationColumns: ColumnDefinition<Partial<DonationType>>[] = [
-  { id: "title", field: "title", title: "Title" },
-  { id: "description", field: "description", title: "Description" },
+	{ id: "title", field: "title", title: "Title" },
+	{ id: "description", field: "description", title: "Description" },
 ];
 
 export default donationColumns;

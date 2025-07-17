@@ -121,8 +121,7 @@ export const EditModeModeratorUser: Story = {
 		</InteractiveStory>
 	),
 	args: {
-		data:
-			userData.find((user) => user.role === "moderator") || initialValues,
+		data: userData.find((user) => user.role === "moderator") || initialValues,
 		buttonText: "🛡️ Edit Moderator User",
 		extraProps: {
 			onClose: () => console.log("Modal closed"),
@@ -156,8 +155,7 @@ export const EditModeGuestUser: Story = {
 	),
 	args: {
 		buttonText: "👤 Edit Guest User",
-		data:
-			userData.find((user) => user.role === "guest") || initialValues,
+		data: userData.find((user) => user.role === "guest") || initialValues,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<UserType>) =>
 			console.log("Guest user updated:", data),
