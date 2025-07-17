@@ -1,8 +1,13 @@
-import { createElement } from "react";
-import type { NotificationType, UserType } from "../../../api/request/types";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
 import { Checkbox } from "@mui/material";
+import { createElement } from "react";
+import type { UserType } from "../../../api/request/types";
+import type { ColumnDefinition } from "../../../components/DataTable/types";
 
+/**
+ * Defines the columns for the User DataTable.
+ * Each column is defined with an id, field, and title.
+ * The field corresponds to the property in the UserType interface.
+ */
 const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 	{ id: "username", field: "username", title: "Username" },
 	{ id: "email", field: "email", title: "Email" },
@@ -18,15 +23,5 @@ const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 	},
 ];
 
-const notificationsColumns: ColumnDefinition<Partial<NotificationType>>[] = [
-	{ id: "title", field: "title", title: "Title" },
-	{ id: "message", field: "message", title: "Message" },
-	{ id: "severity", field: "severity", title: "Severity" },
-	{
-		id: "expires_at",
-		field: "expires_at",
-		title: "Expiration Date",
-	},
-];
+export default userColumns;
 
-export { userColumns, notificationsColumns };

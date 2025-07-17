@@ -1,13 +1,13 @@
 import { useEffect, useState, type FC } from "react";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { NotificationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
 import { initialValues } from "../../../test/mock_data/notifications";
-import { deleteEntity } from "../../../api/request/commonMutations";
-import { notificationsColumns } from "./constants";
 import { createAuthConfig } from "../../../utils/authUtils";
-import { getDatabaseList } from "../../../api/request/commonQueries";
+import notificationsColumns from "../constants/notificationsColumns";
 
 const NOTIFICATION_SUBHEADER = "Manage application notifications";
 

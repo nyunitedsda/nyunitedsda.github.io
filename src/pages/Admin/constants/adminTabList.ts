@@ -1,13 +1,13 @@
 import { createElement } from "react";
-import type { RouteTabsItem } from "../../components/RoutedTabs/types";
-import AnnouncementManagement from "./components/AnnouncementManagement";
-import BlogManagement from "./components/BlogManagement";
-import ContactManagement from "./components/ContactManagement";
-import DonationManagement from "./components/DonationManagement";
-import NotificationManagement from "./components/NotificationManagement";
-import ServiceManagement from "./components/ServiceManagement";
-import SettingManagement from "./components/SettingManagement";
-import UserManagement from "./components/UserManagement";
+import type { RouteTabsItem } from "../../../components/RoutedTabs/types";
+import AnnouncementManagement from "../components/AnnouncementManagement";
+import BlogManagement from "../components/BlogManagement";
+import ContactManagement from "../components/ContactManagement";
+import DonationManagement from "../components/DonationManagement";
+import NotificationManagement from "../components/NotificationManagement";
+import ServiceManagement from "../components/ServiceManagement";
+import SettingManagement from "../components/SettingManagement";
+import UserManagement from "../components/UserManagement";
 
 /**
  * List of tabs for the admin panel.

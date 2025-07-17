@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { UserType } from "../../../../api/request/types";
+import { userColumns } from "../../../../pages/Admin/constants/userColumns";
 import users from "../../../../test/mock_data/users";
 import type { GenericType } from "../../types";
 import TableCard from "./TableCard";
 import type { TableCardProps } from "./types";
-import { userColumns } from "../../../../pages/Admin/components/constants";
 
 type StoryDataType = UserType & GenericType;
 const user: StoryDataType = { ...users[0] } as StoryDataType;

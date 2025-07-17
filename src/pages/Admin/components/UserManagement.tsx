@@ -7,7 +7,7 @@ import PageTitle from "../../../components/PageWrapper/PageTitle";
 import UserEditor from "../../../forms/collection/UserEditor";
 import { initialValues } from "../../../test/mock_data/users";
 import { createAuthConfig } from "../../../utils/authUtils";
-import { userColumns } from "./constants";
+import userColumns from "../constants/userColumns";
 
 const USER_SUBHEADER = "Manage system users and their permissions";
 
