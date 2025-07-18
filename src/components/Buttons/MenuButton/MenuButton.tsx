@@ -27,9 +27,11 @@ const { activeBtnSx, buttonSx } = menuButtonStyles;
 const MenuButton: FC<MenuButtonProps> = (props) => {
 	const { isActive, path, children, buttonProps, menuItems } = props;
 
+
 	const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const navigate = useNavigate();
+	  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const isActiveButton = useMemo((): boolean => {
 		return menuItems && menuItems?.length > 0
@@ -53,8 +55,10 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		setIsMenuVisible(false);
 	}, []);
 
-	const handleMenuOpen = useCallback(() => {
+	const handleMenuOpen = useCallback((e: MouseEvent<HTMLButtonElement>) => {
 		setIsMenuVisible(true);
+		setAnchorEl(e.currentTarget);
+
 	}, []);
 
 	const handleMenuItemSelect = useCallback(
@@ -98,11 +102,11 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 			>
 				{children}
 			</Button>
-			{isMenuVisible && menuItems && (
+			{isMenuVisible && menuItems && anchorEl && document.body.contains(anchorEl) && (
 				<Popper
 					sx={{ zIndex: 1 }}
 					open={isMenuVisible}
-					anchorEl={buttonRef.current}
+					anchorEl={anchorEl}
 					placement="bottom-end"
 					transition
 					disablePortal

@@ -51,16 +51,16 @@ const useLocalStorage = (key: string, initialValue: string | null = null) => {
 	}, [key]);
 
 	// Listen for storage changes from other tabs
-	useEffect(() => {
-		const handleStorage = (event: StorageEvent) => {
-			if (event.key === key) {
-				setStoredValue(event.newValue);
-			}
-		};
-		window.addEventListener("storage", handleStorage);
+	// useEffect(() => {
+	// 	const handleStorage = (event: StorageEvent) => {
+	// 		if (event.key === key) {
+	// 			setStoredValue(event.newValue);
+	// 		}
+	// 	};
+	// 	window.addEventListener("storage", handleStorage);
 
-		return () => window.removeEventListener("storage", handleStorage);
-	}, [key]);
+	// 	return () => window.removeEventListener("storage", handleStorage);
+	// }, [key]);
 
 	return [storedValue, setValue, clearValue] as const;
 };

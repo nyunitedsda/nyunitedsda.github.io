@@ -53,6 +53,44 @@ export const protectedMenuItems: PathlessMenu[] = [
 		id: "admin",
 		icon: "AdminPanelSettingsOutlined",
 		name: "Administration",
+		children: [
+			{
+				id: "admin-user",
+				name: "User",
+			},
+			{
+				id: "admin-announcements",
+				name: "Announcements",
+			},
+			{
+				id: "admin-articles",
+				name: "Articles",
+			},
+			{
+				id: "admin-contact-info",
+				name: "Contact Info",
+			},
+			{
+				id: "admin-donations",
+				name: "Donations",
+			},
+			{
+				id: "admin-legal-content",
+				name: "Legal Content",
+			},
+			{
+				id: "admin-ministries",
+				name: "Ministries",
+			},
+			{
+				id: "admin-notifications",
+				name: "Notifications",
+			},
+			{
+				id: "admin-services",
+				name: "Services",
+			},
+		],
 	},
 	{
 		id: "storybook",

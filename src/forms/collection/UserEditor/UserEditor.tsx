@@ -9,8 +9,10 @@ import {
 } from "../../../api/request/commonQueries";
 import type { UserRoleOption, UserType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { useRegister } from "../../../hooks/auth";
 import FormContainer from "../../FormBuilder/FormContainer";
 import { default as InputField } from "../../Input/FormField";
+import { configurePasswordInput } from "../commonInputs";
 import userSchema from "./schema";
 import type { UserEditorProps } from "./types";
 
@@ -36,7 +38,8 @@ const UserEditor: FC<UserEditorProps> = ({
 	onClose,
 	onSuccess,
 }) => {
-	const { enqueueSnackbar } = useSnackbar();
+	useSnackbar();
+	const registerUser = useRegister();
 
 	const [roles, setRoles] = useState<UserRoleOption[]>([]);
 
@@ -53,22 +56,36 @@ const UserEditor: FC<UserEditorProps> = ({
 		return data?.id ? EDIT_TITLE : CREATE_TITLE;
 	}, [data]);
 
-	const _handleSubmit = useCallback((values: UserType) => {
-		const { id, ...rest } = values;
-		updateUser(id, rest).then((result) => {
-			if (!result) {
-				enqueueSnackbar("Failed to update user", { variant: "error" });
-				return;
-			}
-			// If onSuccess callback is provided, call it with the result
+	const passwordProps = useMemo(() => {
+		return configurePasswordInput();
+	}, []);
 
-			if (onSuccess) {
-				onSuccess(result);
-				enqueueSnackbar("User updated successfully", { variant: "success" });
-				onClose();
-			}
+	const _handleEditSubmit = useCallback((values: UserType) => {
+		const { id, ...rest } = values;
+
+		updateUser(id, rest).then(() => {
+			onSuccess?.();
+			onClose();
 		});
 	}, []);
+
+	const _handleCreateSubmit = useCallback((values: UserType) => {
+		registerUser.mutateAsync(values).then(() => {
+			onSuccess?.();
+			onClose();
+		});
+	}, []);
+
+	const _handleSubmit = useCallback(
+		(values: UserType) => {
+			if (data?.id) {
+				_handleEditSubmit(values);
+			} else {
+				_handleCreateSubmit(values);
+			}
+		},
+		[data],
+	);
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -89,6 +106,8 @@ const UserEditor: FC<UserEditorProps> = ({
 					fieldType="text"
 					placeholder="Enter username"
 				/>
+
+				{!data?.id && <InputField {...passwordProps} />}
 
 				<InputField
 					name="email"
@@ -114,6 +133,7 @@ const UserEditor: FC<UserEditorProps> = ({
 
 				<InputField
 					name="role"
+					defaultValue=""
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
 					items={roles ?? []}

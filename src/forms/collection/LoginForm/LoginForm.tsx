@@ -13,10 +13,11 @@ import { loginSchema } from "./schema";
 
 const REMEMBER_ME = "Remember me";
 const SIGN_IN = "Sign In";
-const DEFAULT_VALUES: LoginCredentials = {
+const DEFAULT_VALUES: LoginCredentials & { id?: number } = {
 	username: "",
 	password: "",
 	remember_me: false,
+	id: undefined,
 };
 
 const LoginForm: FC = () => {
@@ -31,11 +32,14 @@ const LoginForm: FC = () => {
 		[],
 	);
 
-	const _handleSubmit = useCallback(async (values: LoginCredentials) => {
-		await login(values).then(() => {
+	const _handleSubmit = useCallback(
+		async (values: LoginCredentials & { id?: number }) => {
+			const { id, ...loginValues } = values;
+			await login(loginValues);
 			navigate("/admin/users");
-		});
-	}, []);
+		},
+		[login, navigate],
+	);
 
 	return (
 		<FormContainer
@@ -46,7 +50,6 @@ const LoginForm: FC = () => {
 		>
 			<Stack spacing={3}>
 				<InputField {...usernameProps} />
-
 				<InputField {...passwordProps} />
 				<InputField
 					name="remember_me"

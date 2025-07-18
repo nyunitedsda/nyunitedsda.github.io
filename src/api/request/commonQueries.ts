@@ -56,8 +56,6 @@ const getDatabaseItem = async <T extends { id: number }>(
 	}
 };
 
-
-
 /**
  * Login user with credentials
  * @param credentials - User login credentials
@@ -89,7 +87,7 @@ const loginUser = async (
 const registerUser = async (
 	userData: RegisterData,
 	config?: AxiosRequestConfig,
-): Promise<{ user: UserType; tokens: AuthTokenResponse }> => {
+): Promise<{ user: UserType; message: string }> => {
 	try {
 		const response = await axiosInstance.post(
 			`${AUTH_API_URL}register`,
@@ -170,7 +168,7 @@ const getCurrentUser = async (
  * @param userData - Partial user data to update
  * @param config - Optional axios request config
  * @returns Promise<UserType>
- * @throws Error if the operation fails	
+ * @throws Error if the operation fails
  */
 const updateUser = async (
 	userId: number,
@@ -203,7 +201,7 @@ const getAllUsers = async (
 		console.log("All users config: ", config);
 
 		const response = await axiosInstance.get(`${AUTH_API_URL}users`, config);
-		return response?.data || response;
+		return response?.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("getAllUsers", "users", error);
 	}
@@ -215,7 +213,7 @@ const getUserStatus = async (
 ): Promise<{ message: string }> => {
 	try {
 		const response = await axiosInstance.get(
-			`${AUTH_API_URL}status`,
+			`${AUTH_API_URL}authenticated`,
 			createAuthConfig(token, config),
 		);
 		return response?.data || response;

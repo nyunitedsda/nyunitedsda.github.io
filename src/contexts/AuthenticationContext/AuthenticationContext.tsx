@@ -7,8 +7,18 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import { useAuthStatus, useCurrentUser, useLogin, useRefreshToken, useRegister } from "../../hooks/auth";
+import { useNavigate } from "react-router";
+import type { UserType } from "../../api/request/types";
+import {
+	useAuthStatus,
+	useCurrentUser,
+	useLogin,
+	useLogout,
+	useRefreshToken,
+	useRegister,
+} from "../../hooks/auth";
 import useToken from "../../hooks/auth/useToken";
+import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import useLocalStorage from "../../hooks/storage/useLocalStorage";
 import { AUTH_CONSTANTS } from "./constant";
 import { Provider } from "./context";
@@ -17,22 +27,27 @@ import type {
 	LoginCredentials,
 	RegisterData,
 } from "./types";
-import type { UserType } from "../../api/request/types";
 
 const { USER_KEY } = AUTH_CONSTANTS;
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [] = useLocalStorage(USER_KEY);
+	// Only use the getter for userKey, as setter is not needed here
+	const [userKey] = useLocalStorage(USER_KEY, null);
 	const { accessToken, refreshToken, clearTokens } = useToken();
 	const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
 	const { enqueueSnackbar } = useSnackbar();
-	const { isAuthenticated, refreshAuthStatus } = useAuthStatus();
+	const { hasAuthStatus, refreshAuthStatus } = useAuthStatus();
 	const loginUser = useLogin();
+	const logoutUser = useLogout();
 	const refreshAuthToken = useRefreshToken();
 	const registerUser = useRegister();
+	const navigate = useNavigate();
 
 	const [user, setUser] = useState<UserType | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+		!!hasAuthStatus,
+	);
 
 	// Check authentication status every 5 minutes if accessToken is available
 	useEffect(() => {
@@ -40,17 +55,22 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		const interval = setInterval(
 			() => {
 				if (accessToken) {
-					refreshAuthStatus && refreshAuthStatus();
+					console.log("refresh value : ", refreshAuthStatus?.());
+					// setIsAuthenticated(false);
+					// setUser(null);
+					// clearTokens();
+					// navigate(ROUTE_PATHS.LOGIN);
 				}
 			},
 			5 * 60 * 1000,
 		);
 		return () => clearInterval(interval);
-	}, [accessToken, refreshAuthStatus]);
+	}, [accessToken, refreshAuthStatus, clearTokens, navigate]);
 
 	// Keep user state in sync with currentUser and userKey
 	useEffect(() => {
 		if (accessToken) {
+			console.log("current user: ", currentUser);
 			if (!user && currentUser) {
 				setUser(currentUser);
 			} else if (!user && refetchCurrentUser) {
@@ -60,11 +80,11 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 					setIsLoading(false);
 				});
 			}
+			setIsAuthenticated(true);
 		} else {
 			setUser(null);
-			clearTokens();
 		}
-	}, [ accessToken, currentUser, refetchCurrentUser]);
+	}, [accessToken, currentUser, refetchCurrentUser, clearTokens]);
 
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
@@ -75,6 +95,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			const { user } = response;
 
 			setUser(user);
+			setIsAuthenticated(true);
 			setIsLoading(false);
 		},
 		[loginUser, enqueueSnackbar],
@@ -95,9 +116,13 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		}
 	}, []);
 
-	const logout = useCallback(() => {
+	const logout = useCallback(async () => {
 		try {
-			setUser(null);
+			logoutUser.mutateAsync().then(() => {
+				setUser(null);
+
+				navigate(ROUTE_PATHS.HOME);
+			});
 		} catch (error) {
 			console.log("Logout failed", error);
 		}
@@ -109,7 +134,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 				throw new Error("No refresh token available");
 			}
 
-			await refreshAuthToken?.mutateAsync();
+			await refreshAuthToken?.mutateAsync(refreshToken);
 		} catch (error) {
 			logout();
 			throw error;

@@ -1,7 +1,6 @@
 import type { UserType } from "../../api/request/types";
 
-const initialValues: UserType = {
-	id: 0,
+const initialValues: Partial<UserType> = {
 	email: "",
 	firstName: "",
 	lastName: "",

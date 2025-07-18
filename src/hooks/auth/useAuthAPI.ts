@@ -14,9 +14,9 @@ import type {
 	LoginResponse,
 	RegisterData,
 } from "../../contexts/AuthenticationContext/types";
+import { createAuthConfig } from "../../utils";
 import useLocalStorage from "../storage/useLocalStorage";
 import useToken from "./useToken";
-import { createAuthConfig } from "../../utils";
 const { USER_KEY } = AUTH_CONSTANTS;
 
 /**
@@ -39,7 +39,6 @@ export const useLogin = () => {
 	const queryClient = useQueryClient();
 	const { enqueueSnackbar } = useSnackbar();
 	const { setTokens, clearTokens } = useToken();
-	const [_, setUser] = useLocalStorage(USER_KEY, null);
 
 	return useMutation({
 		mutationFn: (credentials: LoginCredentials) => loginUser(credentials),
@@ -47,7 +46,8 @@ export const useLogin = () => {
 			queryClient.setQueryData(["user"], data.user);
 
 			setTokens(data.accessToken, data.refreshToken);
-			setUser(data.user.username);
+			localStorage.setItem(USER_KEY, data.user.username);
+
 			enqueueSnackbar(data?.message || "Login successful", {
 				variant: "success",
 			});
@@ -75,19 +75,14 @@ export const useLogin = () => {
  * register({ username: "new_user", password: "new_pass" });
  */
 export const useRegister = () => {
-	const queryClient = useQueryClient();
 	const { enqueueSnackbar } = useSnackbar();
-	const { accessToken, setTokens } = useToken();
-	const [_, setUser] = useLocalStorage(USER_KEY, null);
+	const { accessToken } = useToken();
 
 	return useMutation({
-		mutationFn: (userData: RegisterData) => registerUser(userData, createAuthConfig(accessToken)),
+		mutationFn: (userData: RegisterData) =>
+			registerUser(userData, createAuthConfig(accessToken)),
 		onSuccess: (data) => {
-			queryClient.setQueryData(["user"], data.user);
-			enqueueSnackbar("Registration successful", { variant: "success" });
-
-			setTokens(data.tokens.accessToken, data.tokens.refreshToken);
-			setUser(data.user.username);
+			enqueueSnackbar(data.message, { variant: "success" });
 		},
 		onError: (error) => {
 			console.error("Registration failed:", error);
@@ -105,21 +100,15 @@ export const useRegister = () => {
  * @returns {MutationFunction<AuthTokenResponse, string>}
  * @throws {Error} if token refresh fails
  * @example
- * const { mutate: refreshAuth } = useRefreshToken();		
+ * const { mutate: refreshAuth } = useRefreshToken();
  * refreshAuth(refreshToken);
  */
 export const useRefreshToken = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { setTokens, clearTokens } = useToken();
-	const { refreshToken } = useToken();
-
-	if (!refreshToken) {
-		console.log("No refresh token available");
-		return;
-	}
 
 	return useMutation({
-		mutationFn: () => refreshAuthToken(refreshToken),
+		mutationFn: (refreshToken: string) => refreshAuthToken(refreshToken),
 		onSuccess: (data) => {
 			setTokens(data.accessToken, data.refreshToken);
 
@@ -137,7 +126,7 @@ export const useRefreshToken = () => {
 /**
  * Logout user hook
  * @description This hook uses React Query's useMutation to perform the logout operation.
- * It handles user logout, clears tokens from localStorage, and removes cached user data.		
+ * It handles user logout, clears tokens from localStorage, and removes cached user data.
  * It returns a mutation function that can be used to trigger the logout process.
  * @returns {MutationFunction<void, void>}
  * @throws {Error} if logout fails
@@ -148,15 +137,17 @@ export const useRefreshToken = () => {
 export const useLogout = () => {
 	const queryClient = useQueryClient();
 	const { enqueueSnackbar } = useSnackbar();
-	const { clearTokens } = useToken();
+	const { accessToken, clearTokens } = useToken();
 	const [_a, _b, removeUser] = useLocalStorage(USER_KEY, null);
+	const { refreshAuthStatus } = useAuthStatus();
 
 	return useMutation({
-		mutationFn: () => logoutUser(),
+		mutationFn: () => logoutUser(createAuthConfig(accessToken)),
 		onSuccess: () => {
 			clearTokens();
 			removeUser();
 
+			refreshAuthStatus?.();
 			queryClient.removeQueries({ queryKey: ["user"] });
 			queryClient.clear(); // Clear all cached data
 			enqueueSnackbar("Logged out successfully", { variant: "info" });
@@ -182,20 +173,21 @@ export const useLogout = () => {
  * @returns {QueryResult<UserType, Error>}
  * @throws {Error} if fetching current user fails
  * @example
- * const { data: user, isLoading, error } = useCurrentUser();		
- * useCurrentUser(enabled = true) 
+ * const { data: user, isLoading, error } = useCurrentUser();
+ * useCurrentUser(enabled = true)
  * -------------
  * const { data, isLoading, error } = useCurrentUser();
  * if (isLoading) return <Loading />;
- * if (error) return <Error message={error.message} />;
- * return <UserProfile user={data} />;	
+ *   if (error) return <Error message={error.message} />;
+ *   return <UserProfile user={data} />;
+ * }
  */
 export const useCurrentUser = (enabled: boolean = true) => {
 	const queryClient = useQueryClient();
 	const { enqueueSnackbar } = useSnackbar();
-	const { accessToken, clearTokens } = useToken(); 
+	const { accessToken, clearTokens } = useToken(); // Ensure tokens are initialized
 
-	const response = useQuery({
+	return useQuery({
 		queryKey: ["user"],
 		queryFn: () => getCurrentUser(createAuthConfig(accessToken)),
 		enabled: enabled && !!accessToken,
@@ -214,25 +206,10 @@ export const useCurrentUser = (enabled: boolean = true) => {
 			return failureCount < 3;
 		},
 	});
-
-	if (response.isError) {
-		console.error("Failed to fetch current user:", response.error);
-		clearTokens();
-		queryClient.removeQueries({ queryKey: ["user"] });
-		enqueueSnackbar(response.error.message, { variant: "error" });
-	}
-	return response;
 };
 
 /**
- * Auhentication status hook
- * @description This hook uses React Query's useQuery to check the authentication status of the user.
- * It retrieves the user's authentication status from the server and caches it.
- * It returns a query object that contains the authentication status, loading state, and error information.
- * @returns {QueryResult<{ message: string }, Error>}
- * @throws {Error} if checking authentication status fails
- * @example
- * const { isAuthenticated, isLoading, error, refreshAuthStatus } = useAuthStatus();
+ * Helper hook to check authentication status
  */
 export const useAuthStatus = () => {
 	const queryClient = useQueryClient();
@@ -267,16 +244,14 @@ export const useAuthStatus = () => {
 
 	return {
 		isLoading,
-		isAuthenticated: !!data?.message,
+		hasAuthStatus: !isLoading && Boolean(data?.message),
 		error,
 		refreshAuthStatus: refetch,
 	};
 };
 
 // /**
-//  * Password reset request hook
-//  * @description This hook uses React Query's useMutation to perform the password reset request operation.
-//  * It handles sending a password reset request to the server.		
+//  * Hook for password reset request
 //  */
 // export const useRequestPasswordReset = () => {
 // 	const { enqueueSnackbar } = useSnackbar();
