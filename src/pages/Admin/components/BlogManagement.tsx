@@ -1,64 +1,90 @@
-import type { FC } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { type FC, useCallback, useEffect, useState } from "react";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { ArticleType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
+import DataTable from "../../../components/DataTable/DataTable";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
 import BlogEditor from "../../../forms/collection/BlogEditor/BlogEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import useToken from "../../../hooks/auth/useToken";
+import { initialArticle } from "../../../test/mock_data/articles";
+import { createAuthConfig } from "../../../utils/authUtils";
+import articleColumns from "../constants/articleColumns";
 
 const BLOG_SUBHEADER = "Manage blog articles";
-const DELETE_ITEM_TITLE = "Delete Article";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this article? This action cannot be undone.";
-const EMPTY_ARTICLES_TEXT = "No articles available.";
-
-// Wrapper component to handle type compatibility
-const WrappedBlogEditor = ({
-	open,
-	data,
-	onClose,
-	onSuccess,
-}: {
-	open: boolean;
-	data?: Partial<ArticleType>;
-	onClose: () => void;
-	onSuccess?: (data?: ArticleType) => void;
-}) => (
-	<BlogEditor
-		open={open}
-		data={data as ArticleType}
-		onClose={onClose}
-		onSuccess={onSuccess ? () => onSuccess() : undefined}
-	/>
-);
 
 const BlogManagement: FC = () => {
+	const { accessToken } = useToken();
+	const [articleData, setArticleData] = useState<Partial<ArticleType>[]>([]);
+	const [createArticleOpen, setCreateArticleOpen] =
+		useState<Partial<ArticleType> | null>(null);
+
+	const { data: queryData, refetch } = useQuery<
+		{ data: ArticleType[] } | undefined
+	>({
+		queryKey: ["articles"],
+		queryFn: () => getDatabaseList("articles", createAuthConfig(accessToken)),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
+
+	useEffect(() => {
+		if (queryData && Array.isArray(queryData.data)) {
+			setArticleData(queryData.data);
+		}
+	}, [queryData]);
+
+	const _handleDeleteArticle = useCallback(
+		(id: number) => {
+			deleteEntity("articles", id, createAuthConfig(accessToken))
+				.then(() => {
+					setArticleData((prev) =>
+						prev.filter((article) => article?.id !== id),
+					);
+				})
+				.catch((error) => {
+					console.error("Failed to delete article:", error);
+				});
+		},
+		[accessToken],
+	);
+
 	return (
-		<EntityManager<ArticleType>
-			entityName="articles"
-			queryKey="admin-articles"
-			title=""
-			subtitle={BLOG_SUBHEADER}
-			emptyText={EMPTY_ARTICLES_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedBlogEditor}
-			getItemTitle={(article: ArticleType) => article?.title as string}
-			getItemSubtitle={(article: ArticleType) => article.category as string}
-			createNewEntity={() => ({
-				title: "",
-				category: "",
-				img_src: "",
-				content: "",
-				author_id: 1,
-				publishDate: new Date().toISOString(),
-			})}
-			successMessages={{
-				save: "Article saved successfully",
-				delete: "Article deleted successfully",
-			}}
-		/>
+		<>
+			<PageTitle
+				title=""
+				subtitle={BLOG_SUBHEADER}
+				handleClick={() => setCreateArticleOpen(initialArticle)}
+			/>
+
+			<DataTable
+				data={articleData.map((article) => ({
+					...article,
+					publishDate:
+						typeof article.publishDate === "string"
+							? article.publishDate
+							: article.publishDate instanceof Date
+								? article.publishDate.toLocaleDateString()
+								: "",
+				}))}
+				columns={articleColumns}
+				onEdit={(d) => setCreateArticleOpen(d)}
+				onDelete={(d) => _handleDeleteArticle(d?.id as number)}
+				onView={(d) => setCreateArticleOpen(d)}
+			/>
+
+			{createArticleOpen && (
+				<BlogEditor
+					open={!!createArticleOpen}
+					data={createArticleOpen as ArticleType}
+					onClose={() => setCreateArticleOpen(null)}
+					onSuccess={() => {
+						refetch();
+						setCreateArticleOpen(null);
+					}}
+				/>
+			)}
+		</>
 	);
 };
 

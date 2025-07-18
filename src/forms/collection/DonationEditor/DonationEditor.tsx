@@ -1,20 +1,10 @@
 import { type FC, useMemo } from "react";
 import * as Yup from "yup";
-import type { DonationType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { initialDonation } from "../../../test/mock_data/donations";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
-
-export interface DonationEditorProps {
-	open: boolean;
-	data?: Partial<DonationType>;
-	onClose: () => void;
-}
-
-const defaultValues: Partial<DonationType> = {
-	title: "",
-	description: "",
-};
+import type { DonationEditorProps } from "./types";
 
 const donationSchema = Yup.object().shape({
 	title: Yup.string().required("Title is required"),
@@ -37,7 +27,7 @@ const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: defaultValues,
+						initialValues: initialDonation,
 						title: ADD_TITLE,
 					},
 		[data],

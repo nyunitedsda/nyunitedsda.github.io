@@ -1,10 +1,12 @@
-import { useEffect, useState, type FC } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { deleteEntity } from "../../../api/request/commonMutations";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { NotificationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
+import useToken from "../../../hooks/auth/useToken";
 import { initialValues } from "../../../test/mock_data/notifications";
 import { createAuthConfig } from "../../../utils/authUtils";
 import notificationsColumns from "../constants/notificationsColumns";
@@ -12,64 +14,66 @@ import notificationsColumns from "../constants/notificationsColumns";
 const NOTIFICATION_SUBHEADER = "Manage application notifications";
 
 const NotificationAdmin: FC = () => {
-	const [createOpen, setCreateOpen] =
-		useState<Partial<NotificationType> | null>(null);
-	const [notificationsData, setNotificationsData] = useState<
+	const [notificationData, setNotificationData] = useState<
 		Partial<NotificationType>[]
 	>([]);
+	const [createNotificationOpen, setCreateNotificationOpen] =
+		useState<Partial<NotificationType> | null>(null);
+	const { accessToken } = useToken();
+
+	const { data: queryData, refetch } = useQuery<
+		{ data: NotificationType[] } | undefined
+	>({
+		queryKey: ["notifications"],
+		queryFn: () =>
+			getDatabaseList("notifications", createAuthConfig(accessToken)),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
 
 	useEffect(() => {
-		const authConfig = createAuthConfig();
+		if (queryData && Array.isArray(queryData.data)) {
+			setNotificationData(queryData.data);
+		}
+	}, [queryData]);
 
-		getDatabaseList<NotificationType>("notifications", authConfig)
-			.then((res) => {
-				if (Array.isArray(res?.data)) {
-					setNotificationsData(res.data);
-				} else {
-					console.error("Unexpected response format:", res);
-					setNotificationsData([]);
-				}
+	const _handleDeleteNotification = useCallback((id: number) => {
+		deleteEntity("notifications", id, createAuthConfig(accessToken))
+			.then(() => {
+				setNotificationData((prev) =>
+					prev.filter((notification) => notification?.id !== id),
+				);
 			})
 			.catch((error) => {
-				console.error("Failed to fetch users:", error);
-				setNotificationsData([]);
+				console.error("Failed to delete notification:", error);
 			});
 	}, []);
-
-	const _handleDelete = (id: number) => {
-		deleteEntity<NotificationType>("notifications", id)
-			.then((res) => {
-				console.log("Notification deleted successfully:", res);
-
-				console.log(`Deleting notification with ID: ${id}`);
-				setCreateOpen(null); // Close the editor after deletion
-			})
-			.catch((error) => {
-				console.error("Error deleting notification:", error);
-			});
-	};
 
 	return (
 		<>
 			<PageTitle
 				title=""
 				subtitle={NOTIFICATION_SUBHEADER}
-				handleClick={() => setCreateOpen(initialValues)}
+				handleClick={() => setCreateNotificationOpen(initialValues)}
 			/>
 
 			<DataTable
-				data={notificationsData}
+				data={notificationData}
 				columns={notificationsColumns}
-				onEdit={(d) => setCreateOpen(d)}
-				onDelete={(d) => _handleDelete(d?.id as number)}
-				onView={(d) => setCreateOpen(d)}
+				onEdit={(d) => setCreateNotificationOpen(d)}
+				onDelete={(d) => _handleDeleteNotification(d?.id as number)}
+				onView={(d) => setCreateNotificationOpen(d)}
 			/>
 
-			{createOpen && (
+			{createNotificationOpen && (
 				<NotificationEditor
-					open={!!createOpen}
-					data={createOpen}
-					onClose={() => setCreateOpen(null)}
+					open={!!createNotificationOpen}
+					data={createNotificationOpen as NotificationType}
+					onClose={() => setCreateNotificationOpen(null)}
+					onSuccess={() => {
+						refetch();
+						setCreateNotificationOpen(null);
+					}}
 				/>
 			)}
 		</>

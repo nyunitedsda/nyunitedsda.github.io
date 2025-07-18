@@ -1,68 +1,79 @@
-import type { FC } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { type FC, useCallback, useEffect, useState } from "react";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { ContactInfoType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
+import DataTable from "../../../components/DataTable/DataTable";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import { createAuthConfig } from "../../../utils/authUtils";
+import useToken from "../../../hooks/auth/useToken";
+import contactInfoColumns from "../constants/contactInfoColumns";
+import { initialContactInfo } from "../../../test/mock_data/contactInfo";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
-const DELETE_ITEM_TITLE = "Delete Contact";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this contact? This action cannot be undone.";
-const EMPTY_CONTACTS_TEXT = "No contact information available.";
-
-// Wrapper component to handle type compatibility
-const WrappedContactEditor = ({
-	open,
-	data,
-	onClose,
-	onSuccess,
-}: {
-	open: boolean;
-	data?: Partial<ContactInfoType>;
-	onClose: () => void;
-	onSuccess?: (data?: ContactInfoType) => void;
-}) => (
-	<ContactEditor
-		open={open}
-		data={data as ContactInfoType}
-		onClose={onClose}
-		onSuccess={onSuccess ? () => onSuccess() : undefined}
-	/>
-);
 
 const ContactManagement: FC = () => {
+	const [contactData, setContactData] = useState<Partial<ContactInfoType>[]>(
+		[],
+	);
+	const [createContactOpen, setCreateContactOpen] =
+		useState<Partial<ContactInfoType> | null>(null);
+	const { accessToken } = useToken();
+
+	const { data: queryData, refetch } = useQuery<
+		{ data: ContactInfoType[] } | undefined
+	>({
+		queryKey: ["contacts"],
+		queryFn: () => getDatabaseList("contacts", createAuthConfig(accessToken)),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
+
+	useEffect(() => {
+		if (queryData && Array.isArray(queryData.data)) {
+			setContactData(queryData.data);
+		}
+	}, [queryData]);
+
+	const _handleDeleteContact = useCallback((id: number) => {
+		deleteEntity("contacts", id, createAuthConfig(accessToken))
+			.then(() => {
+				setContactData((prev) => prev.filter((contact) => contact?.id !== id));
+			})
+			.catch((error) => {
+				console.error("Failed to delete contact:", error);
+			});
+	}, []);
+
 	return (
-		<EntityManager<ContactInfoType>
-			entityName="contacts"
-			queryKey="admin-contacts"
-			title=""
-			subtitle={CONTACT_SUBHEADER}
-			emptyText={EMPTY_CONTACTS_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedContactEditor}
-			getItemTitle={(contact: ContactInfoType) => contact?.email as string}
-			getItemSubtitle={(contact: ContactInfoType) =>
-				`${contact.street}, ${contact.city}, ${contact.zip_code}` as string
-			}
-			createNewEntity={() => ({
-				email: "",
-				phone: "",
-				street: "",
-				city: "",
-				zip_code: "",
-				country: "",
-				mail_address: "",
-				mailing_recipient: "",
-			})}
-			successMessages={{
-				save: "Contact information saved successfully",
-				delete: "Contact information deleted successfully",
-			}}
-		/>
+		<>
+			<PageTitle
+				title=""
+				subtitle={CONTACT_SUBHEADER}
+				handleClick={() => setCreateContactOpen(initialContactInfo)}
+			/>
+
+			<DataTable
+				data={contactData}
+				columns={contactInfoColumns}
+				onEdit={(d) => setCreateContactOpen(d)}
+				onDelete={(d) => _handleDeleteContact(d?.id as number)}
+				onView={(d) => setCreateContactOpen(d)}
+			/>
+
+			{createContactOpen && (
+				<ContactEditor
+					open={!!createContactOpen}
+					data={createContactOpen as ContactInfoType}
+					onClose={() => setCreateContactOpen(null)}
+					onSuccess={() => {
+						refetch();
+						setCreateContactOpen(null);
+					}}
+				/>
+			)}
+		</>
 	);
 };
 

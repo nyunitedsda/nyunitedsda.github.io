@@ -5,10 +5,10 @@ import type {
 	LoginResponse,
 	RegisterData,
 } from "../../contexts/AuthenticationContext/types";
+import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
 import type { DatabaseEntity, UserType } from "./types";
-import { createAuthConfig } from "../../utils/authUtils";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
 

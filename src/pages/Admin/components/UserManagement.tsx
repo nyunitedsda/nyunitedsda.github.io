@@ -19,17 +19,21 @@ const UserManagement: FC = () => {
 		useState<Partial<UserType> | null>(null);
 	const { accessToken } = useToken();
 
-	const { refetch } = useQuery<{ data: UserType[] } | undefined>({
+	const { data: queryData, refetch } = useQuery<
+		{ data: UserType[] } | undefined
+	>({
 		queryKey: ["users"],
-		queryFn: () =>
-			getAllUsers(createAuthConfig(accessToken)).then((res) => {
-				setUserData(res as unknown as UserType[]);
-				return res;
-			}),
+		queryFn: () => getAllUsers(createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 		enabled: !!accessToken,
 	});
+
+	useEffect(() => {
+		if (queryData && Array.isArray(queryData.data)) {
+			setUserData(queryData.data);
+		}
+	}, [queryData]);
 
 	console.log("userData: ", userData);
 

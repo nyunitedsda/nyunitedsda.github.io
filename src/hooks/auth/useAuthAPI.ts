@@ -186,6 +186,14 @@ export const useCurrentUser = (enabled: boolean = true) => {
 	const queryClient = useQueryClient();
 	const { enqueueSnackbar } = useSnackbar();
 	const { accessToken, clearTokens } = useToken(); // Ensure tokens are initialized
+	if (!accessToken) {
+		return {
+			data: null,
+			isLoading: false,
+			error: new Error("No access token available"),
+			refetch: () => Promise.resolve(),
+		};
+	}
 
 	return useQuery({
 		queryKey: ["user"],

@@ -1,53 +1,79 @@
-import type { FC } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { type FC, useCallback, useEffect, useState } from "react";
+import { deleteEntity } from "../../../api/request/commonMutations";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { DonationType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
+import DataTable from "../../../components/DataTable/DataTable";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
 import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import { initialDonation } from "../../../test/mock_data/donations";
+import { createAuthConfig } from "../../../utils/authUtils";
+import donationColumns from "../constants/donationColumns";
+import useToken from "../../../hooks/auth/useToken";
 
 const DONATION_SUBHEADER = "Manage your donation methods";
-const DELETE_ITEM_TITLE = "Delete Donation Method";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this donation method? This action cannot be undone.";
-const EMPTY_DONATIONS_TEXT = "No donation methods available.";
-
-// Wrapper component to handle type compatibility
-const WrappedDonationEditor = ({
-	open,
-	data,
-	onClose,
-}: {
-	open: boolean;
-	data?: Partial<DonationType>;
-	onClose: () => void;
-	onSuccess?: (data?: DonationType) => void;
-}) => (
-	<DonationEditor open={open} data={data as DonationType} onClose={onClose} />
-);
 
 const DonationAdmin: FC = () => {
+	const [donationData, setDonationData] = useState<Partial<DonationType>[]>([]);
+	const [createDonationOpen, setCreateDonationOpen] =
+		useState<Partial<DonationType> | null>(null);
+	const { accessToken } = useToken();
+
+	const { data: queryData, refetch } = useQuery<
+		{ data: DonationType[] } | undefined
+	>({
+		queryKey: ["donations"],
+		queryFn: () => getDatabaseList("donations", createAuthConfig(accessToken)),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
+
+	useEffect(() => {
+		if (queryData && Array.isArray(queryData.data)) {
+			setDonationData(queryData.data);
+		}
+	}, [queryData]);
+
+	const _handleDeleteDonation = useCallback((id: number) => {
+		deleteEntity("donations", id, createAuthConfig(accessToken))
+			.then(() => {
+				setDonationData((prev) =>
+					prev.filter((donation) => donation?.id !== id),
+				);
+			})
+			.catch((error) => {
+				console.error("Failed to delete donation:", error);
+			});
+	}, []);
+
 	return (
-		<EntityManager<DonationType>
-			entityName="donations"
-			queryKey="admin-donations"
-			title=""
-			subtitle={DONATION_SUBHEADER}
-			emptyText={EMPTY_DONATIONS_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedDonationEditor}
-			getItemTitle={(donation: DonationType) => donation?.title as string}
-			getItemSubtitle={(donation: DonationType) =>
-				donation.description as string
-			}
-			createNewEntity={() => ({ title: "", description: "" })}
-			successMessages={{
-				save: "Donation method saved successfully",
-				delete: "Donation method deleted successfully",
-			}}
-		/>
+		<>
+			<PageTitle
+				title=""
+				subtitle={DONATION_SUBHEADER}
+				handleClick={() => setCreateDonationOpen(initialDonation)}
+			/>
+
+			<DataTable
+				data={donationData}
+				columns={donationColumns}
+				onEdit={(d) => setCreateDonationOpen(d)}
+				onDelete={(d) => _handleDeleteDonation(d?.id as number)}
+				onView={(d) => setCreateDonationOpen(d)}
+			/>
+
+			{createDonationOpen && (
+				<DonationEditor
+					open={!!createDonationOpen}
+					data={createDonationOpen as DonationType}
+					onClose={() => setCreateDonationOpen(null)}
+					onSuccess={() => {
+						refetch();
+						setCreateDonationOpen(null);
+					}}
+				/>
+			)}
+		</>
 	);
 };
 
