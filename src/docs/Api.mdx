@@ -1,0 +1,117 @@
+
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/API Endpoints" />
+
+# API Data Endpoints / Doc Example
+
+This page documents the main API endpoints used in the NY United SDA application for authentication and user management.
+
+## Authentication Endpoints
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th> 
+      <th>Endpoints</th> 
+      <th>Description</th> 
+    </tr>  
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/login</code></td>
+      <td>Authenticate user with email/password</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/register</code></td>
+      <td>Register a new user</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/refresh</code></td>
+      <td>Refresh authentication tokens</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/logout</code></td>
+      <td>Logout user and invalidate tokens</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td><code>/api/auth/me</code></td>
+      <td>Get current user profile</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/forgot-password</code></td>
+      <td>Request password reset</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/reset-password</code></td>
+      <td>Reset password with token</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td><code>/api/auth/verify-email</code></td>
+      <td>Verify email address</td>
+    </tr>
+  </tbody>  
+</table>
+
+
+
+## Usage Examples
+
+### Login
+```typescript
+const loginResponse = await loginUser({
+  username: 'user1',
+  password: 'password123',
+  remember_me: true
+});
+```
+
+### Register
+```typescript
+const registerResponse = await registerUser({
+  username: "user1",
+  email: 'user@example.com',
+  password: 'password123',
+  firstName: 'John',
+  lastName: 'Doe'
+});
+```
+
+### Get Current User
+```typescript
+const user = await getCurrentUser();
+```
+
+### Refresh Token
+```typescript
+const tokens = await refreshAuthToken(refreshToken);
+```
+
+### Logout
+```typescript
+await logoutUser();
+```
+
+### Password Reset
+```typescript
+await requestPasswordReset('user1');
+await resetPassword(token, newPassword);
+```
+
+### Email Verification
+```typescript
+await verifyEmail(verificationToken);
+```
+
+---
+
+For more details, see the full `AUTHENTICATION.md` in the `/docs` directory.
