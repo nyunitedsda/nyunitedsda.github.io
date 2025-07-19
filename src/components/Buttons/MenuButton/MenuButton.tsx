@@ -30,7 +30,6 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 	const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const navigate = useNavigate();
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const isActiveButton = useMemo((): boolean => {
 		return menuItems && menuItems?.length > 0
@@ -56,7 +55,6 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 
 	const handleMenuOpen = useCallback((e: MouseEvent<HTMLButtonElement>) => {
 		setIsMenuVisible(true);
-		setAnchorEl(e.currentTarget);
 	}, []);
 
 	const handleMenuItemSelect = useCallback(
@@ -101,13 +99,12 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 				{children}
 			</Button>
 			{isMenuVisible &&
-				menuItems &&
-				anchorEl &&
-				document.body.contains(anchorEl) && (
+				menuItems && 
+				(
 					<Popper
 						sx={{ zIndex: 1 }}
 						open={isMenuVisible}
-						anchorEl={anchorEl}
+						anchorEl={buttonRef?.current}
 						placement="bottom-end"
 						transition
 						disablePortal
@@ -119,7 +116,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 									transformOrigin:
 										placement === "bottom" ? "center top" : "center bottom",
 								}}
-							>
+							> 
+								<div>
 								<ClickAwayListener onClickAway={handleMenuClose}>
 									<Card
 										sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}
@@ -139,6 +137,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 										</MenuList>
 									</Card>
 								</ClickAwayListener>
+								</div>
 							</Grow>
 						)}
 					</Popper>
