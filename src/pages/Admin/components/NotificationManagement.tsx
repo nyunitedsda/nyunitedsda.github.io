@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import type { NotificationType } from "../../../api/request/types";
@@ -20,9 +20,6 @@ const NotificationAdmin: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 
-	const [notificationData, setNotificationData] = useState<
-		Partial<NotificationType>[]
-	>([]);
 	const [createNotificationOpen, setCreateNotificationOpen] =
 		useState<Partial<NotificationType> | null>(null);
 
@@ -31,17 +28,10 @@ const NotificationAdmin: FC = () => {
 			queryKey: ["notifications"],
 			queryFn: () =>
 				getDatabaseList("notifications", createAuthConfig(accessToken)),
-			select: (data) => data?.map((i) => ({ ...i, expires_at: i.expires_at ? new Date(i.expires_at) : undefined })) || [],
 			staleTime: 5 * 60 * 1000,
 			refetchOnWindowFocus: false,
 		},
 	);
-
-	useEffect(() => {
-		if (queryData && Array.isArray(queryData)) {
-			setNotificationData(queryData);
-		}
-	}, [queryData]);
 
 	const _handleDeleteNotification = useCallback(
 		(id: number) => {
@@ -71,7 +61,7 @@ const NotificationAdmin: FC = () => {
 			/>
 
 			<DataTable
-				data={notificationData as GenericType[]}
+				data={queryData as unknown as GenericType[]}
 				columns={notificationsColumns}
 				onEdit={(d) => setCreateNotificationOpen(d)}
 				onDelete={(d) => _handleDeleteNotification(d?.id as number)}

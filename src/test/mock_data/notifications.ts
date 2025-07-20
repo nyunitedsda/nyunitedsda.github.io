@@ -12,14 +12,14 @@ const notifications: NotificationType[] = [
 		message: "Welcome to the platform!",
 		title: "Greetings",
 		severity: 1,
-		expires_at: (Date.now() + 7 * 24 * 60 * 60 * 1000).toString(), // expires in 7 days
+		expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
 	},
 	{
 		id: 2,
 		message: "Your password will expire soon.",
 		title: "Password Expiry",
 		severity: 2,
-		expires_at: (Date.now() + 2 * 24 * 60 * 60 * 1000).toString(), // expires in 2 days
+		expires_at: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
 	},
 	{
 		id: 3,

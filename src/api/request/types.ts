@@ -249,6 +249,8 @@ export type NotificationSeverity =
 	| "error"
 	| "success";
 
+export type SeverityPalette = "info" | "warning" | "error" | "success";
+
 /**
  * Represents an option for notification severity
  *

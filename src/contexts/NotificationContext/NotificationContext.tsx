@@ -39,6 +39,7 @@ const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 		staleTime: 1000 * 60 * 5, // 5 minutes
 		refetchOnMount: true,
 	});
+
 	const notifications = useMemo(
 		() =>
 			(notificationList.length ?? 0) > MAX_NOTIFICATIONS

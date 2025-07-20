@@ -1,13 +1,10 @@
 import { Palette } from "@mui/icons-material";
 import {
 	ButtonBase,
-	ListItemIcon,
-	ListItemText,
 	type SimplePaletteColorOptions,
 	type SxProps,
 	type Theme,
 } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
@@ -59,13 +56,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: defaultNotification,
-					title: ADD_TITLE,
-				},
+						initialValues: defaultNotification,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 
@@ -75,7 +72,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
-
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -105,15 +101,26 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 				<InputField
 					renderItemLabel={(item) => {
 						const paletteKey = SEVERITY_PALETTE_KEY[item.type] || "info";
-						const color = (theme.palette[paletteKey] as SimplePaletteColorOptions).main;
+						const color = (
+							theme.palette[paletteKey] as SimplePaletteColorOptions
+						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting
 						return (
 							<ButtonBase
 								key={item.id}
-								sx={{ width: "100%", height: '100%', display: 'flex', alignItems: 'center', gap: 1, fontWeight: 'bold', justifyContent: 'flex-start', pl: 2 }}
+								sx={{
+									width: "100%",
+									height: "100%",
+									display: "flex",
+									alignItems: "center",
+									gap: 1,
+									fontWeight: "bold",
+									justifyContent: "flex-start",
+									pl: 2,
+								}}
 								value={item.id}
 							>
-								<span style={{ color, display: 'flex', alignItems: 'center' }}>
+								<span style={{ color, display: "flex", alignItems: "center" }}>
 									<Palette fontSize="small" />
 								</span>
 								<span style={{ color }}>{item.title}</span>

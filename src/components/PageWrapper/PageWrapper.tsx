@@ -37,7 +37,7 @@ const PageWrapper: FC = () => {
 	return (
 		<Stack sx={rootSx}>
 			{notifications.map((i) => (
-				<NotificationBanner key={i.id} {...i} />
+				<NotificationBanner key={i.id} {...i} open />
 			))}
 			<Header />
 			<PageContentContainer sx={containerSx}>

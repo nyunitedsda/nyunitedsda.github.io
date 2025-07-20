@@ -6,22 +6,17 @@ import type { Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
 import { type FC, useCallback, useContext, useState } from "react";
-import type { NotificationSeverity } from "../../api/request/types";
+import type { SeverityPalette } from "../../api/request/types";
 import NotificationContext from "../../contexts/NotificationContext/context";
 import { selectSeverityIcon } from "./components/helpers";
 import type { NotificationBannerProps, NotificationProps } from "./types";
 
-
-
-const severityColors: Record<
-	NotificationSeverity,
-	"info" | "warning" | "error" | "success"
-> = {
-	information: "info",
-	caution: "warning",
-	error: "error",
-	success: "success",
-};
+const severityColors: SeverityPalette[] = [
+	"info",
+	"warning",
+	"error",
+	"success",
+];
 
 const rootSx = ({
 	severity = 1,
@@ -38,7 +33,8 @@ const rootSx = ({
 		alignItems: "center",
 		flexDirection: "row",
 		flexWrap: "nowrap",
-		backgroundColor: (theme) => theme.palette[severityColors[severity - 1]].light,
+		backgroundColor: (theme) =>
+			theme.palette[severityColors[severity - 1]].light,
 		color: theme.palette[severityColors[severity - 1]].contrastText,
 		px: 2,
 		py: 0.5,
