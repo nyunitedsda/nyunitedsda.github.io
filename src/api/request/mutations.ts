@@ -16,7 +16,7 @@ const createEntity = async <T extends object>(
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	try {
-		const response = await axiosInstance.post(`/${entity}`, data, config);
+		const response = await axiosInstance.post(`/api/${entity}`, data, config);
 		return response.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("create", entity, error);
@@ -38,7 +38,11 @@ const updateEntity = async <T extends { id: number }>(
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	try {
-		const response = await axiosInstance.put(`/${entity}/${id}`, data, config);
+		const response = await axiosInstance.put(
+			`/api/${entity}/${id}`,
+			data,
+			config,
+		);
 		return response.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("update", entity, error);
@@ -58,7 +62,7 @@ const deleteEntity = async <T extends object>(
 	config?: AxiosRequestConfig,
 ): Promise<T | { success: boolean }> => {
 	try {
-		const response = await axiosInstance.delete(`/${entity}/${id}`, config);
+		const response = await axiosInstance.delete(`/api/${entity}/${id}`, config);
 		return response.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("delete", entity, error);

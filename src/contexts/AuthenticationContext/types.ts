@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 import type { LoginCredentials, UserType } from "../../api/request/types";
 
-
-
 /**
  * Registration data for new users
  * @description This type defines the structure of user registration data.

@@ -1,4 +1,7 @@
-import { CheckBoxOutlineBlankOutlined, CheckBoxOutlined } from "@mui/icons-material";
+import {
+	CheckBoxOutlineBlankOutlined,
+	CheckBoxOutlined,
+} from "@mui/icons-material";
 import { Checkbox } from "@mui/material";
 import { createElement } from "react";
 import type { UserType } from "../../../api/request/types";
@@ -21,10 +24,10 @@ const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 		title: "Active",
 		renderCell: ({ is_active }) =>
 			createElement(Checkbox, {
-				 checked: is_active ,
-				 icon: createElement(CheckBoxOutlineBlankOutlined),
-				 checkedIcon: createElement(CheckBoxOutlined),
-				}),
+				checked: is_active,
+				icon: createElement(CheckBoxOutlineBlankOutlined),
+				checkedIcon: createElement(CheckBoxOutlined),
+			}),
 	},
 ];
 

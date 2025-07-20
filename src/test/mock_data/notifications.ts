@@ -1,7 +1,6 @@
 import type { NotificationType } from "../../api/request/types";
 
-export const initialValues: NotificationType = {
-	id: 0,
+export const initialValues: Partial<NotificationType> = {
 	message: "",
 	title: "",
 	severity: "information",

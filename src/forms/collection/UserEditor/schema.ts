@@ -28,9 +28,7 @@ export default Yup.object().shape({
 		.required("Role ID is required")
 		.oneOf([1, 2, 3], "Invalid Role ID")
 		.min(1, "Role ID must be positive"),
-	is_active: Yup.boolean()
-		.required("Active status is required")
-		.default(true),
+	is_active: Yup.boolean().required("Active status is required").default(true),
 	emailVerified: Yup.boolean()
 		.required("Email verification status is required")
 		.default(false),

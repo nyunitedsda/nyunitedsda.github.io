@@ -1,7 +1,5 @@
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type {
-	RegisterData,
-} from "../../contexts/AuthenticationContext/types";
+import type { AxiosRequestConfig } from "axios";
+import type { RegisterData } from "../../contexts/AuthenticationContext/types";
 import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
@@ -23,7 +21,7 @@ const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
 const getDatabaseList = async <T extends { id: number }>(
 	entity: DatabaseEntity,
 	config?: AxiosRequestConfig,
-): Promise<AxiosResponse<T[], any>> => {
+): Promise<T[]> => {
 	try {
 		const response = await axiosInstance.get(`/api/${entity}`, config);
 		return response?.data || response;
@@ -44,7 +42,7 @@ const getDatabaseItem = async <T extends { id: number }>(
 	entity: DatabaseEntity,
 	id: number,
 	config?: AxiosRequestConfig,
-): Promise<AxiosResponse<T, unknown>> => {
+): Promise<T> => {
 	try {
 		const response = await axiosInstance.get(`/${entity}/${id}`, config);
 		return response?.data;
@@ -52,8 +50,6 @@ const getDatabaseItem = async <T extends { id: number }>(
 		return handleOperationError("getItem", entity, error);
 	}
 };
-
-
 
 /**
  * Register/ create a new user
@@ -73,7 +69,7 @@ const registerUser = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("register", "users", error);
+		return handleOperationError("register", "user", error);
 	}
 };
 
@@ -96,7 +92,7 @@ const refreshAuthToken = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("refresh", "users", error);
+		return handleOperationError("refresh", "user", error);
 	}
 };
 
@@ -117,7 +113,7 @@ const logoutUser = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("logout", "users", error);
+		return handleOperationError("logout", "user", error);
 	}
 };
 
@@ -134,7 +130,7 @@ const getCurrentUser = async (
 		const response = await axiosInstance.get(`${AUTH_API_URL}profile`, config);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("getCurrentUser", "users", error);
+		return handleOperationError("getCurrentUser", "user", error);
 	}
 };
 
@@ -160,7 +156,7 @@ const updateUser = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("updateUser", "users", error);
+		return handleOperationError("updateUser", "user", error);
 	}
 };
 
@@ -175,7 +171,7 @@ const getUserStatus = async (
 		);
 		return response?.data || response;
 	} catch (error: unknown) {
-		return handleOperationError("getUserStatus", "users", error);
+		return handleOperationError("getUserStatus", "user", error);
 	}
 };
 
@@ -194,7 +190,7 @@ const requestPasswordReset = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("requestPasswordReset", "users", error);
+		return handleOperationError("requestPasswordReset", "user", error);
 	}
 };
 
@@ -214,7 +210,7 @@ const resetPassword = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("resetPassword", "users", error);
+		return handleOperationError("resetPassword", "user", error);
 	}
 };
 
@@ -233,7 +229,7 @@ const verifyEmail = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("verifyEmail", "users", error);
+		return handleOperationError("verifyEmail", "user", error);
 	}
 };
 

@@ -1,7 +1,6 @@
 import type { DonationType } from "../../api/request/types";
 
-export const initialDonation: DonationType = {
-	id: 0,
+export const initialDonation: Partial<DonationType> = {
 	title: "",
 	description: "",
 };

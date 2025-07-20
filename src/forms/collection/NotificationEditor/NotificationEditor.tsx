@@ -82,8 +82,8 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
-				id={data?.id}
+				entity={ENTITY_NAME}
+				id={initialValues?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
 				validationSchema={notificationSchema}

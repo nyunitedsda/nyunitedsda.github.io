@@ -1,10 +1,10 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
-import { useEffect, useMemo, useState } from "react";
-import { getDatabaseItem } from "../../api/request/commonQueries";
+import { useMemo } from "react";
 import { createEntity, updateEntity } from "../../api/request/mutations";
-import RingLoader from "../../components/Loaders/RingLoader";
+import useToken from "../../hooks/auth/useToken";
+import { createAuthConfig } from "../../utils/authUtils";
 import FormContainer from "../FormBuilder/FormContainer";
 import type { EntityEditorProps } from "./types";
 
@@ -14,8 +14,9 @@ const titleSx: SxProps<Theme> = {
 	backgroundColor: "inherit",
 	zIndex: 1,
 };
+
 const EntityEditor = <T extends { id?: number }>({
-	data,
+	entity,
 	id,
 	validationSchema,
 	defaultValues,
@@ -27,34 +28,9 @@ const EntityEditor = <T extends { id?: number }>({
 	onCancel,
 }: EntityEditorProps<T>) => {
 	const { enqueueSnackbar } = useSnackbar();
+	const { accessToken } = useToken();
 
-	const [initialValues, setInitialValues] = useState<T>(defaultValues);
-	const [isLoading, setIsLoading] = useState<boolean>(!!id);
-
-	const isEditMode = !!id;
-
-	// Fetch data if in edit mode
-	useEffect(() => {
-		if (id) {
-			setIsLoading(true);
-
-			getDatabaseItem<T & { id: number }>(data, id)
-				.then((data) => {
-					if (data) {
-						setInitialValues((data?.data ?? data) as unknown as T);
-					}
-				})
-				.catch((err) => {
-					enqueueSnackbar(
-						`Failed to load ${data}: ${err.message || "Unknown error"}`,
-						{ variant: "error" },
-					);
-				})
-				.finally(() => {
-					setIsLoading(false);
-				});
-		}
-	}, [data, id]);
+	const isEditMode = useMemo(() => !!id, [id]);
 
 	const handleSubmit = async (values: T) => {
 		try {
@@ -63,29 +39,33 @@ const EntityEditor = <T extends { id?: number }>({
 			if (isEditMode && id) {
 				// Update existing data
 				result = await updateEntity<T & { id: number }>(
-					data,
+					entity,
 					id,
 					values as T & { id: number },
+					createAuthConfig(accessToken),
 				);
 
-				enqueueSnackbar(`${data} updated successfully`, {
+				enqueueSnackbar(`${entity} updated successfully`, {
 					variant: "success",
 				});
 			} else {
 				// Create new data
-				result = await createEntity<T>(data, values as Omit<T, "id">);
-				enqueueSnackbar(`New ${data} created successfully`, {
+				result = await createEntity<T>(
+					entity,
+					values as Omit<T, "id">,
+					createAuthConfig(accessToken),
+				);
+				enqueueSnackbar(`New ${entity} created successfully`, {
 					variant: "success",
 				});
 			}
 
-			// Call success callback if provided
 			if (onSuccess) {
 				onSuccess(result);
 			}
 		} catch (err: any) {
 			enqueueSnackbar(
-				`Failed to ${isEditMode ? "update" : "create"} ${data}: ${err.message || "Unknown error"}`,
+				`Failed to ${isEditMode ? "update" : "create"} ${entity}: ${err.message || "Unknown error"}`,
 				{ variant: "error" },
 			);
 		}
@@ -94,8 +74,9 @@ const EntityEditor = <T extends { id?: number }>({
 	// Default submit button text based on mode if not provided
 	const buttonText = useMemo(
 		() =>
-			submitButtonText ?? (isEditMode ? `Update ${data}` : `Create ${data}`),
-		[submitButtonText, isEditMode, data],
+			submitButtonText ??
+			(isEditMode ? `Update ${entity}` : `Create ${entity}`),
+		[submitButtonText, isEditMode, entity],
 	);
 
 	return (
@@ -106,23 +87,16 @@ const EntityEditor = <T extends { id?: number }>({
 				</Typography>
 			)}
 
-			{isLoading ? (
-				<>
-					<RingLoader />
-					<Typography variant="body1">{`Loading ${data} data...`}</Typography>
-				</>
-			) : (
-				<FormContainer
-					initialValues={initialValues}
-					validationSchema={validationSchema}
-					onSubmit={handleSubmit}
-					submitButtonText={buttonText}
-					onCancel={onCancel}
-					cancelButtonText={cancelButtonText}
-				>
-					{children}
-				</FormContainer>
-			)}
+			<FormContainer
+				initialValues={defaultValues}
+				validationSchema={validationSchema}
+				onSubmit={handleSubmit}
+				submitButtonText={buttonText}
+				onCancel={onCancel}
+				cancelButtonText={cancelButtonText}
+			>
+				{children}
+			</FormContainer>
 		</>
 	);
 };

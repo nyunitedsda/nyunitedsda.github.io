@@ -10,9 +10,7 @@ import {
 } from "../../api/request/commonQueries";
 import type { LoginCredentials, LoginResponse } from "../../api/request/types";
 import { AUTH_CONSTANTS } from "../../contexts/AuthenticationContext/constant";
-import type {
-	RegisterData,
-} from "../../contexts/AuthenticationContext/types";
+import type { RegisterData } from "../../contexts/AuthenticationContext/types";
 import { createAuthConfig } from "../../utils";
 import useLocalStorage from "../storage/useLocalStorage";
 import useToken from "./useToken";

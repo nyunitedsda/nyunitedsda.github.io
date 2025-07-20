@@ -3,23 +3,28 @@ import { type FC, useCallback, useEffect, useState } from "react";
 import { getAllUsers } from "../../../api/request/authAndUserRequest";
 import type { UserType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import RingLoader from "../../../components/Loaders/RingLoader";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import UserEditor from "../../../forms/collection/UserEditor";
 import { useDeleteUser } from "../../../hooks/auth/useAuthAPI";
+import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
 import { initialValues } from "../../../test/mock_data/users";
 import { createAuthConfig } from "../../../utils/authUtils";
+import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import userColumns from "../constants/userColumns";
 
-const USER_SUBHEADER = "Manage system users and their permissions";
+const { USER_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const UserManagement: FC = () => {
+	const { accessToken } = useToken();
+	const deleteUser = useDeleteUser();
+	const { canCreate, canEdit, canDelete } = usePermission("user");
+
 	const [userData, setUserData] = useState<Partial<UserType>[]>([]);
 	const [createUserOpen, setCreateUserOpen] =
 		useState<Partial<UserType> | null>(null);
-	const { accessToken } = useToken();
-	const deleteUser = useDeleteUser();
 
 	const {
 		data: queryData,
@@ -39,26 +44,30 @@ const UserManagement: FC = () => {
 		}
 	}, [queryData]);
 
-	console.log("userData: ", userData);
-
-	const _handleDeleteUser = useCallback(async (id: number) => {
-		await deleteUser.mutateAsync(id).then(() => refetch());
-	}, []);
+	const _handleDeleteUser = useCallback(
+		(data: GenericType & { id: number }) => {
+			const { id } = data;
+			deleteUser.mutateAsync(id).then(() => refetch());
+		},
+		[],
+	);
 
 	return (
 		<>
 			<PageTitle
 				title=""
-				subtitle={USER_SUBHEADER}
-				handleClick={() => setCreateUserOpen(initialValues)}
+				subtitle={SUBHEADER}
+				handleClick={
+					canCreate ? () => setCreateUserOpen(initialValues) : undefined
+				}
 			/>
 
 			{!isLoading ? (
 				<DataTable
 					data={userData}
 					columns={userColumns}
-					onEdit={(d) => setCreateUserOpen(d)}
-					onDelete={(d) => _handleDeleteUser(d?.id as number)}
+					onEdit={canEdit ? setCreateUserOpen : undefined}
+					onDelete={canDelete ? _handleDeleteUser : undefined}
 				/>
 			) : (
 				<RingLoader />

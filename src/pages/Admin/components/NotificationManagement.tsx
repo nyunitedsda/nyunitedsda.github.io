@@ -9,51 +9,62 @@ import NotificationEditor from "../../../forms/collection/NotificationEditor/Not
 import useToken from "../../../hooks/auth/useToken";
 import { initialValues } from "../../../test/mock_data/notifications";
 import { createAuthConfig } from "../../../utils/authUtils";
+import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
+import { useSnackbar } from "notistack";
 
-const NOTIFICATION_SUBHEADER = "Manage application notifications";
+const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const NotificationAdmin: FC = () => {
+	const { accessToken } = useToken();
+	const { enqueueSnackbar } = useSnackbar();
+
 	const [notificationData, setNotificationData] = useState<
 		Partial<NotificationType>[]
 	>([]);
 	const [createNotificationOpen, setCreateNotificationOpen] =
 		useState<Partial<NotificationType> | null>(null);
-	const { accessToken } = useToken();
 
-	const { data: queryData, refetch } = useQuery<
-		{ data: NotificationType[] } | undefined
-	>({
-		queryKey: ["notifications"],
-		queryFn: () =>
-			getDatabaseList("notifications", createAuthConfig(accessToken)),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
+	const { data: queryData, refetch } = useQuery<NotificationType[] | undefined>(
+		{
+			queryKey: ["notifications"],
+			queryFn: () =>
+				getDatabaseList("notifications", createAuthConfig(accessToken)),
+			staleTime: 5 * 60 * 1000,
+			refetchOnWindowFocus: false,
+		},
+	);
 
 	useEffect(() => {
-		if (queryData && Array.isArray(queryData.data)) {
-			setNotificationData(queryData.data);
+		if (queryData && Array.isArray(queryData)) {
+			setNotificationData(queryData);
 		}
 	}, [queryData]);
 
-	const _handleDeleteNotification = useCallback((id: number) => {
-		deleteEntity("notifications", id, createAuthConfig(accessToken))
-			.then(() => {
-				setNotificationData((prev) =>
-					prev.filter((notification) => notification?.id !== id),
-				);
-			})
-			.catch((error) => {
-				console.error("Failed to delete notification:", error);
-			});
-	}, []);
+	const _handleDeleteNotification = useCallback(
+		(id: number) => {
+			deleteEntity("notifications", id, createAuthConfig(accessToken))
+				.then(() => {
+					refetch();
+					enqueueSnackbar("Notification deleted successfully", {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					console.error("Failed to delete notification:", error);
+					enqueueSnackbar("Failed to delete notification", {
+						variant: "error",
+					});
+				});
+		},
+		[accessToken],
+	);
 
 	return (
 		<>
 			<PageTitle
 				title=""
-				subtitle={NOTIFICATION_SUBHEADER}
+				subtitle={SUBHEADER}
 				handleClick={() => setCreateNotificationOpen(initialValues)}
 			/>
 

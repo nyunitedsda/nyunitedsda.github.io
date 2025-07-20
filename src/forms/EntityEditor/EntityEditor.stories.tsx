@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SnackbarProvider } from "notistack";
-import * as yup from "yup";
 // Types
-import type { DonationType } from "../../api/request/types";
+import donations, { initialDonation } from "../../test/mock_data/donations";
 import InputField from "../Input/FormField";
 import EntityEditor from "./EntityEditor";
+import { donationSchema } from "../collection/DonationEditor/constants";
 
 // Wrapper component to avoid React children serialization issues
 const EntityEditorWrapper = (props: any) => (
@@ -19,24 +19,6 @@ const EntityEditorWrapper = (props: any) => (
 		/>
 	</EntityEditor>
 );
-
-// Create validation schema
-const testSchema = yup.object({
-	title: yup.string().required("Title is required"),
-	description: yup.string(),
-});
-
-const defaultValues: DonationType = {
-	id: 456,
-	title: "testing item",
-	description: "Testing item description",
-};
-
-const createModeDefaults: DonationType = {
-	id: 0,
-	title: "",
-	description: "",
-};
 
 // Define the meta for the story
 const meta: Meta<typeof EntityEditorWrapper> = {
@@ -61,8 +43,8 @@ type Story = StoryObj<typeof meta>;
 export const CreateMode: Story = {
 	args: {
 		data: "donations",
-		validationSchema: testSchema,
-		defaultValues: createModeDefaults,
+		validationSchema: donationSchema,
+		defaultValues: initialDonation,
 		title: "Create New Item",
 		submitButtonText: "Create Item",
 		cancelButtonText: "Cancel",
@@ -76,8 +58,8 @@ export const EditMode: Story = {
 	args: {
 		data: "donations",
 		id: 123,
-		validationSchema: testSchema,
-		defaultValues: defaultValues,
+		validationSchema: donationSchema,
+		defaultValues: donations[0], // Use the first donation as default values
 		title: "Edit Item",
 		submitButtonText: "Update Item",
 		cancelButtonText: "Cancel",
@@ -109,8 +91,8 @@ export const LoadingState: Story = {
 	args: {
 		data: "donations",
 		id: 456, // Provide ID to trigger loading state
-		validationSchema: testSchema,
-		defaultValues: defaultValues,
+		validationSchema: donationSchema,
+		defaultValues: donations[0],
 		title: "Edit Item",
 	},
 	parameters: {

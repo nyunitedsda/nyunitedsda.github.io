@@ -1,7 +1,6 @@
 import type { ContactInfoType } from "../../api/request/types";
 
-export const initialContactInfo: ContactInfoType = {
-	id: 0,
+export const initialContactInfo: Partial<ContactInfoType> = {
 	email: "",
 	phone: "",
 	street: "",

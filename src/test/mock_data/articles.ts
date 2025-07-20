@@ -1,7 +1,6 @@
 import type { ArticleType } from "../../api/request/types";
 
-export const initialArticle: ArticleType = {
-	id: 0,
+export const initialArticle: Partial<ArticleType> = {
 	title: "",
 	author_id: 0,
 	publishDate: new Date(),

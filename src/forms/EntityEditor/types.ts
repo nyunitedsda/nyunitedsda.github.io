@@ -5,7 +5,7 @@ interface EntityEditorProps<T extends { id?: number }> {
 	/**
 	 * The database data type
 	 */
-	data: DatabaseEntity;
+	entity: DatabaseEntity;
 
 	/**
 	 * ID of data to update (if updating existing data)

@@ -20,11 +20,7 @@ import {
 import useToken from "../../hooks/auth/useToken";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
-import type {
-	AuthenticationContextProps,
-	RegisterData,
-} from "./types";
-
+import type { AuthenticationContextProps, RegisterData } from "./types";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { accessToken, refreshToken, clearTokens } = useToken();

@@ -7,7 +7,7 @@
  */
 export type DatabaseEntity =
 	| "donations"
-	| "users"
+	| "user"
 	| "articles"
 	| "announcements"
 	| "notifications"
@@ -96,7 +96,6 @@ export type LoginCredentials = Pick<
 	UserType,
 	"username" | "password" | "remember_me"
 >;
-
 
 /**
  * Authentication token response

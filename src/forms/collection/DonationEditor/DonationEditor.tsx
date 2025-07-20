@@ -1,22 +1,19 @@
 import { type FC, useMemo } from "react";
-import * as Yup from "yup";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { initialDonation } from "../../../test/mock_data/donations";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { DonationEditorProps } from "./types";
+import { DONATION_EDITOR_CONSTANTS, donationSchema } from "./constants";
 
-const donationSchema = Yup.object().shape({
-	title: Yup.string().required("Title is required"),
-	description: Yup.string().required("Description is required"),
-});
-
-const EDIT_TITLE = "Edit Donation";
-const ADD_TITLE = "Add Donation";
-const ENTITY_NAME = "donations";
-const BUTTON_TEXT = "Save";
-const TITLE_FIELD_LABEL = "How would you like to title this donation?";
-const DESCRIPTION_FIELD_LABEL = "Please describe the donation method";
+const {
+	EDIT_TITLE,
+	ADD_TITLE,
+	ENTITY_NAME,
+	BUTTON_TEXT,
+	TITLE_FIELD_LABEL,
+	DESCRIPTION_FIELD_LABEL,
+} = DONATION_EDITOR_CONSTANTS;
 
 const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
 	const { initialValues, title } = useMemo(
@@ -37,7 +34,7 @@ const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
+				entity={ENTITY_NAME}
 				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
