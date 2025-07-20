@@ -187,26 +187,6 @@ const updateUser = async (
 	}
 };
 
-/**
- * Get a list of all system users
- * This a Authenticated API call that requires a valid token
- * @param config - Optional axios request config
- * @returns Promise<AxiosResponse<UserType[], any>>
- * @throws Error if the operation fails
- */
-const getAllUsers = async (
-	config?: AxiosRequestConfig,
-): Promise<AxiosResponse<UserType[], any>> => {
-	try {
-		console.log("All users config: ", config);
-
-		const response = await axiosInstance.get(`${AUTH_API_URL}users`, config);
-		return response?.data.data || response.data;
-	} catch (error: unknown) {
-		return handleOperationError("getAllUsers", "users", error);
-	}
-};
-
 const getUserStatus = async (
 	token: string,
 	config?: AxiosRequestConfig,
@@ -281,7 +261,6 @@ const verifyEmail = async (
 };
 
 export {
-	getAllUsers,
 	getCurrentUser,
 	getDatabaseItem,
 	getDatabaseList,

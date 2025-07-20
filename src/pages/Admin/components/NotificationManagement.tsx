@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useEffect, useState } from "react";
-import { deleteEntity } from "../../../api/request/commonMutations";
 import { getDatabaseList } from "../../../api/request/commonQueries";
+import { deleteEntity } from "../../../api/request/mutations";
 import type { NotificationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import PageTitle from "../../../components/PageWrapper/PageTitle";

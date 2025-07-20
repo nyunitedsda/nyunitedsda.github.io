@@ -46,4 +46,4 @@ const deleteEntity = async <T extends object>(
 	}
 };
 
-export { createEntity, updateEntity, deleteEntity };
+export { createEntity, deleteEntity, updateEntity };

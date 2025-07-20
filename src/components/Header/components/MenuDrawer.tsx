@@ -1,6 +1,6 @@
 import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
-import { type FC, memo, useCallback } from "react";
+import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router";
 import LoginButton from "../../Buttons/LoginButton/LoginButton";
 import ThemeToggleButton from "../../Buttons/ThemeToggleButton";

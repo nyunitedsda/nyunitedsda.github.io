@@ -48,7 +48,7 @@ export interface LoginResponse extends AuthTokenResponse {
  */
 export type RegisterData = Pick<
 	UserType,
-	"email" | "username" | "password" | "firstName" | "lastName"
+	"email" | "username" | "password" | "first_name" | "last_name"
 >;
 
 /**

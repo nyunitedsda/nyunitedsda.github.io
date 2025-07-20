@@ -33,10 +33,10 @@ const EDIT_TITLE = "Edit User";
 const CREATE_TITLE = "Create New User";
 
 const UserEditor: FC<UserEditorProps> = ({
-	open,
 	data,
 	onClose,
 	onSuccess,
+	open,
 }) => {
 	useSnackbar();
 	const registerUser = useRegister();

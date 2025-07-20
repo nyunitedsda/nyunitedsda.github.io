@@ -15,7 +15,7 @@ const Administration: FC<AdministrationProps> = () => {
 	}, [isAuthenticated]);
 
 	const accessibleTabs = useMemo(() => {
-		if (!user || user.role !== "admin") {
+		if (!user || user.role_id === 1) {
 			return [];
 		}
 		return ADMIN_TAB_LIST;

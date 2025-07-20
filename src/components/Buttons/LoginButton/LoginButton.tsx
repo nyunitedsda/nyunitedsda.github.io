@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import { type FC, lazy, memo } from "react";
+import { type FC, lazy } from "react";
 import { useNavigate } from "react-router";
 import { useAuthentication } from "../../../hooks/auth";
 import { ROUTE_PATHS } from "../../../hooks/routes/reviewedRoutes";

@@ -11,9 +11,9 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
 const userColumns: ColumnDefinition<Partial<UserType>>[] = [
 	{ id: "username", field: "username", title: "Username" },
 	{ id: "email", field: "email", title: "Email" },
-	{ id: "firstName", field: "firstName", title: "First Name" },
-	{ id: "lastName", field: "lastName", title: "Last Name" },
-	{ id: "role", field: "role", title: "Role" },
+	{ id: "first_name", field: "first_name", title: "First Name" },
+	{ id: "last_name", field: "last_name", title: "Last Name" },
+	{ id: "role_id", field: "role_id", title: "Role" },
 	{
 		id: "is_active",
 		field: "is_active",

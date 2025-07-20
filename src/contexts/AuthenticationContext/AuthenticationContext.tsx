@@ -19,8 +19,6 @@ import {
 } from "../../hooks/auth";
 import useToken from "../../hooks/auth/useToken";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
-import useLocalStorage from "../../hooks/storage/useLocalStorage";
-import { AUTH_CONSTANTS } from "./constant";
 import { Provider } from "./context";
 import type {
 	AuthenticationContextProps,
@@ -28,11 +26,8 @@ import type {
 	RegisterData,
 } from "./types";
 
-const { USER_KEY } = AUTH_CONSTANTS;
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
-	// Only use the getter for userKey, as setter is not needed here
-	const [userKey] = useLocalStorage(USER_KEY, null);
 	const { accessToken, refreshToken, clearTokens } = useToken();
 	const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
 	const { enqueueSnackbar } = useSnackbar();

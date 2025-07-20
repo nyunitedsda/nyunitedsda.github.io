@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useEffect, useState } from "react";
-import { deleteEntity } from "../../../api/request/commonMutations";
 import { getDatabaseList } from "../../../api/request/commonQueries";
+import { deleteEntity } from "../../../api/request/mutations";
 import type { ContactInfoType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
-import { createAuthConfig } from "../../../utils/authUtils";
 import useToken from "../../../hooks/auth/useToken";
-import contactInfoColumns from "../constants/contactInfoColumns";
 import { initialContactInfo } from "../../../test/mock_data/contactInfo";
+import { createAuthConfig } from "../../../utils/authUtils";
+import contactInfoColumns from "../constants/contactInfoColumns";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
 

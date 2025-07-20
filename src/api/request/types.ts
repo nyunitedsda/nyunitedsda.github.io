@@ -72,11 +72,11 @@ export type UserRoleOption = {
 export interface UserType {
 	id: number;
 	email?: string;
-	firstName?: string;
-	lastName?: string;
+	first_name?: string;
+	last_name?: string;
 	username: string;
 	password?: string;
-	role: UserRole;
+	role_id: number;
 	permissions?: string[];
 	remember_me: boolean;
 	emailVerified?: boolean;

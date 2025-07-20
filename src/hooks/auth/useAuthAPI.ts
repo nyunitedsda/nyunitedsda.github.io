@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
+import { deleteUser } from "../../api/request/authAndUserRequest";
 import {
 	getCurrentUser,
 	getUserStatus,
@@ -256,6 +257,39 @@ export const useAuthStatus = () => {
 		error,
 		refreshAuthStatus: refetch,
 	};
+};
+
+/**
+ * Delete user hook
+ * @description This hook uses React Query's useMutation to perform the user deletion operation.
+ * It handles user deletion, clears tokens from localStorage, and removes cached user data.
+ * It returns a mutation function that can be used to trigger the delete process.
+ * @param {string} userId - The ID of the user to delete
+ * @returns {MutationFunction<void, string>}
+ * @throws {Error} if deletion fails
+ * @example
+ * const { mutate: deleteUser } = useDeleteUser();
+ * deleteUser(userId);
+ */
+export const useDeleteUser = () => {
+	const { enqueueSnackbar } = useSnackbar();
+	const { accessToken } = useToken();
+
+	return useMutation({
+		mutationFn: (userId: number) => {
+			if (!accessToken) throw new Error("No access token available");
+			return deleteUser(userId, createAuthConfig(accessToken));
+		},
+		onSuccess: () => {
+			enqueueSnackbar("User deleted successfully", { variant: "success" });
+		},
+		onError: (error: any) => {
+			console.error("Delete user failed:", error);
+			enqueueSnackbar(error.message || "Delete user failed", {
+				variant: "error",
+			});
+		},
+	});
 };
 
 // /**
