@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import type { ContactInfoType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
 import useToken from "../../../hooks/auth/useToken";
@@ -14,37 +16,39 @@ import contactInfoColumns from "../constants/contactInfoColumns";
 const CONTACT_SUBHEADER = "Manage church contact information";
 
 const ContactManagement: FC = () => {
-	const [contactData, setContactData] = useState<Partial<ContactInfoType>[]>(
-		[],
-	);
+	const { accessToken } = useToken();
+	const { enqueueSnackbar } = useSnackbar();
+
 	const [createContactOpen, setCreateContactOpen] =
 		useState<Partial<ContactInfoType> | null>(null);
-	const { accessToken } = useToken();
+
 
 	const { data: queryData, refetch } = useQuery<
-		{ data: ContactInfoType[] } | undefined
+		ContactInfoType[] | undefined
 	>({
 		queryKey: ["contacts"],
-		queryFn: () => getDatabaseList("contacts", createAuthConfig(accessToken)),
+		queryFn: () => getDatabaseList("contact_info", createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
-	useEffect(() => {
-		if (queryData && Array.isArray(queryData.data)) {
-			setContactData(queryData.data);
-		}
-	}, [queryData]);
 
-	const _handleDeleteContact = useCallback((id: number) => {
-		deleteEntity("contacts", id, createAuthConfig(accessToken))
+
+	const _handleDeleteContact = useCallback((data: GenericType) => {
+		deleteEntity("contact_info", data?.id as number, createAuthConfig(accessToken))
 			.then(() => {
-				setContactData((prev) => prev.filter((contact) => contact?.id !== id));
+				refetch();
+				enqueueSnackbar("Contact deleted successfully", {
+					variant: "success",
+				});
 			})
 			.catch((error) => {
 				console.error("Failed to delete contact:", error);
+				enqueueSnackbar("Failed to delete contact", {
+					variant: "error",
+				});
 			});
-	}, []);
+	}, [accessToken]);
 
 	return (
 		<>
@@ -55,11 +59,10 @@ const ContactManagement: FC = () => {
 			/>
 
 			<DataTable
-				data={contactData}
+				data={queryData as unknown as GenericType[]}
 				columns={contactInfoColumns}
-				onEdit={(d) => setCreateContactOpen(d)}
-				onDelete={(d) => _handleDeleteContact(d?.id as number)}
-				onView={(d) => setCreateContactOpen(d)}
+				onEdit={setCreateContactOpen}
+				onDelete={_handleDeleteContact}
 			/>
 
 			{createContactOpen && (

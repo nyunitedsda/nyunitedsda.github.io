@@ -5,6 +5,8 @@ import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import blogSchema from "./schema";
+import { initialArticle } from "../../../test/mock_data/articles";
+import { useAuthentication } from "../../../hooks/auth";
 
 const EDIT_TITLE = "Edit Article";
 const ADD_TITLE = "Add Article";
@@ -15,30 +17,23 @@ const CATEGORY_LABEL = "Category";
 const IMAGE_LABEL = "Image URL";
 const CONTENT_LABEL = "Content";
 
-const defaultValues: Partial<ArticleType> = {
-	title: "",
-	category: "",
-	img_src: "",
-	content: "",
-	author_id: 1, // TODO: Replace with the logged in user id
-	publishDate: new Date().toISOString(),
-};
-
 const BlogEditor: FC<EditorProps<ArticleType>> = ({
 	open,
 	data,
 	onClose,
 	onSuccess,
 }) => {
+	const { user } = useAuthentication();
+
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
+						initialValues: { ...data, author_id: user?.id || null },
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: defaultValues,
+						initialValues: { ...initialArticle, author_id: user?.id || null },
 						title: ADD_TITLE,
 					},
 		[data],
@@ -48,7 +43,7 @@ const BlogEditor: FC<EditorProps<ArticleType>> = ({
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
+				entity={ENTITY_NAME}
 				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}

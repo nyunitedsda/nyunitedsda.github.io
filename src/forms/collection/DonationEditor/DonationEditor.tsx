@@ -15,7 +15,7 @@ const {
 	DESCRIPTION_FIELD_LABEL,
 } = DONATION_EDITOR_CONSTANTS;
 
-const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
+const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose, onSuccess }) => {
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")
@@ -41,7 +41,8 @@ const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose }) => {
 				validationSchema={donationSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Donation saved successfully:", data);
+					onSuccess?.(data);
+					onClose();
 				}}
 			>
 				<InputField name="title" label={TITLE_FIELD_LABEL} fieldType="text" />

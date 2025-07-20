@@ -4,7 +4,7 @@ import { titleSchema } from "../commonSchemas";
 const blogSchema = yup.object({
 	title: titleSchema,
 	category: yup.string().nullable(),
-	img_src: yup.string().nullable().url("Please enter a valid URL"),
+	img_src: yup.string(),
 	content: yup
 		.string()
 		.required("Content is required")

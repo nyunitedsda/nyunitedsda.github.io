@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { type FC, useCallback, useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import type { DonationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
 import useToken from "../../../hooks/auth/useToken";
@@ -14,37 +16,37 @@ import donationColumns from "../constants/donationColumns";
 const DONATION_SUBHEADER = "Manage your donation methods";
 
 const DonationAdmin: FC = () => {
-	const [donationData, setDonationData] = useState<Partial<DonationType>[]>([]);
+	const { accessToken } = useToken();
+	const { enqueueSnackbar } = useSnackbar();
+
 	const [createDonationOpen, setCreateDonationOpen] =
 		useState<Partial<DonationType> | null>(null);
-	const { accessToken } = useToken();
 
-	const { data: queryData, refetch } = useQuery<
-		{ data: DonationType[] } | undefined
-	>({
+	const { data: queryData, refetch } = useQuery<DonationType[] | undefined>({
 		queryKey: ["donations"],
 		queryFn: () => getDatabaseList("donations", createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
-	useEffect(() => {
-		if (queryData && Array.isArray(queryData.data)) {
-			setDonationData(queryData.data);
-		}
-	}, [queryData]);
-
-	const _handleDeleteDonation = useCallback((id: number) => {
-		deleteEntity("donations", id, createAuthConfig(accessToken))
-			.then(() => {
-				setDonationData((prev) =>
-					prev.filter((donation) => donation?.id !== id),
-				);
-			})
-			.catch((error) => {
-				console.error("Failed to delete donation:", error);
-			});
-	}, []);
+	const _handleDeleteDonation = useCallback(
+		(data: GenericType & { id: number }) => {
+			deleteEntity("donations", data.id, createAuthConfig(accessToken))
+				.then(() => {
+					refetch();
+					enqueueSnackbar("Donation deleted successfully", {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					console.error("Failed to delete donation:", error);
+					enqueueSnackbar("Failed to delete donation", {
+						variant: "error",
+					});
+				});
+		},
+		[accessToken],
+	);
 
 	return (
 		<>
@@ -55,11 +57,10 @@ const DonationAdmin: FC = () => {
 			/>
 
 			<DataTable
-				data={donationData}
+				data={queryData as unknown as GenericType[]}
 				columns={donationColumns}
-				onEdit={(d) => setCreateDonationOpen(d)}
-				onDelete={(d) => _handleDeleteDonation(d?.id as number)}
-				onView={(d) => setCreateDonationOpen(d)}
+				onEdit={setCreateDonationOpen}
+				onDelete={_handleDeleteDonation}
 			/>
 
 			{createDonationOpen && (

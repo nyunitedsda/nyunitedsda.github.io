@@ -4,5 +4,5 @@ export interface DonationEditorProps {
 	open: boolean;
 	data?: Partial<DonationType>;
 	onClose: () => void;
-	onSuccess?: () => void;
+	onSuccess?: (data: Partial<DonationType>) => void;
 }

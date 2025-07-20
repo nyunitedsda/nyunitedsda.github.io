@@ -13,7 +13,7 @@ export type DatabaseEntity =
 	| "notifications"
 	| "services"
 	| "roles"
-	| "contacts"
+	| "contact_info"
 	| "severity";
 
 /**

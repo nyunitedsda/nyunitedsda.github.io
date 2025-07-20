@@ -34,7 +34,8 @@ const NotificationAdmin: FC = () => {
 	);
 
 	const _handleDeleteNotification = useCallback(
-		(id: number) => {
+		(data: GenericType & { id: number }) => {
+			const { id } = data as GenericType & { id: number };
 			deleteEntity("notifications", id, createAuthConfig(accessToken))
 				.then(() => {
 					refetch();
@@ -63,9 +64,8 @@ const NotificationAdmin: FC = () => {
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={notificationsColumns}
-				onEdit={(d) => setCreateNotificationOpen(d)}
-				onDelete={(d) => _handleDeleteNotification(d?.id as number)}
-				onView={(d) => setCreateNotificationOpen(d)}
+				onEdit={setCreateNotificationOpen}
+				onDelete={_handleDeleteNotification}
 			/>
 
 			{createNotificationOpen && (

@@ -5,30 +5,25 @@ import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import contactSchema from "./schema";
+import { initialContactInfo } from "../../../test/mock_data/contactInfo";
 
-const EDIT_TITLE = "Edit Contact Information";
-const ADD_TITLE = "Add Contact Information";
-const ENTITY_NAME = "contacts";
-const BUTTON_TEXT = "Save";
-const EMAIL_LABEL = "Email";
-const PHONE_LABEL = "Phone Number";
-const STREET_LABEL = "Street Address";
-const CITY_LABEL = "City";
-const ZIP_CODE_LABEL = "ZIP Code";
-const COUNTRY_LABEL = "Country";
-const MAIL_ADDRESS_LABEL = "Mailing Address";
-const MAILING_RECIPIENT_LABEL = "Mailing Recipient";
-
-const defaultValues: Partial<ContactInfoType> = {
-	email: "",
-	phone: "",
-	street: "",
-	city: "",
-	zip_code: "",
-	country: "",
-	mail_address: "",
-	mailing_recipient: "",
-};
+import {
+	CONTACT_EDITOR_CONSTANTS
+} from "./constants";
+const {
+	EDIT_TITLE,
+	ADD_TITLE,
+	ENTITY_NAME,
+	BUTTON_TEXT,
+	EMAIL_LABEL,
+	PHONE_LABEL,
+	STREET_LABEL,
+	CITY_LABEL,
+	ZIP_CODE_LABEL,
+	COUNTRY_LABEL,
+	MAIL_ADDRESS_LABEL,
+	MAILING_RECIPIENT_LABEL
+} = CONTACT_EDITOR_CONSTANTS;
 
 const ContactEditor: FC<EditorProps<ContactInfoType>> = ({
 	open,
@@ -44,7 +39,7 @@ const ContactEditor: FC<EditorProps<ContactInfoType>> = ({
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: defaultValues,
+						initialValues: initialContactInfo,
 						title: ADD_TITLE,
 					},
 		[data],
@@ -54,7 +49,7 @@ const ContactEditor: FC<EditorProps<ContactInfoType>> = ({
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
+				entity={ENTITY_NAME}
 				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}

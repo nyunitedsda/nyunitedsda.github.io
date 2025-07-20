@@ -14,8 +14,17 @@ const articleColumns: ColumnDefinition<Partial<ArticleType>>[] = [
 	{ id: "comments", field: "comments", title: "Comments" },
 	{ id: "rating", field: "rating", title: "Rating" },
 	{ id: "category", field: "category", title: "Category" },
-	{ id: "img_src", field: "img_src", title: "Image" },
-	{ id: "content", field: "content", title: "Content" },
+	// { id: "img_src", field: "img_src", title: "Image" },
+	{
+		id: "content",
+		field: "content",
+		title: "Content",
+		renderCell: (data) => {
+			return data.content
+				? data.content.substring(0, 100) + "..."
+				: "No content";
+		},
+	},
 ];
 
 export default articleColumns;
