@@ -9,9 +9,9 @@ import { type FC, useCallback, useContext, useState } from "react";
 import type { NotificationSeverity } from "../../api/request/types";
 import NotificationContext from "../../contexts/NotificationContext/context";
 import { selectSeverityIcon } from "./components/helpers";
-import type { NotificationProps } from "./types";
+import type { NotificationBannerProps, NotificationProps } from "./types";
 
-export type NotificationBannerProps = NotificationProps & {};
+
 
 const severityColors: Record<
 	NotificationSeverity,
@@ -24,7 +24,7 @@ const severityColors: Record<
 };
 
 const rootSx = ({
-	severity = "information",
+	severity = 1,
 	theme,
 }: {
 	theme: Theme;
@@ -38,8 +38,8 @@ const rootSx = ({
 		alignItems: "center",
 		flexDirection: "row",
 		flexWrap: "nowrap",
-		backgroundColor: (theme) => theme.palette[severityColors[severity]].light,
-		color: theme.palette[severityColors[severity]].contrastText,
+		backgroundColor: (theme) => theme.palette[severityColors[severity - 1]].light,
+		color: theme.palette[severityColors[severity - 1]].contrastText,
 		px: 2,
 		py: 0.5,
 		gap: 2,

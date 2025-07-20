@@ -13,7 +13,8 @@ export type DatabaseEntity =
 	| "notifications"
 	| "services"
 	| "roles"
-	| "contacts";
+	| "contacts"
+	| "severity";
 
 /**
  * Represents the available user roles in the system
@@ -260,10 +261,10 @@ export type NotificationSeverity =
  * @property value - The notification severity value from NotificationSeverity type
  * @property label - A descriptive text label representing the notification severity
  */
-export type NotificationSeverityOption = {
+export type SeverityType = {
 	id: number;
-	value: NotificationSeverity;
-	label: string;
+	type: NotificationSeverity;
+	title: string;
 };
 
 /**
@@ -284,8 +285,8 @@ export interface NotificationType {
 	id: number;
 	message: string;
 	title?: string;
-	severity?: NotificationSeverity;
-	expires_at?: string;
+	severity?: number;
+	expires_at?: Date;
 }
 
 /**

@@ -14,6 +14,9 @@ const notificationsColumns: ColumnDefinition<Partial<NotificationType>>[] = [
 		id: "expires_at",
 		field: "expires_at",
 		title: "Expiration Date",
+		renderCell: (data) => {
+			return data.expires_at ? new Date(data.expires_at).toLocaleString() : "No expiration";
+		}
 	},
 ];
 

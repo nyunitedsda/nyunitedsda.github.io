@@ -27,10 +27,10 @@ const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 		queryFn: async () =>
 			await getDatabaseList<NotificationType>("notifications")
 				.then((res) => {
-					if (res?.data) {
-						setNotificationList(res.data);
+					if (res) {
+						setNotificationList(res);
 					}
-					return res.data;
+					return res;
 				})
 				.catch((error) => {
 					enqueueSnackbar(String(error), { variant: "error" });

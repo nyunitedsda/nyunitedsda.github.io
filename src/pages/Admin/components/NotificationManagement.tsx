@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import { type FC, useCallback, useEffect, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import type { NotificationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
 import useToken from "../../../hooks/auth/useToken";
-import { initialValues } from "../../../test/mock_data/notifications";
+import { defaultNotification } from "../../../test/mock_data/notifications";
 import { createAuthConfig } from "../../../utils/authUtils";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
-import { useSnackbar } from "notistack";
 
 const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
@@ -30,6 +31,7 @@ const NotificationAdmin: FC = () => {
 			queryKey: ["notifications"],
 			queryFn: () =>
 				getDatabaseList("notifications", createAuthConfig(accessToken)),
+			select: (data) => data?.map((i) => ({ ...i, expires_at: i.expires_at ? new Date(i.expires_at) : undefined })) || [],
 			staleTime: 5 * 60 * 1000,
 			refetchOnWindowFocus: false,
 		},
@@ -65,11 +67,11 @@ const NotificationAdmin: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SUBHEADER}
-				handleClick={() => setCreateNotificationOpen(initialValues)}
+				handleClick={() => setCreateNotificationOpen(defaultNotification)}
 			/>
 
 			<DataTable
-				data={notificationData}
+				data={notificationData as GenericType[]}
 				columns={notificationsColumns}
 				onEdit={(d) => setCreateNotificationOpen(d)}
 				onDelete={(d) => _handleDeleteNotification(d?.id as number)}

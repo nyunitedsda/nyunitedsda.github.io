@@ -1,62 +1,53 @@
 import { Palette } from "@mui/icons-material";
 import {
+	ButtonBase,
 	ListItemIcon,
 	ListItemText,
-	type Palette as PaletteType,
 	type SimplePaletteColorOptions,
+	type SxProps,
+	type Theme,
 } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
-import * as Yup from "yup";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type {
-	NotificationSeverityOption,
 	NotificationType,
+	SeverityType,
 } from "../../../api/request/types";
 import theme from "../../../components/AppProvider/theme";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { defaultNotification } from "../../../test/mock_data/notifications";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import { default as InputField } from "../../Input/FormField";
 import type { EditorProps } from "../types";
+import { NOTIFICATION_EDITOR_CONSTANTS, notificationSchema } from "./constants";
 
-const defaultValues: Partial<NotificationType> = {
-	title: "",
-	message: "",
-	severity: "information",
+const severitySx: SxProps<Theme> = {
+	"& .MuiButtonBase-root-MuiMenuItem-root": {
+		pl: 0,
+		pr: 0,
+	},
+	"& .MuiList-root": {
+		px: 0,
+		"& .MuiMenuItem-root": {
+			width: "100%",
+			px: 0,
+		},
+	},
 };
 
-const notificationSchema = Yup.object().shape({
-	title: Yup.string().required("Title is required"),
-	message: Yup.string().required("Message is required"),
-	severity: Yup.string().oneOf(
-		["information", "caution", "error", "success"],
-		"Invalid severity level",
-	),
-	expires_at: Yup.date().nullable(),
-});
-
-const EDIT_TITLE = "Edit Notification";
-const ADD_TITLE = "Add Notification";
-const ENTITY_NAME = "notifications";
-const BUTTON_TEXT = "Save";
-const TITLE_FIELD_LABEL = "Notification Title";
-const MESSAGE_FIELD_LABEL = "Notification Message";
-const SEVERITY_FIELD_LABEL = "Severity Level";
-const EXPIRATION_FIELD_LABEL = "Expiration Date (Optional)";
-
-const severityOptions: NotificationSeverityOption[] = [
-	{ id: 1, value: "information", label: "Information" },
-	{ id: 2, value: "caution", label: "Caution" },
-	{ id: 3, value: "error", label: "Error" },
-	{ id: 4, value: "success", label: "Success" },
-];
-
-// Map severity values to palette keys
-const severityPaletteKey: Record<string, keyof PaletteType> = {
-	information: "info",
-	caution: "warning",
-	error: "error",
-	success: "success",
-};
+const {
+	EDIT_TITLE,
+	ADD_TITLE,
+	ENTITY_NAME,
+	BUTTON_TEXT,
+	TITLE_FIELD_LABEL,
+	MESSAGE_FIELD_LABEL,
+	SEVERITY_FIELD_LABEL,
+	EXPIRATION_FIELD_LABEL,
+	SEVERITY_PALETTE_KEY,
+} = NOTIFICATION_EDITOR_CONSTANTS;
 
 const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 	open,
@@ -68,15 +59,23 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: defaultValues,
-						title: ADD_TITLE,
-					},
+					initialValues: defaultNotification,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
+
+	const { data: severityData } = useQuery<SeverityType[]>({
+		queryKey: ["severity"],
+		queryFn: () => getDatabaseList("severity"),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
+
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -105,49 +104,28 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 				/>
 				<InputField
 					renderItemLabel={(item) => {
-						const paletteKey = severityPaletteKey[item.value] || "info";
+						const paletteKey = SEVERITY_PALETTE_KEY[item.type] || "info";
+						const color = (theme.palette[paletteKey] as SimplePaletteColorOptions).main;
+						// Avoid ListItemIcon/ListItemText to prevent <li> nesting
 						return (
-							<MenuItem
+							<ButtonBase
 								key={item.id}
-								sx={{
-									width: "100%",
-									color: (
-										theme.palette[paletteKey] as SimplePaletteColorOptions
-									).main,
-								}}
-								value={item.value}
+								sx={{ width: "100%", height: '100%', display: 'flex', alignItems: 'center', gap: 1, fontWeight: 'bold', justifyContent: 'flex-start', pl: 2 }}
+								value={item.id}
 							>
-								<ListItemIcon
-									sx={{
-										color: (
-											theme.palette[paletteKey] as SimplePaletteColorOptions
-										).main,
-									}}
-								>
-									<Palette />
-								</ListItemIcon>
-								<ListItemText primary={item.label} />
-							</MenuItem>
+								<span style={{ color, display: 'flex', alignItems: 'center' }}>
+									<Palette fontSize="small" />
+								</span>
+								<span style={{ color }}>{item.title}</span>
+							</ButtonBase>
 						);
 					}}
 					name="severity"
 					label={SEVERITY_FIELD_LABEL}
 					fieldType="select"
-					items={severityOptions}
-					sx={{
-						"& .MuiButtonBase-root-MuiMenuItem-root": {
-							pl: 0,
-							pr: 0,
-						},
-						"& .MuiList-root": {
-							px: 0,
-							"& .MuiMenuItem-root": {
-								width: "100%",
-								px: 0,
-							},
-						},
-					}}
-					valueResolver={(item) => item.value}
+					items={severityData || []}
+					sx={severitySx}
+					valueResolver={(item) => item.id}
 				/>
 
 				<InputField
