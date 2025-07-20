@@ -5,6 +5,7 @@ import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import serviceSchema from "./schema";
+import { initialService } from "../../../test/mock_data/services";
 
 const EDIT_TITLE = "Edit Service";
 const ADD_TITLE = "Add Service";
@@ -13,10 +14,7 @@ const BUTTON_TEXT = "Save";
 const TITLE_FIELD_LABEL = "Title";
 const TIME_LABEL = "Service Time";
 
-const defaultValues: Partial<ServiceType> = {
-	title: "",
-	time: "",
-};
+
 
 const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 	open,
@@ -32,7 +30,7 @@ const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: defaultValues,
+						initialValues: initialService,
 						title: ADD_TITLE,
 					},
 		[data],
@@ -42,7 +40,7 @@ const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
+				entity={ENTITY_NAME}
 				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
@@ -65,9 +63,10 @@ const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 				<InputField
 					name="time"
 					label={TIME_LABEL}
-					fieldType="text"
+					fieldType="datetime-local"
 					placeholder="Enter service time (e.g., 10:00 AM)"
 				/>
+				{/* Add a format selection input field */}
 			</EntityEditor>
 		</ProjectModal>
 	);

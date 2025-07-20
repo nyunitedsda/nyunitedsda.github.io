@@ -1,6 +1,7 @@
 import type { ServiceType } from "../../api/request/types";
 
 export const initialService: Partial<ServiceType> = {
+	id: undefined,
 	time: "",
 	title: "",
 	created_at: "",

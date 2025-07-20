@@ -1,60 +1,95 @@
-import type { FC } from "react";
+import { useCallback, useState, type FC } from "react";
 import type { ServiceType } from "../../../api/request/types";
-import EntityManager from "../../../components/EntityManager";
 import ServiceEditor from "../../../forms/collection/ServiceEditor/ServiceEditor";
-import DonationItem from "../../Donations/components/DonationItem";
+import useToken from "../../../hooks/auth/useToken";
+import { useSnackbar } from "notistack";
+import { useQuery } from "@tanstack/react-query";
+import { getDatabaseList } from "../../../api/request/commonQueries";
+import { createAuthConfig } from "../../../utils";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
+import type { GenericType } from "../../../components/DataTable/types";
+import { deleteEntity } from "../../../api/request/mutations";
+import { initialService } from "../../../test/mock_data/services";
+import DataTable from "../../../components/DataTable/DataTable";
+import serviceColumns from "../constants/serviceColumns";
 
 const SERVICE_SUBHEADER = "Manage church services";
-const DELETE_ITEM_TITLE = "Delete Service";
-const DELETE_CONFIRMATION_TEXT =
-	"Are you sure you want to delete this service? This action cannot be undone.";
-const EMPTY_SERVICES_TEXT = "No services available.";
 
 // Wrapper component to handle type compatibility
-const WrappedServiceEditor = ({
-	open,
-	data,
-	onClose,
-	onSuccess,
-}: {
-	open: boolean;
-	data?: Partial<ServiceType>;
-	onClose: () => void;
-	onSuccess?: (data?: ServiceType) => void;
-}) => (
-	<ServiceEditor
-		open={open}
-		data={data as ServiceType}
-		onClose={onClose}
-		onSuccess={onSuccess ? () => onSuccess() : undefined}
-	/>
-);
 
 const ServiceManagement: FC = () => {
+	const { accessToken } = useToken();
+	const { enqueueSnackbar } = useSnackbar();
+
+	const [createServiceOpen, setCreateServiceOpen] = useState<Partial<ServiceType> | null>(null);
+
+		const { data: queryData, refetch } = useQuery<Partial<ServiceType>[] | undefined>(
+		{
+			queryKey: ["services"],
+			queryFn: () =>
+				getDatabaseList("services", createAuthConfig(accessToken)),
+			staleTime: 5 * 60 * 1000,
+			refetchOnWindowFocus: false,
+		},
+	);
+
+		const _handleDeleteService = useCallback(
+		(data: GenericType & { id: number }) => {
+			const { id } = data as GenericType & { id: number };
+			deleteEntity("services", id, createAuthConfig(accessToken))
+				.then(() => {
+					refetch();
+					enqueueSnackbar("Service deleted successfully", {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					console.error("Failed to delete service:", error);
+					enqueueSnackbar("Failed to delete service", {
+						variant: "error",
+					});
+				});
+		},
+		[accessToken],
+	);
+
 	return (
-		<EntityManager<ServiceType>
-			entityName="services"
-			queryKey="admin-services"
-			title=""
-			subtitle={SERVICE_SUBHEADER}
-			emptyText={EMPTY_SERVICES_TEXT}
-			deleteConfirmation={{
-				title: DELETE_ITEM_TITLE,
-				message: DELETE_CONFIRMATION_TEXT,
-			}}
-			ItemComponent={DonationItem}
-			EditorComponent={WrappedServiceEditor}
-			getItemTitle={(service: ServiceType) => service?.title as string}
-			getItemSubtitle={(service: ServiceType) => service.time as string}
-			createNewEntity={() => ({
-				title: "",
-				time: "",
-			})}
-			successMessages={{
-				save: "Service saved successfully",
-				delete: "Service deleted successfully",
-			}}
-		/>
+
+	<>
+			<PageTitle
+				title=""
+				subtitle={SERVICE_SUBHEADER}
+				handleClick={() =>
+					setCreateServiceOpen({
+						...initialService,
+						id: initialService.id ?? 0, // or another default id
+					} as ServiceType)
+				}
+			/>
+
+			<DataTable
+				data={queryData as unknown as GenericType[]}
+				columns={serviceColumns}
+				onEdit={setCreateServiceOpen}
+				onDelete={_handleDeleteService}
+			/>
+
+		{
+			createServiceOpen && (
+				<ServiceEditor
+					open={!!createServiceOpen}
+					data={createServiceOpen as ServiceType}
+					onClose={() => setCreateServiceOpen(null)}
+					onSuccess={() => {
+						refetch();
+						setCreateServiceOpen(null);
+					}}
+				/>
+			)
+		}
+
+
+		</>
 	);
 };
 

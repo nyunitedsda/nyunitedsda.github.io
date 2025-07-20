@@ -88,7 +88,6 @@ const AnnouncementManagement: FC = () => {
 				}))}
 				onDelete={(d) => _handleDelete((d as any)?.id as number)}
 				onEdit={(d) => setEditorContent(d as unknown as AnnouncementType)}
-				onView={(d) => setEditorContent(d as unknown as AnnouncementType)}
 			/>
 
 			{editorContent && (
