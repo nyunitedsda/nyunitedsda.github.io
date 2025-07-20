@@ -1,14 +1,11 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import type {
-	AuthTokenResponse,
-	LoginCredentials,
-	LoginResponse,
 	RegisterData,
 } from "../../contexts/AuthenticationContext/types";
 import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
-import type { DatabaseEntity, UserType } from "./types";
+import type { AuthTokenResponse, DatabaseEntity, UserType } from "./types";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
 
@@ -56,27 +53,7 @@ const getDatabaseItem = async <T extends { id: number }>(
 	}
 };
 
-/**
- * Login user with credentials
- * @param credentials - User login credentials
- * @param config - Optional axios request config
- * @returns Promise<LoginResponse>
- */
-const loginUser = async (
-	credentials: LoginCredentials,
-	config?: AxiosRequestConfig,
-): Promise<LoginResponse> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}login`,
-			credentials,
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("login", "users", error);
-	}
-};
+
 
 /**
  * Register/ create a new user
@@ -266,7 +243,6 @@ export {
 	getDatabaseList,
 	getUserStatus,
 	// Authentication exports
-	loginUser,
 	logoutUser,
 	refreshAuthToken,
 	registerUser,

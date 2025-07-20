@@ -15,15 +15,22 @@ export default Yup.object().shape({
 				return !value || EMAIL_REGEX.test(value);
 			},
 		}),
-	firstName: Yup.string()
+	first_name: Yup.string()
 		.nullable()
 		.max(50, "First name must be 50 characters or less"),
-	lastName: Yup.string()
+	last_name: Yup.string()
 		.nullable()
 		.max(50, "Last name must be 50 characters or less"),
 	role: Yup.string()
 		.oneOf(["admin", "guest", "moderator"], "Invalid role")
 		.required("Role is required"),
+	role_id: Yup.number()
+		.required("Role ID is required")
+		.oneOf([1, 2, 3], "Invalid Role ID")
+		.min(1, "Role ID must be positive"),
+	is_active: Yup.boolean()
+		.required("Active status is required")
+		.default(true),
 	emailVerified: Yup.boolean()
 		.required("Email verification status is required")
 		.default(false),

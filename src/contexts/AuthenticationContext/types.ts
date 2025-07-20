@@ -1,43 +1,7 @@
 import type { PropsWithChildren } from "react";
-import type { UserType } from "../../api/request/types";
+import type { LoginCredentials, UserType } from "../../api/request/types";
 
-/**
- * Authentication token response
- * @description This interface defines the structure of the response returned by the authentication API.
- * It includes the access token, refresh token, and expiration time.
- * @property {string} accessToken - The access token for the authenticated user.
- * @property {string} refreshToken - The refresh token for the authenticated user.
- * @property {number} expiresIn - The expiration time of the access token in seconds.
- */
-export interface AuthTokenResponse {
-	accessToken: string;
-	refreshToken: string;
-	expiresIn: number;
-}
 
-/**
- * Login credentials for user authentication
- * @description This type defines the structure of user login credentials.
- * It includes the username, password, remember_me flag, and an optional user ID.
- * @property {string} username - The username of the user.
- * @property {string} password - The password of the user.
- */
-export type LoginCredentials = Pick<
-	UserType,
-	"username" | "password" | "remember_me"
->;
-
-/**
- * Login API response
- * @description This interface defines the structure of the response returned by the login API.
- * It includes the access token, refresh token, expiration time, and user details.
- * @property {string} accessToken - The access token for the authenticated user.
- *
- */
-export interface LoginResponse extends AuthTokenResponse {
-	message: string;
-	user: UserType;
-}
 
 /**
  * Registration data for new users

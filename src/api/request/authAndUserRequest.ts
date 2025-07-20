@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
-import type { UserType } from "./types";
+import type { LoginCredentials, LoginResponse, UserType } from "./types";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
 
@@ -46,4 +46,26 @@ const deleteUser = async (
 	}
 };
 
-export { deleteUser, getAllUsers };
+/**
+ * Login user with credentials
+ * @param credentials - User login credentials
+ * @param config - Optional axios request config
+ * @returns Promise<LoginResponse>
+ */
+const loginUser = async (
+	credentials: LoginCredentials,
+	config?: AxiosRequestConfig,
+): Promise<LoginResponse> => {
+	try {
+		const response = await axiosInstance.post(
+			`${AUTH_API_URL}login`,
+			credentials,
+			config,
+		);
+		return response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("login", "users", error);
+	}
+};
+
+export { deleteUser, getAllUsers, loginUser };

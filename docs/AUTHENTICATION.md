@@ -44,8 +44,8 @@ const registerResponse = await registerUser({
   username: "user1",
   email: 'user@example.com',
   password: 'password123',
-  firstName: 'John',
-  lastName: 'Doe'
+  first_name: 'John',
+  last_name: 'Doe'
 });
 
 // Get current user
@@ -95,8 +95,8 @@ const handleRegister = async () => {
     username: "user1",
     email: 'user@example.com',
     password: 'password123',
-    firstName: 'John',
-    lastName: 'Doe'
+    first_name: 'John',
+    last_name: 'Doe'
   });
 };
 
@@ -146,8 +146,8 @@ The axios instance includes interceptors that:
 interface UserType {
   id: number;
   email?: string;
-  firstName?: string;
-  lastName?: string;
+  first_name?: string;
+  last_name?: string;
   username: string;
   role: 'admin' | 'guest' | 'moderator';
   permissions?: string[];
@@ -169,8 +169,8 @@ interface RegisterData {
   username: string;
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
+  first_name?: string;
+  last_name?: string;
 }
 ```
 

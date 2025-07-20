@@ -21,6 +21,7 @@ const FIRST_NAME_FIELD_LABEL = "First Name";
 const LAST_NAME_FIELD_LABEL = "Last Name";
 const ROLE_FIELD_LABEL = "User Role";
 const EMAIL_VERIFIED_FIELD_LABEL = "Email Verified";
+const IS_ACTIVE_FIELD_LABEL = "Active";
 
 const titleSx: SxProps<Theme> = {
 	position: "sticky",
@@ -118,29 +119,35 @@ const UserEditor: FC<UserEditorProps> = ({
 				/>
 
 				<InputField
-					name="firstName"
+					name="first_name"
 					label={FIRST_NAME_FIELD_LABEL}
 					fieldType="text"
 					placeholder="Enter first name (optional)"
 				/>
 
 				<InputField
-					name="lastName"
+					name="last_name"
 					label={LAST_NAME_FIELD_LABEL}
 					fieldType="text"
 					placeholder="Enter last name (optional)"
 				/>
 
 				<InputField
-					name="role"
+					name="role_id"
 					defaultValue=""
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
 					items={roles ?? []}
 					renderItemLabel={(item) => capitalize(item.name)}
-					valueResolver={(item) => item.name}
+					valueResolver={(item) => item.id}
 				/>
 
+				<InputField
+					defaultValue={true}
+					fieldType="checkbox"
+					label={IS_ACTIVE_FIELD_LABEL}
+					name="is_active"
+				/>
 				<InputField
 					name="emailVerified"
 					label={EMAIL_VERIFIED_FIELD_LABEL}

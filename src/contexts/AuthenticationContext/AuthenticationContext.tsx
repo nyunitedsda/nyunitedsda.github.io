@@ -8,7 +8,7 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import type { UserType } from "../../api/request/types";
+import type { LoginCredentials, UserType } from "../../api/request/types";
 import {
 	useAuthStatus,
 	useCurrentUser,
@@ -22,7 +22,6 @@ import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
 import type {
 	AuthenticationContextProps,
-	LoginCredentials,
 	RegisterData,
 } from "./types";
 

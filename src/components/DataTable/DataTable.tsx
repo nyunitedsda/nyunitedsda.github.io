@@ -125,7 +125,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 										{col.renderCell
 											? col.renderCell(row)
 											: ((row[col.field as keyof typeof row] as ReactNode) ??
-												"")}
+												"-")}
 									</TableCell>
 								))}
 							</TableRow>

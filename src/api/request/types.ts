@@ -58,8 +58,8 @@ export type UserRoleOption = {
  *
  * @property id - Unique identifier for the user
  * @property email - User's email address (optional for some user types)
- * @property firstName - User's first name (optional)
- * @property lastName - User's last name (optional)
+ * @property first_name - User's first name (optional)
+ * @property last_name - User's last name (optional)
  * @property username - User's unique username (required)
  * @property password - User's password hash (optional for security)
  * @property role - User's role in the system (admin, moderator, or guest)
@@ -83,6 +83,45 @@ export interface UserType {
 	createdAt?: string;
 	updatedAt?: string;
 	is_active?: boolean;
+}
+
+/**
+ * Login credentials for user authentication
+ * @description This type defines the structure of user login credentials.
+ * It includes the username, password, remember_me flag, and an optional user ID.
+ * @property {string} username - The username of the user.
+ * @property {string} password - The password of the user.
+ */
+export type LoginCredentials = Pick<
+	UserType,
+	"username" | "password" | "remember_me"
+>;
+
+
+/**
+ * Authentication token response
+ * @description This interface defines the structure of the response returned by the authentication API.
+ * It includes the access token, refresh token, and expiration time.
+ * @property {string} accessToken - The access token for the authenticated user.
+ * @property {string} refreshToken - The refresh token for the authenticated user.
+ * @property {number} expiresIn - The expiration time of the access token in seconds.
+ */
+export interface AuthTokenResponse {
+	accessToken: string;
+	refreshToken: string;
+	expiresIn: number;
+}
+
+/**
+ * Login API response
+ * @description This interface defines the structure of the response returned by the login API.
+ * It includes the access token, refresh token, expiration time, and user details.
+ * @property {string} accessToken - The access token for the authenticated user.
+ *
+ */
+export interface LoginResponse extends AuthTokenResponse {
+	message: string;
+	user: UserType;
 }
 
 /**
