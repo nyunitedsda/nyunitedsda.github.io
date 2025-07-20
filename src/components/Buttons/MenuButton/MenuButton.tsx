@@ -98,26 +98,24 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 			>
 				{children}
 			</Button>
-			{isMenuVisible &&
-				menuItems && 
-				(
-					<Popper
-						sx={{ zIndex: 1 }}
-						open={isMenuVisible}
-						anchorEl={buttonRef?.current}
-						placement="bottom-end"
-						transition
-						disablePortal
-					>
-						{({ TransitionProps, placement }) => (
-							<Grow
-								{...TransitionProps}
-								style={{
-									transformOrigin:
-										placement === "bottom" ? "center top" : "center bottom",
-								}}
-							> 
-								<div>
+			{isMenuVisible && menuItems && (
+				<Popper
+					sx={{ zIndex: 1 }}
+					open={isMenuVisible}
+					anchorEl={buttonRef?.current}
+					placement="bottom-end"
+					transition
+					disablePortal
+				>
+					{({ TransitionProps, placement }) => (
+						<Grow
+							{...TransitionProps}
+							style={{
+								transformOrigin:
+									placement === "bottom" ? "center top" : "center bottom",
+							}}
+						>
+							<div>
 								<ClickAwayListener onClickAway={handleMenuClose}>
 									<Card
 										sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}
@@ -137,11 +135,11 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 										</MenuList>
 									</Card>
 								</ClickAwayListener>
-								</div>
-							</Grow>
-						)}
-					</Popper>
-				)}
+							</div>
+						</Grow>
+					)}
+				</Popper>
+			)}
 		</>
 	);
 };

@@ -64,4 +64,4 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 	);
 };
 
-export default memo(MenuDrawer);
+export default MenuDrawer;

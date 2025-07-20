@@ -41,4 +41,5 @@ const LoginButton: FC = () => {
 	);
 };
 
-export default memo(LoginButton);
+LoginButton.displayName = "LoginButton";
+export default LoginButton;
