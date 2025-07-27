@@ -21,19 +21,19 @@ const ServiceManagement: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 
-	const [createServiceOpen, setCreateServiceOpen] = useState<Partial<ServiceType> | null>(null);
+	const [createServiceOpen, setCreateServiceOpen] =
+		useState<Partial<ServiceType> | null>(null);
 
-		const { data: queryData, refetch } = useQuery<Partial<ServiceType>[] | undefined>(
-		{
-			queryKey: ["services"],
-			queryFn: () =>
-				getDatabaseList("services", createAuthConfig(accessToken)),
-			staleTime: 5 * 60 * 1000,
-			refetchOnWindowFocus: false,
-		},
-	);
+	const { data: queryData, refetch } = useQuery<
+		Partial<ServiceType>[] | undefined
+	>({
+		queryKey: ["services"],
+		queryFn: () => getDatabaseList("services", createAuthConfig(accessToken)),
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+	});
 
-		const _handleDeleteService = useCallback(
+	const _handleDeleteService = useCallback(
 		(data: GenericType & { id: number }) => {
 			const { id } = data as GenericType & { id: number };
 			deleteEntity("services", id, createAuthConfig(accessToken))
@@ -54,8 +54,7 @@ const ServiceManagement: FC = () => {
 	);
 
 	return (
-
-	<>
+		<>
 			<PageTitle
 				title=""
 				subtitle={SERVICE_SUBHEADER}
@@ -74,8 +73,7 @@ const ServiceManagement: FC = () => {
 				onDelete={_handleDeleteService}
 			/>
 
-		{
-			createServiceOpen && (
+			{createServiceOpen && (
 				<ServiceEditor
 					open={!!createServiceOpen}
 					data={createServiceOpen as ServiceType}
@@ -85,10 +83,7 @@ const ServiceManagement: FC = () => {
 						setCreateServiceOpen(null);
 					}}
 				/>
-			)
-		}
-
-
+			)}
 		</>
 	);
 };

@@ -4,8 +4,6 @@ export const initialService: Partial<ServiceType> = {
 	id: undefined,
 	time: "",
 	title: "",
-	created_at: "",
-	modified_at: "",
 };
 
 const services: ServiceType[] = [

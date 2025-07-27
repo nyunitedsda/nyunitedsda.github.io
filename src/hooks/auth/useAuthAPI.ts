@@ -102,10 +102,10 @@ export const useRegister = () => {
  */
 export const useRefreshToken = () => {
 	const { enqueueSnackbar } = useSnackbar();
-	const { setTokens, clearTokens } = useToken();
+	const { refreshToken, setTokens, clearTokens } = useToken();
 
 	return useMutation({
-		mutationFn: (refreshToken: string) => refreshAuthToken(refreshToken),
+		mutationFn: () => refreshAuthToken(refreshToken as string),
 		onSuccess: (data) => {
 			setTokens(data.accessToken, data.refreshToken);
 
@@ -221,6 +221,7 @@ export const useAuthStatus = () => {
 	useToken(); // Ensure tokens are initialized
 	const { accessToken, clearTokens } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const refreshAuthToken = useRefreshToken(); // Ensure refresh token is available
 
 	if (!accessToken)
 		return { isLoading: false, isAuthenticated: false, error: null };
@@ -232,6 +233,19 @@ export const useAuthStatus = () => {
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
+
+			console.log(
+				"Checking auth status, failure count:",
+				failureCount,
+				"error:",
+				error,
+			);
+			if (error?.response?.status === 403) {
+				refreshAuthToken.mutateAsync().then(() => {
+					// Handle successful token refresh
+					refetch();
+				});
+			}
 			if (error?.response?.status === 401) {
 				// If unauthorized, clear tokens
 				clearTokens();
@@ -243,6 +257,7 @@ export const useAuthStatus = () => {
 
 				return false;
 			}
+
 			return failureCount < 3;
 		},
 	});

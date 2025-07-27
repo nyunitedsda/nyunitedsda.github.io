@@ -1,70 +1,60 @@
 import { useQuery } from "@tanstack/react-query";
-import { useCallback, useEffect, useMemo, useState, type FC } from "react";
+import { useSnackbar } from "notistack";
+import { useCallback, useState, type FC } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import type { AnnouncementType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import AnnouncementEditor from "../../../forms/collection/AnnouncementEditor/AnnouncementEditor";
+import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
 import { initialAnnouncement } from "../../../test/mock_data/announcements";
 import { createAuthConfig } from "../../../utils/authUtils";
 import announcementColumns from "../constants/announcementColumns";
+import RingLoader from "../../../components/Loaders/RingLoader";
 
 const SUBHEADER = "Manage church announcements and events";
 
 const AnnouncementManagement: FC = () => {
 	const { accessToken } = useToken();
+	const { canCreate, canEdit, canDelete } = usePermission("user");
+	const { enqueueSnackbar } = useSnackbar();
 
-	const [editorContent, setEditorContent] = useState<AnnouncementType | null>(
-		null,
-	);
-	const [data, setData] = useState<AnnouncementType[]>([]);
+	const [editorContent, setEditorContent] =
+		useState<Partial<AnnouncementType> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<AnnouncementType[] | undefined>(
-		{
-			queryKey: ["announcements"],
-			queryFn: async () => {
-				const res = await getDatabaseList(
-					"announcements",
-					createAuthConfig(accessToken),
-				);
-				// Ensure every item has required AnnouncementType fields
-				return Array.isArray(res.data)
-					? res.data.filter(
-							(item): item is AnnouncementType =>
-								item &&
-								typeof item === "object" &&
-								"title" in item &&
-								"type" in item &&
-								"author_id" in item &&
-								"date_format" in item,
-						)
-					: [];
-			},
-			staleTime: 5 * 60 * 1000,
-			refetchOnWindowFocus: false,
-			enabled: !!accessToken,
+	const {
+		data: queryData,
+		refetch,
+		isLoading,
+	} = useQuery<Partial<AnnouncementType>[] | undefined>({
+		queryKey: ["announcements"],
+		queryFn: async () => {
+			return await getDatabaseList(
+				"announcements",
+				createAuthConfig(accessToken),
+			);
 		},
-	);
+		staleTime: 5 * 60 * 1000,
+		refetchOnWindowFocus: false,
+		enabled: !!accessToken,
+	});
 
-	useEffect(() => {
-		if (queryData && Array.isArray(queryData)) {
-			setData(queryData as AnnouncementType[]);
-		}
-	}, [queryData]);
-
-	const _handleDelete = useCallback((id: number) => {
-		const authConfig = createAuthConfig(accessToken);
-
-		deleteEntity("announcements", id, authConfig)
+	const _handleDelete = useCallback((d: Pick<AnnouncementType, "id">) => {
+		deleteEntity("announcements", d.id, createAuthConfig(accessToken))
 			.then(() => {
-				setData((prev) =>
-					prev.filter((announcement) => announcement?.id !== id),
-				);
+				refetch();
+				enqueueSnackbar("Announcement deleted successfully", {
+					variant: "success",
+				});
 			})
 			.catch((error) => {
 				console.error("Failed to delete announcement:", error);
+				enqueueSnackbar("Failed to delete announcement", {
+					variant: "error",
+				});
 			});
 	}, []);
 
@@ -73,22 +63,21 @@ const AnnouncementManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SUBHEADER}
-				handleClick={() => setEditorContent(initialAnnouncement)}
+				handleClick={
+					canCreate ? () => setEditorContent(initialAnnouncement) : undefined
+				}
 			/>
 
-			<DataTable
-				columns={announcementColumns}
-				data={data.map((item) => ({
-					...item,
-					event_date: item.event_date
-						? typeof item.event_date === "string"
-							? item.event_date
-							: item.event_date.toISOString()
-						: "",
-				}))}
-				onDelete={(d) => _handleDelete((d as any)?.id as number)}
-				onEdit={(d) => setEditorContent(d as unknown as AnnouncementType)}
-			/>
+			{!isLoading ? (
+				<DataTable
+					columns={announcementColumns}
+					data={queryData as GenericType[]}
+					onDelete={canDelete ? _handleDelete : undefined}
+					onEdit={canEdit ? setEditorContent : undefined}
+				/>
+			) : (
+				<RingLoader />
+			)}
 
 			{editorContent && (
 				<AnnouncementEditor

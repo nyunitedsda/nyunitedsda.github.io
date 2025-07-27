@@ -7,9 +7,7 @@ import type { EditorProps } from "../types";
 import contactSchema from "./schema";
 import { initialContactInfo } from "../../../test/mock_data/contactInfo";
 
-import {
-	CONTACT_EDITOR_CONSTANTS
-} from "./constants";
+import { CONTACT_EDITOR_CONSTANTS } from "./constants";
 const {
 	EDIT_TITLE,
 	ADD_TITLE,
@@ -22,7 +20,7 @@ const {
 	ZIP_CODE_LABEL,
 	COUNTRY_LABEL,
 	MAIL_ADDRESS_LABEL,
-	MAILING_RECIPIENT_LABEL
+	MAILING_RECIPIENT_LABEL,
 } = CONTACT_EDITOR_CONSTANTS;
 
 const ContactEditor: FC<EditorProps<ContactInfoType>> = ({

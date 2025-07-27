@@ -14,8 +14,6 @@ const PageAnnouncements: FC = () => {
 		queryKey: ["get-announcements"],
 		queryFn: async () =>
 			await getDatabaseList<EventAnnouncement>("announcements"),
-		select: (res) => (res.data as EventAnnouncement[]) || [],
-		// Improve performance with proper caching
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
 		// Show stale data while refetching to avoid loading screen flash

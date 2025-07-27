@@ -30,3 +30,4 @@ stats.html
 .vite
 *webconfigcontent.ts
 storybook-static
+shared-types

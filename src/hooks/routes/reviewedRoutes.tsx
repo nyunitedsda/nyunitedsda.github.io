@@ -82,7 +82,11 @@ const mainLayoutRoutes: RouteWithId[] = [
 			createRoute(lazyLoad(LiveBroadcast), "watch/:tab?", "watch"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/live", "liveStream"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/archive", "archiveStream"),
-			// createRoute(lazyLoad(Administration), "admin/:tab?", "admin"),
+			createRoute(
+				lazyLoad(LiveBroadcast),
+				"watch/youtube-archive",
+				"youtubeArchive",
+			),
 			createRoute(lazyLoad(Login), "login"),
 		],
 	},

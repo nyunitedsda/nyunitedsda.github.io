@@ -44,6 +44,7 @@
 		"deploy": "gh-pages -d dist",
 		"dev": "vite",
 		"format": "biome format --write",
+		"generate-types": "bash ./src/utils/fetch-database-types.sh",
 		"lint": "biome lint --write src/",
 		"prebuild": "check",
 		"preview": "vite preview",
@@ -53,7 +54,7 @@
 		"build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
 	},
 	"engines": {
-		"node": "20.18.0"
+		"node": "20.19.2"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.14.0",

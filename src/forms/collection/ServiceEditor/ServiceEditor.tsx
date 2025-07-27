@@ -14,8 +14,6 @@ const BUTTON_TEXT = "Save";
 const TITLE_FIELD_LABEL = "Title";
 const TIME_LABEL = "Service Time";
 
-
-
 const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 	open,
 	data,

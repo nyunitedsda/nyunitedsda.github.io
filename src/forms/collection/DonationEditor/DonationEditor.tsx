@@ -15,7 +15,12 @@ const {
 	DESCRIPTION_FIELD_LABEL,
 } = DONATION_EDITOR_CONSTANTS;
 
-const DonationEditor: FC<DonationEditorProps> = ({ open, data, onClose, onSuccess }) => {
+const DonationEditor: FC<DonationEditorProps> = ({
+	open,
+	data,
+	onClose,
+	onSuccess,
+}) => {
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")

@@ -22,33 +22,36 @@ const ContactManagement: FC = () => {
 	const [createContactOpen, setCreateContactOpen] =
 		useState<Partial<ContactInfoType> | null>(null);
 
-
-	const { data: queryData, refetch } = useQuery<
-		ContactInfoType[] | undefined
-	>({
+	const { data: queryData, refetch } = useQuery<ContactInfoType[] | undefined>({
 		queryKey: ["contacts"],
-		queryFn: () => getDatabaseList("contact_info", createAuthConfig(accessToken)),
+		queryFn: () =>
+			getDatabaseList("contact_info", createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
-
-
-	const _handleDeleteContact = useCallback((data: GenericType) => {
-		deleteEntity("contact_info", data?.id as number, createAuthConfig(accessToken))
-			.then(() => {
-				refetch();
-				enqueueSnackbar("Contact deleted successfully", {
-					variant: "success",
+	const _handleDeleteContact = useCallback(
+		(data: GenericType) => {
+			deleteEntity(
+				"contact_info",
+				data?.id as number,
+				createAuthConfig(accessToken),
+			)
+				.then(() => {
+					refetch();
+					enqueueSnackbar("Contact deleted successfully", {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					console.error("Failed to delete contact:", error);
+					enqueueSnackbar("Failed to delete contact", {
+						variant: "error",
+					});
 				});
-			})
-			.catch((error) => {
-				console.error("Failed to delete contact:", error);
-				enqueueSnackbar("Failed to delete contact", {
-					variant: "error",
-				});
-			});
-	}, [accessToken]);
+		},
+		[accessToken],
+	);
 
 	return (
 		<>
