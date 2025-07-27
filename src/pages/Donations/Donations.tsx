@@ -1,8 +1,9 @@
 import { Stack, Typography } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
-import { performQuery } from "../../api/queryData";
+import { Navigate } from "react-router";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { DonationType } from "../../api/request/types";
+import type { DonationDT } from "../../api/request/databaseTypes";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
@@ -10,12 +11,13 @@ import {
 	DONATION_SUBHEADER,
 	DONATION_TEXT,
 } from "../../constants/donationConstant";
+import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 
 const Donations: FC = () => {
-	const { isLoading, data } = performQuery(
-		["get-donations"],
-		async () => await getDatabaseList<DonationType>("donations"),
-	);
+	const { isLoading, data, error } = useQuery({
+		queryKey: ["get-donations"],
+		queryFn: async () => await getDatabaseList("donations"),
+	});
 
 	return (
 		<>
@@ -34,10 +36,9 @@ const Donations: FC = () => {
 				)}
 
 				{!isLoading &&
-					(Array.isArray(data)
-						? data
-						: data?.data || ([] as DonationType[])
-					).map((i) => (
+					data &&
+					data.length !== 0 &&
+					(data as DonationDT[]).map((i) => (
 						<Typography
 							key={i.title}
 							color="text.primary"
@@ -46,6 +47,9 @@ const Donations: FC = () => {
 							}}
 						/>
 					))}
+				{error && (
+					<Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
+				)}
 			</Stack>
 		</>
 	);

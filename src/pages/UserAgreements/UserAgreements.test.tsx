@@ -45,7 +45,7 @@ describe.skip("UserAgreements", () => {
 
 	it("renders tabs for each agreement", () => {
 		(mockLocation as Mock).mockReturnValue({
-			pathname: "/terms",
+			pathname: "/termsOfUse",
 			state: undefined,
 			key: "",
 			search: "",
@@ -59,7 +59,7 @@ describe.skip("UserAgreements", () => {
 	});
 
 	it("renders the correct tab panel content when a tab is selected", async () => {
-		(useLocation as Mock).mockReturnValue({ pathname: "/terms" });
+		(useLocation as Mock).mockReturnValue({ pathname: "/termsOfUse" });
 		// By default, the first tab should be selected due to pathname "/terms"
 		render(<UserAgreements />);
 
@@ -72,7 +72,7 @@ describe.skip("UserAgreements", () => {
 
 	it("changes tab and displays correct content on tab click", async () => {
 		(useLocation as Mock).mockReturnValue({
-			pathname: "/terms",
+			pathname: "/termsOfUse",
 			state: undefined,
 			key: "",
 			search: "",

@@ -12,17 +12,18 @@ const UserAgreements: FC = () => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["legalContent"],
 		queryFn: async () => getDatabaseList("legal_content"),
-		select: (data) => (data as LegalContentDT[]).map(({title, ...rest}) => ({
-			...rest,
-			label: title,
-		})),
+		select: (data) =>
+			(data as LegalContentDT[]).map(({ title, ...rest }) => ({
+				...rest,
+				label: title,
+			})),
 	});
 
 	return (
 		<>
-		{
-			error && <Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
-		}
+			{error && (
+				<Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
+			)}
 			{!isLoading ? (
 				<RoutedTabs
 					baseUrl="/policy"
