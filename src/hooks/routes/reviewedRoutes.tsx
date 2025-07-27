@@ -77,8 +77,8 @@ const mainLayoutRoutes: RouteWithId[] = [
 			createRoute(lazyLoad(BlogDetails), "blog/:id", "blogDetails"),
 			createRoute(lazyLoad(Contact), "contact", "contact"),
 			createRoute(lazyLoad(AboutUs), "aboutUs", "aboutUs"),
-			createRoute(lazyLoad(UserAgreements), "policy/policy", "policy"),
-			createRoute(lazyLoad(UserAgreements), "policy/terms", "terms"),
+			createRoute(lazyLoad(UserAgreements), "policy/privacy", "privacy"),
+			createRoute(lazyLoad(UserAgreements), "policy/termsOfUse", "terms"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/:tab?", "watch"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/live", "liveStream"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/archive", "archiveStream"),
@@ -181,4 +181,6 @@ export const ROUTE_PATHS = {
 	LOGIN: createPath("login"),
 	UNAUTHORIZED: createPath("unauthorized"),
 	STORYBOOK: createPath("storybook"),
+	LEGAL_PRIVACY: createPath("policy/privacy"),
+	LEGAL_TERMS: createPath("policy/termsOfUse"),
 } as const;

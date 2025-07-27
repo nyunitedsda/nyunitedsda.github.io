@@ -21,12 +21,14 @@ import {
 	WEBSITE_TITLE,
 } from "../../constants/footer";
 import services, { SERVICES } from "../../constants/services";
+import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import NoteSection from "../../pages/Home/components/AnnouncementCard/NoteSection";
 import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import { mapRoutesToTabs } from "../RoutedTabs/helpers";
 import FooterSegment from "./components/FooterSegment";
+import { FOOTER_LEGAL_LINKS } from "./constants";
 import { getCopyright } from "./helpers";
 
 const footerSx: SxProps<Theme> = {
@@ -65,11 +67,7 @@ const iconMap: Record<string, ReactNode> = {
 };
 
 const Footer: FC = () => {
-	const { routes, menuItems } = useFormattedRoutes();
-
-	const TERMS_AND_POLICIES = useMemo(() => {
-		return mapRoutesToTabs(routes, LEGAL_TAB_LIST);
-	}, []);
+	const { menuItems } = useFormattedRoutes();
 
 	return (
 		<Stack sx={footerSx}>
@@ -78,7 +76,7 @@ const Footer: FC = () => {
 					{/* Social Media */}
 					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO.text}>
 						<>
-							{TERMS_AND_POLICIES.map((i) => (
+							{FOOTER_LEGAL_LINKS.map((i) => (
 								<Typography
 									component="a"
 									href={i.href}
