@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { type FC, type ReactNode, useMemo } from "react";
+import { type FC, type ReactNode } from "react";
 import { CONTACT_DATA, CONTACT_US } from "../../constants/contact";
 import {
 	MOTTO,
@@ -21,12 +21,9 @@ import {
 	WEBSITE_TITLE,
 } from "../../constants/footer";
 import services, { SERVICES } from "../../constants/services";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
 import NoteSection from "../../pages/Home/components/AnnouncementCard/NoteSection";
-import { LEGAL_TAB_LIST } from "../../pages/UserAgreements/constants";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
-import { mapRoutesToTabs } from "../RoutedTabs/helpers";
 import FooterSegment from "./components/FooterSegment";
 import { FOOTER_LEGAL_LINKS } from "./constants";
 import { getCopyright } from "./helpers";

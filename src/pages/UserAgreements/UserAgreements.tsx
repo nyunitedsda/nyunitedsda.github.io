@@ -5,9 +5,11 @@ import RingLoader from "../../components/Loaders/RingLoader";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import type { RouteTabsItem } from "../../components/RoutedTabs/types";
 import type { LegalContentDT } from "../../api/request/databaseTypes";
+import { Navigate } from "react-router";
+import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 
 const UserAgreements: FC = () => {
-	const { data, isLoading } = useQuery({
+	const { data, isLoading, error } = useQuery({
 		queryKey: ["legalContent"],
 		queryFn: async () => getDatabaseList("legal_content"),
 		select: (data) => (data as LegalContentDT[]).map(({title, ...rest}) => ({
@@ -18,6 +20,9 @@ const UserAgreements: FC = () => {
 
 	return (
 		<>
+		{
+			error && <Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
+		}
 			{!isLoading ? (
 				<RoutedTabs
 					baseUrl="/policy"

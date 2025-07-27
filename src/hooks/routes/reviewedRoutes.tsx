@@ -147,6 +147,7 @@ const fallbackRoutes: RouteObject[] = [
 		element: lazyLoad(MinimalPageWrapper),
 		children: [
 			createRoute(lazyLoad(UnauthorizedError), "unauthorized"),
+			createRoute(lazyLoad(Error), "404", "notFound"),
 			{ element: lazyLoad(Error), path: "*" }, // Wildcard route doesn't need helper
 		],
 	},
@@ -180,6 +181,7 @@ export const ROUTE_PATHS = {
 	ADMIN: createPath("admin"),
 	LOGIN: createPath("login"),
 	UNAUTHORIZED: createPath("unauthorized"),
+	NOT_FOUND: createPath("404"),
 	STORYBOOK: createPath("storybook"),
 	LEGAL_PRIVACY: createPath("policy/privacy"),
 	LEGAL_TERMS: createPath("policy/termsOfUse"),
