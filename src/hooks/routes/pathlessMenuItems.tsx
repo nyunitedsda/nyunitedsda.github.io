@@ -19,10 +19,10 @@ const pathlessMenuItems: PathlessMenu[] = [
 				id: "archiveStream",
 				name: "Watch Archive",
 			},
-			{
-				id: "youtubeArchive",
-				name: "Watch Youtube Archive",
-			},
+			// {
+			// 	id: "youtubeArchive",
+			// 	name: "Watch Youtube Archive",
+			// },
 		],
 	},
 	{

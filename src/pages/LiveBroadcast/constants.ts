@@ -16,10 +16,10 @@ export const TAB_LIST: RouteTabsItem[] = [
 		label: "Watch Archive",
 		tag: "archive",
 	},
-	{
-		content: createElement(ArchiveStream),
-		id: 3,
-		label: "Watch Youtube Archive",
-		tag: "youtube-archive",
-	},
+	// {
+	// 	content: createElement(ArchiveStream),
+	// 	id: 3,
+	// 	label: "Watch Youtube Archive",
+	// 	tag: "youtube-archive",
+	// },
 ];
