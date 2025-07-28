@@ -1,12 +1,32 @@
-import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
-import ArrowBackIosNewSharp from "@mui/icons-material/ArrowBackIosNewSharp";
-import BookmarkAddOutlined from "@mui/icons-material/BookmarkAddOutlined";
-import CalendarTodayOutlined from "@mui/icons-material/CalendarTodayOutlined";
-import CommentOutlined from "@mui/icons-material/CommentOutlined";
-import LocalOfferOutlined from "@mui/icons-material/LocalOfferOutlined";
-import RateReviewOutlined from "@mui/icons-material/RateReviewOutlined";
-import ShareOutlined from "@mui/icons-material/ShareOutlined";
-import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
+import { lazy } from "react";
+import ProjectSuspense from "../../components/ProjectSuspense/ProjectSuspense";
+
+const AccountCircleOutlined = lazy(
+	() => import("@mui/icons-material/AccountCircleOutlined"),
+);
+const ArrowBackIosNewSharp = lazy(
+	() => import("@mui/icons-material/ArrowBackIosNewSharp"),
+);
+const BookmarkAddOutlined = lazy(
+	() => import("@mui/icons-material/BookmarkAddOutlined"),
+);
+const CalendarTodayOutlined = lazy(
+	() => import("@mui/icons-material/CalendarTodayOutlined"),
+);
+const CommentOutlined = lazy(
+	() => import("@mui/icons-material/CommentOutlined"),
+);
+const LocalOfferOutlined = lazy(
+	() => import("@mui/icons-material/LocalOfferOutlined"),
+);
+const RateReviewOutlined = lazy(
+	() => import("@mui/icons-material/RateReviewOutlined"),
+);
+const ShareOutlined = lazy(() => import("@mui/icons-material/ShareOutlined"));
+const VisibilityOutlined = lazy(
+	() => import("@mui/icons-material/VisibilityOutlined"),
+);
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
@@ -17,10 +37,10 @@ import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { useParams } from "react-router";
 import { getDatabaseItem } from "../../api/request/commonQueries";
+import type { ArticleDT } from "../../api/request/databaseTypes";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
-import { authorMetaInfo } from "./blogData";
-import type { ArticleDT } from "../../api/request/databaseTypes";
+import { authorMetaInfo } from "../../test/mock_data/blogData";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -29,24 +49,49 @@ const backBtnSx: SxProps<Theme> = {
 };
 
 const ICONS = {
-	author: <AccountCircleOutlined />,
-	publishDate: <CalendarTodayOutlined />,
-	views: <VisibilityOutlined />,
-	comments: <CommentOutlined />,
-	rating: <RateReviewOutlined />,
-	share: <ShareOutlined />,
-	save: <BookmarkAddOutlined />,
+	author: (
+		<ProjectSuspense>
+			<AccountCircleOutlined />
+		</ProjectSuspense>
+	),
+	publishDate: (
+		<ProjectSuspense>
+			<CalendarTodayOutlined />
+		</ProjectSuspense>
+	),
+	views: (
+		<ProjectSuspense>
+			<VisibilityOutlined />
+		</ProjectSuspense>
+	),
+	comments: (
+		<ProjectSuspense>
+			<CommentOutlined />
+		</ProjectSuspense>
+	),
+	rating: (
+		<ProjectSuspense>
+			<RateReviewOutlined />
+		</ProjectSuspense>
+	),
+	share: (
+		<ProjectSuspense>
+			<ShareOutlined />
+		</ProjectSuspense>
+	),
+	save: (
+		<ProjectSuspense>
+			<BookmarkAddOutlined />
+		</ProjectSuspense>
+	),
 };
-
 const BlogDetails: FC = () => {
 	const { id } = useParams();
 
 	const { isLoading, data } = useQuery({
 		queryKey: ["get-article-id", id],
-		queryFn: async () =>  await getDatabaseItem<ArticleDT>(
-				"articles",
-				parseInt(id as string, 10),
-			),
+		queryFn: async () =>
+			await getDatabaseItem<ArticleDT>("articles", parseInt(id as string, 10)),
 	});
 
 	return (

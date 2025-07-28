@@ -1,6 +1,4 @@
-import type { BlogType } from "./types";
-
-export const blogPost: BlogType = {
+export const blogPost = {
 	id: 1,
 	title: "Edification and Growth of Our Members and Visitors",
 	author: "SUPERUSER ACCOUNT",

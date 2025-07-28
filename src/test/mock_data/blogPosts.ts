@@ -1,7 +1,5 @@
-import type { BlogType } from "./types";
-
 // Mock blog data
-const blogPosts: BlogType[] = [
+const blogPosts = [
 	{
 		id: 1,
 		title: "Edification and Growth of Our Members and Visitors",

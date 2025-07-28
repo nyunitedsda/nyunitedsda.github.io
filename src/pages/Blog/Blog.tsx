@@ -50,7 +50,7 @@ const Blog: FC = () => {
 
 	const { isLoading, data } = useQuery<ArticleDT[]>({
 		queryKey: ["get-articles"],
-		queryFn: async () => await getDatabaseList("articles") as ArticleDT[],
+		queryFn: async () => (await getDatabaseList("articles")) as ArticleDT[],
 	});
 
 	const totalPages = useMemo(
@@ -78,42 +78,41 @@ const Blog: FC = () => {
 				{isLoading ? (
 					<RingLoader />
 				) : (
-					currentPosts.map(
-						({ id, title, author, content, published_at }) => (
-							<Grid size={{ xs: 12, md: 6 }} key={id}>
-								<ProjectCard
-									header={{
-										title,
-										subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author)}`,
-										avatar: <CalendarToday />,
-									}}
-									content={
-										<Typography
-											component="div"
-											variant="body1"
-											sx={{ "& p": { m: 0 } }}
-											dangerouslySetInnerHTML={{
-												__html: `${content.length > BLOG_PREVIEW_LENGTH
-														? content.slice(0, BLOG_PREVIEW_LENGTH)
-														: content
-													}`,
-											}}
-										/>
-									}
-									actions={
-										<Button
-											size="small"
-											color="primary"
-											component={"a"}
-											href={`/blog/${id}`}
-										>
-											Read More
-										</Button>
-									}
-								/>
-							</Grid>
-						),
-					)
+					currentPosts.map(({ id, title, author, content, published_at }) => (
+						<Grid size={{ xs: 12, md: 6 }} key={id}>
+							<ProjectCard
+								header={{
+									title,
+									subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author)}`,
+									avatar: <CalendarToday />,
+								}}
+								content={
+									<Typography
+										component="div"
+										variant="body1"
+										sx={{ "& p": { m: 0 } }}
+										dangerouslySetInnerHTML={{
+											__html: `${
+												content.length > BLOG_PREVIEW_LENGTH
+													? content.slice(0, BLOG_PREVIEW_LENGTH)
+													: content
+											}`,
+										}}
+									/>
+								}
+								actions={
+									<Button
+										size="small"
+										color="primary"
+										component={"a"}
+										href={`/blog/${id}`}
+									>
+										Read More
+									</Button>
+								}
+							/>
+						</Grid>
+					))
 				)}
 			</Grid>
 
