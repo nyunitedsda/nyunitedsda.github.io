@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
-import { TRIP_PLANNER } from "../../../constants/contact";
+import { CONTACT_CONSTANT } from "./contact";
 
 const rootSx: SxProps<Theme> = {
 	p: 2,
@@ -36,6 +36,8 @@ const mapSx: SxProps<Theme> = { width: "100%" };
 
 const styleSx = { borderRadius: 4, width: "100%" };
 
+const { TRIP_PLANNER, MAP_URL, TRANSIT_URL } = CONTACT_CONSTANT;
+
 const MapDirection: FC = () => {
 	return (
 		<Paper elevation={3} sx={rootSx}>
@@ -45,7 +47,7 @@ const MapDirection: FC = () => {
 					component={"a"}
 					sx={plannerSx}
 					title={"Open link to MTA "}
-					href="http://www.mta.info/nyct"
+					href={TRANSIT_URL}
 				>
 					{TRIP_PLANNER}
 					<OpenInNew color="primary" />
@@ -53,7 +55,7 @@ const MapDirection: FC = () => {
 			</Stack>
 			<Box sx={mapSx}>
 				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6039.397082262674!2d-73.9473282235637!3d40.812617831449124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f673ca97d269%3A0xb0125493deeebd8b!2sNY%20United%20SDA%20Church!5e0!3m2!1sen!2sca!4v1747803640476!5m2!1sen!2sca"
+					src={MAP_URL}
 					height="450"
 					style={styleSx}
 					allowFullScreen

@@ -5,4 +5,5 @@ export type FooterSegmentProps = PropsWithChildren<{
 	title: string;
 	subtitle?: string;
 	sx?: SxProps<Theme>;
+	isLoading?: boolean;
 }>;

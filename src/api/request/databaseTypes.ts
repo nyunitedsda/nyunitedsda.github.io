@@ -29,6 +29,7 @@ export interface ArticleDT {
 
 export interface ContactInfoDT {
 	id: number;
+	contact_name: string;
 	email: string;
 	phone: string;
 	street: string;

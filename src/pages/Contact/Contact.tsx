@@ -5,16 +5,12 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import { getDefaultContacts } from "../../api/request/contactsRequest";
 import PageTitle from "../../components/PageWrapper/PageTitle";
-import {
-	CHURCH_NAME,
-	CONTACT_PAGE_SUBTITLE,
-	CONTACT_PAGE_TITLE,
-	contactInfo,
-	MAILING_ADDRESS_TITLE,
-} from "../../constants/contact";
 import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
+import { CONTACT_CONSTANT } from "./components/contact";
 import ContactSection from "./components/ContactSection";
 import MapDirection from "./components/MapDirection";
 import ServiceTimes from "./components/ServiceTimes";
@@ -30,53 +26,64 @@ const contactDetailSx: SxProps<Theme> = {
 	},
 };
 
+const { PAGE_TITLE, PAGE_SUBTITLE, MAILING_ADDRESS_TITLE } = CONTACT_CONSTANT;
+
 const Contact: FC = () => {
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["contactInfo"],
+		queryFn: async () => getDefaultContacts(),
+	});
+
 	return (
 		<>
-			<PageTitle title={CONTACT_PAGE_TITLE} subtitle={CONTACT_PAGE_SUBTITLE} />
+			<PageTitle title={PAGE_TITLE} subtitle={PAGE_SUBTITLE} />
 
 			<Paper elevation={3} sx={contactDetailSx}>
 				{/* address */}
-				<ContactSection title={CHURCH_NAME}>
-					<Stack direction="row" gap={2}>
-						<Stack justifyContent="center">
-							<LocationOnOutlined color="primary" />
-						</Stack>
-						<Stack>
-							<Typography variant="body1">{contactInfo.street}</Typography>
-							<Typography variant="body1">
-								{`${contactInfo.city}, ${contactInfo.zipCode}, ${contactInfo.country}`}
-							</Typography>
-						</Stack>
-					</Stack>
-					{[
-						{
-							id: 2,
-							icon: <PhoneOutlined />,
-							component: "a",
-							href: `tel:${contactInfo.phone}`,
-							content: contactInfo.phone,
-						},
-						{
-							id: 3,
-							icon: <AlternateEmailOutlined />,
-							component: "a",
-							href: `mailto:${contactInfo.email}`,
-							content: contactInfo.email,
-						},
-					].map(({ id, ...rest }) => (
-						<NoteSection {...rest} key={id} />
-					))}
-				</ContactSection>
+				{!isLoading && !error && (
+					<>
+						<ContactSection title={data?.contact_name}>
+							<Stack direction="row" gap={2}>
+								<Stack justifyContent="center">
+									<LocationOnOutlined color="primary" />
+								</Stack>
+								<Stack>
+									<Typography variant="body1">{data.street}</Typography>
+									<Typography variant="body1">
+										{`${data.city}, ${data.zipCode}, ${data.country}`}
+									</Typography>
+								</Stack>
+							</Stack>
+							{[
+								{
+									id: 2,
+									icon: <PhoneOutlined />,
+									component: "a",
+									href: `tel:${data.phone}`,
+									content: data.phone,
+								},
+								{
+									id: 3,
+									icon: <AlternateEmailOutlined />,
+									component: "a",
+									href: `mailto:${data.email}`,
+									content: data.email,
+								},
+							].map(({ id, ...rest }) => (
+								<NoteSection {...rest} key={id} />
+							))}
+						</ContactSection>
 
-				<ContactSection title={MAILING_ADDRESS_TITLE}>
-					<NoteSection
-						columnLayout
-						content={contactInfo.mail_address}
-						icon={<EmailOutlined color="primary" />}
-						title={contactInfo.mail_recipient}
-					/>
-				</ContactSection>
+						<ContactSection title={MAILING_ADDRESS_TITLE}>
+							<NoteSection
+								columnLayout
+								content={data.mail_address}
+								icon={<EmailOutlined color="primary" />}
+								title={data.mailing_recipient}
+							/>
+						</ContactSection>
+					</>
+				)}
 
 				<ServiceTimes />
 			</Paper>

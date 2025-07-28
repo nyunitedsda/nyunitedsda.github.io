@@ -12,21 +12,23 @@ import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { type FC, type ReactNode } from "react";
-import { CONTACT_DATA, CONTACT_US } from "../../constants/contact";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo, type FC, type ReactNode } from "react";
+import { getDefaultContacts } from "../../api/request/contactsRequest";
 import {
 	MOTTO,
 	QUICK_LINKS,
 	socialMediaInfo,
 	WEBSITE_TITLE,
 } from "../../constants/footer";
-import services, { SERVICES } from "../../constants/services";
 import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
+import { CONTACT_CONSTANT } from "../../pages/Contact/components/contact";
 import NoteSection from "../../pages/Home/components/AnnouncementCard/NoteSection";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import FooterSegment from "./components/FooterSegment";
 import { FOOTER_LEGAL_LINKS } from "./constants";
-import { getCopyright } from "./helpers";
+import { formatFooterContactData, getCopyright } from "./helpers";
+import FooterServiceTime from "./components/FooterServiceTime";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -39,6 +41,9 @@ const footerSx: SxProps<Theme> = {
 	"& a": {
 		textDecoration: "none",
 		color: "primary.contrastText",
+	},
+	"& .MuiContainer-root": {
+		p: { xs: 0, md: 2 },
 	},
 };
 
@@ -65,11 +70,19 @@ const iconMap: Record<string, ReactNode> = {
 
 const Footer: FC = () => {
 	const { menuItems } = useFormattedRoutes();
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["contactInfo"],
+		queryFn: async () => getDefaultContacts(),
+	});
+
+	const contactData = useMemo(() => {
+		return data ? formatFooterContactData(data) : [];
+	}, [data]);
 
 	return (
 		<Stack sx={footerSx}>
 			<PageContentContainer>
-				<Grid container spacing={4}>
+				<Grid container spacing={{ xs: 0, md: 4 }}>
 					{/* Social Media */}
 					<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO.text}>
 						<>
@@ -126,25 +139,21 @@ const Footer: FC = () => {
 					</FooterSegment>
 
 					{/* Services */}
-					<FooterSegment title={SERVICES}>
-						{services.map((i) => (
-							<Typography key={i.title} variant="body2">
-								<strong>{`${i.title}: `}</strong> {i.time}
-							</Typography>
-						))}
-					</FooterSegment>
+					<FooterServiceTime />
 
 					{/* Contacts */}
-					<FooterSegment title={CONTACT_US}>
-						{CONTACT_DATA.map((i) => (
-							<NoteSection
-								{...i}
-								columnLayout
-								title={i.title}
-								icon={i?.icon ? iconMap[i.icon] : undefined}
-								key={i.content}
-							/>
-						))}
+					<FooterSegment title={CONTACT_CONSTANT.CONTACT_US}>
+						{!isLoading &&
+							!error &&
+							contactData.map((i) => (
+								<NoteSection
+									{...i}
+									columnLayout
+									title={i.title}
+									icon={i?.icon ? iconMap[i.icon] : undefined}
+									key={i.content}
+								/>
+							))}
 					</FooterSegment>
 				</Grid>
 

@@ -41,6 +41,7 @@ import type { ArticleDT } from "../../api/request/databaseTypes";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
 import { authorMetaInfo } from "../../test/mock_data/blogData";
+import { capitalize } from "@mui/material";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -54,7 +55,7 @@ const ICONS = {
 			<AccountCircleOutlined />
 		</ProjectSuspense>
 	),
-	publishDate: (
+	published_at: (
 		<ProjectSuspense>
 			<CalendarTodayOutlined />
 		</ProjectSuspense>
@@ -92,6 +93,10 @@ const BlogDetails: FC = () => {
 		queryKey: ["get-article-id", id],
 		queryFn: async () =>
 			await getDatabaseItem<ArticleDT>("articles", parseInt(id as string, 10)),
+		select: (data) => ({
+			...data,
+			author: capitalize(data.author),
+		}),
 	});
 
 	return (
