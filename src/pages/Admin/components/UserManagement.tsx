@@ -20,7 +20,7 @@ const { USER_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 const UserManagement: FC = () => {
 	const { accessToken } = useToken();
 	const deleteUser = useDeleteUser();
-	const { canCreate, canEdit, canDelete } = usePermission("user");
+	const { canCreate, canEdit, canDelete } = usePermission("users");
 
 	const [userData, setUserData] = useState<Partial<UserType>[]>([]);
 	const [createUserOpen, setCreateUserOpen] =

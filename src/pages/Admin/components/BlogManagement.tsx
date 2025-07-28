@@ -12,12 +12,14 @@ import { createAuthConfig } from "../../../utils/authUtils";
 import articleColumns from "../constants/articleColumns";
 import type { GenericType } from "../../../components/DataTable/types";
 import { useSnackbar } from "notistack";
+import usePermission from "../../../hooks/auth/usePermission";
 
 const BLOG_SUBHEADER = "Manage blog articles";
 
 const BlogManagement: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const { canCreate, canEdit, canDelete } = usePermission("articles");
 
 	const [createArticleOpen, setCreateArticleOpen] =
 		useState<Partial<ArticleType> | null>(null);
@@ -54,14 +56,14 @@ const BlogManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={BLOG_SUBHEADER}
-				handleClick={() => setCreateArticleOpen(initialArticle)}
+				handleClick={canCreate ? () => setCreateArticleOpen(initialArticle) : undefined}
 			/>
 
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={articleColumns}
-				onEdit={setCreateArticleOpen}
-				onDelete={_handleDeleteArticle}
+				onEdit={canEdit ? setCreateArticleOpen : undefined}
+				onDelete={canDelete ? _handleDeleteArticle : undefined}
 			/>
 
 			{createArticleOpen && (

@@ -15,6 +15,8 @@ import { default as InputField } from "../../Input/FormField";
 import { configurePasswordInput } from "../commonInputs";
 import userSchema from "./schema";
 import type { UserEditorProps } from "./types";
+import type { RoleDT } from "../../../api/request/databaseTypes";
+import { useQuery } from "@tanstack/react-query";
 
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";
@@ -42,16 +44,13 @@ const UserEditor: FC<UserEditorProps> = ({
 	useSnackbar();
 	const registerUser = useRegister();
 
-	const [roles, setRoles] = useState<UserRoleOption[]>([]);
 
-	useEffect(() => {
-		(async () => {
-			const response = await getDatabaseList<UserRoleOption>("roles");
-			if (response) {
-				setRoles(response.data as unknown as UserRoleOption[]);
-			}
-		})();
-	}, []);
+	
+
+	const {data: roleData, isLoading} = useQuery<RoleDT[]>({
+		queryKey: ["roles", data?.id],
+		queryFn: async() => await getDatabaseList("roles"),
+	});
 
 	const title = useMemo(() => {
 		return data?.id ? EDIT_TITLE : CREATE_TITLE;
@@ -137,7 +136,7 @@ const UserEditor: FC<UserEditorProps> = ({
 					defaultValue=""
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
-					items={roles ?? []}
+					items={roleData ?? []}
 					renderItemLabel={(item) => capitalize(item.name)}
 					valueResolver={(item) => item.id}
 				/>

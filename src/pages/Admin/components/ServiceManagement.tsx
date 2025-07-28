@@ -12,6 +12,7 @@ import { deleteEntity } from "../../../api/request/mutations";
 import { initialService } from "../../../test/mock_data/services";
 import DataTable from "../../../components/DataTable/DataTable";
 import serviceColumns from "../constants/serviceColumns";
+import usePermission from "../../../hooks/auth/usePermission";
 
 const SERVICE_SUBHEADER = "Manage church services";
 
@@ -20,6 +21,7 @@ const SERVICE_SUBHEADER = "Manage church services";
 const ServiceManagement: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const { canCreate, canEdit, canDelete } = usePermission("services");
 
 	const [createServiceOpen, setCreateServiceOpen] =
 		useState<Partial<ServiceType> | null>(null);
@@ -58,19 +60,19 @@ const ServiceManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SERVICE_SUBHEADER}
-				handleClick={() =>
+				handleClick={canCreate ? (() =>
 					setCreateServiceOpen({
 						...initialService,
 						id: initialService.id ?? 0, // or another default id
 					} as ServiceType)
-				}
+				) : undefined}
 			/>
 
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={serviceColumns}
-				onEdit={setCreateServiceOpen}
-				onDelete={_handleDeleteService}
+				onEdit={canEdit ? setCreateServiceOpen : undefined}
+				onDelete={canDelete ? _handleDeleteService : undefined}
 			/>
 
 			{createServiceOpen && (

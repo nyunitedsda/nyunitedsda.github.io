@@ -12,12 +12,14 @@ import useToken from "../../../hooks/auth/useToken";
 import { initialContactInfo } from "../../../test/mock_data/contactInfo";
 import { createAuthConfig } from "../../../utils/authUtils";
 import contactInfoColumns from "../constants/contactInfoColumns";
+import usePermission from "../../../hooks/auth/usePermission";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
 
 const ContactManagement: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const { canCreate, canEdit, canDelete } = usePermission("contact_info");
 
 	const [createContactOpen, setCreateContactOpen] =
 		useState<Partial<ContactInfoType> | null>(null);
@@ -58,14 +60,14 @@ const ContactManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={CONTACT_SUBHEADER}
-				handleClick={() => setCreateContactOpen(initialContactInfo)}
+				handleClick={canCreate ? () => setCreateContactOpen(initialContactInfo) : undefined}
 			/>
 
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={contactInfoColumns}
-				onEdit={setCreateContactOpen}
-				onDelete={_handleDeleteContact}
+				onEdit={canEdit ? setCreateContactOpen : undefined}
+				onDelete={canDelete ? _handleDeleteContact : undefined}
 			/>
 
 			{createContactOpen && (

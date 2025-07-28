@@ -13,12 +13,14 @@ import { defaultNotification } from "../../../test/mock_data/notifications";
 import { createAuthConfig } from "../../../utils/authUtils";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
+import usePermission from "../../../hooks/auth/usePermission";
 
 const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const NotificationAdmin: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const { canCreate, canEdit, canDelete } = usePermission("notifications");
 
 	const [createNotificationOpen, setCreateNotificationOpen] =
 		useState<Partial<NotificationType> | null>(null);
@@ -58,14 +60,14 @@ const NotificationAdmin: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SUBHEADER}
-				handleClick={() => setCreateNotificationOpen(defaultNotification)}
+				handleClick={canCreate ? () => setCreateNotificationOpen(defaultNotification) : undefined}
 			/>
 
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={notificationsColumns}
-				onEdit={setCreateNotificationOpen}
-				onDelete={_handleDeleteNotification}
+				onEdit={canEdit ? setCreateNotificationOpen : undefined}
+				onDelete={canDelete ? _handleDeleteNotification : undefined}
 			/>
 
 			{createNotificationOpen && (

@@ -12,12 +12,14 @@ import useToken from "../../../hooks/auth/useToken";
 import { initialDonation } from "../../../test/mock_data/donations";
 import { createAuthConfig } from "../../../utils/authUtils";
 import donationColumns from "../constants/donationColumns";
+import usePermission from "../../../hooks/auth/usePermission";
 
 const DONATION_SUBHEADER = "Manage your donation methods";
 
 const DonationAdmin: FC = () => {
 	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
+	const { canCreate, canEdit, canDelete } = usePermission("donations");
 
 	const [createDonationOpen, setCreateDonationOpen] =
 		useState<Partial<DonationType> | null>(null);
@@ -53,14 +55,14 @@ const DonationAdmin: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={DONATION_SUBHEADER}
-				handleClick={() => setCreateDonationOpen(initialDonation)}
+				handleClick={canCreate ? () => setCreateDonationOpen(initialDonation) : undefined}
 			/>
 
 			<DataTable
 				data={queryData as unknown as GenericType[]}
 				columns={donationColumns}
-				onEdit={setCreateDonationOpen}
-				onDelete={_handleDeleteDonation}
+				onEdit={canEdit ? setCreateDonationOpen : undefined}
+				onDelete={canDelete ? _handleDeleteDonation : undefined}
 			/>
 
 			{createDonationOpen && (

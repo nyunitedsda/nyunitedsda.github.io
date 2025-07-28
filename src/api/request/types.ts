@@ -7,7 +7,7 @@
  */
 export type DatabaseEntity =
 	| "donations"
-	| "user"
+	| "users"
 	| "articles"
 	| "announcements"
 	| "notifications"

@@ -19,7 +19,7 @@ const SUBHEADER = "Manage church announcements and events";
 
 const AnnouncementManagement: FC = () => {
 	const { accessToken } = useToken();
-	const { canCreate, canEdit, canDelete } = usePermission("user");
+	const { canCreate, canEdit, canDelete } = usePermission("announcements");
 	const { enqueueSnackbar } = useSnackbar();
 
 	const [editorContent, setEditorContent] =

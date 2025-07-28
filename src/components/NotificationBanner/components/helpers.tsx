@@ -1,5 +1,5 @@
 import { lazy, type ReactNode } from "react";
-import type { NotificationProps, NotificationSeverity } from "../types";
+import type { SeverityPalette } from "../../../api/request/types";
 
 const InfoOutlineRounded = lazy(
 	() => import("@mui/icons-material/InfoOutlineRounded"),
@@ -14,9 +14,9 @@ const CheckCircleOutlineOutlined = lazy(
 	() => import("@mui/icons-material/CheckCircleOutlineOutlined"),
 );
 
-const severityIcons: Record<NotificationSeverity, ReactNode> = {
-	information: <InfoOutlineRounded sx={{ color: "info.contrastText" }} />,
-	caution: <WarningOutlined sx={{ color: "warning.contrastText" }} />,
+const severityIcons: Record<SeverityPalette, ReactNode> = {
+	info: <InfoOutlineRounded sx={{ color: "info.contrastText" }} />,
+	warning: <WarningOutlined sx={{ color: "warning.contrastText" }} />,
 	error: <ErrorOutlineOutlined sx={{ color: "error.contrastText" }} />,
 	success: (
 		<CheckCircleOutlineOutlined sx={{ color: "success.contrastText" }} />
@@ -24,7 +24,7 @@ const severityIcons: Record<NotificationSeverity, ReactNode> = {
 };
 
 const selectSeverityIcon = (
-	severity: NotificationProps["severity"] = "information",
+	severity: SeverityPalette = "info",
 ) => severityIcons[severity];
 
 export { selectSeverityIcon };

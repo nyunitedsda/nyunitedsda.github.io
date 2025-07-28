@@ -113,15 +113,15 @@ export interface SeverityDT {
 }
 
 export interface UserDT {
-	id: number;
-	username: string;
-	password: string;
-	role_id: number;
-	is_active: boolean;
-	remember_me: boolean;
-	is_system: boolean;
 	email?: string;
 	first_name?: string;
-	last_name?: string;
+	id: number;
+	is_active: boolean;
+	is_system: boolean;
 	last_login?: Date;
+	last_name?: string;
+	password: string;
+	remember_me: boolean;
+	role_id: number;
+	username: string;
 }

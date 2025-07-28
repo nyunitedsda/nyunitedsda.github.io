@@ -70,7 +70,7 @@ const strokeWidth = 12;
 const YoutubeIcon = () => (
 	<svg
 		height="24"
-		width="auto"
+		width="32"
 		viewBox="0 0 200 140"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
