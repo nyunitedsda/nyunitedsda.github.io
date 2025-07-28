@@ -17,11 +17,10 @@ import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { useParams } from "react-router";
 import { getDatabaseItem } from "../../api/request/commonQueries";
-import type { ArticleType } from "../../api/request/types";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
-import PageTitle from "../../components/PageWrapper/PageTitle";
 import { authorMetaInfo } from "./blogData";
+import type { ArticleDT } from "../../api/request/databaseTypes";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -44,21 +43,14 @@ const BlogDetails: FC = () => {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ["get-article-id", id],
-		queryFn: async () => {
-			const response = await getDatabaseItem(
+		queryFn: async () =>  await getDatabaseItem<ArticleDT>(
 				"articles",
 				parseInt(id as string, 10),
-			);
-			// If your API returns an array, pick the first item
-			return (
-				Array.isArray(response.data) ? response.data[0] : response.data
-			) as ArticleType;
-		},
+			),
 	});
 
 	return (
 		<Stack spacing={2}>
-			<PageTitle title="Blog Details" />
 			<Stack spacing={2} sx={{ "& a, svg": { color: "primary.light" } }}>
 				{/* Back Button */}
 
@@ -96,7 +88,7 @@ const BlogDetails: FC = () => {
 								spacing={2}
 							>
 								{authorMetaInfo.map((i) =>
-									data?.[i as keyof ArticleType] ? (
+									data?.[i as keyof ArticleDT] ? (
 										<Stack
 											direction={"row"}
 											spacing={1}
@@ -112,7 +104,7 @@ const BlogDetails: FC = () => {
 												sx={{ fontWeight: "bold", color: "text.secondary" }}
 											>
 												{(() => {
-													const value = data[i as keyof ArticleType];
+													const value = data[i as keyof ArticleDT];
 													return value instanceof Date
 														? value.toLocaleDateString()
 														: value;

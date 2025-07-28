@@ -44,7 +44,7 @@ const getDatabaseItem = async <T extends { id: number }>(
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	try {
-		const response = await axiosInstance.get(`/${entity}/${id}`, config);
+		const response = await axiosInstance.get(`/api/${entity}/${id}`, config);
 		return response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("getItem", entity, error);

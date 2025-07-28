@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { ArticleType } from "../../api/request/types";
+import type { ArticleDT } from "../../api/request/databaseTypes";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -18,6 +18,7 @@ import {
 	BLOG_SUBHEADER,
 	DEFAULT_POST_PER_PAGE,
 } from "./blogConstant";
+import { capitalize } from "@mui/material/utils";
 
 const containerSx: SxProps<Theme> = {
 	alignContent: "flex-start",
@@ -47,10 +48,9 @@ const Blog: FC = () => {
 		DEFAULT_POST_PER_PAGE,
 	);
 
-	const { isLoading, data } = useQuery({
+	const { isLoading, data } = useQuery<ArticleDT[]>({
 		queryKey: ["get-articles"],
-		queryFn: async () => await getDatabaseList("articles"),
-		select: (response) => (response.data as ArticleType[]) || [],
+		queryFn: async () => await getDatabaseList("articles") as ArticleDT[],
 	});
 
 	const totalPages = useMemo(
@@ -58,7 +58,7 @@ const Blog: FC = () => {
 		[data, postsPerPage],
 	);
 
-	const currentPosts: ArticleType[] = useMemo(
+	const currentPosts: ArticleDT[] = useMemo(
 		() => (data ?? []).slice((page - 1) * postsPerPage, page * postsPerPage),
 		[data, postsPerPage, page],
 	);
@@ -79,12 +79,12 @@ const Blog: FC = () => {
 					<RingLoader />
 				) : (
 					currentPosts.map(
-						({ id, title, author_id: author, content, publishDate }) => (
+						({ id, title, author, content, published_at }) => (
 							<Grid size={{ xs: 12, md: 6 }} key={id}>
 								<ProjectCard
 									header={{
 										title,
-										subheader: `${new Date(publishDate).toLocaleDateString()} | ${author}`,
+										subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author)}`,
 										avatar: <CalendarToday />,
 									}}
 									content={
@@ -93,11 +93,10 @@ const Blog: FC = () => {
 											variant="body1"
 											sx={{ "& p": { m: 0 } }}
 											dangerouslySetInnerHTML={{
-												__html: `${
-													content.length > BLOG_PREVIEW_LENGTH
+												__html: `${content.length > BLOG_PREVIEW_LENGTH
 														? content.slice(0, BLOG_PREVIEW_LENGTH)
 														: content
-												}`,
+													}`,
 											}}
 										/>
 									}
@@ -124,7 +123,7 @@ const Blog: FC = () => {
 					page={page}
 					onChange={handlePageChange}
 					color="primary"
-					size="large"
+					size="medium"
 				/>
 			</Stack>
 		</>

@@ -19,6 +19,7 @@ export interface ArticleDT {
 	author_id: number;
 	published_at: Date;
 	content: string;
+	author: string;
 	views?: number;
 	comments?: number;
 	rating?: number;
