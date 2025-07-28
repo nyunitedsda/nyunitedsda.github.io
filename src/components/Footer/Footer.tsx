@@ -3,8 +3,7 @@ import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
-import YouTube from "@mui/icons-material/YouTube";
-import type { SxProps, Theme } from "@mui/material";
+import { type SxProps, type Theme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
@@ -26,9 +25,9 @@ import { CONTACT_CONSTANT } from "../../pages/Contact/components/contact";
 import NoteSection from "../../pages/Home/components/AnnouncementCard/NoteSection";
 import PageContentContainer from "../PageWrapper/PageContentContainer";
 import FooterSegment from "./components/FooterSegment";
+import FooterServiceTime from "./components/FooterServiceTime";
 import { FOOTER_LEGAL_LINKS } from "./constants";
 import { formatFooterContactData, getCopyright } from "./helpers";
-import FooterServiceTime from "./components/FooterServiceTime";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -45,6 +44,14 @@ const footerSx: SxProps<Theme> = {
 	"& .MuiContainer-root": {
 		p: { xs: 0, md: 2 },
 	},
+	'& .MuiIconButton-root': {
+		'& img': {
+			width: 32,
+			height: 32,
+			fill: "red !important",
+			strokeWidth: 4,
+		},
+	},
 };
 
 const menuSx: SxProps<Theme> = {
@@ -58,11 +65,29 @@ const dividerSx: SxProps<Theme> = {
 	backgroundColor: (theme) => `${theme.palette.divider}`,
 };
 
+const strokeWidth = 12; 
+
+const YoutubeIcon = () => (
+	<svg
+		height="24"
+		width="auto"
+		viewBox="0 0 200 140"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		style={{ display: 'inline-block', verticalAlign: 'middle', height: 24 }}
+	>
+		{/* YouTube rounded rectangle outline */}
+		<rect x="12" y="22" width="176" height="96" rx="18" ry="18" fill="none" stroke="#FF0000" strokeWidth={strokeWidth} />
+		{/* Play button triangle outline */}
+		<path d="M75 45L75 95L125 70L75 45Z" fill="none" stroke="#FF0000" strokeWidth={strokeWidth} strokeLinejoin="round" />
+	</svg>
+);
+
 const iconMap: Record<string, ReactNode> = {
 	Facebook: <Facebook />,
 	Instagram: <Instagram />,
 	Twitter: <Twitter />,
-	YouTube: <YouTube />,
+	YouTube: <YoutubeIcon />,
 	Phone: <Phone fontSize="small" />,
 	Email: <AlternateEmailOutlined fontSize="small" />,
 	Mail: <EmailOutlined fontSize="small" />,

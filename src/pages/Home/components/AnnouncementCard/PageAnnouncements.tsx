@@ -6,15 +6,16 @@ import RingLoader from "../../../../components/Loaders/RingLoader";
 import type { EventAnnouncement } from "../../types";
 import SectionWrapper from "../SectionWrapper";
 import AnnouncementCard from "./AnnouncementCard";
+import type { AnnouncementDT } from "../../../../api/request/databaseTypes";
 
 const PAGE_ANNOUNCEMENT_HEADER = "Announcements";
 
 const PageAnnouncements: FC = () => {
-	const { isLoading, data } = useQuery({
+	const { isLoading, data } = useQuery<AnnouncementDT[]>({
 		queryKey: ["get-announcements"],
 		queryFn: async () =>
-			await getDatabaseList<EventAnnouncement>("announcements"),
-		staleTime: 5 * 60 * 1000, // 5 minutes
+			await getDatabaseList("announcements"),
+		staleTime: 10 * 60 * 1000, // 10 minutes
 		gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
 		// Show stale data while refetching to avoid loading screen flash
 		placeholderData: (previousData) => previousData,
@@ -23,7 +24,6 @@ const PageAnnouncements: FC = () => {
 		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
 	});
 
-	console.log("Announcements data:", data);
 
 	return (
 		<SectionWrapper header={PAGE_ANNOUNCEMENT_HEADER}>

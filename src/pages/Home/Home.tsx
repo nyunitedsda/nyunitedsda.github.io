@@ -1,42 +1,14 @@
-import { Stack, type SxProps, type Theme } from "@mui/material";
+import { Stack } from "@mui/material";
 import type { FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
-import MinistryCard from "./components/MinistryCard";
 import SectionWrapper from "./components/SectionWrapper";
-import { ministries } from "./constants";
 import sliderImages from "./sliderImages";
 
-const imageRootSx: SxProps<Theme> = {
-	width: "100%",
-	display: "flex",
-	justifyContent: "center",
-	height: (theme) => `${theme.spacing(11)}`,
-	p: 1,
-};
+import PageMinistries from "./components/Ministries/PageMinistries";
+import { HOME_CONSTANTS } from "./homeConstants";
 
-const cardContainerSx: SxProps<Theme> = {
-	alignItems: { xs: "center", md: "flex-start" },
-	flexWrap: "wrap",
-	gap: 2,
-	width: "100%",
-	"& .MuiPaper-root": {
-		height: (theme) => `${theme.spacing(36)}`,
-		maxWidth: { md: "32%" },
-	},
-	"& .MuiCardActions-root": {
-		p: 0,
-	},
-};
-
-const rootSx: SxProps<Theme> = {
-	flexGrow: 1,
-	width: "100%",
-	gap: 5,
-	pb: 2,
-};
-
-const MINISTRIES_HEADER = "Ministries Links";
+const { rootSx } = HOME_CONSTANTS;
 
 const Home: FC = () => {
 	return (
@@ -71,29 +43,7 @@ const Home: FC = () => {
 			<PageAnnouncements />
 
 			{/* Ministries content */}
-			<SectionWrapper header={MINISTRIES_HEADER}>
-				<Stack direction={{ xs: "column", md: "row" }} sx={cardContainerSx}>
-					{ministries.map((i) => (
-						<MinistryCard
-							{...{
-								header: { title: i.title },
-								content: i.content,
-								link: i.link,
-								image: {
-									root: {
-										sx: imageRootSx,
-									},
-									image: {
-										src: i.image,
-										alt: `${i.title} image`,
-									},
-								},
-							}}
-							key={`${i.title} image`}
-						/>
-					))}
-				</Stack>
-			</SectionWrapper>
+			<PageMinistries />
 		</Stack>
 	);
 };

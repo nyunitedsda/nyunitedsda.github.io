@@ -1,13 +1,20 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import type { FC } from "react";
-import Image from "../../../components/Image/Image";
+import type { CSSProperties, FC } from "react";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
 import { cardStyles } from "./AnnouncementCard/cardStyles";
 import type { MinistryCardProps } from "./types";
 
 const { headerSx } = cardStyles;
+const imageStyles: CSSProperties = {
+	objectFit: "scale-down",
+	maxWidth: "100%",
+	maxHeight: "64px",
+	height: "auto",
+	// Improve CLS (Cumulative Layout Shift)
+	aspectRatio: "auto",
+};
 
 const contentSx: SxProps<Theme> = {
 	display: "flex",
@@ -15,7 +22,7 @@ const contentSx: SxProps<Theme> = {
 	overflow: "hidden",
 	"& a": {
 		textDecoration: "none",
-		color: "primary.light",
+		color:  theme=> `${theme.palette.primary.light} !important`,
 	},
 };
 
@@ -35,7 +42,7 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
 					</Typography>
 				</Box>
 			}
-			actions={image ? <Image {...image} /> : undefined}
+			actions={image?.image ? <img src={image.image.src} alt={image.image.alt} style={imageStyles} /> : undefined}
 		/>
 	);
 };
