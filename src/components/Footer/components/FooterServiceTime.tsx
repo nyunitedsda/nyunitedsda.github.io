@@ -28,4 +28,3 @@ const FooterServiceTime: FC = () => {
 };
 
 export default FooterServiceTime;
-

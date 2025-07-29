@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import type { DonationType } from "../../../api/request/types";
 import DonationEditor from "./DonationEditor";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { UserType } from "../../../api/request/types";
 import UserEditor from "./UserEditor";
 

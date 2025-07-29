@@ -37,7 +37,7 @@ export const brandingStyles: BrandingStyle = {
 	rootSx: {
 		alignItems: "center",
 		display: { xs: "flex" },
-		flexGrow: 1,
+		flexGrow: 0,
 		gap: 2,
 		maxHeight: (theme) => theme.spacing(8),
 	},

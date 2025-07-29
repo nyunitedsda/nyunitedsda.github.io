@@ -1,5 +1,10 @@
 import { ArrowForwardIosRounded } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Stack } from "@mui/material";
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Stack,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import type { SxProps, Theme } from "@mui/material/styles";
@@ -19,23 +24,21 @@ const contentSx: SxProps<Theme> = {
 
 const accordionSx: SxProps<Theme> = {
 	backgroundColor: "inherit !important",
-	'& .MuiAccordionDetails-root': {
-		pl: theme => `${theme.spacing(7.5)} !important`,
-		py: theme => `${theme.spacing(0)} !important`,
+	"& .MuiAccordionDetails-root": {
+		pl: (theme) => `${theme.spacing(7.5)} !important`,
+		py: (theme) => `${theme.spacing(0)} !important`,
 	},
-
 };
 
 const summarySx: SxProps<Theme> = {
 	flexDirection: "row-reverse !important",
 	alignItems: "center",
 	gap: 2,
-	'& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+	"& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
 		transform: "rotate(90deg)",
 	},
-	'& .MuiAccordionSummary-content': {
+	"& .MuiAccordionSummary-content": {
 		m: 0,
-
 	},
 };
 
@@ -46,15 +49,23 @@ const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 	subtitle,
 	children,
 }) => {
-	const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
-
+	const isMobile = useMediaQuery((theme: Theme) =>
+		theme.breakpoints.down("md"),
+	);
 
 	return (
 		<>
 			{isMobile ? (
-				<Accordion sx={accordionSx} disableGutters elevation={0} slotProps={{ transition: { unmountOnExit: true } }}>
-					<AccordionSummary expandIcon={<ArrowForwardIosRounded sx={{ fontSize: '1rem' }} />} sx={summarySx} >
-
+				<Accordion
+					sx={accordionSx}
+					disableGutters
+					elevation={0}
+					slotProps={{ transition: { unmountOnExit: true } }}
+				>
+					<AccordionSummary
+						expandIcon={<ArrowForwardIosRounded sx={{ fontSize: "1rem" }} />}
+						sx={summarySx}
+					>
 						<Stack>
 							<Typography variant="h6" fontWeight="bold" fontFamily="inter">
 								{title}
@@ -84,12 +95,8 @@ const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 				</>
 			)}
 		</>
-
-
-	)
+	);
 };
-
-
 
 const FooterSegment: FC<FooterSegmentProps> = ({
 	children,

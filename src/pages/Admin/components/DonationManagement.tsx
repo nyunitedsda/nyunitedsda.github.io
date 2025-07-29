@@ -55,7 +55,9 @@ const DonationAdmin: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={DONATION_SUBHEADER}
-				handleClick={canCreate ? () => setCreateDonationOpen(initialDonation) : undefined}
+				handleClick={
+					canCreate ? () => setCreateDonationOpen(initialDonation) : undefined
+				}
 			/>
 
 			<DataTable

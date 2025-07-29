@@ -56,7 +56,9 @@ const BlogManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={BLOG_SUBHEADER}
-				handleClick={canCreate ? () => setCreateArticleOpen(initialArticle) : undefined}
+				handleClick={
+					canCreate ? () => setCreateArticleOpen(initialArticle) : undefined
+				}
 			/>
 
 			<DataTable

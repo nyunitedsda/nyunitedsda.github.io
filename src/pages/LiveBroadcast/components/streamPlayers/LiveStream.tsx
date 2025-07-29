@@ -13,7 +13,6 @@ const LiveStream: FC = () => {
 		[mode],
 	);
 
-
 	return (
 		<StreamDisplay
 			id="sermon-cloud-embed"

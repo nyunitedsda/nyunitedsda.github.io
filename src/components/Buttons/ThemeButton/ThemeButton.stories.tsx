@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import ThemeToggleButton from "./ThemeToggleButton";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import ThemeButton from "./ThemeButton";
 
-const meta: Meta<typeof ThemeToggleButton> = {
-	title: "Components/Buttons/ThemeToggleButton",
-	component: ThemeToggleButton,
+const meta: Meta<typeof ThemeButton> = {
+	title: "Components/Buttons/ThemeButton",
+	component: ThemeButton,
 	tags: ["autodocs"],
 	argTypes: {
 		expanded: {

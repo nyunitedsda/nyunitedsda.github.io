@@ -1,5 +1,5 @@
-import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/blocks';
-import type { Preview } from '@storybook/react';
+import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/addon-docs/blocks';
+import type { Preview } from '@storybook/react-vite';
 import React from 'react';
 import DynamicProvider from '../src/test/ProviderWrapper';
 import GlobalNavigationProvider from './GlobalNavigationProvider';

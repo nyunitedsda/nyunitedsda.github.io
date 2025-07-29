@@ -22,7 +22,7 @@ const contentSx: SxProps<Theme> = {
 	overflow: "hidden",
 	"& a": {
 		textDecoration: "none",
-		color:  theme=> `${theme.palette.primary.light} !important`,
+		color: (theme) => `${theme.palette.primary.light} !important`,
 	},
 };
 
@@ -42,7 +42,15 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
 					</Typography>
 				</Box>
 			}
-			actions={image?.image ? <img src={image.image.src} alt={image.image.alt} style={imageStyles} /> : undefined}
+			actions={
+				image?.image ? (
+					<img
+						src={image.image.src}
+						alt={image.image.alt}
+						style={imageStyles}
+					/>
+				) : undefined
+			}
 		/>
 	);
 };

@@ -60,7 +60,11 @@ const NotificationAdmin: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SUBHEADER}
-				handleClick={canCreate ? () => setCreateNotificationOpen(defaultNotification) : undefined}
+				handleClick={
+					canCreate
+						? () => setCreateNotificationOpen(defaultNotification)
+						: undefined
+				}
 			/>
 
 			<DataTable

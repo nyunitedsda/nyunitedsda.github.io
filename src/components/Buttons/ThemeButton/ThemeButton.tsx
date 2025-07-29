@@ -61,9 +61,7 @@ const iconSx: SxProps<Theme> = {
 	},
 };
 
-const ThemeToggleButton: FC<{ expanded?: boolean }> = ({
-	expanded = false,
-}) => {
+const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	const { mode, setMode } = useColorScheme();
 
 	const toggledMode = useMemo(
@@ -98,11 +96,7 @@ const ThemeToggleButton: FC<{ expanded?: boolean }> = ({
 					title={`Switch to ${toggledMode} mode`}
 					sx={{ height: "48px" }}
 				>
-					<Button
-						// onTouchStart={_handleBtnClick}
-						onClick={_handleBtnClick}
-						sx={expandedBtnSx}
-					>
+					<Button onClick={_handleBtnClick} sx={expandedBtnSx}>
 						{mode === "dark" ? (
 							<LightModeRounded color="warning" sx={[iconSx, sunSx]} />
 						) : (
@@ -138,4 +132,4 @@ const ThemeToggleButton: FC<{ expanded?: boolean }> = ({
 	);
 };
 
-export default ThemeToggleButton;
+export default ThemeButton;

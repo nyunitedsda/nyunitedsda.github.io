@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Provider as NotificationProvider } from "../../contexts/NotificationContext/context";
 import NotificationBanner from "./NotificationBanner";

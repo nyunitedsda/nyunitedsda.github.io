@@ -1,7 +1,7 @@
 import { StarOutlineOutlined } from "@mui/icons-material";
 import { Icon, IconButton } from "@mui/material";
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import DataTable from "./DataTable";
 import type { ColumnDefinition } from "./types";
 

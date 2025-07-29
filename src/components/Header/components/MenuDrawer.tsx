@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router";
 import LoginButton from "../../Buttons/LoginButton/LoginButton";
-import ThemeToggleButton from "../../Buttons/ThemeToggleButton";
+import ThemeButton from "../../Buttons/ThemeButton/ThemeButton";
 import { menuDrawerStyles } from "../styles";
 import MenuItemRenderer from "./MenuDrawer/MenuItemRenderer";
 import MenuDrawerItem from "./MenuDrawerItem";
@@ -54,7 +54,7 @@ const MenuDrawer: FC<MenuDrawerProps> = ({
 					borderTop: (theme) => `1px solid ${theme.palette.divider}`,
 				}}
 			>
-				<ThemeToggleButton expanded />
+				<ThemeButton expanded />
 				<LoginButton />
 				{footer?.map((i) => (
 					<MenuDrawerItem {...i} key={i.text} />

@@ -44,12 +44,9 @@ const UserEditor: FC<UserEditorProps> = ({
 	useSnackbar();
 	const registerUser = useRegister();
 
-
-	
-
-	const {data: roleData, isLoading} = useQuery<RoleDT[]>({
+	const { data: roleData, isLoading } = useQuery<RoleDT[]>({
 		queryKey: ["roles", data?.id],
-		queryFn: async() => await getDatabaseList("roles"),
+		queryFn: async () => await getDatabaseList("roles"),
 	});
 
 	const title = useMemo(() => {

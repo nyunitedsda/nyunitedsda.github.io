@@ -30,6 +30,18 @@ const theme = responsiveFontSizes(
 			borderRadius: 8,
 		},
 		components: {
+			MuiMenu: {
+				defaultProps: {
+					anchorOrigin: {
+						vertical: "bottom",
+						horizontal: "right",
+					},
+					transformOrigin: {
+						vertical: "top",
+						horizontal: "right",
+					},
+				},
+			},
 			MuiMenuItem: {
 				styleOverrides: {
 					root: ({ theme }) => ({

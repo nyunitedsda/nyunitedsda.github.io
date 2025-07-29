@@ -1,7 +1,7 @@
 import { ExitToAppOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import CarouselArrowControl from "./CarouselArrowControl";
 

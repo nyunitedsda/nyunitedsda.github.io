@@ -1,7 +1,7 @@
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import ProjectCard from "./ProjectCard";
 
 const meta: Meta<typeof ProjectCard> = {

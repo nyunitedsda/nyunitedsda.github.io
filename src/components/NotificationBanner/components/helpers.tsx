@@ -23,8 +23,7 @@ const severityIcons: Record<SeverityPalette, ReactNode> = {
 	),
 };
 
-const selectSeverityIcon = (
-	severity: SeverityPalette = "info",
-) => severityIcons[severity];
+const selectSeverityIcon = (severity: SeverityPalette = "info") =>
+	severityIcons[severity];
 
 export { selectSeverityIcon };

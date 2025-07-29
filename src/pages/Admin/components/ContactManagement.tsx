@@ -60,7 +60,9 @@ const ContactManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={CONTACT_SUBHEADER}
-				handleClick={canCreate ? () => setCreateContactOpen(initialContactInfo) : undefined}
+				handleClick={
+					canCreate ? () => setCreateContactOpen(initialContactInfo) : undefined
+				}
 			/>
 
 			<DataTable

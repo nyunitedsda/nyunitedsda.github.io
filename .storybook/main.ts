@@ -6,17 +6,12 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-links',
-    'storybook-addon-mock',
-  ],
+  addons: ['@storybook/addon-links', 'storybook-addon-mock', '@storybook/addon-docs'],
   core: {
     disableTelemetry: true,
   },
   docs: {
-    autodocs: true,
-    defaultName: 'Documentation',
+    defaultName: 'Documentation'
   },
   typescript: {
     reactDocgen: 'react-docgen-typescript',

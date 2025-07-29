@@ -60,12 +60,15 @@ const ServiceManagement: FC = () => {
 			<PageTitle
 				title=""
 				subtitle={SERVICE_SUBHEADER}
-				handleClick={canCreate ? (() =>
-					setCreateServiceOpen({
-						...initialService,
-						id: initialService.id ?? 0, // or another default id
-					} as ServiceType)
-				) : undefined}
+				handleClick={
+					canCreate
+						? () =>
+								setCreateServiceOpen({
+									...initialService,
+									id: initialService.id ?? 0, // or another default id
+								} as ServiceType)
+						: undefined
+				}
 			/>
 
 			<DataTable

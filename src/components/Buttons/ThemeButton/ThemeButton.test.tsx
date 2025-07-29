@@ -8,8 +8,8 @@ import {
 	it,
 	type Mock,
 	screen,
-} from "../../test/index.ts";
-import ThemeToggleButton from "./ThemeToggleButton";
+} from "../../../test/index.ts";
+import ThemeButton from "./ThemeButton.tsx";
 
 vi.mock("@mui/material/styles", async () => {
 	const actual = await vi.importActual<typeof import("@mui/material/styles")>(
@@ -21,14 +21,14 @@ vi.mock("@mui/material/styles", async () => {
 	};
 });
 
-describe("ThemeToggleButton", () => {
+describe("ThemeButton", () => {
 	it("renders nothing if mode is undefined", () => {
 		(useColorScheme as Mock).mockReturnValue({
 			mode: undefined,
 			setMode: vi.fn(),
 		});
 
-		const { container } = render(<ThemeToggleButton />);
+		const { container } = render(<ThemeButton />);
 		expect(container.firstChild).toBeNull();
 	});
 
@@ -39,7 +39,7 @@ describe("ThemeToggleButton", () => {
 			setMode,
 		});
 
-		render(<ThemeToggleButton />);
+		render(<ThemeButton />);
 
 		expect(screen.getByTitle(/switch to light/i)).toBeInTheDocument();
 		expect(screen.getByTestId("LightModeRoundedIcon")).toBeVisible();
@@ -56,7 +56,7 @@ describe("ThemeToggleButton", () => {
 			setMode,
 		});
 
-		render(<ThemeToggleButton />);
+		render(<ThemeButton />);
 
 		expect(screen.getByTitle(/switch to dark/i)).toBeInTheDocument();
 		expect(screen.getByTestId("DarkModeTwoToneIcon")).toBeVisible();

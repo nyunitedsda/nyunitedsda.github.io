@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik } from "formik";
-import ConfirmationButton from "../../components/Buttons/ConfirmationButton";
+import {ConfirmationButton} from "../../components/Buttons";
 import type { FormContainerProps } from "./types";
 
 const childrenSx: SxProps<Theme> = {
