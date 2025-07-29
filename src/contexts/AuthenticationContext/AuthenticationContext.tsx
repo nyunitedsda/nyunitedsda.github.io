@@ -15,12 +15,11 @@ import {
 	useLogin,
 	useLogout,
 	useRefreshToken,
-	useRegister,
 } from "../../hooks/auth";
 import useToken from "../../hooks/auth/useToken";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
-import type { AuthenticationContextProps, RegisterData } from "./types";
+import type { AuthenticationContextProps } from "./types";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { accessToken, refreshToken, clearTokens } = useToken();
@@ -30,7 +29,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
 	const refreshAuthToken = useRefreshToken();
-	const registerUser = useRegister();
 	const navigate = useNavigate();
 
 	const [user, setUser] = useState<UserType | null>(null);
@@ -91,21 +89,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		[loginUser, enqueueSnackbar],
 	);
 
-	const register = useCallback(async (data: RegisterData) => {
-		try {
-			setIsLoading(true);
-
-			// Call the actual register API
-			const response = await registerUser.mutateAsync(data);
-			const { user } = response;
-			setUser(user);
-		} catch (error) {
-			throw error;
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
-
+	
 	const logout = useCallback(async () => {
 		try {
 			logoutUser.mutateAsync().then(() => {
@@ -124,7 +108,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 				throw new Error("No refresh token available");
 			}
 
-			await refreshAuthToken?.mutateAsync(refreshToken);
+			await refreshAuthToken?.mutateAsync();
 		} catch (error) {
 			logout();
 			throw error;
@@ -137,11 +121,10 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			isLoading,
 			isAuthenticated,
 			login,
-			register,
 			logout,
 			refreshAuth,
 		}),
-		[user, isLoading, isAuthenticated, login, register, logout, refreshAuth],
+		[user, isLoading, isAuthenticated, login, logout, refreshAuth],
 	);
 
 	return <Provider value={value}>{children}</Provider>;

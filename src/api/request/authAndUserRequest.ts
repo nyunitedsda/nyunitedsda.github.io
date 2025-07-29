@@ -2,6 +2,8 @@ import type { AxiosRequestConfig } from "axios";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
 import type { LoginCredentials, LoginResponse, UserType } from "./types";
+import type { RegisterData } from "../../contexts/AuthenticationContext";
+import type { UserDT } from "./databaseTypes";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
 
@@ -14,7 +16,7 @@ const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
  */
 const getAllUsers = async (
 	config?: AxiosRequestConfig,
-): Promise<UserType[]> => {
+): Promise<UserDT[]> => {
 	try {
 		console.log("All users config: ", config);
 
@@ -22,6 +24,27 @@ const getAllUsers = async (
 		return response?.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("getAllUsers", "users", error);
+	}
+};
+
+/**
+ * Get a list of all system users
+ * This a Authenticated API call that requires a valid token
+ * @param config - Optional axios request config
+ * @returns Promise<UserType[]>
+ * @throws Error if the operation fails
+ */
+const getUserById = async (
+	id: number,
+	config?: AxiosRequestConfig,
+): Promise<UserDT> => {
+	try {
+		console.log("All users config: ", config);
+
+		const response = await axiosInstance.get(`${AUTH_API_URL}users/${id}`, config);
+		return response?.data.data || response.data;
+	} catch (error: unknown) {
+		return handleOperationError("getUserById", "users", error);
 	}
 };
 
@@ -37,7 +60,7 @@ const deleteUser = async (
 ): Promise<{ success: boolean }> => {
 	try {
 		const response = await axiosInstance.delete(
-			`${AUTH_API_URL}user/${id}`,
+			`${AUTH_API_URL}users/${id}`,
 			config,
 		);
 		return response.data;
@@ -45,6 +68,34 @@ const deleteUser = async (
 		return handleOperationError("delete", "users", error);
 	}
 };
+
+/**
+ * Update user profile data
+ * This is an Authenticated API call that requires a valid token
+ * @param userId - ID of the user to update
+ * @param userData - Partial user data to update
+ * @param config - Optional axios request config
+ * @returns Promise<UserType>
+ * @throws Error if the operation fails
+ */
+const updateUser = async (
+	userId: number,
+	userData: Partial<UserType>,
+	config?: AxiosRequestConfig,
+): Promise<UserType> => {
+	try {
+		const response = await axiosInstance.put(
+			`${AUTH_API_URL}/users/${userId}`,
+			userData,
+			config,
+		);
+		return response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("updateUser", "users", error);
+	}
+};
+
+
 
 /**
  * Login user with credentials
@@ -68,4 +119,28 @@ const loginUser = async (
 	}
 };
 
-export { deleteUser, getAllUsers, loginUser };
+/**
+ * Register/ create a new user
+ * @param userData - User registration data
+ * @param config - Optional axios request config
+ * @returns Promise<{ user: UserType; tokens: AuthTokenResponse }>
+ */
+const registerUser = async (
+	userData: RegisterData,
+	config?: AxiosRequestConfig,
+): Promise<{ user: UserType; message: string }> => {
+	try {
+		const response = await axiosInstance.post(
+			`${AUTH_API_URL}/users/register`,
+			userData,
+			config,
+		);
+		return response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("register", "users", error);
+	}
+};
+
+
+
+export { deleteUser, getAllUsers, loginUser,updateUser, registerUser, getUserById };

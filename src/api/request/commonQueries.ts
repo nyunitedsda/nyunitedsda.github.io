@@ -1,5 +1,4 @@
 import type { AxiosRequestConfig } from "axios";
-import type { RegisterData } from "../../contexts/AuthenticationContext/types";
 import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
@@ -51,27 +50,7 @@ const getDatabaseItem = async <T extends { id: number }>(
 	}
 };
 
-/**
- * Register/ create a new user
- * @param userData - User registration data
- * @param config - Optional axios request config
- * @returns Promise<{ user: UserType; tokens: AuthTokenResponse }>
- */
-const registerUser = async (
-	userData: RegisterData,
-	config?: AxiosRequestConfig,
-): Promise<{ user: UserType; message: string }> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}register`,
-			userData,
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("register", "user", error);
-	}
-};
+
 
 /**
  * Refresh authentication token
@@ -92,7 +71,7 @@ const refreshAuthToken = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("refresh", "user", error);
+		return handleOperationError("refresh", "users", error);
 	}
 };
 
@@ -113,7 +92,7 @@ const logoutUser = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("logout", "user", error);
+		return handleOperationError("logout", "users", error);
 	}
 };
 
@@ -130,35 +109,11 @@ const getCurrentUser = async (
 		const response = await axiosInstance.get(`${AUTH_API_URL}profile`, config);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("getCurrentUser", "user", error);
+		return handleOperationError("getCurrentUser", "users", error);
 	}
 };
 
-/**
- * Update user profile data
- * This is an Authenticated API call that requires a valid token
- * @param userId - ID of the user to update
- * @param userData - Partial user data to update
- * @param config - Optional axios request config
- * @returns Promise<UserType>
- * @throws Error if the operation fails
- */
-const updateUser = async (
-	userId: number,
-	userData: Partial<UserType>,
-	config?: AxiosRequestConfig,
-): Promise<UserType> => {
-	try {
-		const response = await axiosInstance.put(
-			`${AUTH_API_URL}${userId}`,
-			userData,
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("updateUser", "user", error);
-	}
-};
+
 
 const getUserStatus = async (
 	token: string,
@@ -171,7 +126,7 @@ const getUserStatus = async (
 		);
 		return response?.data || response;
 	} catch (error: unknown) {
-		return handleOperationError("getUserStatus", "user", error);
+		return handleOperationError("getUserStatus", "users", error);
 	}
 };
 
@@ -190,7 +145,7 @@ const requestPasswordReset = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("requestPasswordReset", "user", error);
+		return handleOperationError("requestPasswordReset", "users", error);
 	}
 };
 
@@ -210,7 +165,7 @@ const resetPassword = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("resetPassword", "user", error);
+		return handleOperationError("resetPassword", "users", error);
 	}
 };
 
@@ -229,7 +184,7 @@ const verifyEmail = async (
 		);
 		return response?.data.data || response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("verifyEmail", "user", error);
+		return handleOperationError("verifyEmail", "users", error);
 	}
 };
 
@@ -241,9 +196,7 @@ export {
 	// Authentication exports
 	logoutUser,
 	refreshAuthToken,
-	registerUser,
 	requestPasswordReset,
 	resetPassword,
-	updateUser,
 	verifyEmail,
 };

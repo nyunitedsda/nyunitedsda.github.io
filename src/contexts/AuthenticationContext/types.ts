@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import type { UserDT } from "../../api/request/databaseTypes";
 import type { LoginCredentials, UserType } from "../../api/request/types";
 
 /**
@@ -8,10 +9,7 @@ import type { LoginCredentials, UserType } from "../../api/request/types";
  * @property {string} username - The username of the user required.
  * @property {string} password - The password of the user required.
  */
-export type RegisterData = Pick<
-	UserType,
-	"email" | "username" | "password" | "first_name" | "last_name"
->;
+export type RegisterData = Omit<	UserDT,	"id" | "is_system" | "last_login">;
 
 /**
  * Authentication context properties
@@ -32,7 +30,6 @@ export type AuthenticationContextProps = PropsWithChildren<{
 	isLoading: boolean;
 	isAuthenticated: boolean;
 	login: (credentials: LoginCredentials) => Promise<void>;
-	register: (data: RegisterData) => Promise<void>;
 	logout: () => void;
 	refreshAuth: () => Promise<void>;
 }>;

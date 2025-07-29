@@ -70,6 +70,7 @@ const InputField: FC<InputFieldProps> = ({
 				<FormControlLabel
 					{...field}
 					{...props}
+					checked={field.value}
 					disabled={props.disabled || isDisabled}
 					control={<Checkbox />}
 					label={label}

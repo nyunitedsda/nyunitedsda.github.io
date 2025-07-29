@@ -1,28 +1,27 @@
-import { capitalize } from "@mui/material";
+import { capitalize, Grid } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useQueries } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useEffect, useMemo, useState } from "react";
+import { type FC, useCallback, useMemo } from "react";
+import { getUserById, updateUser } from "../../../api/request/authAndUserRequest";
 import {
 	getDatabaseList,
-	updateUser,
 } from "../../../api/request/commonQueries";
-import type { UserRoleOption, UserType } from "../../../api/request/types";
+import type { UserDT } from "../../../api/request/databaseTypes";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useRegister } from "../../../hooks/auth";
 import FormContainer from "../../FormBuilder/FormContainer";
 import { default as InputField } from "../../Input/FormField";
 import { configurePasswordInput } from "../commonInputs";
-import userSchema from "./schema";
+
 import type { UserEditorProps } from "./types";
-import type { RoleDT } from "../../../api/request/databaseTypes";
-import { useQuery } from "@tanstack/react-query";
+import { createUserSchema, updateUserSchema } from "./schema";
 
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";
 const LAST_NAME_FIELD_LABEL = "Last Name";
 const ROLE_FIELD_LABEL = "User Role";
-const EMAIL_VERIFIED_FIELD_LABEL = "Email Verified";
 const IS_ACTIVE_FIELD_LABEL = "Active";
 
 const titleSx: SxProps<Theme> = {
@@ -44,9 +43,19 @@ const UserEditor: FC<UserEditorProps> = ({
 	useSnackbar();
 	const registerUser = useRegister();
 
-	const { data: roleData, isLoading } = useQuery<RoleDT[]>({
-		queryKey: ["roles", data?.id],
-		queryFn: async () => await getDatabaseList("roles"),
+	const result = useQueries({
+		queries: [
+			{
+				queryKey: ["roles"],
+				queryFn: async () => await getDatabaseList("roles"),
+			},
+			{
+				queryKey: ["users", data?.id],
+				queryFn: async () => await getUserById(data?.id),
+				enabled: !!data?.id,
+				
+			}
+		]
 	});
 
 	const title = useMemo(() => {
@@ -57,7 +66,7 @@ const UserEditor: FC<UserEditorProps> = ({
 		return configurePasswordInput();
 	}, []);
 
-	const _handleEditSubmit = useCallback((values: UserType) => {
+	const _handleEditSubmit = useCallback((values: UserDT) => {
 		const { id, ...rest } = values;
 
 		updateUser(id, rest).then(() => {
@@ -66,7 +75,7 @@ const UserEditor: FC<UserEditorProps> = ({
 		});
 	}, []);
 
-	const _handleCreateSubmit = useCallback((values: UserType) => {
+	const _handleCreateSubmit = useCallback((values: UserDT) => {
 		registerUser.mutateAsync(values).then(() => {
 			onSuccess?.();
 			onClose();
@@ -74,7 +83,7 @@ const UserEditor: FC<UserEditorProps> = ({
 	}, []);
 
 	const _handleSubmit = useCallback(
-		(values: UserType) => {
+		(values: UserDT) => {
 			if (data?.id) {
 				_handleEditSubmit(values);
 			} else {
@@ -84,15 +93,20 @@ const UserEditor: FC<UserEditorProps> = ({
 		[data],
 	);
 
+	console.log("UserEditor data: ", result[1]?.data);
+
 	return (
-		<ProjectModal open={open} onClose={onClose}>
+		<>
+		{
+			!result.some((query) => query.isLoading) && (
+				<ProjectModal open={open} onClose={onClose}>
 			<Typography variant="h6" gutterBottom sx={titleSx}>
 				{title}
 			</Typography>
 
 			<FormContainer
-				initialValues={data || {}}
-				validationSchema={userSchema}
+				initialValues={data?.id ? (result[1]?.data ?? {} as UserDT) : data}
+				validationSchema={data?.id ? updateUserSchema : createUserSchema}
 				onSubmit={_handleSubmit}
 				submitButtonText="Save"
 				onCancel={onClose}
@@ -133,29 +147,34 @@ const UserEditor: FC<UserEditorProps> = ({
 					defaultValue=""
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
-					items={roleData ?? []}
+					items={result[0]?.data ?? []}
 					renderItemLabel={(item) => capitalize(item.name)}
 					valueResolver={(item) => item.id}
 				/>
+				<Grid container size={12} sx={{ p: 2, py: 0 }}>
+					<Grid size={6}>
 
-				<InputField
-					defaultValue={true}
-					fieldType="checkbox"
-					label={IS_ACTIVE_FIELD_LABEL}
-					name="is_active"
-				/>
-				<InputField
-					name="emailVerified"
-					label={EMAIL_VERIFIED_FIELD_LABEL}
-					fieldType="checkbox"
-				/>
-				<InputField
-					name="remember_me"
-					label="Remember Me"
-					fieldType="checkbox"
-				/>
+						<InputField
+							defaultValue={true}
+							fieldType="checkbox"
+							label={IS_ACTIVE_FIELD_LABEL}
+							name="is_active"
+						/>
+
+					</Grid>
+					<Grid size={6}>
+						<InputField
+							name="remember_me"
+							label="Remember Me"
+							fieldType="checkbox"
+						/>
+					</Grid>
+				</Grid>
 			</FormContainer>
 		</ProjectModal>
+			) 
+		}
+		</>
 	);
 };
 

@@ -1,8 +1,8 @@
-import type { UserType } from "../../../api/request/types";
+import type { UserDT } from "../../../api/request/databaseTypes";
 
 export interface UserEditorProps {
-	data: UserType;
+	data: UserDT;
 	open: boolean;
 	onClose: () => void;
-	onSuccess?: (data?: UserType) => void;
+	onSuccess?: (data?: UserDT) => void;
 }

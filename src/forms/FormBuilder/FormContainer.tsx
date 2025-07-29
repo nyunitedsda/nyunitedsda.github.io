@@ -45,7 +45,7 @@ const FormContainer = <T extends { id?: number }>({
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
 		>
-			{({ isSubmitting, dirty }) => (
+			{({ isSubmitting, dirty}) => (
 				<Form style={{ width: "100%" }}>
 					<Stack spacing={2} sx={childrenSx}>
 						{children}
