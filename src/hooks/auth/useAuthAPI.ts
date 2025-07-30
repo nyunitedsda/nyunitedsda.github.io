@@ -231,14 +231,6 @@ export const useAuthStatus = () => {
 		enabled: !!accessToken,
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		retry: (failureCount, error: any) => {
-			// Don't retry if it's an authentication error
-
-			console.log(
-				"Checking auth status, failure count:",
-				failureCount,
-				"error:",
-				error,
-			);
 			if (error?.response?.status === 403) {
 				refreshAuthToken.mutateAsync().then(() => {
 					// Handle successful token refresh

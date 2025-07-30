@@ -58,7 +58,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Keep user state in sync with currentUser and userKey
 	useEffect(() => {
 		if (accessToken) {
-			console.log("current user: ", currentUser);
 			if (!user && currentUser) {
 				setUser(currentUser);
 			} else if (!user && refetchCurrentUser) {

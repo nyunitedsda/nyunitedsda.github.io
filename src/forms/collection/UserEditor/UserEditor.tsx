@@ -93,8 +93,6 @@ const UserEditor: FC<UserEditorProps> = ({
 		[data],
 	);
 
-	console.log("UserEditor data: ", result[1]?.data);
-
 	return (
 		<>
 		{
