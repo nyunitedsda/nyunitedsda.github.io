@@ -25,9 +25,9 @@ const rootSx: SxProps<Theme> = {
 	borderRadius: 1,
 	boxShadow: 4,
 	flexGrow: 1,
-	overflow: "hidden",
+	overflow: "auto",
 	height: "100%",
-	display: { xs: "none", md: "flex" },
+	display: "flex", // { xs: "none", md: "flex" },
 	"& .MuiTableHead-root": {
 		bgcolor: "primary.main",
 		"& .MuiTableCell-root": {

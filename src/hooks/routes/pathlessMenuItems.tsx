@@ -94,6 +94,10 @@ export const protectedMenuItems: PathlessMenu[] = [
 				id: "admin-services",
 				name: "Services",
 			},
+			{
+				id: "admin-settings",
+				name: "Settings",
+			},
 		],
 	},
 	{
