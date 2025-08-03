@@ -21,12 +21,11 @@ const CONFIRM_PASSWORD = "Confirm Password";
 const REGISTER = "Register";
 const ACCEPT_TERMS = "I accept the terms and conditions";
 
-const RegisterForm: FC<UserAccessFormProps> = () => {
+const ChangePasswordForm: FC<UserAccessFormProps> = ({ user, data }) => {
 	const {
 		buttonText,
 		confirmPasswordProps,
 		passwordProps,
-		usernameProps,
 		initialValues,
 		validationSchema,
 	} = useMemo(
@@ -35,7 +34,6 @@ const RegisterForm: FC<UserAccessFormProps> = () => {
 			initialValues: initialRegisterValues,
 			validationSchema: registerSchema,
 			passwordProps: configurePasswordInput(),
-			usernameProps: configureUsernameInput(),
 			confirmPasswordProps: configurePasswordInput({
 				name: "confirmPassword",
 				label: CONFIRM_PASSWORD,
@@ -58,8 +56,6 @@ const RegisterForm: FC<UserAccessFormProps> = () => {
 			submitButtonText={buttonText}
 		>
 			<Stack spacing={3}>
-				<InputField {...usernameProps} />
-
 				<InputField {...passwordProps} />
 				<InputField {...confirmPasswordProps} />
 				<InputField
@@ -72,4 +68,4 @@ const RegisterForm: FC<UserAccessFormProps> = () => {
 	);
 };
 
-export default RegisterForm;
+export default ChangePasswordForm;

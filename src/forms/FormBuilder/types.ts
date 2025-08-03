@@ -6,6 +6,7 @@ export interface FormContainerProps<T> {
 	initialValues: T;
 	submitButtonText?: string;
 	validationSchema: any;
+	confirmOnSave?: boolean;
 	onSubmit: (values: T) => void | Promise<any>;
 	onCancel?: () => void;
 }

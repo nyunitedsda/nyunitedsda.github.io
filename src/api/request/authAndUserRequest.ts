@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
-import type { LoginCredentials, LoginResponse, UserType } from "./types";
+import type { LoginCredentials, LoginResponse } from "./types";
 import type { RegisterData } from "../../contexts/AuthenticationContext";
 import type { UserDT } from "./databaseTypes";
 
@@ -11,12 +11,10 @@ const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
  * Get a list of all system users
  * This a Authenticated API call that requires a valid token
  * @param config - Optional axios request config
- * @returns Promise<UserType[]>
+ * @returns Promise<UserDT[]>
  * @throws Error if the operation fails
  */
-const getAllUsers = async (
-	config?: AxiosRequestConfig,
-): Promise<UserDT[]> => {
+const getAllUsers = async (config?: AxiosRequestConfig): Promise<UserDT[]> => {
 	try {
 		console.log("All users config: ", config);
 
@@ -31,7 +29,7 @@ const getAllUsers = async (
  * Get a list of all system users
  * This a Authenticated API call that requires a valid token
  * @param config - Optional axios request config
- * @returns Promise<UserType[]>
+ * @returns Promise<UserDT[]>
  * @throws Error if the operation fails
  */
 const getUserById = async (
@@ -41,7 +39,10 @@ const getUserById = async (
 	try {
 		console.log("All users config: ", config);
 
-		const response = await axiosInstance.get(`${AUTH_API_URL}users/${id}`, config);
+		const response = await axiosInstance.get(
+			`${AUTH_API_URL}users/${id}`,
+			config,
+		);
 		return response?.data.data || response.data;
 	} catch (error: unknown) {
 		return handleOperationError("getUserById", "users", error);
@@ -75,14 +76,14 @@ const deleteUser = async (
  * @param userId - ID of the user to update
  * @param userData - Partial user data to update
  * @param config - Optional axios request config
- * @returns Promise<UserType>
+ * @returns Promise<UserDT>
  * @throws Error if the operation fails
  */
 const updateUser = async (
 	userId: number,
-	userData: Partial<UserType>,
+	userData: Partial<UserDT>,
 	config?: AxiosRequestConfig,
-): Promise<UserType> => {
+): Promise<UserDT> => {
 	try {
 		const response = await axiosInstance.put(
 			`${AUTH_API_URL}/users/${userId}`,
@@ -94,8 +95,6 @@ const updateUser = async (
 		return handleOperationError("updateUser", "users", error);
 	}
 };
-
-
 
 /**
  * Login user with credentials
@@ -123,12 +122,12 @@ const loginUser = async (
  * Register/ create a new user
  * @param userData - User registration data
  * @param config - Optional axios request config
- * @returns Promise<{ user: UserType; tokens: AuthTokenResponse }>
+ * @returns Promise<{ user: UserDT; tokens: AuthTokenResponse }>
  */
 const registerUser = async (
 	userData: RegisterData,
 	config?: AxiosRequestConfig,
-): Promise<{ user: UserType; message: string }> => {
+): Promise<{ user: UserDT; message: string }> => {
 	try {
 		const response = await axiosInstance.post(
 			`${AUTH_API_URL}/users/register`,
@@ -141,6 +140,54 @@ const registerUser = async (
 	}
 };
 
+/**
+ * Change user password
+ * @param userId - ID of the user whose password is being changed
+ * @param password - New password
+ * @param config - Optional axios request config
+ * @returns Promise<{ message: string }>
+ */
+const changeUserPassword = async (
+	userId: number,
+	password: string,
+	config?: AxiosRequestConfig,
+): Promise<{ message: string }> => {
+	try {
+		const response = await axiosInstance.put(
+			`${AUTH_API_URL}users/${userId}/change-password`,
+			{ password },
+			config,
+		);
+		return response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("changeUserPassword", "users", error);
+	}
+};
 
+const changeMyPassword = async (
 
-export { deleteUser, getAllUsers, loginUser,updateUser, registerUser, getUserById };
+	{old_Password, new_password, id}: {old_Password: string; new_password: string; id: number},
+	config?: AxiosRequestConfig,
+): Promise<{ message: string }> => {
+	try {
+		const response = await axiosInstance.put(
+			`${AUTH_API_URL}change-password`,
+			{ old_Password, new_password, id },
+			config,
+		);
+		return response?.data;
+	} catch (error: unknown) {
+		return handleOperationError("changeMyPassword", "users", error);
+	}
+};
+
+export {
+	changeMyPassword,
+	deleteUser,
+	getAllUsers,
+	loginUser,
+	updateUser,
+	registerUser,
+	getUserById,
+	changeUserPassword,
+};

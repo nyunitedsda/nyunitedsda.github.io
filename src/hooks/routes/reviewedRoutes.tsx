@@ -133,6 +133,7 @@ export const protectedRoutes: RouteWithId[] = [
 			),
 			createRoute(lazyLoad(Administration), "admin/services", "admin-services"),
 			createRoute(lazyLoad(Administration), "admin/users", "admin-user"),
+			createRoute(lazyLoad(Administration), "admin/settings", "admin-settings"),
 			createRoute(lazyLoad(StorybookPage), "storybook", "storybook"),
 		],
 	},
@@ -183,6 +184,7 @@ export const ROUTE_PATHS = {
 	UNAUTHORIZED: createPath("unauthorized"),
 	NOT_FOUND: createPath("404"),
 	STORYBOOK: createPath("storybook"),
+	ADMIN_SETTINGS: createPath("admin/settings"),
 	LEGAL_PRIVACY: createPath("policy/privacy"),
 	LEGAL_TERMS: createPath("policy/termsOfUse"),
 } as const;

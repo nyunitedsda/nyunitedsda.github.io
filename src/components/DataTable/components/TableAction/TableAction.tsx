@@ -8,7 +8,7 @@ import {
 	type ButtonOwnProps,
 } from "@mui/material";
 import { lazy, Suspense, useMemo, type FC } from "react";
-import {ConfirmationButton }from "../../../Buttons";
+import { ConfirmationButton } from "../../../Buttons";
 import type { ConfirmationButtonProps } from "../../../Buttons/types";
 import { tableActions } from "./constants";
 import type { LazyIconProps, TableActionProps } from "./types";

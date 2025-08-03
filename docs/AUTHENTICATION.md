@@ -143,19 +143,20 @@ The axios instance includes interceptors that:
 
 ### User Object
 ```typescript
-interface UserType {
-  id: number;
-  email?: string;
-  first_name?: string;
-  last_name?: string;
-  username: string;
-  role: 'admin' | 'guest' | 'moderator';
-  permissions?: string[];
-  remember_me: boolean;
-  emailVerified?: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+ interface UserDT {
+	email?: string;
+	first_name?: string;
+	id: number;
+	is_active: boolean;
+	is_system: boolean;
+	last_login?: Date;
+	last_name?: string;
+	password: string;
+	remember_me: boolean;
+	role_id: number;
+	username: string;
 }
+
 ```
 
 ### Authentication Credentials

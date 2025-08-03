@@ -2,7 +2,8 @@ import type { AxiosRequestConfig } from "axios";
 import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
-import type { AuthTokenResponse, DatabaseEntity, UserType } from "./types";
+import type { AuthTokenResponse, DatabaseEntity } from "./types";
+import type { UserDT } from "./databaseTypes";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
 
@@ -49,8 +50,6 @@ const getDatabaseItem = async <T extends { id: number }>(
 		return handleOperationError("getItem", entity, error);
 	}
 };
-
-
 
 /**
  * Refresh authentication token
@@ -100,11 +99,9 @@ const logoutUser = async (
  * Get current user profile
  * This is an Authenticated API call that requires a valid token
  * @param config - Optional axios request config
- * @returns Promise<UserType>
+ * @returns Promise<UserDT>
  */
-const getCurrentUser = async (
-	config?: AxiosRequestConfig,
-): Promise<UserType> => {
+const getCurrentUser = async (config?: AxiosRequestConfig): Promise<UserDT> => {
 	try {
 		const response = await axiosInstance.get(`${AUTH_API_URL}profile`, config);
 		return response?.data;
@@ -112,8 +109,6 @@ const getCurrentUser = async (
 		return handleOperationError("getCurrentUser", "users", error);
 	}
 };
-
-
 
 const getUserStatus = async (
 	token: string,

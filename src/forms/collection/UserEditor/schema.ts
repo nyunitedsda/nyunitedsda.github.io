@@ -3,7 +3,7 @@ import { nameSchema, passwordSchema } from "../commonSchemas";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const commonSchema =  Yup.object().shape({
+const commonSchema = Yup.object().shape({
 	username: nameSchema,
 	email: Yup.string()
 		.required("Email is required")
@@ -25,9 +25,7 @@ const commonSchema =  Yup.object().shape({
 		.required("Role ID is required")
 		.oneOf([1, 2, 3], "Invalid Role ID")
 		.min(1, "Role ID must be positive"),
-	is_active: Yup.boolean()
-	.required("Active status is required")
-	.default(true),
+	is_active: Yup.boolean().required("Active status is required").default(true),
 	remember_me: Yup.boolean()
 		.required("Remember Me status is required")
 		.default(false),
@@ -36,7 +34,7 @@ const commonSchema =  Yup.object().shape({
 const createUserSchema = commonSchema.concat(
 	Yup.object().shape({
 		password: passwordSchema,
-	})
+	}),
 );
 
 const updateUserSchema = commonSchema.concat(
@@ -44,7 +42,7 @@ const updateUserSchema = commonSchema.concat(
 		id: Yup.number()
 			.required("User ID is required")
 			.min(1, "User ID must be positive"),
-	})
+	}),
 );
 
-export { createUserSchema, updateUserSchema }
+export { createUserSchema, updateUserSchema };

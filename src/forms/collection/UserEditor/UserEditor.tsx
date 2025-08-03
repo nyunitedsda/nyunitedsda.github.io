@@ -4,10 +4,11 @@ import Typography from "@mui/material/Typography";
 import { useQueries } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
-import { getUserById, updateUser } from "../../../api/request/authAndUserRequest";
 import {
-	getDatabaseList,
-} from "../../../api/request/commonQueries";
+	getUserById,
+	updateUser,
+} from "../../../api/request/authAndUserRequest";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { UserDT } from "../../../api/request/databaseTypes";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useRegister } from "../../../hooks/auth";
@@ -53,9 +54,8 @@ const UserEditor: FC<UserEditorProps> = ({
 				queryKey: ["users", data?.id],
 				queryFn: async () => await getUserById(data?.id),
 				enabled: !!data?.id,
-				
-			}
-		]
+			},
+		],
 	});
 
 	const title = useMemo(() => {
@@ -95,83 +95,81 @@ const UserEditor: FC<UserEditorProps> = ({
 
 	return (
 		<>
-		{
-			!result.some((query) => query.isLoading) && (
+			{!result.some((query) => query.isLoading) && (
 				<ProjectModal open={open} onClose={onClose}>
-			<Typography variant="h6" gutterBottom sx={titleSx}>
-				{title}
-			</Typography>
+					<Typography variant="h6" gutterBottom sx={titleSx}>
+						{title}
+					</Typography>
 
-			<FormContainer
-				initialValues={data?.id ? (result[1]?.data ?? {} as UserDT) : data}
-				validationSchema={data?.id ? updateUserSchema : createUserSchema}
-				onSubmit={_handleSubmit}
-				submitButtonText="Save"
-				onCancel={onClose}
-			>
-				<InputField
-					name="username"
-					label="Username"
-					fieldType="text"
-					placeholder="Enter username"
-				/>
-
-				{!data?.id && <InputField {...passwordProps} />}
-
-				<InputField
-					name="email"
-					label={EMAIL_FIELD_LABEL}
-					fieldType="text"
-					type="email"
-					placeholder="Enter email address"
-				/>
-
-				<InputField
-					name="first_name"
-					label={FIRST_NAME_FIELD_LABEL}
-					fieldType="text"
-					placeholder="Enter first name (optional)"
-				/>
-
-				<InputField
-					name="last_name"
-					label={LAST_NAME_FIELD_LABEL}
-					fieldType="text"
-					placeholder="Enter last name (optional)"
-				/>
-
-				<InputField
-					name="role_id"
-					defaultValue=""
-					label={ROLE_FIELD_LABEL}
-					fieldType="select"
-					items={result[0]?.data ?? []}
-					renderItemLabel={(item) => capitalize(item.name)}
-					valueResolver={(item) => item.id}
-				/>
-				<Grid container size={12} sx={{ p: 2, py: 0 }}>
-					<Grid size={6}>
-
+					<FormContainer
+						initialValues={
+							data?.id ? (result[1]?.data ?? ({} as UserDT)) : data
+						}
+						validationSchema={data?.id ? updateUserSchema : createUserSchema}
+						onSubmit={_handleSubmit}
+						submitButtonText="Save"
+						onCancel={onClose}
+					>
 						<InputField
-							defaultValue={true}
-							fieldType="checkbox"
-							label={IS_ACTIVE_FIELD_LABEL}
-							name="is_active"
+							name="username"
+							label="Username"
+							fieldType="text"
+							placeholder="Enter username"
 						/>
 
-					</Grid>
-					<Grid size={6}>
+						{!data?.id && <InputField {...passwordProps} />}
+
 						<InputField
-							name="remember_me"
-							label="Remember Me"
-							fieldType="checkbox"
+							name="email"
+							label={EMAIL_FIELD_LABEL}
+							fieldType="text"
+							type="email"
+							placeholder="Enter email address"
 						/>
-					</Grid>
-				</Grid>
-			</FormContainer>
-		</ProjectModal>
-			) 
-		}
+
+						<InputField
+							name="first_name"
+							label={FIRST_NAME_FIELD_LABEL}
+							fieldType="text"
+							placeholder="Enter first name (optional)"
+						/>
+
+						<InputField
+							name="last_name"
+							label={LAST_NAME_FIELD_LABEL}
+							fieldType="text"
+							placeholder="Enter last name (optional)"
+						/>
+
+						<InputField
+							name="role_id"
+							defaultValue=""
+							label={ROLE_FIELD_LABEL}
+							fieldType="select"
+							items={result[0]?.data ?? []}
+							renderItemLabel={(item) => capitalize(item.name)}
+							valueResolver={(item) => item.id}
+						/>
+						<Grid container size={12} sx={{ p: 2, py: 0 }}>
+							<Grid size={6}>
+								<InputField
+									defaultValue={true}
+									fieldType="checkbox"
+									label={IS_ACTIVE_FIELD_LABEL}
+									name="is_active"
+								/>
+							</Grid>
+							<Grid size={6}>
+								<InputField
+									name="remember_me"
+									label="Remember Me"
+									fieldType="checkbox"
+								/>
+							</Grid>
+						</Grid>
+					</FormContainer>
+				</ProjectModal>
+			)}
 		</>
 	);
 };

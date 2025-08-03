@@ -8,7 +8,7 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import type { LoginCredentials, UserType } from "../../api/request/types";
+import type { LoginCredentials } from "../../api/request/types";
 import {
 	useAuthStatus,
 	useCurrentUser,
@@ -20,6 +20,7 @@ import useToken from "../../hooks/auth/useToken";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
 import type { AuthenticationContextProps } from "./types";
+import type { UserDT } from "../../api/request/databaseTypes";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { accessToken, refreshToken, clearTokens } = useToken();
@@ -31,7 +32,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const refreshAuthToken = useRefreshToken();
 	const navigate = useNavigate();
 
-	const [user, setUser] = useState<UserType | null>(null);
+	const [user, setUser] = useState<UserDT | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
 		!!hasAuthStatus,
@@ -88,7 +89,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		[loginUser, enqueueSnackbar],
 	);
 
-	
 	const logout = useCallback(async () => {
 		try {
 			logoutUser.mutateAsync().then(() => {

@@ -1,13 +1,13 @@
 import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { UserType } from "../../../../api/request/types";
-import { userColumns } from "../../../../pages/Admin/constants/userColumns";
 import users from "../../../../test/mock_data/users";
 import type { GenericType } from "../../types";
 import TableCard from "./TableCard";
 import type { TableCardProps } from "./types";
+import type { UserDT } from "../../../../api/request/databaseTypes";
+import userColumns from "../../../../pages/Admin/constants/userColumns";
 
-type StoryDataType = UserType & GenericType;
+type StoryDataType = UserDT & GenericType;
 const user: StoryDataType = { ...users[0] } as StoryDataType;
 
 const columns = userColumns;

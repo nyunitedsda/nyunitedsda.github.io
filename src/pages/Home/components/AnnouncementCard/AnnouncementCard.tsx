@@ -28,7 +28,6 @@ const AnnouncementCard: FC<AnnouncementCardProps> = (props) => {
 	const { title, description, className } = props;
 
 	const contents = useMemo(() => createFormattedContent(props), [props]);
-	
 
 	return (
 		<ProjectCard

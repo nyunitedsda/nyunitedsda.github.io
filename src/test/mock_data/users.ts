@@ -1,6 +1,6 @@
-import type { UserType } from "../../api/request/types";
+import type { UserDT } from "../../api/request/databaseTypes";
 
-const initialValues: Partial<UserType> = {
+const initialValues: Partial<UserDT> = {
 	email: "",
 	first_name: "",
 	is_active: true,
@@ -9,9 +9,34 @@ const initialValues: Partial<UserType> = {
 	remember_me: false,
 	role_id: 1,
 	username: "",
+	is_system: false,
+	last_login: undefined,
+	id: undefined,
 };
 
-const userData: UserType[] = [
+const adminTokenResponse = {
+	accessToken:
+		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY",
+	refreshToken:
+		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3NTQxNjY3MTEsImV4cCI6MTc1NDI1MzExMX0.4LJpIlq88KarZf8hXQel5fm4VGQS1IPu-sLAx17GLds",
+	expiresIn: "1h",
+};
+const adminPermissions = [
+	"announcements-manage",
+	"articles-manage",
+	"contact_info-manage",
+	"donations-manage",
+	"legal_content-manage",
+	"ministries-manage",
+	"notifications-manage",
+	"permissions-manage",
+	"roles-manage",
+	"services-manage",
+	"severity-manage",
+	"users-manage",
+];
+
+const userData: Partial<UserDT>[] = [
 	{
 		id: 1,
 		email: "admin@nyunitedsda.org",
@@ -21,6 +46,8 @@ const userData: UserType[] = [
 		username: "adminjohn",
 		remember_me: false,
 		is_active: true,
+		is_system: true,
+		last_login: new Date("2023-10-01T12:00:00"),
 	},
 
 	{
@@ -52,6 +79,16 @@ const userData: UserType[] = [
 		is_active: true,
 	},
 ];
+
+// Mock login response using similar values from userData
+export const mockLoginResponse = {
+	message: "Login successful",
+	user: {
+		...userData[0],
+		permissions: adminPermissions,
+	},
+	...adminTokenResponse,
+};
 
 export default userData;
 export { initialValues };

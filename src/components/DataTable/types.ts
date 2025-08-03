@@ -17,7 +17,7 @@ interface DataTableProps<GenericType> {
 	columns: ColumnDefinition<GenericType>[];
 	data: GenericType[];
 	onEdit?: (data: GenericType) => void;
-	onDelete?: (data: GenericType & { id: number }) => void;
+	onDelete?: (data: GenericType) => void;
 	onView?: (data: GenericType) => void;
 	renderAction?: (data: GenericType) => ReactNode;
 }

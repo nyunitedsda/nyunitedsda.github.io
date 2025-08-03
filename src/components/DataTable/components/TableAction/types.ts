@@ -4,7 +4,7 @@ type LazyIconProps = PropsWithChildren<{
 	fallback?: ReactNode;
 }>;
 
-interface TableActionProps<T> {
+interface TableActionProps<T extends { id?: number }> {
 	data: T;
 	onEdit?: (data: T) => void;
 	onDelete?: (data: T) => void;

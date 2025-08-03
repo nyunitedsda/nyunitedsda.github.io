@@ -1,3 +1,5 @@
+import type { UserDT } from "./databaseTypes";
+
 /**
  * Represents the available database entities in the system
  *
@@ -52,43 +54,6 @@ export type UserRoleOption = {
 };
 
 /**
- * Represents a user in the system
- *
- * @remarks
- * This interface defines the complete user model including authentication,
- * profile information, and system metadata. Used for user management
- * and authentication throughout the application.
- *
- * @property id - Unique identifier for the user
- * @property email - User's email address (optional for some user types)
- * @property first_name - User's first name (optional)
- * @property last_name - User's last name (optional)
- * @property username - User's unique username (required)
- * @property password - User's password hash (optional for security)
- * @property role - User's role in the system (admin, moderator, or guest)
- * @property permissions - Array of specific permissions granted to the user
- * @property remember_me - Whether the user has opted for "Remember Me" functionality
- * @property emailVerified - Whether the user's email address has been verified
- * @property createdAt - Timestamp when the user account was created
- * @property updatedAt - Timestamp when the user account was last updated
- */
-export interface UserType {
-	id: number;
-	email?: string;
-	first_name?: string;
-	last_name?: string;
-	username: string;
-	password?: string;
-	role_id: number;
-	permissions?: string[];
-	remember_me: boolean;
-	emailVerified?: boolean;
-	createdAt?: string;
-	updatedAt?: string;
-	is_active?: boolean;
-}
-
-/**
  * Login credentials for user authentication
  * @description This type defines the structure of user login credentials.
  * It includes the username, password, remember_me flag, and an optional user ID.
@@ -96,7 +61,7 @@ export interface UserType {
  * @property {string} password - The password of the user.
  */
 export type LoginCredentials = Pick<
-	UserType,
+	UserDT,
 	"username" | "password" | "remember_me"
 >;
 
@@ -123,7 +88,7 @@ export interface AuthTokenResponse {
  */
 export interface LoginResponse extends AuthTokenResponse {
 	message: string;
-	user: UserType;
+	user: UserDT;
 }
 
 /**

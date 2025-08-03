@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { UserType } from "../../../api/request/types";
 import UserEditor from "./UserEditor";
 
+import type { UserDT } from "../../../api/request/databaseTypes";
 import InteractiveStory from "../../../components/InteractiveStory/InteractiveStory";
+import type { InteractiveStoryProps } from "../../../components/InteractiveStory/types";
 import userData, { initialValues } from "../../../test/mock_data/users";
 import type { UserEditorProps } from "./types";
 
 // Define the meta for the story
-const meta: Meta<typeof UserEditor> = {
+const meta: Meta<UserEditorProps> = {
 	title: "Forms/UserEditor",
 	component: UserEditor,
 	tags: ["autodocs"],
@@ -34,23 +35,23 @@ const meta: Meta<typeof UserEditor> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<InteractiveStoryProps<UserEditorProps>>;
 
 // Create mode story
 export const CreateMode: Story = {
 	render: (args) => (
-		<InteractiveStory {...args} buttonText="🆕 Create New User">
-			<UserEditor {...(args as UserEditorProps)} />
+		<InteractiveStory {...(args as StoryObj)} buttonText="🆕 Create New User">
+			<UserEditor {...(args.extraProps as UserEditorProps)} />
 		</InteractiveStory>
 	),
 	args: {
-		data: initialValues,
 		buttonText: "🆕 Create New User",
 		extraProps: {
+			open: false,
+			data: initialValues as UserDT,
 			onClose: () => console.log("Modal closed"),
-			onSuccess: (data: Partial<UserType>) =>
-				console.log("User created:", data),
-		},
+			onSuccess: (data?: UserDT) => console.log("User created:", data),
+		} as UserEditorProps,
 	},
 	parameters: {
 		docs: {
@@ -71,8 +72,8 @@ const [open, setOpen] = useState(false);
   data={undefined}
   onClose={() => setOpen(false)}
   onSuccess={(data) => {
-    console.log("Created:", data);
-    setOpen(false);
+	console.log("Created:", data);
+	setOpen(false);
   }}
 />`,
 			},
@@ -80,20 +81,19 @@ const [open, setOpen] = useState(false);
 	},
 };
 
-// Edit mode - Admin User
 export const EditModeAdminUser: Story = {
 	render: (args) => (
-		<InteractiveStory {...args}>
-			<UserEditor {...(args as UserEditorProps)} />
+		<InteractiveStory {...(args as StoryObj)}>
+			<UserEditor {...(args.extraProps as UserEditorProps)} />
 		</InteractiveStory>
 	),
 	args: {
-		data: userData[0],
 		buttonText: "👑 Edit Admin User",
 		extraProps: {
+			data: userData[0] as UserDT,
+			open: false,
 			onClose: () => console.log("Modal closed"),
-			onSuccess: (data: Partial<UserType>) =>
-				console.log("User updated:", data),
+			onSuccess: (data?: Partial<UserDT>) => console.log("User updated:", data),
 		},
 	},
 	parameters: {
@@ -113,21 +113,19 @@ export const EditModeAdminUser: Story = {
 	},
 };
 
-// Edit mode - Moderator User
 export const EditModeModeratorUser: Story = {
 	render: (args) => (
-		<InteractiveStory {...args}>
-			<UserEditor {...(args as UserEditorProps)} />
+		<InteractiveStory {...(args as StoryObj)}>
+			<UserEditor {...(args.extraProps as UserEditorProps)} />
 		</InteractiveStory>
 	),
 	args: {
-		data: userData.find((user) => user.role === "moderator") || initialValues,
 		buttonText: "🛡️ Edit Moderator User",
 		extraProps: {
+			data: userData.find((user) => user.role_id === 2) || initialValues,
 			onClose: () => console.log("Modal closed"),
-			onSuccess: (data: Partial<UserType>) =>
-				console.log("User created:", data),
-		},
+			onSuccess: (data?: Partial<UserDT>) => console.log("User created:", data),
+		} as UserEditorProps,
 	},
 	parameters: {
 		docs: {
@@ -139,71 +137,74 @@ export const EditModeModeratorUser: Story = {
 - 🔧 Moderator role configuration
 - ✅ Verified email status
 - 👥 User management capabilities
-- 📊 Moderation privileges
-				`,
+- 📊 Moderation privileges`,
 			},
 		},
 	},
 };
 
-// Edit mode - Guest User
 export const EditModeGuestUser: Story = {
 	render: (args) => (
-		<InteractiveStory {...args}>
-			<UserEditor {...(args as UserEditorProps)} />
+		<InteractiveStory {...(args as StoryObj)}>
+			<UserEditor {...(args.extraProps as UserEditorProps)} />
 		</InteractiveStory>
 	),
 	args: {
 		buttonText: "👤 Edit Guest User",
-		data: userData.find((user) => user.role === "guest") || initialValues,
-		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) =>
-			console.log("Guest user updated:", data),
+
+		extraProps: {
+			open: false,
+			data: userData.find((user) => user.role_id === 1) || initialValues,
+			onClose: () => console.log("Modal closed"),
+			onSuccess: (data: Partial<UserDT>) =>
+				console.log("Guest user updated:", data),
+		} as UserEditorProps,
 	},
 	parameters: {
 		docs: {
 			description: {
 				story: `
-**👤 Guest User Editor**
+						**👤 Guest User Editor**
 
-**Click to see:**
-- 👋 Guest role limitations
-- ❌ Unverified email status
-- 📝 Basic user information
-- 🔓 Limited access privileges
-				`,
+** Click to see:**
+					- 👋 Guest role limitations
+- ❌ Unverified email status`,
 			},
 		},
 	},
 };
 
-// Edit mode - Minimal User
 export const EditModeMinimalUser: Story = {
 	render: (args) => (
-		<InteractiveStory {...args}>
-			<UserEditor {...(args as UserEditorProps)} />
+		<InteractiveStory {...(args as StoryObj)}>
+			<UserEditor {...(args.extraProps as UserEditorProps)} />
 		</InteractiveStory>
 	),
 	args: {
 		buttonText: "📝 Edit Minimal User",
-		data:
-			userData.find((user) => user.username === "minimaluser") || initialValues,
-		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<UserType>) =>
-			console.log("Minimal user updated:", data),
+
+		extraProps: {
+			open: false,
+			onClose: () => console.log("Modal closed"),
+			onSuccess: (data: Partial<UserDT>) =>
+				console.log("Minimal user updated:", data),
+			data:
+				userData.find((user) => user.username === "minimaluser") ||
+				initialValues,
+		} as UserEditorProps,
 	},
 	parameters: {
 		docs: {
 			description: {
 				story: `
-**📝 Minimal User Editor**
+	**📝 Minimal User Editor**
 
-**Click to see:**
-- 📧 Email-only user profile
-- 👋 Guest role assignment
-- ❌ No name information
-- 🔓 Basic access level
-				`,
+** Click to see:**
+	- 📧 Email - only user profile
+		- 👋 Guest role assignment
+			- ❌ No name information
+				- 🔓 Basic access level
+					`,
 			},
 		},
 	},

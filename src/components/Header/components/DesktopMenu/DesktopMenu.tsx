@@ -13,7 +13,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router";
 import { LoginButton, ThemeButton } from "../../../Buttons";
-import MenuButton from "../../../Buttons/MenuButton/MenuButton";;
+import MenuButton from "../../../Buttons/MenuButton/MenuButton";
 import IconSkeleton from "../../../ProjectSuspense/IconSkeleton";
 import MenuItemRenderer from "../MenuDrawer/MenuItemRenderer";
 import { generateMenuDisplay } from "./helpers";
@@ -101,11 +101,11 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 					</Suspense>
 				</IconButton>
 			) : (
-        <>
-        <ThemeButton />
-        <LoginButton />
-        </>
-        )}
+				<>
+					<ThemeButton />
+					<LoginButton />
+				</>
+			)}
 			{optionAnchorEl && (
 				<Menu
 					anchorEl={optionAnchorEl}

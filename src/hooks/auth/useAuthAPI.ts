@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { deleteUser, loginUser, registerUser } from "../../api/request/authAndUserRequest";
+import {
+	deleteUser,
+	loginUser,
+	registerUser,
+} from "../../api/request/authAndUserRequest";
 import {
 	getCurrentUser,
 	getUserStatus,
@@ -166,7 +170,7 @@ export const useLogout = () => {
  * It retrieves the current user's data from the server and caches it.
  * It returns a query object that contains the user data, loading state, and error information.
  * @param {boolean} enabled - Whether the query should be enabled (default: true)
- * @returns {QueryResult<UserType, Error>}
+ * @returns {QueryResult<UserDT, Error>}
  * @throws {Error} if fetching current user fails
  * @example
  * const { data: user, isLoading, error } = useCurrentUser();

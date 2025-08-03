@@ -11,7 +11,7 @@ import {
 import type { GenericType } from "../DataTable/types";
 import type { InteractiveStoryProps } from "./types";
 
-const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
+const InteractiveStoryWrapper: FC<InteractiveStoryProps<y>> = ({
 	buttonText = "Display Component",
 	children,
 	extraProps = {},

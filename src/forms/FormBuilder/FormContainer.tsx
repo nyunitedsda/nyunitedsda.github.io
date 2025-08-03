@@ -1,8 +1,7 @@
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik } from "formik";
-import {ConfirmationButton} from "../../components/Buttons";
+import { ConfirmationButton } from "../../components/Buttons";
 import type { FormContainerProps } from "./types";
 
 const childrenSx: SxProps<Theme> = {
@@ -29,6 +28,14 @@ const CANCEL_CONFIRMATION = {
 	cancelLabel: "No",
 };
 
+const SAVE_CONFIRMATION = {
+	confirmationTitle: "Confirm Save",
+	confirmationContent:
+		"Record change will be permanent. Are you sure you want to save changes?",
+	confirmLabel: "Yes",
+	cancelLabel: "No",
+};
+
 const FormContainer = <T extends { id?: number }>({
 	initialValues,
 	validationSchema,
@@ -36,6 +43,7 @@ const FormContainer = <T extends { id?: number }>({
 	children,
 	submitButtonText = "Submit",
 	cancelButtonText = "Cancel",
+	confirmOnSave = false,
 	onCancel,
 }: FormContainerProps<T>) => {
 	return (
@@ -45,7 +53,7 @@ const FormContainer = <T extends { id?: number }>({
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
 		>
-			{({ isSubmitting, dirty}) => (
+			{({ isSubmitting, dirty }) => (
 				<Form style={{ width: "100%" }}>
 					<Stack spacing={2} sx={childrenSx}>
 						{children}
@@ -69,15 +77,17 @@ const FormContainer = <T extends { id?: number }>({
 								{cancelButtonText}
 							</ConfirmationButton>
 						)}
-						<Button
+						<ConfirmationButton
 							type="submit"
 							variant="contained"
 							color="primary"
 							disabled={isSubmitting}
 							fullWidth={!onCancel}
+							{...(confirmOnSave ? { shouldConfirm: dirty } : {})}
+							{...SAVE_CONFIRMATION}
 						>
 							{isSubmitting ? "Submitting..." : submitButtonText}
-						</Button>
+						</ConfirmationButton>
 					</Stack>
 				</Form>
 			)}

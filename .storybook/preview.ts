@@ -1,17 +1,42 @@
 import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/addon-docs/blocks';
 import type { Preview } from '@storybook/react-vite';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import React from 'react';
 import DynamicProvider from '../src/test/ProviderWrapper';
 import GlobalNavigationProvider from './GlobalNavigationProvider';
+import handlers from './helpers/handlers';
 import globalMockConfigs from './mockAddonConfigs';
 
+initialize();
 
 const preview: Preview = {
   initialGlobals: {
     theme: 'light',
     pageLayout: 'default',
   },
+  loaders: [
+    async (...args) => {
+      // Call the default mswLoader
+      await mswLoader(...args);
+      // Set global Authorization header for all requests
+      if (window && window.fetch) {
+        const originalFetch = window.fetch;
+        window.fetch = (input, init = {}) => {
+          console.log('Intercepting fetch request:', input, init);
+          if (!init.headers) init.headers = {};
+          // Set the mock token
+          init.headers = {
+            ...init.headers,
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY',
+          };
 
+          console.log('Mocked fetch request:', input, init);
+          return originalFetch(input, init);
+        };
+      }
+    },
+  ],
   decorators: [
     // Global navigation provider for addon-links integration
     (Story, context) => {
@@ -32,6 +57,9 @@ const preview: Preview = {
   ],
   tags: ['autodocs'],
   parameters: {
+    msw: {
+      handlers,
+    },
     globalMockConfigs, // Mock configurations for API responses
     docs: {
       components: {
