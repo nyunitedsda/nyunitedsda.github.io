@@ -1,8 +1,8 @@
-import type { DonationType } from "../../../api/request/types";
+import type { DonationDT } from "../../../api/request/types";
 
 export interface DonationEditorProps {
 	open: boolean;
-	data?: Partial<DonationType>;
+	data?: Partial<DonationDT>;
 	onClose: () => void;
-	onSuccess?: (data: Partial<DonationType>) => void;
+	onSuccess?: (data: Partial<DonationDT>) => void;
 }

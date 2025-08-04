@@ -1,11 +1,12 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { ContactInfoType } from "../../../api/request/types";
+import type { Contact_InfoDT } from "../../../api/request/types";
 import ContactEditor from "./ContactEditor";
 
 // Sample contact data
-const sampleChurchContact: ContactInfoType = {
+const sampleChurchContact: Contact_InfoDT = {
 	id: 1,
 	email: "info@nyunitedsda.org",
 	phone: "+1-212-555-0123",
@@ -20,7 +21,7 @@ const sampleChurchContact: ContactInfoType = {
 	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
-const samplePastorContact: ContactInfoType = {
+const samplePastorContact: Contact_InfoDT = {
 	id: 2,
 	email: "pastor@nyunitedsda.org",
 	phone: "+1-212-555-0456",
@@ -35,7 +36,7 @@ const samplePastorContact: ContactInfoType = {
 	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
-const sampleMinimalContact: ContactInfoType = {
+const sampleMinimalContact: Contact_InfoDT = {
 	id: 3,
 	email: "contact@example.org",
 	phone: "+1-555-123-4567",
@@ -54,9 +55,9 @@ const InteractiveWrapper = ({
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	data?: ContactInfoType;
+	data?: Contact_InfoDT;
 	onClose?: () => void;
-	onSuccess?: (data: ContactInfoType) => void;
+	onSuccess?: (data: Contact_InfoDT) => void;
 	buttonText?: string;
 }) => {
 	const [open, setOpen] = useState(false);
@@ -67,7 +68,7 @@ const InteractiveWrapper = ({
 		onClose?.();
 	};
 
-	const handleSuccess = (data: ContactInfoType) => {
+	const handleSuccess = (data: Contact_InfoDT) => {
 		setOpen(false);
 		onSuccess?.(data);
 	};
@@ -128,7 +129,7 @@ const meta: Meta<typeof ContactEditor> = {
 			control: "object",
 			description: "Contact data to edit (undefined for create mode)",
 			table: {
-				type: { summary: "ContactInfoType | undefined" },
+				type: { summary: "Contact_InfoDT | undefined" },
 				defaultValue: { summary: "undefined" },
 			},
 		},
@@ -143,7 +144,7 @@ const meta: Meta<typeof ContactEditor> = {
 			action: "onSuccess",
 			description: "Callback when contact is successfully saved",
 			table: {
-				type: { summary: "(data: ContactInfoType) => void" },
+				type: { summary: "(data: Contact_InfoDT) => void" },
 			},
 		},
 	},
@@ -185,7 +186,7 @@ export const CreateMode: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) => console.log("Contact created:", data),
+		onSuccess: (data: Contact_InfoDT) => console.log("Contact created:", data),
 	},
 	parameters: {
 		docs: {
@@ -228,7 +229,7 @@ export const EditModeChurchContact: Story = {
 	args: {
 		data: sampleChurchContact,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) =>
+		onSuccess: (data: Contact_InfoDT) =>
 			console.log("Church contact updated:", data),
 	},
 	parameters: {
@@ -261,7 +262,7 @@ export const EditModePastorContact: Story = {
 	args: {
 		data: samplePastorContact,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) =>
+		onSuccess: (data: Contact_InfoDT) =>
 			console.log("Pastor contact updated:", data),
 	},
 	parameters: {
@@ -294,7 +295,7 @@ export const EditModeMinimalContact: Story = {
 	args: {
 		data: sampleMinimalContact,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) =>
+		onSuccess: (data: Contact_InfoDT) =>
 			console.log("Minimal contact updated:", data),
 	},
 	parameters: {
@@ -320,7 +321,7 @@ export const ClosedModal: Story = {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				ContactInfoType | undefined
+				Contact_InfoDT | undefined
 			>(undefined);
 
 			const entityOptions = [
@@ -414,7 +415,7 @@ export const ClosedModal: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) => console.log("Contact saved:", data),
+		onSuccess: (data: Contact_InfoDT) => console.log("Contact saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -454,9 +455,9 @@ export const CreateModePreFilled: Story = {
 			country: "United States",
 			mail_address: "",
 			mailing_recipient: "",
-		} as ContactInfoType,
+		} as Contact_InfoDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) =>
+		onSuccess: (data: Contact_InfoDT) =>
 			console.log("Pre-filled contact created:", data),
 	},
 	parameters: {
@@ -498,9 +499,9 @@ export const InternationalContact: Story = {
 			mail_address:
 				"International Office, 10 Downing Street, London SW1A 2AA, UK",
 			mailing_recipient: "International Coordinator",
-		} as ContactInfoType,
+		} as Contact_InfoDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ContactInfoType) =>
+		onSuccess: (data: Contact_InfoDT) =>
 			console.log("International contact updated:", data),
 	},
 	parameters: {

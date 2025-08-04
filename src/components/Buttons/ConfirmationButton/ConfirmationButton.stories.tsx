@@ -1,25 +1,26 @@
+
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SaveIcon from "@mui/icons-material/Save";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { ConfirmationButtonProps } from "../types";
 import ConfirmationButton from "./ConfirmationButton";
 
-const StoryWrapper = (Story: React.ComponentType) => (
-	<div style={{ padding: "20px" }}>
-		<Story />
-	</div>
-);
-
-let argTypes;
+let argTypes: Meta<ConfirmationButtonProps>["argTypes"] = {};
 
 // Define the meta for the story
-const meta: Meta<typeof ConfirmationButton> = {
+const meta: Meta<ConfirmationButtonProps> = {
 	title: "Components/Buttons/ConfirmationButton",
 	component: ConfirmationButton,
 	tags: ["autodocs"],
-	decorators: [StoryWrapper],
+	decorators: [(Story: React.ComponentType) => (
+		<div style={{ padding: "20px" }}>
+			<Story />
+		</div>
+	)],
 	argTypes,
 	parameters: {
 		docs: {
@@ -297,15 +298,15 @@ argTypes = {
 		defaultValue: false,
 	},
 	children: {
-		control: "select",
-		options: {
-			"Test Button": "Test Button",
-			"Add Icon": "AddIcon",
-			"Edit Icon": "EditIcon",
-			"Delete Icon": "DeleteIcon",
-			"Save Icon": "SaveIcon",
-			"Logout Icon": "LogoutIcon",
-		},
+		control: "radio",
+		options: [
+			"Test Button",
+			"AddIcon",
+			"EditIcon",
+			"DeleteIcon",
+			"SaveIcon",
+			"LogoutIcon"
+		],
 		mapping: {
 			"Test Button": "Test Button",
 			AddIcon: <AddIcon />,

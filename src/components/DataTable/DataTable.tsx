@@ -1,14 +1,14 @@
 import ButtonGroup from "@mui/material/ButtonGroup";
 import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
+import type { SxProps, Theme } from "@mui/material/styles";
 import Table, { type TableOwnProps } from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { type TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import type { SxProps, Theme } from "@mui/material/styles";
-import { lazy, useMemo, useState, type FC, type ReactNode } from "react";
+import { type FC, lazy, type ReactNode, useMemo, useState } from "react";
 import { generateActionColumn } from "./helpers/columnHelpers";
 import type { ColumnDefinition, DataTableProps, GenericType } from "./types";
 

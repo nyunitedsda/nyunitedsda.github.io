@@ -1,11 +1,12 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { ArticleType } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request/types";
 import BlogEditor from "./BlogEditor";
 
 // Sample article data
-const sampleTechArticle: ArticleType = {
+const sampleTechArticle: ArticleDT = {
 	id: 1,
 	title: "The Future of Church Technology",
 	category: "Technology",
@@ -18,7 +19,7 @@ const sampleTechArticle: ArticleType = {
 	modified_at: new Date("2025-06-15T00:00:00"),
 };
 
-const sampleFaithArticle: ArticleType = {
+const sampleFaithArticle: ArticleDT = {
 	id: 2,
 	title: "Walking in Faith: A Journey of Trust",
 	category: "Faith & Spirituality",
@@ -31,7 +32,7 @@ const sampleFaithArticle: ArticleType = {
 	modified_at: new Date("2025-06-20T00:00:00"),
 };
 
-const sampleCommunityArticle: ArticleType = {
+const sampleCommunityArticle: ArticleDT = {
 	id: 3,
 	title: "Building Stronger Church Communities",
 	category: "Community",
@@ -51,9 +52,9 @@ const InteractiveWrapper = ({
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	data?: ArticleType;
+	data?: ArticleDT;
 	onClose?: () => void;
-	onSuccess?: (data: ArticleType) => void;
+	onSuccess?: (data: ArticleDT) => void;
 	buttonText?: string;
 }) => {
 	const [open, setOpen] = useState(false);
@@ -64,7 +65,7 @@ const InteractiveWrapper = ({
 		onClose?.();
 	};
 
-	const handleSuccess = (data: ArticleType) => {
+	const handleSuccess = (data: ArticleDT) => {
 		setOpen(false);
 		onSuccess?.(data);
 	};
@@ -131,7 +132,7 @@ const meta: Meta<typeof BlogEditor> = {
 			control: "object",
 			description: "Article data to edit (undefined for create mode)",
 			table: {
-				type: { summary: "ArticleType | undefined" },
+				type: { summary: "ArticleDT | undefined" },
 				defaultValue: { summary: "undefined" },
 			},
 		},
@@ -146,7 +147,7 @@ const meta: Meta<typeof BlogEditor> = {
 			action: "onSuccess",
 			description: "Callback when article is successfully saved",
 			table: {
-				type: { summary: "(data: ArticleType) => void" },
+				type: { summary: "(data: ArticleDT) => void" },
 			},
 		},
 	},
@@ -190,7 +191,7 @@ export const CreateMode: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) => console.log("Article created:", data),
+		onSuccess: (data: ArticleDT) => console.log("Article created:", data),
 	},
 	parameters: {
 		docs: {
@@ -226,7 +227,7 @@ export const Playground: Story = {
 		const PlaygroundWrapper = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				ArticleType | undefined
+				ArticleDT | undefined
 			>(args.data);
 
 			const entityOptions = [
@@ -304,7 +305,7 @@ export const Playground: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
+		onSuccess: (data: ArticleDT) => console.log("Article saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -338,8 +339,7 @@ export const EditModeTechnology: Story = {
 	args: {
 		data: sampleTechArticle,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Tech article updated:", data),
+		onSuccess: (data: ArticleDT) => console.log("Tech article updated:", data),
 	},
 	parameters: {
 		docs: {
@@ -371,8 +371,7 @@ export const EditModeFaith: Story = {
 	args: {
 		data: sampleFaithArticle,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Faith article updated:", data),
+		onSuccess: (data: ArticleDT) => console.log("Faith article updated:", data),
 	},
 	parameters: {
 		docs: {
@@ -404,7 +403,7 @@ export const EditModeCommunity: Story = {
 	args: {
 		data: sampleCommunityArticle,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
+		onSuccess: (data: ArticleDT) =>
 			console.log("Community article updated:", data),
 	},
 	parameters: {
@@ -459,8 +458,7 @@ Christian living is a journey of continuous growth. Through Bible study, worship
 This guide provides practical steps and biblical insights for each of these important areas of Christian life.`,
 		},
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) =>
-			console.log("Long article updated:", data),
+		onSuccess: (data: ArticleDT) => console.log("Long article updated:", data),
 	},
 	parameters: {
 		docs: {
@@ -498,9 +496,9 @@ export const FormValidationDemo: Story = {
 			content: "",
 			author_id: 1,
 			publishDate: new Date().toISOString(),
-		} as ArticleType,
+		} as ArticleDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
+		onSuccess: (data: ArticleDT) => console.log("Article saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -527,7 +525,7 @@ export const ClosedModal: Story = {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				ArticleType | undefined
+				ArticleDT | undefined
 			>(undefined);
 
 			const entityOptions = [
@@ -621,7 +619,7 @@ export const ClosedModal: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ArticleType) => console.log("Article saved:", data),
+		onSuccess: (data: ArticleDT) => console.log("Article saved:", data),
 	},
 	parameters: {
 		docs: {

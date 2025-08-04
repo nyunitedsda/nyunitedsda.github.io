@@ -1,12 +1,12 @@
-import { type FC } from "react";
-import SectionWrapper from "../SectionWrapper";
 import Stack from "@mui/material/Stack";
-import MinistryCard from "../MinistryCard";
-import { HOME_CONSTANTS } from "../../homeConstants";
 import { useQuery } from "@tanstack/react-query";
-import type { MinistriesDT } from "../../../../api/request/databaseTypes";
+import type { FC } from "react";
 import { getDatabaseList } from "../../../../api/request/commonQueries";
+import type { MinistriesDT } from "../../../../api/request/databaseTypes";
 import RingLoader from "../../../../components/Loaders/RingLoader";
+import { HOME_CONSTANTS } from "../../homeConstants";
+import MinistryCard from "../MinistryCard";
+import SectionWrapper from "../SectionWrapper";
 
 const { MINISTRIES_HEADER, imageRootSx, cardContainerSx } = HOME_CONSTANTS;
 const PageMinistries: FC = () => {

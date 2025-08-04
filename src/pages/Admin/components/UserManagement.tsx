@@ -19,7 +19,7 @@ import UserEditor from "../../../forms/collection/UserEditor";
 import { useDeleteUser } from "../../../hooks/auth/useAuthAPI";
 import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
-import { initialValues } from "../../../test/mock_data/users";
+import { initialUser } from "../../../test/mock_data";
 import { createAuthConfig } from "../../../utils/authUtils";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import userColumns from "../constants/userColumns";
@@ -103,11 +103,13 @@ const UserManagement: FC = () => {
 				title=""
 				subtitle={SUBHEADER}
 				handleClick={
-					canCreate ? () => setCreateUserOpen(initialValues) : undefined
+					canCreate ? () => setCreateUserOpen(initialUser) : undefined
 				}
 			/>
 
-			{!isLoading ? (
+			{isLoading ? (
+				<RingLoader />
+			) : (
 				<DataTable
 					data={userData as (UserDT extends GenericType ? UserDT : never)[]}
 					columns={userColumns}
@@ -128,8 +130,6 @@ const UserManagement: FC = () => {
 						);
 					}}
 				/>
-			) : (
-				<RingLoader />
 			)}
 
 			{createUserOpen && (

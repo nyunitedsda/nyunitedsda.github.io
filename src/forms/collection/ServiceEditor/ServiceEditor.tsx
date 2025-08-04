@@ -1,11 +1,10 @@
 import { type FC, useMemo } from "react";
-import type { ServiceType } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { initialService } from "../../../test/mock_data";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import serviceSchema from "./schema";
-import { initialService } from "../../../test/mock_data/services";
 
 const EDIT_TITLE = "Edit Service";
 const ADD_TITLE = "Add Service";
@@ -14,7 +13,7 @@ const BUTTON_TEXT = "Save";
 const TITLE_FIELD_LABEL = "Title";
 const TIME_LABEL = "Service Time";
 
-const ServiceEditor: FC<EditorProps<ServiceType>> = ({
+const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 	open,
 	data,
 	onClose,
@@ -47,7 +46,7 @@ const ServiceEditor: FC<EditorProps<ServiceType>> = ({
 				onSuccess={(data) => {
 					console.log("Service saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as ServiceType);
+						onSuccess(data as ServiceDT);
 					}
 				}}
 			>

@@ -92,59 +92,6 @@ export interface LoginResponse extends AuthTokenResponse {
 }
 
 /**
- * Represents a donation payment method in the system
- *
- * @remarks
- * This interface defines the structure of donation options available
- * to users for making contributions to the organization.
- *
- * @property id - Unique identifier for the donation type
- * @property title - Display name of the donation method
- * @property description - Detailed description of the donation option
- */
-export interface DonationType {
-	id: number;
-	title: string;
-	description: string;
-}
-
-/**
- * Represents an article in the system
- *
- * @remarks
- * This type defines the complete structure of articles/blog posts in the system,
- * including content, metadata, and engagement metrics. Used for content
- * management and display throughout the application.
- *
- * @property id - Unique identifier (auto-incremented)
- * @property title - Article title
- * @property author_id - ID of the author who wrote the article
- * @property publishDate - Date when the article was published
- * @property views - Number of views the article has received
- * @property comments - Number of comments on the article
- * @property rating - Rating of the article (out of 5.00)
- * @property category - Article category for organization
- * @property img_src - Path or URL to the article's featured image
- * @property content - Full HTML/text content of the article
- * @property created_at - Timestamp when the article was created
- * @property modified_at - Timestamp when the article was last modified
- */
-export type ArticleType = {
-	id: number;
-	title: string;
-	author_id: number;
-	publishDate: Date | string;
-	views?: number;
-	comments?: number;
-	rating?: number | null;
-	category?: string | null;
-	img_src?: string | null;
-	content: string;
-	created_at?: string;
-	modified_at?: string;
-};
-
-/**
  * Represents the available event types in the system
  *
  * @remarks
@@ -181,7 +128,7 @@ export type EventType = "event" | "service" | "conference" | "zoom";
  * @property zoom_id - Zoom meeting ID for virtual events
  * @property passcode - Passcode for Zoom meetings
  */
-export type AnnouncementType = {
+export type AnnouncementDT = {
 	id: number;
 	title: string;
 	type: EventType;
@@ -217,98 +164,3 @@ export type NotificationSeverity =
 	| "success";
 
 export type SeverityPalette = "info" | "warning" | "error" | "success";
-
-/**
- * Represents an option for notification severity
- *
- * @remarks
- * This type defines the structure of a notification severity option that includes
- * a unique identifier, a severity value, and a human-readable label. Used for
- * building UI components and managing notification severity selections.
- *
- * @property id - The unique identifier for the notification severity option
- * @property value - The notification severity value from NotificationSeverity type
- * @property label - A descriptive text label representing the notification severity
- */
-export type SeverityType = {
-	id: number;
-	type: NotificationSeverity;
-	title: string;
-};
-
-/**
- * Represents a notification in the system
- *
- * @remarks
- * Notifications are used to inform users about important events, updates,
- * or actions required. They can have different severity levels and optional
- * expiration dates for automatic cleanup.
- *
- * @property id - Unique identifier for the notification
- * @property message - The main message content to display
- * @property title - Optional title for the notification
- * @property severity - The severity level of the notification
- * @property expires_at - Date and time when the notification expires (optional)
- */
-export interface NotificationType {
-	id: number;
-	message: string;
-	title?: string;
-	severity?: number;
-	expires_at?: Date;
-}
-
-/**
- * Represents a service in the system
- *
- * @remarks
- * This interface defines the structure of religious services and events
- * offered by the organization, including scheduling and descriptive information.
- *
- * @property id - Unique identifier (auto-incremented)
- * @property time - Time when the service takes place
- * @property title - Title or name of the service
- * @property created_at - Timestamp when the service was created
- * @property modified_at - Timestamp when the service was last modified
- */
-export interface ServiceType {
-	id: number;
-	time: string;
-	title: string;
-	created_at?: string;
-	modified_at?: string;
-}
-
-/**
- * Represents contact information in the system
- *
- * @remarks
- * This interface defines the structure of contact information for the organization,
- * including physical address, digital contact methods, and mailing details.
- * Used for displaying contact information and handling correspondence.
- *
- * @property id - Unique identifier (auto-incremented)
- * @property email - Contact email address
- * @property phone - Contact phone number
- * @property street - Street address
- * @property city - City name
- * @property zip_code - ZIP or postal code
- * @property country - Country name
- * @property mail_address - Optional separate mailing address
- * @property mailing_recipient - Optional name for mailing recipient
- * @property created_at - Timestamp when the contact info was created
- * @property modified_at - Timestamp when the contact info was last modified
- */
-export interface ContactInfoType {
-	id: number;
-	email: string;
-	phone: string;
-	street: string;
-	city: string;
-	zip_code: string;
-	country: string;
-	mail_address?: string;
-	mailing_recipient?: string;
-	created_at?: string;
-	modified_at?: string;
-}

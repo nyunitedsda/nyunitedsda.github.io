@@ -1,11 +1,12 @@
-import type { DonationType } from "../../api/request/types";
+import type { DonationDT } from "../../api/request/databaseTypes";
 
-export const initialDonation: Partial<DonationType> = {
+
+export const initialState: Partial<DonationDT> = {
 	title: "",
 	description: "",
 };
 
-const donations: DonationType[] = [
+const donations: DonationDT[] = [
 	{
 		id: 1,
 		title: "Tithe",

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, type FC } from "react";
+import { type FC, useEffect, useMemo } from "react";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
-import { ADMIN_TAB_LIST } from "./constants/adminTabList";
-import type { AdministrationProps } from "./types";
 import { useAuthentication } from "../../hooks/auth";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import { ADMIN_TAB_LIST } from "./constants/adminTabList";
+import type { AdministrationProps } from "./types";
 
 const Administration: FC<AdministrationProps> = () => {
 	const { user, isAuthenticated } = useAuthentication();

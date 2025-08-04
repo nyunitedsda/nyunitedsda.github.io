@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
-import { type FC } from "react";
+import type { FC } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { ServiceDT } from "../../../api/request/databaseTypes";
 import { CONTACT_CONSTANT } from "../../../pages/Contact/components/contact";

@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { getDatabaseList } from "../../../../api/request/commonQueries";
+import type { AnnouncementDT } from "../../../../api/request/databaseTypes";
 import Carousel from "../../../../components/Carousel/Carousel";
 import RingLoader from "../../../../components/Loaders/RingLoader";
 import type { EventAnnouncement } from "../../types";
 import SectionWrapper from "../SectionWrapper";
 import AnnouncementCard from "./AnnouncementCard";
-import type { AnnouncementDT } from "../../../../api/request/databaseTypes";
 
 const PAGE_ANNOUNCEMENT_HEADER = "Announcements";
 

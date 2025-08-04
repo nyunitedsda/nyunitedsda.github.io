@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
-import type { AnnouncementType } from "../../../api/request/types";
+import type { AnnouncementDT } from "../../../api/request/types";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**
  * Defines the columns for the Announcement DataTable.
  * Each column is defined with an id, field, and title.
- * The field corresponds to the property in the AnnouncementType interface.
+ * The field corresponds to the property in the AnnouncementDT interface.
  */
-const announcementColumns: ColumnDefinition<Partial<AnnouncementType>>[] = [
+const announcementColumns: ColumnDefinition<Partial<AnnouncementDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "type", field: "type", title: "Type" },
 	{ id: "description", field: "description", title: "Description" },

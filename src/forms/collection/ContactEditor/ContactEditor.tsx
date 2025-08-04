@@ -1,13 +1,13 @@
 import { type FC, useMemo } from "react";
-import type { ContactInfoType } from "../../../api/request/types";
+import type { Contact_InfoDT } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { initialContactInfo } from "../../../test/mock_data";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
-import contactSchema from "./schema";
-import { initialContactInfo } from "../../../test/mock_data/contactInfo";
-
 import { CONTACT_EDITOR_CONSTANTS } from "./constants";
+import contactSchema from "./schema";
+
 const {
 	EDIT_TITLE,
 	ADD_TITLE,
@@ -23,7 +23,7 @@ const {
 	MAILING_RECIPIENT_LABEL,
 } = CONTACT_EDITOR_CONSTANTS;
 
-const ContactEditor: FC<EditorProps<ContactInfoType>> = ({
+const ContactEditor: FC<EditorProps<Contact_InfoDT>> = ({
 	open,
 	data,
 	onClose,
@@ -56,7 +56,7 @@ const ContactEditor: FC<EditorProps<ContactInfoType>> = ({
 				onSuccess={(data) => {
 					console.log("Contact information saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as ContactInfoType);
+						onSuccess(data as Contact_InfoDT);
 					}
 				}}
 			>

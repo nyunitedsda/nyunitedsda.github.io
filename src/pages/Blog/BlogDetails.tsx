@@ -27,6 +27,7 @@ const VisibilityOutlined = lazy(
 	() => import("@mui/icons-material/VisibilityOutlined"),
 );
 
+import { capitalize } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
@@ -40,8 +41,7 @@ import { getDatabaseItem } from "../../api/request/commonQueries";
 import type { ArticleDT } from "../../api/request/databaseTypes";
 import Image from "../../components/Image/Image";
 import RingLoader from "../../components/Loaders/RingLoader";
-import { authorMetaInfo } from "../../test/mock_data/blogData";
-import { capitalize } from "@mui/material";
+import { authorMetaInfo } from "../../test/mock_data";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",

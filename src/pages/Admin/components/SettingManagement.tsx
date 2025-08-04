@@ -3,7 +3,7 @@ import { Button, capitalize } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-import { useCallback, useMemo, useState, type FC } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import type { UserDT } from "../../../api/request/databaseTypes";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
@@ -16,7 +16,7 @@ const SUBHEADER = "Manage your account settings and preferences";
 
 const SettingManagement: FC = () => {
 	const { user } = useAuthentication();
-	const {} = usePermission
+	const {} = usePermission;
 
 	const [changePasswordOpen, setChangePasswordOpen] = useState<UserDT | null>(
 		null,
@@ -68,7 +68,7 @@ const SettingManagement: FC = () => {
 					onClick: () => setChangePasswordOpen(user as UserDT),
 					disabled: user?.is_system,
 				},
-				
+
 				content: (
 					<>
 						{user &&

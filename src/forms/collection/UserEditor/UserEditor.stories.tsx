@@ -1,11 +1,11 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import UserEditor from "./UserEditor";
-
 import type { UserDT } from "../../../api/request/databaseTypes";
 import InteractiveStory from "../../../components/InteractiveStory/InteractiveStory";
 import type { InteractiveStoryProps } from "../../../components/InteractiveStory/types";
-import userData, { initialValues } from "../../../test/mock_data/users";
+import { initialUser, users as userData } from "../../../test/mock_data";
 import type { UserEditorProps } from "./types";
+import UserEditor from "./UserEditor";
 
 // Define the meta for the story
 const meta: Meta<UserEditorProps> = {
@@ -21,7 +21,7 @@ const meta: Meta<UserEditorProps> = {
 		data: {
 			control: "object",
 			description: "Initial values for the form fields",
-			defaultValue: initialValues,
+			defaultValue: initialUser,
 		},
 	},
 	parameters: {
@@ -48,7 +48,7 @@ export const CreateMode: Story = {
 		buttonText: "🆕 Create New User",
 		extraProps: {
 			open: false,
-			data: initialValues as UserDT,
+			data: initialUser as UserDT,
 			onClose: () => console.log("Modal closed"),
 			onSuccess: (data?: UserDT) => console.log("User created:", data),
 		} as UserEditorProps,
@@ -122,7 +122,7 @@ export const EditModeModeratorUser: Story = {
 	args: {
 		buttonText: "🛡️ Edit Moderator User",
 		extraProps: {
-			data: userData.find((user) => user.role_id === 2) || initialValues,
+			data: userData.find((user) => user.role_id === 2) || initialUser,
 			onClose: () => console.log("Modal closed"),
 			onSuccess: (data?: Partial<UserDT>) => console.log("User created:", data),
 		} as UserEditorProps,
@@ -154,7 +154,7 @@ export const EditModeGuestUser: Story = {
 
 		extraProps: {
 			open: false,
-			data: userData.find((user) => user.role_id === 1) || initialValues,
+			data: userData.find((user) => user.role_id === 1) || initialUser,
 			onClose: () => console.log("Modal closed"),
 			onSuccess: (data: Partial<UserDT>) =>
 				console.log("Guest user updated:", data),
@@ -189,8 +189,7 @@ export const EditModeMinimalUser: Story = {
 			onSuccess: (data: Partial<UserDT>) =>
 				console.log("Minimal user updated:", data),
 			data:
-				userData.find((user) => user.username === "minimaluser") ||
-				initialValues,
+				userData.find((user) => user.username === "minimaluser") || initialUser,
 		} as UserEditorProps,
 	},
 	parameters: {

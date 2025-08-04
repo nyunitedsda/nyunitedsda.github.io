@@ -1,7 +1,7 @@
-import { createEntityHandler } from "./apiRequest";
-import services from "../../src/test/mock_data/services";
+import userHandlers from "../../src/msw/handlers/authHandlers";
+import { createEntityHandler } from "../../src/msw/handlers/genericHandlers";
+import { services } from "../../src/test/mock_data";
 import type { ImportMeta } from "../../src/vite-env";
-import userHandlers from "./userApiRequest";
 
 const { VITE_API_URL } = (import.meta  as unknown as ImportMeta).env;
 

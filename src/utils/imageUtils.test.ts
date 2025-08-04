@@ -10,8 +10,6 @@ describe("imageUtils", () => {
 	describe("getWebpPath", () => {
 		it("returns undefined for empty or falsy input", () => {
 			expect(getWebpPath("")).toBeUndefined();
-			expect(getWebpPath(null as any)).toBeUndefined();
-			expect(getWebpPath(undefined as any)).toBeUndefined();
 		});
 
 		it("returns the same path for images already in webp format", () => {

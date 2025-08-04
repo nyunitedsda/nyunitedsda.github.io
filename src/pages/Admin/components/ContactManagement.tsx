@@ -3,16 +3,15 @@ import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
-import type { ContactInfoType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
+import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
-import { initialContactInfo } from "../../../test/mock_data/contactInfo";
+import { initialContactInfo } from "../../../test/mock_data";
 import { createAuthConfig } from "../../../utils/authUtils";
 import contactInfoColumns from "../constants/contactInfoColumns";
-import usePermission from "../../../hooks/auth/usePermission";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
 
@@ -22,9 +21,9 @@ const ContactManagement: FC = () => {
 	const { canCreate, canEdit, canDelete } = usePermission("contact_info");
 
 	const [createContactOpen, setCreateContactOpen] =
-		useState<Partial<ContactInfoType> | null>(null);
+		useState<Partial<Contact_InfoDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<ContactInfoType[] | undefined>({
+	const { data: queryData, refetch } = useQuery<Contact_InfoDT[] | undefined>({
 		queryKey: ["contacts"],
 		queryFn: () =>
 			getDatabaseList("contact_info", createAuthConfig(accessToken)),
@@ -75,7 +74,7 @@ const ContactManagement: FC = () => {
 			{createContactOpen && (
 				<ContactEditor
 					open={!!createContactOpen}
-					data={createContactOpen as ContactInfoType}
+					data={createContactOpen as Contact_InfoDT}
 					onClose={() => setCreateContactOpen(null)}
 					onSuccess={() => {
 						refetch();

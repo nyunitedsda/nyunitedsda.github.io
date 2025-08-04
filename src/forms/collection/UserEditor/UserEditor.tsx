@@ -15,9 +15,8 @@ import { useRegister } from "../../../hooks/auth";
 import FormContainer from "../../FormBuilder/FormContainer";
 import { default as InputField } from "../../Input/FormField";
 import { configurePasswordInput } from "../commonInputs";
-
-import type { UserEditorProps } from "./types";
 import { createUserSchema, updateUserSchema } from "./schema";
+import type { UserEditorProps } from "./types";
 
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";

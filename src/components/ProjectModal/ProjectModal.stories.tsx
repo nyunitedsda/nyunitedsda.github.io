@@ -1,4 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import ProjectModal from "./ProjectModal";
@@ -256,7 +257,7 @@ export const StaticClosed: Story = {
 	args: {
 		open: false,
 		ariaText: "static-modal",
-		onClose: () => {},
+		onClose: () => { },
 		children: (
 			<>
 				<Typography variant="h5" component="h2" gutterBottom>

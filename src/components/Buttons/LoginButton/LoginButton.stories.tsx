@@ -1,6 +1,7 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
 import type { FC } from "react";
+import { expect, userEvent, within } from "storybook/test";
 import LoginButton from "./LoginButton";
 
 /**

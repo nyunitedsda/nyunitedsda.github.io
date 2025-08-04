@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
-import { action } from "storybook/actions";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { action } from "storybook/actions";
 import CarouselDotControl from "./CarouselDotControl";
 
 // Simple mock that provides just what the component needs

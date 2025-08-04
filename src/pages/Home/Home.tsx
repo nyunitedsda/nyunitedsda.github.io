@@ -2,11 +2,10 @@ import { Stack } from "@mui/material";
 import type { FC } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
-import SectionWrapper from "./components/SectionWrapper";
-import sliderImages from "./sliderImages";
-
 import PageMinistries from "./components/Ministries/PageMinistries";
+import SectionWrapper from "./components/SectionWrapper";
 import { HOME_CONSTANTS } from "./homeConstants";
+import sliderImages from "./sliderImages";
 
 const { rootSx } = HOME_CONSTANTS;
 

@@ -1,8 +1,11 @@
-import { Typography, type SxProps, type Theme } from "@mui/material";
+import { type SxProps, type Theme, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
-import { useCallback, useMemo, type FC } from "react";
+import { type FC, useCallback, useMemo } from "react";
 import * as Yup from "yup";
-import { changeMyPassword, changeUserPassword } from "../../../api/request/authAndUserRequest";
+import {
+	changeMyPassword,
+	changeUserPassword,
+} from "../../../api/request/authAndUserRequest";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import useToken from "../../../hooks/auth/useToken";
 import { createAuthConfig } from "../../../utils/authUtils";
@@ -107,7 +110,7 @@ const PasswordEditor: FC<PasswordEditorProps> = ({
 					enqueueSnackbar("Password changed successfully!", {
 						variant: "success",
 					});
-				} else{
+				} else {
 					await changeMyPassword(
 						{
 							old_Password: values.old_Password,

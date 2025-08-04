@@ -1,6 +1,6 @@
 import type { UserDT } from "../../api/request/databaseTypes";
 
-const initialValues: Partial<UserDT> = {
+const initialState: Partial<UserDT> = {
 	email: "",
 	first_name: "",
 	is_active: true,
@@ -81,7 +81,7 @@ const userData: Partial<UserDT>[] = [
 ];
 
 // Mock login response using similar values from userData
-export const mockLoginResponse = {
+const mockLoginResponse = {
 	message: "Login successful",
 	user: {
 		...userData[0],
@@ -91,4 +91,4 @@ export const mockLoginResponse = {
 };
 
 export default userData;
-export { initialValues };
+export { initialState, mockLoginResponse };

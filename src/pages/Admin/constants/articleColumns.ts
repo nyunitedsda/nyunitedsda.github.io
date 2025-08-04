@@ -1,12 +1,12 @@
-import type { ArticleType } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request/types";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**
  * Defines the columns for the Article DataTable.
  * Each column is defined with an id, field, and title.
- * The field corresponds to the property in the ArticleType interface.
+ * The field corresponds to the property in the ArticleDT interface.
  */
-const articleColumns: ColumnDefinition<Partial<ArticleType>>[] = [
+const articleColumns: ColumnDefinition<Partial<ArticleDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "author_id", field: "author_id", title: "Author" },
 	{ id: "publishDate", field: "publishDate", title: "Publish Date" },

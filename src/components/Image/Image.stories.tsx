@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import sliderImages from "../../pages/Home/sliderImages";
 import Image from "./Image";

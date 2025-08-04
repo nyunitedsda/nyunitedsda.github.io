@@ -1,9 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
-import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
-import type { AuthTokenResponse, DatabaseEntity } from "./types";
-import type { UserDT } from "./databaseTypes";
+import type { DatabaseEntity } from "./types";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
 
@@ -48,80 +46,6 @@ const getDatabaseItem = async <T extends { id: number }>(
 		return response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("getItem", entity, error);
-	}
-};
-
-/**
- * Refresh authentication token
- * This is an Authenticated API call that requires a valid refresh token
- * @param refreshToken - Refresh token to use for getting new access token
- * @param config - Optional axios request config
- * @returns Promise<AuthTokenResponse>
- */
-const refreshAuthToken = async (
-	refreshToken: string,
-	config?: AxiosRequestConfig,
-): Promise<AuthTokenResponse> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}refresh`,
-			{ refreshToken },
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("refresh", "users", error);
-	}
-};
-
-/**
- * Logout user and invalidate tokens
- * This is an Authenticated API call that requires a valid token
- * @param config - Optional axios request config
- * @returns Promise<{ message: string }>
- */
-const logoutUser = async (
-	config?: AxiosRequestConfig,
-): Promise<{ message: string }> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}logout`,
-			{},
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("logout", "users", error);
-	}
-};
-
-/**
- * Get current user profile
- * This is an Authenticated API call that requires a valid token
- * @param config - Optional axios request config
- * @returns Promise<UserDT>
- */
-const getCurrentUser = async (config?: AxiosRequestConfig): Promise<UserDT> => {
-	try {
-		const response = await axiosInstance.get(`${AUTH_API_URL}profile`, config);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("getCurrentUser", "users", error);
-	}
-};
-
-const getUserStatus = async (
-	token: string,
-	config?: AxiosRequestConfig,
-): Promise<{ message: string }> => {
-	try {
-		const response = await axiosInstance.get(
-			`${AUTH_API_URL}authenticated`,
-			createAuthConfig(token, config),
-		);
-		return response?.data || response;
-	} catch (error: unknown) {
-		return handleOperationError("getUserStatus", "users", error);
 	}
 };
 
@@ -184,13 +108,9 @@ const verifyEmail = async (
 };
 
 export {
-	getCurrentUser,
 	getDatabaseItem,
 	getDatabaseList,
-	getUserStatus,
 	// Authentication exports
-	logoutUser,
-	refreshAuthToken,
 	requestPasswordReset,
 	resetPassword,
 	verifyEmail,

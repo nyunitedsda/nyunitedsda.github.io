@@ -1,5 +1,5 @@
 import { type FC, useMemo } from "react";
-import type { AnnouncementType } from "../../../api/request/types";
+import type { AnnouncementDT } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
@@ -14,7 +14,7 @@ const TITLE_FIELD_LABEL = "Title";
 const DESCRIPTION_LABEL = "Description";
 const TYPE_LABEL = "Type";
 
-const defaultValues: Partial<AnnouncementType> = {
+const defaultValues: Partial<AnnouncementDT> = {
 	title: "",
 	type: "event",
 	description: "",
@@ -30,7 +30,7 @@ const eventTypes = [
 	{ id: 4, value: "zoom", label: "Zoom" },
 ];
 
-const AnnouncementEditor: FC<EditorProps<AnnouncementType>> = ({
+const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	open,
 	data,
 	onClose,
@@ -63,7 +63,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementType>> = ({
 				onSuccess={(data) => {
 					console.log("Announcement saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as AnnouncementType);
+						onSuccess(data as AnnouncementDT);
 					}
 				}}
 			>

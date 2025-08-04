@@ -1,11 +1,12 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { NotificationType } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request/types";
 import NotificationEditor from "./NotificationEditor";
 
 // Sample notification data
-const sampleNotification: NotificationType = {
+const sampleNotification: NotificationDT = {
 	id: 1,
 	message:
 		"The system will be down for maintenance from 2:00 AM to 4:00 AM EST.",
@@ -21,9 +22,9 @@ const InteractiveWrapper = ({
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	data?: Partial<NotificationType>;
+	data?: Partial<NotificationDT>;
 	onClose?: () => void;
-	onSuccess?: (data: Partial<NotificationType>) => void;
+	onSuccess?: (data: Partial<NotificationDT>) => void;
 	buttonText?: string;
 }) => {
 	const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ const InteractiveWrapper = ({
 		onClose?.();
 	};
 
-	const handleSuccess = (data: Partial<NotificationType>) => {
+	const handleSuccess = (data: Partial<NotificationDT>) => {
 		setOpen(false);
 		onSuccess?.(data);
 	};
@@ -94,7 +95,7 @@ const meta: Meta<typeof NotificationEditor> = {
 			control: "object",
 			description: "Notification data to edit (undefined for create mode)",
 			table: {
-				type: { summary: "NotificationType | undefined" },
+				type: { summary: "NotificationDT | undefined" },
 				defaultValue: { summary: "undefined" },
 			},
 		},
@@ -109,7 +110,7 @@ const meta: Meta<typeof NotificationEditor> = {
 			action: "onSuccess",
 			description: "Callback when notification is successfully saved",
 			table: {
-				type: { summary: "(data: Partial<NotificationType>) => void" },
+				type: { summary: "(data: Partial<NotificationDT>) => void" },
 			},
 		},
 	},
@@ -151,7 +152,7 @@ export const CreateMode: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Notification created:", data),
 	},
 	parameters: {
@@ -193,9 +194,9 @@ export const EditMode: Story = {
 		/>
 	),
 	args: {
-		data: sampleNotification as Partial<NotificationType>,
+		data: sampleNotification as Partial<NotificationDT>,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Notification updated:", data),
 	},
 	parameters: {
@@ -235,7 +236,7 @@ export const EditModeError: Story = {
 			severity: "error",
 		},
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Error notification updated:", data),
 	},
 	parameters: {
@@ -273,7 +274,7 @@ export const EditModeSuccess: Story = {
 			severity: "success",
 		},
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Success notification updated:", data),
 	},
 	parameters: {
@@ -311,7 +312,7 @@ export const EditModeCaution: Story = {
 			severity: "caution",
 		},
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Caution notification updated:", data),
 	},
 	parameters: {
@@ -337,14 +338,14 @@ export const ClosedModal: Story = {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				Partial<NotificationType> | undefined
+				Partial<NotificationDT> | undefined
 			>(undefined);
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
 				{
 					label: "Information",
-					value: sampleNotification as Partial<NotificationType>,
+					value: sampleNotification as Partial<NotificationDT>,
 				},
 				{
 					label: "Error",
@@ -353,7 +354,7 @@ export const ClosedModal: Story = {
 						id: 2,
 						severity: "error" as const,
 						title: "Critical Error",
-					} as Partial<NotificationType>,
+					} as Partial<NotificationDT>,
 				},
 				{
 					label: "Success",
@@ -362,7 +363,7 @@ export const ClosedModal: Story = {
 						id: 3,
 						severity: "success" as const,
 						title: "Update Complete",
-					} as Partial<NotificationType>,
+					} as Partial<NotificationDT>,
 				},
 				{
 					label: "Caution",
@@ -371,7 +372,7 @@ export const ClosedModal: Story = {
 						id: 4,
 						severity: "caution" as const,
 						title: "Warning",
-					} as Partial<NotificationType>,
+					} as Partial<NotificationDT>,
 				},
 			];
 
@@ -459,7 +460,7 @@ export const ClosedModal: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: Partial<NotificationType>) =>
+		onSuccess: (data: Partial<NotificationDT>) =>
 			console.log("Notification saved:", data),
 	},
 	parameters: {

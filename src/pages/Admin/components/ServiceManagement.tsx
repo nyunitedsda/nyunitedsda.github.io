@@ -1,18 +1,17 @@
-import { useCallback, useState, type FC } from "react";
-import type { ServiceType } from "../../../api/request/types";
-import ServiceEditor from "../../../forms/collection/ServiceEditor/ServiceEditor";
-import useToken from "../../../hooks/auth/useToken";
-import { useSnackbar } from "notistack";
 import { useQuery } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
+import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import { createAuthConfig } from "../../../utils";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import type { GenericType } from "../../../components/DataTable/types";
 import { deleteEntity } from "../../../api/request/mutations";
-import { initialService } from "../../../test/mock_data/services";
 import DataTable from "../../../components/DataTable/DataTable";
-import serviceColumns from "../constants/serviceColumns";
+import type { GenericType } from "../../../components/DataTable/types";
+import PageTitle from "../../../components/PageWrapper/PageTitle";
+import ServiceEditor from "../../../forms/collection/ServiceEditor/ServiceEditor";
 import usePermission from "../../../hooks/auth/usePermission";
+import useToken from "../../../hooks/auth/useToken";
+import { initialService } from "../../../test/mock_data";
+import { createAuthConfig } from "../../../utils";
+import serviceColumns from "../constants/serviceColumns";
 
 const SERVICE_SUBHEADER = "Manage church services";
 
@@ -24,10 +23,10 @@ const ServiceManagement: FC = () => {
 	const { canCreate, canEdit, canDelete } = usePermission("services");
 
 	const [createServiceOpen, setCreateServiceOpen] =
-		useState<Partial<ServiceType> | null>(null);
+		useState<Partial<ServiceDT> | null>(null);
 
 	const { data: queryData, refetch } = useQuery<
-		Partial<ServiceType>[] | undefined
+		Partial<ServiceDT>[] | undefined
 	>({
 		queryKey: ["services"],
 		queryFn: () => getDatabaseList("services", createAuthConfig(accessToken)),
@@ -66,7 +65,7 @@ const ServiceManagement: FC = () => {
 								setCreateServiceOpen({
 									...initialService,
 									id: initialService.id ?? 0, // or another default id
-								} as ServiceType)
+								} as ServiceDT)
 						: undefined
 				}
 			/>
@@ -81,7 +80,7 @@ const ServiceManagement: FC = () => {
 			{createServiceOpen && (
 				<ServiceEditor
 					open={!!createServiceOpen}
-					data={createServiceOpen as ServiceType}
+					data={createServiceOpen as ServiceDT}
 					onClose={() => setCreateServiceOpen(null)}
 					onSuccess={() => {
 						refetch();

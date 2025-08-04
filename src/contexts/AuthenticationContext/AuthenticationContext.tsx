@@ -8,6 +8,7 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
+import type { UserDT } from "../../api/request/databaseTypes";
 import type { LoginCredentials } from "../../api/request/types";
 import {
 	useAuthStatus,
@@ -20,7 +21,6 @@ import useToken from "../../hooks/auth/useToken";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
 import type { AuthenticationContextProps } from "./types";
-import type { UserDT } from "../../api/request/databaseTypes";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { accessToken, refreshToken, clearTokens } = useToken();

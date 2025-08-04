@@ -2,11 +2,11 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {
 	cloneElement,
+	type FC,
 	isValidElement,
 	useCallback,
 	useMemo,
 	useState,
-	type FC,
 } from "react";
 import type { GenericType } from "../DataTable/types";
 import type { InteractiveStoryProps } from "./types";
@@ -23,7 +23,7 @@ const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
 		setOpen(false);
 		if (
 			extraProps &&
-			Object.hasOwnProperty.call(extraProps, "onClose") &&
+			Object.hasOwn(extraProps, "onClose") &&
 			typeof extraProps.onClose === "function"
 		) {
 			console.log("Calling onClose from extraProps");
@@ -35,7 +35,7 @@ const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
 
 	const childrenProps = useMemo(
 		() => ({
-			...(Object.hasOwnProperty.call(extraProps, "onClose")
+			...(Object.hasOwn(extraProps, "onClose")
 				? { onClose: handleClose }
 				: { onClose: () => setOpen(false) }),
 			open,

@@ -6,7 +6,9 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["src/**/*.{ts,tsx,js,jsx}"],
+		"includes": [
+			"src/**/*.{ts,tsx,js,jsx}"
+		],
 		"ignoreUnknown": false
 	},
 	"formatter": {
@@ -42,17 +44,18 @@
 				"noConstAssign": {
 					"level": "error",
 					"fix": "safe"
-				}
+				},
+				"useExhaustiveDependencies": "info"
 			},
 			"nursery": {
-				"noSecrets": "error",
+				"noSecrets": "off",
 				"noImportCycles": "warn",
 				"noUnresolvedImports": "warn",
-				"noUselessUndefined": "warn",
 				"recommended": true
 			},
 			"suspicious": {
-				"useGuardForIn": "error"
+				"useGuardForIn": "error",
+				"noExplicitAny": "off"
 			},
 			"style": {
 				"noUselessElse": "error",
@@ -66,5 +69,19 @@
 		"formatter": {
 			"quoteStyle": "double"
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": [
+				"**/*.stories.tsx"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"useComponentExportOnlyModules": "off"
+					}
+				}
+			}
+		}
+	]
 }

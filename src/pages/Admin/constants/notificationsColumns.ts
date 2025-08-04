@@ -1,12 +1,12 @@
-import type { NotificationType } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request/types";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**
  * Defines the columns for the Notification DataTable.
  * Each column is defined with an id, field, and title.
- * The field corresponds to the property in the NotificationType interface.
+ * The field corresponds to the property in the NotificationDT interface.
  */
-const notificationsColumns: ColumnDefinition<Partial<NotificationType>>[] = [
+const notificationsColumns: ColumnDefinition<Partial<NotificationDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "message", field: "message", title: "Message" },
 	{ id: "severity", field: "severity", title: "Severity" },

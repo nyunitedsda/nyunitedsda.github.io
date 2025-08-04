@@ -61,7 +61,7 @@ import { FC } from "react";
 import EntityManager from "../../../components/EntityManager";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
 import DonationItem from "../../Donations/components/DonationItem";
-import type { NotificationType } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request/types";
 
 const NotificationAdmin: FC = () => {
   // Wrapper component to handle type compatibility
@@ -72,9 +72,9 @@ const NotificationAdmin: FC = () => {
     onSuccess,
   }: {
     open: boolean;
-    entity?: Partial<NotificationType>;
+    entity?: Partial<NotificationDT>;
     onClose: () => void;
-    onSuccess?: (data?: NotificationType) => void;
+    onSuccess?: (data?: NotificationDT) => void;
   }) => (
     <NotificationEditor
       open={open}
@@ -85,7 +85,7 @@ const NotificationAdmin: FC = () => {
   );
 
   return (
-    <EntityManager<NotificationType>
+    <EntityManager<NotificationDT>
       entityName="notifications"
       queryKey="admin-notifications"
       title=""

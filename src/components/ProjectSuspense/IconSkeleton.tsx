@@ -1,5 +1,5 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
-import React from "react";
+import type React from "react";
 
 const IconSkeleton: React.FC<SvgIconProps> = (props) => (
 	<SvgIcon {...props} viewBox="0 0 40 40">

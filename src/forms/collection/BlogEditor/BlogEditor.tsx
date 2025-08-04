@@ -1,12 +1,12 @@
 import { type FC, useMemo } from "react";
-import type { ArticleType } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request/types";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { useAuthentication } from "../../../hooks/auth";
+import { initialArticle } from "../../../test/mock_data";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
 import blogSchema from "./schema";
-import { initialArticle } from "../../../test/mock_data/articles";
-import { useAuthentication } from "../../../hooks/auth";
 
 const EDIT_TITLE = "Edit Article";
 const ADD_TITLE = "Add Article";
@@ -17,7 +17,7 @@ const CATEGORY_LABEL = "Category";
 const IMAGE_LABEL = "Image URL";
 const CONTENT_LABEL = "Content";
 
-const BlogEditor: FC<EditorProps<ArticleType>> = ({
+const BlogEditor: FC<EditorProps<ArticleDT>> = ({
 	open,
 	data,
 	onClose,
@@ -52,7 +52,7 @@ const BlogEditor: FC<EditorProps<ArticleType>> = ({
 				onSuccess={(data) => {
 					console.log("Article saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as ArticleType);
+						onSuccess(data as ArticleDT);
 					}
 				}}
 			>

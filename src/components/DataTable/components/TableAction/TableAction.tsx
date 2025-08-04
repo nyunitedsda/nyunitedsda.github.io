@@ -1,13 +1,13 @@
 import { DeleteOutlined, VisibilityOutlined } from "@mui/icons-material";
 import {
+	type ButtonOwnProps,
 	MenuItem,
 	Stack,
 	Typography,
 	useMediaQuery,
 	useTheme,
-	type ButtonOwnProps,
 } from "@mui/material";
-import { lazy, Suspense, useMemo, type FC } from "react";
+import { type FC, lazy, Suspense, useMemo } from "react";
 import { ConfirmationButton } from "../../../Buttons";
 import type { ConfirmationButtonProps } from "../../../Buttons/types";
 import { tableActions } from "./constants";
@@ -75,15 +75,7 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 						children: <LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>,
 					};
 
-			return !isMobile ? (
-				<ConfirmationButton
-					{...(buttonProps as unknown as ConfirmationButtonProps)}
-					key={title}
-					aria-label={title}
-				>
-					{buttonProps?.children}
-				</ConfirmationButton>
-			) : (
+			return isMobile ? (
 				<MenuItem
 					key={title}
 					onClick={buttonProps.onClick}
@@ -97,18 +89,26 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 						{buttonProps?.children}
 					</ConfirmationButton>
 				</MenuItem>
+			) : (
+				<ConfirmationButton
+					{...(buttonProps as unknown as ConfirmationButtonProps)}
+					key={title}
+					aria-label={title}
+				>
+					{buttonProps?.children}
+				</ConfirmationButton>
 			);
 		});
 	}, [data, onEdit, onDelete, onView, isMobile]);
 
 	return (
 		<>
-			{!isMobile ? (
+			{isMobile ? (
+				elements
+			) : (
 				<Stack direction="row" justifyContent="center">
 					{elements}
 				</Stack>
-			) : (
-				elements
 			)}
 		</>
 	);

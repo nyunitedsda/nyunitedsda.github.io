@@ -3,16 +3,15 @@ import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
-import type { DonationType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
+import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
-import { initialDonation } from "../../../test/mock_data/donations";
+import { initialDonation } from "../../../test/mock_data";
 import { createAuthConfig } from "../../../utils/authUtils";
 import donationColumns from "../constants/donationColumns";
-import usePermission from "../../../hooks/auth/usePermission";
 
 const DONATION_SUBHEADER = "Manage your donation methods";
 
@@ -22,9 +21,9 @@ const DonationAdmin: FC = () => {
 	const { canCreate, canEdit, canDelete } = usePermission("donations");
 
 	const [createDonationOpen, setCreateDonationOpen] =
-		useState<Partial<DonationType> | null>(null);
+		useState<Partial<DonationDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<DonationType[] | undefined>({
+	const { data: queryData, refetch } = useQuery<DonationDT[] | undefined>({
 		queryKey: ["donations"],
 		queryFn: () => getDatabaseList("donations", createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
@@ -70,7 +69,7 @@ const DonationAdmin: FC = () => {
 			{createDonationOpen && (
 				<DonationEditor
 					open={!!createDonationOpen}
-					data={createDonationOpen as DonationType}
+					data={createDonationOpen as DonationDT}
 					onClose={() => setCreateDonationOpen(null)}
 					onSuccess={() => {
 						refetch();

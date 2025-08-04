@@ -8,7 +8,7 @@ import {
 	useState,
 } from "react";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { NotificationType } from "../../api/request/types";
+import type { NotificationDT } from "../../api/request/types";
 import type { NotificationProps } from "../../components/NotificationBanner/types";
 import { Provider } from "./context";
 import type { NotificationContextProps } from "./types";
@@ -18,14 +18,14 @@ const MAX_NOTIFICATIONS = 3;
 const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { enqueueSnackbar } = useSnackbar();
 
-	const [notificationList, setNotificationList] = useState<NotificationType[]>(
+	const [notificationList, setNotificationList] = useState<NotificationDT[]>(
 		[],
 	);
 
 	useQuery({
 		queryKey: ["notifications"],
 		queryFn: async () =>
-			await getDatabaseList<NotificationType>("notifications")
+			await getDatabaseList<NotificationDT>("notifications")
 				.then((res) => {
 					if (res) {
 						setNotificationList(res);

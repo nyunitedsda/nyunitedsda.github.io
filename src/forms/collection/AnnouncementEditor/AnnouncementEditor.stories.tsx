@@ -1,11 +1,12 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { AnnouncementType } from "../../../api/request/types";
+import type { AnnouncementDT } from "../../../api/request/types";
 import AnnouncementEditor from "./AnnouncementEditor";
 
 // Sample announcement data for different event types
-const sampleEventAnnouncement: AnnouncementType = {
+const sampleEventAnnouncement: AnnouncementDT = {
 	id: 1,
 	title: "Community Fellowship Dinner",
 	type: "event",
@@ -18,7 +19,7 @@ const sampleEventAnnouncement: AnnouncementType = {
 	author_id: 1,
 };
 
-const sampleServiceAnnouncement: AnnouncementType = {
+const sampleServiceAnnouncement: AnnouncementDT = {
 	id: 2,
 	title: "Sunday Morning Worship",
 	type: "service",
@@ -32,7 +33,7 @@ const sampleServiceAnnouncement: AnnouncementType = {
 	author_id: 1,
 };
 
-const sampleConferenceAnnouncement: AnnouncementType = {
+const sampleConferenceAnnouncement: AnnouncementDT = {
 	id: 3,
 	title: "Annual Church Conference",
 	type: "conference",
@@ -48,7 +49,7 @@ const sampleConferenceAnnouncement: AnnouncementType = {
 	author_id: 1,
 };
 
-const sampleZoomAnnouncement: AnnouncementType = {
+const sampleZoomAnnouncement: AnnouncementDT = {
 	id: 4,
 	title: "Virtual Bible Study",
 	type: "zoom",
@@ -69,9 +70,9 @@ const InteractiveWrapper = ({
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	data?: AnnouncementType;
+	data?: AnnouncementDT;
 	onClose?: () => void;
-	onSuccess?: (data: AnnouncementType) => void;
+	onSuccess?: (data: AnnouncementDT) => void;
 	buttonText?: string;
 }) => {
 	const [open, setOpen] = useState(false);
@@ -82,7 +83,7 @@ const InteractiveWrapper = ({
 		onClose?.();
 	};
 
-	const handleSuccess = (data: AnnouncementType) => {
+	const handleSuccess = (data: AnnouncementDT) => {
 		setOpen(false);
 		onSuccess?.(data);
 	};
@@ -149,7 +150,7 @@ const meta: Meta<typeof AnnouncementEditor> = {
 			control: "object",
 			description: "Announcement data to edit (undefined for create mode)",
 			table: {
-				type: { summary: "AnnouncementType | undefined" },
+				type: { summary: "AnnouncementDT | undefined" },
 				defaultValue: { summary: "undefined" },
 			},
 		},
@@ -164,7 +165,7 @@ const meta: Meta<typeof AnnouncementEditor> = {
 			action: "onSuccess",
 			description: "Callback when announcement is successfully saved",
 			table: {
-				type: { summary: "(data: AnnouncementType) => void" },
+				type: { summary: "(data: AnnouncementDT) => void" },
 			},
 		},
 	},
@@ -208,7 +209,7 @@ export const CreateMode: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement created:", data),
 	},
 	parameters: {
@@ -245,7 +246,7 @@ export const Playground: Story = {
 		const PlaygroundWrapper = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				AnnouncementType | undefined
+				AnnouncementDT | undefined
 			>(args.data);
 
 			const entityOptions = [
@@ -324,7 +325,7 @@ export const Playground: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement saved:", data),
 	},
 	parameters: {
@@ -383,7 +384,7 @@ export const EditModeEvent: Story = {
 	args: {
 		data: sampleEventAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Event announcement updated:", data),
 	},
 	parameters: {
@@ -440,7 +441,7 @@ export const EditModeService: Story = {
 	args: {
 		data: sampleServiceAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Service announcement updated:", data),
 	},
 	parameters: {
@@ -489,7 +490,7 @@ export const EditModeConference: Story = {
 	args: {
 		data: sampleConferenceAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Conference announcement updated:", data),
 	},
 	parameters: {
@@ -538,7 +539,7 @@ export const EditModeZoom: Story = {
 	args: {
 		data: sampleZoomAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Zoom announcement updated:", data),
 	},
 	parameters: {
@@ -594,7 +595,7 @@ export const RecurringEvent: Story = {
 			event_date: new Date("2025-07-02T19:00:00"),
 		},
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Recurring event updated:", data),
 	},
 	parameters: {
@@ -634,9 +635,9 @@ export const FormValidationDemo: Story = {
 			recurring: false,
 			date_format: "MM/DD/YYYY",
 			author_id: 1,
-		} as AnnouncementType,
+		} as AnnouncementDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement saved:", data),
 	},
 	parameters: {
@@ -686,7 +687,7 @@ export const ClosedModal: Story = {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				AnnouncementType | undefined
+				AnnouncementDT | undefined
 			>(undefined);
 
 			const entityOptions = [
@@ -781,7 +782,7 @@ export const ClosedModal: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement saved:", data),
 	},
 	parameters: {
@@ -844,9 +845,9 @@ export const CreateModeService: Story = {
 			recurring: false,
 			date_format: "MM/DD/YYYY",
 			author_id: 1,
-		} as AnnouncementType,
+		} as AnnouncementDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Service announcement created:", data),
 	},
 	parameters: {
@@ -885,9 +886,9 @@ export const CreateModeZoom: Story = {
 			recurring: false,
 			date_format: "MM/DD/YYYY",
 			author_id: 1,
-		} as AnnouncementType,
+		} as AnnouncementDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Zoom announcement created:", data),
 	},
 	parameters: {
@@ -920,7 +921,7 @@ export const MobileView: Story = {
 	args: {
 		data: sampleEventAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement updated:", data),
 	},
 	parameters: {
@@ -968,7 +969,7 @@ export const DarkTheme: Story = {
 	args: {
 		data: sampleConferenceAnnouncement,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: AnnouncementType) =>
+		onSuccess: (data: AnnouncementDT) =>
 			console.log("Announcement updated:", data),
 	},
 	parameters: {

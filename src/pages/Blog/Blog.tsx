@@ -5,6 +5,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { capitalize } from "@mui/material/utils";
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { getDatabaseList } from "../../api/request/commonQueries";
@@ -18,7 +19,6 @@ import {
 	BLOG_SUBHEADER,
 	DEFAULT_POST_PER_PAGE,
 } from "./blogConstant";
-import { capitalize } from "@mui/material/utils";
 
 const containerSx: SxProps<Theme> = {
 	alignContent: "flex-start",

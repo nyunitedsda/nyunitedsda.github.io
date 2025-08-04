@@ -3,13 +3,13 @@ import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import {
+	type FC,
 	lazy,
 	Suspense,
 	useCallback,
 	useEffect,
 	useMemo,
 	useState,
-	type FC,
 } from "react";
 import { useNavigate } from "react-router";
 import { LoginButton, ThemeButton } from "../../../Buttons";

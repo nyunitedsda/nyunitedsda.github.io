@@ -1,6 +1,6 @@
-import type { AnnouncementType } from "../../api/request/types";
+import type { AnnouncementDT } from "../../api/request/types";
 
-export const initialAnnouncement: AnnouncementType = {
+export const initialState: AnnouncementDT = {
 	id: 0,
 	title: "",
 	type: "event",
@@ -19,7 +19,7 @@ export const initialAnnouncement: AnnouncementType = {
 	passcode: "",
 };
 
-const announcements: AnnouncementType[] = [
+const announcements: AnnouncementDT[] = [
 	{
 		id: 1,
 		title: "Sabbath Worship Service",

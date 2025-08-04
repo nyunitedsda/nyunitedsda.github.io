@@ -10,8 +10,8 @@ import type { FC } from "react";
 import { getDefaultContacts } from "../../api/request/contactsRequest";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
-import { CONTACT_CONSTANT } from "./components/contact";
 import ContactSection from "./components/ContactSection";
+import { CONTACT_CONSTANT } from "./components/contact";
 import MapDirection from "./components/MapDirection";
 import ServiceTimes from "./components/ServiceTimes";
 

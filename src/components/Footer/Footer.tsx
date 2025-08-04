@@ -3,7 +3,7 @@ import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
-import { type SxProps, type Theme } from "@mui/material";
+import type { SxProps, Theme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, type FC, type ReactNode } from "react";
+import { type FC, type ReactNode, useMemo } from "react";
 import { getDefaultContacts } from "../../api/request/contactsRequest";
 import {
 	MOTTO,

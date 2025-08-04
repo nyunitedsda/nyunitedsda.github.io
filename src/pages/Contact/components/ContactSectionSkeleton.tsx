@@ -1,6 +1,6 @@
-import { type FC } from "react";
-import ContactSection from "./ContactSection";
 import Skeleton from "@mui/material/Skeleton";
+import type { FC } from "react";
+import ContactSection from "./ContactSection";
 import { CONTACT_CONSTANT } from "./contact";
 
 const ContactSectionSkeleton: FC = () => {

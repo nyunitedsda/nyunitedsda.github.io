@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
+import type { ArticleDT } from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
-import type { ArticleType } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
+import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import BlogEditor from "../../../forms/collection/BlogEditor/BlogEditor";
+import usePermission from "../../../hooks/auth/usePermission";
 import useToken from "../../../hooks/auth/useToken";
-import { initialArticle } from "../../../test/mock_data/articles";
+import { initialArticle } from "../../../test/mock_data";
 import { createAuthConfig } from "../../../utils/authUtils";
 import articleColumns from "../constants/articleColumns";
-import type { GenericType } from "../../../components/DataTable/types";
-import { useSnackbar } from "notistack";
-import usePermission from "../../../hooks/auth/usePermission";
 
 const BLOG_SUBHEADER = "Manage blog articles";
 
@@ -22,9 +22,9 @@ const BlogManagement: FC = () => {
 	const { canCreate, canEdit, canDelete } = usePermission("articles");
 
 	const [createArticleOpen, setCreateArticleOpen] =
-		useState<Partial<ArticleType> | null>(null);
+		useState<Partial<ArticleDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<ArticleType[] | undefined>({
+	const { data: queryData, refetch } = useQuery<ArticleDT[] | undefined>({
 		queryKey: ["articles"],
 		queryFn: () => getDatabaseList("articles", createAuthConfig(accessToken)),
 		staleTime: 5 * 60 * 1000,
@@ -32,7 +32,7 @@ const BlogManagement: FC = () => {
 	});
 
 	const _handleDeleteArticle = useCallback(
-		(data: GenericType & { id: number }) => {
+		(data: ArticleDT) => {
 			const { id } = data as GenericType & { id: number };
 			deleteEntity("articles", id, createAuthConfig(accessToken))
 				.then(() => {
@@ -71,7 +71,7 @@ const BlogManagement: FC = () => {
 			{createArticleOpen && (
 				<BlogEditor
 					open={!!createArticleOpen}
-					data={createArticleOpen as ArticleType}
+					data={createArticleOpen as ArticleDT}
 					onClose={() => setCreateArticleOpen(null)}
 					onSuccess={() => {
 						refetch();

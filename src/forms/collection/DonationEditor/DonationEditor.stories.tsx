@@ -1,12 +1,13 @@
 import { Button } from "@mui/material";
-import { action } from "storybook/actions";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import type { DonationType } from "../../../api/request/types";
+import { action } from "storybook/actions";
+import type { DonationDT } from "../../../api/request/types";
 import DonationEditor from "./DonationEditor";
 
 // Sample donation data
-const sampleDonations: Partial<DonationType>[] = [
+const sampleDonations: Partial<DonationDT>[] = [
 	{
 		id: 1,
 		title: "Tithe",
@@ -43,7 +44,7 @@ const InteractiveWrapper = ({
 	data,
 	...args
 }: {
-	data?: Partial<DonationType>;
+	data?: Partial<DonationDT>;
 	open?: boolean;
 }) => {
 	const [isOpen, setIsOpen] = useState(args.open || false);
@@ -155,7 +156,7 @@ export const Create: Story = {
 export const Playground: Story = {
 	render: (args) => {
 		const [selectedEntity, setSelectedEntity] = useState<
-			Partial<DonationType> | undefined
+			Partial<DonationDT> | undefined
 		>(sampleDonations[0]);
 
 		return (
@@ -229,7 +230,7 @@ export const Edit: Story = {
 export const ClosedModal: Story = {
 	render: (args) => {
 		const [selectedEntity, setSelectedEntity] = useState<
-			Partial<DonationType> | undefined
+			Partial<DonationDT> | undefined
 		>(sampleDonations[1]);
 
 		return (

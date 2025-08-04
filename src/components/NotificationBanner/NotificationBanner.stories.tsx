@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { Provider as NotificationProvider } from "../../contexts/NotificationContext/context";
@@ -12,10 +13,10 @@ const MockNotificationContext = ({
 }) => {
 	const mockContextValue = {
 		notifications: [],
-		registerNotification: () => {},
+		registerNotification: () => { },
 		dismissNotification: (id: number) =>
 			console.log("Notification dismissed:", id),
-		clearNotification: () => {},
+		clearNotification: () => { },
 	};
 
 	return React.createElement(
@@ -46,26 +47,26 @@ const NotificationDecorator = (Story: any, context: any) => {
 		{ children: null },
 		showContainer
 			? React.createElement(
-					Box,
-					{
-						sx: {
-							width: "100%",
-							maxWidth: 800,
-							mx: "auto",
-							p: 2,
-							bgcolor: "background.default",
-							borderRadius: 2,
-							border: "1px solid",
-							borderColor: "divider",
-						},
+				Box,
+				{
+					sx: {
+						width: "100%",
+						maxWidth: 800,
+						mx: "auto",
+						p: 2,
+						bgcolor: "background.default",
+						borderRadius: 2,
+						border: "1px solid",
+						borderColor: "divider",
 					},
-					React.createElement(
-						Typography,
-						{ variant: "h6", sx: { mb: 2, color: "text.secondary" } },
-						"Notification Banner Demo",
-					),
-					React.createElement(Story),
-				)
+				},
+				React.createElement(
+					Typography,
+					{ variant: "h6", sx: { mb: 2, color: "text.secondary" } },
+					"Notification Banner Demo",
+				),
+				React.createElement(Story),
+			)
 			: React.createElement(Story),
 	);
 };

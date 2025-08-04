@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { type FC } from "react";
+import type { FC } from "react";
 import FooterSegmentSkeleton from "./FooterSegmentSkeleton";
 import type { FooterSegmentProps } from "./types";
 

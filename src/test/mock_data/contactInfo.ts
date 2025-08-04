@@ -1,7 +1,6 @@
 import type { ContactInfoDT } from "../../api/request/databaseTypes";
-import type { ContactInfoType } from "../../api/request/types";
 
-export const initialContactInfo: Partial<ContactInfoType> = {
+export const initialState: Partial<ContactInfoDT> = {
 	email: "",
 	phone: "",
 	street: "",
@@ -10,8 +9,6 @@ export const initialContactInfo: Partial<ContactInfoType> = {
 	country: "",
 	mail_address: "",
 	mailing_recipient: "",
-	created_at: "",
-	modified_at: "",
 };
 
 const contactInfos: ContactInfoDT[] = [

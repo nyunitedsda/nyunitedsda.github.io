@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import type { UserDT } from "../../api/request/databaseTypes";
-import type { LoginCredentials, UserDT } from "../../api/request/types";
+import type { LoginCredentials } from "../../api/request/types";
 
 /**
  * Registration data for new users

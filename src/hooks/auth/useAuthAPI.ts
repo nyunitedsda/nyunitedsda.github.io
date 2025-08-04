@@ -2,21 +2,21 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import {
 	deleteUser,
-	loginUser,
-	registerUser,
-} from "../../api/request/authAndUserRequest";
-import {
 	getCurrentUser,
 	getUserStatus,
+	loginUser,
 	logoutUser,
 	refreshAuthToken,
-} from "../../api/request/commonQueries";
+	registerUser,
+} from "../../api/request/authAndUserRequest";
+
 import type { LoginCredentials, LoginResponse } from "../../api/request/types";
+import type { RegisterData } from "../../contexts/AuthenticationContext";
 import { AUTH_CONSTANTS } from "../../contexts/AuthenticationContext/constant";
-import type { RegisterData } from "../../contexts/AuthenticationContext/types";
 import { createAuthConfig } from "../../utils";
 import useLocalStorage from "../storage/useLocalStorage";
 import useToken from "./useToken";
+
 const { USER_KEY } = AUTH_CONSTANTS;
 
 /**

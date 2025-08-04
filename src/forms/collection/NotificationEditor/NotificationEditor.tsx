@@ -8,13 +8,10 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type {
-	NotificationType,
-	SeverityType,
-} from "../../../api/request/types";
+import type { NotificationDT, SeverityType } from "../../../api/request/types";
 import theme from "../../../components/AppProvider/theme";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { defaultNotification } from "../../../test/mock_data/notifications";
+import { initialNotification } from "../../../test/mock_data";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import { default as InputField } from "../../Input/FormField";
 import type { EditorProps } from "../types";
@@ -46,7 +43,7 @@ const {
 	SEVERITY_PALETTE_KEY,
 } = NOTIFICATION_EDITOR_CONSTANTS;
 
-const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
+const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 	open,
 	data,
 	onClose,
@@ -60,7 +57,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: defaultNotification,
+						initialValues: initialNotification,
 						title: ADD_TITLE,
 					},
 		[data],
@@ -86,7 +83,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationType>>> = ({
 				onSuccess={(data) => {
 					console.log("Notification saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as NotificationType);
+						onSuccess(data as NotificationDT);
 					}
 				}}
 			>

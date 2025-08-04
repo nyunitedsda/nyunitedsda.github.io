@@ -1,11 +1,12 @@
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { ServiceType } from "../../../api/request/types";
+import type { ServiceDT } from "../../../api/request/types";
 import ServiceEditor from "./ServiceEditor";
 
 // Sample service data
-const sampleSundayService: ServiceType = {
+const sampleSundayService: ServiceDT = {
 	id: 1,
 	title: "Sunday Morning Worship",
 	time: "10:00 AM",
@@ -13,7 +14,7 @@ const sampleSundayService: ServiceType = {
 	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
-const sampleWednesdayService: ServiceType = {
+const sampleWednesdayService: ServiceDT = {
 	id: 2,
 	title: "Wednesday Bible Study",
 	time: "7:00 PM",
@@ -21,7 +22,7 @@ const sampleWednesdayService: ServiceType = {
 	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
-const sampleSabbathService: ServiceType = {
+const sampleSabbathService: ServiceDT = {
 	id: 3,
 	title: "Sabbath School",
 	time: "9:30 AM",
@@ -36,9 +37,9 @@ const InteractiveWrapper = ({
 	onSuccess,
 	buttonText = "Open Editor",
 }: {
-	data?: ServiceType;
+	data?: ServiceDT;
 	onClose?: () => void;
-	onSuccess?: (data: ServiceType) => void;
+	onSuccess?: (data: ServiceDT) => void;
 	buttonText?: string;
 }) => {
 	const [open, setOpen] = useState(false);
@@ -49,7 +50,7 @@ const InteractiveWrapper = ({
 		onClose?.();
 	};
 
-	const handleSuccess = (data: ServiceType) => {
+	const handleSuccess = (data: ServiceDT) => {
 		setOpen(false);
 		onSuccess?.(data);
 	};
@@ -110,7 +111,7 @@ const meta: Meta<typeof ServiceEditor> = {
 			control: "object",
 			description: "Service data to edit (undefined for create mode)",
 			table: {
-				type: { summary: "ServiceType | undefined" },
+				type: { summary: "ServiceDT | undefined" },
 				defaultValue: { summary: "undefined" },
 			},
 		},
@@ -125,7 +126,7 @@ const meta: Meta<typeof ServiceEditor> = {
 			action: "onSuccess",
 			description: "Callback when service is successfully saved",
 			table: {
-				type: { summary: "(data: ServiceType) => void" },
+				type: { summary: "(data: ServiceDT) => void" },
 			},
 		},
 	},
@@ -166,7 +167,7 @@ export const CreateMode: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) => console.log("Service created:", data),
+		onSuccess: (data: ServiceDT) => console.log("Service created:", data),
 	},
 	parameters: {
 		docs: {
@@ -209,7 +210,7 @@ export const EditModeSundayService: Story = {
 	args: {
 		data: sampleSundayService,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) =>
+		onSuccess: (data: ServiceDT) =>
 			console.log("Sunday service updated:", data),
 	},
 	parameters: {
@@ -242,7 +243,7 @@ export const EditModeWednesdayService: Story = {
 	args: {
 		data: sampleWednesdayService,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) =>
+		onSuccess: (data: ServiceDT) =>
 			console.log("Wednesday service updated:", data),
 	},
 	parameters: {
@@ -275,7 +276,7 @@ export const EditModeSabbathSchool: Story = {
 	args: {
 		data: sampleSabbathService,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) =>
+		onSuccess: (data: ServiceDT) =>
 			console.log("Sabbath school updated:", data),
 	},
 	parameters: {
@@ -301,7 +302,7 @@ export const ClosedModal: Story = {
 		const ClosedModalDemo = () => {
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
-				ServiceType | undefined
+				ServiceDT | undefined
 			>(undefined);
 
 			const entityOptions = [
@@ -394,7 +395,7 @@ export const ClosedModal: Story = {
 	args: {
 		data: undefined,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) => console.log("Service saved:", data),
+		onSuccess: (data: ServiceDT) => console.log("Service saved:", data),
 	},
 	parameters: {
 		docs: {
@@ -428,9 +429,9 @@ export const CreateModePreFilled: Story = {
 			id: 0,
 			title: "Evening Prayer Service",
 			time: "6:00 PM",
-		} as ServiceType,
+		} as ServiceDT,
 		onClose: () => console.log("Modal closed"),
-		onSuccess: (data: ServiceType) =>
+		onSuccess: (data: ServiceDT) =>
 			console.log("Evening service created:", data),
 	},
 	parameters: {

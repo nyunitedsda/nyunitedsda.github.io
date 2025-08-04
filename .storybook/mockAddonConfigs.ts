@@ -1,6 +1,4 @@
-import roles from '../src/test/mock_data/roles';
-import users from '../src/test/mock_data/users';
-
+import {roles, users} from '../src/test/mock_data';
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 

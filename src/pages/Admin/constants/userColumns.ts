@@ -2,11 +2,11 @@ import {
 	CheckBoxOutlineBlankOutlined,
 	CheckBoxOutlined,
 } from "@mui/icons-material";
-import { capitalize, Checkbox } from "@mui/material";
+import { Checkbox, capitalize } from "@mui/material";
+import dayjs from "dayjs";
 import { createElement } from "react";
 import type { UserDT } from "../../../api/request/databaseTypes";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
-import dayjs from "dayjs";
 
 type User = Partial<UserDT & { role_name: string }>;
 

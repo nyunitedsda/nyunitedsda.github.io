@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import StreamDisplay from "./StreamDisplay";
 
 // DOC_NOTES: Archive stream Content location - https://https://my.churchstreaming.tv/StreamingSettings/embed/

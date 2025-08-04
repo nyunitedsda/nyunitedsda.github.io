@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
-import { WEBSITE_TITLE } from "../../constants/footer";
-import type { ContactInfoDT } from "../../api/request/databaseTypes";
 import type { SxProps } from "@mui/material/styles";
+import dayjs from "dayjs";
+import type { ContactInfoDT } from "../../api/request/databaseTypes";
+import { WEBSITE_TITLE } from "../../constants/footer";
 
 export const getCopyright = () =>
 	`${dayjs().year()} ${WEBSITE_TITLE}. All rights reserved`;

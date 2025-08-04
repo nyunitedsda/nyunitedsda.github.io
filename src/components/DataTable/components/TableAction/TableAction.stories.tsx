@@ -1,5 +1,6 @@
-import { action } from "storybook/actions";
+// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
 import TableAction from "./TableAction";
 import type { TableActionProps } from "./types";
 
