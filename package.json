@@ -46,7 +46,7 @@
     "format": "biome format --write",
     "generate-types": "bash ./src/utils/fetch-database-types.sh",
     "lint": "biome lint --write src/",
-    "prebuild": "check",
+    "prebuild": "npm run check",
     "preview": "vite preview",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",

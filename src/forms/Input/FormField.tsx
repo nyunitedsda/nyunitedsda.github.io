@@ -95,6 +95,11 @@ const InputField = <
 						helperText={errorText}
 						fullWidth
 						margin="normal"
+						sx={{
+							'& input[type="month"]::-webkit-calendar-picker-indicator': {
+								filter: `invert(1) brightness(0.5)`,
+							},
+						}}
 					/>
 				);
 			default:

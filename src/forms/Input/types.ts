@@ -1,3 +1,4 @@
+import type { SelectProps } from "@mui/material/Select";
 import type { FieldHelperProps, FieldInputProps, FieldMetaProps } from "formik";
 
 export interface RenderFieldProps<T> {
@@ -31,3 +32,11 @@ export type InputFieldProps<
 	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options
 	renderItemLabel?: (item: T) => string; // Function to render the label
 };
+
+export interface SelectFieldProps<T> extends Omit<SelectProps, "error"> {
+	items: T[];
+	label: string;
+	error?: string;
+	valueResolver: (item: T) => string | number;
+	renderItemLabel: (item: T) => string;
+}

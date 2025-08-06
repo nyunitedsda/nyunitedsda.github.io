@@ -29,7 +29,7 @@ const preview: Preview = {
            init.headers = {
              ...init.headers,
              Authorization:
-               'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY',
+               'Bearer eypXVCJ9.eykYS1hcGkifQ.CctE2srjY',
            };
 
           console.log('Mocked fetch request:', input, init);

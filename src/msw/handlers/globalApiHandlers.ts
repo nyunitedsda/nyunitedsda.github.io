@@ -1,4 +1,4 @@
-import { HttpHandler } from "msw";
+import type { HttpHandler } from "msw";
 import { setupWorker } from "msw/browser";
 import userHandlers from "./authHandlers";
 import standardApiHandlers from "./standardResourceHandlers";

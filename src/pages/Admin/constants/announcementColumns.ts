@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
 import type { AnnouncementDT } from "../../../api/request/databaseTypes";
+import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**
  * Defines the columns for the Announcement DataTable.

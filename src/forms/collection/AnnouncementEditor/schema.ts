@@ -49,7 +49,7 @@ export default Yup.object().shape({
 				"Conference code is required for a phone number to have a value",
 				(value, context) => {
 					const { conference_code } = context.parent;
-					if (!!conference_code) return true;
+					if (conference_code) return true;
 					return !value;
 				},
 			),
@@ -60,8 +60,7 @@ export default Yup.object().shape({
 		.max(100, "Speaker name must be 100 characters or less")
 		.when("event_id", {
 			is: (value: number) => value === 2,
-			then: (schema) =>
-				schema.required("Speaker name is required if event ID is 2"),
+			then: (schema) => schema,
 			otherwise: (schema) =>
 				schema.test(
 					"speaker-empty-if-not-2",

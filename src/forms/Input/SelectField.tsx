@@ -2,16 +2,9 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select, { type SelectProps } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { useMemo } from "react";
-
-export interface SelectFieldProps<T> extends Omit<SelectProps, "error"> {
-	items: T[];
-	label: string;
-	error?: string;
-	valueResolver: (item: T) => string | number;
-	renderItemLabel: (item: T) => string;
-}
+import type { SelectFieldProps } from "./types";
 
 const SelectField = <T,>({
 	items,
