@@ -1,10 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useState } from "react";
+import { type FC, useCallback, useMemo, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { AnnouncementDT } from "../../../api/request/databaseTypes";
+import type { AnnouncementDT, EventDT } from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
-import type { AnnouncementDT } from "../../../api/request/types";
 import DataTable from "../../../components/DataTable/DataTable";
 import type { GenericType } from "../../../components/DataTable/types";
 import RingLoader from "../../../components/Loaders/RingLoader";
@@ -26,28 +25,51 @@ const AnnouncementManagement: FC = () => {
 	const [editorContent, setEditorContent] =
 		useState<Partial<AnnouncementDT> | null>(null);
 
-	const {
-		data: queryData,
-		refetch,
-		isLoading,
-	} = useQuery<AnnouncementDT[] | undefined>({
-		queryKey: ["announcements"],
-		queryFn: async () => {
-			return await getDatabaseList(
-				"announcements",
-				createAuthConfig(accessToken),
-			);
-		},
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-		enabled: !!accessToken,
+	const result = useQueries({
+		queries: [
+			{
+				queryKey: ["announcements"],
+				queryFn: async () => {
+					return await getDatabaseList(
+						"announcements"
+					);
+				},
+				staleTime: 5 * 60 * 1000,
+				refetchOnWindowFocus: false,
+			},
+			{
+				queryKey: ["events"],
+				queryFn: async () => {
+					return await getDatabaseList(
+						"events"
+					);
+				},
+				staleTime: 5 * 60 * 1000,
+				refetchOnWindowFocus: false,
+			},
+		],
 	});
+
+	const tableColumns = useMemo(() => {
+		const eventData = result[1].data as EventDT[] | undefined;
+		if (!eventData) {
+			return announcementColumns;
+		}
+
+		return announcementColumns.map((column) => column.field === "event_id" ? ({
+			...column,
+			renderCell(data: Partial<AnnouncementDT>) {
+				const event = eventData.find((e) => e.id === data.event_id);
+				return event ? event.name : "N/A";
+			},
+		}) : column);
+	}, [result]);
 
 	const _handleDelete = useCallback(
 		(d: AnnouncementDT & { id: number }) => {
 			deleteEntity("announcements", d.id, createAuthConfig(accessToken))
 				.then(() => {
-					refetch();
+					result[0].refetch();
 					enqueueSnackbar("Announcement deleted successfully", {
 						variant: "success",
 					});
@@ -59,7 +81,7 @@ const AnnouncementManagement: FC = () => {
 					});
 				});
 		},
-		[accessToken, enqueueSnackbar, refetch],
+		[accessToken, enqueueSnackbar, result],
 	);
 
 	return (
@@ -68,16 +90,16 @@ const AnnouncementManagement: FC = () => {
 				title=""
 				subtitle={SUBHEADER}
 				handleClick={
-					canCreate ? () => setEditorContent(initialAnnouncement) : undefined
+					canCreate ? () => setEditorContent(initialAnnouncement as AnnouncementDT) : undefined
 				}
 			/>
 
-			{isLoading ? (
+			{result[0].isLoading ? (
 				<RingLoader />
 			) : (
 				<DataTable
-					columns={announcementColumns}
-					data={(queryData ?? []) as unknown as GenericType[]}
+					columns={tableColumns}
+					data={(result[0].data ?? []) as unknown as GenericType[]}
 					onDelete={
 						canDelete
 							? (d) => _handleDelete(d as unknown as AnnouncementDT)
@@ -93,7 +115,7 @@ const AnnouncementManagement: FC = () => {
 					data={editorContent as AnnouncementDT}
 					onClose={() => setEditorContent(null)}
 					onSuccess={() => {
-						refetch();
+						result[0].refetch();
 						setEditorContent(null);
 					}}
 				/>

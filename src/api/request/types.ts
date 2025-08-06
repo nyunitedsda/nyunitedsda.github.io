@@ -18,7 +18,8 @@ export type DatabaseEntity =
 	| "contact_info"
 	| "severity"
 	| "legal_content"
-	| "ministries";
+	| "ministries"
+	| "events";
 
 /**
  * Represents the available user roles in the system

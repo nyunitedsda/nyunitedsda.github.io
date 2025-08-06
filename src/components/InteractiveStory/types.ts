@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 
-export interface InteractiveStoryProps<GenericType> {
+export type InteractiveStoryProps<GenericType> = PropsWithChildren<{
 	buttonText?: string;
-	children: ReactNode;
 	extraProps?: GenericType;
-}
+	open?: boolean;
+}>

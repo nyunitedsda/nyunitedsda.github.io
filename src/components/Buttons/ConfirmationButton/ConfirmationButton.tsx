@@ -17,6 +17,12 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 }) => {
 	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
+	const VITE_API_URL =
+	(import.meta as unknown as ImportMeta).env.VITE_API_URL ||
+	"http://localhost:3000";
+
+	console.log("VITE_API_URL:", VITE_API_URL);
+
 	const handleButtonClick = useCallback(() => {
 		if (shouldConfirm) {
 			setIsDialogOpen(true);

@@ -7,16 +7,14 @@ import { type FC, useCallback, useMemo, useState } from "react";
 import type { UserDT } from "../../../api/request/databaseTypes";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
-import { useAuthentication } from "../../../contexts/AuthenticationContext";
 import PasswordEditor from "../../../forms/collection/PasswordEditor/PasswordEditor";
-import usePermission from "../../../hooks/auth/usePermission";
+import { useAuthentication } from "../../../hooks/auth";
 
 const TITLE = "Settings";
 const SUBHEADER = "Manage your account settings and preferences";
 
 const SettingManagement: FC = () => {
 	const { user } = useAuthentication();
-	const {} = usePermission;
 
 	const [changePasswordOpen, setChangePasswordOpen] = useState<UserDT | null>(
 		null,

@@ -4,8 +4,8 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import React from 'react';
 import DynamicProvider from '../src/test/ProviderWrapper';
 import GlobalNavigationProvider from './GlobalNavigationProvider';
-import handlers from './helpers/handlers';
 import globalMockConfigs from './mockAddonConfigs';
+import globalApiHandlers from '../src/msw/handlers/globalApiHandlers';
 
 initialize();
 
@@ -19,17 +19,18 @@ const preview: Preview = {
       // Call the default mswLoader
       await mswLoader(...args);
       // Set global Authorization header for all requests
+  
       if (window && window.fetch) {
         const originalFetch = window.fetch;
         window.fetch = (input, init = {}) => {
           console.log('Intercepting fetch request:', input, init);
-          if (!init.headers) init.headers = {};
+           if (!init.headers) init.headers = {};
           // Set the mock token
-          init.headers = {
-            ...init.headers,
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY',
-          };
+           init.headers = {
+             ...init.headers,
+             Authorization:
+               'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY',
+           };
 
           console.log('Mocked fetch request:', input, init);
           return originalFetch(input, init);
@@ -58,7 +59,7 @@ const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
     msw: {
-      handlers,
+      handlers: globalApiHandlers,
     },
     globalMockConfigs, // Mock configurations for API responses
     docs: {

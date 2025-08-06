@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import type { AnnouncementDT } from "../../../api/request/types";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { AnnouncementDT } from "../../../api/request/databaseTypes";
 
 /**
  * Defines the columns for the Announcement DataTable.
@@ -9,7 +9,7 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
  */
 const announcementColumns: ColumnDefinition<Partial<AnnouncementDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
-	{ id: "type", field: "type", title: "Type" },
+	{ id: "event_id", field: "event_id", title: "Event ID" },
 	{ id: "description", field: "description", title: "Description" },
 	{ id: "location", field: "location", title: "Location" },
 	{ id: "conference_code", field: "conference_code", title: "Conference Code" },

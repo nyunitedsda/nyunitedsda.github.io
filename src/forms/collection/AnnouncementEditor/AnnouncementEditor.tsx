@@ -1,6 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
-import type { AnnouncementDT } from "../../../api/request/types";
+import { getDatabaseList } from "../../../api/request/commonQueries";
+import type { AnnouncementDT, EventDT } from "../../../api/request/databaseTypes";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
+import { useAuthentication } from "../../../hooks/auth";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
@@ -12,23 +15,17 @@ const ENTITY_NAME = "announcements";
 const BUTTON_TEXT = "Save";
 const TITLE_FIELD_LABEL = "Title";
 const DESCRIPTION_LABEL = "Description";
-const TYPE_LABEL = "Type";
+const EVENT_LABEL = "Event Type";
 
 const defaultValues: Partial<AnnouncementDT> = {
 	title: "",
-	type: "event",
+	event_id: 1,
 	description: "",
 	recurring: false,
 	date_format: "MM/DD/YYYY",
-	author_id: 1, // TODO: Replace with the logged in user id
 };
 
-const eventTypes = [
-	{ id: 1, value: "event", label: "Event" },
-	{ id: 2, value: "service", label: "Service" },
-	{ id: 3, value: "conference", label: "Conference" },
-	{ id: 4, value: "zoom", label: "Zoom" },
-];
+
 
 const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	open,
@@ -36,25 +33,32 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	onClose,
 	onSuccess,
 }) => {
+	const { user } = useAuthentication();
+
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: { ...data, author_id: user?.id ?? 0 },
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: defaultValues,
-						title: ADD_TITLE,
-					},
-		[data],
+					initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
+					title: ADD_TITLE,
+				},
+		[data, user],
 	);
+
+	const { data: eventData } = useQuery<EventDT[]>({
+		queryKey: ["events"],
+		queryFn: async () => getDatabaseList("events"),
+	})
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
 			<EntityEditor
 				defaultValues={initialValues}
-				data={ENTITY_NAME}
+				entity={ENTITY_NAME}
 				id={data?.id}
 				submitButtonText={BUTTON_TEXT}
 				title={title}
@@ -78,11 +82,11 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 				/>
 
 				<InputField
-					name="type"
-					label={TYPE_LABEL}
+					name="event_id"
+					label={EVENT_LABEL}
 					fieldType="select"
-					items={eventTypes}
-					renderItemLabel={(item) => item.label}
+					items={eventData ?? []}
+					renderItemLabel={(item) => item.name}
 					valueResolver={(item) => item.id}
 				/>
 

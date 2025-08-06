@@ -8,19 +8,25 @@ const { VITE_API_URL, VITE_API_AUTH_URL } = (
 const USER_STORY_URL = `${VITE_API_URL || "http://localhost:3000"}${VITE_API_AUTH_URL || "/api/auth"}`;
 
 const verifyAuthToken = (request: Request) => {
-	const [bearer, token] =
-		request.headers.get("Authorization")?.split(" ") || [];
-	if (!token || bearer !== "Bearer") {
-		return HttpResponse.json(
-			{ error: "Authorization token is required" },
-			{ status: 401 },
-		);
-	}
-	return null;
+  const [bearer, token] =
+	request.headers.get("Authorization")?.split(" ") || [];
+  // Accept the mock token for development
+  if (
+	!token ||
+	bearer !== "Bearer" ||
+	(import.meta.env.MODE === "development" && token !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mocked")
+  ) {
+	return HttpResponse.json(
+	  { error: "Authorization token is required or invalid" },
+	  { status: 401 },
+	);
+  }
+  return null;
 };
 
 const fetchUserById = (id: number) => {
 	const user = userData.find((u) => u.id === id);
+	console.info(`Fetching user by ID: ${id}`, user);
 	if (!user) {
 		return { error: "User not found" };
 	}
@@ -28,21 +34,19 @@ const fetchUserById = (id: number) => {
 };
 
 const userHandlers = [
-	// Get all users
-	http.get(`${USER_STORY_URL}/users`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
-		return HttpResponse.json({ data: userData }, { status: 200 });
-	}),
+	
 
 	// Get user by ID
 	http.get(
-		new RegExp(`${USER_STORY_URL}/users/\\d+$`),
+		`${USER_STORY_URL}/users/:id`,
 		async ({ params: { id }, request }) => {
-			const authError = verifyAuthToken(request);
-			if (authError) return authError;
+			// const authError = verifyAuthToken(request);
+			// if (authError) return authError;
+
+			console.log(`Inside get user by ID handler for ID: ${id}`);
 
 			const user = fetchUserById(parseInt(id as string));
+
 			if (user.error) {
 				return HttpResponse.json({ error: user.error }, { status: 404 });
 			}
@@ -52,7 +56,7 @@ const userHandlers = [
 
 	// Delete user by ID
 	http.delete(
-		new RegExp(`${USER_STORY_URL}/users/\\d+$`),
+		`${USER_STORY_URL}/users/:id`,
 		async ({ params: { id }, request }) => {
 			const authError = verifyAuthToken(request);
 			if (authError) return authError;
@@ -72,7 +76,7 @@ const userHandlers = [
 
 	// Update user profile
 	http.put(
-		new RegExp(`${VITE_API_AUTH_URL || "/api/auth"}/users/\\d+$`),
+		`${USER_STORY_URL}/users/:id`,
 		async ({ params: { id }, request }) => {
 			const authError = verifyAuthToken(request);
 			if (authError) return authError;
@@ -149,7 +153,7 @@ const userHandlers = [
 
 	// Change user password
 	http.put(
-		new RegExp(`${USER_STORY_URL}/users/d+/change-password$`),
+		`${USER_STORY_URL}/users/:id/change-password`,
 		async ({ params, request }) => {
 			const authError = verifyAuthToken(request);
 			if (authError) return authError;
@@ -242,6 +246,13 @@ const userHandlers = [
 			{ refreshToken: "new-refresh-token", expiresIn: "1h" },
 			{ status: 200 },
 		);
+	}),
+
+	// Get all users
+	http.get(`${USER_STORY_URL}/users`, async ({ request }) => {
+		const authError = verifyAuthToken(request);
+		if (authError) return authError;
+		return HttpResponse.json({ data: userData }, { status: 200 });
 	}),
 ];
 

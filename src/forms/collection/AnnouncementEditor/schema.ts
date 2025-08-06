@@ -3,9 +3,10 @@ import { titleSchema } from "../commonSchemas";
 
 export default Yup.object().shape({
 	title: titleSchema,
-	type: Yup.string()
-		.oneOf(["event", "service", "conference", "zoom"], "Invalid event type")
-		.required("Event type is required"),
+	event_id: Yup.number()
+		.required("Event ID is required")
+		.positive("Event ID must be a positive number")
+		.integer("Event ID must be an integer"),
 	description: Yup.string()
 		.nullable()
 		.max(255, "Description must be 255 characters or less"),
@@ -16,9 +17,6 @@ export default Yup.object().shape({
 			is: (value: string) => value === "zoom",
 			then: (schema) => schema.required("Location is required if type is zoom"),
 			otherwise: (schema) => schema,
-		})
-		.default(function (this: any) {
-			return this.parent.type === "zoom" ? "Zoom" : "";
 		}),
 	conference_code: Yup.string()
 		.nullable()

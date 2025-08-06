@@ -1,11 +1,19 @@
 export interface AnnouncementDT {
 	id: number;
 	title: string;
-	type: "event" | "service" | "virtual";
-	date_format: string;
+	author_id: number;
+	date_format:
+		| "YYYY-MM-DD"
+		| "MM/DD/YYYY"
+		| "DD-MM-YYYY"
+		| "MMM D, YYYY"
+		| "dddd, h:mm a";
+	event_id?: number;
 	description?: string;
 	location?: string;
 	conference_code?: string;
+	zoom_id?: string;
+	passcode?: string;
 	phone_number?: string;
 	sermon?: string;
 	speaker?: string;
@@ -45,6 +53,13 @@ export interface DonationDT {
 	id: number;
 	title: string;
 	description: string;
+}
+
+export interface EventDT {
+	id: number;
+	name: string;
+	author_id: number;
+	description?: string;
 }
 
 export interface LegalContentDT {
@@ -113,15 +128,15 @@ export interface SeverityDT {
 }
 
 export interface UserDT {
+	id: number;
+	username: string;
+	password: string;
+	role_id: number;
+	is_active: boolean;
+	remember_me: boolean;
+	is_system: boolean;
 	email?: string;
 	first_name?: string;
-	id: number;
-	is_active: boolean;
-	is_system: boolean;
-	last_login?: Date;
 	last_name?: string;
-	password: string;
-	remember_me: boolean;
-	role_id: number;
-	username: string;
+	last_login?: Date;
 }

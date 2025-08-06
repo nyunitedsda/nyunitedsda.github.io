@@ -11,6 +11,7 @@ import ConfirmationButton from "./ConfirmationButton";
 
 let argTypes: Meta<ConfirmationButtonProps>["argTypes"] = {};
 
+
 // Define the meta for the story
 const meta: Meta<ConfirmationButtonProps> = {
 	title: "Components/Buttons/ConfirmationButton",

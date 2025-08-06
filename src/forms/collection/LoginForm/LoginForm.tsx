@@ -1,8 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
-import { useAuthentication } from "../../../contexts/AuthenticationContext";
-import type { LoginCredentials } from "../../../contexts/AuthenticationContext/types";
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";
 import {
@@ -10,6 +8,8 @@ import {
 	configureUsernameInput,
 } from "../commonInputs";
 import { loginSchema } from "./schema";
+import type { LoginCredentials } from "../../../api/request/types";
+import { useAuthentication } from "../../../hooks/auth";
 
 const REMEMBER_ME = "Remember me";
 const SIGN_IN = "Sign In";
