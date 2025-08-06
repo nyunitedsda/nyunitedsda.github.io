@@ -14,6 +14,7 @@ interface ColumnDefinition<GenericType> {
 }
 
 interface DataTableProps<GenericType> {
+	isLoading: boolean;
 	columns: ColumnDefinition<GenericType>[];
 	data: GenericType[];
 	onEdit?: (data: GenericType) => void;

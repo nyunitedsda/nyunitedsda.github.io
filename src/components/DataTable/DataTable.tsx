@@ -9,6 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { type FC, lazy, type ReactNode, useMemo, useState } from "react";
+import RingLoader from "react-spinners/RingLoader";
 import { generateActionColumn } from "./helpers/columnHelpers";
 import type { ColumnDefinition, DataTableProps, GenericType } from "./types";
 
@@ -52,6 +53,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 	onDelete,
 	onView,
 	renderAction,
+	isLoading = false,
 }) => {
 	const [density, setDensity] = useState<TableOwnProps["size"]>("medium");
 
@@ -114,29 +116,37 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data?.length > 0 ? (
-						data.map((row) => (
-							<TableRow key={`${row}-${row.id}`} hover>
-								{formattedColumns.map((col) => (
-									<TableCell
-										key={`cell-${col.id}-${row.id}`}
-										align={col?.align || defaultAlign}
-									>
-										{col.renderCell
-											? col.renderCell(row)
-											: ((row[col.field as keyof typeof row] as ReactNode) ??
-												"-")}
-									</TableCell>
-								))}
-							</TableRow>
-						))
-					) : (
+					{isLoading && (
 						<TableRow>
 							<TableCell colSpan={formattedColumns.length} align="center">
-								No data available
+								<RingLoader />
 							</TableCell>
 						</TableRow>
 					)}
+					{!isLoading &&
+						(data.length > 0 ? (
+							data.map((row) => (
+								<TableRow key={`${row}-${row.id}`} hover>
+									{formattedColumns.map((col) => (
+										<TableCell
+											key={`cell-${col.id}-${row.id}`}
+											align={col?.align || defaultAlign}
+										>
+											{col.renderCell
+												? col.renderCell(row)
+												: ((row[col.field as keyof typeof row] as ReactNode) ??
+													"-")}
+										</TableCell>
+									))}
+								</TableRow>
+							))
+						) : (
+							<TableRow>
+								<TableCell colSpan={formattedColumns.length} align="center">
+									No data available
+								</TableCell>
+							</TableRow>
+						))}
 				</TableBody>
 			</Table>
 		</TableContainer>

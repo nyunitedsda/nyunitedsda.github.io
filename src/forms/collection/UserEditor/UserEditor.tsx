@@ -145,8 +145,8 @@ const UserEditor: FC<UserEditorProps> = ({
 							defaultValue=""
 							label={ROLE_FIELD_LABEL}
 							fieldType="select"
-							items={result[0]?.data ?? []}
-							renderItemLabel={(item) => capitalize(item.name)}
+							items={(result[0]?.data ?? []) as { id: number; name: string }[]}
+							renderItemLabel={({ name }) => capitalize(name)}
 							valueResolver={(item) => item.id}
 						/>
 						<Grid container size={12} sx={{ p: 2, py: 0 }}>

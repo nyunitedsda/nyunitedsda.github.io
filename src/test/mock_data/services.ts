@@ -1,6 +1,5 @@
 import type { ServiceDT } from "../../api/request/databaseTypes";
 
-
 export const initialState: Partial<ServiceDT> = {
 	id: undefined,
 	time: "",

@@ -13,9 +13,6 @@ const VITE_API_URL =
 	(import.meta as unknown as ImportMeta).env.VITE_API_URL ||
 	"http://localhost:3000";
 
-	
-	
-
 const standardApiHandlers = [
 	// Announcements handlers
 	...createEntityHandler({

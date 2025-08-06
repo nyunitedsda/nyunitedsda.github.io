@@ -52,6 +52,7 @@ const FormContainer = <T extends { id?: number }>({
 			initialValues={initialValues}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
+			on
 		>
 			{({ isSubmitting, dirty }) => (
 				<Form style={{ width: "100%" }}>
@@ -59,7 +60,6 @@ const FormContainer = <T extends { id?: number }>({
 						{children}
 					</Stack>
 
-					{/* TODO: add a confirm cancel */}
 					<Stack
 						direction="row"
 						spacing={2}

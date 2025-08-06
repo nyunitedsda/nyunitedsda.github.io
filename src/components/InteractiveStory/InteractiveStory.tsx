@@ -26,14 +26,12 @@ const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
 	// 	}
 	// }, [extraProps]);
 
-
 	useEffect(() => {
 		// if (initialOpen ) {
-			setOpen(initialOpen as boolean);
+		setOpen(initialOpen as boolean);
 		// }
 	}, [initialOpen]);
 	const handleOpen = () => {
-
 		setOpen(true);
 	};
 	const handleClose = useCallback(() => {
@@ -56,7 +54,6 @@ const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
 				? { onClose: handleClose }
 				: { onClose: () => setOpen(false) }),
 			open,
-
 		}),
 		[open, extraProps],
 	);

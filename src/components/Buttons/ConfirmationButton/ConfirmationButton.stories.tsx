@@ -1,4 +1,3 @@
-
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -11,17 +10,18 @@ import ConfirmationButton from "./ConfirmationButton";
 
 let argTypes: Meta<ConfirmationButtonProps>["argTypes"] = {};
 
-
 // Define the meta for the story
 const meta: Meta<ConfirmationButtonProps> = {
 	title: "Components/Buttons/ConfirmationButton",
 	component: ConfirmationButton,
 	tags: ["autodocs"],
-	decorators: [(Story: React.ComponentType) => (
-		<div style={{ padding: "20px" }}>
-			<Story />
-		</div>
-	)],
+	decorators: [
+		(Story: React.ComponentType) => (
+			<div style={{ padding: "20px" }}>
+				<Story />
+			</div>
+		),
+	],
 	argTypes,
 	parameters: {
 		docs: {
@@ -306,7 +306,7 @@ argTypes = {
 			"EditIcon",
 			"DeleteIcon",
 			"SaveIcon",
-			"LogoutIcon"
+			"LogoutIcon",
 		],
 		mapping: {
 			"Test Button": "Test Button",

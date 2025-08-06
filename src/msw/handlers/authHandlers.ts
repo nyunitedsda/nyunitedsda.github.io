@@ -8,20 +8,21 @@ const { VITE_API_URL, VITE_API_AUTH_URL } = (
 const USER_STORY_URL = `${VITE_API_URL || "http://localhost:3000"}${VITE_API_AUTH_URL || "/api/auth"}`;
 
 const verifyAuthToken = (request: Request) => {
-  const [bearer, token] =
-	request.headers.get("Authorization")?.split(" ") || [];
-  // Accept the mock token for development
-  if (
-	!token ||
-	bearer !== "Bearer" ||
-	(import.meta.env.MODE === "development" && token !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mocked")
-  ) {
-	return HttpResponse.json(
-	  { error: "Authorization token is required or invalid" },
-	  { status: 401 },
-	);
-  }
-  return null;
+	const [bearer, token] =
+		request.headers.get("Authorization")?.split(" ") || [];
+	// Accept the mock token for development
+	if (
+		!token ||
+		bearer !== "Bearer" ||
+		(import.meta.env.MODE === "development" &&
+			token !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mocked")
+	) {
+		return HttpResponse.json(
+			{ error: "Authorization token is required or invalid" },
+			{ status: 401 },
+		);
+	}
+	return null;
 };
 
 const fetchUserById = (id: number) => {
@@ -34,25 +35,17 @@ const fetchUserById = (id: number) => {
 };
 
 const userHandlers = [
-	
-
 	// Get user by ID
-	http.get(
-		`${USER_STORY_URL}/users/:id`,
-		async ({ params: { id }, request }) => {
-			// const authError = verifyAuthToken(request);
-			// if (authError) return authError;
+	http.get(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
+		console.log(`Inside get user by ID handler for ID: ${id}`);
 
-			console.log(`Inside get user by ID handler for ID: ${id}`);
+		const user = fetchUserById(parseInt(id as string));
 
-			const user = fetchUserById(parseInt(id as string));
-
-			if (user.error) {
-				return HttpResponse.json({ error: user.error }, { status: 404 });
-			}
-			return HttpResponse.json({ data: user.data }, { status: 200 });
-		},
-	),
+		if (user.error) {
+			return HttpResponse.json({ error: user.error }, { status: 404 });
+		}
+		return HttpResponse.json({ data: user.data }, { status: 200 });
+	}),
 
 	// Delete user by ID
 	http.delete(

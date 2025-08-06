@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { AnnouncementDT, EventDT } from "../../../api/request/databaseTypes";
+import type {
+	AnnouncementDT,
+	EventDT,
+} from "../../../api/request/databaseTypes";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useAuthentication } from "../../../hooks/auth";
+import { announcementDateFormats } from "../../../test/mock_data/announcements";
 import EntityEditor from "../../EntityEditor/EntityEditor";
 import InputField from "../../Input/FormField";
 import type { EditorProps } from "../types";
@@ -25,8 +29,6 @@ const defaultValues: Partial<AnnouncementDT> = {
 	date_format: "MM/DD/YYYY",
 };
 
-
-
 const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	open,
 	data,
@@ -39,20 +41,20 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: { ...data, author_id: user?.id ?? 0 },
-					title: EDIT_TITLE,
-				}
+						initialValues: { ...data, author_id: user?.id ?? 0 },
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
-					title: ADD_TITLE,
-				},
+						initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
+						title: ADD_TITLE,
+					},
 		[data, user],
 	);
 
 	const { data: eventData } = useQuery<EventDT[]>({
 		queryKey: ["events"],
 		queryFn: async () => getDatabaseList("events"),
-	})
+	});
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -78,7 +80,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					label={DESCRIPTION_LABEL}
 					fieldType="text"
 					multiline
-					minRows={3}
+					rows={3}
 				/>
 
 				<InputField
@@ -86,8 +88,10 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					label={EVENT_LABEL}
 					fieldType="select"
 					items={eventData ?? []}
-					renderItemLabel={(item) => item.name}
-					valueResolver={(item) => item.id}
+					renderItemLabel={(item: Partial<EventDT>) =>
+						(item?.name as string) || ""
+					}
+					valueResolver={(item: Partial<EventDT>) => item.id as number}
 				/>
 
 				<InputField
@@ -99,27 +103,59 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 
 				<InputField
 					name="conference_code"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						data.event_id === 3 && !data.zoom_id
+					}
 					label="Conference Code"
 					fieldType="text"
 					placeholder="Enter the conference code (if applicable)"
 				/>
 				<InputField
 					name="phone_number"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						!!data.conference_code
+					}
 					label="Phone Number"
 					fieldType="text"
+					type="tel"
 					placeholder="Enter the phone number (if applicable)"
 				/>
+
 				<InputField
-					name="sermon"
-					label="Sermon Title"
+					name="zoom_id"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						data.event_id === 3 && !data.conference_code
+					}
+					label="Zoom ID"
 					fieldType="text"
-					placeholder="Enter the sermon title (if applicable)"
+					placeholder="Enter the Zoom ID (if applicable)"
+				/>
+				<InputField
+					name="passcode"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						!!data.zoom_id
+					}
+					label="Passcode"
+					fieldType="text"
+					placeholder="Enter the passcode (if applicable)"
 				/>
 				<InputField
 					name="speaker"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						data.event_id === 2
+					}
 					label="Speaker"
 					fieldType="text"
 					placeholder="Enter the speaker's name (if applicable)"
+				/>
+				<InputField
+					name="sermon"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						!!data.speaker
+					}
+					label="Sermon Title"
+					fieldType="text"
+					placeholder="Enter the sermon title (if applicable)"
 				/>
 
 				<InputField
@@ -134,6 +170,17 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					label="Event Date"
 					fieldType="datetime-local"
 					placeholder="Select the date of the event"
+				/>
+				<InputField
+					name="date_format"
+					validateFieldCondition={(data: Partial<AnnouncementDT>) =>
+						!!data.event_date
+					}
+					label="Date Format"
+					fieldType="select"
+					items={announcementDateFormats}
+					renderItemLabel={(item: { format: string }) => item.format}
+					valueResolver={(item: { value: string }) => item.value}
 				/>
 			</EntityEditor>
 		</ProjectModal>

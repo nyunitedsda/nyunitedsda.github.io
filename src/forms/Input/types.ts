@@ -1,4 +1,11 @@
-import type { ReactNode } from "react";
+import type { FieldHelperProps, FieldInputProps, FieldMetaProps } from "formik";
+
+export interface RenderFieldProps<T> {
+	inputProps: FieldInputProps<T>;
+	metaProps: FieldMetaProps<T>;
+	helperProps: FieldHelperProps<T>;
+	formValues: T;
+}
 
 export type FormFieldType =
 	| "text"
@@ -7,16 +14,20 @@ export type FormFieldType =
 	| "checkbox"
 	| "radio";
 
-export interface InputFieldProps {
-	dependencies?: string[]; // Fields that this field depends on
+export type InputFieldProps<
+	T extends Record<string, string | number | boolean>,
+	S extends Record<string, string | number | boolean | Date>,
+> = {
+	validateFieldCondition?: (data: S) => boolean;
 	name: string;
 	label: string;
 	type?: string;
 	fieldType: FormFieldType;
+	defaultValue?: string | number | boolean;
+	placeholder?: string;
 	multiline?: boolean;
 	rows?: number;
-	items?: any[]; // For select fields, the items to display
-	valueResolver?: (item: any) => string | number; // Function to resolve the value for select options
-	renderItemLabel?: (item: any) => ReactNode; // Function to render the label
-	[x: string]: any;
-}
+	items?: T[]; // For select fields, the items to display
+	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options
+	renderItemLabel?: (item: T) => string; // Function to render the label
+};

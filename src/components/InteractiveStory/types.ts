@@ -4,4 +4,4 @@ export type InteractiveStoryProps<GenericType> = PropsWithChildren<{
 	buttonText?: string;
 	extraProps?: GenericType;
 	open?: boolean;
-}>
+}>;

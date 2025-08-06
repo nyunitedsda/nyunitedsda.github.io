@@ -257,7 +257,7 @@ export const StaticClosed: Story = {
 	args: {
 		open: false,
 		ariaText: "static-modal",
-		onClose: () => { },
+		onClose: () => {},
 		children: (
 			<>
 				<Typography variant="h5" component="h2" gutterBottom>

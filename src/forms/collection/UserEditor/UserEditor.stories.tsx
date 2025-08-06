@@ -120,16 +120,16 @@ export const EditModeModeratorUser: Story = {
 		</InteractiveStory>
 	),
 	args: {
-        buttonText: "🛡️ Edit Moderator User",
+		buttonText: "🛡️ Edit Moderator User",
 
-        extraProps: {
+		extraProps: {
 			data: userData.find((user) => user.role_id === 2) || initialUser,
 			onClose: () => console.log("Modal closed"),
 			onSuccess: (data?: Partial<UserDT>) => console.log("User created:", data),
 		} as UserEditorProps,
 
-        open: true
-    },
+		open: true,
+	},
 	parameters: {
 		docs: {
 			description: {

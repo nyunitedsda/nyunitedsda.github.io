@@ -1,8 +1,11 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { AnnouncementDT, EventDT } from "../../../api/request/databaseTypes";
+import type {
+	AnnouncementDT,
+	EventDT,
+} from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
 import type { GenericType } from "../../../components/DataTable/types";
@@ -30,9 +33,7 @@ const AnnouncementManagement: FC = () => {
 			{
 				queryKey: ["announcements"],
 				queryFn: async () => {
-					return await getDatabaseList(
-						"announcements"
-					);
+					return await getDatabaseList("announcements");
 				},
 				staleTime: 5 * 60 * 1000,
 				refetchOnWindowFocus: false,
@@ -40,9 +41,7 @@ const AnnouncementManagement: FC = () => {
 			{
 				queryKey: ["events"],
 				queryFn: async () => {
-					return await getDatabaseList(
-						"events"
-					);
+					return await getDatabaseList("events");
 				},
 				staleTime: 5 * 60 * 1000,
 				refetchOnWindowFocus: false,
@@ -56,13 +55,17 @@ const AnnouncementManagement: FC = () => {
 			return announcementColumns;
 		}
 
-		return announcementColumns.map((column) => column.field === "event_id" ? ({
-			...column,
-			renderCell(data: Partial<AnnouncementDT>) {
-				const event = eventData.find((e) => e.id === data.event_id);
-				return event ? event.name : "N/A";
-			},
-		}) : column);
+		return announcementColumns.map((column) =>
+			column.field === "event_id"
+				? {
+						...column,
+						renderCell(data: Partial<AnnouncementDT>) {
+							const event = eventData.find((e) => e.id === data.event_id);
+							return event ? event.name : "N/A";
+						},
+					}
+				: column,
+		);
 	}, [result]);
 
 	const _handleDelete = useCallback(
@@ -90,7 +93,9 @@ const AnnouncementManagement: FC = () => {
 				title=""
 				subtitle={SUBHEADER}
 				handleClick={
-					canCreate ? () => setEditorContent(initialAnnouncement as AnnouncementDT) : undefined
+					canCreate
+						? () => setEditorContent(initialAnnouncement as AnnouncementDT)
+						: undefined
 				}
 			/>
 
@@ -98,6 +103,7 @@ const AnnouncementManagement: FC = () => {
 				<RingLoader />
 			) : (
 				<DataTable
+					isLoading={result[0].isLoading}
 					columns={tableColumns}
 					data={(result[0].data ?? []) as unknown as GenericType[]}
 					onDelete={

@@ -1,5 +1,17 @@
 import type { AnnouncementDT } from "../../api/request/databaseTypes";
 
+export const dateFormatValues = [
+	"YYYY-MM-DD",
+	"MM/DD/YYYY",
+	"DD-MM-YYYY",
+	"MMM D, YYYY",
+	"dddd, h:mm a",
+] as const;
+
+export const announcementDateFormats = dateFormatValues.map((format) => ({
+	format,
+	value: format,
+}));
 
 export const initialState: AnnouncementDT = {
 	id: 0,
@@ -16,7 +28,7 @@ export const initialState: AnnouncementDT = {
 	date_format: "MM/DD/YYYY",
 	zoom_id: "",
 	passcode: "",
-	author_id: 1
+	author_id: 1,
 };
 
 const announcements: AnnouncementDT[] = [
@@ -31,7 +43,7 @@ const announcements: AnnouncementDT[] = [
 		speaker: "Pastor John Doe",
 		sermon: "Faith and Hope",
 		recurring: true,
-		author_id: 1
+		author_id: 1,
 	},
 	{
 		id: 2,
@@ -42,7 +54,7 @@ const announcements: AnnouncementDT[] = [
 		event_date: new Date("2025-08-10T09:00:00Z"),
 		date_format: "MM/DD/YYYY",
 		conference_code: "YTH2025",
-		author_id: 1
+		author_id: 1,
 	},
 ];
 

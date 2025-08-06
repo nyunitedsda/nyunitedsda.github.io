@@ -90,14 +90,20 @@ const createEntityHandler = <T extends { id?: number }>({
 				});
 			}
 			localData.splice(idx, 1);
-			return new HttpResponse({ status: 204, body: { message: `${entity} deleted successfully` } });
+			return new HttpResponse({
+				status: 204,
+				body: { message: `${entity} deleted successfully` },
+			});
 		}),
 		// OPTIONS handlers
 		http.options(`${url}`, () => {
 			return new HttpResponse({ status: 204 });
 		}),
 		http.options(`${url}/:id`, () => {
-			return new HttpResponse({ status: 204, headers: { Allow: "GET, POST, PUT, DELETE, OPTIONS" } });
+			return new HttpResponse({
+				status: 204,
+				headers: { Allow: "GET, POST, PUT, DELETE, OPTIONS" },
+			});
 		}),
 	];
 };
