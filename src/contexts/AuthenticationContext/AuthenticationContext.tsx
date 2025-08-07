@@ -12,7 +12,7 @@ import type { UserDT } from "../../api/request/databaseTypes";
 import type { LoginCredentials } from "../../api/request/types";
 import {
 	useAuthStatus,
-	useCurrentUser,
+	// useCurrentUser,
 	useLogin,
 	useLogout,
 	useRefreshToken,
@@ -24,8 +24,8 @@ import type { AuthenticationContextProps } from "./types";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { accessToken, refreshToken, clearTokens } = useToken();
-	const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
-	const { enqueueSnackbar } = useSnackbar();
+	// // const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
+	// const { enqueueSnackbar } = useSnackbar();
 	const { hasAuthStatus, refreshAuthStatus } = useAuthStatus();
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
@@ -56,24 +56,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		return () => clearInterval(interval);
 	}, [accessToken, refreshAuthStatus, clearTokens, navigate]);
 
-	// Keep user state in sync with currentUser and userKey
-	useEffect(() => {
-		if (accessToken) {
-			if (!user && currentUser) {
-				setUser(currentUser);
-			} else if (!user && refetchCurrentUser) {
-				setIsLoading(true);
-				refetchCurrentUser().then((result: any) => {
-					setUser(result?.data || null);
-					setIsLoading(false);
-				});
-			}
-			setIsAuthenticated(true);
-		} else {
-			setUser(null);
-		}
-	}, [accessToken, currentUser, refetchCurrentUser, clearTokens]);
-
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
 			setIsLoading(true);
@@ -86,7 +68,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			setIsAuthenticated(true);
 			setIsLoading(false);
 		},
-		[loginUser, enqueueSnackbar],
+		[loginUser],
 	);
 
 	const logout = useCallback(async () => {

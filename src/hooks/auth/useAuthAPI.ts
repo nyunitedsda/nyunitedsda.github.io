@@ -41,16 +41,16 @@ export const useLogin = () => {
 	const { setTokens, clearTokens } = useToken();
 
 	return useMutation({
-		mutationFn: (credentials: LoginCredentials) => loginUser(credentials),
+		mutationFn: async (credentials: LoginCredentials) => await loginUser(credentials),
 		onSuccess: (data: LoginResponse) => {
 			queryClient.setQueryData(["user"], data.user);
 
 			setTokens(data.accessToken, data.refreshToken);
-			localStorage.setItem(USER_KEY, data.user.username);
 
 			enqueueSnackbar(data?.message || "Login successful", {
 				variant: "success",
 			});
+			return data;
 		},
 		onError: (error) => {
 			console.error("Login failed:", error);

@@ -113,7 +113,7 @@ const registerUser = async (
 ): Promise<{ user: UserDT; message: string }> => {
 	try {
 		const response = await axiosInstance.post(
-			`${AUTH_API_URL}/users/register`,
+			`${AUTH_API_URL}users/register`,
 			userData,
 			config,
 		);
