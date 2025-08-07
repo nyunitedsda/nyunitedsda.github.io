@@ -16,10 +16,10 @@ const meta: Meta<typeof FormContainer> = {
 
 export default meta;
 
-type Story = StoryObj<FormContainerProps<{ name: string, id?: number }>>;
+type Story = StoryObj<FormContainerProps<{ name: string; id?: number }>>;
 
 const validationSchema = Yup.object({
-  id: Yup.number(),
+	id: Yup.number(),
 	name: Yup.string().required("Name is required"),
 });
 

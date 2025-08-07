@@ -7,24 +7,6 @@ const { VITE_API_URL, VITE_API_AUTH_URL } = (
 ).env;
 const USER_STORY_URL = `${VITE_API_URL || "http://localhost:3000"}${VITE_API_AUTH_URL || "/api/auth"}`;
 
-const verifyAuthToken = (request: Request) => {
-	const [bearer, token] =
-		request.headers.get("Authorization")?.split(" ") || [];
-	// Accept the mock token for development
-	if (
-		!token ||
-		bearer !== "Bearer" ||
-		(import.meta.env.MODE === "development" &&
-			token !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mocked")
-	) {
-		return HttpResponse.json(
-			{ error: "Authorization token is required or invalid" },
-			{ status: 401 },
-		);
-	}
-	return null;
-};
-
 const fetchUserById = (id: number) => {
 	const user = userData.find((u) => u.id === id);
 	console.info(`Fetching user by ID: ${id}`, user);
@@ -48,46 +30,32 @@ const userHandlers = [
 	}),
 
 	// Delete user by ID
-	http.delete(
-		`${USER_STORY_URL}/users/:id`,
-		async ({ params: { id }, request }) => {
-			const authError = verifyAuthToken(request);
-			if (authError) return authError;
+	http.delete(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
+		console.log(`Inside delete user by ID handler for ID: ${id}`);
+		const user = fetchUserById(parseInt(id as string));
+		if (user.error) {
+			return HttpResponse.json({ error: user.error }, { status: 404 });
+		}
 
-			const user = fetchUserById(parseInt(id as string));
-			if (user.error) {
-				return HttpResponse.json({ error: user.error }, { status: 404 });
-			}
-
-			// Simulate deletion
-			return HttpResponse.json(
-				{ message: "User deleted successfully" },
-				{ status: 200 },
-			);
-		},
-	),
+		// Simulate deletion
+		return HttpResponse.json(
+			{ message: "User deleted successfully" },
+			{ status: 200 },
+		);
+	}),
 
 	// Update user profile
-	http.put(
-		`${USER_STORY_URL}/users/:id`,
-		async ({ params: { id }, request }) => {
-			const authError = verifyAuthToken(request);
-			if (authError) return authError;
+	http.put(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
+		const user = fetchUserById(parseInt(id as string));
+		if (user.error) {
+			return HttpResponse.json({ error: user.error }, { status: 404 });
+		}
 
-			const user = fetchUserById(parseInt(id as string));
-			if (user.error) {
-				return HttpResponse.json({ error: user.error }, { status: 404 });
-			}
-
-			return HttpResponse.json({ ...user }, { status: 200 });
-		},
-	),
+		return HttpResponse.json({ ...user }, { status: 200 });
+	}),
 
 	// Register user
 	http.post(`${USER_STORY_URL}/users/register`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
-
 		const reqBody = (await request.json()) as Pick<
 			UserDT,
 			"username" | "password"
@@ -137,9 +105,7 @@ const userHandlers = [
 	}),
 
 	// Logout user
-	http.post(`${USER_STORY_URL}/logout`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
+	http.post(`${USER_STORY_URL}/logout`, async () => {
 		// Simulate logout
 		return HttpResponse.json({ message: "User logged out" }, { status: 200 });
 	}),
@@ -148,9 +114,6 @@ const userHandlers = [
 	http.put(
 		`${USER_STORY_URL}/users/:id/change-password`,
 		async ({ params, request }) => {
-			const authError = verifyAuthToken(request);
-			if (authError) return authError;
-
 			const reqBody = (await request.json()) as Pick<UserDT, "password">;
 			const { id } = params;
 			const { password } = reqBody;
@@ -176,9 +139,6 @@ const userHandlers = [
 
 	// Change my password
 	http.put(`${USER_STORY_URL}/change-password`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
-
 		const reqBody = (await request.json()) as Pick<UserDT, "password" | "id">;
 		const { password, id } = reqBody;
 
@@ -201,18 +161,13 @@ const userHandlers = [
 	}),
 
 	// Get current user
-	http.get(`${USER_STORY_URL}/profile`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
-
+	http.get(`${USER_STORY_URL}/profile`, async () => {
 		// Simulate current user info (using first user as example)
 		return HttpResponse.json({ data: userData[0] }, { status: 200 });
 	}),
 
 	// Get user status
-	http.get(`${USER_STORY_URL}/authenticated`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
+	http.get(`${USER_STORY_URL}/authenticated`, async () => {
 		// Simulate user status
 		return HttpResponse.json(
 			{ message: "User is authenticated" },
@@ -221,30 +176,17 @@ const userHandlers = [
 	}),
 
 	// Refresh auth token
-	http.post(`${USER_STORY_URL}/refresh`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
-
-		const reqBody = (await request.json()) as { refreshToken?: string };
-
-		if (!reqBody?.refreshToken) {
-			return HttpResponse.json(
-				{ error: "Refresh token is required" },
-				{ status: 400 },
-			);
-		}
-
+	http.post(`${USER_STORY_URL}/refresh`, async () => {
+		// TODO: verify refreshToken from cookies
 		// Simulate token refresh
 		return HttpResponse.json(
-			{ refreshToken: "new-refresh-token", expiresIn: "1h" },
+			{ message: "Token refreshed successfully" },
 			{ status: 200 },
 		);
 	}),
 
 	// Get all users
-	http.get(`${USER_STORY_URL}/users`, async ({ request }) => {
-		const authError = verifyAuthToken(request);
-		if (authError) return authError;
+	http.get(`${USER_STORY_URL}/users`, async () => {
 		return HttpResponse.json({ data: userData }, { status: 200 });
 	}),
 ];

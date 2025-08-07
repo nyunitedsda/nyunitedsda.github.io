@@ -3,8 +3,6 @@ import axiosInstance from "../axiosInstance";
 import { handleOperationError } from "./helpers";
 import type { DatabaseEntity } from "./types";
 
-const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth";
-
 /**
  * Authentication API calls
  */
@@ -49,69 +47,4 @@ const getDatabaseItem = async <T extends { id: number }>(
 	}
 };
 
-/**
- * Request password reset
- */
-const requestPasswordReset = async (
-	email: string,
-	config?: AxiosRequestConfig,
-): Promise<{ message: string }> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}forgot-password`,
-			{ email },
-			config,
-		);
-		return response?.data.data || response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("requestPasswordReset", "users", error);
-	}
-};
-
-/**
- * Reset password with token
- */
-const resetPassword = async (
-	token: string,
-	newPassword: string,
-	config?: AxiosRequestConfig,
-): Promise<{ message: string }> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}reset-password`,
-			{ token, password: newPassword },
-			config,
-		);
-		return response?.data.data || response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("resetPassword", "users", error);
-	}
-};
-
-/**
- * Verify email address
- */
-const verifyEmail = async (
-	token: string,
-	config?: AxiosRequestConfig,
-): Promise<{ message: string }> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}verify-email`,
-			{ token },
-			config,
-		);
-		return response?.data.data || response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("verifyEmail", "users", error);
-	}
-};
-
-export {
-	getDatabaseItem,
-	getDatabaseList,
-	// Authentication exports
-	requestPasswordReset,
-	resetPassword,
-	verifyEmail,
-};
+export { getDatabaseItem, getDatabaseList };

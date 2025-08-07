@@ -4,35 +4,37 @@ import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
-import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
 import usePermission from "../../../hooks/auth/usePermission";
-import useToken from "../../../hooks/auth/useToken";
 import { initialDonation } from "../../../test/mock_data";
-import { createAuthConfig } from "../../../utils/authUtils";
+
+import type { DonationDT } from "../../../api/request/databaseTypes";
 import donationColumns from "../constants/donationColumns";
 
 const DONATION_SUBHEADER = "Manage your donation methods";
 
 const DonationAdmin: FC = () => {
-	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("donations");
 
 	const [createDonationOpen, setCreateDonationOpen] =
 		useState<Partial<DonationDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<DonationDT[] | undefined>({
+	const {
+		data: queryData,
+		refetch,
+		isLoading,
+	} = useQuery<DonationDT[] | undefined>({
 		queryKey: ["donations"],
-		queryFn: () => getDatabaseList("donations", createAuthConfig(accessToken)),
+		queryFn: () => getDatabaseList("donations"),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
 	const _handleDeleteDonation = useCallback(
-		(data: GenericType & { id: number }) => {
-			deleteEntity("donations", data.id, createAuthConfig(accessToken))
+		(data: DonationDT) => {
+			deleteEntity("donations", data.id)
 				.then(() => {
 					refetch();
 					enqueueSnackbar("Donation deleted successfully", {
@@ -46,7 +48,7 @@ const DonationAdmin: FC = () => {
 					});
 				});
 		},
-		[accessToken],
+		[refetch, enqueueSnackbar],
 	);
 
 	return (
@@ -60,7 +62,8 @@ const DonationAdmin: FC = () => {
 			/>
 
 			<DataTable
-				data={queryData as unknown as GenericType[]}
+				isLoading={isLoading}
+				data={queryData as DonationDT[]}
 				columns={donationColumns}
 				onEdit={canEdit ? setCreateDonationOpen : undefined}
 				onDelete={canDelete ? _handleDeleteDonation : undefined}

@@ -11,23 +11,18 @@ import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { getAllUsers } from "../../../api/request/authAndUserRequest";
 import type { UserDT } from "../../../api/request/databaseTypes";
 import DataTable from "../../../components/DataTable/DataTable";
-import type { GenericType } from "../../../components/DataTable/types";
-import RingLoader from "../../../components/Loaders/RingLoader";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import PasswordEditor from "../../../forms/collection/PasswordEditor/PasswordEditor";
 import UserEditor from "../../../forms/collection/UserEditor";
 import { useDeleteUser } from "../../../hooks/auth/useAuthAPI";
 import usePermission from "../../../hooks/auth/usePermission";
-import useToken from "../../../hooks/auth/useToken";
 import { initialUser } from "../../../test/mock_data";
-import { createAuthConfig } from "../../../utils/authUtils";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import userColumns from "../constants/userColumns";
 
 const { USER_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const UserManagement: FC = () => {
-	const { accessToken } = useToken();
 	const deleteUser = useDeleteUser();
 	const { canCreate, canEdit, canDelete } = usePermission("users");
 	useSnackbar();
@@ -49,10 +44,9 @@ const UserManagement: FC = () => {
 		isLoading,
 	} = useQuery<UserDT[] | undefined>({
 		queryKey: ["users"],
-		queryFn: () => getAllUsers(createAuthConfig(accessToken)),
+		queryFn: () => getAllUsers(),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
-		enabled: !!accessToken,
 	});
 
 	useEffect(() => {
@@ -107,30 +101,27 @@ const UserManagement: FC = () => {
 				}
 			/>
 
-			{isLoading ? (
-				<RingLoader />
-			) : (
-				<DataTable
-					data={userData as (UserDT extends GenericType ? UserDT : never)[]}
-					columns={userColumns}
-					renderAction={(data) => {
-						return (
-							<IconButton
-								size="small"
-								title="View User"
-								onClick={(e) =>
-									setIsMenuOpen({
-										data: data as unknown as UserDT,
-										anchorEl: e.currentTarget,
-									})
-								}
-							>
-								<MoreVertOutlined color="primary" />
-							</IconButton>
-						);
-					}}
-				/>
-			)}
+			<DataTable
+				isLoading={isLoading}
+				data={userData as UserDT[]}
+				columns={userColumns}
+				renderAction={(data) => {
+					return (
+						<IconButton
+							size="small"
+							title="View User"
+							onClick={(e) =>
+								setIsMenuOpen({
+									data: data as unknown as UserDT,
+									anchorEl: e.currentTarget,
+								})
+							}
+						>
+							<MoreVertOutlined color="primary" />
+						</IconButton>
+					);
+				}}
+			/>
 
 			{createUserOpen && (
 				<UserEditor

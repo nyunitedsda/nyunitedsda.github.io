@@ -5,36 +5,37 @@ import { getDatabaseList } from "../../../api/request/commonQueries";
 import type { ArticleDT } from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
-import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import BlogEditor from "../../../forms/collection/BlogEditor/BlogEditor";
 import usePermission from "../../../hooks/auth/usePermission";
-import useToken from "../../../hooks/auth/useToken";
 import { initialArticle } from "../../../test/mock_data";
-import { createAuthConfig } from "../../../utils/authUtils";
+
 import articleColumns from "../constants/articleColumns";
 
 const BLOG_SUBHEADER = "Manage blog articles";
 
 const BlogManagement: FC = () => {
-	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("articles");
 
 	const [createArticleOpen, setCreateArticleOpen] =
 		useState<Partial<ArticleDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<ArticleDT[] | undefined>({
+	const {
+		data: queryData,
+		refetch,
+		isLoading,
+	} = useQuery<Partial<ArticleDT>[] | undefined>({
 		queryKey: ["articles"],
-		queryFn: () => getDatabaseList("articles", createAuthConfig(accessToken)),
+		queryFn: () => getDatabaseList("articles"),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
 	const _handleDeleteArticle = useCallback(
-		(data: ArticleDT) => {
-			const { id } = data as GenericType & { id: number };
-			deleteEntity("articles", id, createAuthConfig(accessToken))
+		(data: Partial<ArticleDT>) => {
+			const { id } = data as ArticleDT;
+			deleteEntity("articles", id)
 				.then(() => {
 					refetch();
 					enqueueSnackbar("Article deleted successfully", {
@@ -48,7 +49,7 @@ const BlogManagement: FC = () => {
 					});
 				});
 		},
-		[accessToken],
+		[refetch, enqueueSnackbar],
 	);
 
 	return (
@@ -62,7 +63,8 @@ const BlogManagement: FC = () => {
 			/>
 
 			<DataTable
-				data={queryData as unknown as GenericType[]}
+				isLoading={isLoading}
+				data={queryData as ArticleDT[]}
 				columns={articleColumns}
 				onEdit={canEdit ? setCreateArticleOpen : undefined}
 				onDelete={canDelete ? _handleDeleteArticle : undefined}

@@ -1,26 +1,24 @@
 import type { TableCellProps } from "@mui/material/TableCell";
 import type { ReactNode } from "react";
 
-type GenericType = { [key: string]: ReactNode };
-
-interface ColumnDefinition<GenericType> {
+interface ColumnDefinition<T extends { id?: number }> {
 	id: string;
 	title: string;
-	field: keyof GenericType;
+	field: keyof T;
 	header?: string;
 	align?: TableCellProps["align"];
-	renderCell?: (data: GenericType) => ReactNode;
+	renderCell?: (data: T) => ReactNode;
 	renderHeader?: ReactNode;
 }
 
-interface DataTableProps<GenericType> {
+interface DataTableProps<T extends { id?: number }> {
 	isLoading: boolean;
-	columns: ColumnDefinition<GenericType>[];
-	data: GenericType[];
-	onEdit?: (data: GenericType) => void;
-	onDelete?: (data: GenericType) => void;
-	onView?: (data: GenericType) => void;
-	renderAction?: (data: GenericType) => ReactNode;
+	columns: ColumnDefinition<T>[];
+	data: T[];
+	onEdit?: (data: T) => void;
+	onDelete?: (data: T) => void;
+	onView?: (data: T) => void;
+	renderAction?: (data: T) => ReactNode;
 }
 
-export type { ColumnDefinition, DataTableProps, GenericType };
+export type { ColumnDefinition, DataTableProps };

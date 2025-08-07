@@ -4,6 +4,7 @@ export const initialState: Partial<NotificationDT> = {
 	message: "",
 	title: "",
 	severity_id: 1,
+	expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Default to one week from now
 };
 
 const notifications: NotificationDT[] = [

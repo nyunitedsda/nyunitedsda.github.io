@@ -4,40 +4,37 @@ import { type FC, useCallback, useState } from "react";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
-import type { GenericType } from "../../../components/DataTable/types";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
 import usePermission from "../../../hooks/auth/usePermission";
-import useToken from "../../../hooks/auth/useToken";
 import { initialContactInfo } from "../../../test/mock_data";
-import { createAuthConfig } from "../../../utils/authUtils";
+
+import type { ContactInfoDT } from "../../../api/request/databaseTypes";
 import contactInfoColumns from "../constants/contactInfoColumns";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
 
 const ContactManagement: FC = () => {
-	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("contact_info");
 
 	const [createContactOpen, setCreateContactOpen] =
-		useState<Partial<Contact_InfoDT> | null>(null);
+		useState<Partial<ContactInfoDT> | null>(null);
 
-	const { data: queryData, refetch } = useQuery<Contact_InfoDT[] | undefined>({
+	const {
+		data: queryData,
+		refetch,
+		isLoading,
+	} = useQuery<ContactInfoDT[] | undefined>({
 		queryKey: ["contacts"],
-		queryFn: () =>
-			getDatabaseList("contact_info", createAuthConfig(accessToken)),
+		queryFn: () => getDatabaseList("contact_info"),
 		staleTime: 5 * 60 * 1000,
 		refetchOnWindowFocus: false,
 	});
 
 	const _handleDeleteContact = useCallback(
-		(data: GenericType) => {
-			deleteEntity(
-				"contact_info",
-				data?.id as number,
-				createAuthConfig(accessToken),
-			)
+		(data: ContactInfoDT) => {
+			deleteEntity("contact_info", data?.id as number)
 				.then(() => {
 					refetch();
 					enqueueSnackbar("Contact deleted successfully", {
@@ -51,7 +48,7 @@ const ContactManagement: FC = () => {
 					});
 				});
 		},
-		[accessToken],
+		[refetch],
 	);
 
 	return (
@@ -65,7 +62,8 @@ const ContactManagement: FC = () => {
 			/>
 
 			<DataTable
-				data={queryData as unknown as GenericType[]}
+				isLoading={isLoading}
+				data={queryData as Partial<ContactInfoDT>[]}
 				columns={contactInfoColumns}
 				onEdit={canEdit ? setCreateContactOpen : undefined}
 				onDelete={canDelete ? _handleDeleteContact : undefined}
@@ -74,7 +72,7 @@ const ContactManagement: FC = () => {
 			{createContactOpen && (
 				<ContactEditor
 					open={!!createContactOpen}
-					data={createContactOpen as Contact_InfoDT}
+					data={createContactOpen as ContactInfoDT}
 					onClose={() => setCreateContactOpen(null)}
 					onSuccess={() => {
 						refetch();

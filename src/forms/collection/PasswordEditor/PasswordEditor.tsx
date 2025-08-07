@@ -7,8 +7,7 @@ import {
 	changeUserPassword,
 } from "../../../api/request/authAndUserRequest";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import useToken from "../../../hooks/auth/useToken";
-import { createAuthConfig } from "../../../utils/authUtils";
+
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";
 import { configurePasswordInput } from "../commonInputs";
@@ -63,7 +62,6 @@ const PasswordEditor: FC<PasswordEditorProps> = ({
 	type = "user",
 	confirmOnSave = false,
 }) => {
-	const { accessToken } = useToken();
 	const { enqueueSnackbar } = useSnackbar();
 
 	const passwordProps = useMemo(() => {
@@ -101,24 +99,17 @@ const PasswordEditor: FC<PasswordEditorProps> = ({
 		async (values: ChangePasswordFormData) => {
 			try {
 				if (type === "admin") {
-					await changeUserPassword(
-						values.id,
-						values.password,
-						createAuthConfig(accessToken),
-					);
+					await changeUserPassword(values.id, values.password);
 
 					enqueueSnackbar("Password changed successfully!", {
 						variant: "success",
 					});
 				} else {
-					await changeMyPassword(
-						{
-							old_Password: values.old_Password,
-							new_password: values.password,
-							id: values.id,
-						},
-						createAuthConfig(accessToken),
-					);
+					await changeMyPassword({
+						old_Password: values.old_Password,
+						new_password: values.password,
+						id: values.id,
+					});
 
 					enqueueSnackbar("Your password has been changed successfully!", {
 						variant: "success",

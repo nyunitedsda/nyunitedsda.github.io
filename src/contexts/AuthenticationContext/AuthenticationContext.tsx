@@ -1,4 +1,3 @@
-import { useSnackbar } from "notistack";
 import {
 	type FC,
 	type PropsWithChildren,
@@ -8,104 +7,104 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import type { UserDT } from "../../api/request/databaseTypes";
 import type { LoginCredentials } from "../../api/request/types";
-import {
-	useAuthStatus,
-	// useCurrentUser,
-	useLogin,
-	useLogout,
-	useRefreshToken,
-} from "../../hooks/auth";
-import useToken from "../../hooks/auth/useToken";
+import { useLogin, useLogout } from "../../hooks/auth";
+import { useAuthStatus, useCurrentUser } from "../../hooks/auth/useAuthAPI";
 import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
 import { Provider } from "./context";
 import type { AuthenticationContextProps } from "./types";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
-	const { accessToken, refreshToken, clearTokens } = useToken();
-	// // const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
-	// const { enqueueSnackbar } = useSnackbar();
 	const { hasAuthStatus, refreshAuthStatus } = useAuthStatus();
+	const {
+		data: currentUser,
+		isLoading: userLoading,
+		refetch: refreshUser,
+	} = useCurrentUser();
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
-	const refreshAuthToken = useRefreshToken();
 	const navigate = useNavigate();
 
-	const [user, setUser] = useState<UserDT | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
 		!!hasAuthStatus,
 	);
 
-	// Check authentication status every 5 minutes if accessToken is available
 	useEffect(() => {
-		if (!accessToken) return;
+		setIsAuthenticated(!!hasAuthStatus);
+		if (!hasAuthStatus) {
+			// Optionally redirect to login if session expired
+			if (
+				typeof window !== "undefined" &&
+				window.location.pathname !== "/login"
+			) {
+				window.location.href = "/login";
+			}
+		}
+	}, [hasAuthStatus]);
+
+	useEffect(() => {
+		if (currentUser) {
+			setIsAuthenticated(true);
+		}
+	}, [currentUser]);
+
+	// Check authentication status every 5 minutes if user authenticated
+	useEffect(() => {
 		const interval = setInterval(
 			() => {
-				if (accessToken) {
-					console.log("refresh value : ", refreshAuthStatus?.());
-					// setIsAuthenticated(false);
-					// setUser(null);
-					// clearTokens();
-					// navigate(ROUTE_PATHS.LOGIN);
+				if (isAuthenticated) {
+					refreshAuthStatus();
+					refreshUser();
 				}
 			},
 			5 * 60 * 1000,
 		);
 		return () => clearInterval(interval);
-	}, [accessToken, refreshAuthStatus, clearTokens, navigate]);
+	}, [isAuthenticated, refreshAuthStatus, refreshUser]);
 
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
-			setIsLoading(true);
-
-			// Call the actual login API using useLogin mutation
-			const response = await loginUser.mutateAsync(credentials);
-			const { user } = response;
-
-			setUser(user);
-			setIsAuthenticated(true);
-			setIsLoading(false);
+			try {
+				await loginUser.mutateAsync(credentials);
+				await refreshUser();
+				setIsAuthenticated(true);
+			} catch (error) {
+				setIsAuthenticated(false);
+			}
 		},
-		[loginUser],
+		[loginUser, refreshUser],
 	);
 
 	const logout = useCallback(async () => {
 		try {
-			logoutUser.mutateAsync().then(() => {
-				setUser(null);
-
-				navigate(ROUTE_PATHS.HOME);
-			});
+			await logoutUser.mutateAsync();
+			setIsAuthenticated(false);
+			await refreshUser(); // Clear user state after logout
+			navigate(ROUTE_PATHS.HOME);
 		} catch (error) {
 			console.log("Logout failed", error);
 		}
-	}, []);
-
-	const refreshAuth = useCallback(async () => {
-		try {
-			if (!refreshToken) {
-				throw new Error("No refresh token available");
-			}
-
-			await refreshAuthToken?.mutateAsync();
-		} catch (error) {
-			logout();
-			throw error;
-		}
-	}, [logout]);
+	}, [logoutUser, refreshUser, navigate]);
 
 	const value: AuthenticationContextProps = useMemo(
 		() => ({
-			user,
-			isLoading,
+			user: currentUser ?? null,
+			isLoading: userLoading,
 			isAuthenticated,
 			login,
 			logout,
-			refreshAuth,
+			refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
+			refreshUser, // Expose user refresh for manual sync
 		}),
-		[user, isLoading, isAuthenticated, login, logout, refreshAuth],
+		[
+			currentUser,
+			userLoading,
+			isAuthenticated,
+			login,
+			logout,
+			refreshAuthStatus,
+			refreshUser,
+		],
 	);
 
 	return <Provider value={value}>{children}</Provider>;

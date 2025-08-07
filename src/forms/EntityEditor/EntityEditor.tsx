@@ -3,8 +3,6 @@ import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
 import { useMemo } from "react";
 import { createEntity, updateEntity } from "../../api/request/mutations";
-import useToken from "../../hooks/auth/useToken";
-import { createAuthConfig } from "../../utils/authUtils";
 import FormContainer from "../FormBuilder/FormContainer";
 import type { EntityEditorProps } from "./types";
 
@@ -28,8 +26,6 @@ const EntityEditor = <T extends { id?: number }>({
 	onCancel,
 }: EntityEditorProps<T>) => {
 	const { enqueueSnackbar } = useSnackbar();
-	const { accessToken } = useToken();
-
 	const isEditMode = useMemo(() => !!id, [id]);
 
 	const handleSubmit = async (values: T) => {
@@ -42,7 +38,6 @@ const EntityEditor = <T extends { id?: number }>({
 					entity,
 					id,
 					values as T & { id: number },
-					createAuthConfig(accessToken),
 				);
 
 				enqueueSnackbar(`${entity} updated successfully`, {
@@ -50,11 +45,7 @@ const EntityEditor = <T extends { id?: number }>({
 				});
 			} else {
 				// Create new data
-				result = await createEntity<T>(
-					entity,
-					values as Omit<T, "id">,
-					createAuthConfig(accessToken),
-				);
+				result = await createEntity<T>(entity, values as Omit<T, "id">);
 				enqueueSnackbar(`New ${entity} created successfully`, {
 					variant: "success",
 				});

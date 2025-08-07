@@ -14,13 +14,6 @@ const initialState: Partial<UserDT> = {
 	id: undefined,
 };
 
-const adminTokenResponse = {
-	accessToken:
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVfaWQiOjMsImlhdCI6MTc1NDE2NjcxMSwiZXhwIjoxNzU0MTcwMzExLCJhdWQiOiJueXVuaXRlZHNkYS1hcHAiLCJpc3MiOiJueXVuaXRlZHNkYS1hcGkifQ.CctMZHQpnXgRXTKltECTiT0pRj_uTlPkvjNF1E2srjY",
-	refreshToken:
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3NTQxNjY3MTEsImV4cCI6MTc1NDI1MzExMX0.4LJpIlq88KarZf8hXQel5fm4VGQS1IPu-sLAx17GLds",
-	expiresIn: "1h",
-};
 const adminPermissions = [
 	"announcements-manage",
 	"articles-manage",
@@ -87,7 +80,6 @@ const mockLoginResponse = {
 		...userData[0],
 		permissions: adminPermissions,
 	},
-	...adminTokenResponse,
 };
 
 export default userData;

@@ -8,20 +8,17 @@ import type {
 } from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
-import type { GenericType } from "../../../components/DataTable/types";
 import RingLoader from "../../../components/Loaders/RingLoader";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import AnnouncementEditor from "../../../forms/collection/AnnouncementEditor/AnnouncementEditor";
 import usePermission from "../../../hooks/auth/usePermission";
-import useToken from "../../../hooks/auth/useToken";
 import { initialAnnouncement } from "../../../test/mock_data";
-import { createAuthConfig } from "../../../utils/authUtils";
+
 import announcementColumns from "../constants/announcementColumns";
 
 const SUBHEADER = "Manage church announcements and events";
 
 const AnnouncementManagement: FC = () => {
-	const { accessToken } = useToken();
 	const { canCreate, canEdit, canDelete } = usePermission("announcements");
 	const { enqueueSnackbar } = useSnackbar();
 
@@ -70,7 +67,7 @@ const AnnouncementManagement: FC = () => {
 
 	const _handleDelete = useCallback(
 		(d: AnnouncementDT & { id: number }) => {
-			deleteEntity("announcements", d.id, createAuthConfig(accessToken))
+			deleteEntity("announcements", d.id)
 				.then(() => {
 					result[0].refetch();
 					enqueueSnackbar("Announcement deleted successfully", {
@@ -84,7 +81,7 @@ const AnnouncementManagement: FC = () => {
 					});
 				});
 		},
-		[accessToken, enqueueSnackbar, result],
+		[enqueueSnackbar, result],
 	);
 
 	return (
@@ -105,7 +102,7 @@ const AnnouncementManagement: FC = () => {
 				<DataTable
 					isLoading={result[0].isLoading}
 					columns={tableColumns}
-					data={(result[0].data ?? []) as unknown as GenericType[]}
+					data={result[0].data ?? []}
 					onDelete={
 						canDelete
 							? (d) => _handleDelete(d as unknown as AnnouncementDT)

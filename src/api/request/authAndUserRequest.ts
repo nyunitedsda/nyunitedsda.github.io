@@ -1,11 +1,10 @@
 import type { AxiosRequestConfig } from "axios";
 import type { RegisterData } from "../../contexts/AuthenticationContext/types";
-import { createAuthConfig } from "../../utils/authUtils";
 import axiosInstance from "../axiosInstance";
 import type { UserDT } from "./databaseTypes";
 import { handleOperationError } from "./helpers";
 import type {
-	AuthTokenResponse,
+	ChangeMyPassword,
 	LoginCredentials,
 	LoginResponse,
 } from "./types";
@@ -14,7 +13,7 @@ const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
 
 /**
  * Get a list of all system users
- * This a Authenticated API call that requires a valid token
+ * This a Authenticated API call
  * @param config - Optional axios request config
  * @returns Promise<UserDT[]>
  * @throws Error if the operation fails
@@ -32,7 +31,7 @@ const getAllUsers = async (config?: AxiosRequestConfig): Promise<UserDT[]> => {
 
 /**
  * Get a list of all system users
- * This a Authenticated API call that requires a valid token
+ * This a Authenticated API call
  * @param config - Optional axios request config
  * @returns Promise<UserDT[]>
  * @throws Error if the operation fails
@@ -42,8 +41,6 @@ const getUserById = async (
 	config?: AxiosRequestConfig,
 ): Promise<UserDT> => {
 	try {
-		console.log("All users config: ", config);
-
 		const response = await axiosInstance.get(
 			`${AUTH_API_URL}users/${id}`,
 			config,
@@ -77,7 +74,7 @@ const deleteUser = async (
 
 /**
  * Update user profile data
- * This is an Authenticated API call that requires a valid token
+ * This is an Authenticated API call
  * @param userId - ID of the user to update
  * @param userData - Partial user data to update
  * @param config - Optional axios request config
@@ -105,7 +102,7 @@ const updateUser = async (
  * Register/ create a new user
  * @param userData - User registration data
  * @param config - Optional axios request config
- * @returns Promise<{ user: UserDT; tokens: AuthTokenResponse }>
+ * @returns Promise<{ user: UserDT;  message: string }>
  */
 const registerUser = async (
 	userData: RegisterData,
@@ -146,8 +143,8 @@ const loginUser = async (
 };
 
 /**
- * Logout user and invalidate tokens
- * This is an Authenticated API call that requires a valid token
+ * Logout user
+ * This is an Authenticated API call
  * @param config - Optional axios request config
  * @returns Promise<{ message: string }>
  */
@@ -155,11 +152,7 @@ const logoutUser = async (
 	config?: AxiosRequestConfig,
 ): Promise<{ message: string }> => {
 	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}logout`,
-			{},
-			config,
-		);
+		const response = await axiosInstance.post(`${AUTH_API_URL}logout`, config);
 		return response?.data;
 	} catch (error: unknown) {
 		return handleOperationError("logout", "users", error);
@@ -168,7 +161,7 @@ const logoutUser = async (
 
 /**
  * Get current user profile
- * This is an Authenticated API call that requires a valid token
+ * This is an Authenticated API call
  * @param config - Optional axios request config
  * @returns Promise<UserDT>
  */
@@ -182,40 +175,16 @@ const getCurrentUser = async (config?: AxiosRequestConfig): Promise<UserDT> => {
 };
 
 const getUserStatus = async (
-	token: string,
 	config?: AxiosRequestConfig,
 ): Promise<{ message: string }> => {
 	try {
 		const response = await axiosInstance.get(
 			`${AUTH_API_URL}authenticated`,
-			createAuthConfig(token, config),
+			config,
 		);
 		return response?.data || response;
 	} catch (error: unknown) {
 		return handleOperationError("getUserStatus", "users", error);
-	}
-};
-
-/**
- * Refresh authentication token
- * This is an Authenticated API call that requires a valid refresh token
- * @param refreshToken - Refresh token to use for getting new access token
- * @param config - Optional axios request config
- * @returns Promise<AuthTokenResponse>
- */
-const refreshAuthToken = async (
-	refreshToken: string,
-	config?: AxiosRequestConfig,
-): Promise<AuthTokenResponse> => {
-	try {
-		const response = await axiosInstance.post(
-			`${AUTH_API_URL}refresh`,
-			{ refreshToken },
-			config,
-		);
-		return response?.data;
-	} catch (error: unknown) {
-		return handleOperationError("refresh", "users", error);
 	}
 };
 
@@ -250,11 +219,7 @@ const changeUserPassword = async (
  * @returns Promise<{ message: string }>
  */
 const changeMyPassword = async (
-	{
-		old_Password,
-		new_password,
-		id,
-	}: { old_Password: string; new_password: string; id: number },
+	{ old_Password, new_password, id }: ChangeMyPassword,
 	config?: AxiosRequestConfig,
 ): Promise<{ message: string }> => {
 	try {
@@ -279,7 +244,6 @@ export {
 	getUserStatus,
 	loginUser,
 	logoutUser,
-	refreshAuthToken,
 	registerUser,
 	updateUser,
 };
