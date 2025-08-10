@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
-import { getDatabaseList } from "../../../api/request/commonQueries";
 import type {
 	AnnouncementDT,
 	EventDT,
-} from "../../../api/request/databaseTypes";
+} from "../../../api/request";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useAuthentication } from "../../../hooks/auth";
 import { announcementDateFormats } from "../../../test/mock_data/announcements";
@@ -41,13 +41,13 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: { ...data, author_id: user?.id ?? 0 },
-						title: EDIT_TITLE,
-					}
+					initialValues: { ...data, author_id: user?.id ?? 0 },
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
-						title: ADD_TITLE,
-					},
+					initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
+					title: ADD_TITLE,
+				},
 		[data, user],
 	);
 

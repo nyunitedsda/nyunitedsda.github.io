@@ -61,7 +61,7 @@ import { FC } from "react";
 import EntityManager from "../../../components/EntityManager";
 import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
 import DonationItem from "../../Donations/components/DonationItem";
-import type { NotificationDT } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request";
 
 const NotificationAdmin: FC = () => {
   // Wrapper component to handle type compatibility

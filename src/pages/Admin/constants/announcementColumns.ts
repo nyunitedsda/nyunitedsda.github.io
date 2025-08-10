@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { AnnouncementDT } from "../../../api/request/databaseTypes";
+import type { AnnouncementDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

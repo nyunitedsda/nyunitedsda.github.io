@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import type { DatabaseEntity } from "../../api/request/types";
+import type { DatabaseEntity } from "../../api/request";
 import useAuthentication from "./useAuthentication";
 
 const usePermission = (entity: DatabaseEntity) => {

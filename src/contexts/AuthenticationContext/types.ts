@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { UserDT } from "../../api/request/databaseTypes";
-import type { LoginCredentials } from "../../api/request/types";
+import type { LoginCredentials, UserDT } from "../../api/request";
 
 export type RegisterData = Omit<UserDT, "id" | "is_system" | "last_login">;
 

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
+import type { ArticleDT } from "../../../api/request";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { ArticleDT } from "../../../api/request/databaseTypes";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
 import PageTitle from "../../../components/PageWrapper/PageTitle";

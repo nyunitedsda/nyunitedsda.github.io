@@ -1,5 +1,5 @@
 import { HttpResponse, http } from "msw";
-import type { UserDT } from "../../api/request/databaseTypes";
+import type { UserDT } from "../../api/request";
 import { mockLoginResponse, users as userData } from "../../test/mock_data";
 
 const { VITE_API_URL, VITE_API_AUTH_URL } = (

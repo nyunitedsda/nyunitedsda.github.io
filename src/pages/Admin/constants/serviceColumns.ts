@@ -1,4 +1,4 @@
-import type { ServiceDT } from "../../../api/request/types";
+import type { ServiceDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

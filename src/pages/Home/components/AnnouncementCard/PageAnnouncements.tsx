@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import type { AnnouncementDT } from "../../../../api/request";
 import { getDatabaseList } from "../../../../api/request/commonQueries";
-import type { AnnouncementDT } from "../../../../api/request/databaseTypes";
 import Carousel from "../../../../components/Carousel/Carousel";
 import RingLoader from "../../../../components/Loaders/RingLoader";
 import type { EventAnnouncement } from "../../types";

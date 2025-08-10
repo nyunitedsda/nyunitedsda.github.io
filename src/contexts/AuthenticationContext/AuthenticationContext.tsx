@@ -7,10 +7,10 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router";
-import type { LoginCredentials } from "../../api/request/types";
+import type { LoginCredentials } from "../../api/request";
 import { useLogin, useLogout } from "../../hooks/auth";
 import { useAuthStatus, useCurrentUser } from "../../hooks/auth/useAuthAPI";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 import { Provider } from "./context";
 import type { AuthenticationContextProps } from "./types";
 
@@ -29,18 +29,18 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		!!hasAuthStatus,
 	);
 
-	useEffect(() => {
-		setIsAuthenticated(!!hasAuthStatus);
-		if (!hasAuthStatus) {
-			// Optionally redirect to login if session expired
-			if (
-				typeof window !== "undefined" &&
-				window.location.pathname !== "/login"
-			) {
-				window.location.href = "/login";
-			}
-		}
-	}, [hasAuthStatus]);
+	// useEffect(() => {
+	// 	setIsAuthenticated(!!hasAuthStatus);
+	// 	if (!hasAuthStatus) {
+	// 		// Optionally redirect to login if session expired
+	// 		if (
+	// 			typeof window !== "undefined" &&
+	// 			window.location.pathname !== "/login"
+	// 		) {
+	// 			window.location.href = "/login";
+	// 		}
+	// 	}
+	// }, [hasAuthStatus]);
 
 	useEffect(() => {
 		if (currentUser) {
@@ -80,7 +80,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			await logoutUser.mutateAsync();
 			setIsAuthenticated(false);
 			await refreshUser(); // Clear user state after logout
-			navigate(ROUTE_PATHS.HOME);
+			navigate(routePaths.HOME);
 		} catch (error) {
 			console.log("Logout failed", error);
 		}

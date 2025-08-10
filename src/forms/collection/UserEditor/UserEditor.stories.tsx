@@ -1,6 +1,6 @@
 // biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { UserDT } from "../../../api/request/databaseTypes";
+import type { UserDT } from "../../../api/request";
 import InteractiveStory from "../../../components/InteractiveStory/InteractiveStory";
 import type { InteractiveStoryProps } from "../../../components/InteractiveStory/types";
 import { initialUser, users as userData } from "../../../test/mock_data";

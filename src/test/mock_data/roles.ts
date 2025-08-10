@@ -1,4 +1,4 @@
-import type { UserRoleOption } from "../../api/request/types";
+import type { UserRoleOption } from "../../api/request";
 
 export const roles: UserRoleOption[] = [
 	{

@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useMemo } from "react";
+import type { NotificationDT, SeverityType } from "../../../api/request";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { NotificationDT, SeverityType } from "../../../api/request/types";
 import theme from "../../../components/AppProvider/theme";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { initialNotification } from "../../../test/mock_data";
@@ -53,13 +53,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialNotification,
-						title: ADD_TITLE,
-					},
+					initialValues: initialNotification,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 

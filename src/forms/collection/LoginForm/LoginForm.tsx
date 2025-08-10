@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
-import type { LoginCredentials } from "../../../api/request/types";
+import type { LoginCredentials } from "../../../api/request";
 import { useAuthentication } from "../../../hooks/auth";
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";

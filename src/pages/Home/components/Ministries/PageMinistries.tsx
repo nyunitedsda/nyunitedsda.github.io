@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import type { MinistriesDT } from "../../../../api/request";
 import { getDatabaseList } from "../../../../api/request/commonQueries";
-import type { MinistriesDT } from "../../../../api/request/databaseTypes";
 import RingLoader from "../../../../components/Loaders/RingLoader";
 import { HOME_CONSTANTS } from "../../homeConstants";
 import MinistryCard from "../MinistryCard";

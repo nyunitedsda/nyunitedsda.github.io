@@ -1,4 +1,4 @@
-import type { UserDT } from "../../../api/request/databaseTypes";
+import type { UserDT } from "../../../api/request";
 
 interface PasswordEditorProps {
 	data: UserDT;

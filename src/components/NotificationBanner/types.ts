@@ -1,4 +1,4 @@
-import type { NotificationDT } from "../../api/request/types";
+import type { NotificationDT } from "../../api/request";
 
 export type NotificationPosition = "top" | "bottom";
 export type NotificationVariant = "banner" | "sticky" | "popup";

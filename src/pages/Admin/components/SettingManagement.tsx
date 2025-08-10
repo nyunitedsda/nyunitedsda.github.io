@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 import { type FC, useCallback, useMemo, useState } from "react";
-import type { UserDT } from "../../../api/request/databaseTypes";
+import type { UserDT } from "../../../api/request";
 import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
 import PasswordEditor from "../../../forms/collection/PasswordEditor/PasswordEditor";
@@ -46,10 +46,10 @@ const SettingManagement: FC = () => {
 									<strong>{capitalize(field.replace(/_/g, " "))}:</strong>{" "}
 									{field === "last_login" && user[field as keyof UserDT]
 										? dayjs(user[field as keyof UserDT] as string).format(
-												"MMMM D, YYYY",
-											)
+											"MMMM D, YYYY",
+										)
 										: typeof user[field as keyof UserDT] === "object" &&
-												user[field as keyof UserDT] instanceof Date
+											user[field as keyof UserDT] instanceof Date
 											? (user[field as keyof UserDT] as Date).toISOString()
 											: String(user[field as keyof UserDT] ?? "N/A")}
 								</Typography>

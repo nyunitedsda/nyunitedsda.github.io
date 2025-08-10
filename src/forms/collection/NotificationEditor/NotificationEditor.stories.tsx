@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { NotificationDT } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request";
 import NotificationEditor from "./NotificationEditor";
 
 // Sample notification data

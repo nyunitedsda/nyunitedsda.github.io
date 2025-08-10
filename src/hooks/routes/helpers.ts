@@ -181,3 +181,21 @@ export const validateMenuRoutes = (
 		validCount,
 	};
 };
+
+// Constants
+const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
+
+// Helper function to create consistent route paths
+export const createPath = (path: string): string =>
+	`${BASE_URL}${path}`.replace(/\/+/g, "/");
+
+// Helper function to create route objects with consistent structure
+export const createRoute = (
+	element: React.ReactElement,
+	path: string,
+	id?: string,
+): RouteWithId => ({
+	element,
+	path: createPath(path),
+	...(id && { id }),
+});

@@ -1,14 +1,13 @@
 // biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { action } from "storybook/actions";
-import type { UserDT } from "../../../../api/request/databaseTypes";
+import type { UserDT } from "../../../../api/request";
 import userColumns from "../../../../pages/Admin/constants/userColumns";
 import { users } from "../../../../test/mock_data";
-import type { GenericType } from "../../types";
 import TableCard from "./TableCard";
 import type { TableCardProps } from "./types";
 
-type StoryDataType = UserDT & GenericType;
+type StoryDataType = UserDT;
 const user: StoryDataType = { ...users[0] } as StoryDataType;
 
 const columns = userColumns;
@@ -106,7 +105,7 @@ export const CustomRenderAction: Story = {
 		data: user,
 		columns,
 		renderAction: (data: StoryDataType) => (
-			<span>Custom Action for {data.name}</span>
+			<span>Custom Action for {data.username}</span>
 		),
 	},
 	parameters: {

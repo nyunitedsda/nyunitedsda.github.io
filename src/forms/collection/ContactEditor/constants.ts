@@ -1,4 +1,4 @@
-import type { DatabaseEntity } from "../../../api/request/types";
+import type { DatabaseEntity } from "../../../api/request";
 
 const CONTACT_EDITOR_CONSTANTS = {
 	EDIT_TITLE: "Edit Contact Information",
@@ -16,3 +16,4 @@ const CONTACT_EDITOR_CONSTANTS = {
 };
 
 export { CONTACT_EDITOR_CONSTANTS };
+

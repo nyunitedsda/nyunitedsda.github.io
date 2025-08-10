@@ -21,7 +21,7 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 		(import.meta as unknown as ImportMeta).env.VITE_API_URL ||
 		"http://localhost:3000";
 
-	console.log("VITE_API_URL:", VITE_API_URL);
+
 
 	const handleButtonClick = useCallback(() => {
 		if (shouldConfirm) {

@@ -1,10 +1,12 @@
 import {
+	type UseQueryResult,
 	useMutation,
 	useQuery,
 	useQueryClient,
-	type UseQueryResult,
 } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router";
+import type { LoginCredentials, LoginResponse, UserDT } from "../../api/request";
 import {
 	deleteUser,
 	getCurrentUser,
@@ -13,12 +15,8 @@ import {
 	logoutUser,
 	registerUser,
 } from "../../api/request/authAndUserRequest";
-
-import { useNavigate } from "react-router";
-import type { UserDT } from "../../api/request/databaseTypes";
-import type { LoginCredentials, LoginResponse } from "../../api/request/types";
 import type { RegisterData } from "../../contexts/AuthenticationContext";
-import { ROUTE_PATHS } from "../routes/reviewedRoutes";
+import routePaths from "../routes/routePaths";
 
 /**
  * Authentication API hooks using React Query
@@ -76,14 +74,14 @@ export const useLogout = () => {
 			queryClient.removeQueries({ queryKey: ["user"] });
 			queryClient.clear(); // Clear all cached data
 			enqueueSnackbar("Logged out successfully", { variant: "info" });
-			navigate(ROUTE_PATHS.HOME, { replace: true });
+			navigate(routePaths.HOME, { replace: true });
 		},
 		onError: (error) => {
 			console.error("Logout failed:", error);
 
 			queryClient.removeQueries({ queryKey: ["user"] });
 
-			navigate(ROUTE_PATHS.HOME, { replace: true });
+			navigate(routePaths.HOME, { replace: true });
 		},
 	});
 };
@@ -96,6 +94,9 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 		queryKey: ["user"],
 		queryFn: () => getCurrentUser(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
+		enabled: () => {
+			return document.cookie.includes("accessToken") || document.cookie.includes("refreshToken");
+		},
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
 			if (error?.response?.status === 401 || error?.response?.status === 403) {
@@ -122,6 +123,9 @@ export const useAuthStatus = () => {
 		queryKey: ["user-status"],
 		queryFn: () => getUserStatus(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
+		enabled: () => {
+			return document.cookie.includes("accessToken") || document.cookie.includes("refreshToken");
+		},
 		retry: (failureCount, error: any) => {
 			if (error?.response?.status === 403) {
 			}

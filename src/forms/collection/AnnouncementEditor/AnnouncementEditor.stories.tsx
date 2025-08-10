@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { AnnouncementDT } from "../../../api/request/types";
+import type { AnnouncementDT } from "../../../api/request";
 import AnnouncementEditor from "./AnnouncementEditor";
 
 // Sample announcement data for different event types

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { ServiceDT } from "../../../api/request/types";
+import type { ServiceDT } from "../../../api/request";
 import ServiceEditor from "./ServiceEditor";
 
 // Sample service data

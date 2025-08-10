@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
+import type { DonationDT } from "../../../api/request";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
@@ -8,8 +9,6 @@ import PageTitle from "../../../components/PageWrapper/PageTitle";
 import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
 import usePermission from "../../../hooks/auth/usePermission";
 import { initialDonation } from "../../../test/mock_data";
-
-import type { DonationDT } from "../../../api/request/databaseTypes";
 import donationColumns from "../constants/donationColumns";
 
 const DONATION_SUBHEADER = "Manage your donation methods";

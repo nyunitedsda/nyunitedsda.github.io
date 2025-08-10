@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { Navigate } from "react-router";
+import type { LegalContentDT } from "../../api/request";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { LegalContentDT } from "../../api/request/databaseTypes";
 import RingLoader from "../../components/Loaders/RingLoader";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import type { RouteTabsItem } from "../../components/RoutedTabs/types";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 
 const UserAgreements: FC = () => {
 	const { data, isLoading, error } = useQuery({
@@ -22,7 +22,7 @@ const UserAgreements: FC = () => {
 	return (
 		<>
 			{error && (
-				<Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
+				<Navigate to={routePaths.NOT_FOUND} replace state={{ error }} />
 			)}
 			{isLoading ? (
 				<RingLoader />

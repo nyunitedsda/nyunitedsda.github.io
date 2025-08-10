@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import type { DatabaseEntity } from "../../../api/request/types";
+import type { DatabaseEntity } from "../../../api/request";
 
 export const donationSchema = Yup.object().shape({
 	title: Yup.string().required("Title is required"),

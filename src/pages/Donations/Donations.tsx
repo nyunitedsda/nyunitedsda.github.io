@@ -2,8 +2,8 @@ import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
 import { Navigate } from "react-router";
+import type { DonationDT } from "../../api/request";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { DonationDT } from "../../api/request/databaseTypes";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import {
@@ -11,7 +11,7 @@ import {
 	DONATION_SUBHEADER,
 	DONATION_TEXT,
 } from "../../constants/donationConstant";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 
 const Donations: FC = () => {
 	const { isLoading, data, error } = useQuery({
@@ -48,7 +48,7 @@ const Donations: FC = () => {
 						/>
 					))}
 				{error && (
-					<Navigate to={ROUTE_PATHS.NOT_FOUND} replace state={{ error }} />
+					<Navigate to={routePaths.NOT_FOUND} replace state={{ error }} />
 				)}
 			</Stack>
 		</>

@@ -1,6 +1,6 @@
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { ComponentType } from "react";
-import type { DatabaseEntity } from "../../api/request/types";
+import type { DatabaseEntity } from "../../api/request";
 
 export interface ItemComponentProps {
 	title: string;

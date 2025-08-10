@@ -1,5 +1,5 @@
 import { type FC, useMemo } from "react";
-import type { ArticleDT } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useAuthentication } from "../../../hooks/auth";
 import { initialArticle } from "../../../test/mock_data";
@@ -29,13 +29,13 @@ const BlogEditor: FC<EditorProps<ArticleDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: { ...data, author_id: user?.id || null },
-						title: EDIT_TITLE,
-					}
+					initialValues: { ...data, author_id: user?.id || null },
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: { ...initialArticle, author_id: user?.id || null },
-						title: ADD_TITLE,
-					},
+					initialValues: { ...initialArticle, author_id: user?.id || null },
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 

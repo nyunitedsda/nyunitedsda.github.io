@@ -1,4 +1,4 @@
-import type { AnnouncementDT } from "../../api/request/databaseTypes";
+import type { AnnouncementDT } from "../../api/request";
 
 export const dateFormatValues = [
 	"YYYY-MM-DD",

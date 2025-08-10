@@ -1,5 +1,5 @@
 import type { Dayjs } from "dayjs";
-import type { EventType } from "../../api/request/types";
+import type { EventType } from "../../api/request";
 
 interface AnnouncementDetail {
 	description?: string;

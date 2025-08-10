@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Navigate } from "react-router";
 import useAuthentication from "../../hooks/auth/useAuthentication";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 import RingLoader from "../Loaders/RingLoader";
 import PageWrapper from "./PageWrapper";
 
@@ -13,7 +13,7 @@ const ProtectedPageWrapper: FC = () => {
 	}
 	if (!isAuthenticated) {
 		return (
-			<Navigate to={ROUTE_PATHS.LOGIN} state={{ from: location }} replace />
+			<Navigate to={routePaths.LOGIN} state={{ from: location }} replace />
 		);
 	}
 

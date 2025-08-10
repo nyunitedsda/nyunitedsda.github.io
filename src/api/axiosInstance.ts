@@ -1,4 +1,4 @@
-import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 
 // Extend InternalAxiosRequestConfig to allow _retry property
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {

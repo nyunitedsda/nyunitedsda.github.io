@@ -1,7 +1,7 @@
 import { type FC, useEffect, useMemo } from "react";
 import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
 import { useAuthentication } from "../../hooks/auth";
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 import { ADMIN_TAB_LIST } from "./constants/adminTabList";
 import type { AdministrationProps } from "./types";
 
@@ -10,7 +10,7 @@ const Administration: FC<AdministrationProps> = () => {
 
 	useEffect(() => {
 		if (!isAuthenticated) {
-			window.location.href = ROUTE_PATHS.LOGIN;
+			window.location.href = routePaths.LOGIN;
 		}
 	}, [isAuthenticated]);
 

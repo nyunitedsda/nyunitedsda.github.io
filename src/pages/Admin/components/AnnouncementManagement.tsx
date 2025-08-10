@@ -1,11 +1,11 @@
 import { useQueries } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo, useState } from "react";
-import { getDatabaseList } from "../../../api/request/commonQueries";
 import type {
 	AnnouncementDT,
 	EventDT,
-} from "../../../api/request/databaseTypes";
+} from "../../../api/request";
+import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
 import RingLoader from "../../../components/Loaders/RingLoader";
@@ -55,12 +55,12 @@ const AnnouncementManagement: FC = () => {
 		return announcementColumns.map((column) =>
 			column.field === "event_id"
 				? {
-						...column,
-						renderCell(data: Partial<AnnouncementDT>) {
-							const event = eventData.find((e) => e.id === data.event_id);
-							return event ? event.name : "N/A";
-						},
-					}
+					...column,
+					renderCell(data: Partial<AnnouncementDT>) {
+						const event = eventData.find((e) => e.id === data.event_id);
+						return event ? event.name : "N/A";
+					},
+				}
 				: column,
 		);
 	}, [result]);

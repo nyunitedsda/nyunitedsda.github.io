@@ -1,4 +1,4 @@
-import type { ServiceDT } from "../../api/request/databaseTypes";
+import type { ServiceDT } from "../../api/request";
 
 export const initialState: Partial<ServiceDT> = {
 	id: undefined,

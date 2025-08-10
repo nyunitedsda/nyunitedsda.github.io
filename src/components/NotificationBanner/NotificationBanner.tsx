@@ -6,7 +6,7 @@ import type { Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
 import { type FC, useCallback, useContext, useState } from "react";
-import type { SeverityPalette } from "../../api/request/types";
+import type { SeverityPalette } from "../../api/request";
 import NotificationContext from "../../contexts/NotificationContext/context";
 import { selectSeverityIcon } from "./components/helpers";
 import type { NotificationBannerProps, NotificationProps } from "./types";

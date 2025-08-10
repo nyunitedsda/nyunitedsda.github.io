@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import type { UserDT } from "../../../api/request/databaseTypes";
+import type { UserDT } from "../../../api/request";
 import { users as userData } from "../../../test/mock_data/";
 import PasswordEditor from "./PasswordEditor";
 

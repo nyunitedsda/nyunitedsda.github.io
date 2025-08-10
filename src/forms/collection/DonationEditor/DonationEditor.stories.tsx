@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
-import type { DonationDT } from "../../../api/request/types";
+import type { DonationDT } from "../../../api/request";
 import DonationEditor from "./DonationEditor";
 
 // Sample donation data

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { ArticleDT } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request";
 import BlogEditor from "./BlogEditor";
 
 // Sample article data

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useState } from "react";
-import type { Contact_InfoDT } from "../../../api/request/types";
+import type { Contact_InfoDT } from "../../../api/request";
 import ContactEditor from "./ContactEditor";
 
 // Sample contact data

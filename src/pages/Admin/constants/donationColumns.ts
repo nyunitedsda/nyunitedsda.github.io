@@ -1,4 +1,4 @@
-import type { DonationDT } from "../../../api/request/types";
+import type { DonationDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

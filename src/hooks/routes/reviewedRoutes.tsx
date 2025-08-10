@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import type { RouteObject } from "react-router";
 import RingLoader from "../../components/Loaders/RingLoader";
+import { createRoute } from "./helpers";
 
 // Helper function to wrap components with Suspense
 const lazyLoad = (Component: React.LazyExoticComponent<any>) => (
@@ -40,24 +41,6 @@ const UnauthorizedError = lazy(
 const UserAgreements = lazy(
 	() => import("../../pages/UserAgreements/UserAgreements"),
 );
-
-// Constants
-const BASE_URL = import.meta.env.VITE_BASE_URL ?? "/";
-
-// Helper function to create consistent route paths
-const createPath = (path: string): string =>
-	`${BASE_URL}${path}`.replace(/\/+/g, "/");
-
-// Helper function to create route objects with consistent structure
-const createRoute = (
-	element: React.ReactElement,
-	path: string,
-	id?: string,
-): RouteWithId => ({
-	element,
-	path: createPath(path),
-	...(id && { id }),
-});
 
 // Type for routes with id property
 type RouteWithId = RouteObject & { id?: string };
@@ -166,25 +149,3 @@ export { fallbackRoutes, mainLayoutRoutes };
 
 // Export the main routes configuration
 export default siteRoutes;
-
-// Export helper functions for external use
-export { createPath, createRoute };
-
-// Export route constants for consistency
-export const ROUTE_PATHS = {
-	HOME: createPath(""),
-	DONATIONS: createPath("donations"),
-	BLOG: createPath("blog"),
-	CONTACT: createPath("contact"),
-	ABOUT_US: createPath("aboutUs"),
-	POLICY: createPath("policy"),
-	WATCH: createPath("watch"),
-	ADMIN: createPath("admin"),
-	LOGIN: createPath("login"),
-	UNAUTHORIZED: createPath("unauthorized"),
-	NOT_FOUND: createPath("404"),
-	STORYBOOK: createPath("storybook"),
-	ADMIN_SETTINGS: createPath("admin/settings"),
-	LEGAL_PRIVACY: createPath("policy/privacy"),
-	LEGAL_TERMS: createPath("policy/termsOfUse"),
-} as const;

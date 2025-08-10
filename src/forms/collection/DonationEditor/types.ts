@@ -1,4 +1,5 @@
-import type { DonationDT } from "../../../api/request/types";
+import type { DonationDT } from "../../../api/request";
+
 
 export interface DonationEditorProps {
 	open: boolean;

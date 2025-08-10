@@ -1,4 +1,4 @@
-import type { DonationDT } from "../../api/request/databaseTypes";
+import type { DonationDT } from "../../api/request";
 
 export const initialState: Partial<DonationDT> = {
 	title: "",

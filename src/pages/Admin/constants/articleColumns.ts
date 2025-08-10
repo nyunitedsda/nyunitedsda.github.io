@@ -1,4 +1,4 @@
-import type { ArticleDT } from "../../../api/request/types";
+import type { ArticleDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

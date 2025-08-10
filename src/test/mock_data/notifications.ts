@@ -1,4 +1,4 @@
-import type { NotificationDT } from "../../api/request/databaseTypes";
+import type { NotificationDT } from "../../api/request";
 
 export const initialState: Partial<NotificationDT> = {
 	message: "",

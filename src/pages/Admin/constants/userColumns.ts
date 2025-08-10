@@ -5,7 +5,7 @@ import {
 import { Checkbox, capitalize } from "@mui/material";
 import dayjs from "dayjs";
 import { createElement } from "react";
-import type { UserDT } from "../../../api/request/databaseTypes";
+import type { UserDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 type User = Partial<UserDT & { role_name: string }>;

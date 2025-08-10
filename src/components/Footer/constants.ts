@@ -1,13 +1,13 @@
-import { ROUTE_PATHS } from "../../hooks/routes/reviewedRoutes";
+import routePaths from "../../hooks/routes/routePaths";
 
 const FOOTER_LEGAL_LINKS = [
 	{
 		label: "Terms of Use",
-		href: ROUTE_PATHS.LEGAL_TERMS,
+		href: routePaths.LEGAL_TERMS,
 	},
 	{
 		label: "Privacy Statement",
-		href: ROUTE_PATHS.LEGAL_PRIVACY,
+		href: routePaths.LEGAL_PRIVACY,
 	},
 ];
 

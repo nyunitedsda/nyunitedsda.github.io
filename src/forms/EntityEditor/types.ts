@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { DatabaseEntity } from "../../api/request/types";
+import type { DatabaseEntity } from "../../api/request";
 
 interface EntityEditorProps<T extends { id?: number }> {
 	/**
@@ -59,3 +59,4 @@ interface EntityEditorProps<T extends { id?: number }> {
 }
 
 export type { EntityEditorProps };
+

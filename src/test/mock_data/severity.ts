@@ -1,4 +1,4 @@
-import type { SeverityDT } from "../../api/request/databaseTypes";
+import type { SeverityDT } from "../../api/request";
 
 const severities: SeverityDT[] = [
 	{

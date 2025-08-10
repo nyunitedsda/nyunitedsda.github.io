@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
+import type { ContactInfoDT } from "../../../api/request";
 import { getDatabaseList } from "../../../api/request/commonQueries";
 import { deleteEntity } from "../../../api/request/mutations";
 import DataTable from "../../../components/DataTable/DataTable";
@@ -8,8 +9,6 @@ import PageTitle from "../../../components/PageWrapper/PageTitle";
 import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
 import usePermission from "../../../hooks/auth/usePermission";
 import { initialContactInfo } from "../../../test/mock_data";
-
-import type { ContactInfoDT } from "../../../api/request/databaseTypes";
 import contactInfoColumns from "../constants/contactInfoColumns";
 
 const CONTACT_SUBHEADER = "Manage church contact information";

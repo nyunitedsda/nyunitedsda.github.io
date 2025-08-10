@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import type { ServiceDT } from "../../../api/request";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { ServiceDT } from "../../../api/request/databaseTypes";
 import NoteSection from "../../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./ContactSection";
 import ContactSectionSkeleton from "./ContactSectionSkeleton";

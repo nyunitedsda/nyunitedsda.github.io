@@ -1,4 +1,4 @@
-import type { ContactInfoDT } from "../../api/request/databaseTypes";
+import type { ContactInfoDT } from "../../api/request";
 
 export const initialState: Partial<ContactInfoDT> = {
 	email: "",

@@ -1,4 +1,4 @@
-import type { UserDT } from "../../api/request/databaseTypes";
+import type { UserDT } from "../../api/request";
 
 const initialState: Partial<UserDT> = {
 	email: "",
@@ -84,3 +84,4 @@ const mockLoginResponse = {
 
 export default userData;
 export { initialState, mockLoginResponse };
+

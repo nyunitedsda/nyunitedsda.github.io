@@ -1,4 +1,4 @@
-import type { NotificationDT } from "../../../api/request/types";
+import type { NotificationDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

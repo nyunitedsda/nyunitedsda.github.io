@@ -1,4 +1,4 @@
-import type { Contact_InfoDT } from "../../../api/request/types";
+import type { Contact_InfoDT } from "../../../api/request";
 import type { ColumnDefinition } from "../../../components/DataTable/types";
 
 /**

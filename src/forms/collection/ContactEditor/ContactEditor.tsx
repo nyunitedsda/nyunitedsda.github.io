@@ -1,5 +1,5 @@
 import { type FC, useMemo } from "react";
-import type { Contact_InfoDT } from "../../../api/request/types";
+import type { ContactInfoDT } from "../../../api/request";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { initialContactInfo } from "../../../test/mock_data";
 import EntityEditor from "../../EntityEditor/EntityEditor";
@@ -23,7 +23,7 @@ const {
 	MAILING_RECIPIENT_LABEL,
 } = CONTACT_EDITOR_CONSTANTS;
 
-const ContactEditor: FC<EditorProps<Contact_InfoDT>> = ({
+const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 	open,
 	data,
 	onClose,
@@ -33,13 +33,13 @@ const ContactEditor: FC<EditorProps<Contact_InfoDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialContactInfo,
-						title: ADD_TITLE,
-					},
+					initialValues: initialContactInfo,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 
@@ -56,7 +56,7 @@ const ContactEditor: FC<EditorProps<Contact_InfoDT>> = ({
 				onSuccess={(data) => {
 					console.log("Contact information saved successfully:", data);
 					if (onSuccess) {
-						onSuccess(data as Contact_InfoDT);
+						onSuccess(data as ContactInfoDT);
 					}
 				}}
 			>

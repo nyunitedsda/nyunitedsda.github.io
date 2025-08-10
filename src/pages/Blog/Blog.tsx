@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
 import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useMemo, useState } from "react";
+import type { ArticleDT } from "../../api/request";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { ArticleDT } from "../../api/request/databaseTypes";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -92,11 +92,10 @@ const Blog: FC = () => {
 										variant="body1"
 										sx={{ "& p": { m: 0 } }}
 										dangerouslySetInnerHTML={{
-											__html: `${
-												content.length > BLOG_PREVIEW_LENGTH
+											__html: `${content.length > BLOG_PREVIEW_LENGTH
 													? content.slice(0, BLOG_PREVIEW_LENGTH)
 													: content
-											}`,
+												}`,
 										}}
 									/>
 								}

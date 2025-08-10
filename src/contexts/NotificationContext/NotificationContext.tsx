@@ -7,8 +7,8 @@ import {
 	useMemo,
 	useState,
 } from "react";
+import type { NotificationDT } from "../../api/request";
 import { getDatabaseList } from "../../api/request/commonQueries";
-import type { NotificationDT } from "../../api/request/types";
 import type { NotificationProps } from "../../components/NotificationBanner/types";
 import { Provider } from "./context";
 import type { NotificationContextProps } from "./types";

@@ -4,12 +4,12 @@ import Typography from "@mui/material/Typography";
 import { useQueries } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
+import type { UserDT } from "../../../api/request";
 import {
 	getUserById,
 	updateUser,
 } from "../../../api/request/authAndUserRequest";
 import { getDatabaseList } from "../../../api/request/commonQueries";
-import type { UserDT } from "../../../api/request/databaseTypes";
 import ProjectModal from "../../../components/ProjectModal/ProjectModal";
 import { useRegister } from "../../../hooks/auth";
 import FormContainer from "../../FormBuilder/FormContainer";
