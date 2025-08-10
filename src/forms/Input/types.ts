@@ -16,7 +16,7 @@ export type FormFieldType =
 	| "checkbox"
 	| "radio";
 
-export type InputFieldProps<
+export type InputFieldProps <
 	T extends Record<string, string | number | boolean>,
 	S extends Record<string, string | number | boolean | Date>,
 > = {
@@ -30,6 +30,8 @@ export type InputFieldProps<
 	multiline?: boolean;
 	required?: boolean;
 	rows?: number;
+	minRows?: number;
+	maxRows?: number;
 	sx?: SxProps<Theme>;
 	items?: T[]; // For select fields, the items to display
 	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options

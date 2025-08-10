@@ -77,7 +77,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					label={DESCRIPTION_LABEL}
 					fieldType="text"
 					multiline
-					rows={3}
+					minRows={3}
 				/>
 
 				<InputField
