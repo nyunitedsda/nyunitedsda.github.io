@@ -49,6 +49,7 @@
     "prebuild": "npm run check",
     "preview": "vite preview",
     "test": "vitest",
+    "typecheck": "react-router typegen && tsc",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
@@ -72,6 +73,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.6.0",
+    "react-router-dom": "^7.8.0",
     "react-scroll-to-top": "^3.1.0",
     "react-spinners": "^0.17.0",
     "yaml": "^2.8.0",
