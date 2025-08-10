@@ -1,6 +1,6 @@
+import Carousel from "@components/Carousel";
 import { Stack } from "@mui/material";
 import type { FC } from "react";
-import Carousel from "../../components/Carousel/Carousel";
 import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
 import PageMinistries from "./components/Ministries/PageMinistries";
 import SectionWrapper from "./components/SectionWrapper";

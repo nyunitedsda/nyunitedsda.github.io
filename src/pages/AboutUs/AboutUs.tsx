@@ -1,7 +1,7 @@
+import { PageTitle } from "@components/PageWrapper";
 import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
-import PageTitle from "../../components/PageWrapper/PageTitle";
 import ContactSection from "../Contact/components/ContactSection";
 import ServiceTimes from "../Contact/components/ServiceTimes";
 import {
@@ -31,8 +31,9 @@ const AboutUs: FC = () => {
 							"& strong": { color: "text.secondary" },
 							color: "text.primary",
 						}}
-						dangerouslySetInnerHTML={{ __html: organizationContent }}
-					/>
+					>
+						{organizationContent}
+					</Typography>
 				</ContactSection>
 
 				{details.map((i) => (

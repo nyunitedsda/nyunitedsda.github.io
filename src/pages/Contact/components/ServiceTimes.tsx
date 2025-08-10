@@ -1,17 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEntityList } from "@hooks/api";
 import type { FC } from "react";
-import type { ServiceDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
+import type { ServiceDT } from "@/api";
 import NoteSection from "../../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./ContactSection";
 import ContactSectionSkeleton from "./ContactSectionSkeleton";
 import { CONTACT_CONSTANT } from "./contact";
 
 const ServiceTimes: FC = () => {
-	const { data, isLoading, error } = useQuery<ServiceDT[]>({
-		queryKey: ["services"],
-		queryFn: async () => getDatabaseList("services"),
-	});
+	const { data, error, isLoading } = useEntityList<ServiceDT>("services");
 
 	return (
 		<>

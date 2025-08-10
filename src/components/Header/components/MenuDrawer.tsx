@@ -1,9 +1,8 @@
+import { LoginButton, ThemeButton } from "@components/Buttons";
 import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginButton from "../../Buttons/LoginButton/LoginButton";
-import ThemeButton from "../../Buttons/ThemeButton/ThemeButton";
 import { menuDrawerStyles } from "../styles";
 import MenuItemRenderer from "./MenuDrawer/MenuItemRenderer";
 import MenuDrawerItem from "./MenuDrawerItem";

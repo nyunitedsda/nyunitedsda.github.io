@@ -1,14 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { DonationEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialDonation } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import type { DonationDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import DonationEditor from "../../../forms/collection/DonationEditor/DonationEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialDonation } from "../../../test/mock_data";
+import { type DonationDT, deleteEntity } from "@/api";
 import donationColumns from "../constants/donationColumns";
 
 const DONATION_SUBHEADER = "Manage your donation methods";
@@ -16,24 +14,18 @@ const DONATION_SUBHEADER = "Manage your donation methods";
 const DonationAdmin: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("donations");
-
-	const [createDonationOpen, setCreateDonationOpen] =
-		useState<Partial<DonationDT> | null>(null);
-
 	const {
 		data: queryData,
 		refetch,
 		isLoading,
-	} = useQuery<DonationDT[] | undefined>({
-		queryKey: ["donations"],
-		queryFn: () => getDatabaseList("donations"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
+	} = useEntityList<DonationDT>("donations");
+
+	const [createDonationOpen, setCreateDonationOpen] =
+		useState<Partial<DonationDT> | null>(null);
 
 	const _handleDeleteDonation = useCallback(
-		(data: DonationDT) => {
-			deleteEntity("donations", data.id)
+		(data: Partial<DonationDT>) => {
+			deleteEntity("donations", data?.id as number)
 				.then(() => {
 					refetch();
 					enqueueSnackbar("Donation deleted successfully", {
@@ -62,7 +54,7 @@ const DonationAdmin: FC = () => {
 
 			<DataTable
 				isLoading={isLoading}
-				data={queryData as DonationDT[]}
+				data={queryData ?? []}
 				columns={donationColumns}
 				onEdit={canEdit ? setCreateDonationOpen : undefined}
 				onDelete={canDelete ? _handleDeleteDonation : undefined}

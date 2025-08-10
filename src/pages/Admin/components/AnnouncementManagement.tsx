@@ -1,16 +1,13 @@
-import { useQueries } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { AnnouncementEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialAnnouncement } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo, useState } from "react";
-import type { AnnouncementDT, EventDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import RingLoader from "../../../components/Loaders/RingLoader";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import AnnouncementEditor from "../../../forms/collection/AnnouncementEditor/AnnouncementEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialAnnouncement } from "../../../test/mock_data";
-
+import type { AnnouncementDT, EventDT } from "@/api";
+import { deleteEntity } from "@/api";
 import announcementColumns from "../constants/announcementColumns";
 
 const SUBHEADER = "Manage church announcements and events";
@@ -18,34 +15,18 @@ const SUBHEADER = "Manage church announcements and events";
 const AnnouncementManagement: FC = () => {
 	const { canCreate, canEdit, canDelete } = usePermission("announcements");
 	const { enqueueSnackbar } = useSnackbar();
+	const {
+		data: announcements,
+		isLoading,
+		refetch,
+	} = useEntityList<AnnouncementDT>("announcements");
+	const { data: events } = useEntityList<EventDT>("events");
 
 	const [editorContent, setEditorContent] =
 		useState<Partial<AnnouncementDT> | null>(null);
 
-	const result = useQueries({
-		queries: [
-			{
-				queryKey: ["announcements"],
-				queryFn: async () => {
-					return await getDatabaseList("announcements");
-				},
-				staleTime: 5 * 60 * 1000,
-				refetchOnWindowFocus: false,
-			},
-			{
-				queryKey: ["events"],
-				queryFn: async () => {
-					return await getDatabaseList("events");
-				},
-				staleTime: 5 * 60 * 1000,
-				refetchOnWindowFocus: false,
-			},
-		],
-	});
-
 	const tableColumns = useMemo(() => {
-		const eventData = result[1].data as EventDT[] | undefined;
-		if (!eventData) {
+		if (!events) {
 			return announcementColumns;
 		}
 
@@ -54,19 +35,19 @@ const AnnouncementManagement: FC = () => {
 				? {
 						...column,
 						renderCell(data: Partial<AnnouncementDT>) {
-							const event = eventData.find((e) => e.id === data.event_id);
+							const event = events.find((e) => e.id === data.event_id);
 							return event ? event.name : "N/A";
 						},
 					}
 				: column,
 		);
-	}, [result]);
+	}, [events]);
 
 	const _handleDelete = useCallback(
 		(d: AnnouncementDT & { id: number }) => {
 			deleteEntity("announcements", d.id)
 				.then(() => {
-					result[0].refetch();
+					refetch();
 					enqueueSnackbar("Announcement deleted successfully", {
 						variant: "success",
 					});
@@ -78,7 +59,7 @@ const AnnouncementManagement: FC = () => {
 					});
 				});
 		},
-		[enqueueSnackbar, result],
+		[enqueueSnackbar, refetch],
 	);
 
 	return (
@@ -93,21 +74,17 @@ const AnnouncementManagement: FC = () => {
 				}
 			/>
 
-			{result[0].isLoading ? (
-				<RingLoader />
-			) : (
-				<DataTable
-					isLoading={result[0].isLoading}
-					columns={tableColumns}
-					data={result[0].data ?? []}
-					onDelete={
-						canDelete
-							? (d) => _handleDelete(d as unknown as AnnouncementDT)
-							: undefined
-					}
-					onEdit={canEdit ? setEditorContent : undefined}
-				/>
-			)}
+			<DataTable
+				isLoading={isLoading}
+				columns={tableColumns}
+				data={announcements ?? []}
+				onDelete={
+					canDelete
+						? (d) => _handleDelete(d as unknown as AnnouncementDT)
+						: undefined
+				}
+				onEdit={canEdit ? setEditorContent : undefined}
+			/>
 
 			{editorContent && (
 				<AnnouncementEditor
@@ -115,7 +92,7 @@ const AnnouncementManagement: FC = () => {
 					data={editorContent as AnnouncementDT}
 					onClose={() => setEditorContent(null)}
 					onSuccess={() => {
-						result[0].refetch();
+						refetch();
 						setEditorContent(null);
 					}}
 				/>

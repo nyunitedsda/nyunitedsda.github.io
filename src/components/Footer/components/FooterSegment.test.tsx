@@ -1,6 +1,6 @@
+import { AppProvider } from "@components/AppProvider";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import AppProvider from "../../../components/AppProvider/AppProvider";
 import FooterSegment from "./FooterSegment";
 
 // Custom render function that wraps with AppProvider

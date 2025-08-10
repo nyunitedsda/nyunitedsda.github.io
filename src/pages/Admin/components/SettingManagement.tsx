@@ -1,14 +1,14 @@
+import { PageTitle } from "@components/PageWrapper";
+import ProjectCard from "@components/ProjectCard";
+import { PasswordEditor } from "@forms/collection";
+import { useAuthentication } from "@hooks/auth";
 import { Person3Outlined, SecurityOutlined } from "@mui/icons-material";
 import { Button, capitalize } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 import { type FC, useCallback, useMemo, useState } from "react";
-import type { UserDT } from "../../../api/request";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import ProjectCard from "../../../components/ProjectCard/ProjectCard";
-import PasswordEditor from "../../../forms/collection/PasswordEditor/PasswordEditor";
-import { useAuthentication } from "../../../hooks/auth";
+import type { UserDT } from "@/api";
 
 const TITLE = "Settings";
 const SUBHEADER = "Manage your account settings and preferences";
@@ -55,9 +55,7 @@ const SettingManagement: FC = () => {
 												? (user[field as keyof UserDT] as Date).toISOString()
 												: String(user[field as keyof UserDT] ?? "N/A")}
 									</Typography>
-								) : (
-									<></>
-								),
+								) : undefined,
 							)}
 					</>
 				),
@@ -86,7 +84,7 @@ const SettingManagement: FC = () => {
 				),
 			},
 		];
-	}, []);
+	}, [user]);
 
 	const handleSuccess = useCallback(() => {
 		setChangePasswordOpen(null);
@@ -106,9 +104,9 @@ const SettingManagement: FC = () => {
 			spacing={2}
 		>
 			<PageTitle title={TITLE} subtitle={SUBHEADER} />
-			{settings.map((i, ind) => (
+			{settings.map((i) => (
 				<ProjectCard
-					key={`settings-card-${ind}`}
+					key={`settings-card-${i.title}`}
 					header={{
 						title: (
 							<Stack direction="row" alignItems="flex-start" gap={1}>

@@ -7,9 +7,9 @@ import { useMemo } from "react";
 import type { SelectFieldProps } from "./types";
 
 const SelectField = <T,>({
-	items,
+	items = [],
 	error,
-	label,
+	label = "",
 	valueResolver,
 	renderItemLabel,
 	required = false,

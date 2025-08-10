@@ -1,7 +1,6 @@
 import type { AxiosRequestConfig } from "axios";
-import type { RegisterData } from "../../contexts/AuthenticationContext/types";
 import axiosInstance from "../axiosInstance";
-import type { UserDT } from "./databaseTypes";
+import type { RegisterUserDT, UserDT } from "./databaseTypes";
 import { handleOperationError } from "./helpers";
 import type {
 	ChangeMyPassword,
@@ -79,7 +78,6 @@ const deleteUser = async (
  * @param userData - Partial user data to update
  * @param config - Optional axios request config
  * @returns Promise<UserDT>
- * @throws Error if the operation fails
  */
 const updateUser = async (
 	userId: number,
@@ -105,7 +103,7 @@ const updateUser = async (
  * @returns Promise<{ user: UserDT;  message: string }>
  */
 const registerUser = async (
-	userData: RegisterData,
+	userData: RegisterUserDT,
 	config?: AxiosRequestConfig,
 ): Promise<{ user: UserDT; message: string }> => {
 	try {

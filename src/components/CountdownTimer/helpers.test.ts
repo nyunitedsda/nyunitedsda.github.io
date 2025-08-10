@@ -1,12 +1,5 @@
+import { afterAll, beforeAll, describe, expect, it, vi } from "@test/index.ts";
 import dayjs from "dayjs";
-import {
-	afterAll,
-	beforeAll,
-	describe,
-	expect,
-	it,
-	vi,
-} from "../../test/index.ts";
 import {
 	calculateRemainingTime,
 	formatTimeUnits,

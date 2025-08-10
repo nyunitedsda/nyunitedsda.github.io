@@ -1,25 +1,23 @@
 import { createElement } from "react";
 import TableAction from "../components/TableAction/TableAction";
 import type { TableActionProps } from "../components/TableAction/types";
-import type { ColumnDefinition, GenericType } from "../types";
+import type { ColumnDefinition } from "../types";
 
-const generateActionColumn = ({
-	onEdit,
-	onDelete,
-	onView,
-	renderAction,
-}: Omit<
-	TableActionProps<GenericType>,
-	"data"
->): ColumnDefinition<GenericType> => ({
-	id: "actions",
-	title: "Actions",
-	field: "actions",
-	align: "center",
-	renderCell: (data: GenericType) =>
-		renderAction
-			? renderAction(data)
-			: createElement(TableAction, { data, onEdit, onDelete, onView }),
-});
+const generateActionColumn = <T extends { id?: number }>(
+	props: Omit<TableActionProps<T>, "data">,
+) =>
+	({
+		id: "actions",
+		title: "Actions",
+		field: "actions",
+		align: "center",
+		renderCell: (data: T) => {
+			const { renderAction, ...rest } = props;
+
+			return renderAction
+				? renderAction(data)
+				: createElement(TableAction, { ...({ data, ...rest } as any) });
+		},
+	}) as ColumnDefinition<T>;
 
 export { generateActionColumn };

@@ -21,6 +21,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"a11y": {
+				"useButtonType": "off",
+				"noSvgWithoutTitle": "off"
+			},
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "error",
 				"useArrowFunction": "error",
@@ -48,18 +52,20 @@
 			"nursery": {
 				"noSecrets": "off",
 				"noImportCycles": "warn",
-				"noUnresolvedImports": "warn",
-				"recommended": true
+				"noUnresolvedImports": "off",
+				"recommended": false
 			},
 			"suspicious": {
 				"useGuardForIn": "error",
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noThenProperty": "off"
 			},
 			"style": {
 				"noUselessElse": "error",
 				"useFilenamingConvention": "off",
 				"useComponentExportOnlyModules": "error",
-				"noNegationElse": "warn"
+				"noNegationElse": "warn",
+				"noNonNullAssertion": "off"
 			}
 		}
 	},

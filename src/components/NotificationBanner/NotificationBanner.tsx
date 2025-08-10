@@ -1,29 +1,23 @@
+import { NotificationContext } from "@contexts/NotificationContext";
+import { useEntityList } from "@hooks/api";
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import type { Theme } from "@mui/material/styles";
+import type { Palette, PaletteColor, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
-import { type FC, useCallback, useContext, useState } from "react";
-import type { SeverityPalette } from "../../api/request";
-import NotificationContext from "../../contexts/NotificationContext/context";
+import { type FC, useCallback, useContext, useMemo, useState } from "react";
+import type { SeverityDT, SeverityPalette } from "@/api";
 import { selectSeverityIcon } from "./components/helpers";
-import type { NotificationBannerProps, NotificationProps } from "./types";
-
-const severityColors: SeverityPalette[] = [
-	"info",
-	"warning",
-	"error",
-	"success",
-];
+import type { NotificationBannerProps } from "./types";
 
 const rootSx = ({
-	severity = 1,
+	severColor = "info",
 	theme,
 }: {
 	theme: Theme;
-	severity: NotificationProps["severity"];
+	severColor: keyof Palette;
 }): SystemStyleObject<Theme> => ({
 	width: "100%",
 	height: "auto",
@@ -34,8 +28,8 @@ const rootSx = ({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		backgroundColor: (theme) =>
-			theme.palette[severityColors[severity - 1]].light,
-		color: theme.palette[severityColors[severity - 1]].contrastText,
+			(theme.palette[severColor] as PaletteColor).light,
+		color: (theme.palette[severColor] as PaletteColor).contrastText,
 		px: 2,
 		py: 0.5,
 		gap: 2,
@@ -43,19 +37,28 @@ const rootSx = ({
 });
 
 const NotificationBanner: FC<NotificationBannerProps> = (props) => {
-	const { id, message, open, severity, title } = props;
+	const { id, message, open, severity_id, title } = props;
 	const { dismissNotification } = useContext(NotificationContext);
+	const { data, isLoading } = useEntityList<SeverityDT>("severity");
 
 	const [isVisible, setIsVisible] = useState<boolean>(open ?? false);
+
+	const { icon, severColor } = useMemo(() => {
+		const severity = data?.find((i) => i.id === severity_id) ?? {};
+		return {
+			icon: selectSeverityIcon(severity.color as SeverityPalette),
+			severColor: (severity.color ?? "info") as keyof Palette,
+		};
+	}, [data, severity_id]);
 
 	const _handleClose = useCallback(() => {
 		setIsVisible(false);
 		dismissNotification(id);
-	}, []);
+	}, [id, dismissNotification]);
 
 	return (
 		<>
-			{isVisible && (
+			{isVisible && !isLoading && (
 				<Stack
 					direction={"row"}
 					spacing={1}
@@ -66,9 +69,9 @@ const NotificationBanner: FC<NotificationBannerProps> = (props) => {
 					<Collapse
 						component="div"
 						in={isVisible}
-						sx={[(theme: Theme) => rootSx({ severity, theme })]}
+						sx={[(theme: Theme) => rootSx({ severColor, theme })]}
 					>
-						<Stack sx={{ maxWidth: 32 }}>{selectSeverityIcon(severity)}</Stack>
+						<Stack sx={{ maxWidth: 32 }}>{icon}</Stack>
 
 						<Stack sx={{ flexGrow: 1 }}>
 							{title && (

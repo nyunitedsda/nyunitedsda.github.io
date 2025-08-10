@@ -1,3 +1,4 @@
+import type { RouteMenu } from "@hooks/routes";
 import AdminPanelSettingsOutlined from "@mui/icons-material/AdminPanelSettingsOutlined";
 import ArticleRounded from "@mui/icons-material/ArticleRounded";
 import ContactMailRounded from "@mui/icons-material/ContactMailRounded";
@@ -7,7 +8,6 @@ import LiveTvRounded from "@mui/icons-material/LiveTvRounded";
 import LoginRounded from "@mui/icons-material/LoginRounded";
 import VolunteerActivismRounded from "@mui/icons-material/VolunteerActivismRounded";
 import type { FC, ReactNode } from "react";
-import type { RouteMenu } from "../../../../hooks/routes/types";
 import MenuDrawerItem from "../MenuDrawerItem";
 import SubMenuDrawerItem from "../SubMenuDrawerItem";
 

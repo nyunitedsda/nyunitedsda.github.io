@@ -1,5 +1,5 @@
+import { describe, expect, it } from "@test/index.ts";
 import type { RouteObject } from "react-router";
-import { describe, expect, it } from "../../test/index.ts";
 import { mapRoutesToTabs } from "./helpers.ts";
 import type { RouteTabsItem } from "./types.ts";
 

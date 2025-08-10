@@ -1,4 +1,4 @@
-import type { UserDT } from "../../../api/request";
+import type { UserDT } from "@/api";
 
 interface PasswordEditorProps {
 	data: UserDT;

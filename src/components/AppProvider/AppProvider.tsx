@@ -1,10 +1,10 @@
-import { ThemeProvider } from "@mui/material";
+import { AuthProvider } from "@contexts/AuthenticationContext";
+import { NotificationProvider } from "@contexts/NotificationContext";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
-import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
-import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
-import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
+import React, { type FC, type PropsWithChildren, useMemo } from "react";
 import queryClient from "./queryClient";
 import theme from "./theme";
 
@@ -19,7 +19,7 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	);
 
 	return (
-		<StrictMode>
+		<React.StrictMode>
 			<QueryClientProvider client={queryClient}>
 				<SnackbarProvider
 					maxSnack={3}
@@ -31,17 +31,17 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 					dense
 				>
 					{/* <BrowserRouter> */}
-					<AuthenticationProvider>
+					<AuthProvider>
 						<ThemeProvider theme={theme}>
 							{/* Using enableColorScheme for better dark/light mode handling */}
 							<CssBaseline enableColorScheme />
 							<NotificationProvider>{children}</NotificationProvider>
 						</ThemeProvider>
-					</AuthenticationProvider>
+					</AuthProvider>
 					{/* </BrowserRouter> */}
 				</SnackbarProvider>
 			</QueryClientProvider>
-		</StrictMode>
+		</React.StrictMode>
 	);
 };
 

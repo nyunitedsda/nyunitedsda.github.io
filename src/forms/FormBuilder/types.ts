@@ -8,6 +8,9 @@ export interface FormContainerProps<T> {
 	submitButtonText?: string;
 	validationSchema: any;
 	confirmOnSave?: boolean;
-	onSubmit: (values: T, formikHelpers: FormikHelpers<T>) => void | Promise<any>;
+	onSubmit: (
+		values: T,
+		formikHelpers: FormikHelpers<T>,
+	) => Promise<any> | undefined;
 	onCancel?: () => void;
 }

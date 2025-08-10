@@ -1,3 +1,4 @@
+import { PageTitle } from "@components/PageWrapper";
 import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
@@ -7,8 +8,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
-import { getDefaultContacts } from "../../api/request/contactsRequest";
-import PageTitle from "../../components/PageWrapper/PageTitle";
+import { getDefaultContacts } from "@/api";
 import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
 import ContactSection from "./components/ContactSection";
 import { CONTACT_CONSTANT } from "./components/contact";

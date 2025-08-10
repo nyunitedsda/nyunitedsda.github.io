@@ -30,7 +30,57 @@
     "rootDirs": [
       ".",
       "./.react-router/types"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*",
+        "./dist/*",
+        ""
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
+      "@docs/*": [
+        "src/docs/*"
+      ],
+      "@forms/*": [
+        "src/forms/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@msw/*": [
+        "src/msw/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@test/*": [
+        "src/test/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@public/*": [
+        "src/public/*"
+      ],
+      "@storybook/*": [
+        ".storybook/*"
+      ],
+    }
   },
   "include": [
     "src",

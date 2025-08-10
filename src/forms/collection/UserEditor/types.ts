@@ -1,4 +1,4 @@
-import type { UserDT } from "../../../api/request";
+import type { UserDT } from "@/api";
 
 export interface UserEditorProps {
 	data: UserDT;

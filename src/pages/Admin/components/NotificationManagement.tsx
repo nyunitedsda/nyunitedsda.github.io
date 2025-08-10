@@ -1,14 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { NotificationEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialNotification } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import type { NotificationDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import NotificationEditor from "../../../forms/collection/NotificationEditor/NotificationEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialNotification } from "../../../test/mock_data";
+import type { DonationDT, NotificationDT } from "@/api";
+import { deleteEntity } from "@/api";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
 
@@ -17,20 +16,14 @@ const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 const NotificationAdmin: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("notifications");
-
-	const [createNotificationOpen, setCreateNotificationOpen] =
-		useState<Partial<NotificationDT> | null>(null);
-
 	const {
 		data: queryData,
 		refetch,
 		isLoading,
-	} = useQuery<Partial<NotificationDT>[] | undefined>({
-		queryKey: ["notifications"],
-		queryFn: () => getDatabaseList("notifications"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
+	} = useEntityList<DonationDT>("notifications");
+
+	const [createNotificationOpen, setCreateNotificationOpen] =
+		useState<Partial<NotificationDT> | null>(null);
 
 	const _handleDeleteNotification = useCallback(
 		(data: Partial<NotificationDT>) => {
@@ -49,7 +42,7 @@ const NotificationAdmin: FC = () => {
 					});
 				});
 		},
-		[refetch],
+		[refetch, enqueueSnackbar],
 	);
 
 	return (

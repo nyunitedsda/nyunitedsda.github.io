@@ -25,9 +25,10 @@ const CarouselDotControl: FC<CarouselControlProps> = ({
 
 	return (
 		<Stack className="embla__dots" direction="row">
-			{scrollSnaps.map((_, index) => (
+			{scrollSnaps.map((snap, index) => (
 				<CarouselDotButton
-					key={index}
+					// biome-ignore lint/suspicious/noArrayIndexKey: Using index as key for simplicity in this example
+					key={`${snap}-${index}`}
 					onClick={() => onDotButtonClick(index)}
 					className={"embla__dot".concat(
 						index === selectedIndex ? " embla__dot--selected" : "",

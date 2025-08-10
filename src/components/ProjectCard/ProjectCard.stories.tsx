@@ -1,7 +1,7 @@
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import ProjectCard from "./ProjectCard";
 

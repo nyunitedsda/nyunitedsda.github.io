@@ -1,6 +1,6 @@
 import { ExitToAppOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
@@ -17,7 +17,10 @@ const createMockEmblaApi = (
 
 	const triggerListeners = (event: string) => {
 		if (listeners[event]) {
-			listeners[event].forEach((callback) => callback(mockApi));
+			listeners[event].forEach((callback) => {
+				callback(mockApi);
+				return;
+			});
 		}
 	};
 

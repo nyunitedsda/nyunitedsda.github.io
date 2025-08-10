@@ -1,6 +1,6 @@
 import type { Theme } from "@emotion/react";
+import type { RouteMenu } from "@hooks/routes";
 import type { SxProps } from "@mui/material";
-import type { RouteMenu } from "../../../../hooks/routes/types";
 
 interface DesktopMenuProps {
 	menuList: RouteMenu[];

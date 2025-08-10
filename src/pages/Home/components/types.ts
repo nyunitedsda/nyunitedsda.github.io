@@ -1,12 +1,14 @@
+import type { CardProps } from "@components/ProjectCard";
 import type { PropsWithChildren } from "react";
-import type { ImageProps } from "../../../components/Image/types";
-import type { CardProps } from "../../../components/ProjectCard/types";
 
 export interface MinistryCardProps
 	extends Omit<CardProps, "content" | "actions"> {
 	content: string;
 	link?: string;
-	image?: ImageProps;
+	image?: {
+		src?: string;
+		alt?: string;
+	};
 }
 
 export type SectionWrapperProps = PropsWithChildren<{

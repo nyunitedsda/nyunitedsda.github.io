@@ -1,19 +1,18 @@
+import { AuthProvider } from "@contexts/AuthenticationContext";
 import { Box } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 import Footer from "./Footer";
 
 // Simple decorator to provide layout context
 const FooterDecorator = (Story: any) => {
 	return (
-		<AuthenticationProvider>
+		<AuthProvider>
 			<Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
 				<Box sx={{ pt: 4 }}>
 					<Story />
 				</Box>
 			</Box>
-		</AuthenticationProvider>
+		</AuthProvider>
 	);
 };
 

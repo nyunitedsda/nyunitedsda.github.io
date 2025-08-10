@@ -1,5 +1,4 @@
-// Main AppProvider for production use
-// Export the default as the main AppProvider for backward compatibility
-export { default as AppProvider, default } from "./AppProvider";
-// Test version of AppProvider for testing and Storybook
+export { default as AppProvider } from "./AppProvider";
 export { default as AppProviderTest } from "./AppProviderTest";
+export { default as queryClient } from "./queryClient";
+export { default as theme } from "./theme";

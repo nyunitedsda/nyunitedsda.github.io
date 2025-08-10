@@ -1,8 +1,7 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SnackbarProvider } from "notistack";
 // Types
-import { donations, initialDonation } from "../../test/mock_data";
+import { donations, initialDonation } from "@test/mock_data";
+import { SnackbarProvider } from "notistack";
 import { donationSchema } from "../collection/DonationEditor/constants";
 import InputField from "../Input/FormField";
 import EntityEditor from "./EntityEditor";

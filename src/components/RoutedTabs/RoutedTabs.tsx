@@ -1,3 +1,4 @@
+import TabPanel from "@components/TabPanel";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import type { SxProps, Theme } from "@mui/material/styles";
@@ -11,7 +12,6 @@ import {
 	useState,
 } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
-import TabPanel from "../TabPanel/TabPanel";
 import type { RoutedTabsProps } from "./types";
 
 const panelSx: SxProps<Theme> = {
@@ -106,7 +106,7 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 							value={selectedTabId}
 						>
 							{typeof i.content === "string" ? (
-								<Box dangerouslySetInnerHTML={{ __html: i.content }} />
+								<Box>{i.content}</Box>
 							) : typeof i.content === "function" ? (
 								<i.content />
 							) : (

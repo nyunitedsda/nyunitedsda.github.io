@@ -14,6 +14,7 @@ import {
 	type MouseEvent,
 	useCallback,
 	useEffect,
+	useId,
 	useMemo,
 	useRef,
 	useState,
@@ -26,6 +27,7 @@ const { activeBtnSx, buttonSx } = menuButtonStyles;
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
 	const { isActive, path, children, buttonProps, menuItems } = props;
+	const uId = useId();
 
 	const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
@@ -53,7 +55,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		setIsMenuVisible(false);
 	}, []);
 
-	const handleMenuOpen = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+	const handleMenuOpen = useCallback((_e: MouseEvent<HTMLButtonElement>) => {
 		setIsMenuVisible(true);
 	}, []);
 
@@ -62,7 +64,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 			navigate(url);
 			handleMenuClose();
 		},
-		[handleMenuClose],
+		[handleMenuClose, navigate],
 	);
 
 	useEffect(() => {
@@ -82,7 +84,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 		<>
 			<Button
 				{...buttonProps}
-				id="MenuBtn"
+				id={`${uId}MenuBtn`}
 				aria-haspopup={menuItems ? "true" : undefined}
 				aria-expanded={isMenuVisible ? "true" : undefined}
 				endIcon={endIcon}
@@ -120,7 +122,11 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 									<Card
 										sx={{ py: 2, minWidth: (theme) => `${theme.spacing(25)}` }}
 									>
-										<MenuList id="split-button-menu" role="menu" autoFocusItem>
+										<MenuList
+											id={`${uId}-split-button-menu`}
+											role="menu"
+											autoFocusItem
+										>
 											{menuItems?.map((i) => (
 												<MenuItem
 													key={i.name}

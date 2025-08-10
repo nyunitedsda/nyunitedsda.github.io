@@ -1,3 +1,5 @@
+import { PageContentContainer } from "@components/PageWrapper";
+import { useMenuItems } from "@hooks/routes";
 import MenuRounded from "@mui/icons-material/MenuRounded";
 import { useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -5,8 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { createRef, type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
-import useFormattedRoutes from "../../hooks/routes/useFormattedRoutes";
-import PageContentContainer from "../PageWrapper/PageContentContainer";
 import { DesktopMenu } from "./components/DesktopMenu";
 import OrganizationBranding from "./components/OrganizationBranding";
 import Sidebar from "./components/Sidebar";
@@ -17,9 +17,9 @@ const { hamburgerMenuSx, rootSx } = headerStyles;
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
-	const { menuItems } = useFormattedRoutes();
 	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 	const appBarRef = useMemo(() => createRef<HTMLDivElement>(), []);
+	const { userMenuItems } = useMenuItems();
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((prev) => !prev);
@@ -45,7 +45,7 @@ const Header: FC = () => {
 			}
 
 			// Handle base path inclusion for routes that might be parent routes
-			return pathname.startsWith(path + "/");
+			return pathname.startsWith(`${path}/`);
 		},
 		[pathname],
 	);
@@ -80,7 +80,7 @@ const Header: FC = () => {
 					{/* Menu */}
 					{!isMobile && (
 						<DesktopMenu
-							menuList={menuItems}
+							menuList={userMenuItems}
 							isActive={isActive}
 							sx={{ display: { xs: "none", md: "flex" } }}
 						/>

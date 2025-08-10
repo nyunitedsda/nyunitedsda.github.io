@@ -1,8 +1,8 @@
+import RingLoader from "@components/Loaders";
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { type FC, lazy, Suspense } from "react";
-import RingLoader from "../../components/Loaders/RingLoader";
+import React, { type FC, lazy } from "react";
 
 const StorybookIframe = lazy(() => import("./StorybookIframe.tsx"));
 
@@ -29,9 +29,9 @@ const StorybookPage: FC = () => {
 			</Typography>
 			<Typography variant="body1">{SUBTITLE}</Typography>
 			<Box sx={contentSx}>
-				<Suspense fallback={<RingLoader />}>
+				<React.Suspense fallback={<RingLoader />}>
 					<StorybookIframe />
-				</Suspense>
+				</React.Suspense>
 			</Box>
 		</Box>
 	);

@@ -1,6 +1,5 @@
+import { describe, expect, it, render, screen } from "@test/index.ts";
 import "@testing-library/jest-dom";
-import { describe, expect, it, screen } from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
 import AboutUs from "./AboutUs";
 
 describe("AboutUs", () => {

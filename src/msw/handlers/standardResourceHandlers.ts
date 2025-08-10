@@ -6,7 +6,7 @@ import {
 	notifications,
 	roles,
 	services,
-} from "../../test/mock_data";
+} from "@test/mock_data";
 import { createEntityHandler } from "./genericHandlers";
 
 const VITE_API_URL =

@@ -1,14 +1,14 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
-import { vi } from "vitest";
 import {
 	describe,
 	expect,
 	fireEvent,
 	it,
+	render,
 	screen,
-} from "../../../test/index.ts";
-import { render } from "../../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import { vi } from "vitest";
 import MenuDrawerItem from "./MenuDrawerItem";
 
 const mockOnClick = vi.fn();

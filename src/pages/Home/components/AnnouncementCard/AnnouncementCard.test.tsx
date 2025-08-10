@@ -11,6 +11,7 @@ const defaultProps = {
 	location: "home",
 	recurring: true,
 	date_format: "MMM YYY",
+	author_id: 2,
 };
 
 describe("NotificationCard", () => {

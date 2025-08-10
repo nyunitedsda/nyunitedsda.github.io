@@ -1,7 +1,7 @@
+import { ConfirmationButton } from "@components/Buttons";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik, type FormikHelpers } from "formik";
-import { ConfirmationButton } from "../../components/Buttons";
 import type { FormContainerProps } from "./types";
 
 const childrenSx: SxProps<Theme> = {
@@ -36,7 +36,7 @@ const SAVE_CONFIRMATION = {
 	cancelLabel: "No",
 };
 
-const FormContainer = <T extends Object>({
+const FormContainer = <T extends { [key: string]: unknown }>({
 	initialValues,
 	validationSchema,
 	onSubmit,

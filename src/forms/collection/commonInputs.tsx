@@ -1,6 +1,6 @@
 import InputAdornment from "@mui/material/InputAdornment";
 import { lazy, Suspense } from "react";
-import type { InputFieldProps } from "../Input/types";
+import type { FormFieldType } from "../Input/types";
 import PlaceholderIcon from "./PlaceholderIcon";
 
 const LockOutlined = lazy(() => import("@mui/icons-material/LockOutlined"));
@@ -11,10 +11,10 @@ const Person3Outlined = lazy(
 export const configurePasswordInput = ({
 	name = "password",
 	label = "Password",
-} = {}): InputFieldProps => ({
+} = {}) => ({
 	name: name ?? "password",
 	label: label ?? "Password",
-	fieldType: "text",
+	fieldType: "text" as FormFieldType,
 	type: "password",
 	sx: {
 		"& .MuiInputBase-inputAdornedEnd": {
@@ -32,10 +32,10 @@ export const configurePasswordInput = ({
 	},
 });
 
-export const configureUsernameInput = (): InputFieldProps => ({
+export const configureUsernameInput = () => ({
 	name: "username",
 	label: "Username",
-	fieldType: "text",
+	fieldType: "text" as FormFieldType,
 	InputProps: {
 		startAdornment: (
 			<InputAdornment position="start">

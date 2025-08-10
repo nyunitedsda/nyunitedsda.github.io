@@ -1,11 +1,11 @@
+import { useMenuItems } from "@hooks/routes";
 import Drawer from "@mui/material/Drawer";
 import type { FC } from "react";
-import useFormattedRoutes from "../../../hooks/routes/useFormattedRoutes";
 import MenuDrawer from "./MenuDrawer";
 import type { SidebarProps } from "./types";
 
 const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
-	const { menuItems } = useFormattedRoutes();
+	const { userMenuItems } = useMenuItems();
 
 	return (
 		<Drawer
@@ -26,7 +26,7 @@ const Sidebar: FC<SidebarProps> = ({ isActive, open, onClose }) => {
 		>
 			<MenuDrawer
 				isActive={isActive}
-				menuItems={menuItems}
+				menuItems={userMenuItems}
 				toggleDrawer={onClose}
 			/>
 		</Drawer>

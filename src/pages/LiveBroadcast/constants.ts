@@ -1,5 +1,5 @@
+import type { RouteTabsItem } from "@components/RoutedTabs";
 import { createElement } from "react";
-import type { RouteTabsItem } from "../../components/RoutedTabs/types";
 import ArchiveStream from "./components/streamPlayers/ArchiveStream";
 import LiveStream from "./components/streamPlayers/LiveStream";
 

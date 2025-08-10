@@ -1,19 +1,19 @@
-import { vi } from "vitest";
-import useColorTheme from "../../../../hooks/theme/useColorTheme";
+import useColorTheme from "@hooks/theme/useColorTheme";
 import {
 	beforeEach,
 	describe,
 	expect,
 	type Mock,
+	render,
 	screen,
 	test,
-} from "../../../../test/index.ts";
-import { render } from "../../../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import { vi } from "vitest";
 import LiveStream from "./LiveStream";
 import StreamDisplay from "./StreamDisplay";
 
 // Mock the dependencies
-vi.mock("../../../../hooks/theme/useColorTheme");
+vi.mock("@hooks/theme/useColorTheme");
 
 vi.mock("./StreamDisplay", () => ({
 	default: vi.fn(() => <div data-testid="stream-display" />),

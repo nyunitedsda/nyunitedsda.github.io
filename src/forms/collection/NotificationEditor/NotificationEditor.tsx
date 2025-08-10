@@ -1,19 +1,19 @@
+import { theme } from "@components/AppProvider";
+import { ProjectModal } from "@components/ProjectModal";
+import EntityEditor from "@forms/EntityEditor/EntityEditor";
+import { InputField } from "@forms/Input";
+import { useEntityList } from "@hooks/api";
 import { Palette } from "@mui/icons-material";
 import {
 	ButtonBase,
+	type Palette as PaletteType,
 	type SimplePaletteColorOptions,
 	type SxProps,
 	type Theme,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { initialNotification } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { NotificationDT, SeverityType } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import theme from "../../../components/AppProvider/theme";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { initialNotification } from "../../../test/mock_data";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import { default as InputField } from "../../Input/FormField";
+import type { NotificationDT, SeverityDT } from "@/api";
 import type { EditorProps } from "../types";
 import { NOTIFICATION_EDITOR_CONSTANTS, notificationSchema } from "./constants";
 
@@ -40,7 +40,6 @@ const {
 	MESSAGE_FIELD_LABEL,
 	SEVERITY_FIELD_LABEL,
 	EXPIRATION_FIELD_LABEL,
-	SEVERITY_PALETTE_KEY,
 } = NOTIFICATION_EDITOR_CONSTANTS;
 
 const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
@@ -49,6 +48,8 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 	onClose,
 	onSuccess,
 }) => {
+	const { data: severityData } = useEntityList<SeverityDT>("severity");
+
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")
@@ -62,13 +63,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 					},
 		[data],
 	);
-
-	const { data: severityData } = useQuery<SeverityType[]>({
-		queryKey: ["severity"],
-		queryFn: () => getDatabaseList("severity"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -97,9 +91,11 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 				/>
 				<InputField
 					renderItemLabel={(item) => {
-						const paletteKey = SEVERITY_PALETTE_KEY[item.type] || "info";
+						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (
-							theme.palette[paletteKey] as SimplePaletteColorOptions
+							theme.palette[
+								colorKey?.color as keyof PaletteType
+							] as SimplePaletteColorOptions
 						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting
 						return (
@@ -129,7 +125,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 					fieldType="select"
 					items={severityData || []}
 					sx={severitySx}
-					valueResolver={(item) => item.id}
+					valueResolver={(item) => item?.id as number}
 				/>
 
 				<InputField

@@ -1,5 +1,5 @@
-import type { NotificationDT } from "../../../api/request";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { ColumnDefinition } from "@components/DataTable";
+import type { NotificationDT } from "@/api";
 
 /**
  * Defines the columns for the Notification DataTable.
@@ -9,7 +9,7 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
 const notificationsColumns: ColumnDefinition<Partial<NotificationDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "message", field: "message", title: "Message" },
-	{ id: "severity", field: "severity", title: "Severity" },
+	{ id: "severity_id", field: "severity_id", title: "Severity" },
 	{
 		id: "expires_at",
 		field: "expires_at",

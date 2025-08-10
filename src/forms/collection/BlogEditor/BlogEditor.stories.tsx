@@ -1,8 +1,7 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
-import { useState } from "react";
-import type { ArticleDT } from "../../../api/request";
+import { useId, useState } from "react";
+import type { ArticleDT } from "@/api";
 import BlogEditor from "./BlogEditor";
 
 // Sample article data
@@ -14,9 +13,7 @@ const sampleTechArticle: ArticleDT = {
 	content:
 		"In today's digital age, churches are embracing technology to reach more people and enhance worship experiences. From live streaming services to interactive prayer apps, the possibilities are endless...",
 	author_id: 1,
-	publishDate: new Date("2025-06-01T00:00:00").toISOString(),
-	created_at: new Date("2025-06-01T00:00:00"),
-	modified_at: new Date("2025-06-15T00:00:00"),
+	published_at: new Date("2025-06-01T00:00:00"),
 };
 
 const sampleFaithArticle: ArticleDT = {
@@ -27,9 +24,7 @@ const sampleFaithArticle: ArticleDT = {
 	content:
 		"Faith is not just a belief; it's a way of life. When we walk in faith, we learn to trust in God's plan even when the path ahead seems uncertain. This journey of faith transforms not only our lives but also the lives of those around us...",
 	author_id: 2,
-	publishDate: new Date("2025-06-10T00:00:00").toISOString(),
-	created_at: new Date("2025-06-10T00:00:00"),
-	modified_at: new Date("2025-06-20T00:00:00"),
+	published_at: new Date("2025-06-10T00:00:00"),
 };
 
 const sampleCommunityArticle: ArticleDT = {
@@ -40,9 +35,7 @@ const sampleCommunityArticle: ArticleDT = {
 	content:
 		"A strong church community is built on fellowship, mutual support, and shared purpose. Through various outreach programs, small group meetings, and community service projects, we can create bonds that last a lifetime...",
 	author_id: 1,
-	publishDate: new Date("2025-06-20T00:00:00").toISOString(),
-	created_at: new Date("2025-06-20T00:00:00"),
-	modified_at: new Date("2025-06-25T00:00:00"),
+	published_at: new Date("2025-06-20T00:00:00"),
 };
 
 // Interactive wrapper component with open button
@@ -229,6 +222,7 @@ export const Playground: Story = {
 			const [selectedEntity, setSelectedEntity] = useState<
 				ArticleDT | undefined
 			>(args.data);
+			const uId = useId();
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -241,6 +235,7 @@ export const Playground: Story = {
 				<div style={{ padding: "20px" }}>
 					<div style={{ marginBottom: "20px" }}>
 						<label
+							htmlFor={uId}
 							style={{
 								display: "block",
 								marginBottom: "8px",
@@ -250,6 +245,7 @@ export const Playground: Story = {
 							Select Article Type:
 						</label>
 						<select
+							id={uId}
 							title="Select article type"
 							value={entityOptions.findIndex(
 								(opt) => opt.value === selectedEntity,
@@ -266,7 +262,7 @@ export const Playground: Story = {
 							}}
 						>
 							{entityOptions.map((option, index) => (
-								<option key={index} value={index}>
+								<option key={option.label} value={index}>
 									{option.label}
 								</option>
 							))}
@@ -495,8 +491,8 @@ export const FormValidationDemo: Story = {
 			img_src: "",
 			content: "",
 			author_id: 1,
-			publishDate: new Date().toISOString(),
-		} as ArticleDT,
+			published_at: new Date().toISOString(),
+		} as unknown as ArticleDT,
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: ArticleDT) => console.log("Article saved:", data),
 	},
@@ -527,6 +523,7 @@ export const ClosedModal: Story = {
 			const [selectedEntity, setSelectedEntity] = useState<
 				ArticleDT | undefined
 			>(undefined);
+			const uId = useId();
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -559,11 +556,13 @@ export const ClosedModal: Story = {
 									marginBottom: "8px",
 									fontWeight: "bold",
 								}}
+								htmlFor={uId}
 							>
 								Pre-select article for modal:
 							</label>
 							<select
 								title="Select article type for modal"
+								id={uId}
 								value={entityOptions.findIndex(
 									(opt) => opt.value === selectedEntity,
 								)}
@@ -579,7 +578,7 @@ export const ClosedModal: Story = {
 								}}
 							>
 								{entityOptions.map((option, index) => (
-									<option key={index} value={index}>
+									<option key={option.label} value={index}>
 										{option.label}
 									</option>
 								))}

@@ -1,15 +1,14 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
-import { useState } from "react";
-import type { AnnouncementDT } from "../../../api/request";
+import { useId, useState } from "react";
+import type { AnnouncementDT } from "@/api";
 import AnnouncementEditor from "./AnnouncementEditor";
 
 // Sample announcement data for different event types
 const sampleEventAnnouncement: AnnouncementDT = {
 	id: 1,
 	title: "Community Fellowship Dinner",
-	type: "event",
+	event_id: 1,
 	description:
 		"Join us for a wonderful evening of fellowship and great food. All are welcome!",
 	location: "Fellowship Hall",
@@ -22,7 +21,7 @@ const sampleEventAnnouncement: AnnouncementDT = {
 const sampleServiceAnnouncement: AnnouncementDT = {
 	id: 2,
 	title: "Sunday Morning Worship",
-	type: "service",
+	event_id: 2,
 	description: "Weekly worship service with inspiring music and fellowship",
 	location: "Main Sanctuary",
 	sermon: "Faith in Action",
@@ -36,7 +35,7 @@ const sampleServiceAnnouncement: AnnouncementDT = {
 const sampleConferenceAnnouncement: AnnouncementDT = {
 	id: 3,
 	title: "Annual Church Conference",
-	type: "conference",
+	event_id: 3,
 	description:
 		"Join us for our annual conference with special speakers and workshops",
 	location: "Conference Center",
@@ -52,7 +51,7 @@ const sampleConferenceAnnouncement: AnnouncementDT = {
 const sampleZoomAnnouncement: AnnouncementDT = {
 	id: 4,
 	title: "Virtual Bible Study",
-	type: "zoom",
+	event_id: 3,
 	description: "Weekly Bible study session conducted online via Zoom",
 	location: "Zoom",
 	zoom_id: "123-456-789",
@@ -92,6 +91,7 @@ const InteractiveWrapper = ({
 		<div style={{ padding: "20px" }}>
 			<button
 				onClick={handleOpen}
+				type="button"
 				style={{
 					padding: "12px 24px",
 					fontSize: "16px",
@@ -244,6 +244,7 @@ const [open, setOpen] = useState(false);
 export const Playground: Story = {
 	render: (args) => {
 		const PlaygroundWrapper = () => {
+			const annId = useId();
 			const [open, setOpen] = useState(false);
 			const [selectedEntity, setSelectedEntity] = useState<
 				AnnouncementDT | undefined
@@ -261,6 +262,7 @@ export const Playground: Story = {
 				<div style={{ padding: "20px" }}>
 					<div style={{ marginBottom: "20px" }}>
 						<label
+							htmlFor={`${annId}-playground`}
 							style={{
 								display: "block",
 								marginBottom: "8px",
@@ -270,6 +272,7 @@ export const Playground: Story = {
 							Select Announcement Type:
 						</label>
 						<select
+							id={`${annId}-playground`}
 							title="Select announcement type"
 							value={entityOptions.findIndex(
 								(opt) => opt.value === selectedEntity,
@@ -286,7 +289,7 @@ export const Playground: Story = {
 							}}
 						>
 							{entityOptions.map((option, index) => (
-								<option key={index} value={index}>
+								<option key={option.label} value={index}>
 									{option.label}
 								</option>
 							))}
@@ -689,7 +692,7 @@ export const ClosedModal: Story = {
 			const [selectedEntity, setSelectedEntity] = useState<
 				AnnouncementDT | undefined
 			>(undefined);
-
+			const uId = useId();
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
 				{ label: "Event", value: sampleEventAnnouncement },
@@ -717,6 +720,7 @@ export const ClosedModal: Story = {
 						</p>
 						<div style={{ marginBottom: "12px" }}>
 							<label
+								htmlFor={uId}
 								style={{
 									display: "block",
 									marginBottom: "8px",
@@ -727,6 +731,7 @@ export const ClosedModal: Story = {
 							</label>
 							<select
 								title="Select announcement type for modal"
+								id={uId}
 								value={entityOptions.findIndex(
 									(opt) => opt.value === selectedEntity,
 								)}
@@ -742,7 +747,7 @@ export const ClosedModal: Story = {
 								}}
 							>
 								{entityOptions.map((option, index) => (
-									<option key={index} value={index}>
+									<option key={option.label} value={index}>
 										{option.label}
 									</option>
 								))}
@@ -751,6 +756,7 @@ export const ClosedModal: Story = {
 					</div>
 					<button
 						onClick={() => setOpen(true)}
+						type="button"
 						style={{
 							padding: "12px 24px",
 							fontSize: "16px",

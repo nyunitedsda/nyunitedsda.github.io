@@ -1,14 +1,13 @@
+import { AuthContext } from "@contexts/AuthenticationContext";
 import { useContext } from "react";
-import context from "../../contexts/AuthenticationContext/context";
-import type { AuthenticationContextProps } from "../../contexts/AuthenticationContext/types";
 
 /**
  * Hook to access the Authentication context
  * @returns Authentication context value
  * @throws Error if used outside of AuthenticationProvider
  */
-const useAuthentication = (): AuthenticationContextProps => {
-	const contextValue = useContext(context);
+const useAuthentication = () => {
+	const contextValue = useContext(AuthContext);
 
 	if (!contextValue) {
 		throw new Error(

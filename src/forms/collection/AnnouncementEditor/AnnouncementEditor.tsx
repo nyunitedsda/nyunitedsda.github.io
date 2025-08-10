@@ -1,12 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { ProjectModal } from "@components/ProjectModal";
+import { EntityEditor } from "@forms/EntityEditor";
+import { InputField } from "@forms/Input";
+import { useEntityList } from "@hooks/api";
+import { useAuthentication } from "@hooks/auth";
+import { announcementDateFormats } from "@test/mock_data/announcements";
 import { type FC, useMemo } from "react";
-import type { AnnouncementDT, EventDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { useAuthentication } from "../../../hooks/auth";
-import { announcementDateFormats } from "../../../test/mock_data/announcements";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import InputField from "../../Input/FormField";
+import type { AnnouncementDT, EventDT } from "@/api";
 import type { EditorProps } from "../types";
 import announcementSchema from "./schema";
 
@@ -33,6 +32,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	onSuccess,
 }) => {
 	const { user } = useAuthentication();
+	const { data: eventData } = useEntityList<EventDT>("events");
 
 	const { initialValues, title } = useMemo(
 		() =>
@@ -47,11 +47,6 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					},
 		[data, user],
 	);
-
-	const { data: eventData } = useQuery<EventDT[]>({
-		queryKey: ["events"],
-		queryFn: async () => getDatabaseList("events"),
-	});
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
@@ -84,7 +79,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					name="event_id"
 					label={EVENT_LABEL}
 					fieldType="select"
-					items={eventData ?? []}
+					items={(eventData as EventDT[]) ?? []}
 					renderItemLabel={(item: Partial<EventDT>) =>
 						(item?.name as string) || ""
 					}

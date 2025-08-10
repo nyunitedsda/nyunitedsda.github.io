@@ -1,9 +1,9 @@
+import ProjectCard from "@components/ProjectCard";
 import { InfoOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { type FC, useMemo } from "react";
-import ProjectCard from "../../../../components/ProjectCard/ProjectCard";
 import { cardStyles } from "./cardStyles";
 import { createFormattedContent } from "./helpers";
 import NoteSection from "./NoteSection";
@@ -33,13 +33,9 @@ const AnnouncementCard: FC<AnnouncementCardProps> = (props) => {
 		<ProjectCard
 			className={className ?? ""}
 			header={{ title, sx: headerSx }}
-			content={
-				<>
-					{contents.map(({ title, ...rest }) => (
-						<NoteSection {...rest} key={title} title={`${title}:`} />
-					))}
-				</>
-			}
+			content={contents.map(({ title, ...rest }) => (
+				<NoteSection {...rest} key={title} title={`${title}:`} />
+			))}
 			actions={
 				description ? (
 					<Box sx={descriptionSx}>

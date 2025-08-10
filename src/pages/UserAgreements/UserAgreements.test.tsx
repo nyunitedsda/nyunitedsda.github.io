@@ -1,5 +1,3 @@
-import { useLocation, useNavigate } from "react-router";
-import { type Mock, vi } from "vitest";
 import {
 	beforeEach,
 	describe,
@@ -9,7 +7,9 @@ import {
 	render,
 	screen,
 	waitFor,
-} from "../../test/index.ts";
+} from "@test/index.ts";
+import { useLocation, useNavigate } from "react-router";
+import { type Mock, vi } from "vitest";
 import UserAgreements from "./UserAgreements";
 
 const mockNavigate = vi.fn();
@@ -21,13 +21,13 @@ vi.mock("react-router", async () => ({
 	useNavigate: () => mockNavigate,
 }));
 
-vi.mock("../../components/PageWrapper/PageWrapper", () => ({
+vi.mock("@components/PageWrapper", () => ({
 	default: ({ children }: { children: React.ReactNode }) => (
 		<div>{children}</div>
 	),
 }));
 
-vi.mock("../../components/TabPanel/TabPanel", () => ({
+vi.mock("@components/TabPanel", () => ({
 	default: ({ children, value, index }: any) =>
 		value === index ? (
 			<div data-testid={`tabpanel-${index}`}>{children}</div>

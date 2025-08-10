@@ -25,12 +25,16 @@ export const extractRouteIdAndPath = (
 
 		// Recursively check children if they exist
 		if (route.children && route.children.length > 0) {
-			route.children.forEach((childRoute) => traverse(childRoute));
+			route.children.forEach((childRoute) => {
+				traverse(childRoute);
+			});
 		}
 	}
 
 	// Start traversal for each top-level route
-	routes.forEach((route) => traverse(route));
+	routes.forEach((route) => {
+		traverse(route);
+	});
 
 	return result;
 };

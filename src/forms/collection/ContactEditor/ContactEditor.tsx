@@ -1,9 +1,9 @@
+import { ProjectModal } from "@components/ProjectModal";
+import { EntityEditor } from "@forms/EntityEditor";
+import { InputField } from "@forms/Input";
+import { initialContactInfo } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ContactInfoDT } from "../../../api/request";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { initialContactInfo } from "../../../test/mock_data";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import InputField from "../../Input/FormField";
+import type { ContactInfoDT } from "@/api";
 import type { EditorProps } from "../types";
 import { CONTACT_EDITOR_CONSTANTS } from "./constants";
 import contactSchema from "./schema";

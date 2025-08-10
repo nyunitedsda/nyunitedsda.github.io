@@ -1,4 +1,4 @@
-import type { ConfirmationButtonProps } from "../../../Buttons/types";
+import type { ConfirmationButtonProps } from "@components/Buttons";
 
 const tableActions: Record<string, Partial<ConfirmationButtonProps>> = {
 	deleteConfirm: {

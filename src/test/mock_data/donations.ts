@@ -1,4 +1,4 @@
-import type { DonationDT } from "../../api/request";
+import type { DonationDT } from "@/api";
 
 export const initialState: Partial<DonationDT> = {
 	title: "",

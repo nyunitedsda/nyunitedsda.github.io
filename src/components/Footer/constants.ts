@@ -1,4 +1,4 @@
-import routePaths from "../../hooks/routes/routePaths";
+import { routePaths } from "@hooks/routes";
 
 const FOOTER_LEGAL_LINKS = [
 	{

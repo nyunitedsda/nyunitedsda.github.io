@@ -1,8 +1,7 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
-import { useState } from "react";
-import type { NotificationDT } from "../../../api/request";
+import { useId, useState } from "react";
+import type { NotificationDT } from "@/api";
 import NotificationEditor from "./NotificationEditor";
 
 // Sample notification data
@@ -11,7 +10,7 @@ const sampleNotification: NotificationDT = {
 	message:
 		"The system will be down for maintenance from 2:00 AM to 4:00 AM EST.",
 	title: "System Maintenance",
-	severity: "information",
+	severity_id: 1,
 	expires_at: new Date("2025-12-31T23:59:59"),
 };
 
@@ -233,7 +232,7 @@ export const EditModeError: Story = {
 			message:
 				"A critical error has occurred in the system. Please contact support immediately.",
 			title: "Critical Error",
-			severity: "error",
+			severity_id: 2,
 		},
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationDT>) =>
@@ -271,7 +270,7 @@ export const EditModeSuccess: Story = {
 			id: 3,
 			message: "The system update has been completed successfully.",
 			title: "Update Complete",
-			severity: "success",
+			severity_id: 3,
 		},
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationDT>) =>
@@ -309,7 +308,7 @@ export const EditModeCaution: Story = {
 			id: 4,
 			message: "Your session will expire in 5 minutes. Please save your work.",
 			title: "Warning",
-			severity: "caution",
+			severity_id: 4,
 		},
 		onClose: () => console.log("Modal closed"),
 		onSuccess: (data: Partial<NotificationDT>) =>
@@ -340,7 +339,7 @@ export const ClosedModal: Story = {
 			const [selectedEntity, setSelectedEntity] = useState<
 				Partial<NotificationDT> | undefined
 			>(undefined);
-
+			const uId = useId();
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
 				{
@@ -395,6 +394,7 @@ export const ClosedModal: Story = {
 						</p>
 						<div style={{ marginBottom: "12px" }}>
 							<label
+								htmlFor={uId}
 								style={{
 									display: "block",
 									marginBottom: "8px",
@@ -404,6 +404,7 @@ export const ClosedModal: Story = {
 								Pre-select notification for modal:
 							</label>
 							<select
+								id={uId}
 								title="Select notification type for modal"
 								value={entityOptions.findIndex(
 									(opt) => opt.value === selectedEntity,
@@ -420,7 +421,7 @@ export const ClosedModal: Story = {
 								}}
 							>
 								{entityOptions.map((option, index) => (
-									<option key={index} value={index}>
+									<option key={option.label} value={index}>
 										{option.label}
 									</option>
 								))}

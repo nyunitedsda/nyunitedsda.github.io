@@ -1,13 +1,13 @@
+import RingLoader from "@components/Loaders";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
 import { useLoaderData } from "react-router-dom";
-import type { MinistriesDT } from "../../../../api/request";
-import RingLoader from "../../../../components/Loaders/RingLoader";
+import type { MinistriesDT } from "@/api";
 import { HOME_CONSTANTS } from "../../homeConstants";
 import MinistryCard from "../MinistryCard";
 import SectionWrapper from "../SectionWrapper";
 
-const { MINISTRIES_HEADER, imageRootSx, cardContainerSx } = HOME_CONSTANTS;
+const { MINISTRIES_HEADER, cardContainerSx } = HOME_CONSTANTS;
 const PageMinistries: FC = () => {
 	const { ministries, isLoading } = useLoaderData();
 
@@ -22,13 +22,8 @@ const PageMinistries: FC = () => {
 								content: i.content,
 								link: i.link_url,
 								image: {
-									root: {
-										sx: imageRootSx,
-									},
-									image: {
-										src: i.image_url,
-										alt: `${i.title} image`,
-									},
+									src: i.image_url,
+									alt: `${i.title} image`,
 								},
 							}}
 							key={`${i.title} image`}

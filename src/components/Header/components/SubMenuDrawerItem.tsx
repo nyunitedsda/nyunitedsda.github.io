@@ -34,7 +34,7 @@ const SubMenuDrawerItem: FC<SubMenuDrawerItemProps> = ({
 				text={name}
 			/>
 			{isExpanded && (
-				<div id={`${name}-submenu`} role="group">
+				<div id={`${name}-submenu`}>
 					{children?.map((ch) => (
 						<MenuDrawItem
 							key={ch.name}

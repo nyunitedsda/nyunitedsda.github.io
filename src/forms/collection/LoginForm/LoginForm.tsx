@@ -1,13 +1,13 @@
+import { FormContainer } from "@forms/FormBuilder";
+import { InputField } from "@forms/Input";
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
 import Stack from "@mui/material/Stack";
 import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import type { LoginCredentials } from "../../../api/request";
-import { useAuthentication } from "../../../hooks/auth";
-import routePaths from "../../../hooks/routes/routePaths";
-import FormContainer from "../../FormBuilder/FormContainer";
-import InputField from "../../Input/FormField";
+import type { LoginCredentials } from "@/api";
 import {
 	configurePasswordInput,
 	configureUsernameInput,
@@ -65,7 +65,7 @@ const LoginForm: FC = () => {
 					formikHelpers.setSubmitting(false);
 				});
 		},
-		[login, navigate],
+		[login, navigate, enqueueSnackbar],
 	);
 
 	return (

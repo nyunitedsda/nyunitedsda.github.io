@@ -3,7 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SaveIcon from "@mui/icons-material/Save";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ConfirmationButtonProps } from "../types";
 import ConfirmationButton from "./ConfirmationButton";

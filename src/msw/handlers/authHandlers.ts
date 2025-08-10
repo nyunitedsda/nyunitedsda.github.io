@@ -1,6 +1,6 @@
+import { mockLoginResponse, users as userData } from "@test/mock_data";
 import { HttpResponse, http } from "msw";
-import type { UserDT } from "../../api/request";
-import { mockLoginResponse, users as userData } from "../../test/mock_data";
+import type { UserDT } from "@/api";
 
 const { VITE_API_URL, VITE_API_AUTH_URL } = (
 	import.meta as unknown as ImportMeta
@@ -21,7 +21,7 @@ const userHandlers = [
 	http.get(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
 		console.log(`Inside get user by ID handler for ID: ${id}`);
 
-		const user = fetchUserById(parseInt(id as string));
+		const user = fetchUserById(parseInt(id as string, 10));
 
 		if (user.error) {
 			return HttpResponse.json({ error: user.error }, { status: 404 });
@@ -32,7 +32,7 @@ const userHandlers = [
 	// Delete user by ID
 	http.delete(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
 		console.log(`Inside delete user by ID handler for ID: ${id}`);
-		const user = fetchUserById(parseInt(id as string));
+		const user = fetchUserById(parseInt(id as string, 10));
 		if (user.error) {
 			return HttpResponse.json({ error: user.error }, { status: 404 });
 		}
@@ -46,7 +46,7 @@ const userHandlers = [
 
 	// Update user profile
 	http.put(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
-		const user = fetchUserById(parseInt(id as string));
+		const user = fetchUserById(parseInt(id as string, 10));
 		if (user.error) {
 			return HttpResponse.json({ error: user.error }, { status: 404 });
 		}
@@ -125,7 +125,7 @@ const userHandlers = [
 				);
 			}
 
-			const user = fetchUserById(parseInt(id as string));
+			const user = fetchUserById(parseInt(id as string, 10));
 			if (user.error) {
 				return HttpResponse.json({ error: user.error }, { status: 404 });
 			}

@@ -1,23 +1,19 @@
-import { Stack, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import type { FC } from "react";
-import { Navigate } from "react-router";
-import type { DonationDT } from "../../api/request";
-import { getDatabaseList } from "../../api/request/commonQueries";
-import RingLoader from "../../components/Loaders/RingLoader";
-import PageTitle from "../../components/PageWrapper/PageTitle";
+import RingLoader from "@components/Loaders";
+import { PageTitle } from "@components/PageWrapper";
 import {
 	DONATION_HEADER,
 	DONATION_SUBHEADER,
 	DONATION_TEXT,
-} from "../../constants/donationConstant";
-import routePaths from "../../hooks/routes/routePaths";
+} from "@constants/donationConstant";
+import { useEntityList } from "@hooks/api";
+import { routePaths } from "@hooks/routes";
+import { Stack, Typography } from "@mui/material";
+import type { FC } from "react";
+import { Navigate } from "react-router";
+import type { DonationDT } from "@/api";
 
 const Donations: FC = () => {
-	const { isLoading, data, error } = useQuery({
-		queryKey: ["get-donations"],
-		queryFn: async () => await getDatabaseList("donations"),
-	});
+	const { data, error, isLoading } = useEntityList<DonationDT>("donations");
 
 	return (
 		<>
@@ -38,14 +34,11 @@ const Donations: FC = () => {
 				{!isLoading &&
 					data &&
 					data.length !== 0 &&
-					(data as DonationDT[]).map((i) => (
-						<Typography
-							key={i.title}
-							color="text.primary"
-							dangerouslySetInnerHTML={{
-								__html: `<strong>${i.title}: </strong>${i.description}`,
-							}}
-						/>
+					data.map((i) => (
+						<Typography key={i.title} color="text.primary">
+							<strong>{i.title}: </strong>
+							{i.description}
+						</Typography>
 					))}
 				{error && (
 					<Navigate to={routePaths.NOT_FOUND} replace state={{ error }} />

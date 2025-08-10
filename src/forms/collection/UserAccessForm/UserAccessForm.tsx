@@ -1,11 +1,8 @@
+import FormContainer from "@forms/FormBuilder/FormContainer";
+import InputField from "@forms/Input/FormField";
 import Stack from "@mui/material/Stack";
 import { type FC, useCallback, useMemo } from "react";
-import FormContainer from "../../FormBuilder/FormContainer";
-import InputField from "../../Input/FormField";
-import {
-	configurePasswordInput,
-	configureUsernameInput,
-} from "../commonInputs";
+import { configurePasswordInput } from "../commonInputs";
 import { registerSchema } from "./schema";
 import type { UserAccessFormProps } from "./types";
 
@@ -21,7 +18,7 @@ const CONFIRM_PASSWORD = "Confirm Password";
 const REGISTER = "Register";
 const ACCEPT_TERMS = "I accept the terms and conditions";
 
-const ChangePasswordForm: FC<UserAccessFormProps> = ({ user, data }) => {
+const ChangePasswordForm: FC<UserAccessFormProps> = () => {
 	const {
 		buttonText,
 		confirmPasswordProps,
@@ -46,6 +43,7 @@ const ChangePasswordForm: FC<UserAccessFormProps> = ({ user, data }) => {
 		// TODO: Implement form submission logic
 		// Handle form submission logic here for login or registration
 		// This could involve calling an API, updating state, etc.
+		return Promise.resolve();
 	}, []);
 
 	return (

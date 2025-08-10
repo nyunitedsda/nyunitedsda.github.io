@@ -1,5 +1,5 @@
-import type { ServiceDT } from "../../../api/request";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { ColumnDefinition } from "@components/DataTable";
+import type { ServiceDT } from "@/api";
 
 /**
  * Defines the columns for the Service DataTable.

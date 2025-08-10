@@ -1,12 +1,12 @@
-import type { Contact_InfoDT } from "../../../api/request";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { ColumnDefinition } from "@components/DataTable";
+import type { ContactInfoDT } from "@/api";
 
 /**
  * Defines the columns for the Contact Information DataTable.
  * Each column is defined with an id, field, and title.
- * The field corresponds to the property in the Contact_InfoDT interface.
+ * The field corresponds to the property in the ContactInfoDT interface.
  */
-const contactInfoColumns: ColumnDefinition<Partial<Contact_InfoDT>>[] = [
+const contactInfoColumns: ColumnDefinition<Partial<ContactInfoDT>>[] = [
 	{ id: "email", field: "email", title: "Email" },
 	{ id: "phone", field: "phone", title: "Phone" },
 	{ id: "street", field: "street", title: "Street" },

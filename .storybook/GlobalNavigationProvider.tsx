@@ -124,7 +124,7 @@ export const GlobalNavigationProvider = ({
 	
 	useEffect(() => {
 		// Skip if navigation is disabled for this story
-		if (!config.enabled) {
+		if (!config.enabled || typeof window === 'undefined') {
 			return;
 		}
 		

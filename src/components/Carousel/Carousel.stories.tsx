@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import sliderImages from "../../pages/Home/sliderImages";
 import Carousel from "./Carousel";
@@ -158,7 +158,11 @@ export const Default: Story = {
 	args: {
 		autoplay: false,
 		children: sampleImages.map((image, index) => (
-			<SampleSlide key={index} image={image} index={index} />
+			<SampleSlide
+				key={JSON.stringify({ image, index })}
+				image={image}
+				index={index}
+			/>
 		)),
 	} as any,
 	parameters: {
@@ -175,7 +179,11 @@ export const WithAutoplay: Story = {
 		autoplay: true,
 		userOptions: {},
 		children: sampleImages.map((image, index) => (
-			<SampleSlide key={index} image={image} index={index} />
+			<SampleSlide
+				key={JSON.stringify({ image, index })}
+				image={image}
+				index={index}
+			/>
 		)),
 	},
 	parameters: {
@@ -242,10 +250,18 @@ export const ManySlides: Story = {
 		autoplay: false,
 		children: [
 			...sampleImages.map((image, index) => (
-				<SampleSlide key={index} image={image} index={index} />
+				<SampleSlide
+					key={JSON.stringify({ image, index })}
+					image={image}
+					index={index}
+				/>
 			)),
 			...sampleImages.map((image, index) => (
-				<SampleSlide key={index + 5} image={image} index={index + 5} />
+				<SampleSlide
+					key={JSON.stringify({ image, index: index + 5 })}
+					image={image}
+					index={index + 5}
+				/>
 			)),
 		],
 	} as any,
@@ -269,7 +285,7 @@ export const WithCustomOptions: Story = {
 		},
 		children: sampleImages.map((image, index) => (
 			<Box
-				key={index}
+				key={JSON.stringify({ image, index })}
 				sx={{
 					flex: "0 0 50%",
 					minWidth: 0,
@@ -319,7 +335,11 @@ export const WithCustomStyling: Story = {
 		children: sampleImages
 			.slice(0, 3)
 			.map((image, index) => (
-				<SampleSlide key={index} image={image} index={index} />
+				<SampleSlide
+					key={JSON.stringify({ image, index })}
+					image={image}
+					index={index}
+				/>
 			)),
 	} as any,
 	parameters: {
@@ -339,7 +359,11 @@ export const FastAutoplay: Story = {
 			delay: 2000, // 2 seconds
 		},
 		children: sampleImages.map((image, index) => (
-			<SampleSlide key={index} image={image} index={index} />
+			<SampleSlide
+				key={JSON.stringify({ image, index })}
+				image={image}
+				index={index}
+			/>
 		)),
 	},
 	parameters: {

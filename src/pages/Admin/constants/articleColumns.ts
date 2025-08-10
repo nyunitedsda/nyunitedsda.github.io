@@ -1,5 +1,5 @@
-import type { ArticleDT } from "../../../api/request";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { ColumnDefinition } from "@components/DataTable";
+import type { ArticleDT } from "@/api";
 
 /**
  * Defines the columns for the Article DataTable.
@@ -9,7 +9,7 @@ import type { ColumnDefinition } from "../../../components/DataTable/types";
 const articleColumns: ColumnDefinition<Partial<ArticleDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "author_id", field: "author_id", title: "Author" },
-	{ id: "publishDate", field: "publishDate", title: "Publish Date" },
+	{ id: "published_at", field: "published_at", title: "Publish Date" },
 	{ id: "views", field: "views", title: "Views" },
 	{ id: "comments", field: "comments", title: "Comments" },
 	{ id: "rating", field: "rating", title: "Rating" },
@@ -21,7 +21,7 @@ const articleColumns: ColumnDefinition<Partial<ArticleDT>>[] = [
 		title: "Content",
 		renderCell: (data) => {
 			return data.content
-				? data.content.substring(0, 100) + "..."
+				? `${data.content.substring(0, 100)}...`
 				: "No content";
 		},
 	},

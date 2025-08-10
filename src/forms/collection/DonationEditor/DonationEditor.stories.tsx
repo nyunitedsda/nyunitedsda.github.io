@@ -1,9 +1,8 @@
 import { Button } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { action } from "storybook/actions";
-import type { DonationDT } from "../../../api/request";
+import type { DonationDT } from "@/api";
 import DonationEditor from "./DonationEditor";
 
 // Sample donation data
@@ -158,12 +157,13 @@ export const Playground: Story = {
 		const [selectedEntity, setSelectedEntity] = useState<
 			Partial<DonationDT> | undefined
 		>(sampleDonations[0]);
+		const uId = useId();
 
 		return (
 			<div style={{ padding: "20px" }}>
 				<div style={{ marginBottom: "20px" }}>
 					<label
-						htmlFor="data-select"
+						htmlFor={uId}
 						style={{
 							display: "block",
 							marginBottom: "8px",
@@ -173,7 +173,7 @@ export const Playground: Story = {
 						Select a donation method to edit:
 					</label>
 					<select
-						id="data-select"
+						id={uId}
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);
@@ -232,6 +232,7 @@ export const ClosedModal: Story = {
 		const [selectedEntity, setSelectedEntity] = useState<
 			Partial<DonationDT> | undefined
 		>(sampleDonations[1]);
+		const uId = useId();
 
 		return (
 			<div style={{ padding: "20px" }}>
@@ -242,7 +243,7 @@ export const ClosedModal: Story = {
 
 				<div style={{ marginBottom: "20px" }}>
 					<label
-						htmlFor="data-select-closed"
+						htmlFor={uId}
 						style={{
 							display: "block",
 							marginBottom: "8px",
@@ -252,7 +253,7 @@ export const ClosedModal: Story = {
 						Select a donation method:
 					</label>
 					<select
-						id="data-select-closed"
+						id={uId}
 						value={selectedEntity?.id || ""}
 						onChange={(e) => {
 							const id = Number(e.target.value);

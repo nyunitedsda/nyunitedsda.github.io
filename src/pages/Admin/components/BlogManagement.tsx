@@ -1,15 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { BlogEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialArticle } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import type { ArticleDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import BlogEditor from "../../../forms/collection/BlogEditor/BlogEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialArticle } from "../../../test/mock_data";
-
+import type { ArticleDT } from "@/api";
+import { deleteEntity } from "@/api";
 import articleColumns from "../constants/articleColumns";
 
 const BLOG_SUBHEADER = "Manage blog articles";
@@ -20,17 +18,11 @@ const BlogManagement: FC = () => {
 
 	const [createArticleOpen, setCreateArticleOpen] =
 		useState<Partial<ArticleDT> | null>(null);
-
 	const {
 		data: queryData,
-		refetch,
 		isLoading,
-	} = useQuery<Partial<ArticleDT>[] | undefined>({
-		queryKey: ["articles"],
-		queryFn: () => getDatabaseList("articles"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
+		refetch,
+	} = useEntityList<ArticleDT>("articles");
 
 	const _handleDeleteArticle = useCallback(
 		(data: Partial<ArticleDT>) => {
@@ -64,7 +56,7 @@ const BlogManagement: FC = () => {
 
 			<DataTable
 				isLoading={isLoading}
-				data={queryData as ArticleDT[]}
+				data={queryData ?? []}
 				columns={articleColumns}
 				onEdit={canEdit ? setCreateArticleOpen : undefined}
 				onDelete={canDelete ? _handleDeleteArticle : undefined}

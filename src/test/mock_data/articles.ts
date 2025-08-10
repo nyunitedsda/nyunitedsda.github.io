@@ -1,4 +1,4 @@
-import type { ArticleDT } from "../../api/request";
+import type { ArticleDT } from "@/api";
 
 const initialState: Partial<ArticleDT> = {
 	title: "",

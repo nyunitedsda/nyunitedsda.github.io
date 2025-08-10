@@ -33,7 +33,8 @@ export const Default: Story = {
 			validationSchema={validationSchema}
 			onSubmit={(values) => {
 				// eslint-disable-next-line no-alert
-				alert("Submitted: " + JSON.stringify(values));
+				alert(`"Submitted: ${JSON.stringify(values)}`);
+				return Promise.resolve();
 			}}
 		>
 			<TextField name="name" label="Name" fullWidth />
@@ -57,7 +58,10 @@ export const WithCancel: Story = {
 				{...args}
 				initialValues={initialValues}
 				validationSchema={validationSchema}
-				onSubmit={() => setSubmitted(true)}
+				onSubmit={() => {
+					setSubmitted(true);
+					return Promise.resolve();
+				}}
 				onCancel={() => setSubmitted(false)}
 			>
 				<TextField name="name" label="Name" fullWidth />

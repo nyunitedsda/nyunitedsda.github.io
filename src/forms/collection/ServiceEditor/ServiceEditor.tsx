@@ -1,8 +1,9 @@
+import ProjectModal from "@components/ProjectModal/ProjectModal";
+import { EntityEditor } from "@forms/EntityEditor";
+import InputField from "@forms/Input/FormField";
+import { initialService } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { initialService } from "../../../test/mock_data";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import InputField from "../../Input/FormField";
+import type { ServiceDT } from "@/api";
 import type { EditorProps } from "../types";
 import serviceSchema from "./schema";
 

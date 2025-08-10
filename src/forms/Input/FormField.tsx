@@ -1,3 +1,4 @@
+import type { InputProps } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel, {
@@ -8,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import { useField, useFormikContext } from "formik";
 import { useCallback, useMemo } from "react";
 import SelectField from "./SelectField";
-import type { InputFieldProps } from "./types";
+import type { InputFieldProps, SelectFieldProps } from "./types";
 
 const InputField = <
 	T extends { [key: string]: string | number | boolean },
@@ -25,47 +26,43 @@ const InputField = <
 		return validateFieldCondition?.(values) ?? true;
 	}, [validateFieldCondition, values]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies(props): suppress dependency props
+	const memoProps = useMemo(() => {
+		return props;
+	}, []);
+
 	const renderInputField = useCallback(() => {
-		// Always destructure fieldType out so it is not passed to DOM elements
-		const { fieldType, type, required = false, ...rest } = props;
+		const { fieldType = "text", type, required = false, ...rest } = memoProps;
 		const { error, touched } = meta;
 		const errorText = error && touched ? error : "";
 
+		const commonProps = {
+			type,
+			error: !!errorText,
+			helperText: errorText,
+			fullWidth: true,
+			margin: "normal" as InputProps["margin"],
+			required,
+		};
+
 		switch (fieldType) {
-			case "text":
-				return (
-					<TextField
-						{...field}
-						{...rest}
-						type={type ?? undefined}
-						error={!!error}
-						helperText={errorText}
-						fullWidth
-						margin="normal"
-						required={required}
-					/>
-				);
 			case "select":
 				return (
 					<SelectField<T>
 						{...field}
 						{...rest}
 						error={error}
-						items={props?.items || []}
-						label={(props?.label ?? "") as string}
+						items={memoProps.items}
 						valueResolver={
-							typeof props.valueResolver === "function"
-								? props.valueResolver
-								: (item) => String(item.value)
+							memoProps.valueResolver as SelectFieldProps<T>["valueResolver"]
 						}
 						renderItemLabel={
-							typeof props?.renderItemLabel === "function"
-								? props?.renderItemLabel
-								: (item) => String(item.value)
+							memoProps.renderItemLabel as SelectFieldProps<T>["renderItemLabel"]
 						}
 						required={required}
 					/>
 				);
+
 			case "checkbox":
 				return (
 					<FormControl
@@ -75,16 +72,13 @@ const InputField = <
 						required={required}
 					>
 						<FormControlLabel
+							{...(rest as FormControlLabelProps)}
 							control={<Checkbox />}
 							checked={field.value}
 							onChange={field.onChange}
 							onBlur={field.onBlur}
 							name={field.name}
-							label={(props as unknown as FormControlLabelProps)?.label || ""}
-							{...(rest as Omit<
-								FormControlLabelProps,
-								"control" | "checked" | "onChange" | "onBlur" | "name" | "label"
-							>)}
+							label={memoProps?.label || ""}
 						/>
 						{errorText && <FormHelperText>{errorText}</FormHelperText>}
 					</FormControl>
@@ -94,12 +88,8 @@ const InputField = <
 					<TextField
 						{...field}
 						{...rest}
+						{...commonProps}
 						type="datetime-local"
-						error={!!errorText}
-						helperText={errorText}
-						fullWidth
-						margin="normal"
-						required={required}
 						sx={{
 							'& input[type="month"]::-webkit-calendar-picker-indicator': {
 								filter: `invert(1) brightness(0.5)`,
@@ -107,21 +97,11 @@ const InputField = <
 						}}
 					/>
 				);
+
 			default:
-				return (
-					<TextField
-						{...field}
-						{...rest}
-						type={type ?? undefined}
-						error={!!errorText}
-						helperText={errorText}
-						fullWidth
-						margin="normal"
-						required={required}
-					/>
-				);
+				return <TextField {...field} {...rest} {...commonProps} />;
 		}
-	}, [field, props, meta]);
+	}, [field, meta, memoProps]);
 
 	return <>{isValidConditions && renderInputField()}</>;
 };

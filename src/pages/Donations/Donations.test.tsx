@@ -1,5 +1,11 @@
-import { beforeEach, describe, expect, it, screen } from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
+import {
+	beforeEach,
+	describe,
+	expect,
+	it,
+	render,
+	screen,
+} from "@test/index.ts";
 import Donations from "./Donations";
 
 describe("Donations component", () => {

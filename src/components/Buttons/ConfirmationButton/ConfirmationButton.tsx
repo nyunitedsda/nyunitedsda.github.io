@@ -1,7 +1,7 @@
+import ConfirmationDialog from "@components/ConfirmationDialog";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { type FC, useCallback, useState } from "react";
-import ConfirmationDialog from "../../ConfirmationDialog/ConfirmationDialog";
 import type { ConfirmationButtonProps } from "../types";
 
 const ConfirmationButton: FC<ConfirmationButtonProps> = ({
@@ -16,10 +16,6 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 	...buttonProps
 }) => {
 	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-
-	const VITE_API_URL =
-		(import.meta as unknown as ImportMeta).env.VITE_API_URL ||
-		"http://localhost:3000";
 
 	const handleButtonClick = useCallback(() => {
 		if (shouldConfirm) {

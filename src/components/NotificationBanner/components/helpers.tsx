@@ -1,5 +1,5 @@
 import { lazy, type ReactNode } from "react";
-import type { SeverityPalette } from "../../../api/request";
+import type { SeverityPalette } from "@/api";
 
 const InfoOutlineRounded = lazy(
 	() => import("@mui/icons-material/InfoOutlineRounded"),
@@ -24,6 +24,6 @@ const severityIcons: Record<SeverityPalette, ReactNode> = {
 };
 
 const selectSeverityIcon = (severity: SeverityPalette = "info") =>
-	severityIcons[severity];
+	severityIcons[severity] ?? severityIcons.info;
 
 export { selectSeverityIcon };

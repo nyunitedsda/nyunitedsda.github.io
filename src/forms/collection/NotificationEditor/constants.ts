@@ -1,6 +1,6 @@
 import type { Palette } from "@mui/material/styles";
 import * as Yup from "yup";
-import type { DatabaseEntity } from "../../../api/request";
+import type { DatabaseEntity } from "@/api";
 
 export const notificationSchema = Yup.object().shape({
 	title: Yup.string().required("Title is required"),

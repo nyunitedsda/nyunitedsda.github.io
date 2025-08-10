@@ -1,8 +1,8 @@
+import type { RouteMenu } from "@hooks/routes";
 import type { ButtonProps } from "@mui/material/Button";
 import type { IconButtonProps } from "@mui/material/IconButton";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { PropsWithChildren, ReactNode } from "react";
-import type { RouteMenu } from "../../hooks/routes/types";
 
 export type MenuButtonProps = PropsWithChildren<{
 	path: string;

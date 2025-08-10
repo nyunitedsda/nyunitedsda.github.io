@@ -1,7 +1,7 @@
+import RoutedTabs from "@components/RoutedTabs";
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
 import { type FC, useEffect, useMemo } from "react";
-import RoutedTabs from "../../components/RoutedTabs/RoutedTabs";
-import { useAuthentication } from "../../hooks/auth";
-import routePaths from "../../hooks/routes/routePaths";
 import { ADMIN_TAB_LIST } from "./constants/adminTabList";
 import type { AdministrationProps } from "./types";
 
@@ -33,6 +33,7 @@ const Administration: FC<AdministrationProps> = () => {
 		return approvedTabs;
 	}, [user]);
 
+	console.table({ user });
 	return (
 		<RoutedTabs
 			baseUrl="/admin"

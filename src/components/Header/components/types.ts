@@ -1,6 +1,6 @@
+import type { RouteMenu } from "@hooks/routes";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { MouseEvent, ReactNode } from "react";
-import type { RouteMenu } from "../../../hooks/routes/types";
 
 export interface MenuDrawerProps {
 	footer?: MenuDrawerItemProps[];

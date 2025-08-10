@@ -1,15 +1,11 @@
+import ProjectModal from "@components/ProjectModal/ProjectModal";
+import FormContainer from "@forms/FormBuilder/FormContainer";
+import InputField from "@forms/Input/FormField";
 import { type SxProps, type Theme, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
 import * as Yup from "yup";
-import {
-	changeMyPassword,
-	changeUserPassword,
-} from "../../../api/request/authAndUserRequest";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-
-import FormContainer from "../../FormBuilder/FormContainer";
-import InputField from "../../Input/FormField";
+import { changeMyPassword, changeUserPassword } from "@/api";
 import { configurePasswordInput } from "../commonInputs";
 import { passwordSchema } from "../commonSchemas";
 import type { PasswordEditorProps } from "./types";
@@ -124,7 +120,7 @@ const PasswordEditor: FC<PasswordEditorProps> = ({
 				);
 			}
 		},
-		[enqueueSnackbar, onSuccess, onClose],
+		[enqueueSnackbar, onSuccess, onClose, type],
 	);
 
 	return (

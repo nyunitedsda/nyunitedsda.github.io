@@ -2,7 +2,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
 import { useMemo } from "react";
-import { createEntity, updateEntity } from "../../api/request/mutations";
+import { createEntity, updateEntity } from "@/api";
 import FormContainer from "../FormBuilder/FormContainer";
 import type { EntityEditorProps } from "./types";
 

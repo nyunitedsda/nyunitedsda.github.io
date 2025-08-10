@@ -1,5 +1,6 @@
 "use client";
 
+import { routePaths } from "@hooks/routes";
 import LockOutlined from "@mui/icons-material/LockOutlined";
 import Box from "@mui/material/Box";
 import Button, { type ButtonProps } from "@mui/material/Button";
@@ -8,7 +9,6 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import routePaths from "../../hooks/routes/routePaths";
 import { PERMISSION_ERROR } from "./constants";
 
 const actionSx: SxProps<Theme> = {
@@ -52,13 +52,16 @@ const UnauthorizedError: FC = () => {
 		window.location.reload();
 	}, []);
 
-	const redirectUser = useCallback((path: "home" | "login") => {
-		if (path === "home") {
-			navigate(routePaths.HOME, { replace: true });
-		} else if (path === "login") {
-			navigate(routePaths.LOGIN, { replace: true });
-		}
-	}, []);
+	const redirectUser = useCallback(
+		(path: "home" | "login") => {
+			if (path === "home") {
+				navigate(routePaths.HOME, { replace: true });
+			} else if (path === "login") {
+				navigate(routePaths.LOGIN, { replace: true });
+			}
+		},
+		[navigate],
+	);
 
 	return (
 		<Stack spacing={3} sx={rootSx} className="fade-in">

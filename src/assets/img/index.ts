@@ -1,0 +1,20 @@
+export { default as elderImage } from "./elder.webp";
+export { default as familyImage } from "./family.webp";
+export { default as family2Image } from "./family2.webp";
+
+export { default as family3Image } from "./family3.webp";
+export { default as family4Image } from "./family4.webp";
+export { default as family5Image } from "./family5.webp";
+export { default as givingGiftImage } from "./giving-gift.webp";
+export { default as groupPrayImage } from "./group-pray.webp";
+export { default as membersImage } from "./members.webp";
+export { default as membersEmbraceImage } from "./members-embrace.webp";
+export { default as membersEmbrace1Image } from "./members-embrace1.webp";
+export { default as membersEmbrace2Image } from "./members-embrace2.webp";
+export { default as members3Image } from "./members3.webp";
+export { default as members4Image } from "./members4.webp";
+export { default as members6Image } from "./members6.webp";
+export { default as singingSisterImage } from "./singing-sister.webp";
+export { default as sisterPhotographyImage } from "./sister-photography.webp";
+export { default as youthsImage } from "./youths.webp";
+export { default as youths2Image } from "./youths2.webp";

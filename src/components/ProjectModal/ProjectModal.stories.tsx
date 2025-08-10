@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import ProjectModal from "./ProjectModal";
@@ -232,14 +232,17 @@ export const WithScrollableContent: Story = {
 				Long Content Modal
 			</Typography>
 			<Stack sx={{ overflowY: "auto" }}>
-				{Array.from({ length: 20 }, (_, index) => (
-					<Typography key={index} variant="body1" paragraph>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-						aliquip ex ea commodo consequat. Paragraph {index + 1}.
-					</Typography>
-				))}
+				{Array.from({ length: 20 }, (_, index) => {
+					const uniqueKey = `scrollable-paragraph-${index}-${Math.random().toString(36).slice(2)}`;
+					return (
+						<Typography key={uniqueKey} variant="body1" paragraph>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+							enim ad minim veniam, quis nostrud exercitation ullamco laboris
+							nisi ut aliquip ex ea commodo consequat. Paragraph {index + 1}.
+						</Typography>
+					);
+				})}
 			</Stack>
 			<Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", mt: 2 }}>
 				<Button variant="outlined">Cancel</Button>

@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+import Box from "@mui/material/Box";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
@@ -18,7 +18,9 @@ const createMockEmblaApi = (snapCount: number, initialIndex = 0) => {
 			selectedIndex = index;
 			// Trigger select listeners
 			if (listeners.select) {
-				listeners.select.forEach((callback) => callback(mockApi));
+				listeners.select.forEach((callback) => {
+					callback(mockApi);
+				});
 			}
 			action("scrollTo")(index);
 		},

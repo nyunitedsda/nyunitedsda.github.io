@@ -1,18 +1,13 @@
-import type {
-	AnnouncementDT,
-	ArticleDT,
-	MinistriesDT,
-} from "../../api/request";
-import {
-	getDatabaseItem,
-	getDatabaseList,
-} from "../../api/request/commonQueries";
+import { useAuthentication, useCurrentUser } from "@hooks/auth";
+import type { LoaderFunctionArgs } from "react-router-dom";
+import type { ArticleDT, UserDT } from "@/api";
+import { getDatabaseItem, getDatabaseList, getDefaultContacts } from "@/api";
 
 export const homeLoader = async () => {
 	let isLoading = true;
 	const [announcements, ministries] = await Promise.all([
-		getDatabaseList<AnnouncementDT>("announcements"),
-		getDatabaseList<MinistriesDT>("ministries"),
+		getDatabaseList("announcements"),
+		getDatabaseList("ministries"),
 	]);
 	isLoading = false;
 	return {
@@ -24,12 +19,10 @@ export const homeLoader = async () => {
 
 export const blogLoader = async () => {
 	let isLoading = true;
-	const blogs = await getDatabaseList<ArticleDT>("articles");
+	const blogs = await getDatabaseList("articles");
 	isLoading = false;
 	return { blogs: blogs || [], isLoading };
 };
-
-import type { LoaderFunctionArgs } from "react-router-dom";
 
 export const blogDetailLoader = async ({ params }: LoaderFunctionArgs) => {
 	let isLoading = true;
@@ -39,4 +32,28 @@ export const blogDetailLoader = async ({ params }: LoaderFunctionArgs) => {
 	);
 	isLoading = false;
 	return { blog: blog || null, isLoading };
+};
+
+export const pageLoader = async () => {
+	let isLoading = true;
+	const [services, defaultContact] = await Promise.all([
+		getDatabaseList("services"),
+		getDefaultContacts(),
+	]);
+	isLoading = false;
+	return {
+		services: services || [],
+		defaultContact: defaultContact || {},
+		isLoading,
+	};
+};
+
+export const adminLoader = async () => {
+	const { user } = useAuthentication();
+	const { refetch } = useCurrentUser();
+	let adminUser = user;
+	if (!adminUser) {
+		adminUser = (await refetch()).data as UserDT;
+	}
+	return { adminUser: adminUser };
 };

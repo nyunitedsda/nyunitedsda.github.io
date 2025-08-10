@@ -1,8 +1,7 @@
+import { NotificationProvider } from "@contexts/NotificationContext";
 import { Box, Stack, Typography } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Provider as NotificationProvider } from "../../contexts/NotificationContext/context";
 import NotificationBanner from "./NotificationBanner";
 
 // Mock NotificationContext for Storybook
@@ -11,17 +10,16 @@ const MockNotificationContext = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const mockContextValue = {
-		notifications: [],
-		registerNotification: () => {},
-		dismissNotification: (id: number) =>
-			console.log("Notification dismissed:", id),
-		clearNotification: () => {},
-	};
+	// const mockContextValue = {
+	// 	notifications: [],
+	// 	registerNotification: () => { },
+	// 	dismissNotification: (id: number) =>
+	// 		console.log("Notification dismissed:", id),
+	// 	clearNotification: () => { },
+	// };
 
 	return React.createElement(
 		NotificationProvider,
-		{ value: mockContextValue },
 		React.createElement(
 			"div",
 			{
@@ -44,7 +42,7 @@ const NotificationDecorator = (Story: any, context: any) => {
 
 	return React.createElement(
 		MockNotificationContext,
-		{ children: null },
+		null,
 		showContainer
 			? React.createElement(
 					Box,
@@ -96,9 +94,9 @@ const meta: Meta<typeof NotificationBanner> = {
 			control: "text",
 			description: "Optional title for the notification",
 		},
-		severity: {
+		severity_id: {
 			control: { type: "select" },
-			options: ["information", "caution", "error", "success"],
+			options: [1, 2, 3, 4],
 			description: "The severity level of the notification",
 		},
 		open: {
@@ -119,7 +117,7 @@ export const Default: Story = {
 		message:
 			"Welcome to New York United SDA Church! Join us for worship this Saturday at 11:00 AM.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -139,7 +137,7 @@ export const WithTitle: Story = {
 		message:
 			"Special prayer meeting scheduled for this Wednesday at 7:00 PM in the main sanctuary.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -159,7 +157,7 @@ export const Success: Story = {
 		message:
 			"Thank you for your generous donation of $100. Your contribution helps support our ministry.",
 		open: true,
-		severity: "success",
+		severity_id: 4,
 	},
 	parameters: {
 		docs: {
@@ -179,7 +177,7 @@ export const Warning: Story = {
 		message:
 			"Please note that next Saturday's service will start 30 minutes later due to a special program.",
 		open: true,
-		severity: "caution",
+		severity_id: 2,
 	},
 	parameters: {
 		docs: {
@@ -191,7 +189,7 @@ export const Warning: Story = {
 	},
 };
 
-export const Error: Story = {
+export const ErrorAlert: Story = {
 	name: "Error Alert",
 	args: {
 		id: 5,
@@ -199,7 +197,7 @@ export const Error: Story = {
 		message:
 			"Unable to connect to the server. Please check your internet connection and try again.",
 		open: true,
-		severity: "error",
+		severity_id: 3,
 	},
 	parameters: {
 		docs: {
@@ -219,7 +217,7 @@ export const LongMessage: Story = {
 		message:
 			"We are excited to announce the launch of our new online giving platform, which will make it easier for members to support our various ministries and programs. The platform includes features for one-time donations, recurring giving, and the ability to designate funds for specific projects such as youth programs, community outreach, building maintenance, and missionary support. Please visit our website or speak with a church elder for more information on how to get started.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -237,7 +235,7 @@ export const MessageOnly: Story = {
 		id: 7,
 		message: "Bible study resumes next Tuesday at 7:00 PM.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -256,7 +254,7 @@ export const Hidden: Story = {
 		title: "Hidden Notification",
 		message: "This notification is not visible because open is set to false.",
 		open: false,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -274,7 +272,7 @@ export const AllSeverities: Story = {
 		id: 9,
 		message: "This story shows all severity types",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		showContainer: false,
@@ -289,7 +287,7 @@ export const AllSeverities: Story = {
 		() =>
 			React.createElement(
 				MockNotificationContext,
-				{ children: null },
+				null,
 				React.createElement(
 					Stack,
 					{ spacing: 2, sx: { p: 2 } },
@@ -303,28 +301,28 @@ export const AllSeverities: Story = {
 						title: "Information",
 						message: "This is an informational message about church services.",
 						open: true,
-						severity: "information",
+						severity_id: 1,
 					}),
 					React.createElement(NotificationBanner, {
 						id: 102,
 						title: "Success",
 						message: "Your prayer request has been submitted successfully.",
 						open: true,
-						severity: "success",
+						severity_id: 4,
 					}),
 					React.createElement(NotificationBanner, {
 						id: 103,
 						title: "Warning",
 						message: "Please arrive early as parking will be limited.",
 						open: true,
-						severity: "caution",
+						severity_id: 2,
 					}),
 					React.createElement(NotificationBanner, {
 						id: 104,
 						title: "Error",
 						message: "Unable to process your request. Please try again.",
 						open: true,
-						severity: "error",
+						severity_id: 3,
 					}),
 				),
 			),
@@ -339,7 +337,7 @@ export const Interactive: Story = {
 		message:
 			"Click the close button to dismiss this notification. Use the controls below to customize it.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		docs: {
@@ -366,7 +364,7 @@ export const ChurchAnnouncements: Story = {
 		() =>
 			React.createElement(
 				MockNotificationContext,
-				{ children: null },
+				null,
 				React.createElement(
 					Box,
 					{ sx: { p: 3, maxWidth: 900, mx: "auto" } },
@@ -384,7 +382,7 @@ export const ChurchAnnouncements: Story = {
 							message:
 								"Join us this Saturday for a special communion service starting at 11:00 AM. Elder Johnson will be delivering the sermon.",
 							open: true,
-							severity: "information",
+							severity_id: 1,
 						}),
 						React.createElement(NotificationBanner, {
 							id: 202,
@@ -392,14 +390,14 @@ export const ChurchAnnouncements: Story = {
 							message:
 								"Registration is now open for our summer youth camp. Early bird pricing available until March 15th.",
 							open: true,
-							severity: "success",
+							severity_id: 4,
 						}),
 						React.createElement(NotificationBanner, {
 							id: 203,
 							message:
 								"Prayer meeting moved to Fellowship Hall due to sanctuary maintenance.",
 							open: true,
-							severity: "caution",
+							severity_id: 2,
 						}),
 						React.createElement(NotificationBanner, {
 							id: 204,
@@ -407,7 +405,7 @@ export const ChurchAnnouncements: Story = {
 							message:
 								"Join us next Sunday for our monthly food distribution program. Volunteers needed from 9:00 AM to 12:00 PM.",
 							open: true,
-							severity: "information",
+							severity_id: 1,
 						}),
 					),
 				),
@@ -423,7 +421,7 @@ export const ResponsiveDemo: Story = {
 		message:
 			"This notification adapts to different screen sizes and maintains readability on all devices.",
 		open: true,
-		severity: "information",
+		severity_id: 1,
 	},
 	parameters: {
 		viewport: {

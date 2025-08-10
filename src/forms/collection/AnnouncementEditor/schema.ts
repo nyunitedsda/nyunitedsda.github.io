@@ -1,5 +1,5 @@
+import { dateFormatValues } from "@test/mock_data/announcements";
 import * as Yup from "yup";
-import { dateFormatValues } from "../../../test/mock_data/announcements";
 import { titleSchema } from "../commonSchemas";
 
 // Conditional rules are documented inline.

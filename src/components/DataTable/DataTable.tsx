@@ -8,10 +8,10 @@ import TableCell, { type TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { type FC, lazy, type ReactNode, useMemo, useState } from "react";
+import { lazy, type ReactNode, useMemo, useState } from "react";
 import RingLoader from "react-spinners/RingLoader";
 import { generateActionColumn } from "./helpers/columnHelpers";
-import type { ColumnDefinition, DataTableProps, GenericType } from "./types";
+import type { ColumnDefinition, DataTableProps } from "./types";
 
 const DensitySmallOutlined = lazy(
 	() => import("@mui/icons-material/DensitySmallOutlined"),
@@ -28,7 +28,7 @@ const rootSx: SxProps<Theme> = {
 	flexGrow: 1,
 	overflow: "auto",
 	height: "100%",
-	display: "flex", // { xs: "none", md: "flex" },
+	display: "flex",
 	"& .MuiTableHead-root": {
 		bgcolor: "primary.main",
 		"& .MuiTableCell-root": {
@@ -36,9 +36,6 @@ const rootSx: SxProps<Theme> = {
 			fontWeight: "bold",
 		},
 	},
-	// "& .MuiTableBody-root": {
-	// 	flexGrow: 1,
-	// },
 };
 
 // FEATURE: Add accordion support for expandable rows in mobile view
@@ -46,7 +43,7 @@ const rootSx: SxProps<Theme> = {
 
 const defaultAlign = "left" as TableCellProps["align"];
 
-const DataTable: FC<DataTableProps<GenericType>> = ({
+const DataTable = <T extends { [key: string]: unknown }>({
 	columns,
 	data,
 	onEdit,
@@ -54,7 +51,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 	onView,
 	renderAction,
 	isLoading = false,
-}) => {
+}: DataTableProps<T>) => {
 	const [density, setDensity] = useState<TableOwnProps["size"]>("medium");
 
 	const tableOptions: Partial<IconButtonProps>[] = useMemo(() => {
@@ -76,7 +73,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 		];
 	}, [density]);
 
-	const formattedColumns: ColumnDefinition<GenericType>[] = useMemo(() => {
+	const formattedColumns: ColumnDefinition<T>[] = useMemo(() => {
 		if (onEdit || onDelete || onView || renderAction) {
 			return [
 				...columns,
@@ -85,7 +82,7 @@ const DataTable: FC<DataTableProps<GenericType>> = ({
 		}
 
 		return columns;
-	}, [columns]);
+	}, [columns, onEdit, onDelete, onView, renderAction]);
 
 	return (
 		<TableContainer sx={rootSx}>

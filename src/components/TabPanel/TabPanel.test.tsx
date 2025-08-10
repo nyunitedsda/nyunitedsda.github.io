@@ -1,5 +1,4 @@
-import { describe, expect, it } from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
+import { describe, expect, it, render } from "@test/index.ts";
 import TabPanel from "./TabPanel";
 
 describe("TabPanel", () => {

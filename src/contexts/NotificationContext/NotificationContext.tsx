@@ -1,43 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import { useSnackbar } from "notistack";
+import type { NotificationProps } from "@components/NotificationBanner";
+import { useEntityList } from "@hooks/api";
 import {
 	type FC,
 	type PropsWithChildren,
 	useCallback,
+	useEffect,
 	useMemo,
 	useState,
 } from "react";
-import type { NotificationDT } from "../../api/request";
-import { getDatabaseList } from "../../api/request/commonQueries";
-import type { NotificationProps } from "../../components/NotificationBanner/types";
+import type { NotificationDT } from "@/api";
 import { Provider } from "./context";
 import type { NotificationContextProps } from "./types";
 
 const MAX_NOTIFICATIONS = 3;
 
 const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
-	const { enqueueSnackbar } = useSnackbar();
-
+	const { data, refetch } = useEntityList<NotificationDT>("notifications");
 	const [notificationList, setNotificationList] = useState<NotificationDT[]>(
 		[],
 	);
 
-	useQuery({
-		queryKey: ["notifications"],
-		queryFn: async () =>
-			await getDatabaseList<NotificationDT>("notifications")
-				.then((res) => {
-					if (res) {
-						setNotificationList(res);
-					}
-					return res;
-				})
-				.catch((error) => {
-					enqueueSnackbar(String(error), { variant: "error" });
-					Promise.reject(error);
-				}),
-		staleTime: 1000 * 60 * 5, // 5 minutes
-		refetchOnMount: true,
+	useEffect(() => {
+		if (data) setNotificationList(data as NotificationDT[]);
+	}, [data]);
+
+	useEffect(() => {
+		const timer = setInterval(() => refetch(), 6000 * 15);
+		return clearInterval(timer);
 	});
 
 	const notifications = useMemo(

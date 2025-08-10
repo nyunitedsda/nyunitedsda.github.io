@@ -1,4 +1,4 @@
-import type { RouteMenu } from "../../../../hooks/routes/types";
+import type { RouteMenu } from "@hooks/routes";
 
 const btnCharLength = 12;
 const btnXPadding = 16;

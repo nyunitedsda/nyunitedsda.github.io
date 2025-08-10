@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import dayjs from "dayjs";
 import {
 	act,
 	afterEach,
@@ -7,10 +5,12 @@ import {
 	describe,
 	expect,
 	it,
+	render,
 	screen,
 	vi,
-} from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import "@testing-library/jest-dom";
+import dayjs from "dayjs";
 import CountdownTimer from "./CountdownTimer";
 
 describe("CountdownTimer", () => {

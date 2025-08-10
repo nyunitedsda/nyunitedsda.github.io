@@ -1,6 +1,6 @@
+import type { TabPanelProps } from "@components/TabPanel";
 import type { TabProps } from "@mui/material";
 import type { FC, ReactNode } from "react";
-import type { TabPanelProps } from "../TabPanel/types";
 
 interface RoutedTabsProps {
 	baseUrl: string;

@@ -10,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 import type {
 	LoginCredentials,
 	LoginResponse,
+	RegisterUserDT,
 	UserDT,
-} from "../../api/request";
+} from "@/api";
 import {
 	deleteUser,
 	getCurrentUser,
@@ -19,8 +20,7 @@ import {
 	loginUser,
 	logoutUser,
 	registerUser,
-} from "../../api/request/authAndUserRequest";
-import type { RegisterData } from "../../contexts/AuthenticationContext";
+} from "@/api";
 import routePaths from "../routes/routePaths";
 
 /**
@@ -38,6 +38,8 @@ export const useLogin = () => {
 			return data;
 		},
 		onError: (error: AxiosError<{ error: string }>) => {
+			console.log("login error: ", error);
+
 			console.error("Login failed:", error?.response?.data.error);
 			queryClient.removeQueries({ queryKey: ["user"] });
 			return Promise.reject({ message: error?.response?.data.error });
@@ -49,7 +51,7 @@ export const useRegister = () => {
 	const { enqueueSnackbar } = useSnackbar();
 
 	return useMutation({
-		mutationFn: (userData: RegisterData) => registerUser(userData),
+		mutationFn: (userData: RegisterUserDT) => registerUser(userData),
 		onSuccess: (data) => {
 			enqueueSnackbar("User registered successfully", { variant: "success" });
 			return data;
@@ -70,7 +72,6 @@ export const useLogout = () => {
 	return useMutation({
 		mutationFn: () => logoutUser(),
 		onSuccess: () => {
-			// refreshAuthStatus?.();
 			queryClient.removeQueries({ queryKey: ["user"] });
 			queryClient.clear(); // Clear all cached data
 			enqueueSnackbar("Logged out successfully", { variant: "info" });
@@ -78,7 +79,6 @@ export const useLogout = () => {
 		},
 		onError: (error) => {
 			console.error("Logout failed:", error);
-
 			queryClient.removeQueries({ queryKey: ["user"] });
 
 			navigate(routePaths.HOME, { replace: true });
@@ -88,24 +88,15 @@ export const useLogout = () => {
 
 export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 	const queryClient = useQueryClient();
-	const { enqueueSnackbar } = useSnackbar();
 
 	return useQuery({
 		queryKey: ["user"],
 		queryFn: () => getCurrentUser(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
-		enabled: () => {
-			return (
-				document.cookie.includes("accessToken") ||
-				document.cookie.includes("refreshToken")
-			);
-		},
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
 			if (error?.response?.status === 401 || error?.response?.status === 403) {
-				enqueueSnackbar("Session expired, please log in again", {
-					variant: "warning",
-				});
+				console.log("Session expired, please log in again");
 
 				queryClient.removeQueries({ queryKey: ["user"] });
 				return false;
@@ -120,27 +111,18 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 //  */
 export const useAuthStatus = () => {
 	const queryClient = useQueryClient();
-	const { enqueueSnackbar } = useSnackbar();
 
 	const { data, isLoading, error, refetch } = useQuery({
 		queryKey: ["user-status"],
 		queryFn: () => getUserStatus(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
-		enabled: () => {
-			return (
-				document.cookie.includes("accessToken") ||
-				document.cookie.includes("refreshToken")
-			);
-		},
 		retry: (failureCount, error: any) => {
 			if (error?.response?.status === 403) {
 			}
 			if (error?.response?.status === 401) {
 				queryClient.removeQueries({ queryKey: ["user"] });
 
-				enqueueSnackbar("Session expired, please log in again", {
-					variant: "warning",
-				});
+				console.log("Session expired, please log in again");
 
 				return false;
 			}

@@ -4,7 +4,9 @@ import DataTable from "./DataTable";
 
 describe("DataTable", () => {
 	it("renders DataTable", () => {
-		const { getByText } = render(<DataTable />);
+		const { getByText } = render(
+			<DataTable isLoading={false} columns={[]} data={[]} />,
+		);
 
 		expect(getByText("DataTable Component")).toBeInTheDocument();
 	});

@@ -1,16 +1,26 @@
-import type { FC } from "react";
-import { Navigate } from "react-router-dom";
-import AppProvider from "./components/AppProvider";
-import PageWrapper from "./components/PageWrapper/PageWrapper";
-import { useAuthentication } from "./hooks/auth";
+import { AppProvider } from "@components/AppProvider";
+import RingLoader from "@components/Loaders";
+import PageWrapper from "@components/PageWrapper";
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
+import { type FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProtectedLayout: FC = () => {
-	const { isAuthenticated } = useAuthentication();
+	const { isAuthenticated, isLoading } = useAuthentication();
+	const navigate = useNavigate();
 
-	return isAuthenticated ? (
-		<PageWrapper />
-	) : (
-		<Navigate to="/unauthorized" replace />
+	useEffect(() => {
+		if (!isLoading && !isAuthenticated) {
+			navigate(routePaths.UNAUTHORIZED);
+		}
+	}, [isAuthenticated, isLoading, navigate]);
+
+	return (
+		<>
+			{isLoading && <RingLoader />}
+			{!isLoading && isAuthenticated && <PageWrapper />}
+		</>
 	);
 };
 

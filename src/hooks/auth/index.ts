@@ -1,7 +1,3 @@
-export {
-	useCurrentUser,
-	useLogin,
-	useLogout,
-	useRegister,
-} from "./useAuthAPI";
-export { default  } from "./useAuthentication";
+export * from "./useAuthAPI";
+export { default as useAuthentication } from "./useAuthentication";
+export { default as usePermission } from "./usePermission";

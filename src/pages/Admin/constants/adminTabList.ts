@@ -1,5 +1,5 @@
+import type { RouteTabsItem } from "@components/RoutedTabs";
 import { createElement } from "react";
-import type { RouteTabsItem } from "../../../components/RoutedTabs/types";
 import AnnouncementManagement from "../components/AnnouncementManagement";
 import BlogManagement from "../components/BlogManagement";
 import ContactManagement from "../components/ContactManagement";

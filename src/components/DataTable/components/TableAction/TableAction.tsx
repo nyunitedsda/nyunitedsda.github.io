@@ -1,3 +1,5 @@
+import type { ConfirmationButtonProps } from "@components/Buttons";
+import { ConfirmationButton } from "@components/Buttons";
 import { DeleteOutlined, VisibilityOutlined } from "@mui/icons-material";
 import {
 	type ButtonOwnProps,
@@ -8,8 +10,6 @@ import {
 	useTheme,
 } from "@mui/material";
 import { type FC, lazy, Suspense, useMemo } from "react";
-import { ConfirmationButton } from "../../../Buttons";
-import type { ConfirmationButtonProps } from "../../../Buttons/types";
 import { tableActions } from "./constants";
 import type { LazyIconProps, TableActionProps } from "./types";
 
@@ -32,9 +32,8 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-	if (renderAction) return renderAction(data);
-
 	const elements = useMemo(() => {
+		if (renderAction) return renderAction(data);
 		const actions = [];
 
 		if (onEdit)
@@ -99,7 +98,7 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 				</ConfirmationButton>
 			);
 		});
-	}, [data, onEdit, onDelete, onView, isMobile]);
+	}, [data, onEdit, onDelete, onView, isMobile, renderAction]);
 
 	return (
 		<>

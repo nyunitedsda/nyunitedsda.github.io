@@ -1,10 +1,10 @@
+import { ProjectModal } from "@components/ProjectModal";
+import { EntityEditor } from "@forms/EntityEditor";
+import { InputField } from "@forms/Input";
+import { useAuthentication } from "@hooks/auth";
+import { initialArticle } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ArticleDT } from "../../../api/request";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { useAuthentication } from "../../../hooks/auth";
-import { initialArticle } from "../../../test/mock_data";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import InputField from "../../Input/FormField";
+import type { ArticleDT } from "@/api";
 import type { EditorProps } from "../types";
 import blogSchema from "./schema";
 
@@ -36,7 +36,7 @@ const BlogEditor: FC<EditorProps<ArticleDT>> = ({
 						initialValues: { ...initialArticle, author_id: user?.id || null },
 						title: ADD_TITLE,
 					},
-		[data],
+		[data, user],
 	);
 
 	return (

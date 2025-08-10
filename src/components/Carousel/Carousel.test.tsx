@@ -1,7 +1,6 @@
+import { describe, expect, it, render, screen } from "@test/index.ts";
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
-import { describe, expect, it, screen } from "../../test/index";
-import { render } from "../../test/vitest-setup";
 import Carousel from "./Carousel";
 
 // Mock the embla carousel hooks and sub-components

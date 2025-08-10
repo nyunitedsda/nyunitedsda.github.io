@@ -1,4 +1,4 @@
-import type { DatabaseEntity } from "../../../api/request";
+import type { DatabaseEntity } from "@/api";
 
 const CONTACT_EDITOR_CONSTANTS = {
 	EDIT_TITLE: "Edit Contact Information",

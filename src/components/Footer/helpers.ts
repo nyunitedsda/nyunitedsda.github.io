@@ -1,6 +1,6 @@
 import type { SxProps } from "@mui/material/styles";
 import dayjs from "dayjs";
-import type { ContactInfoDT } from "../../api/request";
+import type { ContactInfoDT } from "@/api";
 import { WEBSITE_TITLE } from "../../constants/footer";
 
 export const getCopyright = () =>

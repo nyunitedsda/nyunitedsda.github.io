@@ -49,19 +49,19 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({
 				arrowDirection="prev"
 				disabled={prevBtnDisabled}
 				onClick={onPrevButtonClick}
-				children={prevIcon || <ArrowBackIosNewRounded />}
-			/>
+			>
+				{prevIcon || <ArrowBackIosNewRounded />}
+			</CarouselArrowButton>
 			<CarouselArrowButton
 				{...buttonProps}
 				arrowDirection="next"
 				disabled={nextBtnDisabled}
 				onClick={onNextButtonClick}
-				children={
-					nextIcon || (
-						<ArrowBackIosNewRounded sx={{ transform: "rotate(180deg)" }} />
-					)
-				}
-			/>
+			>
+				{nextIcon || (
+					<ArrowBackIosNewRounded sx={{ transform: "rotate(180deg)" }} />
+				)}
+			</CarouselArrowButton>
 		</Stack>
 	);
 };

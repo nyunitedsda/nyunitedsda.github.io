@@ -113,6 +113,7 @@ const theme = responsiveFontSizes(
 				defaultProps: {
 					size: "small",
 					required: true,
+					autoComplete: "",
 					slotProps: {
 						inputLabel: {
 							shrink: true,

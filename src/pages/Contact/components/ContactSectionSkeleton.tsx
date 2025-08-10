@@ -6,8 +6,8 @@ import { CONTACT_CONSTANT } from "./contact";
 const ContactSectionSkeleton: FC = () => {
 	return (
 		<ContactSection title={CONTACT_CONSTANT.SERVICES}>
-			{Array.from({ length: 3 }).map((_, idx) => (
-				<div key={idx} style={{ marginBottom: 16 }}>
+			{["top", "mid", "btm"].map((idx) => (
+				<div key={`${idx}-name`} style={{ marginBottom: 16 }}>
 					{/* Title Skeleton */}
 					<div style={{ display: "flex", alignItems: "center" }}>
 						<span style={{ marginRight: 8 }}>

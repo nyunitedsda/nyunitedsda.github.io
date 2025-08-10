@@ -1,5 +1,4 @@
 import type { ButtonProps } from "@mui/material/Button";
-import { vi } from "vitest";
 import {
 	act,
 	beforeEach,
@@ -7,10 +6,11 @@ import {
 	expect,
 	fireEvent,
 	it,
+	render,
 	screen,
 	waitFor,
-} from "../../../test/index.ts";
-import { render } from "../../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import { vi } from "vitest";
 import type { MenuButtonProps } from "../types.ts";
 import MenuButton from "./MenuButton.tsx";
 

@@ -3,9 +3,15 @@ import { StorybookConfig } from "@storybook/react-vite";
 const config: StorybookConfig = {
   framework: "@storybook/react-vite",
   stories: [
-    '../src/**/*.mdx',
+    // '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
+  build: {
+    test: {
+      //  disableSourcemaps: false,
+      //  disableTreeShaking: false,
+    }
+  },
   staticDirs: ['../public', '../static'],
   addons: ['@storybook/addon-links', 'storybook-addon-mock', '@storybook/addon-docs'],
   core: {

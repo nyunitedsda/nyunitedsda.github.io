@@ -1,11 +1,12 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { AuthProvider } from "@contexts/AuthenticationContext";
+import { NotificationProvider } from "@contexts/NotificationContext";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
-import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
-import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
+import React, { type FC, type PropsWithChildren, useMemo } from "react";
 import theme from "./theme";
 
-// Create a separate query client for testing to avoid state pollution
+//Testing query client to avoid state pollution
 const createTestQueryClient = () =>
 	new QueryClient({
 		defaultOptions: {
@@ -41,16 +42,16 @@ const AppProviderTest: FC<AppProviderTestProps> = ({
 	);
 
 	return (
-		<StrictMode>
+		<React.StrictMode>
 			<QueryClientProvider client={queryClient}>
-				<AuthenticationProvider>
+				<AuthProvider>
 					<ThemeProvider theme={theme}>
 						<CssBaseline enableColorScheme />
 						<NotificationProvider>{children}</NotificationProvider>
 					</ThemeProvider>
-				</AuthenticationProvider>
+				</AuthProvider>
 			</QueryClientProvider>
-		</StrictMode>
+		</React.StrictMode>
 	);
 };
 

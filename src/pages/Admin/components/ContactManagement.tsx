@@ -1,14 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { ContactEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialContactInfo } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import type { ContactInfoDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import ContactEditor from "../../../forms/collection/ContactEditor/ContactEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialContactInfo } from "../../../test/mock_data";
+import type { ContactInfoDT } from "@/api";
+import { deleteEntity } from "@/api";
 import contactInfoColumns from "../constants/contactInfoColumns";
 
 const CONTACT_SUBHEADER = "Manage church contact information";
@@ -16,23 +15,17 @@ const CONTACT_SUBHEADER = "Manage church contact information";
 const ContactManagement: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("contact_info");
+	const {
+		data: queryData,
+		isLoading,
+		refetch,
+	} = useEntityList<ContactInfoDT>("contact_info");
 
 	const [createContactOpen, setCreateContactOpen] =
 		useState<Partial<ContactInfoDT> | null>(null);
 
-	const {
-		data: queryData,
-		refetch,
-		isLoading,
-	} = useQuery<ContactInfoDT[] | undefined>({
-		queryKey: ["contacts"],
-		queryFn: () => getDatabaseList("contact_info"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
-
 	const _handleDeleteContact = useCallback(
-		(data: ContactInfoDT) => {
+		(data: Partial<ContactInfoDT>) => {
 			deleteEntity("contact_info", data?.id as number)
 				.then(() => {
 					refetch();
@@ -47,7 +40,7 @@ const ContactManagement: FC = () => {
 					});
 				});
 		},
-		[refetch],
+		[refetch, enqueueSnackbar],
 	);
 
 	return (

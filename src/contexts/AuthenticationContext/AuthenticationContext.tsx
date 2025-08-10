@@ -1,13 +1,11 @@
 import {
-	type FC,
-	type PropsWithChildren,
-	useCallback,
-	useEffect,
-	useState,
-} from "react";
-import type { LoginCredentials } from "../../api/request";
-import { useLogin, useLogout } from "../../hooks/auth";
-import { useAuthStatus, useCurrentUser } from "../../hooks/auth/useAuthAPI";
+	useAuthStatus,
+	useCurrentUser,
+	useLogin,
+	useLogout,
+} from "@hooks/auth";
+import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
+import type { LoginCredentials } from "@/api";
 import { Provider } from "./context";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -20,86 +18,54 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
 
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-		// Prefer currentUser, then hasAuthStatus, fallback to false
-		return !!currentUser || !!hasAuthStatus;
-	});
-
-	// Keep isAuthenticated in sync with currentUser and hasAuthStatus
-	useEffect(() => {
-		if (currentUser) {
-			setIsAuthenticated(true);
-		} else if (hasAuthStatus) {
-			setIsAuthenticated(true);
-		} else {
-			setIsAuthenticated(false);
-		}
-	}, [currentUser, hasAuthStatus]);
-
-	useEffect(() => {
-		if (!isAuthenticated) {
-			refreshAuthStatus();
-		}
-	}, [isAuthenticated, refreshAuthStatus]);
-
-	useEffect(() => {
-		if (currentUser) {
-			setIsAuthenticated(true);
-		}
-	}, [currentUser]);
+	const isAuthenticated = !!currentUser || !!hasAuthStatus;
 
 	// Check authentication status every 5 minutes if user authenticated
 	useEffect(() => {
-		const interval = setInterval(
-			() => {
-				if (isAuthenticated) {
+		if (isAuthenticated) {
+			const interval = setInterval(
+				() => {
 					refreshAuthStatus();
-					refreshUser();
-				}
-			},
-			5 * 60 * 1000,
-		);
-		return () => clearInterval(interval);
-	}, [isAuthenticated, refreshAuthStatus, refreshUser]);
+				},
+				5 * 60 * 1000,
+			);
+			return () => clearInterval(interval);
+		}
+	}, [isAuthenticated, refreshAuthStatus]);
 
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
 			try {
 				const response = await loginUser.mutateAsync(credentials);
 				await refreshUser();
-				setIsAuthenticated(true);
 				return response;
 			} catch (error) {
-				setIsAuthenticated(false);
 				return Promise.reject(error);
 			}
 		},
 		[loginUser, refreshUser],
 	);
 
-	const logout = useCallback(async (): Promise<{ message: string }> => {
+	const logout = useCallback(async () => {
 		try {
-			const response = await logoutUser.mutateAsync();
-			setIsAuthenticated(false);
+			await logoutUser.mutateAsync();
 			await refreshUser();
-			return response; // response is of type { message: string }
+			return { message: "Logged out Successfully" };
 		} catch (error) {
-			setIsAuthenticated(false);
-			await refreshUser();
-			throw error;
+			return Promise.reject(error);
 		}
 	}, [logoutUser, refreshUser]);
 
 	return (
 		<Provider
 			value={{
-				user: currentUser ?? null,
+				user: currentUser,
 				isLoading: userLoading,
 				isAuthenticated,
 				login,
 				logout,
-				refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
-				refreshUser, // Expose user refresh for manual sync
+				refreshAuthStatus,
+				refreshUser: () => refreshUser(),
 			}}
 		>
 			{children}

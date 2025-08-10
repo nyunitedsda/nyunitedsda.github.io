@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
-import type { EventAnnouncement } from "../../types";
+import type { AnnouncementDT } from "@/api";
 
-type AnnouncementCardProps = EventAnnouncement & {
+type AnnouncementCardProps = AnnouncementDT & {
 	className?: string;
 };
 
 interface NoteSectionProps {
 	icon?: ReactNode;
 	content: ReactNode;
-	title?: string;
+	title?: ReactNode;
 	columnLayout?: boolean;
 }
 

@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
@@ -79,9 +79,9 @@ export const Default: Story = {
 		<InteractiveWrapper buttonText="Open Dialog">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {
@@ -111,9 +111,9 @@ export const DeleteConfirmation: Story = {
 		<InteractiveWrapper buttonText="Delete Item">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {
@@ -146,9 +146,9 @@ export const CustomLabels: Story = {
 		<InteractiveWrapper buttonText="Check Unsaved Changes">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {
@@ -180,9 +180,9 @@ export const LongContent: Story = {
 		<InteractiveWrapper buttonText="View Terms & Conditions">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {
@@ -228,9 +228,9 @@ export const WithReactContent: Story = {
 		<InteractiveWrapper buttonText="⚠️ Delete Account">
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {
@@ -280,9 +280,9 @@ export const Interactive: Story = {
 		<InteractiveWrapper>
 			{({ open, onClose }) => (
 				<ConfirmationDialog
+					{...args}
 					title={args.title}
 					content={args.content}
-					{...args}
 					open={open}
 					onClose={onClose}
 					onConfirm={() => {

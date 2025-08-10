@@ -1,9 +1,9 @@
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
 import Button, { type ButtonProps } from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
-import { type FC, lazy, Suspense, useCallback, useMemo } from "react";
+import React, { type FC, lazy, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import  useAuthentication  from "../../../hooks/auth";
-import routePaths from "../../../hooks/routes/routePaths";
 
 const LogoutOutlined = lazy(() => import("@mui/icons-material/LogoutOutlined"));
 const LoginOutlined = lazy(() => import("@mui/icons-material/LoginOutlined"));
@@ -41,7 +41,7 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	);
 
 	return (
-		<Suspense
+		<React.Suspense
 			fallback={
 				<Skeleton
 					variant="rectangular"
@@ -51,7 +51,7 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 			}
 		>
 			<Button {...commonProps}>{commonProps.title}</Button>
-		</Suspense>
+		</React.Suspense>
 	);
 };
 

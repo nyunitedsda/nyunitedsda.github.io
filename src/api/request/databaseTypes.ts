@@ -4,6 +4,7 @@ export type AnnouncementDTDate_format =
 	| "DD-MM-YYYY"
 	| "MMM D, YYYY"
 	| "dddd, h:mm a";
+
 export interface AnnouncementDT {
 	id: number;
 	title: string;
@@ -28,12 +29,12 @@ export interface ArticleDT {
 	author_id: number;
 	published_at: Date;
 	content: string;
-	author: string;
 	views?: number;
 	comments?: number;
 	rating?: number;
 	category?: string;
 	img_src?: string;
+	author?: string;
 }
 
 export interface ContactInfoDT {
@@ -128,6 +129,7 @@ export type SeverityDTColor =
 	| "success"
 	| "primary"
 	| "secondary";
+
 export interface SeverityDT {
 	id: number;
 	type: string;
@@ -149,4 +151,15 @@ export interface UserDT {
 	last_login?: Date;
 	permissions?: string[];
 	role_name?: string;
+}
+
+export interface RegisterUserDT {
+	username: string;
+	password: string;
+	role_id: number;
+	is_active: boolean;
+	remember_me: boolean;
+	email?: string;
+	first_name?: string;
+	last_name?: string;
 }

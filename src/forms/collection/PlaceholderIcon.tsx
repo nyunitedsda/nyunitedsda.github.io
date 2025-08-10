@@ -11,6 +11,7 @@ const PlaceholderIcon: FC<PlaceholderIconProps> = ({
 }) => {
 	return (
 		<svg
+			aria-label="icon placeholder"
 			width={size}
 			height={size}
 			viewBox="0 0 24 24"

@@ -1,13 +1,12 @@
+import { queryClient, theme } from "@components/AppProvider";
+import { AuthProvider } from "@contexts/AuthenticationContext";
+import { NotificationProvider } from "@contexts/NotificationContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
-import { type FC, StrictMode, useMemo } from "react";
-import { MemoryRouter } from "react-router";
-import queryClient from "../components/AppProvider/queryClient";
-import theme from "../components/AppProvider/theme";
-import AuthenticationProvider from "../contexts/AuthenticationContext/AuthenticationContext";
-import NotificationProvider from "../contexts/NotificationContext/NotificationContext";
+import React, { type FC, useMemo } from "react";
+import { MemoryRouter } from "react-router-dom";
 import type { DynamicProviderProps, ExcludedProvider } from "./types";
 
 const DynamicProvider: FC<DynamicProviderProps> = ({
@@ -40,7 +39,7 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 	let wrappedChildren = children;
 
 	if (shouldExclude("All")) {
-		return <StrictMode>{wrappedChildren}</StrictMode>;
+		return <React.StrictMode>{wrappedChildren}</React.StrictMode>;
 	}
 
 	// Apply providers in reverse order (innermost to outermost)
@@ -66,9 +65,7 @@ const DynamicProvider: FC<DynamicProviderProps> = ({
 	}
 
 	if (!shouldExclude("Authentication")) {
-		wrappedChildren = (
-			<AuthenticationProvider>{wrappedChildren}</AuthenticationProvider>
-		);
+		wrappedChildren = <AuthProvider>{wrappedChildren}</AuthProvider>;
 	}
 
 	if (!shouldExclude("Snackbar")) {

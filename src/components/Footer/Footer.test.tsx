@@ -1,18 +1,8 @@
+import { describe, expect, it, render, screen } from "@test/index.ts";
 import { vi } from "vitest";
-import { describe, expect, it, screen } from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
 import Footer from "./Footer";
 
 // Mock dependencies
-vi.mock("../../hooks/routes/useFormattedRoutes", () => ({
-	default: () => ({
-		menuItems: [
-			{ name: "Home", path: "/" },
-			{ name: "About", path: "/about" },
-		],
-	}),
-	__esModule: true,
-}));
 
 vi.mock("../../constants/services", () => ({
 	default: [

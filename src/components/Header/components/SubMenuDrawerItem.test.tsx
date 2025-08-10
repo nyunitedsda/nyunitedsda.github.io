@@ -1,7 +1,13 @@
+import {
+	describe,
+	expect,
+	fireEvent,
+	it,
+	render,
+	screen,
+} from "@test/index.ts";
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
-import { describe, expect, fireEvent, it, screen } from "../../../test/index";
-import { render } from "../../../test/vitest-setup";
 import SubMenuDrawerItem from "./SubMenuDrawerItem";
 
 const mockOnClick = vi.fn();
@@ -63,7 +69,9 @@ describe("SubMenuDrawerItem", () => {
 
 	it("collapses when clicked again", () => {
 		const name = [defaultProps.name];
-		defaultProps.children.forEach((i) => name.push(i.name));
+		defaultProps.children.forEach((i) => {
+			name.push(i.name);
+		});
 
 		render(<SubMenuDrawerItem {...defaultProps} />);
 

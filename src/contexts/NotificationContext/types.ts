@@ -1,5 +1,5 @@
+import type { NotificationProps } from "@components/NotificationBanner";
 import type { PropsWithChildren } from "react";
-import type { NotificationProps } from "../../components/NotificationBanner/types";
 
 type NotificationContextProps = PropsWithChildren<{
 	notifications: NotificationProps[];

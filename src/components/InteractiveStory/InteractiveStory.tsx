@@ -2,29 +2,21 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {
 	cloneElement,
-	type FC,
 	isValidElement,
 	useCallback,
 	useEffect,
 	useMemo,
 	useState,
 } from "react";
-import type { GenericType } from "../DataTable/types";
 import type { InteractiveStoryProps } from "./types";
 
-const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
+const InteractiveStoryWrapper = <T extends { [key: string]: unknown }>({
 	buttonText = "Display Component",
 	children,
-	extraProps = {},
+	extraProps,
 	open: initialOpen = false,
-}) => {
+}: InteractiveStoryProps<T>) => {
 	const [open, setOpen] = useState<boolean>(initialOpen);
-
-	// useEffect(() => {
-	// 	if (extraProps && Object.hasOwn(extraProps, "open")) {
-	// 		setOpen(extraProps.open as boolean);
-	// 	}
-	// }, [extraProps]);
 
 	useEffect(() => {
 		// if (initialOpen ) {
@@ -50,12 +42,12 @@ const InteractiveStoryWrapper: FC<InteractiveStoryProps<GenericType>> = ({
 	const childrenProps = useMemo(
 		() => ({
 			...extraProps,
-			...(Object.hasOwn(extraProps, "onClose")
+			...(Object.hasOwn(extraProps as T, "onClose")
 				? { onClose: handleClose }
 				: { onClose: () => setOpen(false) }),
 			open,
 		}),
-		[open, extraProps],
+		[open, extraProps, handleClose],
 	);
 
 	return (

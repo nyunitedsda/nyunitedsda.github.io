@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Error from "./Error";
+import UnknownError from "./UnknownError";
 
-describe("Error", () => {
-	it("renders Error", () => {
-		const { getByText } = render(<Error />);
+describe("UnknownError", () => {
+	it("renders UnknownError", () => {
+		const { getByText } = render(<UnknownError />);
 
-		expect(getByText("Error Component")).toBeInTheDocument();
+		expect(getByText("UnknownError Component")).toBeInTheDocument();
 	});
 });

@@ -1,12 +1,12 @@
+import { LoginForm } from "@forms/collection";
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
 import { Navigate } from "react-router-dom";
-import LoginForm from "../../forms/collection/LoginForm/LoginForm";
-import { useAuthentication } from "../../hooks/auth";
-import routePaths from "../../hooks/routes/routePaths";
 
 const containerSx: SxProps<Theme> = {
 	borderRadius: 2,

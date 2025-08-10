@@ -1,3 +1,6 @@
+import RingLoader from "@components/Loaders";
+import { PageTitle } from "@components/PageWrapper";
+import ProjectCard from "@components/ProjectCard";
 import CalendarToday from "@mui/icons-material/CalendarToday";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -8,10 +11,7 @@ import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { useLoaderData } from "react-router";
-import type { ArticleDT } from "../../api/request";
-import RingLoader from "../../components/Loaders/RingLoader";
-import PageTitle from "../../components/PageWrapper/PageTitle";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import type { ArticleDT } from "@/api";
 import {
 	BLOG_HEADER,
 	BLOG_PREVIEW_LENGTH,
@@ -49,11 +49,6 @@ const Blog: FC = () => {
 
 	const { blogs, isLoading } = useLoaderData();
 
-	// const { isLoading, blogs } = useQuery<ArticleDT[]>({
-	// 	queryKey: ["get-articles"],
-	// 	queryFn: async () => (await getDatabaseList("articles")) as ArticleDT[],
-	// });
-
 	const totalPages = useMemo(
 		() => Math.ceil((blogs || []).length / postsPerPage),
 		[blogs, postsPerPage],
@@ -84,7 +79,7 @@ const Blog: FC = () => {
 							<ProjectCard
 								header={{
 									title,
-									subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author)}`,
+									subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author ?? "")}`,
 									avatar: <CalendarToday />,
 								}}
 								content={
@@ -92,14 +87,11 @@ const Blog: FC = () => {
 										component="div"
 										variant="body1"
 										sx={{ "& p": { m: 0 } }}
-										dangerouslySetInnerHTML={{
-											__html: `${
-												content.length > BLOG_PREVIEW_LENGTH
-													? content.slice(0, BLOG_PREVIEW_LENGTH)
-													: content
-											}`,
-										}}
-									/>
+									>
+										{content.length > BLOG_PREVIEW_LENGTH
+											? content.slice(0, BLOG_PREVIEW_LENGTH)
+											: content}
+									</Typography>
 								}
 								actions={
 									<Button

@@ -1,17 +1,17 @@
-import { vi } from "vitest";
 import {
 	beforeEach,
 	describe,
 	expect,
 	fireEvent,
 	it,
+	render,
 	screen,
-} from "../../test/index.ts";
-import { render } from "../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import { vi } from "vitest";
 import NotificationBanner from "./NotificationBanner";
 
 // Mock the context functions
-vi.mock("../../contexts/NotificationContext/context", () => {
+vi.mock("@contexts/NotificationContext", () => {
 	const mockContext = {
 		notifications: [],
 		registerNotification: vi.fn(),
@@ -36,7 +36,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Test notification message"
 				open={true}
-				severity="information"
+				severity_id={1}
 			/>,
 		);
 
@@ -50,7 +50,7 @@ describe("NotificationBanner", () => {
 				title="Test Title"
 				message="Test notification message"
 				open={true}
-				severity="information"
+				severity_id={1}
 			/>,
 		);
 
@@ -64,7 +64,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Test notification message"
 				open={false}
-				severity="information"
+				severity_id={1}
 			/>,
 		);
 
@@ -79,7 +79,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Test notification message"
 				open={true}
-				severity="information"
+				severity_id={1}
 			/>,
 		);
 
@@ -94,7 +94,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Test notification message"
 				open={true}
-				severity="information"
+				severity_id={1}
 				onClose={mockDismissNotification}
 			/>,
 		);
@@ -111,7 +111,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Success message"
 				open={true}
-				severity="success"
+				severity_id={4}
 			/>,
 		);
 
@@ -124,7 +124,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Error message"
 				open={true}
-				severity="error"
+				severity_id={3}
 			/>,
 		);
 
@@ -137,7 +137,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Warning message"
 				open={true}
-				severity="caution"
+				severity_id={2}
 			/>,
 		);
 
@@ -151,7 +151,7 @@ describe("NotificationBanner", () => {
 			<NotificationBanner
 				id={1}
 				message="Test notification message"
-				severity="information"
+				severity_id={1}
 			/>,
 		);
 

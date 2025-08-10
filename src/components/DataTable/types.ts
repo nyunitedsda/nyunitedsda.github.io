@@ -11,7 +11,7 @@ interface ColumnDefinition<T extends { id?: number }> {
 	renderHeader?: ReactNode;
 }
 
-interface DataTableProps<T extends { id?: number }> {
+interface DataTableProps<T extends { id?: number; [key: string]: unknown }> {
 	isLoading: boolean;
 	columns: ColumnDefinition<T>[];
 	data: T[];

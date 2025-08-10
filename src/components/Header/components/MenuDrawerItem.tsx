@@ -18,7 +18,7 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 			event.stopPropagation();
 			if (!disabled) onClick(event);
 		},
-		[onClick],
+		[onClick, disabled],
 	);
 
 	return (

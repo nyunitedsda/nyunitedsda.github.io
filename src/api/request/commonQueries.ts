@@ -14,7 +14,7 @@ import type { DatabaseEntity } from "./types";
  * @param config
  * @returns Promise<AxiosResponse<T[], any>>
  */
-const getDatabaseList = async <T extends {[key: string]: unknown}>(
+const getDatabaseList = async <T extends { [key: string]: unknown }>(
 	entity: DatabaseEntity,
 	config?: AxiosRequestConfig,
 ): Promise<T[]> => {

@@ -1,8 +1,8 @@
+import RingLoader from "@components/Loaders";
+import { useAuthentication } from "@hooks/auth";
+import { routePaths } from "@hooks/routes";
 import type { FC } from "react";
 import { Navigate } from "react-router";
-import useAuthentication from "../../hooks/auth/useAuthentication";
-import routePaths from "../../hooks/routes/routePaths";
-import RingLoader from "../Loaders/RingLoader";
 import PageWrapper from "./PageWrapper";
 
 const ProtectedPageWrapper: FC = () => {

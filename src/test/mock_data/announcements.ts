@@ -1,4 +1,4 @@
-import type { AnnouncementDT } from "../../api/request";
+import type { AnnouncementDT } from "@/api";
 
 export const dateFormatValues = [
 	"YYYY-MM-DD",

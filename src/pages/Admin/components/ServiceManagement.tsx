@@ -1,14 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { ServiceEditor } from "@forms/collection";
+import { useEntityList } from "@hooks/api";
+import { usePermission } from "@hooks/auth";
+import { initialService } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useState } from "react";
-import type { ServiceDT } from "../../../api/request";
-import { getDatabaseList } from "../../../api/request/commonQueries";
-import { deleteEntity } from "../../../api/request/mutations";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import ServiceEditor from "../../../forms/collection/ServiceEditor/ServiceEditor";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialService } from "../../../test/mock_data";
+import type { ServiceDT } from "@/api";
+import { deleteEntity } from "@/api";
 import serviceColumns from "../constants/serviceColumns";
 
 const SERVICE_SUBHEADER = "Manage church services";
@@ -16,37 +15,34 @@ const SERVICE_SUBHEADER = "Manage church services";
 const ServiceManagement: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("services");
-
-	const [createServiceOpen, setCreateServiceOpen] =
-		useState<Partial<ServiceDT> | null>(null);
-
 	const {
 		data: queryData,
 		refetch,
 		isLoading,
-	} = useQuery<Partial<ServiceDT>[] | undefined>({
-		queryKey: ["services"],
-		queryFn: () => getDatabaseList("services"),
-		staleTime: 5 * 60 * 1000,
-		refetchOnWindowFocus: false,
-	});
+	} = useEntityList<ServiceDT>("services");
 
-	const _handleDeleteService = useCallback((data: Partial<ServiceDT>) => {
-		const { id } = data as ServiceDT;
-		deleteEntity("services", id)
-			.then(() => {
-				refetch();
-				enqueueSnackbar("Service deleted successfully", {
-					variant: "success",
+	const [createServiceOpen, setCreateServiceOpen] =
+		useState<Partial<ServiceDT> | null>(null);
+
+	const _handleDeleteService = useCallback(
+		(data: Partial<ServiceDT>) => {
+			const { id } = data as ServiceDT;
+			deleteEntity("services", id)
+				.then(() => {
+					refetch();
+					enqueueSnackbar("Service deleted successfully", {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					console.error("Failed to delete service:", error);
+					enqueueSnackbar("Failed to delete service", {
+						variant: "error",
+					});
 				});
-			})
-			.catch((error) => {
-				console.error("Failed to delete service:", error);
-				enqueueSnackbar("Failed to delete service", {
-					variant: "error",
-				});
-			});
-	}, []);
+		},
+		[refetch, enqueueSnackbar],
+	);
 
 	return (
 		<>

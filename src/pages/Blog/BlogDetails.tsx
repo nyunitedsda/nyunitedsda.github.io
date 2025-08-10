@@ -1,5 +1,5 @@
+import ProjectSuspense from "@components/ProjectSuspense";
 import { lazy } from "react";
-import ProjectSuspense from "../../components/ProjectSuspense/ProjectSuspense";
 
 const AccountCircleOutlined = lazy(
 	() => import("@mui/icons-material/AccountCircleOutlined"),
@@ -27,6 +27,7 @@ const VisibilityOutlined = lazy(
 	() => import("@mui/icons-material/VisibilityOutlined"),
 );
 
+import RingLoader from "@components/Loaders";
 import { capitalize } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -35,13 +36,11 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
+import { authorMetaInfo } from "@test/mock_data";
 import type { FC } from "react";
 import { useParams } from "react-router";
-import type { ArticleDT } from "../../api/request";
-import { getDatabaseItem } from "../../api/request/commonQueries";
-import Image from "../../components/Image/Image";
-import RingLoader from "../../components/Loaders/RingLoader";
-import { authorMetaInfo } from "../../test/mock_data";
+import type { ArticleDT } from "@/api";
+import { getDatabaseItem } from "@/api";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -95,7 +94,7 @@ const BlogDetails: FC = () => {
 			await getDatabaseItem<ArticleDT>("articles", parseInt(id as string, 10)),
 		select: (data) => ({
 			...data,
-			author: capitalize(data.author),
+			...(data?.author && { author: capitalize(data?.author) }),
 		}),
 	});
 
@@ -114,108 +113,101 @@ const BlogDetails: FC = () => {
 				>
 					Back
 				</Button>
-				<>
-					{!isLoading || data ? (
-						<>
-							{/* Blog Image */}
-							{data?.img_src && (
-								<Image image={{ src: data?.img_src as string }} />
-							)}
 
-							<Typography
-								variant="h4"
-								component="h1"
-								sx={{ color: "primary.light" }}
-							>
-								{data?.title}
-							</Typography>
+				{!isLoading || data ? (
+					<>
+						{/* Blog Image */}
+						{data?.img_src && (
+							<img src={data?.img_src as string} alt={`${data?.title} blog`} />
+						)}
 
-							{/* Author info */}
-							<Stack
-								direction="row"
-								flexWrap={"wrap"}
-								justifyContent={"flex-start"}
-								spacing={2}
-							>
-								{authorMetaInfo.map((i) =>
-									data?.[i as keyof ArticleDT] ? (
-										<Stack
-											direction={"row"}
-											spacing={1}
-											key={i}
-											sx={{
-												alignItems: "center",
-												color: "primary.contrastText",
-											}}
-										>
-											{ICONS[i as keyof typeof ICONS]}
-											<Typography
-												variant="body2"
-												sx={{ fontWeight: "bold", color: "text.secondary" }}
-											>
-												{(() => {
-													const value = data[i as keyof ArticleDT];
-													return value instanceof Date
-														? value.toLocaleDateString()
-														: value;
-												})()}
-											</Typography>
-										</Stack>
-									) : (
-										<></>
-									),
-								)}
-							</Stack>
+						<Typography
+							variant="h4"
+							component="h1"
+							sx={{ color: "primary.light" }}
+						>
+							{data?.title}
+						</Typography>
 
-							{/* Content */}
-							<Box sx={{ mb: 4 }}>
-								<Typography
-									variant="body1"
-									sx={{ lineHeight: 1.8 }}
-									dangerouslySetInnerHTML={{
-										__html: data?.content as string,
-									}}
-								/>
-							</Box>
-
-							<Box sx={{ mb: 3 }}>
-								<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-									<LocalOfferOutlined
-										fontSize="small"
-										sx={{ mr: 1, color: "primary.light" }}
-									/>
-									<Typography
-										variant="h6"
-										sx={{ fontWeight: "bold", color: "primary.light" }}
+						{/* Author info */}
+						<Stack
+							direction="row"
+							flexWrap={"wrap"}
+							justifyContent={"flex-start"}
+							spacing={2}
+						>
+							{authorMetaInfo.map((i) =>
+								data?.[i as keyof ArticleDT] ? (
+									<Stack
+										direction={"row"}
+										spacing={1}
+										key={i}
+										sx={{
+											alignItems: "center",
+											color: "primary.contrastText",
+										}}
 									>
-										Tags
-									</Typography>
-								</Box>
-								<Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-									{
-										// FEATURE: Update database for multiple categories
-										[data?.category]?.map((tag, index) => (
-											<Chip
-												key={index}
-												label={tag}
-												size="small"
-												variant="outlined"
-												sx={{
-													"&:hover": {
-														bgcolor: "primary.light",
-														color: "white",
-													},
-												}}
-											/>
-										))
-									}
-								</Box>
+										{ICONS[i as keyof typeof ICONS]}
+										<Typography
+											variant="body2"
+											sx={{ fontWeight: "bold", color: "text.secondary" }}
+										>
+											{(() => {
+												const value = data[i as keyof ArticleDT];
+												return value instanceof Date
+													? value.toLocaleDateString()
+													: value;
+											})()}
+										</Typography>
+									</Stack>
+								) : null,
+							)}
+						</Stack>
+
+						{/* Content */}
+						<Box sx={{ mb: 4 }}>
+							<Typography variant="body1" sx={{ lineHeight: 1.8 }}>
+								{data?.content}
+							</Typography>
+						</Box>
+
+						<Box sx={{ mb: 3 }}>
+							<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+								<LocalOfferOutlined
+									fontSize="small"
+									sx={{ mr: 1, color: "primary.light" }}
+								/>
+								<Typography
+									variant="h6"
+									sx={{ fontWeight: "bold", color: "primary.light" }}
+								>
+									Tags
+								</Typography>
 							</Box>
-						</>
-					) : (
-						<RingLoader />
-					)}
-				</>
+							<Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+								{
+									// FEATURE: Update database for multiple categories
+									[data?.category]?.map((tag) => (
+										<Chip
+											key={tag}
+											label={tag}
+											size="small"
+											variant="outlined"
+											sx={{
+												"&:hover": {
+													bgcolor: "primary.light",
+													color: "white",
+												},
+											}}
+										/>
+									))
+								}
+							</Box>
+						</Box>
+					</>
+				) : (
+					<RingLoader />
+				)}
 			</Stack>
 		</Stack>
 	);

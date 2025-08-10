@@ -1,4 +1,3 @@
-import { vi } from "vitest";
 import {
 	beforeEach,
 	describe,
@@ -6,9 +5,10 @@ import {
 	expect,
 	fireEvent,
 	it,
+	render,
 	screen,
-} from "../../../test/index.ts";
-import { render } from "../../../test/vitest-setup.tsx";
+} from "@test/index.ts";
+import { vi } from "vitest";
 import LoginButton from "./LoginButton";
 
 // Mock react-router's useNavigate

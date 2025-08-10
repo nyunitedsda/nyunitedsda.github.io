@@ -1,8 +1,7 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
-import { useState } from "react";
-import type { ServiceDT } from "../../../api/request";
+import { useId, useState } from "react";
+import type { ServiceDT } from "@/api";
 import ServiceEditor from "./ServiceEditor";
 
 // Sample service data
@@ -10,24 +9,18 @@ const sampleSundayService: ServiceDT = {
 	id: 1,
 	title: "Sunday Morning Worship",
 	time: "10:00 AM",
-	created_at: new Date("2025-01-01T00:00:00"),
-	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
 const sampleWednesdayService: ServiceDT = {
 	id: 2,
 	title: "Wednesday Bible Study",
 	time: "7:00 PM",
-	created_at: new Date("2025-01-01T00:00:00"),
-	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
 const sampleSabbathService: ServiceDT = {
 	id: 3,
 	title: "Sabbath School",
 	time: "9:30 AM",
-	created_at: new Date("2025-01-01T00:00:00"),
-	modified_at: new Date("2025-01-15T00:00:00"),
 };
 
 // Interactive wrapper component with open button
@@ -304,6 +297,7 @@ export const ClosedModal: Story = {
 			const [selectedEntity, setSelectedEntity] = useState<
 				ServiceDT | undefined
 			>(undefined);
+			const uId = useId();
 
 			const entityOptions = [
 				{ label: "None (Create Mode)", value: undefined },
@@ -330,6 +324,7 @@ export const ClosedModal: Story = {
 						</p>
 						<div style={{ marginBottom: "12px" }}>
 							<label
+								htmlFor={uId}
 								style={{
 									display: "block",
 									marginBottom: "8px",
@@ -339,6 +334,7 @@ export const ClosedModal: Story = {
 								Pre-select service for modal:
 							</label>
 							<select
+								id={uId}
 								title="Select service type for modal"
 								value={entityOptions.findIndex(
 									(opt) => opt.value === selectedEntity,
@@ -355,7 +351,7 @@ export const ClosedModal: Story = {
 								}}
 							>
 								{entityOptions.map((option, index) => (
-									<option key={index} value={index}>
+									<option key={option.label} value={index}>
 										{option.label}
 									</option>
 								))}

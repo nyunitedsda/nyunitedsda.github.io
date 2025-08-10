@@ -1,11 +1,5 @@
+import { afterEach, beforeEach, describe, expect, it } from "@test/index.ts";
 import { vi } from "vitest";
-import {
-	afterEach,
-	beforeEach,
-	describe,
-	expect,
-	it,
-} from "../../test/index.ts";
 import { handleOperationError } from "./helpers.ts";
 import type { DatabaseEntity } from "./types.ts";
 

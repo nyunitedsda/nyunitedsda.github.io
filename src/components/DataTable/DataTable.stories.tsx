@@ -1,6 +1,6 @@
 import { StarOutlineOutlined } from "@mui/icons-material";
-import { Icon, IconButton } from "@mui/material";
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+import IconButton from "@mui/material/IconButton";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { action } from "storybook/actions";
 import DataTable from "./DataTable";

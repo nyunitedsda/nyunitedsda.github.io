@@ -2,8 +2,12 @@ import { Skeleton } from "@mui/material";
 import { createElement } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "../../Layout";
-import Error from "../../pages/Error/Error";
-import { blogDetailLoader, blogLoader, homeLoader } from "./loaders";
+import {
+	blogDetailLoader,
+	blogLoader,
+	homeLoader,
+	pageLoader,
+} from "./loaders";
 
 // Helper for lazy loading React components
 const createComponent = (
@@ -16,8 +20,8 @@ const routes = createBrowserRouter([
 	{
 		path: "/",
 		element: createElement(AppLayout),
-		errorElement: createElement(Error),
 		hydrateFallbackElement: createElement(Skeleton),
+		loader: pageLoader,
 		children: [
 			{
 				index: true,
@@ -108,6 +112,7 @@ const routes = createBrowserRouter([
 		path: "admin/:tab?",
 		element: createElement(AppLayout, { restricted: true }),
 		hydrateFallbackElement: createElement(Skeleton),
+		loader: pageLoader,
 		children: [
 			{
 				path: "users",
@@ -186,6 +191,7 @@ const routes = createBrowserRouter([
 	},
 	{
 		path: "unauthorized",
+		loader: pageLoader,
 		element: createElement(AppLayout),
 		hydrateFallbackElement: createElement(Skeleton),
 		children: [
@@ -203,7 +209,8 @@ const routes = createBrowserRouter([
 		children: [
 			{
 				path: "*",
-				lazy: () => createComponent(() => import("../../pages/Error/Error")),
+				lazy: () =>
+					createComponent(() => import("../../pages/Error/UnknownError")),
 				id: "notFound",
 			},
 		],

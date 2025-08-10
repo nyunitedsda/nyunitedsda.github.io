@@ -1,6 +1,5 @@
-// biome-ignore lint/nursery/noUnresolvedImports: Storybook types are intentionally imported from @storybook/react-vite
+import type { RouteMenu } from "@hooks/routes";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { RouteMenu } from "../../../../hooks/routes/types";
 import DesktopMenu from "./DesktopMenu";
 
 const menuList: RouteMenu[] = [

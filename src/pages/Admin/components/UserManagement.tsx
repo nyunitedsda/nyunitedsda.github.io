@@ -1,3 +1,7 @@
+import DataTable from "@components/DataTable";
+import { PageTitle } from "@components/PageWrapper";
+import { PasswordEditor, UserEditor } from "@forms/collection";
+import { useDeleteUser, usePermission } from "@hooks/auth";
 import {
 	DeleteOutlined,
 	Edit,
@@ -6,17 +10,11 @@ import {
 } from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import { initialUser } from "@test/mock_data";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useEffect, useMemo, useState } from "react";
-import type { UserDT } from "../../../api/request";
-import { getAllUsers } from "../../../api/request/authAndUserRequest";
-import DataTable from "../../../components/DataTable/DataTable";
-import PageTitle from "../../../components/PageWrapper/PageTitle";
-import PasswordEditor from "../../../forms/collection/PasswordEditor/PasswordEditor";
-import UserEditor from "../../../forms/collection/UserEditor";
-import { useDeleteUser } from "../../../hooks/auth/useAuthAPI";
-import usePermission from "../../../hooks/auth/usePermission";
-import { initialUser } from "../../../test/mock_data";
+import type { UserDT } from "@/api";
+import { getAllUsers } from "@/api";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import userColumns from "../constants/userColumns";
 
@@ -88,7 +86,7 @@ const UserManagement: FC = () => {
 				icon: <DeleteOutlined color="error" />,
 			},
 		],
-		[canEdit, canDelete],
+		[canEdit, canDelete, _handleDeleteUser],
 	);
 
 	return (
@@ -150,9 +148,9 @@ const UserManagement: FC = () => {
 					anchorEl={isMenuOpen.anchorEl}
 					onClose={() => setIsMenuOpen(null)}
 				>
-					{menuOptions.map((option, index) => (
+					{menuOptions.map((option) => (
 						<MenuItem
-							key={`menu-option-${index}`}
+							key={`menu-option-${option.title}`}
 							onClick={() => {
 								option.onClick(isMenuOpen.data);
 								setIsMenuOpen(null);

@@ -1,3 +1,5 @@
+import { LoginButton, MenuButton, ThemeButton } from "@components/Buttons";
+import IconSkeleton from "@components/ProjectSuspense";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
@@ -8,13 +10,11 @@ import {
 	Suspense,
 	useCallback,
 	useEffect,
+	useId,
 	useMemo,
 	useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginButton, ThemeButton } from "../../../Buttons";
-import MenuButton from "../../../Buttons/MenuButton/MenuButton";
-import IconSkeleton from "../../../ProjectSuspense/IconSkeleton";
 import MenuItemRenderer from "../MenuDrawer/MenuItemRenderer";
 import { generateMenuDisplay } from "./helpers";
 import type { DesktopMenuProps } from "./types";
@@ -33,6 +33,7 @@ const rootSx: SxProps<Theme> = {
 
 const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const navigate = useNavigate();
+	const uId = useId();
 
 	const [menuWidth, setMenuWidth] = useState<number | undefined>();
 	const [optionAnchorEl, setOptionAnchorEl] =
@@ -77,7 +78,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const mergedSx = useMemo(() => (sx ? { ...rootSx, ...sx } : rootSx), [sx]);
 
 	return (
-		<Stack id="desktop-menu" sx={mergedSx}>
+		<Stack id={uId} sx={mergedSx}>
 			{displayList.map((item) => (
 				<MenuButton
 					key={item.name}

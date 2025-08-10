@@ -1,3 +1,4 @@
+import type { ColumnDefinition } from "@components/DataTable";
 import {
 	CheckBoxOutlineBlankOutlined,
 	CheckBoxOutlined,
@@ -5,8 +6,7 @@ import {
 import { Checkbox, capitalize } from "@mui/material";
 import dayjs from "dayjs";
 import { createElement } from "react";
-import type { UserDT } from "../../../api/request";
-import type { ColumnDefinition } from "../../../components/DataTable/types";
+import type { UserDT } from "@/api";
 
 type User = Partial<UserDT & { role_name: string }>;
 

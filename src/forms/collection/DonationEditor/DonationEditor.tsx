@@ -1,8 +1,8 @@
+import { ProjectModal } from "@components/ProjectModal";
+import { EntityEditor } from "@forms/EntityEditor";
+import { InputField } from "@forms/Input";
+import { initialDonation } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import ProjectModal from "../../../components/ProjectModal/ProjectModal";
-import { initialDonation } from "../../../test/mock_data";
-import EntityEditor from "../../EntityEditor/EntityEditor";
-import InputField from "../../Input/FormField";
 import { DONATION_EDITOR_CONSTANTS, donationSchema } from "./constants";
 import type { DonationEditorProps } from "./types";
 

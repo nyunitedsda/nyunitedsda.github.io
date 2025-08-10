@@ -23,19 +23,14 @@ const NoteSection: FC<NoteSectionProps> = ({
 		{icon && icon}
 		<Box sx={[contentSx, { flexDirection: columnLayout ? "column" : "row" }]}>
 			{title && (
-				<Typography
-					variant="body1"
-					color="text.primary"
-					fontWeight="bold"
-					dangerouslySetInnerHTML={{ __html: title }}
-				/>
+				<Typography variant="body1" color="text.primary" fontWeight="bold">
+					{title}
+				</Typography>
 			)}
 			{content && (
-				<Typography
-					color="text.primary"
-					variant="body1"
-					dangerouslySetInnerHTML={{ __html: content }}
-				/>
+				<Typography color="text.primary" variant="body1">
+					{content}
+				</Typography>
 			)}
 		</Box>
 	</Box>

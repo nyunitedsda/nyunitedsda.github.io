@@ -1,23 +1,24 @@
-import elderImage from "../../assets/img/elder.webp";
-import familyImage from "../../assets/img/family.webp";
-import family2Image from "../../assets/img/family2.webp";
-
-import family3Image from "../../assets/img/family3.webp";
-import family4Image from "../../assets/img/family4.webp";
-import family5Image from "../../assets/img/family5.webp";
-import givingGiftImage from "../../assets/img/giving-gift.webp";
-import groupPrayImage from "../../assets/img/group-pray.webp";
-import membersImage from "../../assets/img/members.webp";
-import membersEmbraceImage from "../../assets/img/members-embrace.webp";
-import membersEmbrace1Image from "../../assets/img/members-embrace1.webp";
-import membersEmbrace2Image from "../../assets/img/members-embrace2.webp";
-import members3Image from "../../assets/img/members3.webp";
-import members4Image from "../../assets/img/members4.webp";
-import members6Image from "../../assets/img/members6.webp";
-import singingSisterImage from "../../assets/img/singing-sister.webp";
-import sisterPhotographyImage from "../../assets/img/sister-photography.webp";
-import youthsImage from "../../assets/img/youths.webp";
-import youths2Image from "../../assets/img/youths2.webp";
+import {
+	elderImage,
+	family2Image,
+	family3Image,
+	family4Image,
+	family5Image,
+	familyImage,
+	givingGiftImage,
+	groupPrayImage,
+	members3Image,
+	members4Image,
+	members6Image,
+	membersEmbrace1Image,
+	membersEmbrace2Image,
+	membersEmbraceImage,
+	membersImage,
+	singingSisterImage,
+	sisterPhotographyImage,
+	youths2Image,
+	youthsImage,
+} from "@/assets";
 
 export default [
 	{

@@ -1,6 +1,7 @@
 import type { SelectProps } from "@mui/material/Select";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FieldHelperProps, FieldInputProps, FieldMetaProps } from "formik";
+import type { ReactNode } from "react";
 
 export interface RenderFieldProps<T> {
 	inputProps: FieldInputProps<T>;
@@ -24,7 +25,7 @@ export type InputFieldProps<
 	name: string;
 	label: string;
 	type?: string;
-	fieldType: FormFieldType;
+	fieldType?: FormFieldType;
 	defaultValue?: string | number | boolean;
 	placeholder?: string;
 	multiline?: boolean;
@@ -35,11 +36,11 @@ export type InputFieldProps<
 	sx?: SxProps<Theme>;
 	items?: T[]; // For select fields, the items to display
 	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options
-	renderItemLabel?: (item: T) => string; // Function to render the label
+	renderItemLabel?: (item: T) => string | ReactNode; // Function to render the label
 };
 
 export interface SelectFieldProps<T> extends Omit<SelectProps, "error"> {
-	items: T[];
+	items?: T[];
 	label: string;
 	error?: string;
 	required?: boolean;

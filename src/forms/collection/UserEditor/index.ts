@@ -1,2 +1,2 @@
-export type { EditorProps } from "../types";
-export { default } from "./UserEditor";
+export * from "./types";
+export { default as UserEditor } from "./UserEditor";

@@ -1,8 +1,8 @@
+import ProjectCard from "@components/ProjectCard";
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { CSSProperties, FC } from "react";
-import ProjectCard from "../../../components/ProjectCard/ProjectCard";
 import { cardStyles } from "./AnnouncementCard/cardStyles";
 import type { MinistryCardProps } from "./types";
 
@@ -12,7 +12,6 @@ const imageStyles: CSSProperties = {
 	maxWidth: "100%",
 	maxHeight: "64px",
 	height: "auto",
-	// Improve CLS (Cumulative Layout Shift)
 	aspectRatio: "auto",
 };
 
@@ -27,7 +26,7 @@ const contentSx: SxProps<Theme> = {
 };
 
 const MinistryCard: FC<MinistryCardProps> = (props) => {
-	const { header, content, link, image } = props;
+	const { header, content, link: _, image } = props;
 	return (
 		<ProjectCard
 			header={{
@@ -38,17 +37,13 @@ const MinistryCard: FC<MinistryCardProps> = (props) => {
 				<Box sx={contentSx}>
 					<Typography variant="body1">
 						{content}
-						<a href={link}>{" Click here"}</a>
+						{/* <a href={link}>{" Click here"}</a> */}
 					</Typography>
 				</Box>
 			}
 			actions={
-				image?.image ? (
-					<img
-						src={image.image.src}
-						alt={image.image.alt}
-						style={imageStyles}
-					/>
+				image ? (
+					<img src={image.src} alt={image.alt} style={imageStyles} />
 				) : undefined
 			}
 		/>

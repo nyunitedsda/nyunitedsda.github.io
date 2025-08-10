@@ -4,11 +4,11 @@ import {
 	expect,
 	fireEvent,
 	it,
+	render,
 	screen,
 	vi,
 	waitFor,
-} from "../../../test/index";
-import { render } from "../../../test/vitest-setup.tsx";
+} from "@test/index.ts";
 import ConfirmationButton from "./ConfirmationButton.tsx";
 
 describe("ConfirmationButton", () => {
