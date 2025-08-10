@@ -6,7 +6,11 @@ import {
 } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router";
-import type { LoginCredentials, LoginResponse, UserDT } from "../../api/request";
+import type {
+	LoginCredentials,
+	LoginResponse,
+	UserDT,
+} from "../../api/request";
 import {
 	deleteUser,
 	getCurrentUser,
@@ -52,7 +56,8 @@ export const useRegister = () => {
 	return useMutation({
 		mutationFn: (userData: RegisterData) => registerUser(userData),
 		onSuccess: (data) => {
-			enqueueSnackbar(data.message, { variant: "success" });
+			enqueueSnackbar("User registered successfully", { variant: "success" });
+			return data;
 		},
 		onError: (error) => {
 			console.error("Registration failed:", error);
@@ -95,7 +100,10 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 		queryFn: () => getCurrentUser(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		enabled: () => {
-			return document.cookie.includes("accessToken") || document.cookie.includes("refreshToken");
+			return (
+				document.cookie.includes("accessToken") ||
+				document.cookie.includes("refreshToken")
+			);
 		},
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
@@ -124,7 +132,10 @@ export const useAuthStatus = () => {
 		queryFn: () => getUserStatus(),
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		enabled: () => {
-			return document.cookie.includes("accessToken") || document.cookie.includes("refreshToken");
+			return (
+				document.cookie.includes("accessToken") ||
+				document.cookie.includes("refreshToken")
+			);
 		},
 		retry: (failureCount, error: any) => {
 			if (error?.response?.status === 403) {

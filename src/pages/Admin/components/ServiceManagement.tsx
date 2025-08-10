@@ -56,10 +56,10 @@ const ServiceManagement: FC = () => {
 				handleClick={
 					canCreate
 						? () =>
-							setCreateServiceOpen({
-								...initialService,
-								id: initialService.id ?? 0, // or another default id
-							} as ServiceDT)
+								setCreateServiceOpen({
+									...initialService,
+									id: initialService.id ?? 0, // or another default id
+								} as ServiceDT)
 						: undefined
 				}
 			/>

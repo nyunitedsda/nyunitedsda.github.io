@@ -27,4 +27,3 @@ const selectSeverityIcon = (severity: SeverityPalette = "info") =>
 	severityIcons[severity];
 
 export { selectSeverityIcon };
-

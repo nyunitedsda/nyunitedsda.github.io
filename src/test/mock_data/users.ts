@@ -84,4 +84,3 @@ const mockLoginResponse = {
 
 export default userData;
 export { initialState, mockLoginResponse };
-

@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { Form, Formik } from "formik";
+import { Form, Formik, type FormikHelpers } from "formik";
 import { ConfirmationButton } from "../../components/Buttons";
 import type { FormContainerProps } from "./types";
 
@@ -36,7 +36,7 @@ const SAVE_CONFIRMATION = {
 	cancelLabel: "No",
 };
 
-const FormContainer = <T extends { id?: number }>({
+const FormContainer = <T extends Object>({
 	initialValues,
 	validationSchema,
 	onSubmit,
@@ -51,8 +51,10 @@ const FormContainer = <T extends { id?: number }>({
 			enableReinitialize
 			initialValues={initialValues}
 			validationSchema={validationSchema}
-			onSubmit={onSubmit}
-			on
+			onSubmit={async (values: T, formikHelpers: FormikHelpers<T>) => {
+				await onSubmit(values, formikHelpers);
+				formikHelpers.setSubmitting(false);
+			}}
 		>
 			{({ isSubmitting, dirty }) => (
 				<Form style={{ width: "100%" }}>

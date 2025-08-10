@@ -46,10 +46,10 @@ const SettingManagement: FC = () => {
 									<strong>{capitalize(field.replace(/_/g, " "))}:</strong>{" "}
 									{field === "last_login" && user[field as keyof UserDT]
 										? dayjs(user[field as keyof UserDT] as string).format(
-											"MMMM D, YYYY",
-										)
+												"MMMM D, YYYY",
+											)
 										: typeof user[field as keyof UserDT] === "object" &&
-											user[field as keyof UserDT] instanceof Date
+												user[field as keyof UserDT] instanceof Date
 											? (user[field as keyof UserDT] as Date).toISOString()
 											: String(user[field as keyof UserDT] ?? "N/A")}
 								</Typography>

@@ -92,10 +92,11 @@ const Blog: FC = () => {
 										variant="body1"
 										sx={{ "& p": { m: 0 } }}
 										dangerouslySetInnerHTML={{
-											__html: `${content.length > BLOG_PREVIEW_LENGTH
+											__html: `${
+												content.length > BLOG_PREVIEW_LENGTH
 													? content.slice(0, BLOG_PREVIEW_LENGTH)
 													: content
-												}`,
+											}`,
 										}}
 									/>
 								}

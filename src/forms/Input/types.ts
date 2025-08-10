@@ -1,4 +1,5 @@
 import type { SelectProps } from "@mui/material/Select";
+import type { SxProps, Theme } from "@mui/material/styles";
 import type { FieldHelperProps, FieldInputProps, FieldMetaProps } from "formik";
 
 export interface RenderFieldProps<T> {
@@ -27,7 +28,9 @@ export type InputFieldProps<
 	defaultValue?: string | number | boolean;
 	placeholder?: string;
 	multiline?: boolean;
+	required?: boolean;
 	rows?: number;
+	sx?: SxProps<Theme>;
 	items?: T[]; // For select fields, the items to display
 	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options
 	renderItemLabel?: (item: T) => string; // Function to render the label
@@ -37,6 +40,7 @@ export interface SelectFieldProps<T> extends Omit<SelectProps, "error"> {
 	items: T[];
 	label: string;
 	error?: string;
+	required?: boolean;
 	valueResolver: (item: T) => string | number;
 	renderItemLabel: (item: T) => string;
 }

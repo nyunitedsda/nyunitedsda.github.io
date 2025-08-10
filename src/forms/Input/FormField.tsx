@@ -26,7 +26,8 @@ const InputField = <
 	}, [validateFieldCondition, values]);
 
 	const renderInputField = useCallback(() => {
-		const { fieldType, type } = props;
+		// Always destructure fieldType out so it is not passed to DOM elements
+		const { fieldType, type, required = false, ...rest } = props;
 		const { error, touched } = meta;
 		const errorText = error && touched ? error : "";
 
@@ -35,19 +36,20 @@ const InputField = <
 				return (
 					<TextField
 						{...field}
-						{...props}
+						{...rest}
 						type={type ?? undefined}
 						error={!!error}
 						helperText={errorText}
 						fullWidth
 						margin="normal"
+						required={required}
 					/>
 				);
 			case "select":
 				return (
 					<SelectField<T>
 						{...field}
-						{...props}
+						{...rest}
 						error={error}
 						items={props?.items || []}
 						label={(props?.label ?? "") as string}
@@ -61,6 +63,7 @@ const InputField = <
 								? props?.renderItemLabel
 								: (item) => String(item.value)
 						}
+						required={required}
 					/>
 				);
 			case "checkbox":
@@ -69,6 +72,7 @@ const InputField = <
 						error={!!errorText}
 						component="fieldset"
 						variant="standard"
+						required={required}
 					>
 						<FormControlLabel
 							control={<Checkbox />}
@@ -77,7 +81,7 @@ const InputField = <
 							onBlur={field.onBlur}
 							name={field.name}
 							label={(props as unknown as FormControlLabelProps)?.label || ""}
-							{...(props as Omit<
+							{...(rest as Omit<
 								FormControlLabelProps,
 								"control" | "checked" | "onChange" | "onBlur" | "name" | "label"
 							>)}
@@ -89,12 +93,13 @@ const InputField = <
 				return (
 					<TextField
 						{...field}
-						{...props}
+						{...rest}
 						type="datetime-local"
 						error={!!errorText}
 						helperText={errorText}
 						fullWidth
 						margin="normal"
+						required={required}
 						sx={{
 							'& input[type="month"]::-webkit-calendar-picker-indicator': {
 								filter: `invert(1) brightness(0.5)`,
@@ -106,12 +111,13 @@ const InputField = <
 				return (
 					<TextField
 						{...field}
-						{...props}
+						{...rest}
 						type={type ?? undefined}
 						error={!!errorText}
 						helperText={errorText}
 						fullWidth
 						margin="normal"
+						required={required}
 					/>
 				);
 		}

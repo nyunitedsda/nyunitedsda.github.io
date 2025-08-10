@@ -12,6 +12,7 @@ const SelectField = <T,>({
 	label,
 	valueResolver,
 	renderItemLabel,
+	required = false,
 	sx,
 	...props
 }: SelectFieldProps<T>) => {
@@ -23,7 +24,7 @@ const SelectField = <T,>({
 	return (
 		<FormControl sx={sx} error={!!error} fullWidth variant="outlined">
 			<InputLabel id={labelId}>{label}</InputLabel>
-			<Select labelId={labelId} label={label} {...props}>
+			<Select labelId={labelId} label={label} required={required} {...props}>
 				{!items || items.length === 0 ? (
 					<MenuItem value="">
 						<em>No options available</em>

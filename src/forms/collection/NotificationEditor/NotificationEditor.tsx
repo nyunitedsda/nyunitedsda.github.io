@@ -53,13 +53,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: initialNotification,
-					title: ADD_TITLE,
-				},
+						initialValues: initialNotification,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 

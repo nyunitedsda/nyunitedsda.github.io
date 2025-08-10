@@ -19,14 +19,20 @@ vi.mock("@mui/material", async () => {
 			</div>
 		),
 		MenuItem: ({ children, onClick, selected, ...props }: any) => (
-			<div
+			<button
 				data-testid="menuitem"
 				onClick={onClick}
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						onClick?.(e);
+					}
+				}}
+				tabIndex={0}
 				className={selected ? "Mui-selected" : ""}
 				{...props}
 			>
 				{children}
-			</div>
+			</button>
 		),
 		Alert: ({ children, severity, ...props }: any) => (
 			<div data-testid="alert" data-severity={severity} {...props}>

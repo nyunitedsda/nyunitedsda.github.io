@@ -1,3 +1,4 @@
+import type { FormikHelpers } from "formik";
 import type { ReactNode } from "react";
 
 export interface FormContainerProps<T> {
@@ -7,6 +8,6 @@ export interface FormContainerProps<T> {
 	submitButtonText?: string;
 	validationSchema: any;
 	confirmOnSave?: boolean;
-	onSubmit: (values: T) => void | Promise<any>;
+	onSubmit: (values: T, formikHelpers: FormikHelpers<T>) => void | Promise<any>;
 	onCancel?: () => void;
 }

@@ -6,7 +6,6 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const commonSchema = Yup.object().shape({
 	username: nameSchema,
 	email: Yup.string()
-		.required("Email is required")
 		.max(100, "Email must be 100 characters or less")
 		.test({
 			name: "email-format",

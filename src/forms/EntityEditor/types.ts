@@ -59,4 +59,3 @@ interface EntityEditorProps<T extends { id?: number }> {
 }
 
 export type { EntityEditorProps };
-
