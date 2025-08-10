@@ -36,14 +36,17 @@ const LoginForm: FC = () => {
 	);
 
 	const _handleSubmit = useCallback(
-		async (values: LoginCredentials, formikHelpers: FormikHelpers<LoginCredentials>) => {
-
+		async (
+			values: LoginCredentials,
+			formikHelpers: FormikHelpers<LoginCredentials>,
+		) => {
 			await login(values)
 				.then((data) => {
 					navigate(routePaths.ADMIN_USERS, { replace: true });
-					data?.message && enqueueSnackbar(data?.message, {
-						variant: "success",
-					});
+					data?.message &&
+						enqueueSnackbar(data?.message, {
+							variant: "success",
+						});
 				})
 				.catch((error) => {
 					if (error) {
@@ -51,12 +54,14 @@ const LoginForm: FC = () => {
 						enqueueSnackbar(error.message || "Login failed", {
 							variant: "error",
 						});
-						error.message && formikHelpers.setErrors({
-							username: error.message,
-							password: error.message,
-						});
+						error.message &&
+							formikHelpers.setErrors({
+								username: error.message,
+								password: error.message,
+							});
 					}
-				}).finally(() => {
+				})
+				.finally(() => {
 					formikHelpers.setSubmitting(false);
 				});
 		},

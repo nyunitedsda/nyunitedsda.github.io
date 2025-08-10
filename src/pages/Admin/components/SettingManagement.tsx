@@ -26,10 +26,12 @@ const SettingManagement: FC = () => {
 				title: "Account",
 				icon: <Person3Outlined color="primary" />,
 				description: "Manage your account information and preferences",
-				action: !user?.is_system ? {
-					label: "Edit Account",
-					onClick: () => console.log("Edit Account"),
-				} : undefined,
+				action: user?.is_system
+					? undefined
+					: {
+							label: "Edit Account",
+							onClick: () => console.log("Edit Account"),
+						},
 				content: (
 					<>
 						{user &&
@@ -40,20 +42,23 @@ const SettingManagement: FC = () => {
 								"email",
 								"role_name",
 								"last_login",
-							].map((field) => user[field as keyof UserDT] ? (
-								<Typography key={field} variant="body1">
-									<strong>{capitalize(field.replace(/_/g, " "))}:</strong>{" "}
-									{field === "last_login" && user[field as keyof UserDT]
-										? dayjs(user[field as keyof UserDT] as string).format(
-											"MMMM D, YYYY",
-										)
-										: typeof user[field as keyof UserDT] === "object" &&
-											user[field as keyof UserDT] instanceof Date
-											? (user[field as keyof UserDT] as Date).toISOString()
-											: String(user[field as keyof UserDT] ?? "N/A")}
-								</Typography>
-							) : <></>)
-						}
+							].map((field) =>
+								user[field as keyof UserDT] ? (
+									<Typography key={field} variant="body1">
+										<strong>{capitalize(field.replace(/_/g, " "))}:</strong>{" "}
+										{field === "last_login" && user[field as keyof UserDT]
+											? dayjs(user[field as keyof UserDT] as string).format(
+													"MMMM D, YYYY",
+												)
+											: typeof user[field as keyof UserDT] === "object" &&
+													user[field as keyof UserDT] instanceof Date
+												? (user[field as keyof UserDT] as Date).toISOString()
+												: String(user[field as keyof UserDT] ?? "N/A")}
+									</Typography>
+								) : (
+									<></>
+								),
+							)}
 					</>
 				),
 			},
@@ -61,11 +66,13 @@ const SettingManagement: FC = () => {
 				title: "Security",
 				icon: <SecurityOutlined color="primary" />,
 				description: "Manage your security settings and preferences",
-				action: !user?.is_system ? {
-					label: "Change Password",
-					onClick: () => setChangePasswordOpen(user as UserDT),
-					disabled: user?.is_system,
-				} : undefined,
+				action: user?.is_system
+					? undefined
+					: {
+							label: "Change Password",
+							onClick: () => setChangePasswordOpen(user as UserDT),
+							disabled: user?.is_system,
+						},
 				content: (
 					<>
 						{user &&

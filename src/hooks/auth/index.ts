@@ -4,4 +4,4 @@ export {
 	useLogout,
 	useRegister,
 } from "./useAuthAPI";
-export { default as useAuthentication } from "./useAuthentication";
+export { default  } from "./useAuthentication";

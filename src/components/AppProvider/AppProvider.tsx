@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 import { type FC, type PropsWithChildren, StrictMode, useMemo } from "react";
-import { BrowserRouter } from "react-router";
 import { AuthenticationProvider } from "../../contexts/AuthenticationContext";
 import NotificationProvider from "../../contexts/NotificationContext/NotificationContext";
 import queryClient from "./queryClient";

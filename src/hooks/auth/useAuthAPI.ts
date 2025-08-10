@@ -4,6 +4,7 @@ import {
 	useQuery,
 	useQueryClient,
 } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import type {
@@ -21,7 +22,6 @@ import {
 } from "../../api/request/authAndUserRequest";
 import type { RegisterData } from "../../contexts/AuthenticationContext";
 import routePaths from "../routes/routePaths";
-import type { AxiosError } from "axios";
 
 /**
  * Authentication API hooks using React Query
@@ -34,13 +34,13 @@ export const useLogin = () => {
 		mutationFn: async (credentials: LoginCredentials) =>
 			await loginUser(credentials),
 		onSuccess: (data: LoginResponse) => {
-			queryClient.setQueryData(["user"], data.user);			
+			queryClient.setQueryData(["user"], data.user);
 			return data;
 		},
 		onError: (error: AxiosError<{ error: string }>) => {
 			console.error("Login failed:", error?.response?.data.error);
 			queryClient.removeQueries({ queryKey: ["user"] });
-			return Promise.reject({message: error?.response?.data.error});
+			return Promise.reject({ message: error?.response?.data.error });
 		},
 	});
 };

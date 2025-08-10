@@ -38,9 +38,9 @@ const AUTHENTICATION_HEADER = {
 const Login: FC = () => {
 	const { isAuthenticated } = useAuthentication();
 
-
-
-	return !isAuthenticated ? (
+	return isAuthenticated ? (
+		<Navigate to={routePaths.ADMIN_USERS} replace />
+	) : (
 		<Stack sx={rootSx} spacing={4}>
 			<Stack sx={headerSx} spacing={2}>
 				<Typography variant="h2" component="h1" fontWeight="bold">
@@ -53,7 +53,7 @@ const Login: FC = () => {
 				<LoginForm />
 			</Paper>
 		</Stack>
-	) : <Navigate to={routePaths.ADMIN_USERS} replace />;
+	);
 };
 
 export default Login;

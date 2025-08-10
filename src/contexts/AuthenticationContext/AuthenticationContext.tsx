@@ -20,12 +20,10 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
 
-
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
 		// Prefer currentUser, then hasAuthStatus, fallback to false
 		return !!currentUser || !!hasAuthStatus;
 	});
-
 
 	// Keep isAuthenticated in sync with currentUser and hasAuthStatus
 	useEffect(() => {
@@ -79,31 +77,34 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		[loginUser, refreshUser],
 	);
 
-	const logout = useCallback(
-		async (): Promise<{ message: string }> => {
-			try {
-				const response = await logoutUser.mutateAsync();
-				setIsAuthenticated(false);
-				await refreshUser();
-				return response; // response is of type { message: string }
-			} catch (error) {
-				setIsAuthenticated(false);
-				await refreshUser();
-				throw error;
-			}
-		},
-		[logoutUser, refreshUser],
-	);
+	const logout = useCallback(async (): Promise<{ message: string }> => {
+		try {
+			const response = await logoutUser.mutateAsync();
+			setIsAuthenticated(false);
+			await refreshUser();
+			return response; // response is of type { message: string }
+		} catch (error) {
+			setIsAuthenticated(false);
+			await refreshUser();
+			throw error;
+		}
+	}, [logoutUser, refreshUser]);
 
-	return <Provider value={{
-		user: currentUser ?? null,
-		isLoading: userLoading,
-		isAuthenticated,
-		login,
-		logout,
-		refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
-		refreshUser, // Expose user refresh for manual sync
-	}}>{children}</Provider>;
+	return (
+		<Provider
+			value={{
+				user: currentUser ?? null,
+				isLoading: userLoading,
+				isAuthenticated,
+				login,
+				logout,
+				refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
+				refreshUser, // Expose user refresh for manual sync
+			}}
+		>
+			{children}
+		</Provider>
+	);
 };
 
 export default AuthenticationProvider;

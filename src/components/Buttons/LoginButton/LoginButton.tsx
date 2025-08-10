@@ -1,9 +1,9 @@
 import Button, { type ButtonProps } from "@mui/material/Button";
+import Skeleton from "@mui/material/Skeleton";
 import { type FC, lazy, Suspense, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthentication } from "../../../hooks/auth";
+import  useAuthentication  from "../../../hooks/auth";
 import routePaths from "../../../hooks/routes/routePaths";
-import Skeleton from "@mui/material/Skeleton";
 
 const LogoutOutlined = lazy(() => import("@mui/icons-material/LogoutOutlined"));
 const LoginOutlined = lazy(() => import("@mui/icons-material/LoginOutlined"));
@@ -31,7 +31,9 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 			"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
 			color: "primary",
 			sx: { color: "primary.light" },
-			onClick: isAuthenticated ? handleLogout : () => navigate(routePaths.LOGIN),
+			onClick: isAuthenticated
+				? handleLogout
+				: () => navigate(routePaths.LOGIN),
 			startIcon: isAuthenticated ? <LogoutOutlined /> : <LoginOutlined />,
 			title: isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
 		}),
@@ -39,7 +41,15 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	);
 
 	return (
-		<Suspense fallback={<Skeleton variant="rectangular" width={expanded ? "100%" : 90} height={'auto'} />}>
+		<Suspense
+			fallback={
+				<Skeleton
+					variant="rectangular"
+					width={expanded ? "100%" : 90}
+					height={"auto"}
+				/>
+			}
+		>
 			<Button {...commonProps}>{commonProps.title}</Button>
 		</Suspense>
 	);

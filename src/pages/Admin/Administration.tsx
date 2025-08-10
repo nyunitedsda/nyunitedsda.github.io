@@ -5,8 +5,6 @@ import routePaths from "../../hooks/routes/routePaths";
 import { ADMIN_TAB_LIST } from "./constants/adminTabList";
 import type { AdministrationProps } from "./types";
 
-
-
 const Administration: FC<AdministrationProps> = () => {
 	const { user, isAuthenticated, refreshUser } = useAuthentication();
 
@@ -25,8 +23,12 @@ const Administration: FC<AdministrationProps> = () => {
 			return [];
 		}
 
-		const permissions = Array.from(new Set([...(user?.permissions || [])].map((perm) => perm.split("-")[0])));
-		const approvedTabs = ADMIN_TAB_LIST.filter((tab) => permissions.includes(tab.tag));
+		const permissions = Array.from(
+			new Set([...(user?.permissions || [])].map((perm) => perm.split("-")[0])),
+		);
+		const approvedTabs = ADMIN_TAB_LIST.filter((tab) =>
+			permissions.includes(tab.tag),
+		);
 
 		return approvedTabs;
 	}, [user]);

@@ -34,7 +34,6 @@ const titleSx: SxProps<Theme> = {
 const EDIT_TITLE = "Edit User";
 const CREATE_TITLE = "Create New User";
 
-
 const UserEditor: FC<UserEditorProps> = ({
 	data,
 	onClose,
@@ -66,11 +65,13 @@ const UserEditor: FC<UserEditorProps> = ({
 		return configurePasswordInput();
 	}, []);
 
-
 	const _handleEditSubmit = useCallback((values: UserDT) => {
 		const { id, last_login, ...rest } = values;
 
-		updateUser(id, { ...rest, last_login: last_login ? new Date(last_login) : undefined }).then(() => {
+		updateUser(id, {
+			...rest,
+			last_login: last_login ? new Date(last_login) : undefined,
+		}).then(() => {
 			enqueueSnackbar("User updated successfully", { variant: "success" });
 			onSuccess?.();
 			onClose();

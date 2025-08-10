@@ -28,7 +28,6 @@ axiosInstance.interceptors.response.use(
 			console.error("CORS issue or forbidden access");
 		}
 
-		
 		if (
 			typeof window !== "undefined" &&
 			error.response &&

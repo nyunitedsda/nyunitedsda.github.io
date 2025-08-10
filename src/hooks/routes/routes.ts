@@ -1,9 +1,9 @@
+import { Skeleton } from "@mui/material";
 import { createElement } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "../../Layout";
 import Error from "../../pages/Error/Error";
 import { blogDetailLoader, blogLoader, homeLoader } from "./loaders";
-import { Skeleton } from "@mui/material";
 
 // Helper for lazy loading React components
 const createComponent = (
@@ -16,8 +16,8 @@ const routes = createBrowserRouter([
 	{
 		path: "/",
 		element: createElement(AppLayout),
-    errorElement: createElement(Error),
-    hydrateFallbackElement: createElement(Skeleton),
+		errorElement: createElement(Error),
+		hydrateFallbackElement: createElement(Skeleton),
 		children: [
 			{
 				index: true,
@@ -102,13 +102,12 @@ const routes = createBrowserRouter([
 					),
 				id: "terms",
 			},
-      
 		],
 	},
 	{
 		path: "admin/:tab?",
 		element: createElement(AppLayout, { restricted: true }),
-    hydrateFallbackElement: createElement(Skeleton),
+		hydrateFallbackElement: createElement(Skeleton),
 		children: [
 			{
 				path: "users",
@@ -175,7 +174,7 @@ const routes = createBrowserRouter([
 	{
 		path: "library",
 		element: createElement(AppLayout, { restricted: true }),
-    hydrateFallbackElement: createElement(Skeleton),
+		hydrateFallbackElement: createElement(Skeleton),
 		children: [
 			{
 				index: true,
@@ -185,23 +184,23 @@ const routes = createBrowserRouter([
 			},
 		],
 	},
-  {
-    path: 'unauthorized',
-    element: createElement(AppLayout),
-    hydrateFallbackElement: createElement(Skeleton),
-    children: [
-      {
-        path: 'unauthorized',
-        lazy: () => createComponent(() => import("../../pages/Error/UnauthorizedError")),
-        id: "unauthorized",
-      },
-    ],
-  },
+	{
+		path: "unauthorized",
+		element: createElement(AppLayout),
+		hydrateFallbackElement: createElement(Skeleton),
+		children: [
+			{
+				path: "unauthorized",
+				lazy: () =>
+					createComponent(() => import("../../pages/Error/UnauthorizedError")),
+				id: "unauthorized",
+			},
+		],
+	},
 	{
 		path: "*",
 		element: createElement(AppLayout),
 		children: [
-      
 			{
 				path: "*",
 				lazy: () => createComponent(() => import("../../pages/Error/Error")),
