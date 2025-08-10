@@ -3,16 +3,12 @@ import {
 	type PropsWithChildren,
 	useCallback,
 	useEffect,
-	useMemo,
 	useState,
 } from "react";
-import { useNavigate } from "react-router";
 import type { LoginCredentials } from "../../api/request";
 import { useLogin, useLogout } from "../../hooks/auth";
 import { useAuthStatus, useCurrentUser } from "../../hooks/auth/useAuthAPI";
-import routePaths from "../../hooks/routes/routePaths";
 import { Provider } from "./context";
-import type { AuthenticationContextProps } from "./types";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { hasAuthStatus, refreshAuthStatus } = useAuthStatus();
@@ -23,24 +19,30 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	} = useCurrentUser();
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
-	const navigate = useNavigate();
 
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-		!!hasAuthStatus,
-	);
 
-	// useEffect(() => {
-	// 	setIsAuthenticated(!!hasAuthStatus);
-	// 	if (!hasAuthStatus) {
-	// 		// Optionally redirect to login if session expired
-	// 		if (
-	// 			typeof window !== "undefined" &&
-	// 			window.location.pathname !== "/login"
-	// 		) {
-	// 			window.location.href = "/login";
-	// 		}
-	// 	}
-	// }, [hasAuthStatus]);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+		// Prefer currentUser, then hasAuthStatus, fallback to false
+		return !!currentUser || !!hasAuthStatus;
+	});
+
+
+	// Keep isAuthenticated in sync with currentUser and hasAuthStatus
+	useEffect(() => {
+		if (currentUser) {
+			setIsAuthenticated(true);
+		} else if (hasAuthStatus) {
+			setIsAuthenticated(true);
+		} else {
+			setIsAuthenticated(false);
+		}
+	}, [currentUser, hasAuthStatus]);
+
+	useEffect(() => {
+		if (!isAuthenticated) {
+			refreshAuthStatus();
+		}
+	}, [isAuthenticated, refreshAuthStatus]);
 
 	useEffect(() => {
 		if (currentUser) {
@@ -65,49 +67,43 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
 			try {
-				await loginUser.mutateAsync(credentials);
+				const response = await loginUser.mutateAsync(credentials);
 				await refreshUser();
 				setIsAuthenticated(true);
+				return response;
 			} catch (error) {
 				setIsAuthenticated(false);
+				return Promise.reject(error);
 			}
 		},
 		[loginUser, refreshUser],
 	);
 
-	const logout = useCallback(async () => {
-		try {
-			await logoutUser.mutateAsync();
-			setIsAuthenticated(false);
-			await refreshUser(); // Clear user state after logout
-			navigate(routePaths.HOME);
-		} catch (error) {
-			console.log("Logout failed", error);
-		}
-	}, [logoutUser, refreshUser, navigate]);
-
-	const value: AuthenticationContextProps = useMemo(
-		() => ({
-			user: currentUser ?? null,
-			isLoading: userLoading,
-			isAuthenticated,
-			login,
-			logout,
-			refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
-			refreshUser, // Expose user refresh for manual sync
-		}),
-		[
-			currentUser,
-			userLoading,
-			isAuthenticated,
-			login,
-			logout,
-			refreshAuthStatus,
-			refreshUser,
-		],
+	const logout = useCallback(
+		async (): Promise<{ message: string }> => {
+			try {
+				const response = await logoutUser.mutateAsync();
+				setIsAuthenticated(false);
+				await refreshUser();
+				return response; // response is of type { message: string }
+			} catch (error) {
+				setIsAuthenticated(false);
+				await refreshUser();
+				throw error;
+			}
+		},
+		[logoutUser, refreshUser],
 	);
 
-	return <Provider value={value}>{children}</Provider>;
+	return <Provider value={{
+		user: currentUser ?? null,
+		isLoading: userLoading,
+		isAuthenticated,
+		login,
+		logout,
+		refreshAuthStatus, // Expose refreshAuthStatus for manual session checks
+		refreshUser, // Expose user refresh for manual sync
+	}}>{children}</Provider>;
 };
 
 export default AuthenticationProvider;

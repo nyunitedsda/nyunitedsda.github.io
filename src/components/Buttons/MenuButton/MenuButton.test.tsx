@@ -12,11 +12,11 @@ import {
 } from "../../../test/index.ts";
 import { render } from "../../../test/vitest-setup.tsx";
 import type { MenuButtonProps } from "../types.ts";
-import MenuButton from "./index.ts";
+import MenuButton from "./MenuButton.tsx";
 
 // Mock react-router's useNavigate
 const mockNavigate = vi.fn();
-vi.mock("react-router", () => ({
+vi.mock("react-router-dom", () => ({
 	useNavigate: () => mockNavigate,
 }));
 

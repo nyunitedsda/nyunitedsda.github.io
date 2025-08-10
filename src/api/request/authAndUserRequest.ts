@@ -138,7 +138,9 @@ const loginUser = async (
 		);
 		return response?.data;
 	} catch (error: unknown) {
-		return handleOperationError("login", "users", error);
+		handleOperationError("login", "users", error);
+		const axiosError = error as { response?: { data?: { error?: string } } };
+		return Promise.reject({ message: axiosError.response?.data?.error });
 	}
 };
 

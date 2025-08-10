@@ -7,13 +7,9 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { type FC, useCallback } from "react";
-import { useNavigate } from "react-router";
-import {
-	APOLOGY_MSG,
-	DESCRIPTION_MSG,
-	ERROR_BUTTONS,
-	ERROR_MSG,
-} from "./constants";
+import { useNavigate } from "react-router-dom";
+import routePaths from "../../hooks/routes/routePaths";
+import { PERMISSION_ERROR } from "./constants";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",
@@ -36,7 +32,7 @@ const rootSx: SxProps<Theme> = {
 	width: "100%",
 	alignItems: "center",
 	justifyContent: "center",
-	height: "100vh",
+	flexGrow: 1,
 	gap: 3,
 	"& .MuiTypography-root": {
 		color: "text.primary",
@@ -47,6 +43,8 @@ const apologySx: SxProps<Theme> = {
 	color: "text.secondary",
 };
 
+const { ERROR_MSG, APOLOGY_MSG, DESCRIPTION_MSG, BUTTONS } = PERMISSION_ERROR;
+
 const UnauthorizedError: FC = () => {
 	const navigate = useNavigate();
 
@@ -56,9 +54,9 @@ const UnauthorizedError: FC = () => {
 
 	const redirectUser = useCallback((path: "home" | "login") => {
 		if (path === "home") {
-			navigate("/", { replace: true });
+			navigate(routePaths.HOME, { replace: true });
 		} else if (path === "login") {
-			navigate("/login", { replace: true });
+			navigate(routePaths.LOGIN, { replace: true });
 		}
 	}, []);
 
@@ -82,13 +80,13 @@ const UnauthorizedError: FC = () => {
 			</Stack>
 
 			<Box sx={actionSx}>
-				{ERROR_BUTTONS.map(({ action, color, icon, label, variant }) => (
+				{BUTTONS.map(({ action, color, icon, label, variant, to }) => (
 					<Button
 						color={(color ?? "primary") as ButtonProps["color"]}
 						onClick={() => {
 							if (action === "refresh") refreshPage();
 							else if (action === "redirect")
-								redirectUser(label.toLowerCase() as "home" | "login");
+								redirectUser(to as "home" | "login");
 						}}
 						key={label}
 						startIcon={icon}

@@ -11,7 +11,7 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { LoginButton, ThemeButton } from "../../../Buttons";
 import MenuButton from "../../../Buttons/MenuButton/MenuButton";
 import IconSkeleton from "../../../ProjectSuspense/IconSkeleton";

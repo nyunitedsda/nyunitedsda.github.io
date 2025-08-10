@@ -1,12 +1,9 @@
-import type { FC } from "react";
-import { useRoutes } from "react-router";
-import useFormattedRoutes from "./hooks/routes/useFormattedRoutes";
+import { type FC } from "react";
+import { RouterProvider } from "react-router-dom";
+import routes from "./hooks/routes/routes.ts";
 
 const App: FC = () => {
-	const { routes } = useFormattedRoutes();
-	const element = useRoutes(routes);
-
-	return <>{element}</>;
+	return <RouterProvider router={routes} />;
 };
 
 export default App;

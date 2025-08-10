@@ -6,10 +6,9 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
-import { useQuery } from "@tanstack/react-query";
 import { type FC, useCallback, useMemo, useState } from "react";
+import { useLoaderData } from "react-router";
 import type { ArticleDT } from "../../api/request";
-import { getDatabaseList } from "../../api/request/commonQueries";
 import RingLoader from "../../components/Loaders/RingLoader";
 import PageTitle from "../../components/PageWrapper/PageTitle";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -48,19 +47,21 @@ const Blog: FC = () => {
 		DEFAULT_POST_PER_PAGE,
 	);
 
-	const { isLoading, data } = useQuery<ArticleDT[]>({
-		queryKey: ["get-articles"],
-		queryFn: async () => (await getDatabaseList("articles")) as ArticleDT[],
-	});
+	const { blogs, isLoading } = useLoaderData();
+
+	// const { isLoading, blogs } = useQuery<ArticleDT[]>({
+	// 	queryKey: ["get-articles"],
+	// 	queryFn: async () => (await getDatabaseList("articles")) as ArticleDT[],
+	// });
 
 	const totalPages = useMemo(
-		() => Math.ceil((data || []).length / postsPerPage),
-		[data, postsPerPage],
+		() => Math.ceil((blogs || []).length / postsPerPage),
+		[blogs, postsPerPage],
 	);
 
 	const currentPosts: ArticleDT[] = useMemo(
-		() => (data ?? []).slice((page - 1) * postsPerPage, page * postsPerPage),
-		[data, postsPerPage, page],
+		() => (blogs ?? []).slice((page - 1) * postsPerPage, page * postsPerPage),
+		[blogs, postsPerPage, page],
 	);
 
 	const handlePageChange = useCallback(

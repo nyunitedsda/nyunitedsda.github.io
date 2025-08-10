@@ -31,15 +31,15 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 					preventDuplicate
 					dense
 				>
-					<BrowserRouter>
-						<AuthenticationProvider>
-							<ThemeProvider theme={theme}>
-								{/* Using enableColorScheme for better dark/light mode handling */}
-								<CssBaseline enableColorScheme />
-								<NotificationProvider>{children}</NotificationProvider>
-							</ThemeProvider>
-						</AuthenticationProvider>
-					</BrowserRouter>
+					{/* <BrowserRouter> */}
+					<AuthenticationProvider>
+						<ThemeProvider theme={theme}>
+							{/* Using enableColorScheme for better dark/light mode handling */}
+							<CssBaseline enableColorScheme />
+							<NotificationProvider>{children}</NotificationProvider>
+						</ThemeProvider>
+					</AuthenticationProvider>
+					{/* </BrowserRouter> */}
 				</SnackbarProvider>
 			</QueryClientProvider>
 		</StrictMode>

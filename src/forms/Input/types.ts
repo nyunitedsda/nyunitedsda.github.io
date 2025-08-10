@@ -16,7 +16,7 @@ export type FormFieldType =
 	| "checkbox"
 	| "radio";
 
-export type InputFieldProps <
+export type InputFieldProps<
 	T extends Record<string, string | number | boolean>,
 	S extends Record<string, string | number | boolean | Date>,
 > = {

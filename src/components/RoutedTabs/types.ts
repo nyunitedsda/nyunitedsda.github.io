@@ -14,6 +14,7 @@ interface RouteTabsItem {
 	id: number;
 	tag: string;
 	label: string;
+	hidden?: boolean | (() => boolean);
 	content: string | ReactNode | FC;
 }
 

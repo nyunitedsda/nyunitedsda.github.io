@@ -3,7 +3,10 @@ import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
+import { Navigate } from "react-router-dom";
 import LoginForm from "../../forms/collection/LoginForm/LoginForm";
+import { useAuthentication } from "../../hooks/auth";
+import routePaths from "../../hooks/routes/routePaths";
 
 const containerSx: SxProps<Theme> = {
 	borderRadius: 2,
@@ -33,7 +36,11 @@ const AUTHENTICATION_HEADER = {
 };
 
 const Login: FC = () => {
-	return (
+	const { isAuthenticated } = useAuthentication();
+
+
+
+	return !isAuthenticated ? (
 		<Stack sx={rootSx} spacing={4}>
 			<Stack sx={headerSx} spacing={2}>
 				<Typography variant="h2" component="h1" fontWeight="bold">
@@ -46,7 +53,7 @@ const Login: FC = () => {
 				<LoginForm />
 			</Paper>
 		</Stack>
-	);
+	) : <Navigate to={routePaths.ADMIN_USERS} replace />;
 };
 
 export default Login;

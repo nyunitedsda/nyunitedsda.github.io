@@ -1,8 +1,7 @@
 import Stack from "@mui/material/Stack";
-import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import { useLoaderData } from "react-router-dom";
 import type { MinistriesDT } from "../../../../api/request";
-import { getDatabaseList } from "../../../../api/request/commonQueries";
 import RingLoader from "../../../../components/Loaders/RingLoader";
 import { HOME_CONSTANTS } from "../../homeConstants";
 import MinistryCard from "../MinistryCard";
@@ -10,23 +9,13 @@ import SectionWrapper from "../SectionWrapper";
 
 const { MINISTRIES_HEADER, imageRootSx, cardContainerSx } = HOME_CONSTANTS;
 const PageMinistries: FC = () => {
-	const { isLoading, data } = useQuery<MinistriesDT[]>({
-		queryKey: ["get-ministries"],
-		queryFn: async () => await getDatabaseList("ministries"),
-		staleTime: 10 * 60 * 1000, // 10 minutes
-		gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
-		// Show stale data while refetching to avoid loading screen flash
-		placeholderData: (previousData) => previousData,
-		// Retry failed requests with exponential backoff
-		retry: 2,
-		retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-	});
+	const { ministries, isLoading } = useLoaderData();
 
 	return (
 		<SectionWrapper header={MINISTRIES_HEADER}>
 			<Stack direction={{ xs: "column", md: "row" }} sx={cardContainerSx}>
 				{!isLoading &&
-					data?.map((i) => (
+					ministries?.map((i: MinistriesDT) => (
 						<MinistryCard
 							{...{
 								header: { title: i.title },

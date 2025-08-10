@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
 			console.error("CORS issue or forbidden access");
 		}
 
-		// Handle unauthorized (401) - optionally redirect to login
+		
 		if (
 			typeof window !== "undefined" &&
 			error.response &&
@@ -38,7 +38,6 @@ axiosInstance.interceptors.response.use(
 		) {
 			originalRequest._retry = true;
 			// Optionally redirect to login or show a message
-			window.location.href = "/login";
 		}
 
 		return Promise.reject(error);

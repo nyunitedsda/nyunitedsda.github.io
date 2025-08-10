@@ -1,6 +1,15 @@
+export type AnnouncementDTDate_format =
+	| "YYYY-MM-DD"
+	| "MM/DD/YYYY"
+	| "DD-MM-YYYY"
+	| "MMM D, YYYY"
+	| "dddd, h:mm a";
 export interface AnnouncementDT {
 	id: number;
 	title: string;
+	author_id: number;
+	date_format: AnnouncementDTDate_format;
+	event_id?: number;
 	description?: string;
 	location?: string;
 	conference_code?: string;
@@ -11,14 +20,6 @@ export interface AnnouncementDT {
 	speaker?: string;
 	recurring?: boolean;
 	event_date?: Date;
-	author_id: number;
-	date_format:
-		| "YYYY-MM-DD"
-		| "MM/DD/YYYY"
-		| "DD-MM-YYYY"
-		| "MMM D, YYYY"
-		| "dddd, h:mm a";
-	event_id?: number;
 }
 
 export interface ArticleDT {
@@ -120,11 +121,18 @@ export interface ServiceDT {
 	title: string;
 }
 
+export type SeverityDTColor =
+	| "info"
+	| "error"
+	| "warning"
+	| "success"
+	| "primary"
+	| "secondary";
 export interface SeverityDT {
 	id: number;
 	type: string;
 	title: string;
-	color: "info" | "error" | "warning" | "success" | "primary" | "secondary";
+	color: SeverityDTColor;
 }
 
 export interface UserDT {
@@ -139,4 +147,6 @@ export interface UserDT {
 	first_name?: string;
 	last_name?: string;
 	last_login?: Date;
+	permissions?: string[];
+	role_name?: string;
 }

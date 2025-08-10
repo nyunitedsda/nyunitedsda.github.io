@@ -5,7 +5,7 @@ import {
 	useQueryClient,
 } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import type {
 	LoginCredentials,
 	LoginResponse,
@@ -21,6 +21,7 @@ import {
 } from "../../api/request/authAndUserRequest";
 import type { RegisterData } from "../../contexts/AuthenticationContext";
 import routePaths from "../routes/routePaths";
+import type { AxiosError } from "axios";
 
 /**
  * Authentication API hooks using React Query
@@ -28,24 +29,18 @@ import routePaths from "../routes/routePaths";
 
 export const useLogin = () => {
 	const queryClient = useQueryClient();
-	const { enqueueSnackbar } = useSnackbar();
 
 	return useMutation({
 		mutationFn: async (credentials: LoginCredentials) =>
 			await loginUser(credentials),
 		onSuccess: (data: LoginResponse) => {
-			queryClient.setQueryData(["user"], data.user);
-
-			enqueueSnackbar(data?.message || "Login successful", {
-				variant: "success",
-			});
+			queryClient.setQueryData(["user"], data.user);			
 			return data;
 		},
-		onError: (error) => {
-			console.error("Login failed:", error);
+		onError: (error: AxiosError<{ error: string }>) => {
+			console.error("Login failed:", error?.response?.data.error);
 			queryClient.removeQueries({ queryKey: ["user"] });
-
-			enqueueSnackbar(error.message, { variant: "error" });
+			return Promise.reject({message: error?.response?.data.error});
 		},
 	});
 };

@@ -1,8 +1,11 @@
 import Stack from "@mui/material/Stack";
+import type { FormikHelpers } from "formik";
+import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import type { LoginCredentials } from "../../../api/request";
 import { useAuthentication } from "../../../hooks/auth";
+import routePaths from "../../../hooks/routes/routePaths";
 import FormContainer from "../../FormBuilder/FormContainer";
 import InputField from "../../Input/FormField";
 import {
@@ -22,6 +25,7 @@ const DEFAULT_VALUES: LoginCredentials = {
 const LoginForm: FC = () => {
 	const { login } = useAuthentication();
 	const navigate = useNavigate();
+	const { enqueueSnackbar } = useSnackbar();
 
 	const { passwordProps, usernameProps } = useMemo(
 		() => ({
@@ -32,9 +36,29 @@ const LoginForm: FC = () => {
 	);
 
 	const _handleSubmit = useCallback(
-		async (values: LoginCredentials) => {
-			await login(values);
-			navigate("/admin/users");
+		async (values: LoginCredentials, formikHelpers: FormikHelpers<LoginCredentials>) => {
+
+			await login(values)
+				.then((data) => {
+					navigate(routePaths.ADMIN_USERS, { replace: true });
+					data?.message && enqueueSnackbar(data?.message, {
+						variant: "success",
+					});
+				})
+				.catch((error) => {
+					if (error) {
+						console.error("Login error:", error.message || error);
+						enqueueSnackbar(error.message || "Login failed", {
+							variant: "error",
+						});
+						error.message && formikHelpers.setErrors({
+							username: error.message,
+							password: error.message,
+						});
+					}
+				}).finally(() => {
+					formikHelpers.setSubmitting(false);
+				});
 		},
 		[login, navigate],
 	);

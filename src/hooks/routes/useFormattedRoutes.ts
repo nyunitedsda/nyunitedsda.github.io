@@ -18,10 +18,10 @@ import type { FormattedRoutes, RouteMenu } from "./types";
  *   - routes: The memoized array of RouteObject representing the application routes.
  *   - menuItems: An array of RouteMenu items for use in navigation components.
  */
-const useFormattedRoutes = (): FormattedRoutes => {
+const useFormattedRoutes = () => {
 	const { isAuthenticated } = useAuthentication();
 
-	const { finalRoutes, menuItemList } = useMemo(() => {
+	const { finalRoutes, menuList } = useMemo(() => {
 		const finalRoutes: RouteObject[] = isAuthenticated
 			? siteRoutes
 			: [...mainLayoutRoutes, ...fallbackRoutes];
@@ -37,10 +37,10 @@ const useFormattedRoutes = (): FormattedRoutes => {
 			routeIdAndPath,
 		);
 
-		return { finalRoutes, menuItemList };
+		return { finalRoutes, menuList };
 	}, [isAuthenticated]);
 
-	return { menuItems: menuItemList, routes: finalRoutes };
+	return { menuItems: menuList, routes: finalRoutes };
 };
 
 export default useFormattedRoutes;

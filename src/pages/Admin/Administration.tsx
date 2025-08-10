@@ -5,20 +5,30 @@ import routePaths from "../../hooks/routes/routePaths";
 import { ADMIN_TAB_LIST } from "./constants/adminTabList";
 import type { AdministrationProps } from "./types";
 
+
+
 const Administration: FC<AdministrationProps> = () => {
-	const { user, isAuthenticated } = useAuthentication();
+	const { user, isAuthenticated, refreshUser } = useAuthentication();
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			window.location.href = routePaths.LOGIN;
-		}
-	}, [isAuthenticated]);
+		(async () => {
+			if (!isAuthenticated || !user) {
+				await refreshUser().catch(() => {
+					window.location.href = routePaths.LOGIN;
+				});
+			}
+		})();
+	}, [isAuthenticated, user, refreshUser]);
 
 	const accessibleTabs = useMemo(() => {
 		if (!user || user.role_id === 1) {
 			return [];
 		}
-		return ADMIN_TAB_LIST;
+
+		const permissions = Array.from(new Set([...(user?.permissions || [])].map((perm) => perm.split("-")[0])));
+		const approvedTabs = ADMIN_TAB_LIST.filter((tab) => permissions.includes(tab.tag));
+
+		return approvedTabs;
 	}, [user]);
 
 	return (

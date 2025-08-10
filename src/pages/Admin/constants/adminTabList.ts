@@ -15,6 +15,8 @@ import UserManagement from "../components/UserManagement";
  * and the content to be rendered when the tab is active.
  */
 export const ADMIN_TAB_LIST: RouteTabsItem[] = [
+
+
 	{
 		id: 1,
 		tag: "users",
@@ -41,7 +43,7 @@ export const ADMIN_TAB_LIST: RouteTabsItem[] = [
 	},
 	{
 		id: 5,
-		tag: "contacts",
+		tag: "contact_info",
 		label: "Contact Info",
 		content: () => createElement(ContactManagement),
 	},
@@ -53,7 +55,7 @@ export const ADMIN_TAB_LIST: RouteTabsItem[] = [
 	},
 	{
 		id: 7,
-		tag: "blogs",
+		tag: "articles",
 		label: "Blogs",
 		content: () => createElement(BlogManagement),
 	},
@@ -63,4 +65,31 @@ export const ADMIN_TAB_LIST: RouteTabsItem[] = [
 		label: "Settings",
 		content: () => createElement(SettingManagement),
 	},
+
 ];
+
+/**
+ * Returns only the tabs the user is allowed to see, based on their permissions.
+ * @param permissions Array of permission strings (e.g., ["users-manage", ...])
+ * @returns Filtered RouteTabsItem[]
+ */
+export function getAdminTabsForPermissions(permissions: string[]): RouteTabsItem[] {
+  // Map tab tags to permission keys
+  const tagToPermission: Record<string, string> = {
+	users: "users-manage",
+	notifications: "notifications-manage",
+	announcements: "announcements-manage",
+	services: "services-manage",
+	contact_info: "contact_info-manage",
+	donations: "donations-manage",
+	blogs: "articles-manage",
+	settings: "settings-manage", // Add if you have a permission for settings
+	// Add more mappings as needed
+  };
+  return ADMIN_TAB_LIST.filter(tab => {
+	const perm = tagToPermission[tab.tag];
+	// If no permission mapping, show tab by default (or change to false to hide by default)
+	if (!perm) return true;
+	return permissions.includes(perm);
+  });
+}

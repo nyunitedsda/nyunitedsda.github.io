@@ -3,7 +3,7 @@
 set -e
 
 url="http://127.0.0.1:3000/api/types"
-outfile="src/api/request.ts"
+outfile="src/api/request/databaseTypes.ts"
 
 echo "Requesting types from $url..."
 

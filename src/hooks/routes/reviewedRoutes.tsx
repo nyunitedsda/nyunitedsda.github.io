@@ -27,19 +27,14 @@ const Administration = lazy(() => import("../../pages/Admin/Administration"));
 const Blog = lazy(() => import("../../pages/Blog/Blog"));
 const BlogDetails = lazy(() => import("../../pages/Blog/BlogDetails"));
 const Contact = lazy(() => import("../../pages/Contact/Contact"));
-const Donations = lazy(() => import("../../pages/Donations/Donations"));
 const Error = lazy(() => import("../../pages/Error/Error"));
 const Home = lazy(() => import("../../pages/Home/Home"));
 const LiveBroadcast = lazy(
 	() => import("../../pages/LiveBroadcast/LiveBroadcast"),
 );
-const Login = lazy(() => import("../../pages/Login/Login"));
 const StorybookPage = lazy(() => import("../../pages/Storybook/StorybookPage"));
 const UnauthorizedError = lazy(
 	() => import("../../pages/Error/UnauthorizedError"),
-);
-const UserAgreements = lazy(
-	() => import("../../pages/UserAgreements/UserAgreements"),
 );
 
 // Type for routes with id property
@@ -55,22 +50,22 @@ const mainLayoutRoutes: RouteWithId[] = [
 		element: lazyLoad(PageWrapper),
 		children: [
 			createRoute(lazyLoad(Home), "", "home"),
-			createRoute(lazyLoad(Donations), "donations", "donations"),
+			// createRoute(lazyLoad(Donations), "donations", "donations"),
 			createRoute(lazyLoad(Blog), "blog", "blogs"),
 			createRoute(lazyLoad(BlogDetails), "blog/:id", "blogDetails"),
 			createRoute(lazyLoad(Contact), "contact", "contact"),
 			createRoute(lazyLoad(AboutUs), "aboutUs", "aboutUs"),
-			createRoute(lazyLoad(UserAgreements), "policy/privacy", "privacy"),
-			createRoute(lazyLoad(UserAgreements), "policy/termsOfUse", "terms"),
+			// createRoute(lazyLoad(UserAgreements), "policy/privacy", "privacy"),
+			// createRoute(lazyLoad(UserAgreements), "policy/termsOfUse", "terms"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/:tab?", "watch"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/live", "liveStream"),
 			createRoute(lazyLoad(LiveBroadcast), "watch/archive", "archiveStream"),
-			createRoute(
-				lazyLoad(LiveBroadcast),
-				"watch/youtube-archive",
-				"youtubeArchive",
-			),
-			createRoute(lazyLoad(Login), "login"),
+			// createRoute(
+			// 	lazyLoad(LiveBroadcast),
+			// 	"watch/youtube-archive",
+			// 	"youtubeArchive",
+			// ),
+			// createRoute(lazyLoad(Login), "login"),
 		],
 	},
 ];
