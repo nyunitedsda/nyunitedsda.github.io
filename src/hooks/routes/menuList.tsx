@@ -1,4 +1,4 @@
-import { type RouteMenu } from "@hooks/routes";
+import type { RouteMenu } from "@hooks/routes";
 import { routePaths } from "./routePaths";
 
 export type MenuItems = {

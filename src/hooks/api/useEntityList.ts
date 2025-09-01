@@ -1,5 +1,5 @@
-import { type DatabaseEntity, getDatabaseList } from "@/api";
 import { useQuery } from "@tanstack/react-query";
+import { type DatabaseEntity, getDatabaseList } from "@/api";
 
 export default <T>(entity: DatabaseEntity) =>
 	useQuery<Partial<T>[]>({

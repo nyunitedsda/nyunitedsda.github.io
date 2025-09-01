@@ -1,12 +1,12 @@
-import type { AnnouncementDT, EventDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
-import { type EditorProps, announcementSchema } from "@forms/collection";
+import { announcementSchema, type EditorProps } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { useEntityList } from "@hooks/api";
 import { useAuthentication } from "@hooks/auth";
 import { announcementDateFormats } from "@test/mock_data/announcements";
 import { type FC, useMemo } from "react";
+import type { AnnouncementDT, EventDT } from "@/api";
 
 const EDIT_TITLE = "Edit Announcement";
 const ADD_TITLE = "Add Announcement";

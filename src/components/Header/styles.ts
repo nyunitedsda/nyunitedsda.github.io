@@ -1,4 +1,4 @@
-import { type BrandingStyle, type HeaderStyle } from "@components/Header";
+import type { BrandingStyle, HeaderStyle } from "@components/Header";
 import type { SxProps, Theme } from "@mui/material/styles";
 
 type StyleExport = Record<string, SxProps<Theme>>;

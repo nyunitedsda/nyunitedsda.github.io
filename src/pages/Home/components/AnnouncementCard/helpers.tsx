@@ -1,6 +1,6 @@
-import type { AnnouncementDT } from "@/api";
 import dayjs from "dayjs";
 import { createElement, lazy, type ReactNode } from "react";
+import type { AnnouncementDT } from "@/api";
 
 type Section = {
 	title: string;

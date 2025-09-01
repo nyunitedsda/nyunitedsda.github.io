@@ -1,4 +1,3 @@
-import { getDefaultContacts } from "@/api";
 import { PageTitle } from "@components/PageWrapper";
 import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
@@ -16,6 +15,7 @@ import {
 import { NoteSection } from "@pages/Home";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
+import { getDefaultContacts } from "@/api";
 
 const contactDetailSx: SxProps<Theme> = {
 	display: "flex",

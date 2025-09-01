@@ -1,5 +1,5 @@
-import { describe, expect, it, render } from "@/test";
 import { DonationEditor } from "@forms/collection";
+import { describe, expect, it, render } from "@/test";
 
 describe("DonationEditor", () => {
 	it("renders DonationEditor", () => {

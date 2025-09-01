@@ -1,8 +1,8 @@
-import type { UserDT } from "@/api";
 import { UserEditor } from "@forms/collection";
 import { describe, it, render } from "@test/index.ts";
 import { users } from "@test/mock_data";
 import { SnackbarProvider } from "notistack";
+import type { UserDT } from "@/api";
 
 describe("UserEditor", () => {
 	it("renders UserEditor", () => {

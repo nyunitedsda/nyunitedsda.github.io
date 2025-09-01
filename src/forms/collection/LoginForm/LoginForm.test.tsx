@@ -1,5 +1,5 @@
-import { describe, expect, it, render } from "@/test";
 import { LoginForm } from "@forms/collection";
+import { describe, expect, it, render } from "@/test";
 
 describe("LoginForm", () => {
 	it("renders LoginForm", () => {

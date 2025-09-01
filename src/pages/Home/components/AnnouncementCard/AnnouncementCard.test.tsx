@@ -1,5 +1,5 @@
-import { describe, expect, it, render } from "@/test";
 import { AnnouncementCard, type AnnouncementCardProps } from "@pages/Home";
+import { describe, expect, it, render } from "@/test";
 
 const defaultProps = {
 	id: 1,

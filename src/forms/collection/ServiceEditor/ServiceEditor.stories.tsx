@@ -1,8 +1,8 @@
-import type { ServiceDT } from "@/api";
 import { ServiceEditor } from "@forms/collection";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useId, useState } from "react";
+import type { ServiceDT } from "@/api";
 
 // Sample service data
 const sampleSundayService: ServiceDT = {

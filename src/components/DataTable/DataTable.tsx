@@ -1,7 +1,7 @@
 import {
-	generateActionColumn,
 	type ColumnDefinition,
 	type DataTableProps,
+	generateActionColumn,
 } from "@components/DataTable";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
@@ -13,7 +13,7 @@ import TableCell, { type TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { lazy, useMemo, useState, type ReactNode } from "react";
+import { lazy, type ReactNode, useMemo, useState } from "react";
 import RingLoader from "react-spinners/RingLoader";
 
 const DensitySmallOutlined = lazy(

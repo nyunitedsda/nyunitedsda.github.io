@@ -5,7 +5,7 @@ export default defineConfig({
 		clearMocks: true,
 		coverage: {
 			reporter: ["html"],
-			reportsDirectory: "./src/utils/coverage",
+			reportsDirectory: "./src/test/coverage",
 			enabled: true,
 		},
 		include: ["*src/**/*.test.ts", "*src/**/*.test.tsx"],
@@ -16,7 +16,7 @@ export default defineConfig({
 		name: "nyunitedsda",
 		printConsoleTrace: true,
 		root: ".",
-		setupFiles: ["./src/utils/vitest-setup.tsx"],
+		setupFiles: ["./src/test/vitest-setup.tsx"],
 		unstubEnvs: true,
 		unstubGlobals: true,
 	},

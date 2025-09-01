@@ -1,7 +1,6 @@
-import type { SeverityDT, SeverityPalette } from "@/api";
 import {
-	selectSeverityIcon,
 	type NotificationBannerProps,
+	selectSeverityIcon,
 } from "@components/NotificationBanner";
 import { NotificationContext } from "@contexts/NotificationContext";
 import { useEntityList } from "@hooks/api";
@@ -12,7 +11,8 @@ import Stack from "@mui/material/Stack";
 import type { Palette, PaletteColor, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { SystemStyleObject } from "@mui/system";
-import { useCallback, useContext, useMemo, useState, type FC } from "react";
+import { type FC, useCallback, useContext, useMemo, useState } from "react";
+import type { SeverityDT, SeverityPalette } from "@/api";
 
 const rootSx = ({
 	severColor = "info",

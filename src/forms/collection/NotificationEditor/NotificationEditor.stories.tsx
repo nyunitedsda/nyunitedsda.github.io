@@ -1,8 +1,8 @@
-import type { NotificationDT } from "@/api";
 import { NotificationEditor } from "@forms/collection";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useId, useState } from "react";
+import type { NotificationDT } from "@/api";
 
 // Sample notification data
 const sampleNotification: NotificationDT = {

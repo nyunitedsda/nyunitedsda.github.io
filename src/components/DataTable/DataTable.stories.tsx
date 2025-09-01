@@ -1,7 +1,6 @@
+import DataTable, { type ColumnDefinition } from "@components/DataTable";
 import { StarOutlineOutlined } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
-
-import DataTable, { type ColumnDefinition } from "@components/DataTable";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { action } from "storybook/actions";
 

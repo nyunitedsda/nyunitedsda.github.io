@@ -1,9 +1,9 @@
-import type { MinistriesDT } from "@/api";
 import RingLoader from "@components/Loaders";
 import Stack from "@mui/material/Stack";
 import { HOME_CONSTANTS, MinistryCard, SectionWrapper } from "@pages/Home";
 import type { FC } from "react";
 import { useLoaderData } from "react-router-dom";
+import type { MinistriesDT } from "@/api";
 
 const PageMinistries: FC = () => {
 	const { ministries, isLoading } = useLoaderData();

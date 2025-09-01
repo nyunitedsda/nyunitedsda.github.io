@@ -1,9 +1,3 @@
-import type { NotificationDT, SeverityDT } from "@/api";
-import {
-	NOTIFICATION_EDITOR_CONSTANTS,
-	notificationSchema,
-	type EditorProps,
-} from "@/forms";
 import { theme } from "@components/AppProvider";
 import { ProjectModal } from "@components/ProjectModal";
 import EntityEditor from "@forms/EntityEditor/EntityEditor";
@@ -18,7 +12,13 @@ import {
 	type Theme,
 } from "@mui/material";
 import { initialNotification } from "@test/mock_data";
-import { useMemo, type FC } from "react";
+import { type FC, useMemo } from "react";
+import type { NotificationDT, SeverityDT } from "@/api";
+import {
+	type EditorProps,
+	NOTIFICATION_EDITOR_CONSTANTS,
+	notificationSchema,
+} from "@/forms";
 
 const severitySx: SxProps<Theme> = {
 	"& .MuiButtonBase-root-MuiMenuItem-root": {

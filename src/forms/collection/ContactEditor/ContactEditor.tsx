@@ -1,4 +1,3 @@
-import type { ContactInfoDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
 import {
 	CONTACT_EDITOR_CONSTANTS,
@@ -9,6 +8,7 @@ import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { initialContactInfo } from "@test/mock_data";
 import { type FC, useMemo } from "react";
+import type { ContactInfoDT } from "@/api";
 
 const {
 	EDIT_TITLE,

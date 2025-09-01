@@ -2,8 +2,8 @@ import { LoginButton, ThemeButton } from "@components/Buttons";
 import {
 	MenuDrawerItem,
 	type MenuDrawerProps,
-	menuDrawerStyles,
 	MenuItemRenderer,
+	menuDrawerStyles,
 	OrganizationBranding,
 } from "@components/Header";
 import List from "@mui/material/List";

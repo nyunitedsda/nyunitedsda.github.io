@@ -1,6 +1,6 @@
 import {
-	TableAction,
 	type ColumnDefinition,
+	TableAction,
 	type TableActionProps,
 } from "@components/DataTable";
 import { createElement } from "react";

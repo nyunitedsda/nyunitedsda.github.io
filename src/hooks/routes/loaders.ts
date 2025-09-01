@@ -1,12 +1,12 @@
+import { useAuthentication, useCurrentUser } from "@hooks/auth";
+import type { LoaderFunctionArgs } from "react-router-dom";
 import {
+	type ArticleDT,
 	getDatabaseItem,
 	getDatabaseList,
 	getDefaultContacts,
-	type ArticleDT,
 	type UserDT,
 } from "@/api";
-import { useAuthentication, useCurrentUser } from "@hooks/auth";
-import type { LoaderFunctionArgs } from "react-router-dom";
 
 export const adminLoader = async () => {
 	const { user } = useAuthentication();

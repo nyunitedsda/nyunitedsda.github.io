@@ -1,5 +1,5 @@
-import type { NotificationContextProps } from "@/contexts";
 import { createContext } from "react";
+import type { NotificationContextProps } from "@/contexts";
 
 const context = createContext<NotificationContextProps>(null as never);
 

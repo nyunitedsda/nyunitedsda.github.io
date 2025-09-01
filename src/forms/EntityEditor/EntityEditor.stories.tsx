@@ -1,7 +1,7 @@
-import { EntityEditor, InputField, donationSchema } from "@/forms";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { donations, initialDonation } from "@test/mock_data";
 import { SnackbarProvider } from "notistack";
+import { donationSchema, EntityEditor, InputField } from "@/forms";
 
 // Wrapper component to avoid React children serialization issues
 const EntityEditorWrapper = (props: any) => (

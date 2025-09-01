@@ -1,6 +1,6 @@
-import type { DatabaseEntity } from "@/api";
 import { useAuthentication } from "@hooks/auth";
 import { useCallback, useMemo } from "react";
+import type { DatabaseEntity } from "@/api";
 
 const usePermission = (entity: DatabaseEntity) => {
 	const { user } = useAuthentication();

@@ -1,4 +1,3 @@
-import { darkLogo, smallLogo } from "@/assets";
 import { brandingStyles } from "@components/Header";
 import { routePaths } from "@hooks/routes";
 import { useColorTheme } from "@hooks/theme";
@@ -6,6 +5,7 @@ import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { FC } from "react";
+import { darkLogo, smallLogo } from "@/assets";
 
 export interface OrganizationBrandingProps {
 	isLogoVisible?: boolean;

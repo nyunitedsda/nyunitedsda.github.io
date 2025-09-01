@@ -1,4 +1,3 @@
-import AppLayout from "@/Layout";
 import {
 	blogDetailLoader,
 	blogLoader,
@@ -8,6 +7,7 @@ import {
 import { Skeleton } from "@mui/material";
 import { createElement } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AppLayout from "@/Layout";
 
 // Helper for lazy loading React components
 const createComponent = async (

@@ -1,8 +1,8 @@
-import type { AnnouncementDT } from "@/api";
 import { AnnouncementEditor } from "@forms/collection";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
 import { useId, useState } from "react";
+import type { AnnouncementDT } from "@/api";
 
 // Sample announcement data for different event types
 const sampleEventAnnouncement: AnnouncementDT = {

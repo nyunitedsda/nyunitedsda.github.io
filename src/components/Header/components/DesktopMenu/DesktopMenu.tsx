@@ -16,7 +16,9 @@ import {
 	useCallback,
 	useEffect,
 	useId,
+	useLayoutEffect,
 	useMemo,
+	useRef,
 	useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,35 +37,31 @@ const rootSx: SxProps<Theme> = {
 const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const navigate = useNavigate();
 	const uId = useId();
+	const blockRef = useRef<HTMLDivElement>(null);
 
-	const [menuWidth, setMenuWidth] = useState<number | undefined>();
+	const [menuWidth, setMenuWidth] = useState<number | undefined>(blockRef?.current?.clientWidth || 100);
 	const [optionAnchorEl, setOptionAnchorEl] =
 		useState<null | HTMLButtonElement>(null);
 
-	useEffect(() => {
-		const updateMenuWidth = () => {
-			const clientWidth = document.getElementById("desktop-menu")?.clientWidth;
-			setMenuWidth(clientWidth);
-			console.table({ clientWidth })
-		};
+	const updateMenuWidth = useCallback(() => {
+		setMenuWidth(blockRef?.current?.clientWidth || 100);
+	}, []);
 
+	useEffect(() => {
 		window.addEventListener("resize", updateMenuWidth);
-		// updateMenuWidth();
 
 		return () => {
 			window.removeEventListener("resize", updateMenuWidth);
 		};
 	}, []);
 
-	const { displayList, optionList } = useMemo(
-		() => {
-			console.table({ displayList, optionList, menuList });
-			return generateMenuDisplay(menuWidth || 100, menuList);
-		},
-		[menuWidth, menuList],
-	);
+	useLayoutEffect(() => {
+		updateMenuWidth();
+	}, []);
 
-
+	const { displayList, optionList } = useMemo(() => {
+		return generateMenuDisplay(menuWidth || 100, menuList);
+	}, [menuWidth, menuList]);
 
 	const handleOptionsMenuOpen = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>) => {
@@ -87,7 +85,11 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const mergedSx = useMemo(() => (sx ? { ...rootSx, ...sx } : rootSx), [sx]);
 
 	return (
-		<Stack id={uId} sx={mergedSx}>
+		<Stack
+			ref={blockRef}
+			id={uId}
+			sx={mergedSx}
+		>
 			{displayList.map((item) => (
 				<MenuButton
 					key={item.name}
@@ -98,7 +100,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 					{item.name}
 				</MenuButton>
 			))}
-			{ }
+
 			{optionList.length > 0 ? (
 				<IconButton
 					aria-label="more options"

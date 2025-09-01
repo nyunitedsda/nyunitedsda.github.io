@@ -1,7 +1,7 @@
-import type { UserDT } from "@/api";
-import { describe, expect, it, render } from "@/test";
 import { PasswordEditor } from "@forms/collection";
 import { users as userData } from "@test/mock_data/";
+import type { UserDT } from "@/api";
+import { describe, expect, it, render } from "@/test";
 
 describe("PasswordEditor", () => {
 	it("renders PasswordEditor", () => {

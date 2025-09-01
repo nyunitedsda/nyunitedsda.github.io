@@ -1,4 +1,9 @@
 import ProjectModal from "@components/ProjectModal/ProjectModal";
+import {
+	configurePasswordInput,
+	type PasswordEditorProps,
+	passwordSchema,
+} from "@forms/collection";
 import FormContainer from "@forms/FormBuilder/FormContainer";
 import InputField from "@forms/Input/FormField";
 import { type SxProps, type Theme, Typography } from "@mui/material";
@@ -6,11 +11,6 @@ import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
 import * as Yup from "yup";
 import { changeMyPassword, changeUserPassword } from "@/api";
-import {
-	configurePasswordInput,
-	type PasswordEditorProps,
-	passwordSchema,
-} from "@forms/collection";
 
 const titleSx: SxProps<Theme> = {
 	position: "sticky",

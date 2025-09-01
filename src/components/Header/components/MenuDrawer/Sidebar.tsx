@@ -1,4 +1,4 @@
-import { type SidebarProps, MenuDrawer } from "@components/Header";
+import { MenuDrawer, type SidebarProps } from "@components/Header";
 import { useMenuItems } from "@hooks/routes";
 import Drawer from "@mui/material/Drawer";
 import type { FC } from "react";

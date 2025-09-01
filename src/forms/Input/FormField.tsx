@@ -1,8 +1,3 @@
-import {
-	SelectField,
-	type InputFieldProps,
-	type SelectFieldProps,
-} from "@/forms";
 import type { InputProps } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
@@ -13,6 +8,11 @@ import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
 import { useField, useFormikContext } from "formik";
 import { useCallback, useMemo } from "react";
+import {
+	type InputFieldProps,
+	SelectField,
+	type SelectFieldProps,
+} from "@/forms";
 
 const InputField = <
 	T extends { [key: string]: string | number | boolean },

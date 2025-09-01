@@ -5,7 +5,6 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import {
 	type AnnouncementCardProps,
-	cardStyles,
 	createFormattedContent,
 	NoteSection,
 } from "@pages/Home";

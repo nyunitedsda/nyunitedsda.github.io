@@ -1,6 +1,6 @@
-import { InputField, type InputFieldProps } from "@/forms";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Form, Formik } from "formik";
+import { InputField, type InputFieldProps } from "@/forms";
 
 // Sample select options
 type Option = { id: number; name: string; value: string };
