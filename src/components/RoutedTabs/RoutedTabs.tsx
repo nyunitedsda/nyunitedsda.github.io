@@ -1,3 +1,4 @@
+import type { RoutedTabsProps } from "@components/RoutedTabs";
 import TabPanel from "@components/TabPanel";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
@@ -12,7 +13,6 @@ import {
 	useState,
 } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
-import type { RoutedTabsProps } from "./types";
 
 const panelSx: SxProps<Theme> = {
 	"& a": {

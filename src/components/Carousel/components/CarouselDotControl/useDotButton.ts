@@ -1,7 +1,9 @@
+import type {
+	CarouselControlProps,
+	UseDotButtonType,
+} from "@components/Carousel";
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
-import type { CarouselControlProps } from "../../types";
-import type { UseDotButtonType } from "./types";
 
 const useDotButton = ({
 	api,

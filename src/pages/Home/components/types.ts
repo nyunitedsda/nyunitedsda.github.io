@@ -1,8 +1,7 @@
 import type { CardProps } from "@components/ProjectCard";
 import type { PropsWithChildren } from "react";
 
-export interface MinistryCardProps
-	extends Omit<CardProps, "content" | "actions"> {
+interface MinistryCardProps extends Omit<CardProps, "content" | "actions"> {
 	content: string;
 	link?: string;
 	image?: {
@@ -11,7 +10,9 @@ export interface MinistryCardProps
 	};
 }
 
-export type SectionWrapperProps = PropsWithChildren<{
+type SectionWrapperProps = PropsWithChildren<{
 	header?: string;
 	spacing?: number;
 }>;
+
+export type { MinistryCardProps, SectionWrapperProps };

@@ -1,6 +1,7 @@
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 import NotificationBanner from "@components/NotificationBanner";
+import { PageContentContainer } from "@components/PageWrapper";
 import ProjectSuspense from "@components/ProjectSuspense";
 import { NotificationContext } from "@contexts/NotificationContext";
 import Stack from "@mui/material/Stack";
@@ -8,7 +9,6 @@ import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
 import { type FC, useContext } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
-import PageContentContainer from "./PageContentContainer";
 
 const containerSx: SxProps<Theme> = {
 	display: "flex",

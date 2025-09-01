@@ -19,7 +19,7 @@ type CarouselProps = PropsWithChildren<
 >;
 
 interface CarouselControlProps {
-	api: EmblaCarouselType | undefined; //emblaApi
+	api: EmblaCarouselType | undefined;
 	onButtonClick?: (emblaApi: EmblaCarouselType) => void;
 	prevIcon?: ReactNode;
 	nextIcon?: ReactNode;

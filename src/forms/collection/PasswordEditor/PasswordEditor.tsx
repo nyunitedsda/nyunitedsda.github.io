@@ -6,9 +6,11 @@ import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
 import * as Yup from "yup";
 import { changeMyPassword, changeUserPassword } from "@/api";
-import { configurePasswordInput } from "../commonInputs";
-import { passwordSchema } from "../commonSchemas";
-import type { PasswordEditorProps } from "./types";
+import {
+	configurePasswordInput,
+	type PasswordEditorProps,
+	passwordSchema,
+} from "@forms/collection";
 
 const titleSx: SxProps<Theme> = {
 	position: "sticky",

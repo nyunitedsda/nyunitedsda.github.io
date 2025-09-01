@@ -1,6 +1,6 @@
+import { LoginForm } from "@forms/collection";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SnackbarProvider } from "notistack";
-import LoginForm from "./LoginForm";
 
 const meta: Meta<typeof LoginForm> = {
 	title: "Forms/LoginForm",

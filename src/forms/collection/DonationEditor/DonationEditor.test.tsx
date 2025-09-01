@@ -1,6 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import DonationEditor from "./DonationEditor";
+import { describe, expect, it, render } from "@/test";
+import { DonationEditor } from "@forms/collection";
 
 describe("DonationEditor", () => {
 	it("renders DonationEditor", () => {

@@ -1,4 +1,9 @@
 import { LoginButton, MenuButton, ThemeButton } from "@components/Buttons";
+import {
+	type DesktopMenuProps,
+	generateMenuDisplay,
+	MenuItemRenderer,
+} from "@components/Header";
 import IconSkeleton from "@components/ProjectSuspense";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -15,9 +20,6 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import MenuItemRenderer from "../MenuDrawer/MenuItemRenderer";
-import { generateMenuDisplay } from "./helpers";
-import type { DesktopMenuProps } from "./types";
 
 const MoreVertOutlined = lazy(
 	() => import("@mui/icons-material/MoreVertOutlined"),
@@ -25,7 +27,6 @@ const MoreVertOutlined = lazy(
 
 const rootSx: SxProps<Theme> = {
 	flexGrow: 1,
-	// width: "100%",
 	flexDirection: "row",
 	justifyContent: "flex-end",
 	fontFamily: "Inter",

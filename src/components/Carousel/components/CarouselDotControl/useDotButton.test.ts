@@ -1,7 +1,7 @@
+import { useDotButton } from "@components/Carousel";
 import { act, renderHook } from "@testing-library/react";
 import type { EmblaCarouselType } from "embla-carousel";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import useDotButton from "./useDotButton";
 
 const createMockApi = (): Partial<EmblaCarouselType> => ({
 	scrollTo: vi.fn(),

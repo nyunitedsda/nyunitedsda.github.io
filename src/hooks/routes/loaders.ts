@@ -1,7 +1,39 @@
+import {
+	getDatabaseItem,
+	getDatabaseList,
+	getDefaultContacts,
+	type ArticleDT,
+	type UserDT,
+} from "@/api";
 import { useAuthentication, useCurrentUser } from "@hooks/auth";
 import type { LoaderFunctionArgs } from "react-router-dom";
-import type { ArticleDT, UserDT } from "@/api";
-import { getDatabaseItem, getDatabaseList, getDefaultContacts } from "@/api";
+
+export const adminLoader = async () => {
+	const { user } = useAuthentication();
+	const { refetch } = useCurrentUser();
+	let adminUser = user;
+	if (!adminUser) {
+		adminUser = (await refetch()).data as UserDT;
+	}
+	return { adminUser: adminUser };
+};
+
+export const blogDetailLoader = async ({ params }: LoaderFunctionArgs) => {
+	let isLoading = true;
+	const blog = await getDatabaseItem<ArticleDT>(
+		"articles",
+		params.id ? parseInt(params.id, 10) : 0,
+	);
+	isLoading = false;
+	return { blog: blog || null, isLoading };
+};
+
+export const blogLoader = async () => {
+	let isLoading = true;
+	const blogs = await getDatabaseList("articles");
+	isLoading = false;
+	return { blogs: blogs || [], isLoading };
+};
 
 export const homeLoader = async () => {
 	let isLoading = true;
@@ -17,23 +49,6 @@ export const homeLoader = async () => {
 	};
 };
 
-export const blogLoader = async () => {
-	let isLoading = true;
-	const blogs = await getDatabaseList("articles");
-	isLoading = false;
-	return { blogs: blogs || [], isLoading };
-};
-
-export const blogDetailLoader = async ({ params }: LoaderFunctionArgs) => {
-	let isLoading = true;
-	const blog = await getDatabaseItem<ArticleDT>(
-		"articles",
-		params.id ? parseInt(params.id, 10) : 0,
-	);
-	isLoading = false;
-	return { blog: blog || null, isLoading };
-};
-
 export const pageLoader = async () => {
 	let isLoading = true;
 	const [services, defaultContact] = await Promise.all([
@@ -46,14 +61,4 @@ export const pageLoader = async () => {
 		defaultContact: defaultContact || {},
 		isLoading,
 	};
-};
-
-export const adminLoader = async () => {
-	const { user } = useAuthentication();
-	const { refetch } = useCurrentUser();
-	let adminUser = user;
-	if (!adminUser) {
-		adminUser = (await refetch()).data as UserDT;
-	}
-	return { adminUser: adminUser };
 };

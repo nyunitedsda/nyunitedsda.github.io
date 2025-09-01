@@ -1,6 +1,6 @@
+import RingLoader from "@components/Loaders";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import RingLoader from "./RingLoader";
 
 // Decorator to provide visual context for the loader
 const LoaderDecorator = (Story: any, context: any) => {

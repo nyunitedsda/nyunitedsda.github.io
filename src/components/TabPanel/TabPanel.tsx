@@ -1,8 +1,8 @@
+import RingLoader from "@components/Loaders";
+import type { TabPanelProps } from "@components/TabPanel";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
-import RingLoader from "../Loaders/RingLoader";
-import type { TabPanelProps } from "./types";
 
 const rootSx: SxProps<Theme> = {
 	flexGrow: 1,

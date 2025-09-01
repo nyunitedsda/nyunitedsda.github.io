@@ -1,3 +1,4 @@
+import type { InteractiveStoryProps } from "@components/InteractiveStory";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import {
@@ -8,7 +9,6 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import type { InteractiveStoryProps } from "./types";
 
 const InteractiveStoryWrapper = <T extends { [key: string]: unknown }>({
 	buttonText = "Display Component",
@@ -19,9 +19,7 @@ const InteractiveStoryWrapper = <T extends { [key: string]: unknown }>({
 	const [open, setOpen] = useState<boolean>(initialOpen);
 
 	useEffect(() => {
-		// if (initialOpen ) {
 		setOpen(initialOpen as boolean);
-		// }
 	}, [initialOpen]);
 	const handleOpen = () => {
 		setOpen(true);

@@ -1,9 +1,9 @@
+import type { ProjectModalProps } from "@components/ProjectModal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
-import type { ProjectModalProps } from "./types";
 
 const modalStyle = {
 	position: "absolute",

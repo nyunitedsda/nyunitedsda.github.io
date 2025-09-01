@@ -3,13 +3,21 @@ import { InfoOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import {
+	type AnnouncementCardProps,
+	cardStyles,
+	createFormattedContent,
+	NoteSection,
+} from "@pages/Home";
 import { type FC, useMemo } from "react";
-import { cardStyles } from "./cardStyles";
-import { createFormattedContent } from "./helpers";
-import NoteSection from "./NoteSection";
-import type { AnnouncementCardProps } from "./types";
 
-const { headerSx } = cardStyles;
+const headerSx: SxProps<Theme> = {
+	bgcolor: (theme) => theme.palette.primary.main,
+	"& .MuiTypography-root": {
+		color: (theme) => theme.palette.primary.contrastText,
+	},
+	width: "100%",
+};
 
 const descriptionSx: SxProps<Theme> = {
 	pt: 2,

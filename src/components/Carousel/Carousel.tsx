@@ -1,3 +1,9 @@
+import {
+	CarouselArrowControl,
+	CarouselDotControl,
+	type CarouselProps,
+	carouselStyle,
+} from "@components/Carousel";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
@@ -5,10 +11,6 @@ import type { EmblaCarouselType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { type FC, memo, useCallback } from "react";
-import { default as CarouselArrowControl } from "./components/CarouselArrowControl/CarouselArrowControl";
-import { default as CarouselDotControl } from "./components/CarouselDotControl/CarouselDotControl";
-import styles from "./styles";
-import type { CarouselProps } from "./types";
 
 const Carousel: FC<CarouselProps> = memo((props) => {
 	const { children, options, sx, autoplay = false } = props;
@@ -49,7 +51,7 @@ const Carousel: FC<CarouselProps> = memo((props) => {
 		<Box
 			component="section"
 			className="embla"
-			sx={{ ...styles, ...(sx ? sx : {}) } as SxProps<Theme>}
+			sx={{ ...carouselStyle, ...(sx ? sx : {}) } as SxProps<Theme>}
 		>
 			<Stack direction="row" className="embla__viewport" ref={emblaRef}>
 				<Stack direction="row" className="embla__container">

@@ -1,10 +1,12 @@
+import {
+	type CarouselArrowButtonProps,
+	type CarouselControlProps,
+	useCarouselArrowButton,
+} from "@components/Carousel";
 import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
-import type { CarouselControlProps } from "../../types";
-import type { CarouselArrowButtonProps } from "./types";
-import useCarouselArrowButtons from "./useCarouselArrowButton";
 
 const CarouselArrowButton: FC<CarouselArrowButtonProps> = (props) => {
 	const { arrowDirection, children, ...restProps } = props;
@@ -34,7 +36,7 @@ const CarouselArrowControl: FC<CarouselControlProps> = ({
 		nextBtnDisabled,
 		onPrevButtonClick,
 		onNextButtonClick,
-	} = useCarouselArrowButtons(api, onButtonClick);
+	} = useCarouselArrowButton(api, onButtonClick);
 
 	return (
 		<Stack

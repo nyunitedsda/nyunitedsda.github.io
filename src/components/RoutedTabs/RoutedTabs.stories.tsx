@@ -1,6 +1,5 @@
+import RoutedTabs, { type RoutedTabsProps } from "@components/RoutedTabs";
 import type { Meta, StoryObj } from "@storybook/react";
-import RoutedTabs from "./RoutedTabs";
-import type { RoutedTabsProps } from "./types";
 
 const meta: Meta<typeof RoutedTabs> = {
 	title: "Components/RoutedTabs",

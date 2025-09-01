@@ -1,3 +1,4 @@
+import type { PageTitleProps } from "@components/PageWrapper";
 import AddOutlined from "@mui/icons-material/AddOutlined";
 import Button, { type ButtonProps } from "@mui/material/Button";
 import type { FabProps } from "@mui/material/Fab";
@@ -7,7 +8,6 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { type FC, useMemo } from "react";
-import type { PageTitleProps } from "./types";
 
 const titleSx: SxProps<Theme> = {
 	fontWeight: "bold",

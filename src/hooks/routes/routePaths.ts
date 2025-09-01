@@ -1,7 +1,6 @@
-import { createPath } from "./helpers";
+import { createPath } from "@hooks/routes";
 
-// Export route constants for consistency
-export default {
+const routePaths: Record<string, string> = {
 	// WATCH_YOUTUBE_ARCHIVE: createPath("watch/youtube-archive"),
 	ABOUT_US: createPath("aboutUs"),
 	ADMIN_ANNOUNCEMENTS: createPath("admin/announcements"),
@@ -29,4 +28,6 @@ export default {
 	WATCH_ARCHIVE: createPath("watch/archive"),
 	WATCH_LIVE: createPath("watch/live"),
 	WATCH: createPath("watch/:tab?"),
-} as const;
+};
+
+export { routePaths };

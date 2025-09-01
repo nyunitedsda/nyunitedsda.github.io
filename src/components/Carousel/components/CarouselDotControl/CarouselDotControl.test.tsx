@@ -1,4 +1,8 @@
 import {
+	type CarouselControlProps,
+	CarouselDotControl,
+} from "@components/Carousel";
+import {
 	beforeEach,
 	describe,
 	expect,
@@ -8,8 +12,6 @@ import {
 } from "@test/index.ts";
 import type { EmblaCarouselType } from "embla-carousel";
 import { vi } from "vitest";
-import type { CarouselControlProps } from "../../types";
-import CarouselDotControl from "./CarouselDotControl";
 
 // Mock the useDotButton hook
 vi.mock("./useDotButton", () => ({

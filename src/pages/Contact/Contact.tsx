@@ -1,3 +1,4 @@
+import { getDefaultContacts } from "@/api";
 import { PageTitle } from "@components/PageWrapper";
 import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
@@ -6,14 +7,15 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import {
+	CONTACT_CONSTANT,
+	ContactSection,
+	MapDirection,
+	ServiceTimes,
+} from "@pages/Contact";
+import { NoteSection } from "@pages/Home";
 import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
-import { getDefaultContacts } from "@/api";
-import NoteSection from "../Home/components/AnnouncementCard/NoteSection";
-import ContactSection from "./components/ContactSection";
-import { CONTACT_CONSTANT } from "./components/contact";
-import MapDirection from "./components/MapDirection";
-import ServiceTimes from "./components/ServiceTimes";
 
 const contactDetailSx: SxProps<Theme> = {
 	display: "flex",
@@ -26,8 +28,6 @@ const contactDetailSx: SxProps<Theme> = {
 	},
 };
 
-const { PAGE_TITLE, PAGE_SUBTITLE, MAILING_ADDRESS_TITLE } = CONTACT_CONSTANT;
-
 const Contact: FC = () => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["contactInfo"],
@@ -36,7 +36,10 @@ const Contact: FC = () => {
 
 	return (
 		<>
-			<PageTitle title={PAGE_TITLE} subtitle={PAGE_SUBTITLE} />
+			<PageTitle
+				title={CONTACT_CONSTANT.PAGE_TITLE}
+				subtitle={CONTACT_CONSTANT.PAGE_SUBTITLE}
+			/>
 
 			<Paper elevation={3} sx={contactDetailSx}>
 				{/* address */}
@@ -74,7 +77,7 @@ const Contact: FC = () => {
 							))}
 						</ContactSection>
 
-						<ContactSection title={MAILING_ADDRESS_TITLE}>
+						<ContactSection title={CONTACT_CONSTANT.MAILING_ADDRESS_TITLE}>
 							<NoteSection
 								columnLayout
 								content={data.mail_address}

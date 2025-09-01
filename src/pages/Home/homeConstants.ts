@@ -32,9 +32,11 @@ const rootSx: SxProps<Theme> = {
 	pb: 2,
 };
 
-export const HOME_CONSTANTS = {
+const HOME_CONSTANTS = {
 	MINISTRIES_HEADER: "Ministries Links",
 	imageRootSx,
 	cardContainerSx,
 	rootSx,
 };
+
+export { HOME_CONSTANTS };

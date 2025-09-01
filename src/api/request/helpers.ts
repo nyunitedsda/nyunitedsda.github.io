@@ -1,4 +1,4 @@
-import type { DatabaseEntity } from "./types";
+import type { DatabaseEntity } from "@api/index";
 
 /**
  * Generic error handler for database operations

@@ -1,6 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import UserAccessForm from "./UserAccessForm";
+import { describe, expect, it, render } from "@/test";
+import { UserAccessForm } from "@forms/collection";
 
 describe("UserAccessForm", () => {
 	it("renders UserAccessForm", () => {

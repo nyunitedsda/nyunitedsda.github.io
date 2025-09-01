@@ -1,4 +1,8 @@
 import {
+	CarouselArrowControl,
+	type CarouselControlProps,
+} from "@components/Carousel";
+import {
 	beforeEach,
 	describe,
 	expect,
@@ -9,8 +13,6 @@ import {
 	vi,
 } from "@test/index.ts";
 import type { EmblaCarouselType } from "embla-carousel";
-import type { CarouselControlProps } from "../../types.ts";
-import CarouselArrowControl from "./CarouselArrowControl.tsx";
 
 // Mock the hook at the module level
 const mockUseCarouselArrowButtons = vi.fn();

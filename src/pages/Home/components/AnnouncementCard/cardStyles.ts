@@ -12,4 +12,4 @@ const cardStyles: Record<string, SxProps<Theme>> = {
 	actionSx: {},
 };
 
-export { cardStyles };
+export default cardStyles;

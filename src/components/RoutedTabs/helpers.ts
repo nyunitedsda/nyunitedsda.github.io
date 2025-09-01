@@ -1,5 +1,8 @@
+import type {
+	RouteTabsItem,
+	RouteTabsWithHrefItem,
+} from "@components/RoutedTabs";
 import type { RouteObject } from "react-router";
-import type { RouteTabsItem, RouteTabsWithHrefItem } from "./types";
 
 const flattenRoutes = (routes: RouteObject[]): RouteObject[] => {
 	const result: RouteObject[] = [];

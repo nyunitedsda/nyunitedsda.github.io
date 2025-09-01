@@ -1,9 +1,9 @@
+import type { DonationDT } from "@/api";
+import { DonationEditor } from "@forms/collection";
 import { Button } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useId, useState } from "react";
 import { action } from "storybook/actions";
-import type { DonationDT } from "@/api";
-import DonationEditor from "./DonationEditor";
 
 // Sample donation data
 const sampleDonations: Partial<DonationDT>[] = [

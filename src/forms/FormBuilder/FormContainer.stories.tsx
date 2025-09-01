@@ -1,9 +1,8 @@
+import { FormContainer, type FormContainerProps } from "@forms/FormBuilder";
 import { TextField } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import * as Yup from "yup";
-import FormContainer from "./FormContainer";
-import type { FormContainerProps } from "./types";
 
 const meta: Meta<typeof FormContainer> = {
 	title: "Forms/FormContainer",

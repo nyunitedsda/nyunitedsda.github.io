@@ -1,8 +1,7 @@
+import { ProjectModal } from "@components/ProjectModal";
 import { Box, Button, Stack, Typography } from "@mui/material";
-
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import ProjectModal from "./ProjectModal";
 
 // Define the meta for the story
 const meta: Meta<typeof ProjectModal> = {

@@ -1,7 +1,7 @@
+import { LoginButton } from "@components/Buttons";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { FC } from "react";
 import { expect, userEvent, within } from "storybook/test";
-import LoginButton from "./LoginButton";
 
 /**
  * LoginButton is a specialized navigation button component that provides a consistent way

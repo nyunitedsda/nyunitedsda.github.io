@@ -1,12 +1,13 @@
+import {
+	axiosInstance,
+	type ChangeMyPassword,
+	handleOperationError,
+	type LoginCredentials,
+	type LoginResponse,
+	type RegisterUserDT,
+	type UserDT,
+} from "@api/index";
 import type { AxiosRequestConfig } from "axios";
-import axiosInstance from "../axiosInstance";
-import type { RegisterUserDT, UserDT } from "./databaseTypes";
-import { handleOperationError } from "./helpers";
-import type {
-	ChangeMyPassword,
-	LoginCredentials,
-	LoginResponse,
-} from "./types";
 
 const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
 

@@ -1,5 +1,5 @@
+import { type BrandingStyle, type HeaderStyle } from "@components/Header";
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { BrandingStyle, HeaderStyle } from "./components/types";
 
 type StyleExport = Record<string, SxProps<Theme>>;
 
@@ -21,7 +21,7 @@ export const headerStyles: HeaderStyle = {
 	},
 	rootSx: {
 		backgroundColor: "background.paper",
-		height: (theme) => theme.spacing(8),
+		height: (theme: Theme) => theme.spacing(8),
 	},
 };
 
@@ -39,7 +39,7 @@ export const brandingStyles: BrandingStyle = {
 		display: { xs: "flex" },
 		flexGrow: 0,
 		gap: 2,
-		maxHeight: (theme) => theme.spacing(8),
+		maxHeight: (theme: Theme) => theme.spacing(8),
 	},
 };
 

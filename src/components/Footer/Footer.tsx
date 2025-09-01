@@ -1,5 +1,14 @@
+import {
+	FooterContact,
+	FooterSegment,
+	FooterServiceTime,
+	FooterSocial,
+	getCopyright,
+} from "@components/Footer";
+import { YoutubeIcon } from "@components/Icons";
 import { PageContentContainer } from "@components/PageWrapper";
-import { generalMenuItems } from "@hooks/routes";
+import footer from "@constants/footer";
+import { useMenuItems } from "@hooks/routes";
 import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
 import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
@@ -12,13 +21,6 @@ import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { FC, ReactNode } from "react";
-import { QUICK_LINKS } from "../../constants/footer";
-import FooterContact from "./components/FooterContact";
-import FooterSegment from "./components/FooterSegment";
-import FooterServiceTime from "./components/FooterServiceTime";
-import FooterSocial from "./components/FooterSocial";
-import { getCopyright } from "./helpers";
-import YoutubeIcon from "./YoutubeIcon";
 
 const footerSx: SxProps<Theme> = {
 	bgcolor: "primary.main",
@@ -67,6 +69,8 @@ const iconMap: Record<string, ReactNode> = {
 };
 
 const Footer: FC = () => {
+	const { activeMenu } = useMenuItems();
+
 	return (
 		<Stack sx={footerSx}>
 			<PageContentContainer>
@@ -75,8 +79,8 @@ const Footer: FC = () => {
 					<FooterSocial iconMap={iconMap} />
 
 					{/* Menu */}
-					<FooterSegment sx={menuSx} title={QUICK_LINKS}>
-						{generalMenuItems.map((i) => (
+					<FooterSegment sx={menuSx} title={footer.QUICK_LINKS}>
+						{activeMenu.map((i) => (
 							<ListItem
 								component={"a"}
 								href={i.path}

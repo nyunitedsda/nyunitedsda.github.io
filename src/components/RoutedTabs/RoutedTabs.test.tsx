@@ -1,6 +1,6 @@
+import RoutedTabs from "@components/RoutedTabs";
 import { render } from "@test/index.ts";
 import { describe, expect, it } from "vitest";
-import RoutedTabs from "./RoutedTabs";
 
 describe("RoutedTabs", () => {
 	it("renders RoutedTabs", () => {

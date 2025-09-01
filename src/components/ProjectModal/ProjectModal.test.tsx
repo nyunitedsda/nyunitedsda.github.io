@@ -1,6 +1,6 @@
+import { ProjectModal } from "@components/ProjectModal";
 import { beforeEach, describe, expect, it, render, vi } from "@test/index.ts";
 import { fireEvent, screen } from "@testing-library/react";
-import ProjectModal from "./ProjectModal";
 
 const mockOnClose = vi.fn();
 describe("ProjectModal", () => {

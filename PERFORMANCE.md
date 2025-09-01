@@ -41,7 +41,7 @@ Run the performance analysis tool:
 ```bash
 npm run build:analyze
 ```
-This will generate a visualization of your bundle in `dist/stats.html` that opens automatically after the build.
+This will generate a visualization of your bundle in `./stats.html` that opens automatically after the build.
 
 ### Key Metrics to Monitor
 - First Contentful Paint (FCP): < 1.8s

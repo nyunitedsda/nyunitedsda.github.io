@@ -40,6 +40,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "build:analyze": "ANALYZE=true tsc -b && vite build",
+    "serve": "vite preview",
     "check": "biome check --write .",
     "deploy": "gh-pages -d dist",
     "dev": "vite",

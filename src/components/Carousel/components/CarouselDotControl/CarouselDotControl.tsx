@@ -1,8 +1,10 @@
+import {
+	type CarouselControlProps,
+	type CarouselDotButtonProps,
+	useDotButton,
+} from "@components/Carousel";
 import Stack from "@mui/material/Stack";
 import type { FC } from "react";
-import type { CarouselControlProps } from "../../types";
-import type { CarouselDotButtonProps } from "./types";
-import useDotButton from "./useDotButton";
 
 const CarouselDotButton: FC<CarouselDotButtonProps> = (props) => {
 	const { children, ...restProps } = props;

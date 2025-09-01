@@ -1,3 +1,4 @@
+import { ThemeButton } from "@components/Buttons";
 import { useColorScheme } from "@mui/material/styles";
 import {
 	describe,
@@ -9,7 +10,6 @@ import {
 } from "@test/index.ts";
 import { render } from "@testing-library/react";
 import { vi } from "vitest";
-import ThemeButton from "./ThemeButton.tsx";
 
 vi.mock("@mui/material/styles", async () => {
 	const actual = await vi.importActual<typeof import("@mui/material/styles")>(

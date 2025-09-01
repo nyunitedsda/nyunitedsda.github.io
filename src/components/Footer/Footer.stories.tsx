@@ -1,7 +1,7 @@
+import Footer from "@components/Footer";
 import { AuthProvider } from "@contexts/AuthenticationContext";
 import { Box } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Footer from "./Footer";
 
 // Simple decorator to provide layout context
 const FooterDecorator = (Story: any) => {

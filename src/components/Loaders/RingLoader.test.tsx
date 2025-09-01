@@ -1,5 +1,5 @@
+import RingLoader from "@components/Loaders";
 import { describe, expect, it, render, screen } from "@test/index.ts";
-import RingLoader from "./RingLoader";
 
 describe("RingLoader", () => {
 	it("renders RingLoader", () => {

@@ -1,3 +1,4 @@
+import { ConfirmationButton } from "@components/Buttons";
 import {
 	beforeEach,
 	describe,
@@ -9,7 +10,6 @@ import {
 	vi,
 	waitFor,
 } from "@test/index.ts";
-import ConfirmationButton from "./ConfirmationButton.tsx";
 
 describe("ConfirmationButton", () => {
 	const defaultProps = {

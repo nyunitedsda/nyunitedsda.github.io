@@ -1,10 +1,11 @@
+import type { UserDT } from "@/api";
+import {
+	InteractiveStoryWrapper as InteractiveStory,
+	type InteractiveStoryProps,
+} from "@components/InteractiveStory";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { initialUser, users as userData } from "@test/mock_data";
-import type { UserDT } from "@/api";
-import InteractiveStory from "../../../components/InteractiveStory/InteractiveStory";
-import type { InteractiveStoryProps } from "../../../components/InteractiveStory/types";
-import type { UserEditorProps } from "./types";
-import UserEditor from "./UserEditor";
+import { type UserEditorProps, UserEditor } from "@forms/collection";
 
 // Define the meta for the story
 const meta: Meta<UserEditorProps> = {

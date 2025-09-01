@@ -12,34 +12,43 @@ interface AnnouncementDetail {
 }
 
 // TODO: add a field for
-export interface ZoomEvent extends AnnouncementDetail {
+interface ZoomEvent extends AnnouncementDetail {
 	zoom_id: string;
 	passcode: string;
 	location: "Zoom";
 	type: "zoom";
 }
-export interface ConferenceEvent extends AnnouncementDetail {
+interface ConferenceEvent extends AnnouncementDetail {
 	conference_code?: string;
 	location?: string;
 	phone_number: string;
 	type: "conference";
 }
 
-export interface ServiceEvent extends AnnouncementDetail {
+interface ServiceEvent extends AnnouncementDetail {
 	location?: string;
 	sermon?: string;
 	speaker: string;
 	type: "service";
 }
 
-export interface StandardEvent extends AnnouncementDetail {
+interface StandardEvent extends AnnouncementDetail {
 	location: string;
 	type: "event";
 }
 
 // Create a full announcement type
-export type EventAnnouncement =
+type EventAnnouncement =
 	| ConferenceEvent
 	| ServiceEvent
 	| ZoomEvent
 	| StandardEvent;
+
+export type {
+	AnnouncementDetail,
+	ConferenceEvent,
+	EventAnnouncement,
+	ServiceEvent,
+	StandardEvent,
+	ZoomEvent,
+};

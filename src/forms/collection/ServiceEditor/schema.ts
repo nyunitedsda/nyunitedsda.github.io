@@ -1,5 +1,5 @@
+import { titleSchema } from "@forms/collection";
 import * as Yup from "yup";
-import { titleSchema } from "../commonSchemas";
 
 export default Yup.object().shape({
 	title: titleSchema,

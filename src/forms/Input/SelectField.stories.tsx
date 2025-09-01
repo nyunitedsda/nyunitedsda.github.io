@@ -1,6 +1,5 @@
+import { SelectField, type SelectFieldProps } from "@forms/Input";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import SelectField from "./SelectField";
-import type { SelectFieldProps } from "./types";
 
 // Sample data for select options
 type Option = { id: number; name: string; value: string };

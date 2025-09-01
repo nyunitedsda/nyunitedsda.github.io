@@ -1,10 +1,10 @@
+import type { CardProps } from "@components/ProjectCard";
 import type { SxProps, Theme } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import type { FC } from "react";
-import type { CardProps } from "./types";
 
 const cardContentSx: SxProps<Theme> = {
 	display: "flex",

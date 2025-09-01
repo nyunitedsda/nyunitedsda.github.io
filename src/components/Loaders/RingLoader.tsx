@@ -1,3 +1,4 @@
+import type { RingLoaderProps } from "@components/Loaders";
 import Stack from "@mui/material/Stack";
 import {
 	alpha,
@@ -7,7 +8,6 @@ import {
 } from "@mui/material/styles";
 import type { CSSProperties, FC } from "react";
 import { default as Loader } from "react-spinners/RingLoader";
-import type { RingLoaderProps } from "./types";
 
 const override: CSSProperties = {
 	display: "block",

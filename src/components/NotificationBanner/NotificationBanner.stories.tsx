@@ -1,23 +1,14 @@
+import NotificationBanner from "@components/NotificationBanner";
 import { NotificationProvider } from "@contexts/NotificationContext";
 import { Box, Stack, Typography } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import NotificationBanner from "./NotificationBanner";
 
-// Mock NotificationContext for Storybook
 const MockNotificationContext = ({
 	children,
 }: {
 	children: React.ReactNode;
 }) => {
-	// const mockContextValue = {
-	// 	notifications: [],
-	// 	registerNotification: () => { },
-	// 	dismissNotification: (id: number) =>
-	// 		console.log("Notification dismissed:", id),
-	// 	clearNotification: () => { },
-	// };
-
 	return React.createElement(
 		NotificationProvider,
 		React.createElement(

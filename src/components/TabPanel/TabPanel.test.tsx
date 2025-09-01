@@ -1,5 +1,5 @@
+import TabPanel from "@components/TabPanel";
 import { describe, expect, it, render } from "@test/index.ts";
-import TabPanel from "./TabPanel";
 
 describe("TabPanel", () => {
 	it("renders TabPanel", () => {

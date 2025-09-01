@@ -1,3 +1,4 @@
+import { MenuButton, type MenuButtonProps } from "@components/Buttons";
 import type { ButtonProps } from "@mui/material/Button";
 import {
 	act,
@@ -11,8 +12,6 @@ import {
 	waitFor,
 } from "@test/index.ts";
 import { vi } from "vitest";
-import type { MenuButtonProps } from "../types.ts";
-import MenuButton from "./MenuButton.tsx";
 
 // Mock react-router's useNavigate
 const mockNavigate = vi.fn();

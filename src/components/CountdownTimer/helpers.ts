@@ -1,5 +1,5 @@
+import type { TimeLeft, TimeUnit } from "@components/CountdownTimer";
 import dayjs, { type Dayjs } from "dayjs";
-import type { TimeLeft, TimeUnit } from "./types";
 
 const INITIAL_TIMER_VALUES = {
 	days: 0,

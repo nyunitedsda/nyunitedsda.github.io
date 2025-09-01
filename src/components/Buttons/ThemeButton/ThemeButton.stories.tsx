@@ -1,5 +1,5 @@
+import { ThemeButton } from "@components/Buttons";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import ThemeButton from "./ThemeButton";
 
 const meta: Meta<typeof ThemeButton> = {
 	title: "Components/Buttons/ThemeButton",

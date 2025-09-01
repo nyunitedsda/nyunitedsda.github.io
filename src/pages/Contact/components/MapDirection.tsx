@@ -4,8 +4,8 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { CONTACT_CONSTANT } from "@pages/Contact";
 import type { FC } from "react";
-import { CONTACT_CONSTANT } from "./contact";
 
 const rootSx: SxProps<Theme> = {
 	p: 2,

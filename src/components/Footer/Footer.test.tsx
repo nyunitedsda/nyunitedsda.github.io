@@ -1,6 +1,6 @@
+import Footer from "@components/Footer";
 import { describe, expect, it, render, screen } from "@test/index.ts";
 import { vi } from "vitest";
-import Footer from "./Footer";
 
 // Mock dependencies
 

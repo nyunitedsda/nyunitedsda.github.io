@@ -1,9 +1,8 @@
+import { CarouselDotControl } from "@components/Carousel";
 import Box from "@mui/material/Box";
-
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
-import CarouselDotControl from "./CarouselDotControl";
 
 // Simple mock that provides just what the component needs
 const createMockEmblaApi = (snapCount: number, initialIndex = 0) => {

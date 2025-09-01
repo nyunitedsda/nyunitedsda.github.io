@@ -1,8 +1,8 @@
+import type { UseCarouselArrowButtonsType } from "@components/Carousel";
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
-import type { UseCarouselArrowButtonsType } from "./types";
 
-const useCarouselArrowButtons = (
+const useCarouselArrowButton = (
 	emblaApi: EmblaCarouselType | undefined,
 	onButtonClick?: (emblaApi: EmblaCarouselType) => void,
 ): UseCarouselArrowButtonsType => {
@@ -41,4 +41,4 @@ const useCarouselArrowButtons = (
 	};
 };
 
-export default useCarouselArrowButtons;
+export default useCarouselArrowButton;

@@ -1,17 +1,15 @@
 import { useAuthentication } from "@hooks/auth";
+import { menuList } from "@hooks/routes";
 import { useMemo } from "react";
-import generalMenuItems, { restrictedMenuItems } from "./generalMenuItems";
 
 const useMenuItems = () => {
 	const { isAuthenticated } = useAuthentication();
 
-	const userMenuItems = useMemo(() => {
-		return isAuthenticated
-			? [...generalMenuItems, ...restrictedMenuItems]
-			: generalMenuItems;
+	const activeMenu = useMemo(() => {
+		return isAuthenticated ? menuList.restrictedMenu : menuList.generalMenu;
 	}, [isAuthenticated]);
 
-	return { userMenuItems, generalMenuItems, restrictedMenuItems };
+	return { activeMenu };
 };
 
 export default useMenuItems;

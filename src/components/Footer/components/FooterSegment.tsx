@@ -1,3 +1,7 @@
+import {
+	type FooterSegmentProps,
+	FooterSegmentSkeleton,
+} from "@components/Footer";
 import { ArrowForwardIosRounded } from "@mui/icons-material";
 import {
 	Accordion,
@@ -11,8 +15,6 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { FC } from "react";
-import FooterSegmentSkeleton from "./FooterSegmentSkeleton";
-import type { FooterSegmentProps } from "./types";
 
 const contentSx: SxProps<Theme> = {
 	color: "inherit",

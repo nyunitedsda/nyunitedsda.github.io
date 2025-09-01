@@ -1,10 +1,13 @@
 import { ProjectModal } from "@components/ProjectModal";
+import {
+	DONATION_EDITOR_CONSTANTS,
+	donationSchema,
+	type DonationEditorProps,
+} from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { initialDonation } from "@test/mock_data";
-import { type FC, useMemo } from "react";
-import { DONATION_EDITOR_CONSTANTS, donationSchema } from "./constants";
-import type { DonationEditorProps } from "./types";
+import { useMemo, type FC } from "react";
 
 const {
 	EDIT_TITLE,

@@ -1,6 +1,6 @@
+import DataTable from "@components/DataTable";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import DataTable from "./DataTable";
 
 describe("DataTable", () => {
 	it("renders DataTable", () => {

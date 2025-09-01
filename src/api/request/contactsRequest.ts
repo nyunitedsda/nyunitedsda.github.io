@@ -1,5 +1,4 @@
-import axiosInstance from "../axiosInstance";
-import { handleOperationError } from "./helpers";
+import { axiosInstance, handleOperationError } from "@api/index";
 
 const getDefaultContacts = async () => {
 	try {

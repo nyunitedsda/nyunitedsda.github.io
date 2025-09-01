@@ -1,4 +1,4 @@
-import type { MenuButtonStyle } from "./types";
+import type { MenuButtonStyle } from "@components/Buttons";
 
 export const menuButtonStyles: MenuButtonStyle = {
 	activeBtnSx: {

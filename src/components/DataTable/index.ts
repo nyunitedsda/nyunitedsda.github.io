@@ -1,4 +1,4 @@
-export { default as TableAction } from "./components/TableAction/TableAction";
-export * from "./components/TableAction/types";
 export { default } from "./DataTable";
+export * from "./helpers";
+export * from "./TableAction";
 export * from "./types";

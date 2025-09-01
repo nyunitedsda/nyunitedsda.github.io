@@ -87,6 +87,9 @@ export default defineConfig((props: UserConfig) => {
 							}
 							if (id.includes("@storybook")) {
 								return "vendor_storybook";
+							}							
+							if (id.includes("formik")) {
+								return "vendor_formik";
 							}
 							return "vendor"; // other dependencies
 						}

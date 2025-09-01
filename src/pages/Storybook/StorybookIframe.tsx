@@ -24,7 +24,9 @@ const StorybookIframe: FC = () => {
 
 		// For production - using relative path based on your GitHub Pages deployment
 		// This path assumes Storybook static files are copied to the dist root during build
-		return `${window.location.origin}${import.meta.env.BASE_URL || "/"}/storybook-static`;
+		// return `${window.location.origin}${import.meta.env.BASE_URL || "/"}/storybook-static`;
+		// TODO: Should only be accessible through the api
+		return import.meta.env.VITE_PROD_STORYBOOK_URL || "/storybook-static";
 	};
 
 	return (

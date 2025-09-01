@@ -1,10 +1,12 @@
 import { useEntityList } from "@hooks/api";
+import {
+	CONTACT_CONSTANT,
+	ContactSection,
+	ContactSectionSkeleton,
+} from "@pages/Contact";
+import { NoteSection } from "@pages/Home";
 import type { FC } from "react";
 import type { ServiceDT } from "@/api";
-import NoteSection from "../../Home/components/AnnouncementCard/NoteSection";
-import ContactSection from "./ContactSection";
-import ContactSectionSkeleton from "./ContactSectionSkeleton";
-import { CONTACT_CONSTANT } from "./contact";
 
 const ServiceTimes: FC = () => {
 	const { data, error, isLoading } = useEntityList<ServiceDT>("services");

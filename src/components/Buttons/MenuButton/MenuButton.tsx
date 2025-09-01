@@ -1,3 +1,4 @@
+import { type MenuButtonProps, menuButtonStyles } from "@components/Buttons";
 import ExpandLessRounded from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import Button from "@mui/material/Button";
@@ -20,10 +21,6 @@ import {
 	useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { menuButtonStyles } from "../styles";
-import type { MenuButtonProps } from "../types";
-
-const { activeBtnSx, buttonSx } = menuButtonStyles;
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
 	const { isActive, path, children, buttonProps, menuItems } = props;
@@ -93,8 +90,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 				ref={buttonRef}
 				sx={
 					{
-						...buttonSx,
-						...(isActiveButton ? activeBtnSx : {}),
+						...menuButtonStyles.buttonSx,
+						...(isActiveButton ? menuButtonStyles.activeBtnSx : {}),
 					} as SxProps<Theme>
 				}
 			>

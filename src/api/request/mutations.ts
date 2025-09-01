@@ -1,7 +1,9 @@
+import {
+	axiosInstance,
+	type DatabaseEntity,
+	handleOperationError,
+} from "@api/index";
 import type { AxiosRequestConfig } from "axios";
-import axiosInstance from "../axiosInstance";
-import { handleOperationError } from "./helpers";
-import type { DatabaseEntity } from "./types";
 
 /**
  * Creates a new entity item in the database.

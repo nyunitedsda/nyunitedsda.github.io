@@ -1,3 +1,4 @@
+import { LoginButton } from "@components/Buttons";
 import {
 	beforeEach,
 	describe,
@@ -9,7 +10,6 @@ import {
 	screen,
 } from "@test/index.ts";
 import { vi } from "vitest";
-import LoginButton from "./LoginButton";
 
 // Mock react-router's useNavigate
 const mockNavigate = vi.fn();

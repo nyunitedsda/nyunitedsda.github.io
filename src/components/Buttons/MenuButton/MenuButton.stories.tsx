@@ -1,6 +1,6 @@
+import { MenuButton } from "@components/Buttons";
 import type { RouteMenu } from "@hooks/routes";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import MenuButton from "./MenuButton";
 
 const meta: Meta<typeof MenuButton> = {
 	title: "Components/Buttons/MenuButton",

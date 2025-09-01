@@ -1,3 +1,4 @@
+import NotificationBanner from "@components/NotificationBanner";
 import {
 	beforeEach,
 	describe,
@@ -8,7 +9,6 @@ import {
 	screen,
 } from "@test/index.ts";
 import { vi } from "vitest";
-import NotificationBanner from "./NotificationBanner";
 
 // Mock the context functions
 vi.mock("@contexts/NotificationContext", () => {

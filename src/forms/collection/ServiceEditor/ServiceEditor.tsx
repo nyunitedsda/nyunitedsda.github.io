@@ -1,11 +1,10 @@
+import type { ServiceDT } from "@/api";
 import ProjectModal from "@components/ProjectModal/ProjectModal";
+import { type EditorProps, serviceSchema } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import InputField from "@forms/Input/FormField";
 import { initialService } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ServiceDT } from "@/api";
-import type { EditorProps } from "../types";
-import serviceSchema from "./schema";
 
 const EDIT_TITLE = "Edit Service";
 const ADD_TITLE = "Add Service";

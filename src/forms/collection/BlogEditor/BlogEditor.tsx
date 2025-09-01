@@ -1,12 +1,11 @@
+import type { ArticleDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
+import { type EditorProps, blogSchema } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { useAuthentication } from "@hooks/auth";
 import { initialArticle } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ArticleDT } from "@/api";
-import type { EditorProps } from "../types";
-import blogSchema from "./schema";
 
 const EDIT_TITLE = "Edit Article";
 const ADD_TITLE = "Add Article";

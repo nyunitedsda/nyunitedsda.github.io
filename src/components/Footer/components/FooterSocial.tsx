@@ -1,13 +1,10 @@
+import { FOOTER_LEGAL_LINKS, FooterSegment } from "@components/Footer";
+import footer from "@constants/footer";
 import { Box, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import type { FC, ReactNode } from "react";
-import {
-	MOTTO,
-	socialMediaInfo,
-	WEBSITE_TITLE,
-} from "../../../constants/footer";
-import { FOOTER_LEGAL_LINKS } from "../constants";
-import FooterSegment from "./FooterSegment";
+
+const { WEBSITE_TITLE, MOTTO, socialMediaInfo } = footer;
 
 const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = ({
 	iconMap,

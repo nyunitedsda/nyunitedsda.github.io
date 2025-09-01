@@ -1,11 +1,10 @@
+import ConfirmationDialog from "@components/ConfirmationDialog";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { action } from "storybook/actions";
-import ConfirmationDialog from "./ConfirmationDialog";
 
 const meta: Meta<typeof ConfirmationDialog> = {
 	title: "Components/ConfirmationDialog",

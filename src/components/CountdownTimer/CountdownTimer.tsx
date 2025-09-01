@@ -1,14 +1,14 @@
+import type { CountdownTimerProps, TimeLeft } from "@components/CountdownTimer";
+import {
+	calculateRemainingTime,
+	formatTimeUnits,
+	INITIAL_TIMER_VALUES,
+} from "@components/CountdownTimer";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { type FC, useEffect, useMemo, useState } from "react";
-import {
-	calculateRemainingTime,
-	formatTimeUnits,
-	INITIAL_TIMER_VALUES,
-} from "./helpers";
-import type { CountdownTimerProps, TimeLeft } from "./types";
 
 const clockSx: SxProps<Theme> = {
 	display: "flex",

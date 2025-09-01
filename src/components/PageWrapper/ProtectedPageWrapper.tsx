@@ -1,9 +1,9 @@
 import RingLoader from "@components/Loaders";
+import PageWrapper from "@components/PageWrapper";
 import { useAuthentication } from "@hooks/auth";
 import { routePaths } from "@hooks/routes";
 import type { FC } from "react";
 import { Navigate } from "react-router";
-import PageWrapper from "./PageWrapper";
 
 const ProtectedPageWrapper: FC = () => {
 	const { isAuthenticated, isLoading } = useAuthentication();

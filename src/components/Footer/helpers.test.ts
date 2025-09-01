@@ -1,5 +1,5 @@
+import { getCopyright } from "@components/Footer";
 import { describe, expect, it, vi } from "vitest";
-import { getCopyright } from "./helpers";
 
 // Mock the footer constants
 vi.mock("../../constants/footer", () => ({

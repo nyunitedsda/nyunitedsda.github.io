@@ -1,7 +1,7 @@
+import { PlaceholderIcon } from "@components/Icons";
+import type { FormFieldType } from "@forms/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import { lazy, Suspense } from "react";
-import type { FormFieldType } from "../Input/types";
-import PlaceholderIcon from "./PlaceholderIcon";
 
 const LockOutlined = lazy(() => import("@mui/icons-material/LockOutlined"));
 const Person3Outlined = lazy(

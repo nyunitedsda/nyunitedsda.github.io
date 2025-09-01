@@ -1,5 +1,7 @@
-export type AdministrationTab = "users" | "donations" | "notifications";
+type AdministrationTab = "users" | "donations" | "notifications";
 
-export interface AdministrationProps {
+interface AdministrationProps {
 	initialTab?: string;
 }
+
+export type { AdministrationProps, AdministrationTab };

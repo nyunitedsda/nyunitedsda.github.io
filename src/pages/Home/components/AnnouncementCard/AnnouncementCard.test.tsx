@@ -1,7 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import AnnouncementCard from "./AnnouncementCard";
-import type { AnnouncementCardProps } from "./types";
+import { describe, expect, it, render } from "@/test";
+import { AnnouncementCard, type AnnouncementCardProps } from "@pages/Home";
 
 const defaultProps = {
 	id: 1,

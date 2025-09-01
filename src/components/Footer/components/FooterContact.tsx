@@ -1,14 +1,18 @@
+import {
+	FooterSegment,
+	FooterSegmentSkeleton,
+	formatFooterContactData,
+} from "@components/Footer";
+import { CONTACT_CONSTANT } from "@pages/Contact";
+import { NoteSection } from "@pages/Home";
 import { type FC, type ReactNode, useMemo } from "react";
 import { useLoaderData } from "react-router";
-import { CONTACT_CONSTANT } from "../../../pages/Contact/components/contact";
-import NoteSection from "../../../pages/Home/components/AnnouncementCard/NoteSection";
-import { formatFooterContactData } from "../helpers";
-import FooterSegment from "./FooterSegment";
-import FooterSegmentSkeleton from "./FooterSegmentSkeleton";
 
-const FooterContact: FC<{ iconMap: Record<string, ReactNode> }> = ({
-	iconMap,
-}) => {
+interface FCProps {
+	iconMap: Record<string, ReactNode>;
+}
+
+const FooterContact: FC<FCProps> = ({ iconMap }) => {
 	const { defaultContact: data, isLoading } = useLoaderData();
 
 	const contactData = useMemo(() => {

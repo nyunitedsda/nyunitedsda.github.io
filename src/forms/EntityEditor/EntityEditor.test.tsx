@@ -1,7 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import InputField from "../Input/FormField";
-import EntityEditor from "./EntityEditor";
+import { EntityEditor, InputField } from "@/forms";
+import { describe, expect, it, render } from "@/test";
 
 describe("GenericEntityModificationForm", () => {
 	it("renders GenericEntityModificationForm", () => {

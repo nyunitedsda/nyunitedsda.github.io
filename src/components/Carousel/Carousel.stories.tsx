@@ -1,12 +1,11 @@
+import Carousel from "@components/Carousel";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-
+import { sliderImages } from "@pages/Home";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import sliderImages from "../../pages/Home/sliderImages";
-import Carousel from "./Carousel";
 
 // Sample images from the project's assets
 const sampleImages = [

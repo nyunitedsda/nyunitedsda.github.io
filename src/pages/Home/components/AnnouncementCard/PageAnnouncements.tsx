@@ -1,10 +1,9 @@
 import Carousel from "@components/Carousel";
 import RingLoader from "@components/Loaders";
+import { AnnouncementCard, SectionWrapper } from "@pages/Home";
 import type { FC } from "react";
 import { useLoaderData } from "react-router-dom";
 import type { AnnouncementDT } from "@/api";
-import SectionWrapper from "../SectionWrapper";
-import AnnouncementCard from "./AnnouncementCard";
 
 const PAGE_ANNOUNCEMENT_HEADER = "Announcements";
 

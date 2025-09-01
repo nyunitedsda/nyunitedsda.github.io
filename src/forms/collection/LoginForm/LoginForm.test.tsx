@@ -1,6 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import LoginForm from "./LoginForm";
+import { describe, expect, it, render } from "@/test";
+import { LoginForm } from "@forms/collection";
 
 describe("LoginForm", () => {
 	it("renders LoginForm", () => {

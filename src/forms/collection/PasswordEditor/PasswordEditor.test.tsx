@@ -1,8 +1,7 @@
-import { users as userData } from "@test/mock_data/";
-import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
 import type { UserDT } from "@/api";
-import PasswordEditor from "./PasswordEditor";
+import { describe, expect, it, render } from "@/test";
+import { PasswordEditor } from "@forms/collection";
+import { users as userData } from "@test/mock_data/";
 
 describe("PasswordEditor", () => {
 	it("renders PasswordEditor", () => {

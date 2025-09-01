@@ -1,3 +1,4 @@
+import { queryClient, theme } from "@components/AppProvider";
 import { AuthProvider } from "@contexts/AuthenticationContext";
 import { NotificationProvider } from "@contexts/NotificationContext";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -5,8 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 import React, { type FC, type PropsWithChildren, useMemo } from "react";
-import queryClient from "./queryClient";
-import theme from "./theme";
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders

@@ -1,17 +1,17 @@
 import Carousel from "@components/Carousel";
 import { Stack } from "@mui/material";
+import {
+	HOME_CONSTANTS,
+	PageAnnouncements,
+	PageMinistries,
+	SectionWrapper,
+	sliderImages,
+} from "@pages/Home";
 import type { FC } from "react";
-import PageAnnouncements from "./components/AnnouncementCard/PageAnnouncements";
-import PageMinistries from "./components/Ministries/PageMinistries";
-import SectionWrapper from "./components/SectionWrapper";
-import { HOME_CONSTANTS } from "./homeConstants";
-import sliderImages from "./sliderImages";
-
-const { rootSx } = HOME_CONSTANTS;
 
 const Home: FC = () => {
 	return (
-		<Stack sx={rootSx}>
+		<Stack sx={HOME_CONSTANTS.rootSx}>
 			{/* Image Slides */}
 			<SectionWrapper>
 				<Carousel

@@ -1,5 +1,5 @@
+import ConfirmationDialog from "@components/ConfirmationDialog";
 import { describe, expect, it, render, screen } from "@test/index.ts";
-import ConfirmationDialog from "./ConfirmationDialog";
 
 describe("ConfirmationDialog", () => {
 	it("renders ConfirmationDialog", () => {

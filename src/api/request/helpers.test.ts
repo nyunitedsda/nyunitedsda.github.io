@@ -1,7 +1,6 @@
+import { type DatabaseEntity, handleOperationError } from "@api/index";
 import { afterEach, beforeEach, describe, expect, it } from "@test/index.ts";
 import { vi } from "vitest";
-import { handleOperationError } from "./helpers.ts";
-import type { DatabaseEntity } from "./types.ts";
 
 describe("handleOperationError", () => {
 	// Spy on console.error to verify it's called correctly

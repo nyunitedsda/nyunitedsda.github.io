@@ -11,4 +11,4 @@ const FOOTER_LEGAL_LINKS = [
 	},
 ];
 
-export { FOOTER_LEGAL_LINKS };
+export default FOOTER_LEGAL_LINKS;

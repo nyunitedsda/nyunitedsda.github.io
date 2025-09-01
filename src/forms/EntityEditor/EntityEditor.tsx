@@ -1,10 +1,9 @@
+import { createEntity, updateEntity } from "@/api";
+import { type EntityEditorProps, FormContainer } from "@/forms";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useSnackbar } from "notistack";
 import { useMemo } from "react";
-import { createEntity, updateEntity } from "@/api";
-import FormContainer from "../FormBuilder/FormContainer";
-import type { EntityEditorProps } from "./types";
 
 const titleSx: SxProps<Theme> = {
 	position: "sticky",

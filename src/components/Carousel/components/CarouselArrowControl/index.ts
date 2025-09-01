@@ -1,2 +1,3 @@
-export { default } from "./CarouselArrowControl";
-export type { CarouselArrowButtonProps } from "./types";
+export { default as CarouselArrowControl } from "./CarouselArrowControl";
+export * from "./types";
+export { default as useCarouselArrowButton } from "./useCarouselArrowButton";

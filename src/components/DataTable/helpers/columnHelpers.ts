@@ -1,7 +1,9 @@
+import {
+	TableAction,
+	type ColumnDefinition,
+	type TableActionProps,
+} from "@components/DataTable";
 import { createElement } from "react";
-import TableAction from "../components/TableAction/TableAction";
-import type { TableActionProps } from "../components/TableAction/types";
-import type { ColumnDefinition } from "../types";
 
 const generateActionColumn = <T extends { id?: number }>(
 	props: Omit<TableActionProps<T>, "data">,

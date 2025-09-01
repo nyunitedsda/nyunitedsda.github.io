@@ -1,8 +1,8 @@
 import { ConfirmationButton } from "@components/Buttons";
+import type { FormContainerProps } from "@forms/FormBuilder";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Form, Formik, type FormikHelpers } from "formik";
-import type { FormContainerProps } from "./types";
 
 const childrenSx: SxProps<Theme> = {
 	width: "100%",

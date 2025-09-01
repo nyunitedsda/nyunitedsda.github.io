@@ -1,12 +1,3 @@
-import {
-	type UseQueryResult,
-	useMutation,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/react-query";
-import type { AxiosError } from "axios";
-import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
 import type {
 	LoginCredentials,
 	LoginResponse,
@@ -21,7 +12,16 @@ import {
 	logoutUser,
 	registerUser,
 } from "@/api";
-import routePaths from "../routes/routePaths";
+import { routePaths } from "@hooks/routes";
+import {
+	type UseQueryResult,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Authentication API hooks using React Query

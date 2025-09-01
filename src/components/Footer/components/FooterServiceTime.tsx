@@ -1,10 +1,9 @@
+import { FooterSegment, FooterSegmentSkeleton } from "@components/Footer";
 import Typography from "@mui/material/Typography";
+import { CONTACT_CONSTANT } from "@pages/Contact";
 import type { FC } from "react";
 import { useLoaderData } from "react-router";
 import type { ServiceDT } from "@/api";
-import { CONTACT_CONSTANT } from "../../../pages/Contact/components/contact";
-import FooterSegment from "./FooterSegment";
-import FooterSegmentSkeleton from "./FooterSegmentSkeleton";
 
 const FooterServiceTime: FC = () => {
 	const { services, isLoading } = useLoaderData();

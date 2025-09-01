@@ -1,10 +1,12 @@
+import {
+	configurePasswordInput,
+	registerSchema,
+	type UserAccessFormProps,
+} from "@forms/collection";
 import FormContainer from "@forms/FormBuilder/FormContainer";
 import InputField from "@forms/Input/FormField";
 import Stack from "@mui/material/Stack";
 import { type FC, useCallback, useMemo } from "react";
-import { configurePasswordInput } from "../commonInputs";
-import { registerSchema } from "./schema";
-import type { UserAccessFormProps } from "./types";
 
 const initialRegisterValues = {
 	id: undefined,

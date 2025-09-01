@@ -1,3 +1,4 @@
+import { day } from "@components/Buttons";
 import DarkModeRounded from "@mui/icons-material/DarkModeRounded";
 import DarkModeTwoTone from "@mui/icons-material/DarkModeTwoTone";
 import LightModeRounded from "@mui/icons-material/LightModeRounded";
@@ -13,8 +14,6 @@ import {
 	useCallback,
 	useMemo,
 } from "react";
-
-import day from "./daytheme.svg";
 
 const expandedBtnSx: SxProps<Theme> = {
 	position: "relative",

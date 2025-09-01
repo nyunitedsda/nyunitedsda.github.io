@@ -1,6 +1,6 @@
+import { DesktopMenu } from "@components/Header";
 import type { RouteMenu } from "@hooks/routes";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import DesktopMenu from "./DesktopMenu";
 
 const menuList: RouteMenu[] = [
 	{ id: "1", name: "Home", path: "/" },

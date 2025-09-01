@@ -1,3 +1,4 @@
+import CountdownTimer from "@components/CountdownTimer";
 import {
 	act,
 	afterEach,
@@ -11,7 +12,6 @@ import {
 } from "@test/index.ts";
 import "@testing-library/jest-dom";
 import dayjs from "dayjs";
-import CountdownTimer from "./CountdownTimer";
 
 describe("CountdownTimer", () => {
 	const now = dayjs("2024-01-01T12:00:00.000Z");

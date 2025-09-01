@@ -1,14 +1,6 @@
-import {
-	AutoStoriesOutlined,
-	CodeOutlined,
-	EventOutlined,
-	LocationOnOutlined,
-	Person3Outlined,
-	PhoneOutlined,
-} from "@mui/icons-material";
-import dayjs from "dayjs";
-import type { ReactNode } from "react";
 import type { AnnouncementDT } from "@/api";
+import dayjs from "dayjs";
+import { createElement, lazy, type ReactNode } from "react";
 
 type Section = {
 	title: string;
@@ -40,13 +32,29 @@ const NOTIFICATION_KEYS: NoteKeys[] = [
 	"conference_code",
 ];
 
+const AutoStoriesOutlined = lazy(
+	() => import("@mui/icons-material/AutoStoriesOutlined"),
+);
+const CodeOutlined = lazy(() => import("@mui/icons-material/CodeOutlined"));
+const EventOutlined = lazy(() => import("@mui/icons-material/EventOutlined"));
+const LocationOnOutlined = lazy(
+	() => import("@mui/icons-material/LocationOnOutlined"),
+);
+const Person3Outlined = lazy(
+	() => import("@mui/icons-material/Person3Outlined"),
+);
+const PhoneOutlined = lazy(() => import("@mui/icons-material/PhoneOutlined"));
+
 const NOTIFICATION_ATTRIBUTES: Record<NoteKeys, Omit<Section, "content">> = {
-	event_date: { icon: <EventOutlined />, title: WHEN },
-	location: { icon: <LocationOnOutlined />, title: WHERE },
-	speaker: { icon: <Person3Outlined />, title: SPEAKER },
-	sermon: { icon: <AutoStoriesOutlined />, title: SERMON_TITLE },
-	phone_number: { icon: <PhoneOutlined />, title: PHONE_NUMBER },
-	conference_code: { icon: <CodeOutlined />, title: CONFERENCE_CODE },
+	event_date: { icon: createElement(EventOutlined), title: WHEN },
+	location: { icon: createElement(LocationOnOutlined), title: WHERE },
+	speaker: { icon: createElement(Person3Outlined), title: SPEAKER },
+	sermon: { icon: createElement(AutoStoriesOutlined), title: SERMON_TITLE },
+	phone_number: { icon: createElement(PhoneOutlined), title: PHONE_NUMBER },
+	conference_code: {
+		icon: createElement(CodeOutlined),
+		title: CONFERENCE_CODE,
+	},
 };
 
 const createFormattedContent = (props: AnnouncementDT): Section[] => {

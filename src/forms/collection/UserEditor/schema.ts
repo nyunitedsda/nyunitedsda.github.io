@@ -1,5 +1,5 @@
+import { nameSchema, passwordSchema } from "@forms/collection";
 import * as Yup from "yup";
-import { nameSchema, passwordSchema } from "../commonSchemas";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

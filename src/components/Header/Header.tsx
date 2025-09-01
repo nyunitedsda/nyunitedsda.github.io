@@ -1,3 +1,9 @@
+import {
+	DesktopMenu,
+	headerStyles,
+	OrganizationBranding,
+	Sidebar,
+} from "@components/Header";
 import { PageContentContainer } from "@components/PageWrapper";
 import { useMenuItems } from "@hooks/routes";
 import MenuRounded from "@mui/icons-material/MenuRounded";
@@ -7,19 +13,13 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { createRef, type FC, useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router";
-import { DesktopMenu } from "./components/DesktopMenu";
-import OrganizationBranding from "./components/OrganizationBranding";
-import Sidebar from "./components/Sidebar";
-import { headerStyles } from "./styles";
-
-const { hamburgerMenuSx, rootSx } = headerStyles;
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
 	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 	const appBarRef = useMemo(() => createRef<HTMLDivElement>(), []);
-	const { userMenuItems } = useMenuItems();
+	const { activeMenu } = useMenuItems();
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((prev) => !prev);
@@ -56,7 +56,7 @@ const Header: FC = () => {
 			position="sticky"
 			color="default"
 			elevation={1}
-			sx={rootSx}
+			sx={headerStyles.rootSx}
 		>
 			<PageContentContainer
 				sx={{ height: (theme) => `${theme.spacing(8)}` }}
@@ -65,7 +65,7 @@ const Header: FC = () => {
 				<Toolbar disableGutters>
 					{/* Mobile Hamburger Menu */}
 					<IconButton
-						sx={hamburgerMenuSx}
+						sx={headerStyles.hamburgerMenuSx}
 						aria-label="open drawer"
 						color="primary"
 						edge="start"
@@ -80,7 +80,7 @@ const Header: FC = () => {
 					{/* Menu */}
 					{!isMobile && (
 						<DesktopMenu
-							menuList={userMenuItems}
+							menuList={activeMenu}
 							isActive={isActive}
 							sx={{ display: { xs: "none", md: "flex" } }}
 						/>

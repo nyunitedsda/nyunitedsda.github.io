@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import type { NoteSectionProps } from "@pages/Home";
 import { type FC, memo } from "react";
-import type { NoteSectionProps } from "./types";
 
 const noteSx: SxProps<Theme> = {
 	display: "flex",

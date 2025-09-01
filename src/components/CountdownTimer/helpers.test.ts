@@ -1,11 +1,11 @@
-import { afterAll, beforeAll, describe, expect, it, vi } from "@test/index.ts";
-import dayjs from "dayjs";
 import {
 	calculateRemainingTime,
 	formatTimeUnits,
 	INITIAL_TIMER_VALUES,
-} from "./helpers";
-import type { TimeLeft } from "./types";
+	type TimeLeft,
+} from "@components/CountdownTimer";
+import { afterAll, beforeAll, describe, expect, it, vi } from "@test/index.ts";
+import dayjs from "dayjs";
 
 describe("INITIAL_TIMER_VALUES", () => {
 	it("should have all values set to 0", () => {

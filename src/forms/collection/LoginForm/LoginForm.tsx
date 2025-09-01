@@ -1,3 +1,9 @@
+import type { LoginCredentials } from "@/api";
+import {
+	configurePasswordInput,
+	configureUsernameInput,
+	loginSchema,
+} from "@forms/collection";
 import { FormContainer } from "@forms/FormBuilder";
 import { InputField } from "@forms/Input";
 import { useAuthentication } from "@hooks/auth";
@@ -7,12 +13,6 @@ import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import type { LoginCredentials } from "@/api";
-import {
-	configurePasswordInput,
-	configureUsernameInput,
-} from "../commonInputs";
-import { loginSchema } from "./schema";
 
 const REMEMBER_ME = "Remember me";
 const SIGN_IN = "Sign In";
