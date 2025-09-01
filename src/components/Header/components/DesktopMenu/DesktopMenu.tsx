@@ -44,18 +44,26 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 		const updateMenuWidth = () => {
 			const clientWidth = document.getElementById("desktop-menu")?.clientWidth;
 			setMenuWidth(clientWidth);
+			console.table({ clientWidth })
 		};
+
 		window.addEventListener("resize", updateMenuWidth);
-		updateMenuWidth();
+		// updateMenuWidth();
+
 		return () => {
 			window.removeEventListener("resize", updateMenuWidth);
 		};
 	}, []);
 
 	const { displayList, optionList } = useMemo(
-		() => generateMenuDisplay(menuWidth || 100, menuList),
+		() => {
+			console.table({ displayList, optionList, menuList });
+			return generateMenuDisplay(menuWidth || 100, menuList);
+		},
 		[menuWidth, menuList],
 	);
+
+
 
 	const handleOptionsMenuOpen = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,7 +98,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 					{item.name}
 				</MenuButton>
 			))}
-			{}
+			{ }
 			{optionList.length > 0 ? (
 				<IconButton
 					aria-label="more options"

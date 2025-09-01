@@ -16,7 +16,7 @@ export const handleOperationError = (
 	entity: DatabaseEntity,
 	error: unknown,
 ) => {
-	const errorMessage = error instanceof Error ? error.message : String(error);
+	const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
 	console.error(`${operation} ${entity} mutation Error: ${errorMessage}`);
-	return Promise.reject(error instanceof Error ? error : errorMessage);
+	return Promise.reject(errorMessage);
 };
