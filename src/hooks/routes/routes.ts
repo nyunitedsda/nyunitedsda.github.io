@@ -169,13 +169,12 @@ const routes = createBrowserRouter([
 	},
 	{
 		path: "unauthorized",
-		loader: pageLoader,
-		element: createElement(AppLayout),
-		hydrateFallbackElement: createElement(Skeleton),
+		lazy: () => createComponent(() => import("@pages/Error/Auth")),
+		// hydrateFallbackElement: createElement(Skeleton),
 		children: [
 			{
 				path: "unauthorized",
-				lazy: () => createComponent(() => import("@pages/Error/Auth")),
+				
 				id: "unauthorized",
 			},
 		],

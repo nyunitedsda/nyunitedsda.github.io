@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { PERMISSION_ERROR } from "../constants";
+import { AppProvider } from "@/components";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",
@@ -64,6 +65,7 @@ const UnauthorizedError: FC = () => {
 	);
 
 	return (
+		<AppProvider>
 		<Stack spacing={3} sx={rootSx} className="fade-in">
 			<Stack alignItems={"center"} spacing={2}>
 				<LockOutlined sx={errorIconSx} />
@@ -100,6 +102,7 @@ const UnauthorizedError: FC = () => {
 				))}
 			</Box>
 		</Stack>
+		</AppProvider>
 	);
 };
 

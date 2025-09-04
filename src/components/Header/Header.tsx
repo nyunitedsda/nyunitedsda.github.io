@@ -60,7 +60,6 @@ const Header: FC = () => {
 		>
 			<PageContentContainer
 				sx={{ height: (theme) => `${theme.spacing(8)}` }}
-				maxWidth="lg"
 			>
 				<Toolbar disableGutters>
 					{/* Mobile Hamburger Menu */}
