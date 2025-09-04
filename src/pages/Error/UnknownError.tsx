@@ -1,7 +1,8 @@
+import { AppProvider } from "@/components";
 import { routePaths } from "@hooks/routes";
+import { ArrowBackIosNew } from "@mui/icons-material";
 import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
 import HomeRounded from "@mui/icons-material/HomeRounded";
-import RefreshOutlined from "@mui/icons-material/RefreshOutlined";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -9,6 +10,7 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { ReactNode } from "react";
 import { type FC, useCallback } from "react";
+import { useNavigate } from "react-router";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",
@@ -22,24 +24,25 @@ const actionSx: SxProps<Theme> = {
 
 const errorIconSx: SxProps<Theme> = {
 	fontSize: 80,
-	color: "error.main",
+	color: theme => theme.palette.error.main,
 	mb: 2,
 };
 
 const rootSx: SxProps<Theme> = {
+	backgroundColor: theme => theme.palette.background.default,
 	textAlign: "center",
 	width: "100%",
 	alignItems: "center",
 	justifyContent: "center",
-	height: "100%",
+	height: "100vh",
 	gap: 3,
 	"& .MuiTypography-root": {
-		color: "text.primary",
+		color: theme => theme.palette.text.primary,
 	},
 };
 
 const apologySx: SxProps<Theme> = {
-	color: "text.secondary",
+	color: theme => theme.palette.text.secondary,
 };
 
 const HOME = "Home";
@@ -51,54 +54,62 @@ const PRAY_MSG: ReactNode = (
 		me." - <i>Psalm 28:7</i>
 	</>
 );
-const REFRESH = "Refresh Page";
+const BACKWARDS = "Go back";
 
 const UnknownError: FC = () => {
-	const refreshPage = useCallback(() => {
-		window.location.reload();
-	}, []);
+	const navigate = useNavigate();
+
+	const handleSelection = useCallback((path: number | string) => {
+		if (typeof path === 'number') {
+			navigate(path);
+		} else {
+			navigate(path, { replace: true })
+		}
+	}, [navigate]);
 
 	return (
-		<Stack spacing={3} sx={rootSx} className="fade-in">
-			<Stack alignItems={"center"} spacing={2}>
-				<ErrorOutlineOutlined sx={errorIconSx} />
-				<Typography variant="h2" component="h1" fontWeight={"bold"}>
-					{ERROR_MSG}
+		<AppProvider>
+			<Stack spacing={3} sx={rootSx} className="fade-in">
+				<Stack alignItems={"center"} spacing={2}>
+					<ErrorOutlineOutlined sx={errorIconSx} />
+					<Typography variant="h2" component="h1" fontWeight={"bold"}>
+						{ERROR_MSG}
+					</Typography>
+				</Stack>
+
+				<Typography variant="h5" sx={apologySx}>
+					{APOLOGY_MSG}
 				</Typography>
+
+				<Typography component={"blockquote"} variant="h5">
+					{PRAY_MSG}
+				</Typography>
+
+				<Box sx={actionSx}>
+					<Button
+						color="primary"
+						onClick={() => handleSelection(-1)}
+						size="large"
+						startIcon={<ArrowBackIosNew />}
+						title={BACKWARDS}
+						variant="outlined"
+					>
+						{BACKWARDS}
+					</Button>
+
+					<Button
+						autoFocus
+						color="primary"
+						onClick={() => handleSelection(routePaths.HOME)}
+						size="large"
+						startIcon={<HomeRounded />}
+						variant="contained"
+					>
+						{`Return to ${HOME}`}
+					</Button>
+				</Box>
 			</Stack>
-
-			<Typography variant="h5" sx={apologySx}>
-				{APOLOGY_MSG}
-			</Typography>
-
-			<Typography component={"blockquote"} variant="body1">
-				{PRAY_MSG}
-			</Typography>
-
-			<Box sx={actionSx}>
-				<Button
-					color="secondary"
-					onClick={refreshPage}
-					size="large"
-					startIcon={<RefreshOutlined />}
-					variant="outlined"
-				>
-					{REFRESH}
-				</Button>
-
-				<Button
-					autoFocus
-					color="primary"
-					component={"a"}
-					href={routePaths.HOME}
-					size="large"
-					startIcon={<HomeRounded />}
-					variant="contained"
-				>
-					{`Return to ${HOME}`}
-				</Button>
-			</Box>
-		</Stack>
+		</AppProvider>
 	);
 };
 

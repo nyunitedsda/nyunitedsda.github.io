@@ -1,3 +1,4 @@
+import AppLayout from "@/Layout";
 import {
 	blogDetailLoader,
 	blogLoader,
@@ -5,9 +6,8 @@ import {
 	pageLoader,
 } from "@hooks/routes";
 import { Skeleton } from "@mui/material";
-import { createElement } from "react";
+import { createElement, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import AppLayout from "@/Layout";
 
 // Helper for lazy loading React components
 const createComponent = async (
@@ -18,11 +18,13 @@ const createComponent = async (
 	}));
 };
 
+const UnknownError = lazy( () => import("@pages/Error/UnknownError"));
 const routes = createBrowserRouter([
 	{
 		path: "/",
 		element: createElement(AppLayout),
 		hydrateFallbackElement: createElement(Skeleton),
+		errorElement: createElement(UnknownError),
 		loader: pageLoader,
 		children: [
 			{
@@ -95,6 +97,7 @@ const routes = createBrowserRouter([
 		path: "admin/:tab?",
 		element: createElement(AppLayout, { restricted: true }),
 		hydrateFallbackElement: createElement(Skeleton),
+		errorElement: createElement(UnknownError),
 		loader: pageLoader,
 		children: [
 			{
@@ -153,6 +156,7 @@ const routes = createBrowserRouter([
 		path: "library",
 		element: createElement(AppLayout, { restricted: true }),
 		hydrateFallbackElement: createElement(Skeleton),
+		errorElement: createElement(UnknownError),
 		loader: pageLoader,
 		children: [
 			{
@@ -178,11 +182,10 @@ const routes = createBrowserRouter([
 	},
 	{
 		path: "*",
-		element: createElement(AppLayout),
 		children: [
 			{
 				path: "*",
-				lazy: () => createComponent(() => import("@pages/Error")),
+				element: createElement(UnknownError),
 				id: "notFound",
 			},
 		],
