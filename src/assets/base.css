@@ -1,0 +1,47 @@
+
+  *, *::before,*::after {
+	box-sizing: border-box;
+}
+
+:root {
+	/* Theme variables */
+	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+	width: 100%;
+	min-height: 100vh;
+
+	color-scheme: light dark;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	width: 100%;
+	min-height: 100vh;
+  height: 100%;
+	overflow: auto;
+}
+
+#root {
+	width: 100%;
+	min-height: 100vh;
+  height: 100%;
+  overflow-y: visible;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.no-content {
+  padding: 0px !important;
+  border-radius: 0px !important;
+  height: 100dvh;
+  overflow-y: visible;
+} 

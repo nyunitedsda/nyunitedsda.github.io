@@ -153,11 +153,12 @@ const routes = createBrowserRouter([
 		path: "library",
 		element: createElement(AppLayout, { restricted: true }),
 		hydrateFallbackElement: createElement(Skeleton),
+		loader: pageLoader,
 		children: [
 			{
 				index: true,
 				lazy: () =>
-					createComponent(() => import("@pages/Storybook/StorybookPage")),
+					createComponent(() => import("@pages/Storybook")),
 				id: "library",
 			},
 		],

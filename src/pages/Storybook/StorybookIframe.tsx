@@ -1,21 +1,22 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
-import type { FC } from "react";
+import { useLayoutEffect, type FC } from "react";
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
-	height: "100%",
+	height: "100dvh",
 	border: "none",
-	borderRadius: 1,
-	boxShadow: 3,
 };
 
 const TITLE = "Component Library";
 
 const StorybookIframe: FC = () => {
-	// Build the URL for your Storybook instance
-	// This assumes Storybook is running on localhost:6006 during development
-	// For production, you would build Storybook and serve it from a specific URL
+
+	useLayoutEffect(() => {
+		document.getElementById(".page-container")?.classList.add('no-content');
+		return document.getElementById("page-container")?.classList.remove('no-content');
+	}, [])
+
 	const getStorybookUrl = () => {
 		// For development
 		if (import.meta.env.DEV) {

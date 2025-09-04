@@ -18,10 +18,10 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	const handleLogout = useCallback(async () => {
 		try {
 			await logout();
-			navigate(routePaths.LOGIN, { replace: true });
 		} catch (error) {
 			console.error("Logout error:", error);
-			navigate(routePaths.LOGIN, { replace: true });
+		} finally {
+			navigate(routePaths.HOME, { replace: true });
 		}
 	}, [logout, navigate]);
 

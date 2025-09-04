@@ -14,7 +14,7 @@ const containerSx: SxProps<Theme> = {
 	display: "flex",
 	flexDirection: "column",
 	flexGrow: 1,
-	height: "auto",
+	height: "100%",
 	justifyContent: "flex-start",
 	maxWidth: "1200px",
 	ml: "auto",
@@ -25,8 +25,8 @@ const containerSx: SxProps<Theme> = {
 
 const rootSx: SxProps<Theme> = {
 	backgroundColor: (theme) => theme.palette.background.paper,
-	height: "auto",
-	minHeight: "100%",
+	height: "100%",
+	minHeight: "100dvh",
 	overflowY: "auto",
 	width: "100%",
 };

@@ -106,7 +106,7 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 							value={selectedTabId}
 						>
 							{typeof i.content === "string" ? (
-								<Box>{i.content}</Box>
+								<Box component={'div'} dangerouslySetInnerHTML={{__html: i.content}}></Box>
 							) : typeof i.content === "function" ? (
 								<i.content />
 							) : (

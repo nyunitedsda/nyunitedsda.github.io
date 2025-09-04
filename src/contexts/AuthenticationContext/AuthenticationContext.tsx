@@ -1,3 +1,4 @@
+import type { LoginCredentials } from "@/api";
 import {
 	useAuthStatus,
 	useCurrentUser,
@@ -5,7 +6,7 @@ import {
 	useLogout,
 } from "@hooks/auth";
 import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
-import type { LoginCredentials } from "@/api";
+import { useLocalStorage } from 'usehooks-ts';
 import { Provider } from "./context";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -17,12 +18,13 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	} = useCurrentUser();
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
+	const [token, setToken, removeToken] = useLocalStorage<boolean | null>('hasToken', null);
 
 	const isAuthenticated = !!currentUser || !!hasAuthStatus;
 
 	// Check authentication status every 5 minutes if user authenticated
 	useEffect(() => {
-		if (isAuthenticated) {
+		if (token !== null && isAuthenticated) {
 			const interval = setInterval(
 				() => {
 					refreshAuthStatus();
@@ -31,13 +33,14 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 			);
 			return () => clearInterval(interval);
 		}
-	}, [isAuthenticated, refreshAuthStatus]);
+	}, [isAuthenticated, refreshAuthStatus, token]);
 
 	const login = useCallback(
 		async (credentials: LoginCredentials) => {
 			try {
 				const response = await loginUser.mutateAsync(credentials);
 				await refreshUser();
+				setToken(true);
 				return response;
 			} catch (error) {
 				return Promise.reject(error);
@@ -47,14 +50,16 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	);
 
 	const logout = useCallback(async () => {
+		removeToken();
 		try {
 			await logoutUser.mutateAsync();
-			await refreshUser();
+
 			return { message: "Logged out Successfully" };
 		} catch (error) {
 			return Promise.reject(error);
 		}
-	}, [logoutUser, refreshUser]);
+
+	}, [logoutUser]);
 
 	return (
 		<Provider
