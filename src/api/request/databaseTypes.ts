@@ -89,6 +89,9 @@ export interface NotificationDT {
 	severity_id: number;
 	title?: string;
 	expires_at?: Date;
+	severity_color?: string;
+	severity_title?: string;
+	severity_type?: string;
 }
 
 export interface PermissionDT {

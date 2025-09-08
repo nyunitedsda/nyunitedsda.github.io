@@ -19,9 +19,9 @@ const createEntity = async <T extends object>(
 ): Promise<T> => {
 	try {
 		const response = await axiosInstance.post(`/api/${entity}`, data, config);
-		return response.data.data || response.data;
-	} catch (error: unknown) {
-		return handleOperationError("create", entity, error);
+		return response.data;
+	} catch (error) {
+		return Promise.reject(error);
 	}
 };
 
@@ -47,7 +47,7 @@ const updateEntity = async <T extends { id: number }>(
 		);
 		return response.data.data || response.data;
 	} catch (error: unknown) {
-		return handleOperationError("update", entity, error);
+		return Promise.reject(error);
 	}
 };
 

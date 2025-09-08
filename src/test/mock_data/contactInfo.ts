@@ -9,7 +9,7 @@ export const initialState: Partial<ContactInfoDT> = {
 	country: "",
 	mail_address: "",
 	mailing_recipient: "",
-	contact_name: '',
+	contact_name: "",
 	is_default: false,
 };
 

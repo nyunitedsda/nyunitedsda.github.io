@@ -6,7 +6,7 @@ import {
 	useLogout,
 } from "@hooks/auth";
 import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from "usehooks-ts";
 import { Provider } from "./context";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -18,7 +18,10 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 	} = useCurrentUser();
 	const loginUser = useLogin();
 	const logoutUser = useLogout();
-	const [token, setToken, removeToken] = useLocalStorage<boolean | null>('hasToken', null);
+	const [token, setToken, removeToken] = useLocalStorage<boolean | null>(
+		"hasToken",
+		null,
+	);
 
 	const isAuthenticated = !!currentUser || !!hasAuthStatus;
 
@@ -58,7 +61,6 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		} catch (error) {
 			return Promise.reject(error);
 		}
-
 	}, [logoutUser]);
 
 	return (

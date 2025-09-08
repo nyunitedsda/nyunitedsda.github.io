@@ -5,7 +5,7 @@ import type { DatabaseEntity } from "@/api";
 export const notificationSchema = Yup.object().shape({
 	title: Yup.string().required("Title is required"),
 	message: Yup.string().required("Message is required"),
-	severity: Yup.number().oneOf([1, 2, 3, 4], "Invalid severity level"),
+	severity_id: Yup.number().oneOf([1, 2, 3, 4], "Invalid severity level"),
 	expires_at: Yup.date().nullable(),
 });
 

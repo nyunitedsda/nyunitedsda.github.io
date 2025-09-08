@@ -73,7 +73,6 @@ export const useLogout = () => {
 			queryClient.removeQueries({ queryKey: ["user"] });
 			queryClient.clear(); // Clear all cached data
 			enqueueSnackbar("Logged out successfully", { variant: "info" });
-			
 		},
 		onError: (error) => {
 			console.error("Logout failed:", error);
@@ -84,9 +83,12 @@ export const useLogout = () => {
 
 export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 	const queryClient = useQueryClient();
-	const [token, _setToken, removeToken] = useLocalStorage<boolean | null>('hasToken', null);
+	const [token, _setToken, removeToken] = useLocalStorage<boolean | null>(
+		"hasToken",
+		null,
+	);
 
-	const enableQuery = useMemo(() => getActiveToken(token),[token]);
+	const enableQuery = useMemo(() => getActiveToken(token), [token]);
 
 	return useQuery({
 		queryKey: ["user"],
@@ -106,17 +108,17 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 	});
 };
 
-
-
 /**
  * Helper hook to check authentication status
 //  */
 export const useAuthStatus = () => {
 	const queryClient = useQueryClient();
-		const [token, _setToken, removeToken] = useLocalStorage<boolean | null>('hasToken', null);
+	const [token, _setToken, removeToken] = useLocalStorage<boolean | null>(
+		"hasToken",
+		null,
+	);
 
-
-	const enableQuery = useMemo(() => getActiveToken(token),[token]);
+	const enableQuery = useMemo(() => getActiveToken(token), [token]);
 
 	const { data, isLoading, error, refetch } = useQuery({
 		queryKey: ["user-status"],
@@ -165,7 +167,7 @@ export const useDeleteUser = () => {
 	});
 };
 
-export const getActiveToken = (token?: boolean | null) => { 
-	if(!token || token === null || token === undefined) return false;
-		return token;
-}
+export const getActiveToken = (token?: boolean | null) => {
+	if (!token || token === null || token === undefined) return false;
+	return token;
+};

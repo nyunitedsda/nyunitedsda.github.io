@@ -31,8 +31,8 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 	const navigate = useNavigate();
 
 	const location = useLocation();
-		const match = matchPath(location.pathname, path);
-		console.log("match: ", match);
+	const match = matchPath(location.pathname, path);
+	console.log("match: ", match);
 
 	const isActiveButton = useMemo((): boolean => {
 		return menuItems && menuItems?.length > 0

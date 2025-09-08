@@ -24,12 +24,12 @@ const actionSx: SxProps<Theme> = {
 
 const errorIconSx: SxProps<Theme> = {
 	fontSize: 80,
-	color: theme => theme.palette.error.main,
+	color: (theme) => theme.palette.error.main,
 	mb: 2,
 };
 
 const rootSx: SxProps<Theme> = {
-	backgroundColor: theme => theme.palette.background.default,
+	backgroundColor: (theme) => theme.palette.background.default,
 	textAlign: "center",
 	width: "100%",
 	alignItems: "center",
@@ -37,12 +37,12 @@ const rootSx: SxProps<Theme> = {
 	height: "100vh",
 	gap: 3,
 	"& .MuiTypography-root": {
-		color: theme => theme.palette.text.primary,
+		color: (theme) => theme.palette.text.primary,
 	},
 };
 
 const apologySx: SxProps<Theme> = {
-	color: theme => theme.palette.text.secondary,
+	color: (theme) => theme.palette.text.secondary,
 };
 
 const HOME = "Home";
@@ -59,13 +59,16 @@ const BACKWARDS = "Go back";
 const UnknownError: FC = () => {
 	const navigate = useNavigate();
 
-	const handleSelection = useCallback((path: number | string) => {
-		if (typeof path === 'number') {
-			navigate(path);
-		} else {
-			navigate(path, { replace: true })
-		}
-	}, [navigate]);
+	const handleSelection = useCallback(
+		(path: number | string) => {
+			if (typeof path === "number") {
+				navigate(path);
+			} else {
+				navigate(path, { replace: true });
+			}
+		},
+		[navigate],
+	);
 
 	return (
 		<AppProvider>

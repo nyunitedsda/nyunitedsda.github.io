@@ -11,11 +11,12 @@ const rootSx: SxProps<Theme> = {
 const TITLE = "Component Library";
 
 const StorybookIframe: FC = () => {
-
 	useLayoutEffect(() => {
-		document.getElementById(".page-container")?.classList.add('no-content');
-		return document.getElementById("page-container")?.classList.remove('no-content');
-	}, [])
+		document.getElementById(".page-container")?.classList.add("no-content");
+		return document
+			.getElementById("page-container")
+			?.classList.remove("no-content");
+	}, []);
 
 	const getStorybookUrl = () => {
 		// For development

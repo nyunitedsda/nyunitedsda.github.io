@@ -7,7 +7,7 @@ import type { ColumnDefinition } from "@components/DataTable";
  * The field corresponds to the property in the ContactInfoDT interface.
  */
 const contactInfoColumns: ColumnDefinition<Partial<ContactInfoDT>>[] = [
-	{id: "contact_name", field:  "contact_name", title: "Name" },
+	{ id: "contact_name", field: "contact_name", title: "Name" },
 	{ id: "email", field: "email", title: "Email" },
 	{ id: "phone", field: "phone", title: "Phone" },
 	{ id: "street", field: "street", title: "Street" },

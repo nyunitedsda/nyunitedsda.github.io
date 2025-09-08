@@ -1,3 +1,4 @@
+import type { AnnouncementDT, EventDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
 import { announcementSchema, type EditorProps } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
@@ -5,8 +6,7 @@ import { InputField } from "@forms/Input";
 import { useEntityList } from "@hooks/api";
 import { useAuthentication } from "@hooks/auth";
 import { announcementDateFormats } from "@test/mock_data/announcements";
-import { type FC, useMemo } from "react";
-import type { AnnouncementDT, EventDT } from "@/api";
+import { type FC, useCallback, useMemo } from "react";
 
 const EDIT_TITLE = "Edit Announcement";
 const ADD_TITLE = "Add Announcement";
@@ -109,6 +109,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					label="Phone Number"
 					fieldType="text"
 					type="tel"
+					defaultValue={undefined}
 					placeholder="Enter the phone number (if applicable)"
 				/>
 

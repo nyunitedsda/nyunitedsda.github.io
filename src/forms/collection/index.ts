@@ -3,7 +3,6 @@ export * from "./BlogEditor";
 export * from "./commonInputs";
 export * from "./commonSchemas";
 export * from "./ContactEditor";
-export * from "./ContactEditor/constants";
 export * from "./DonationEditor";
 export * from "./LoginForm";
 export * from "./NotificationEditor";

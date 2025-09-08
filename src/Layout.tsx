@@ -11,7 +11,7 @@ const ProtectedLayout: FC = () => {
 	const { isAuthenticated, isLoading } = useAuthentication();
 	const navigate = useNavigate();
 
-	const [token, _, _x] = useLocalStorage<boolean | null>('hasToken', null);
+	const [token, _, _x] = useLocalStorage<boolean | null>("hasToken", null);
 
 	useEffect(() => {
 		if (token && !isLoading && !isAuthenticated) {

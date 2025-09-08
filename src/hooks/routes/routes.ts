@@ -18,7 +18,7 @@ const createComponent = async (
 	}));
 };
 
-const UnknownError = lazy( () => import("@pages/Error/UnknownError"));
+const UnknownError = lazy(() => import("@pages/Error/UnknownError"));
 const routes = createBrowserRouter([
 	{
 		path: "/",
@@ -161,8 +161,7 @@ const routes = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				lazy: () =>
-					createComponent(() => import("@pages/Storybook")),
+				lazy: () => createComponent(() => import("@pages/Storybook")),
 				id: "library",
 			},
 		],
@@ -174,7 +173,7 @@ const routes = createBrowserRouter([
 		children: [
 			{
 				path: "unauthorized",
-				
+
 				id: "unauthorized",
 			},
 		],

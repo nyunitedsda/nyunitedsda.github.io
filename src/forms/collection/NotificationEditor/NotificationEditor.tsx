@@ -123,10 +123,11 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 							</ButtonBase>
 						);
 					}}
-					name="severity"
+					name="severity_id"
 					label={SEVERITY_FIELD_LABEL}
 					fieldType="select"
 					items={severityData || []}
+					defaultValue={1}
 					sx={severitySx}
 					valueResolver={(item) => item?.id as number}
 				/>

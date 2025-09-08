@@ -39,7 +39,9 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const uId = useId();
 	const blockRef = useRef<HTMLDivElement>(null);
 
-	const [menuWidth, setMenuWidth] = useState<number | undefined>(blockRef?.current?.clientWidth || 100);
+	const [menuWidth, setMenuWidth] = useState<number | undefined>(
+		blockRef?.current?.clientWidth || 100,
+	);
 	const [optionAnchorEl, setOptionAnchorEl] =
 		useState<null | HTMLButtonElement>(null);
 
@@ -85,11 +87,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	const mergedSx = useMemo(() => (sx ? { ...rootSx, ...sx } : rootSx), [sx]);
 
 	return (
-		<Stack
-			ref={blockRef}
-			id={uId}
-			sx={mergedSx}
-		>
+		<Stack ref={blockRef} id={uId} sx={mergedSx}>
 			{displayList.map((item) => (
 				<MenuButton
 					key={item.name}
