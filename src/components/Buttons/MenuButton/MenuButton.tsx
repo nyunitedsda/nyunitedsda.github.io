@@ -20,7 +20,7 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { matchPath, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
 	const { isActive, path, children, buttonProps, menuItems } = props;
@@ -29,10 +29,6 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
 	const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const navigate = useNavigate();
-
-	const location = useLocation();
-	const match = matchPath(location.pathname, path);
-	console.log("match: ", match);
 
 	const isActiveButton = useMemo((): boolean => {
 		return menuItems && menuItems?.length > 0

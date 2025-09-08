@@ -33,6 +33,7 @@ export type InputFieldProps<
 	rows?: number;
 	minRows?: number;
 	maxRows?: number;
+	disabled?: boolean;
 	sx?: SxProps<Theme>;
 	items?: T[]; // For select fields, the items to display
 	valueResolver?: (item: T) => string | number; // Function to resolve the value for select options

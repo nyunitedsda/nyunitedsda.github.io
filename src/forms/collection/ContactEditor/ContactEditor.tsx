@@ -54,7 +54,6 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 				validationSchema={contactSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Contact information saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as ContactInfoDT);
 					}

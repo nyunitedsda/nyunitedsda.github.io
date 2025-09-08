@@ -78,7 +78,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 				validationSchema={notificationSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Notification saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as NotificationDT);
 					}

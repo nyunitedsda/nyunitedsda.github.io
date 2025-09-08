@@ -49,7 +49,6 @@ const BlogEditor: FC<EditorProps<ArticleDT>> = ({
 				validationSchema={blogSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Article saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as ArticleDT);
 					}

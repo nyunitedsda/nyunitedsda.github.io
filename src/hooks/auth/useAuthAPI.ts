@@ -38,7 +38,6 @@ export const useLogin = () => {
 			return data;
 		},
 		onError: (error: AxiosError<{ error: string }>) => {
-			console.log("login error: ", error);
 
 			console.error("Login failed:", error?.response?.data.error);
 			queryClient.removeQueries({ queryKey: ["user"] });
@@ -97,8 +96,10 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 		enabled: enableQuery,
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
-			if (error?.response?.status === 401 || error?.response?.status === 403) {
-				console.log("Session expired, please log in again");
+			if (
+				error?.response?.status === 401 
+				|| error?.response?.status === 403
+			) {
 				removeToken();
 				queryClient.removeQueries({ queryKey: ["user"] });
 				return false;
@@ -131,8 +132,6 @@ export const useAuthStatus = () => {
 			if (error?.response?.status === 401) {
 				queryClient.removeQueries({ queryKey: ["user"] });
 				removeToken();
-				console.log("Session expired, please log in again");
-
 				return false;
 			}
 

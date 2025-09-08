@@ -62,7 +62,11 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 	}, []);
 
 	const { displayList, optionList } = useMemo(() => {
-		return generateMenuDisplay(menuWidth || 100, menuList);
+		const result = generateMenuDisplay(menuWidth || 100, menuList);
+		if (result.optionList.length === 0 && optionAnchorEl) {
+			setOptionAnchorEl(null);
+		}
+		return result;
 	}, [menuWidth, menuList]);
 
 	const handleOptionsMenuOpen = useCallback(

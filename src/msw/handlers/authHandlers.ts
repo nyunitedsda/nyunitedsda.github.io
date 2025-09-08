@@ -19,7 +19,6 @@ const fetchUserById = (id: number) => {
 const userHandlers = [
 	// Get user by ID
 	http.get(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
-		console.log(`Inside get user by ID handler for ID: ${id}`);
 
 		const user = fetchUserById(parseInt(id as string, 10));
 
@@ -31,7 +30,6 @@ const userHandlers = [
 
 	// Delete user by ID
 	http.delete(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
-		console.log(`Inside delete user by ID handler for ID: ${id}`);
 		const user = fetchUserById(parseInt(id as string, 10));
 		if (user.error) {
 			return HttpResponse.json({ error: user.error }, { status: 404 });

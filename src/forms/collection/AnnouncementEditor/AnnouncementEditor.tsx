@@ -58,7 +58,6 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 				validationSchema={announcementSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Announcement saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as AnnouncementDT);
 					}

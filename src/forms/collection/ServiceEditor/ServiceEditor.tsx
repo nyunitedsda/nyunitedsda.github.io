@@ -44,7 +44,6 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 				validationSchema={serviceSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Service saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as ServiceDT);
 					}
