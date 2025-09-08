@@ -13,6 +13,8 @@ const CONTACT_EDITOR_CONSTANTS = {
   COUNTRY_LABEL: "Country",
   MAIL_ADDRESS_LABEL: "Mailing Address",
   MAILING_RECIPIENT_LABEL: "Mailing Recipient",
+  CONTACT_NAME: "Name"
 };
 
 export { CONTACT_EDITOR_CONSTANTS };
+

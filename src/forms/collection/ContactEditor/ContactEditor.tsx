@@ -23,6 +23,7 @@ const {
 	COUNTRY_LABEL,
 	MAIL_ADDRESS_LABEL,
 	MAILING_RECIPIENT_LABEL,
+	CONTACT_NAME,
 } = CONTACT_EDITOR_CONSTANTS;
 
 const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
@@ -63,9 +64,17 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 				}}
 			>
 				<InputField
+					name="contact_name"
+					label={CONTACT_NAME}
+					fieldType="text"
+					placeholder="Enter name"
+				/>
+
+				<InputField
 					name="email"
 					label={EMAIL_LABEL}
 					fieldType="text"
+					type="email"
 					placeholder="Enter email address"
 				/>
 
@@ -73,6 +82,7 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 					name="phone"
 					label={PHONE_LABEL}
 					fieldType="text"
+					type="phone"
 					placeholder="Enter phone number"
 				/>
 
@@ -121,6 +131,7 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 				<InputField
 					name="is_default"
 					label="Default Contact"
+					defaultValue={false}
 					fieldType="checkbox"
 					placeholder="Set as default contact"
 				/>

@@ -146,7 +146,6 @@ const UserEditor: FC<UserEditorProps> = ({
 
 				<InputField
 					name="role_id"
-					defaultValue=""
 					label={ROLE_FIELD_LABEL}
 					fieldType="select"
 					items={(roleData ?? []) as (RoleDT & any)[]}
