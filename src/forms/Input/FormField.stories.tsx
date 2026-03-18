@@ -87,23 +87,6 @@ export const CheckboxField: Story = {
 };
 
 /**
- * Datetime-local field
- */
-export const DateTimeField: Story = {
-	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
-			<Form>
-				<InputField<FormValues, FormValues>
-					name="datetime"
-					label="DateTime Field"
-					fieldType="datetime-local"
-				/>
-			</Form>
-		</Formik>
-	),
-};
-
-/**
  * Edge case: Select field with no options
  */
 export const SelectNoOptions: Story = {

@@ -1,3 +1,9 @@
+import type { NotificationDT, SeverityDT } from "@/api";
+import {
+	type EditorProps,
+	NOTIFICATION_EDITOR_CONSTANTS,
+	notificationSchema,
+} from "@/forms";
 import { theme } from "@components/AppProvider";
 import { ProjectModal } from "@components/ProjectModal";
 import EntityEditor from "@forms/EntityEditor/EntityEditor";
@@ -13,12 +19,7 @@ import {
 } from "@mui/material";
 import { initialNotification } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { NotificationDT, SeverityDT } from "@/api";
-import {
-	type EditorProps,
-	NOTIFICATION_EDITOR_CONSTANTS,
-	notificationSchema,
-} from "@/forms";
+import DTPicker from "../../Input/DTPicker";
 
 const severitySx: SxProps<Theme> = {
 	"& .MuiButtonBase-root-MuiMenuItem-root": {
@@ -34,6 +35,17 @@ const severitySx: SxProps<Theme> = {
 	},
 };
 
+const severityItemSx: SxProps<Theme> = {
+	width: "100%",
+	height: "100%",
+	display: "flex",
+	alignItems: "center",
+	gap: 1,
+	fontWeight: "bold",
+	justifyContent: "flex-start",
+	pl: 2,
+};
+
 const {
 	EDIT_TITLE,
 	ADD_TITLE,
@@ -43,6 +55,7 @@ const {
 	MESSAGE_FIELD_LABEL,
 	SEVERITY_FIELD_LABEL,
 	EXPIRATION_FIELD_LABEL,
+	PUBLISH_FIELD_LABEL,
 } = NOTIFICATION_EDITOR_CONSTANTS;
 
 const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
@@ -57,13 +70,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialNotification,
-						title: ADD_TITLE,
-					},
+					initialValues: initialNotification,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 
@@ -73,9 +86,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 				defaultValues={initialValues}
 				entity={ENTITY_NAME}
 				id={initialValues?.id}
-				submitButtonText={BUTTON_TEXT}
-				title={title}
-				validationSchema={notificationSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
 					console.log("Notification saved successfully:", data);
@@ -83,39 +93,36 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 						onSuccess(data as NotificationDT);
 					}
 				}}
+				submitButtonText={BUTTON_TEXT}
+				title={title}
+				validationSchema={notificationSchema}
+
 			>
 				<InputField name="title" label={TITLE_FIELD_LABEL} fieldType="text" />
 
 				<InputField
-					name="message"
-					label={MESSAGE_FIELD_LABEL}
 					fieldType="text"
+					label={MESSAGE_FIELD_LABEL}
 					multiline
+					name="message"
 				/>
 				<InputField
+					// disabled={severityData?.length === 0}
+					defaultValue={1}
+					fieldType="select"
+					items={severityData || []}
+					label={SEVERITY_FIELD_LABEL}
+					name="severity"
 					renderItemLabel={(item) => {
 						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (
 							theme.palette[
-								colorKey?.color as keyof PaletteType
+							colorKey?.color as keyof PaletteType
 							] as SimplePaletteColorOptions
 						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting
 						return (
-							<ButtonBase
-								key={item.id}
-								sx={{
-									width: "100%",
-									height: "100%",
-									display: "flex",
-									alignItems: "center",
-									gap: 1,
-									fontWeight: "bold",
-									justifyContent: "flex-start",
-									pl: 2,
-								}}
-								value={item.id}
-							>
+							<ButtonBase key={item.id} sx={severityItemSx} value={item.id}>
 								<span style={{ color, display: "flex", alignItems: "center" }}>
 									<Palette fontSize="small" />
 								</span>
@@ -123,18 +130,22 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 							</ButtonBase>
 						);
 					}}
-					name="severity"
-					label={SEVERITY_FIELD_LABEL}
-					fieldType="select"
-					items={severityData || []}
+
 					sx={severitySx}
 					valueResolver={(item) => item?.id as number}
 				/>
 
-				<InputField
-					name="expires_at"
+				<DTPicker
+					disablePast
 					label={EXPIRATION_FIELD_LABEL}
-					fieldType="datetime-local"
+					name="expires_at"
+					type="DateTime"
+				/>
+
+				<DTPicker
+					label={PUBLISH_FIELD_LABEL}
+					name="publish_on"
+					type="DateTime"
 				/>
 			</EntityEditor>
 		</ProjectModal>

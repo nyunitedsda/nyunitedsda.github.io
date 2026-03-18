@@ -7,6 +7,7 @@ import { useAuthentication } from "@hooks/auth";
 import { announcementDateFormats } from "@test/mock_data/announcements";
 import { type FC, useMemo } from "react";
 import type { AnnouncementDT, EventDT } from "@/api";
+import DTPicker from "../../Input/DTPicker";
 
 const EDIT_TITLE = "Edit Announcement";
 const ADD_TITLE = "Add Announcement";
@@ -156,11 +157,10 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					placeholder="Is this event recurring?"
 				/>
 
-				<InputField
+				<DTPicker
 					name="event_date"
 					label="Event Date"
-					fieldType="datetime-local"
-					placeholder="Select the date of the event"
+					type="DateTime"
 				/>
 				<InputField
 					name="date_format"

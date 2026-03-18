@@ -1,10 +1,11 @@
+import type { ServiceDT } from "@/api";
 import ProjectModal from "@components/ProjectModal/ProjectModal";
 import { type EditorProps, serviceSchema } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import InputField from "@forms/Input/FormField";
 import { initialService } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ServiceDT } from "@/api";
+import DTPicker from "../../Input/DTPicker";
 
 const EDIT_TITLE = "Edit Service";
 const ADD_TITLE = "Add Service";
@@ -23,13 +24,13 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialService,
-						title: ADD_TITLE,
-					},
+					initialValues: initialService,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 
@@ -39,9 +40,6 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 				defaultValues={initialValues}
 				entity={ENTITY_NAME}
 				id={data?.id}
-				submitButtonText={BUTTON_TEXT}
-				title={title}
-				validationSchema={serviceSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
 					console.log("Service saved successfully:", data);
@@ -49,19 +47,21 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 						onSuccess(data as ServiceDT);
 					}
 				}}
+				submitButtonText={BUTTON_TEXT}
+				title={title}
+				validationSchema={serviceSchema}
 			>
 				<InputField
-					name="title"
-					label={TITLE_FIELD_LABEL}
 					fieldType="text"
+					label={TITLE_FIELD_LABEL}
+					name="title"
 					placeholder="Enter service title"
 				/>
 
-				<InputField
-					name="time"
+				<DTPicker
 					label={TIME_LABEL}
-					fieldType="datetime-local"
-					placeholder="Enter service time (e.g., 10:00 AM)"
+					name="time"
+					type="Time"
 				/>
 				{/* Add a format selection input field */}
 			</EntityEditor>

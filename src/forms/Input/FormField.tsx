@@ -6,6 +6,7 @@ import FormControlLabel, {
 } from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
+import type { Dayjs } from "dayjs";
 import { useField, useFormikContext } from "formik";
 import { useCallback, useMemo } from "react";
 import {
@@ -16,7 +17,7 @@ import {
 
 const InputField = <
 	T extends { [key: string]: string | number | boolean },
-	S extends { [key: string]: string | number | boolean | Date },
+	S extends { [key: string]: string | number | boolean | Dayjs },
 >({
 	validateFieldCondition,
 	name,
@@ -32,7 +33,7 @@ const InputField = <
 	// biome-ignore lint/correctness/useExhaustiveDependencies(props): suppress dependency props
 	const memoProps = useMemo(() => {
 		return props;
-	}, []);
+	}, [props]);
 
 	const renderInputField = useCallback(() => {
 		const { fieldType = "text", type, required = false, ...rest } = memoProps;
@@ -85,20 +86,6 @@ const InputField = <
 						/>
 						{errorText && <FormHelperText>{errorText}</FormHelperText>}
 					</FormControl>
-				);
-			case "datetime-local":
-				return (
-					<TextField
-						{...field}
-						{...rest}
-						{...commonProps}
-						type="datetime-local"
-						sx={{
-							'& input[type="month"]::-webkit-calendar-picker-indicator': {
-								filter: `invert(1) brightness(0.5)`,
-							},
-						}}
-					/>
 				);
 
 			default:

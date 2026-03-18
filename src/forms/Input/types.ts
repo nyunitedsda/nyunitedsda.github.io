@@ -1,5 +1,8 @@
 import type { SelectProps } from "@mui/material/Select";
 import type { SxProps, Theme } from "@mui/material/styles";
+import type { DateTimePickerProps } from "@mui/x-date-pickers";
+import type { PickerValue } from "@mui/x-date-pickers/internals";
+import type { Dayjs } from "dayjs";
 import type { FieldHelperProps, FieldInputProps, FieldMetaProps } from "formik";
 import type { ReactNode } from "react";
 
@@ -19,14 +22,14 @@ export type FormFieldType =
 
 export type InputFieldProps<
 	T extends Record<string, string | number | boolean>,
-	S extends Record<string, string | number | boolean | Date>,
+	S extends Record<string, string | number | boolean | Dayjs>,
 > = {
 	validateFieldCondition?: (data: S) => boolean;
 	name: string;
 	label: string;
 	type?: string;
 	fieldType?: FormFieldType;
-	defaultValue?: string | number | boolean;
+	defaultValue?: string | number | boolean | Dayjs | PickerValue;
 	placeholder?: string;
 	multiline?: boolean;
 	required?: boolean;
@@ -47,3 +50,7 @@ export interface SelectFieldProps<T> extends Omit<SelectProps, "error"> {
 	valueResolver: (item: T) => string | number;
 	renderItemLabel: (item: T) => string;
 }
+
+export type PickerType = "DateTime" | "Time" | "Date";
+
+export type DTPickerProps = DateTimePickerProps & { type: PickerType };

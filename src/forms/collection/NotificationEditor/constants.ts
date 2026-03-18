@@ -18,6 +18,7 @@ export const NOTIFICATION_EDITOR_CONSTANTS = {
 	MESSAGE_FIELD_LABEL: "Notification Message",
 	SEVERITY_FIELD_LABEL: "Severity Level",
 	EXPIRATION_FIELD_LABEL: "Expiration Date (Optional)",
+	PUBLISH_FIELD_LABEL: "Publication Date",
 	SEVERITY_PALETTE_KEY: {
 		information: "info",
 		caution: "warning",

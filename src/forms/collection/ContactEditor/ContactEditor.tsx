@@ -1,3 +1,4 @@
+import type { ContactInfoDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
 import {
 	CONTACT_EDITOR_CONSTANTS,
@@ -8,22 +9,6 @@ import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { initialContactInfo } from "@test/mock_data";
 import { type FC, useMemo } from "react";
-import type { ContactInfoDT } from "@/api";
-
-const {
-	EDIT_TITLE,
-	ADD_TITLE,
-	ENTITY_NAME,
-	BUTTON_TEXT,
-	EMAIL_LABEL,
-	PHONE_LABEL,
-	STREET_LABEL,
-	CITY_LABEL,
-	ZIP_CODE_LABEL,
-	COUNTRY_LABEL,
-	MAIL_ADDRESS_LABEL,
-	MAILING_RECIPIENT_LABEL,
-} = CONTACT_EDITOR_CONSTANTS;
 
 const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 	open,
@@ -31,17 +16,33 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 	onClose,
 	onSuccess,
 }) => {
+
+	const {
+		EDIT_TITLE,
+		ADD_TITLE,
+		ENTITY_NAME,
+		BUTTON_TEXT,
+		EMAIL_LABEL,
+		PHONE_LABEL,
+		STREET_LABEL,
+		CITY_LABEL,
+		ZIP_CODE_LABEL,
+		COUNTRY_LABEL,
+		MAIL_ADDRESS_LABEL,
+		MAILING_RECIPIENT_LABEL,
+	} = CONTACT_EDITOR_CONSTANTS;
+
 	const { initialValues, title } = useMemo(
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialContactInfo,
-						title: ADD_TITLE,
-					},
+					initialValues: initialContactInfo,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 
