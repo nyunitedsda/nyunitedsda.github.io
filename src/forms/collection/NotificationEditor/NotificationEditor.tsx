@@ -88,7 +88,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 				id={initialValues?.id}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Notification saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as NotificationDT);
 					}
@@ -130,7 +129,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 							</ButtonBase>
 						);
 					}}
-
 					sx={severitySx}
 					valueResolver={(item) => item?.id as number}
 				/>

@@ -5,7 +5,6 @@ import type { FC } from "react";
 const rootSx: SxProps<Theme> = {
 	position: "relative",
 	height: "100%",
-	minHeight: "min-content",
 };
 
 const PageContentContainer: FC<Omit<ContainerProps, "MaxWidth">> = ({
@@ -13,7 +12,7 @@ const PageContentContainer: FC<Omit<ContainerProps, "MaxWidth">> = ({
 	...rest
 }) => {
 	return (
-		<Container maxWidth="lg" sx={rootSx} {...rest}>
+		<Container id={"page-container"} maxWidth="xl" sx={rootSx} {...rest}>
 			{children}
 		</Container>
 	);

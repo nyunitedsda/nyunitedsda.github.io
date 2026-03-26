@@ -2,8 +2,8 @@ import { createPath, createRoute } from "@/hooks/routes";
 import { describe, expect, it } from "@/test";
 import { createElement } from "react";
 
- const Element = createElement("div", {}, "Test Element");
- const BASE_URL = import.meta.env.BASE_URL || '/'
+const Element = createElement("div", {}, "Test Element");
+const BASE_URL = import.meta.env.BASE_URL || "/";
 describe("helpers test", () => {
 	it("should create path correctly", () => {
 		const path = "/this/is/a/test/path";
@@ -20,7 +20,6 @@ describe("helpers test", () => {
 	});
 
 	it("should create route with element, path and id", () => {
-		
 		const path = "test-path";
 		const id = "12345";
 		const route = createRoute(Element, path, id);
@@ -30,5 +29,4 @@ describe("helpers test", () => {
 			id,
 		});
 	});
-
 });

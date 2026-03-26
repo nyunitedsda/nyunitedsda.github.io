@@ -6,7 +6,7 @@ const initialState: Partial<ArticleDT> = {
 	published_at: new Date(),
 	views: 0,
 	comments: 0,
-	rating: undefined,
+	rating: 0,
 	category: "",
 	img_src: "",
 	content: "",

@@ -1,10 +1,7 @@
 import type { ContactInfoDT } from "@/api";
+import { CONTACT_EDITOR_CONSTANTS } from "@/constants";
 import { ProjectModal } from "@components/ProjectModal";
-import {
-	CONTACT_EDITOR_CONSTANTS,
-	contactSchema,
-	type EditorProps,
-} from "@forms/collection";
+import { contactSchema, type EditorProps } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { initialContactInfo } from "@test/mock_data";
@@ -16,7 +13,6 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 	onClose,
 	onSuccess,
 }) => {
-
 	const {
 		EDIT_TITLE,
 		ADD_TITLE,
@@ -30,6 +26,7 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 		COUNTRY_LABEL,
 		MAIL_ADDRESS_LABEL,
 		MAILING_RECIPIENT_LABEL,
+		CONTACT_NAME,
 	} = CONTACT_EDITOR_CONSTANTS;
 
 	const { initialValues, title } = useMemo(
@@ -57,16 +54,23 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 				validationSchema={contactSchema}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Contact information saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as ContactInfoDT);
 					}
 				}}
 			>
 				<InputField
+					name="contact_name"
+					label={CONTACT_NAME}
+					fieldType="text"
+					placeholder="Enter name"
+				/>
+
+				<InputField
 					name="email"
 					label={EMAIL_LABEL}
 					fieldType="text"
+					type="email"
 					placeholder="Enter email address"
 				/>
 
@@ -74,6 +78,7 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 					name="phone"
 					label={PHONE_LABEL}
 					fieldType="text"
+					type="phone"
 					placeholder="Enter phone number"
 				/>
 
@@ -122,6 +127,7 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 				<InputField
 					name="is_default"
 					label="Default Contact"
+					defaultValue={false}
 					fieldType="checkbox"
 					placeholder="Set as default contact"
 				/>

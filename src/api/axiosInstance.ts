@@ -5,6 +5,8 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 	_retry?: boolean;
 }
 
+type ErrorDetail = { details?: Record<string, { msg: string }> };
+
 const axiosInstance = axios.create({
 	baseURL: import.meta.env.VITE_API_URL ?? "",
 	responseType: "json",
@@ -23,6 +25,18 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config as
 			| CustomAxiosRequestConfig
 			| undefined;
+
+		if (error.status === 400 && error.response?.data) {
+			const { data } = error.response;
+
+			const details = (data as ErrorDetail).details ?? {};
+
+			const formikError = Object.fromEntries(
+				Object.entries(details).map(([field, { msg }]) => [field, msg]),
+			);
+
+			return Promise.reject({ error, formikError });
+		}
 
 		// Handle CORS and other errors
 		if (error.response && error.response.status === 403) {

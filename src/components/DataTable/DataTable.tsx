@@ -27,7 +27,6 @@ const rootSx: SxProps<Theme> = {
 	flexDirection: "column",
 	bgcolor: "background.paper",
 	borderRadius: 1,
-	boxShadow: 4,
 	flexGrow: 1,
 	overflow: "auto",
 	height: "100%",

@@ -58,10 +58,7 @@ const Header: FC = () => {
 			elevation={1}
 			sx={headerStyles.rootSx}
 		>
-			<PageContentContainer
-				sx={{ height: (theme) => `${theme.spacing(8)}` }}
-				maxWidth="lg"
-			>
+			<PageContentContainer sx={{ height: (theme) => `${theme.spacing(8)}` }}>
 				<Toolbar disableGutters>
 					{/* Mobile Hamburger Menu */}
 					<IconButton

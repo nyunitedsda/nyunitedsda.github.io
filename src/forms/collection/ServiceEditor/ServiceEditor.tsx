@@ -42,7 +42,6 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 				id={data?.id}
 				onCancel={onClose}
 				onSuccess={(data) => {
-					console.log("Service saved successfully:", data);
 					if (onSuccess) {
 						onSuccess(data as ServiceDT);
 					}

@@ -4,7 +4,7 @@
   "version": "2.5.0",
   "type": "module",
   "repository": "https://github.com/nhope123/nyunitedsda.git",
-  "description": "New York United Seventh-day Adventist Church - Official website featuring live broadcasts, community services, and spiritual resources",
+  "description": "New York United Sabbath Day Adventist Church - Official website featuring live broadcasts, community services, and spiritual resources",
   "homepage": "https://nhope123.github.io/nyunitedsda/",
   "keywords": [
     "seventh-day adventist",
@@ -80,6 +80,7 @@
     "react-scroll-to-top": "^3.1.0",
     "react-spinners": "^0.17.0",
     "terser": "^5.43.1",
+    "usehooks-ts": "^3.1.1",
     "yaml": "^2.8.0",
     "yup": "^1.6.1"
   },
@@ -88,7 +89,6 @@
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-links": "^9.0.18",
     "@storybook/react-vite": "^9.0.18",
-    "@storybook/testing-library": "^0.2.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -98,6 +98,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.4.1",
     "@vitest/coverage-v8": "^3.2.4",
+    "biome": "^0.2.2",
     "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
     "jsdom": "^26.1.0",

@@ -13,8 +13,6 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 	expandedIcon,
 	path = "",
 }) => {
-
-
 	const handleClick = useCallback(
 		(event: MouseEvent) => {
 			event.stopPropagation();
@@ -22,7 +20,6 @@ const MenuDrawerItem: FC<MenuDrawerItemProps> = ({
 		},
 		[onClick, disabled],
 	);
-
 
 	return (
 		<MenuItem

@@ -4,11 +4,11 @@ import { create } from 'storybook/theming';
 export default create({
   // base: 'light',
 
-  brandTitle: 'New York United Sabbath Day Adventist Church',
+  // brandTitle: 'New York United Sabbath Day Adventist Church',
   // brandUrl: 'https://example.com', add site link
-  brandUrl: '/',
-  brandImage: '/favicon.ico', // Uses the logo from the public directory
-  brandTarget: '_self',
+  // brandUrl: '/',
+  // brandImage: '/favicon.ico', // Uses the logo from the public directory
+  // brandTarget: '_self',
 
 
 

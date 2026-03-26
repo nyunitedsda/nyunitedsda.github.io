@@ -31,59 +31,58 @@
       ".",
       "./.react-router/types"
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*",
         "./dist/*",
-        ""
+        "./*"
       ],
       "@api/*": [
-        "src/api/*"
+        "./src/api/*"
       ],
       "@assets/*": [
-        "src/assets/*"
+        "./src/assets/*"
       ],
       "@components/*": [
-        "src/components/*"
+        "./src/components/*"
       ],
       "@contexts/*": [
-        "src/contexts/*"
+        "./src/contexts/*"
       ],
       "@constants/*": [
-        "src/constants/*"
+        "./src/constants/*"
       ],
       "@docs/*": [
-        "src/docs/*"
+        "./src/docs/*"
       ],
       "@forms/*": [
-        "src/forms/*"
+        "./src/forms/*"
       ],
       "@hooks/*": [
-        "src/hooks/*"
+        "./src/hooks/*"
       ],
       "@msw/*": [
-        "src/msw/*"
+        "./src/msw/*"
       ],
       "@pages/*": [
-        "src/pages/*"
+        "./src/pages/*"
       ],
       "@test/*": [
-        "src/test/*"
+        "./src/test/*"
       ],
       "@utils/*": [
-        "src/utils/*"
+        "./src/utils/*"
       ],
       "@public/*": [
-        "src/public/*"
+        "./src/public/*"
       ],
       "@storybook/*": [
-        ".storybook/*"
+        "./storybook/*"
       ],
     }
   },
   "include": [
-    "src",
+    "./src",
     ".react-router/types/**/*"
   ],
 }
