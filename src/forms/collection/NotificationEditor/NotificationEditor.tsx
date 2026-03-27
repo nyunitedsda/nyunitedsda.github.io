@@ -111,7 +111,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 					fieldType="select"
 					items={severityData || []}
 					label={SEVERITY_FIELD_LABEL}
-					name="severity"
+					name="severity_id"
 					renderItemLabel={(item) => {
 						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (

@@ -33,7 +33,6 @@ const Administration: FC<AdministrationProps> = () => {
 		return approvedTabs;
 	}, [user]);
 
-	console.table({ user });
 	return (
 		<RoutedTabs
 			baseUrl="/admin"
