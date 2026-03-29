@@ -8,8 +8,7 @@ const blogSchema = yup.object({
 	content: yup
 		.string()
 		.required("Content is required")
-		.min(10, "Content must be at least 10 characters")
-		.max(500, "Content must be at most 500 characters"),
+		.min(10, "Content must be at least 10 characters"),
 	author_id: yup.number().required(),
 });
 

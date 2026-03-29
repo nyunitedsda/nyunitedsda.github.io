@@ -27,6 +27,8 @@ const VisibilityOutlined = lazy(
 	() => import("@mui/icons-material/VisibilityOutlined"),
 );
 
+import type { ArticleDT } from "@/api";
+import { getDatabaseItem } from "@/api";
 import RingLoader from "@components/Loaders";
 import { capitalize } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -39,8 +41,6 @@ import { useQuery } from "@tanstack/react-query";
 import { authorMetaInfo } from "@test/mock_data";
 import type { FC } from "react";
 import { useParams } from "react-router";
-import type { ArticleDT } from "@/api";
-import { getDatabaseItem } from "@/api";
 
 const backBtnSx: SxProps<Theme> = {
 	maxWidth: "150px",
@@ -166,9 +166,12 @@ const BlogDetails: FC = () => {
 
 						{/* Content */}
 						<Box sx={{ mb: 4 }}>
-							<Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-								{data?.content}
-							</Typography>
+							<Typography
+								variant="body1"
+								sx={{ lineHeight: 1.8 }}
+								dangerouslySetInnerHTML={{ __html: data?.content ?? "" }}
+							/>
+
 						</Box>
 
 						<Box sx={{ mb: 3 }}>
