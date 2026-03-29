@@ -4,7 +4,7 @@ export const SERVICES = "SERVICES";
 
 export const aboutContent = [
 	"We’re looking forward to meeting you. Whether you are checking out our website just to learn more about New York United Sabbath Day Church or are planning to visit soon, we’re here for you.",
-	'New York United Sabbath Day Church Church is an independent self-supporting Adventist group that meets year-round to provide services that help to meet the communities physical and spiritual needs such as our annual Thanksgiving meals, refreshing bottled water for passer-bys during the hot summer days ("Got Thirst"). And to fulfill the spiritual we hold bible classes, prayer listen-in lines, Sabbath School and dynamic speakers from Sabbath to Sabbath(Saturday). We are nestled in beautiful South Harlem, New York.  So come by and say "hello".',
+	'New York United Sabbath Day Church Church is an independent self-supporting Adventist group that meets year-round to provide services that help to meet the communities physical and spiritual needs such as our annual Thanksgiving meals, refreshing bottled water for passer-bys during the hot summer days ("Got Thirst"). And to fulfill the spiritual we hold bible classes, prayer listen-in lines, Sabbath School and dynamic speakers from Sabbath to Sabbath (Saturday). We are nestled in beautiful South Harlem, New York.  So come by and say "hello".',
 ];
 
 export const organization =
