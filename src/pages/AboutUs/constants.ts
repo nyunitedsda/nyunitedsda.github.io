@@ -20,10 +20,10 @@ export const details = [
 		title: "LANGUAGE",
 		content: "English",
 	},
-	{
-		title: "MUSIC",
-		content: "Traditional Hymns,Praise and Worship",
-	},
+	// {
+	// 	title: "MUSIC",
+	// 	content: "Traditional Hymns,Praise and Worship",
+	// },
 	{
 		title: "VIBE",
 		content:
