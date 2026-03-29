@@ -2,7 +2,8 @@ import type { NotificationDT } from "@/api";
 import type { ColumnDefinition } from "@components/DataTable";
 import dayjs from "dayjs";
 
-const format = "DD-MM-YYYY h:mm A";
+const dateTimeFormat = "DD-MM-YYYY h:mm A";
+const dateFormat = "DD-MM-YYYY"
 
 /**
  * Defines the columns for the Notification DataTable.
@@ -12,14 +13,14 @@ const format = "DD-MM-YYYY h:mm A";
 const notificationsColumns: ColumnDefinition<Partial<NotificationDT>>[] = [
 	{ id: "title", field: "title", title: "Title" },
 	{ id: "message", field: "message", title: "Message" },
-	{ id: "severity_title", field: "severity_title", title: "Severity" },
+	{ id: "severity_title", field: "severity_title", title: "Severity", align: 'center' },
 	{
 		id: "expires_at",
 		field: "expires_at",
-		title: "Expiration Date",
+		title: "Expiration Date",		
 		renderCell: (data) => {
 			return data.expires_at
-				? dayjs(data.expires_at).format(format)
+				? dayjs(data.expires_at).format(dateTimeFormat)
 				: "No expiration";
 		},
 	},
@@ -28,7 +29,7 @@ const notificationsColumns: ColumnDefinition<Partial<NotificationDT>>[] = [
 		field: "publish_on",
 		title: "Publishing Date",
 		renderCell: (data) => {
-			return data.publish_on ? dayjs(data.publish_on).format(format) : "-";
+			return data.publish_on ? dayjs(data.publish_on).format(dateFormat) : "-";
 		},
 	},
 ];

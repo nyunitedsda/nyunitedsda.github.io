@@ -5,17 +5,19 @@ import { useEntityList } from "@hooks/api";
 import { usePermission } from "@hooks/auth";
 import { initialNotification } from "@test/mock_data";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useState } from "react";
+import { type FC, useCallback, useContext, useState } from "react";
 import type { DonationDT, NotificationDT } from "@/api";
 import { deleteEntity } from "@/api";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
+import {NotificationContext} from '@contexts/NotificationContext';
 
 const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const NotificationAdmin: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("notifications");
+	const { refetchNotifications} = useContext(NotificationContext);
 	const {
 		data: queryData,
 		refetch,
@@ -31,6 +33,7 @@ const NotificationAdmin: FC = () => {
 			deleteEntity("notifications", id)
 				.then(() => {
 					refetch();
+					refetchNotifications();
 					enqueueSnackbar("Notification deleted successfully", {
 						variant: "success",
 					});
@@ -73,6 +76,7 @@ const NotificationAdmin: FC = () => {
 					onSuccess={() => {
 						refetch();
 						setCreateNotificationOpen(null);
+						refetchNotifications();
 					}}
 				/>
 			)}

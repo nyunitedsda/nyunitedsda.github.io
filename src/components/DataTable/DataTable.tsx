@@ -101,7 +101,7 @@ const DataTable = <T extends { [key: string]: unknown }>({
 					))}
 				</ButtonGroup>
 			</Stack>
-			<Table size={density} aria-label="data table">
+			<Table size={density} aria-label="data table" stickyHeader>
 				<TableHead>
 					<TableRow>
 						{formattedColumns.map((col) => (

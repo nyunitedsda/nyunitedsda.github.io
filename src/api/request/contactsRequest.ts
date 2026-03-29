@@ -9,4 +9,13 @@ const getDefaultContacts = async () => {
 	}
 };
 
-export { getDefaultContacts };
+const getActiveNotifications = async () => {
+	try {
+		const response = await axiosInstance.get('/api/notifications/active');
+		return response.data;
+	} catch (error) {
+		return handleOperationError("getActiveNotifications", "notifications", error);
+	}
+}
+
+export { getActiveNotifications, getDefaultContacts };

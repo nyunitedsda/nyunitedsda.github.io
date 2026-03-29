@@ -6,6 +6,7 @@ type NotificationContextProps = PropsWithChildren<{
 	registerNotification: (notice: NotificationProps) => void;
 	dismissNotification: (id: NotificationProps["id"]) => void;
 	clearNotification: () => void;
+	refetchNotifications: () => void;
 }>;
 
 export type { NotificationContextProps };
