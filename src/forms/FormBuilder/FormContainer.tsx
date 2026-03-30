@@ -83,7 +83,7 @@ const FormContainer = <T extends { [key: string]: unknown }>({
 							type="submit"
 							variant="contained"
 							color="primary"
-							disabled={isSubmitting}
+							disabled={isSubmitting || !dirty}
 							fullWidth={!onCancel}
 							{...(confirmOnSave ? { shouldConfirm: dirty } : {})}
 							{...SAVE_CONFIRMATION}

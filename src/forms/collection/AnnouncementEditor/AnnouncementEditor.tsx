@@ -22,8 +22,34 @@ const defaultValues: Partial<AnnouncementDT> = {
 	event_id: 1,
 	description: "",
 	recurring: false,
+	location: "",
+	conference_code: "",
+	zoom_id: "",
+	passcode: "",
+	sermon: "",
+	speaker: "",
+	event_date: undefined,
 	date_format: "MM/DD/YYYY",
+	phone_number: '',
 };
+
+const formatData = (dData: Partial<AnnouncementDT>) => ({
+	...dData,
+	title: dData.title ?? defaultValues.title,
+	event_id: dData.event_id ?? defaultValues.event_id,
+	description: dData.description ?? defaultValues.description,
+	recurring: dData.recurring ?? defaultValues.recurring,
+	location: dData.location ?? defaultValues.location,
+	conference_code: dData.conference_code ?? defaultValues.conference_code,
+	zoom_id: dData.zoom_id ?? defaultValues.zoom_id,
+	passcode: dData.passcode ?? defaultValues.passcode,
+	sermon: dData.sermon ?? defaultValues.sermon,
+	speaker: dData.speaker ?? defaultValues.speaker,
+	event_date: dData.event_date ?? defaultValues.event_date,
+	date_format: dData.date_format ?? defaultValues.date_format,
+	phone_number: dData.phone_number ?? defaultValues.phone_number,
+})
+
 
 const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 	open,
@@ -38,11 +64,11 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: { ...data, author_id: user?.id ?? 0 },
+						initialValues: formatData({ ...data, author_id: user?.id ?? 0 }),
 						title: EDIT_TITLE,
 					}
 				: {
-						initialValues: { ...defaultValues, author_id: user?.id ?? 0 },
+						initialValues: formatData({ author_id: user?.id ?? 0 }),
 						title: ADD_TITLE,
 					},
 		[data, user],
