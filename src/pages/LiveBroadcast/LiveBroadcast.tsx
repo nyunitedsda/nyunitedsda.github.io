@@ -8,6 +8,13 @@ const LiveBroadcast: FC = () => {
 			baseUrl="/watch"
 			tabsProps={{ "aria-label": "Media streaming" }}
 			tabItems={TAB_LIST}
+			tabPanelProps={{
+				sx: {
+					minHeight: {
+						md: "70dvh"
+					}
+				}
+			}}
 		/>
 	);
 };

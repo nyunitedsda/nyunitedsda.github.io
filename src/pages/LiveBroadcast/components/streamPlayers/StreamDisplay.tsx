@@ -17,9 +17,8 @@ const rootSx: SxProps<Theme> = {
 	},
 
 	"& .responsive-iframe": {
-		position: "relative",
 		/*aspect ratio 16:9 */
-		height: 0,
+		height: "100%",
 		overflow: "hidden",
 	},
 	".responsive-iframe iframe": {
@@ -34,7 +33,7 @@ const rootSx: SxProps<Theme> = {
 const StreamDisplay: FC<
 	StreamDisplayProps & React.IframeHTMLAttributes<HTMLIFrameElement>
 > = (props) => {
-	const { loading = "lazy", stackProps, id, ...rest } = props;
+	const { loading = "eager", stackProps, id, ...rest } = props;
 	const ref = useRef(null);
 
 	useEffect(() => {
@@ -49,7 +48,6 @@ const StreamDisplay: FC<
 		<Stack
 			id={`wrap-${id}`}
 			sx={rootSx}
-			className="responsive-iframe"
 			{...stackProps}
 		>
 			<iframe
@@ -60,7 +58,7 @@ const StreamDisplay: FC<
 				id={id}
 				width="100%"
 				height="100%"
-				// sandbox="allow-scripts"
+				sandbox="allow-scripts allow-presentation"
 				loading={loading}
 				{...(rest as React.IframeHTMLAttributes<HTMLIFrameElement>)}
 			></iframe>
