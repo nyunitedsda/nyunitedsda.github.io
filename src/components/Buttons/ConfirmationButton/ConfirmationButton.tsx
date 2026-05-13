@@ -1,6 +1,6 @@
 import type { ConfirmationButtonProps } from "@components/Buttons";
 import ConfirmationDialog from "@components/ConfirmationDialog";
-import Button from "@mui/material/Button";
+import Button, { type ButtonProps } from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { type FC, useCallback, useState } from "react";
 
@@ -37,11 +37,17 @@ const ConfirmationButton: FC<ConfirmationButtonProps> = ({
 	return (
 		<>
 			{confirmVariant === "icon" ? (
-				<IconButton {...(buttonProps as any)} onClick={handleButtonClick}>
+				<IconButton
+					{...(buttonProps as Partial<ButtonProps>)}
+					onClick={handleButtonClick}
+				>
 					{children}
 				</IconButton>
 			) : (
-				<Button {...(buttonProps as any)} onClick={handleButtonClick}>
+				<Button
+					{...(buttonProps as Partial<ButtonProps>)}
+					onClick={handleButtonClick}
+				>
 					{children}
 				</Button>
 			)}

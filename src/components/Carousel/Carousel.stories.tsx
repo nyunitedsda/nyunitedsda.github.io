@@ -155,7 +155,7 @@ const TextSlide = ({
 
 export const Default: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		children: sampleImages.map((image, index) => (
 			<SampleSlide
 				key={JSON.stringify({ image, index })}
@@ -163,7 +163,7 @@ export const Default: Story = {
 				index={index}
 			/>
 		)),
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -197,7 +197,7 @@ export const WithAutoplay: Story = {
 
 export const TextSlides: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		children: [
 			<TextSlide
 				key={0}
@@ -218,7 +218,7 @@ export const TextSlides: Story = {
 				index={2}
 			/>,
 		],
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -231,9 +231,9 @@ export const TextSlides: Story = {
 
 export const SingleSlide: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		children: [<SampleSlide key={0} image={sampleImages[0]} index={0} />],
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -246,7 +246,7 @@ export const SingleSlide: Story = {
 
 export const ManySlides: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		children: [
 			...sampleImages.map((image, index) => (
 				<SampleSlide
@@ -263,7 +263,7 @@ export const ManySlides: Story = {
 				/>
 			)),
 		],
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -276,7 +276,7 @@ export const ManySlides: Story = {
 
 export const WithCustomOptions: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		options: {
 			align: "center",
 			slidesToScroll: 2,
@@ -305,7 +305,7 @@ export const WithCustomOptions: Story = {
 				</Card>
 			</Box>
 		)),
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -318,7 +318,7 @@ export const WithCustomOptions: Story = {
 
 export const WithCustomStyling: Story = {
 	args: {
-		autoplay: false,
+		userOptions: {},
 		sx: {
 			"& .embla": {
 				border: "2px solid #1976d2",
@@ -340,7 +340,7 @@ export const WithCustomStyling: Story = {
 					index={index}
 				/>
 			)),
-	} as any,
+	},
 	parameters: {
 		docs: {
 			description: {

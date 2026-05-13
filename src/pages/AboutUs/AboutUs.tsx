@@ -16,7 +16,7 @@ import {
 const organizationSx: SxProps<Theme> = {
 	"& strong": { color: "text.secondary" },
 	color: "text.primary",
-}
+};
 
 const AboutUs: FC = () => {
 	return (

@@ -17,7 +17,7 @@ const ProtectedLayout: FC = () => {
 		if (token && !isLoading && !isAuthenticated) {
 			navigate(routePaths.UNAUTHORIZED);
 		}
-	}, [isAuthenticated, isLoading, navigate]);
+	}, [isAuthenticated, isLoading, navigate, token]);
 
 	return (
 		<>

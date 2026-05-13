@@ -1,4 +1,4 @@
-import AppLayout from "@/Layout";
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import {
 	blogDetailLoader,
 	blogLoader,
@@ -8,6 +8,7 @@ import {
 import { Skeleton } from "@mui/material";
 import { createElement, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AppLayout from "@/Layout";
 
 // Helper for lazy loading React components
 const createComponent = async (

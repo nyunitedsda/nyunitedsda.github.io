@@ -1,7 +1,7 @@
 import { titleSchema } from "@forms/collection";
 import * as Yup from "yup";
 
-export default Yup.object().shape({
+export const serviceSchema = Yup.object().shape({
 	title: titleSchema,
 	time: Yup.string()
 		.required("Service time is required")

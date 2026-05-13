@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: Acceptable any */
 import { CarouselArrowControl } from "@components/Carousel";
 import { ExitToAppOutlined } from "@mui/icons-material";
 import Box from "@mui/material/Box";

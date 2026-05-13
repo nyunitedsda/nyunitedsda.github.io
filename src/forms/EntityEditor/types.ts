@@ -1,3 +1,4 @@
+import type { FormikConfig } from "formik";
 import type { ReactNode } from "react";
 import type { DatabaseEntity } from "@/api";
 
@@ -15,7 +16,7 @@ interface EntityEditorProps<T extends { id?: number }> {
 	/**
 	 * Validation schema for form (Yup schema)
 	 */
-	validationSchema: any;
+	validationSchema: FormikConfig<T>["validationSchema"];
 
 	/**
 	 * Default/initial values for data

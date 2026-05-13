@@ -19,7 +19,6 @@ const fetchUserById = (id: number) => {
 const userHandlers = [
 	// Get user by ID
 	http.get(`${USER_STORY_URL}/users/:id`, async ({ params: { id } }) => {
-
 		const user = fetchUserById(parseInt(id as string, 10));
 
 		if (user.error) {

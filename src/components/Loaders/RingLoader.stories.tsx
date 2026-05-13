@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import RingLoader from "@components/Loaders";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";

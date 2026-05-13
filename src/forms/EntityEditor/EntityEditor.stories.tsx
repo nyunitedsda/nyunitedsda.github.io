@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { donations, initialDonation } from "@test/mock_data";
 import { SnackbarProvider } from "notistack";

@@ -149,5 +149,6 @@ const articles: ArticleDT[] = [
 ];
 
 const authorMetaInfo = ["author", "publishDate", "views", "comments", "rating"];
+
 export { authorMetaInfo, initialState };
 export default articles;

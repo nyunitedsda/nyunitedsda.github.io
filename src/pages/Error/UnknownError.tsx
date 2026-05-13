@@ -1,4 +1,3 @@
-import { AppProvider } from "@/components";
 import { routePaths } from "@hooks/routes";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
@@ -11,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import type { ReactNode } from "react";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router";
+import { AppProvider } from "@/components";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",

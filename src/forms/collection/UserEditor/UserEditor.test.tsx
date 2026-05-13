@@ -1,8 +1,9 @@
+// biome-ignore assist/source/organizeImports: <explanation
+import type { UserDT } from "@/api";
 import { UserEditor } from "@forms/collection";
 import { describe, it, render } from "@test/index.ts";
 import { users } from "@test/mock_data";
 import { SnackbarProvider } from "notistack";
-import type { UserDT } from "@/api";
 
 describe("UserEditor", () => {
 	it("renders UserEditor", () => {
@@ -10,8 +11,8 @@ describe("UserEditor", () => {
 			<SnackbarProvider>
 				<UserEditor
 					open={true}
-					onClose={() => {}}
-					onSuccess={() => {}}
+					onClose={() => ({})}
+					onSuccess={() => ({})}
 					data={users[0] as UserDT}
 				/>
 			</SnackbarProvider>,

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import { CarouselDotControl } from "@components/Carousel";
 import Box from "@mui/material/Box";
 import type { Meta, StoryObj } from "@storybook/react-vite";

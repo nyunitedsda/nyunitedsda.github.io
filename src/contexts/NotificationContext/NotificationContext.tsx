@@ -1,4 +1,3 @@
-import { getActiveNotifications, type NotificationDT } from "@/api";
 import type { NotificationProps } from "@components/NotificationBanner";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -9,6 +8,7 @@ import {
 	useMemo,
 	useState,
 } from "react";
+import { getActiveNotifications, type NotificationDT } from "@/api";
 import { Provider } from "./context";
 import type { NotificationContextProps } from "./types";
 
@@ -19,15 +19,14 @@ const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 		[],
 	);
 
-
-	const { data, refetch} = useQuery({
+	const { data, refetch } = useQuery({
 		queryKey: ["active-notification"],
 		queryFn: () => getActiveNotifications(),
 		staleTime: 6000 * 15,
 		retry: (failureCount, _error) => {
-			return failureCount < 3
+			return failureCount < 3;
 		},
-	})
+	});
 
 	useEffect(() => {
 		if (data) setNotificationList(data as NotificationDT[]);

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import { ProjectModal } from "@components/ProjectModal";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
@@ -259,7 +260,7 @@ export const StaticClosed: Story = {
 	args: {
 		open: false,
 		ariaText: "static-modal",
-		onClose: () => {},
+		onClose: () => ({}),
 		children: (
 			<>
 				<Typography variant="h5" component="h2" gutterBottom>

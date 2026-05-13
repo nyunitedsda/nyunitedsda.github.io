@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: explanation */
 import { vi } from "vitest";
 
 // Mock problematic MUI components that cause scrollTop errors

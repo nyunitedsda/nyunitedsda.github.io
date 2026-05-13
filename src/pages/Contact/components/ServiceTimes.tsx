@@ -1,4 +1,3 @@
-import type { ServiceDT } from "@/api";
 import { useEntityList } from "@hooks/api";
 import {
 	CONTACT_CONSTANT,
@@ -8,6 +7,7 @@ import {
 import { NoteSection } from "@pages/Home";
 import dayjs from "dayjs";
 import type { FC } from "react";
+import type { ServiceDT } from "@/api";
 
 const ServiceTimes: FC = () => {
 	const { data, error, isLoading } = useEntityList<ServiceDT>("services");
@@ -18,7 +18,11 @@ const ServiceTimes: FC = () => {
 				<ContactSection title={CONTACT_CONSTANT.SERVICES}>
 					{data?.map((i) => (
 						<NoteSection
-							content={dayjs(i.time).isValid() ? dayjs(i.time).format('h:mm a') : i.time}
+							content={
+								dayjs(i.time).isValid()
+									? dayjs(i.time).format("h:mm a")
+									: i.time
+							}
 							key={i.title}
 							title={`${i.title}:`}
 						/>

@@ -56,7 +56,7 @@
     "build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
   },
   "engines": {
-    "node": "20.19.2"
+    "node": "24.14.1"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

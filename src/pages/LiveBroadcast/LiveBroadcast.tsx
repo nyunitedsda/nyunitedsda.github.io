@@ -11,9 +11,9 @@ const LiveBroadcast: FC = () => {
 			tabPanelProps={{
 				sx: {
 					minHeight: {
-						md: "70dvh"
-					}
-				}
+						md: "70dvh",
+					},
+				},
 			}}
 		/>
 	);

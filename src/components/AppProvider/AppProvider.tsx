@@ -22,31 +22,31 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<React.StrictMode>
 			<LocalizationProvider dateAdapter={AdapterDayjs}>
-			<QueryClientProvider client={queryClient}>
-				<SnackbarProvider
-					maxSnack={3}
-					anchorOrigin={snackbarAnchor}
-					// Prevent excessive DOM nodes with autoHideDuration
-					autoHideDuration={5000}
-					// Prevent layout shifts
-					preventDuplicate
-					dense
-				>
-					{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-					{/* <BrowserRouter> */}
-					<AuthProvider>
-						<ThemeProvider theme={theme}>
-							{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+				<QueryClientProvider client={queryClient}>
+					<SnackbarProvider
+						maxSnack={3}
+						anchorOrigin={snackbarAnchor}
+						// Prevent excessive DOM nodes with autoHideDuration
+						autoHideDuration={5000}
+						// Prevent layout shifts
+						preventDuplicate
+						dense
+					>
+						{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+						{/* <BrowserRouter> */}
+						<AuthProvider>
+							<ThemeProvider theme={theme}>
+								{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
 								{/* Using enableColorScheme for better dark/light mode handling */}
 								<CssBaseline enableColorScheme />
 								<NotificationProvider>{children}</NotificationProvider>
-							{/* </LocalizationProvider> */}
-						</ThemeProvider>
-					</AuthProvider>
-					{/* </BrowserRouter> */}
-					{/* </LocalizationProvider> */}
-				</SnackbarProvider>
-			</QueryClientProvider>
+								{/* </LocalizationProvider> */}
+							</ThemeProvider>
+						</AuthProvider>
+						{/* </BrowserRouter> */}
+						{/* </LocalizationProvider> */}
+					</SnackbarProvider>
+				</QueryClientProvider>
 			</LocalizationProvider>
 		</React.StrictMode>
 	);

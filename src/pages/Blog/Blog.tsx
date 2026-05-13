@@ -1,4 +1,3 @@
-import type { ArticleDT } from "@/api";
 import RingLoader from "@components/Loaders";
 import { PageTitle } from "@components/PageWrapper";
 import ProjectCard from "@components/ProjectCard";
@@ -12,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
 import { type FC, useCallback, useMemo, useState } from "react";
 import { useLoaderData } from "react-router";
+import type { ArticleDT } from "@/api";
 import {
 	BLOG_HEADER,
 	BLOG_PREVIEW_LENGTH,
@@ -88,9 +88,10 @@ const Blog: FC = () => {
 										variant="body1"
 										sx={{ "& p": { m: 0 } }}
 										dangerouslySetInnerHTML={{
-											__html: content.length > BLOG_PREVIEW_LENGTH
-												? `${content.slice(0, BLOG_PREVIEW_LENGTH)} ...`
-												: content
+											__html:
+												content.length > BLOG_PREVIEW_LENGTH
+													? `${content.slice(0, BLOG_PREVIEW_LENGTH)} ...`
+													: content,
 										}}
 									/>
 								}

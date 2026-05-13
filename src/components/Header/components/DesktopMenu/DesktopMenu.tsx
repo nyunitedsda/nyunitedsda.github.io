@@ -55,11 +55,11 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 		return () => {
 			window.removeEventListener("resize", updateMenuWidth);
 		};
-	}, []);
+	}, [updateMenuWidth]);
 
 	useLayoutEffect(() => {
 		updateMenuWidth();
-	}, []);
+	}, [updateMenuWidth]);
 
 	const { displayList, optionList } = useMemo(() => {
 		const result = generateMenuDisplay(menuWidth || 100, menuList);
@@ -67,7 +67,7 @@ const DesktopMenu: FC<DesktopMenuProps> = ({ menuList, isActive, sx }) => {
 			setOptionAnchorEl(null);
 		}
 		return result;
-	}, [menuWidth, menuList]);
+	}, [menuWidth, menuList, optionAnchorEl]);
 
 	const handleOptionsMenuOpen = useCallback(
 		(event: React.MouseEvent<HTMLButtonElement>) => {

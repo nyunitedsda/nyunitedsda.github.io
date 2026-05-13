@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation */
 import Footer from "@components/Footer";
 import { AuthProvider } from "@contexts/AuthenticationContext";
 import { Box } from "@mui/material";

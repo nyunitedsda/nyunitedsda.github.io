@@ -45,11 +45,7 @@ const StreamDisplay: FC<
 	});
 
 	return (
-		<Stack
-			id={`wrap-${id}`}
-			sx={rootSx}
-			{...stackProps}
-		>
+		<Stack id={`wrap-${id}`} sx={rootSx} {...stackProps}>
 			<iframe
 				allow="fullscreen"
 				allowFullScreen

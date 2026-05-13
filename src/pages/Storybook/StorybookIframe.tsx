@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { useLayoutEffect, type FC } from "react";
+import { type FC, useLayoutEffect } from "react";
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",

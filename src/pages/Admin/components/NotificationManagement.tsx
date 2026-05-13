@@ -1,5 +1,6 @@
 import DataTable from "@components/DataTable";
 import { PageTitle } from "@components/PageWrapper";
+import { NotificationContext } from "@contexts/NotificationContext";
 import { NotificationEditor } from "@forms/collection";
 import { useEntityList } from "@hooks/api";
 import { usePermission } from "@hooks/auth";
@@ -10,14 +11,13 @@ import type { DonationDT, NotificationDT } from "@/api";
 import { deleteEntity } from "@/api";
 import ADMIN_GENERAL_CONSTANTS from "../constants/general";
 import notificationsColumns from "../constants/notificationsColumns";
-import {NotificationContext} from '@contexts/NotificationContext';
 
 const { NOTIFICATION_SUBHEADER: SUBHEADER } = ADMIN_GENERAL_CONSTANTS;
 
 const NotificationAdmin: FC = () => {
 	const { enqueueSnackbar } = useSnackbar();
 	const { canCreate, canEdit, canDelete } = usePermission("notifications");
-	const { refetchNotifications} = useContext(NotificationContext);
+	const { refetchNotifications } = useContext(NotificationContext);
 	const {
 		data: queryData,
 		refetch,
@@ -45,7 +45,7 @@ const NotificationAdmin: FC = () => {
 					});
 				});
 		},
-		[refetch, enqueueSnackbar],
+		[refetch, enqueueSnackbar, refetchNotifications],
 	);
 
 	return (

@@ -8,7 +8,8 @@ const STREAM_URL = "https://embeds.sermoncloud.com/new-york-united/live?theme=";
 const LiveStream: FC = () => {
 	const { mode } = useColorTheme();
 	const streamSrc = useMemo(
-		() => `${STREAM_URL}${mode === "dark" ? "dark" : "light"}&isGivingBannerEnabled=true`,
+		() =>
+			`${STREAM_URL}${mode === "dark" ? "dark" : "light"}&isGivingBannerEnabled=true`,
 		[mode],
 	);
 
