@@ -77,11 +77,11 @@ const routes = createBrowserRouter([
 				lazy: () => createComponent(() => import("@pages/Donations")),
 				id: "donations",
 			},
-			{
-				path: "login",
-				lazy: () => createComponent(() => import("@pages/Login")),
-				id: "login",
-			},
+			// {
+			// 	path: "login",
+			// 	lazy: () => createComponent(() => import("@pages/Login")),
+			// 	id: "login",
+			// },
 			{
 				path: "policy/privacy",
 				lazy: () => createComponent(() => import("@pages/UserAgreements")),

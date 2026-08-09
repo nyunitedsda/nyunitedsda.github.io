@@ -1,3 +1,4 @@
+import { getMockEntity, type EntitiesKey } from "@/test/mock_data/helpers";
 import {
 	axiosInstance,
 	type DatabaseEntity,
@@ -21,8 +22,8 @@ const getDatabaseList = async <T extends { [key: string]: unknown }>(
 	config?: AxiosRequestConfig,
 ): Promise<T[]> => {
 	try {
-		const response = await axiosInstance.get(`/api/${entity}`, config);
-		return response?.data || response;
+		const response = await getMockEntity(entity as EntitiesKey); // axiosInstance.get(`/api/${entity}`, config);
+		return (response?.data || response) as T[];
 	} catch (error: unknown) {
 		return handleOperationError("getList", entity, error);
 	}

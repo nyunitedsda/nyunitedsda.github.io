@@ -5,53 +5,53 @@ import Skeleton from "@mui/material/Skeleton";
 import React, { type FC, lazy, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutOutlined = lazy(() => import("@mui/icons-material/LogoutOutlined"));
-const LoginOutlined = lazy(() => import("@mui/icons-material/LoginOutlined"));
+// const LogoutOutlined = lazy(() => import("@mui/icons-material/LogoutOutlined"));
+// const LoginOutlined = lazy(() => import("@mui/icons-material/LoginOutlined"));
 
-const LOGIN_TITLE = "Login";
-const LOGOUT_TITLE = "Logout";
+// const LOGIN_TITLE = "Login";
+// const LOGOUT_TITLE = "Logout";
 
 const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
-	const navigate = useNavigate();
-	const { isAuthenticated, logout } = useAuthentication();
+	// const navigate = useNavigate();
+	// const { isAuthenticated, logout } = useAuthentication();
 
-	const handleLogout = useCallback(async () => {
-		try {
-			await logout();
-		} catch (error) {
-			console.error("Logout error:", error);
-		} finally {
-			navigate(routePaths.HOME, { replace: true });
-		}
-	}, [logout, navigate]);
+	// const handleLogout = useCallback(async () => {
+	// 	try {
+	// 		await logout();
+	// 	} catch (error) {
+	// 		console.error("Logout error:", error);
+	// 	} finally {
+	// 		navigate(routePaths.HOME, { replace: true });
+	// 	}
+	// }, [logout, navigate]);
 
-	const commonProps: ButtonProps = useMemo(
-		() => ({
-			fullWidth: expanded,
-			"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
-			color: "primary",
-			sx: { color: "primary.light" },
-			onClick: isAuthenticated
-				? handleLogout
-				: () => navigate(routePaths.LOGIN),
-			startIcon: isAuthenticated ? <LogoutOutlined /> : <LoginOutlined />,
-			title: isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
-		}),
-		[expanded, isAuthenticated, handleLogout, navigate],
-	);
+	// const commonProps: ButtonProps = useMemo(
+	// 	() => ({
+	// 		fullWidth: expanded,
+	// 		"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
+	// 		color: "primary",
+	// 		sx: { color: "primary.light" },
+	// 		onClick: isAuthenticated
+	// 			? handleLogout
+	// 			: () => navigate(routePaths.LOGIN),
+	// 		startIcon: isAuthenticated ? <LogoutOutlined /> : <LoginOutlined />,
+	// 		title: isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
+	// 	}),
+	// 	[expanded, isAuthenticated, handleLogout, navigate],
+	// );
 
-	return (
-		<React.Suspense
-			fallback={
-				<Skeleton
-					variant="rectangular"
-					width={expanded ? "100%" : 90}
-					height={"auto"}
-				/>
-			}
-		>
-			<Button {...commonProps}>{commonProps.title}</Button>
-		</React.Suspense>
+	return ( <></>
+		// <React.Suspense
+		// 	fallback={
+		// 		<Skeleton
+		// 			variant="rectangular"
+		// 			width={expanded ? "100%" : 90}
+		// 			height={"auto"}
+		// 		/>
+		// 	}
+		// >
+		// 	<Button {...commonProps}>{commonProps.title}</Button>
+		// </React.Suspense>
 	);
 };
 

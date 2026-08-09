@@ -8,15 +8,15 @@ import type { UserDT } from "./databaseTypes";
  * database operations throughout the application.
  */
 export type DatabaseEntity =
-	| "donations"
-	| "users"
-	| "articles"
-	| "announcements"
-	| "notifications"
-	| "services"
-	| "roles"
-	| "contact_info"
-	| "severity"
+	| "donations" //
+	| "users" //
+	| "articles" //
+	| "announcements" //
+	| "notifications" //
+	| "services" //
+	| "roles" //
+	| "contact_info" //
+	| "severity" //
 	| "legal_content"
 	| "ministries"
 	| "events";

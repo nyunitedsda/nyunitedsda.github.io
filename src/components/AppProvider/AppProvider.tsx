@@ -34,7 +34,7 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 					>
 						{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
 						{/* <BrowserRouter> */}
-						<AuthProvider>
+						{/* <AuthProvider> */}
 							<ThemeProvider theme={theme}>
 								{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
 								{/* Using enableColorScheme for better dark/light mode handling */}
@@ -42,7 +42,7 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 								<NotificationProvider>{children}</NotificationProvider>
 								{/* </LocalizationProvider> */}
 							</ThemeProvider>
-						</AuthProvider>
+						{/* </AuthProvider> */}
 						{/* </BrowserRouter> */}
 						{/* </LocalizationProvider> */}
 					</SnackbarProvider>
