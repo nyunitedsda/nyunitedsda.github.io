@@ -1,24 +1,30 @@
 import type { PageTitleProps } from "@components/PageWrapper";
 import AddOutlined from "@mui/icons-material/AddOutlined";
-import Button, { type ButtonProps } from "@mui/material/Button";
-import type { FabProps } from "@mui/material/Fab";
-import Fab from "@mui/material/Fab";
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { useTheme, type Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { type FC, useMemo } from "react";
+import { type CSSProperties, type FC, useMemo } from "react";
+import { Flex, Button, FloatButton } from 'antd';
+import Title from "antd/es/typography/Title";
 
-const titleSx: SxProps<Theme> = {
-	fontWeight: "bold",
+const titleSx: CSSProperties = {
 	color: "primary.light",
 	fontFamily: "inter",
+	fontWeight: "bold",
+	marginTop: '0px',
 };
 
-const subtitleSx: SxProps<Theme> = {
-	fontWeight: "bold",
+const subtitleSx: CSSProperties = {
 	color: "text.primary",
+	fontWeight: "bold",
+	margin: '0px',
 };
+
+const rootStyle: CSSProperties = {
+	alignItems: 'center',
+	gap: '24px',
+	justifyContent: "space-between",
+	padding: '16px 0px',
+}
 
 const MOBILE_BUTTON_OFFSET = 18;
 
@@ -28,56 +34,58 @@ const PageTitle: FC<PageTitleProps> = ({
 	handleClick,
 	icon,
 }) => {
+
+	const theme = useTheme();
+
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm"),
 	);
 
-	const buttonAttributes = useMemo(
+	const buttonStyle = useMemo(
 		() => ({
-			"aria-label": `Create new ${title}`,
-			color: "primary",
-			onClick: handleClick,
-			...(isMobile
-				? {
-						children: icon ?? <AddOutlined />,
-					}
-				: {
-						children: "Create",
-						startIcon: icon ?? <AddOutlined />,
-						variant: "contained",
-					}),
+			color: theme.palette.primary.contrastText,
+			backgroundColor: theme.palette.primary.main
 		}),
-		[handleClick, icon, title, isMobile],
+		[theme],
 	);
 
 	return (
-		<Stack direction="row" spacing={3} sx={{ pt: 2, pb: 2, alignItems: "center" }}>
-			<Stack spacing={2} flexGrow={1}>
-				<Typography variant="h3" component="h1" sx={titleSx}>
+		<Flex vertical={false} style={rootStyle}>
+			<Flex style={{ flexGrow: 1, flexDirection: 'column' }} >
+				<Title level={2} style={{ ...titleSx, color: theme.palette.primary.main }}>
 					{title}
-				</Typography>
+				</Title>
 				{subtitle && (
-					<Typography variant="h6" sx={subtitleSx}>
+					<Title level={4} style={subtitleSx} type={'secondary'}>
 						{subtitle}
-					</Typography>
+					</Title>
 				)}
-			</Stack>
+			</Flex>
 			{!isMobile && handleClick && (
-				<Button {...(buttonAttributes as ButtonProps)} />
+				<Button
+					aria-label={`Create new ${title}`}
+					icon={icon ?? <AddOutlined />}
+					onClick={handleClick}
+					shape={"round"}
+					style={buttonStyle}
+					type={"primary"}
+					>
+					{"Create"}
+				</Button>
 			)}
 			{isMobile && handleClick && (
-				<Fab
-					{...({
-						...buttonAttributes,
-						sx: {
-							position: "absolute",
-							bottom: MOBILE_BUTTON_OFFSET,
-							right: MOBILE_BUTTON_OFFSET,
-						},
-					} as FabProps)}
+				<FloatButton
+					icon={icon ?? <AddOutlined />}
+					onClick={handleClick}
+					shape={"circle"}
+					style={{ insetInlineEnd: MOBILE_BUTTON_OFFSET, ...buttonStyle }}
+					tooltip={{
+						title: "Create",
+						color: 'lightgrey'
+					}}
 				/>
 			)}
-		</Stack>
+		</Flex>
 	);
 };
 
