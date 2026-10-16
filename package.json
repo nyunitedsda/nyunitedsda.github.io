@@ -56,9 +56,10 @@
     "build-storybook-for-prod": "npm run build-storybook && shx cp -r storybook-static dist/"
   },
   "engines": {
-    "node": "20.19.2"
+    "node": "24.14.1"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.3.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.1.0",
@@ -66,6 +67,7 @@
     "@mui/system": "^7.3.1",
     "@mui/x-date-pickers": "^8.27.2",
     "@tanstack/react-query": "^5.84.2",
+    "antd": "^6.6.2",
     "axios": "^1.9.0",
     "dayjs": "^1.11.13",
     "embla-carousel": "^8.6.0",

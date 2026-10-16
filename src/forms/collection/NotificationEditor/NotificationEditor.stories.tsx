@@ -12,6 +12,7 @@ const sampleNotification: NotificationDT = {
 	title: "System Maintenance",
 	severity_id: 1,
 	expires_at: new Date("2025-12-31T23:59:59"),
+	publish_on: new Date("2025-12-30T23:59:59"),
 };
 
 // Interactive wrapper component with open button

@@ -1,10 +1,10 @@
-import { createEntity, updateEntity } from "@/api";
-import { type EntityEditorProps, FormContainer } from "@/forms";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
 import { useCallback, useMemo } from "react";
+import { createEntity, updateEntity } from "@/api";
+import { type EntityEditorProps, FormContainer } from "@/forms";
 
 const titleSx: SxProps<Theme> = {
 	position: "sticky",
@@ -66,7 +66,7 @@ const EntityEditor = <T extends { id?: number }>({
 				);
 			}
 		},
-		[enqueueSnackbar, onSuccess],
+		[enqueueSnackbar, onSuccess, isEditMode, entity, id],
 	);
 
 	// Default submit button text based on mode if not provided

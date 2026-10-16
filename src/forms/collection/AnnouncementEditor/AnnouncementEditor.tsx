@@ -1,4 +1,3 @@
-import type { AnnouncementDT, EventDT } from "@/api";
 import { ProjectModal } from "@components/ProjectModal";
 import { announcementSchema, type EditorProps } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
@@ -7,6 +6,7 @@ import { useEntityList } from "@hooks/api";
 import { useAuthentication } from "@hooks/auth";
 import { announcementDateFormats } from "@test/mock_data/announcements";
 import { type FC, useMemo } from "react";
+import type { AnnouncementDT, EventDT } from "@/api";
 import DTPicker from "../../Input/DTPicker";
 
 const EDIT_TITLE = "Edit Announcement";
@@ -157,11 +157,7 @@ const AnnouncementEditor: FC<EditorProps<AnnouncementDT>> = ({
 					placeholder="Is this event recurring?"
 				/>
 
-				<DTPicker
-					name="event_date"
-					label="Event Date"
-					type="DateTime"
-				/>
+				<DTPicker name="event_date" label="Event Date" type="DateTime" />
 				<InputField
 					name="date_format"
 					validateFieldCondition={(data: Partial<AnnouncementDT>) =>

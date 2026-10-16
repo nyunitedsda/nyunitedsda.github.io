@@ -20,7 +20,6 @@ const AUTH_API_URL = import.meta.env.VITE_API_AUTH_URL || "/api/auth/";
  */
 const getAllUsers = async (config?: AxiosRequestConfig): Promise<UserDT[]> => {
 	try {
-		
 		const response = await axiosInstance.get(`${AUTH_API_URL}users`, config);
 		return response?.data.data || response.data;
 	} catch (error: unknown) {

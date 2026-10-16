@@ -9,8 +9,8 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { PERMISSION_ERROR } from "../constants";
 import { AppProvider } from "@/components";
+import { PERMISSION_ERROR } from "../constants";
 
 const actionSx: SxProps<Theme> = {
 	display: "flex",

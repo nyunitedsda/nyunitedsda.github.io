@@ -1,5 +1,5 @@
-import type { ContactInfoDT } from "@/api";
 import type { ColumnDefinition } from "@components/DataTable";
+import type { ContactInfoDT } from "@/api";
 
 /**
  * Defines the columns for the Contact Information DataTable.

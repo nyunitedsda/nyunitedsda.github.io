@@ -293,6 +293,7 @@ export const AllSeverities: Story = {
 						message: "This is an informational message about church services.",
 						open: true,
 						severity_id: 1,
+						publish_on: new Date(),
 					}),
 					React.createElement(NotificationBanner, {
 						id: 102,
@@ -300,6 +301,7 @@ export const AllSeverities: Story = {
 						message: "Your prayer request has been submitted successfully.",
 						open: true,
 						severity_id: 4,
+						publish_on: new Date(),
 					}),
 					React.createElement(NotificationBanner, {
 						id: 103,
@@ -307,6 +309,7 @@ export const AllSeverities: Story = {
 						message: "Please arrive early as parking will be limited.",
 						open: true,
 						severity_id: 2,
+						publish_on: new Date(),
 					}),
 					React.createElement(NotificationBanner, {
 						id: 104,
@@ -314,6 +317,7 @@ export const AllSeverities: Story = {
 						message: "Unable to process your request. Please try again.",
 						open: true,
 						severity_id: 3,
+						publish_on: new Date(),
 					}),
 				),
 			),
@@ -374,6 +378,7 @@ export const ChurchAnnouncements: Story = {
 								"Join us this Saturday for a special communion service starting at 11:00 AM. Elder Johnson will be delivering the sermon.",
 							open: true,
 							severity_id: 1,
+							publish_on: new Date(),
 						}),
 						React.createElement(NotificationBanner, {
 							id: 202,
@@ -382,6 +387,7 @@ export const ChurchAnnouncements: Story = {
 								"Registration is now open for our summer youth camp. Early bird pricing available until March 15th.",
 							open: true,
 							severity_id: 4,
+							publish_on: new Date(),
 						}),
 						React.createElement(NotificationBanner, {
 							id: 203,
@@ -389,6 +395,7 @@ export const ChurchAnnouncements: Story = {
 								"Prayer meeting moved to Fellowship Hall due to sanctuary maintenance.",
 							open: true,
 							severity_id: 2,
+							publish_on: new Date(),
 						}),
 						React.createElement(NotificationBanner, {
 							id: 204,
@@ -397,6 +404,7 @@ export const ChurchAnnouncements: Story = {
 								"Join us next Sunday for our monthly food distribution program. Volunteers needed from 9:00 AM to 12:00 PM.",
 							open: true,
 							severity_id: 1,
+							publish_on: new Date(),
 						}),
 					),
 				),

@@ -37,6 +37,7 @@ describe("NotificationBanner", () => {
 				message="Test notification message"
 				open={true}
 				severity_id={1}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -51,6 +52,7 @@ describe("NotificationBanner", () => {
 				message="Test notification message"
 				open={true}
 				severity_id={1}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -65,6 +67,7 @@ describe("NotificationBanner", () => {
 				message="Test notification message"
 				open={false}
 				severity_id={1}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -80,6 +83,7 @@ describe("NotificationBanner", () => {
 				message="Test notification message"
 				open={true}
 				severity_id={1}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -96,6 +100,7 @@ describe("NotificationBanner", () => {
 				open={true}
 				severity_id={1}
 				onClose={mockDismissNotification}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -112,6 +117,7 @@ describe("NotificationBanner", () => {
 				message="Success message"
 				open={true}
 				severity_id={4}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -125,6 +131,7 @@ describe("NotificationBanner", () => {
 				message="Error message"
 				open={true}
 				severity_id={3}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -138,6 +145,7 @@ describe("NotificationBanner", () => {
 				message="Warning message"
 				open={true}
 				severity_id={2}
+				publish_on={new Date()}
 			/>,
 		);
 
@@ -152,6 +160,7 @@ describe("NotificationBanner", () => {
 				id={1}
 				message="Test notification message"
 				severity_id={1}
+				publish_on={new Date()}
 			/>,
 		);
 

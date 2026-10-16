@@ -1,11 +1,9 @@
-import type { RoleDT, UserDT } from "@/api";
-import { getUserById, updateUser } from "@/api";
 import ProjectModal from "@components/ProjectModal/ProjectModal";
 import {
 	configurePasswordInput,
 	createUserSchema,
-	updateUserSchema,
 	type UserEditorProps,
+	updateUserSchema,
 } from "@forms/collection";
 import FormContainer from "@forms/FormBuilder/FormContainer";
 import { InputField } from "@forms/Input";
@@ -18,6 +16,8 @@ import { useQuery } from "@tanstack/react-query";
 import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
 import { type FC, useCallback, useMemo } from "react";
+import type { RoleDT, UserDT } from "@/api";
+import { getUserById, updateUser } from "@/api";
 
 const EMAIL_FIELD_LABEL = "Email Address";
 const FIRST_NAME_FIELD_LABEL = "First Name";

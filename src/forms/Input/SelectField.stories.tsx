@@ -32,7 +32,7 @@ export const Basic: Story = {
 		value: "one",
 		valueResolver: (item: Option) => item.value,
 		renderItemLabel: (item: Option) => item.name,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };
 
@@ -46,7 +46,7 @@ export const NoOptions: Story = {
 		value: "",
 		valueResolver: (item: Option) => item.value,
 		renderItemLabel: (item: Option) => item.name,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };
 
@@ -64,7 +64,7 @@ export const DuplicateValues: Story = {
 		value: "dup",
 		valueResolver: (item: Option) => item.value,
 		renderItemLabel: (item: Option) => item.name,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };
 
@@ -89,7 +89,7 @@ export const LongLabels: Story = {
 		value: "long1",
 		valueResolver: (item: Option) => item.value,
 		renderItemLabel: (item: Option) => item.name,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };
 
@@ -106,7 +106,7 @@ export const NumberValues: Story = {
 		value: "1",
 		valueResolver: (item) => item.value,
 		renderItemLabel: (item) => item.name,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };
 
@@ -122,6 +122,6 @@ export const CustomLabel: Story = {
 		valueResolver: (item: Option) => item.value,
 		// For edge case: custom label, but must return string for SelectField
 		renderItemLabel: (item: Option) => `⭐ ${item.name}`,
-		onChange: () => {},
+		onChange: () => ({}),
 	},
 };

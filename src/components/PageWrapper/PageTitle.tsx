@@ -51,7 +51,7 @@ const PageTitle: FC<PageTitleProps> = ({
 	);
 
 	return (
-		<Stack direction="row" spacing={3} sx={{ pb: 2, alignItems: "center" }}>
+		<Stack direction="row" spacing={3} sx={{ pt: 2, pb: 2, alignItems: "center" }}>
 			<Stack spacing={2} flexGrow={1}>
 				<Typography variant="h3" component="h1" sx={titleSx}>
 					{title}

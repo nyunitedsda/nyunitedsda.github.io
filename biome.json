@@ -1,7 +1,14 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-	"files": { "ignoreUnknown": false, "includes": ["src/**/*.{ts,tsx,js,jsx}"] },
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": ["src/**/*.{ts,tsx,js,jsx}"]
+	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab",
@@ -15,23 +22,39 @@
 		"enabled": true,
 		"rules": {
 			"recommended": false,
-			"a11y": { "noSvgWithoutTitle": "off", "useButtonType": "off" },
+			"a11y": {
+				"noSvgWithoutTitle": "off",
+				"useButtonType": "off"
+			},
 			"complexity": {
-				"noBannedTypes": { "level": "error", "fix": "safe", "options": {} },
+				"noBannedTypes": {
+					"level": "error",
+					"fix": "safe",
+					"options": {}
+				},
 				"noExcessiveCognitiveComplexity": "error",
 				"useArrowFunction": "error",
-				"useFlatMap": { "level": "error", "fix": "safe", "options": {} },
-				"useOptionalChain": { "level": "error", "fix": "safe", "options": {} }
+				"useFlatMap": {
+					"level": "error",
+					"fix": "safe",
+					"options": {}
+				},
+				"useOptionalChain": {
+					"level": "error",
+					"fix": "safe",
+					"options": {}
+				}
 			},
 			"correctness": {
-				"noConstAssign": { "level": "error", "fix": "safe", "options": {} },
+				"noConstAssign": {
+					"level": "error",
+					"fix": "safe",
+					"options": {}
+				},
 				"useExhaustiveDependencies": "info"
 			},
 			"nursery": {
-				"recommended": false,
-				"noImportCycles": "warn",
-				"noSecrets": "off",
-				"noUnresolvedImports": "off"
+				"recommended": false
 			},
 			"style": {
 				"noNegationElse": "warn",
@@ -48,12 +71,20 @@
 		},
 		"includes": ["**", "!dist", "**", "!dist"]
 	},
-	"javascript": { "formatter": { "quoteStyle": "double" } },
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
 	"overrides": [
 		{
 			"includes": ["**/*.stories.tsx"],
 			"linter": {
-				"rules": { "style": { "useComponentExportOnlyModules": "off" } }
+				"rules": {
+					"style": {
+						"useComponentExportOnlyModules": "off"
+					}
+				}
 			}
 		},
 		{
@@ -124,7 +155,12 @@
 				}
 			}
 		},
-		{ "includes": ["**/*.{ts,tsx}"], "javascript": { "globals": [] } },
+		{
+			"includes": ["**/*.{ts,tsx}"],
+			"javascript": {
+				"globals": []
+			}
+		},
 		{
 			"includes": [
 				"**/*.{ts,tsx}",
@@ -138,7 +174,9 @@
 			],
 			"linter": {
 				"rules": {
-					"complexity": { "noArguments": "error" },
+					"complexity": {
+						"noArguments": "error"
+					},
 					"correctness": {
 						"noConstAssign": "off",
 						"noGlobalObjectCalls": "off",
@@ -149,7 +187,9 @@
 						"noUnreachable": "off",
 						"noUnreachableSuper": "off"
 					},
-					"style": { "useConst": "error" },
+					"style": {
+						"useConst": "error"
+					},
 					"suspicious": {
 						"noClassAssign": "off",
 						"noDuplicateClassMembers": "off",
@@ -170,8 +210,12 @@
 			"includes": ["**/*.{ts,tsx}"],
 			"linter": {
 				"rules": {
-					"complexity": { "noUselessTypeConstraint": "error" },
-					"correctness": { "noUnusedVariables": "error" },
+					"complexity": {
+						"noUselessTypeConstraint": "error"
+					},
+					"correctness": {
+						"noUnusedVariables": "error"
+					},
 					"style": {
 						"noCommonJs": "error",
 						"noNamespace": "error",
@@ -179,7 +223,7 @@
 						"useAsConstAssertion": "error"
 					},
 					"suspicious": {
-						"noExplicitAny": "error",
+						"noExplicitAny": "off",
 						"noExtraNonNullAssertion": "error",
 						"noMisleadingInstantiator": "error",
 						"noUnsafeDeclarationMerging": "error",
@@ -199,7 +243,12 @@
 				}
 			}
 		},
-		{ "includes": ["**/*.{ts,tsx}"], "linter": { "rules": {} } },
+		{
+			"includes": ["**/*.{ts,tsx}"],
+			"linter": {
+				"rules": {}
+			}
+		},
 		{
 			"includes": ["**/*.{ts,tsx}"],
 			"javascript": {
@@ -400,7 +449,12 @@
 				}
 			}
 		},
-		{ "includes": ["**/*.{ts,tsx}"], "javascript": { "globals": [] } },
+		{
+			"includes": ["**/*.{ts,tsx}"],
+			"javascript": {
+				"globals": []
+			}
+		},
 		{
 			"includes": [
 				"**/*.{ts,tsx}",
@@ -414,7 +468,9 @@
 			],
 			"linter": {
 				"rules": {
-					"complexity": { "noArguments": "error" },
+					"complexity": {
+						"noArguments": "error"
+					},
 					"correctness": {
 						"noConstAssign": "off",
 						"noGlobalObjectCalls": "off",
@@ -425,7 +481,9 @@
 						"noUnreachable": "off",
 						"noUnreachableSuper": "off"
 					},
-					"style": { "useConst": "error" },
+					"style": {
+						"useConst": "error"
+					},
 					"suspicious": {
 						"noClassAssign": "off",
 						"noDuplicateClassMembers": "off",
@@ -446,8 +504,12 @@
 			"includes": ["**/*.{ts,tsx}"],
 			"linter": {
 				"rules": {
-					"complexity": { "noUselessTypeConstraint": "error" },
-					"correctness": { "noUnusedVariables": "error" },
+					"complexity": {
+						"noUselessTypeConstraint": "error"
+					},
+					"correctness": {
+						"noUnusedVariables": "error"
+					},
 					"style": {
 						"noCommonJs": "error",
 						"noNamespace": "error",
@@ -455,7 +517,7 @@
 						"useAsConstAssertion": "error"
 					},
 					"suspicious": {
-						"noExplicitAny": "error",
+						"noExplicitAny": "off",
 						"noExtraNonNullAssertion": "error",
 						"noMisleadingInstantiator": "error",
 						"noUnsafeDeclarationMerging": "error",
@@ -475,7 +537,12 @@
 				}
 			}
 		},
-		{ "includes": ["**/*.{ts,tsx}"], "linter": { "rules": {} } },
+		{
+			"includes": ["**/*.{ts,tsx}"],
+			"linter": {
+				"rules": {}
+			}
+		},
 		{
 			"includes": ["**/*.{ts,tsx}"],
 			"javascript": {

@@ -1,6 +1,6 @@
-import type { NotificationDT } from "@/api";
 import type { ColumnDefinition } from "@components/DataTable";
 import dayjs from "dayjs";
+import type { NotificationDT } from "@/api";
 
 const format = "DD-MM-YYYY h:mm A";
 

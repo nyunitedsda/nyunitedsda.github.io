@@ -1,9 +1,3 @@
-import type { NotificationDT, SeverityDT } from "@/api";
-import {
-	type EditorProps,
-	NOTIFICATION_EDITOR_CONSTANTS,
-	notificationSchema,
-} from "@/forms";
 import { theme } from "@components/AppProvider";
 import { ProjectModal } from "@components/ProjectModal";
 import EntityEditor from "@forms/EntityEditor/EntityEditor";
@@ -19,6 +13,12 @@ import {
 } from "@mui/material";
 import { initialNotification } from "@test/mock_data";
 import { type FC, useMemo } from "react";
+import type { NotificationDT, SeverityDT } from "@/api";
+import {
+	type EditorProps,
+	NOTIFICATION_EDITOR_CONSTANTS,
+	notificationSchema,
+} from "@/forms";
 import DTPicker from "../../Input/DTPicker";
 
 const severitySx: SxProps<Theme> = {
@@ -70,13 +70,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: initialNotification,
-					title: ADD_TITLE,
-				},
+						initialValues: initialNotification,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 
@@ -95,7 +95,6 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 				submitButtonText={BUTTON_TEXT}
 				title={title}
 				validationSchema={notificationSchema}
-
 			>
 				<InputField name="title" label={TITLE_FIELD_LABEL} fieldType="text" />
 
@@ -116,7 +115,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (
 							theme.palette[
-							colorKey?.color as keyof PaletteType
+								colorKey?.color as keyof PaletteType
 							] as SimplePaletteColorOptions
 						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting

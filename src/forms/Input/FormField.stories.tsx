@@ -36,7 +36,7 @@ type Story = StoryObj<InputFieldProps<Option, FormValues>>;
  */
 export const TextField: Story = {
 	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
+		<Formik initialValues={initialValues} onSubmit={() => undefined}>
 			<Form>
 				<InputField<FormValues, FormValues>
 					name="text"
@@ -54,7 +54,7 @@ export const TextField: Story = {
  */
 export const SelectFieldStory: Story = {
 	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
+		<Formik initialValues={initialValues} onSubmit={() => undefined}>
 			<Form>
 				<InputField<Option, FormValues>
 					name="select"
@@ -74,7 +74,7 @@ export const SelectFieldStory: Story = {
  */
 export const CheckboxField: Story = {
 	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
+		<Formik initialValues={initialValues} onSubmit={() => undefined}>
 			<Form>
 				<InputField<FormValues, FormValues>
 					name="checkbox"
@@ -91,7 +91,7 @@ export const CheckboxField: Story = {
  */
 export const SelectNoOptions: Story = {
 	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
+		<Formik initialValues={initialValues} onSubmit={() => undefined}>
 			<Form>
 				<InputField<Option, FormValues>
 					name="select"
@@ -116,7 +116,7 @@ export const CheckboxWithError: Story = {
 			validate={(values) => ({
 				checkbox: values.checkbox ? undefined : "Must be checked",
 			})}
-			onSubmit={() => {}}
+			onSubmit={() => undefined}
 		>
 			<Form>
 				<InputField<FormValues, FormValues>
@@ -135,7 +135,7 @@ export const CheckboxWithError: Story = {
  */
 export const ConditionalField: Story = {
 	render: () => (
-		<Formik initialValues={initialValues} onSubmit={() => {}}>
+		<Formik initialValues={initialValues} onSubmit={() => undefined}>
 			<Form>
 				<InputField<FormValues, FormValues>
 					name="checkbox"

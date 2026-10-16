@@ -24,6 +24,8 @@ const getDatabaseList = async <T extends { [key: string]: unknown }>(
 		const response = await axiosInstance.get(`/api/${entity}`, config);
 		return response?.data || response;
 	} catch (error: unknown) {
+		console.error("error: ", error);
+
 		return handleOperationError("getList", entity, error);
 	}
 };

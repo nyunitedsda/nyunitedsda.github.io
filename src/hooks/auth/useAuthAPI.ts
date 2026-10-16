@@ -1,3 +1,13 @@
+import {
+	type UseQueryResult,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { useSnackbar } from "notistack";
+import { useMemo } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import type {
 	LoginCredentials,
 	LoginResponse,
@@ -12,16 +22,6 @@ import {
 	logoutUser,
 	registerUser,
 } from "@/api";
-import {
-	type UseQueryResult,
-	useMutation,
-	useQuery,
-	useQueryClient,
-} from "@tanstack/react-query";
-import type { AxiosError } from "axios";
-import { useSnackbar } from "notistack";
-import { useMemo } from "react";
-import { useLocalStorage } from "usehooks-ts";
 
 /**
  * Authentication API hooks using React Query
@@ -38,7 +38,6 @@ export const useLogin = () => {
 			return data;
 		},
 		onError: (error: AxiosError<{ error: string }>) => {
-
 			console.error("Login failed:", error?.response?.data.error);
 			queryClient.removeQueries({ queryKey: ["user"] });
 			return Promise.reject({ message: error?.response?.data.error });
@@ -96,10 +95,7 @@ export const useCurrentUser = (): UseQueryResult<UserDT, Error> => {
 		enabled: enableQuery,
 		retry: (failureCount, error: any) => {
 			// Don't retry if it's an authentication error
-			if (
-				error?.response?.status === 401 
-				|| error?.response?.status === 403
-			) {
+			if (error?.response?.status === 401 || error?.response?.status === 403) {
 				removeToken();
 				queryClient.removeQueries({ queryKey: ["user"] });
 				return false;
@@ -127,9 +123,7 @@ export const useAuthStatus = () => {
 		staleTime: 5 * 60 * 1000, // 5 minutes
 		enabled: enableQuery,
 		retry: (failureCount, error: any) => {
-			if (error?.response?.status === 403) {
-			}
-			if (error?.response?.status === 401) {
+			if (error?.response?.status === 403 || error?.response?.status === 401) {
 				queryClient.removeQueries({ queryKey: ["user"] });
 				removeToken();
 				return false;

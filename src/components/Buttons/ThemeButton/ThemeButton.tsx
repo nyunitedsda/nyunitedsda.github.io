@@ -1,11 +1,14 @@
+import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { day } from "@components/Buttons";
-import DarkModeRounded from "@mui/icons-material/DarkModeRounded";
-import DarkModeTwoTone from "@mui/icons-material/DarkModeTwoTone";
-import LightModeRounded from "@mui/icons-material/LightModeRounded";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
-import { type SxProps, type Theme, useColorScheme } from "@mui/material/styles";
+import {
+	type SxProps,
+	type Theme,
+	useColorScheme,
+	useTheme,
+} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import {
 	type FC,
@@ -28,40 +31,9 @@ const expandedBtnSx: SxProps<Theme> = {
 	background: `center / 110%  no-repeat url('${day}')`,
 };
 
-const sunSx: SxProps<Theme> = {
-	position: "relative",
-	right: 0,
-	transition: "transform 0.3s ease",
-	transform: "rotate(0deg) translateX(48px)",
-	"&:active": {
-		transform: "translateX(-48px) rotate(360deg)",
-	},
-};
-
-const moonSx: SxProps<Theme> = {
-	position: "relative",
-	left: 0,
-	transition: "transform 0.3s ease",
-	transform: "rotate(0deg) translateX(-48px)",
-	"&:active": {
-		transform: "translateX(48px) rotate(360deg)",
-	},
-};
-
-const iconSx: SxProps<Theme> = {
-	borderRadius: "50%",
-	width: 28,
-	height: 28,
-	boxShadow: 4,
-	transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-	"&:active": {
-		transform: (theme) =>
-			`scale(1.3) ${theme.palette.mode === "dark" ? "translateX(-3px)" : "translateX(-48px)"}`,
-	},
-};
-
 const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	const { mode, setMode } = useColorScheme();
+	const theme = useTheme();
 
 	const toggledMode = useMemo(
 		() => (mode === "light" ? "dark" : "light"),
@@ -97,18 +69,12 @@ const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 				>
 					<Button onClick={_handleBtnClick} sx={expandedBtnSx}>
 						{mode === "dark" ? (
-							<LightModeRounded color="warning" sx={[iconSx, sunSx]} />
+							<SunOutlined style={{ color: theme.palette.warning.light }} />
 						) : (
-							<DarkModeRounded
-								sx={[
-									iconSx,
-									moonSx,
-									{
-										fill: (theme) => theme.palette.primary.contrastText,
-										color: (theme) => theme.palette.primary.light,
-										backgroundColor: (theme) => theme.palette.primary.light,
-									},
-								]}
+							<MoonOutlined
+								style={{
+									color: theme.palette.primary.light,
+								}}
 							/>
 						)}
 					</Button>
@@ -121,9 +87,13 @@ const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 					title={`Switch to ${toggledMode} mode`}
 				>
 					{mode === "dark" ? (
-						<LightModeRounded color="warning" />
+						<SunOutlined style={{ color: theme.palette.warning.light }} />
 					) : (
-						<DarkModeTwoTone htmlColor="primary" />
+						<MoonOutlined
+							style={{
+								color: theme.palette.primary.light,
+							}}
+						/>
 					)}
 				</IconButton>
 			)}

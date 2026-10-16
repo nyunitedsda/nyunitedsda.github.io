@@ -25,4 +25,5 @@ interface CarouselControlProps {
 	nextIcon?: ReactNode;
 	buttonProps?: Exclude<IconButtonProps, "children">;
 }
-export type { CarouselProps, CarouselControlProps };
+
+export type { CarouselControlProps, CarouselProps };

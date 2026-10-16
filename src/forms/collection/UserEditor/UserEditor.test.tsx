@@ -10,8 +10,8 @@ describe("UserEditor", () => {
 			<SnackbarProvider>
 				<UserEditor
 					open={true}
-					onClose={() => {}}
-					onSuccess={() => {}}
+					onClose={() => undefined}
+					onSuccess={() => undefined}
 					data={users[0] as UserDT}
 				/>
 			</SnackbarProvider>,

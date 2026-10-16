@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import type { SxProps, Theme } from "@mui/material/styles";
-import { useLayoutEffect, type FC } from "react";
+import { type FC, useLayoutEffect } from "react";
 
 const rootSx: SxProps<Theme> = {
 	width: "100%",
@@ -12,6 +12,7 @@ const TITLE = "Component Library";
 
 const StorybookIframe: FC = () => {
 	useLayoutEffect(() => {
+
 		document.getElementById(".page-container")?.classList.add("no-content");
 		return document
 			.getElementById("page-container")

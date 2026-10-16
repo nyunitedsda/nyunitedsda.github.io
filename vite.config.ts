@@ -73,9 +73,9 @@ export default defineConfig((props: UserConfig) => {
 							if (id.includes("@emotion/styled")) {
 								return "vendor_emo_styled";
 							}
-							if (id.includes("react") || id.includes("react-dom")) {
-								return "vendor_react";
-							}
+							// if (id.includes("react") || id.includes("react-dom")) {
+							// 	return "vendor_react";
+							// }
 							if (id.includes("@tanstack")) {
 								return "vendor_tanstack";
 							}

@@ -1,11 +1,11 @@
-import type { ContactInfoDT } from "@/api";
-import { CONTACT_EDITOR_CONSTANTS } from "@/constants";
 import { ProjectModal } from "@components/ProjectModal";
 import { contactSchema, type EditorProps } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import { InputField } from "@forms/Input";
 import { initialContactInfo } from "@test/mock_data";
 import { type FC, useMemo } from "react";
+import type { ContactInfoDT } from "@/api";
+import { CONTACT_EDITOR_CONSTANTS } from "@/constants";
 
 const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 	open,
@@ -33,13 +33,13 @@ const ContactEditor: FC<EditorProps<ContactInfoDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: initialContactInfo,
-					title: ADD_TITLE,
-				},
+						initialValues: initialContactInfo,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 

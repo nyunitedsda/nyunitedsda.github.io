@@ -1,4 +1,3 @@
-import type { LoginCredentials } from "@/api";
 import {
 	useAuthStatus,
 	useCurrentUser,
@@ -7,6 +6,7 @@ import {
 } from "@hooks/auth";
 import { type FC, type PropsWithChildren, useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import type { LoginCredentials } from "@/api";
 import { Provider } from "./context";
 
 const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -49,7 +49,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 				return Promise.reject(error);
 			}
 		},
-		[loginUser, refreshUser],
+		[loginUser, refreshUser, setToken],
 	);
 
 	const logout = useCallback(async () => {
@@ -61,7 +61,7 @@ const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 		} catch (error) {
 			return Promise.reject(error);
 		}
-	}, [logoutUser]);
+	}, [logoutUser, removeToken]);
 
 	return (
 		<Provider

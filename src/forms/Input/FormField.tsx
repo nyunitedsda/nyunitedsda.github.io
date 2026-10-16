@@ -30,9 +30,9 @@ const InputField = <
 		return validateFieldCondition?.(values) ?? true;
 	}, [validateFieldCondition, values]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies(props): suppress dependency props
 	const memoProps = useMemo(() => {
 		return props;
+		// biome-ignore lint/correctness/useExhaustiveDependencies: props is ok
 	}, [props]);
 
 	const renderInputField = useCallback(() => {

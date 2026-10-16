@@ -1,10 +1,10 @@
-import type { ServiceDT } from "@/api";
 import ProjectModal from "@components/ProjectModal/ProjectModal";
 import { type EditorProps, serviceSchema } from "@forms/collection";
 import { EntityEditor } from "@forms/EntityEditor";
 import InputField from "@forms/Input/FormField";
 import { initialService } from "@test/mock_data";
 import { type FC, useMemo } from "react";
+import type { ServiceDT } from "@/api";
 import DTPicker from "../../Input/DTPicker";
 
 const EDIT_TITLE = "Edit Service";
@@ -24,13 +24,13 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: initialService,
-					title: ADD_TITLE,
-				},
+						initialValues: initialService,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 
@@ -57,11 +57,7 @@ const ServiceEditor: FC<EditorProps<ServiceDT>> = ({
 					placeholder="Enter service title"
 				/>
 
-				<DTPicker
-					label={TIME_LABEL}
-					name="time"
-					type="Time"
-				/>
+				<DTPicker label={TIME_LABEL} name="time" type="Time" />
 				{/* Add a format selection input field */}
 			</EntityEditor>
 		</ProjectModal>

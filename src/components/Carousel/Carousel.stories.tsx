@@ -163,7 +163,7 @@ export const Default: Story = {
 				index={index}
 			/>
 		)),
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
@@ -218,7 +218,7 @@ export const TextSlides: Story = {
 				index={2}
 			/>,
 		],
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
@@ -233,7 +233,7 @@ export const SingleSlide: Story = {
 	args: {
 		autoplay: false,
 		children: [<SampleSlide key={0} image={sampleImages[0]} index={0} />],
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
@@ -263,7 +263,7 @@ export const ManySlides: Story = {
 				/>
 			)),
 		],
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
@@ -305,7 +305,7 @@ export const WithCustomOptions: Story = {
 				</Card>
 			</Box>
 		)),
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
@@ -340,7 +340,7 @@ export const WithCustomStyling: Story = {
 					index={index}
 				/>
 			)),
-	} as any,
+	} as unknown as Story["args"],
 	parameters: {
 		docs: {
 			description: {
