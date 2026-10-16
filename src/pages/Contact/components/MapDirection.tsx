@@ -1,69 +1,65 @@
-import { OpenInNew } from "@mui/icons-material";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
+import { LinkOutlined } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { CONTACT_CONSTANT } from "@pages/Contact";
-import type { FC } from "react";
+import { Card, type CardProps } from "antd";
+import type { CSSProperties, FC } from "react";
 
-const rootSx: SxProps<Theme> = {
-	p: 2,
-	minHeight: "450px",
-	overflow: "hidden",
-	display: "flex",
-	flexDirection: "column",
-	gap: 2,
-	mt: 2,
-};
 
-const directionSx: SxProps<Theme> = {
-	p: 2,
-	height: { xs: "auto", md: "100%" },
-	gap: 2,
-	width: { xs: "100%", md: "50%" },
-	"& svg": {
-		fontSize: (theme) => theme.spacing(2.2),
-		fill: (theme) => theme.palette.primary.light,
+
+
+const cardStyles: CardProps['styles'] = {
+	root: {
+		boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
 	},
-};
+	header: {
+		borderBottom: 'none'
 
-const plannerSx: SxProps<Theme> = {
+}};
+
+const plannerSx: CSSProperties = {
 	textDecoration: "none",
-	color: (theme) => `${theme.palette.primary.light} !important`,
+	fontWeight: 'bold',
+	display: 'flex',
+	gap: '12px',
+	alignItems: 'center',
 };
-const mapSx: SxProps<Theme> = { width: "100%" };
 
 const styleSx = { borderRadius: 4, width: "100%" };
 
 const { TRIP_PLANNER, MAP_URL, TRANSIT_URL } = CONTACT_CONSTANT;
 
 const MapDirection: FC = () => {
+	const theme = useTheme();
+
 	return (
-		<Paper elevation={3} sx={rootSx}>
-			<Stack direction="row" sx={directionSx}>
+		<Card
+			styles={cardStyles}
+			title={
 				<Typography
 					variant="h6"
 					component={"a"}
-					sx={plannerSx}
+					style={{
+						...plannerSx,
+						color: `${theme.palette.primary.main}`
+					}}
 					title={"Open link to MTA "}
 					href={TRANSIT_URL}
 				>
 					{TRIP_PLANNER}
-					<OpenInNew color="primary" />
+					<LinkOutlined style={{ color: theme.palette.primary.main }} />
 				</Typography>
-			</Stack>
-			<Box sx={mapSx}>
-				<iframe
-					src={MAP_URL}
-					height="450"
-					style={styleSx}
-					allowFullScreen
-					referrerPolicy="no-referrer-when-downgrade"
-					title="Google Maps Location"
-				></iframe>
-			</Box>
-		</Paper>
+			}>
+			
+			<iframe
+				src={MAP_URL}
+				height="450"
+				style={styleSx}
+				allowFullScreen
+				referrerPolicy="no-referrer-when-downgrade"
+				title="Google Maps Location"
+			/>
+		</Card>
 	);
 };
 
