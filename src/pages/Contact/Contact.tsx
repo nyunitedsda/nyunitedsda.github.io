@@ -37,8 +37,8 @@ const Contact: FC = () => {
 	return (
 		<>
 			<PageTitle
-				title={CONTACT_CONSTANT.PAGE_TITLE}
 				subtitle={CONTACT_CONSTANT.PAGE_SUBTITLE}
+				title={CONTACT_CONSTANT.PAGE_TITLE}
 			/>
 
 			<Paper elevation={3} sx={contactDetailSx}>

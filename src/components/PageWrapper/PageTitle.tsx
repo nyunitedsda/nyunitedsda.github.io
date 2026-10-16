@@ -1,10 +1,10 @@
 import type { PageTitleProps } from "@components/PageWrapper";
-import AddOutlined from "@mui/icons-material/AddOutlined";
 import { useTheme, type Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { type CSSProperties, type FC, useMemo } from "react";
 import { Flex, Button, FloatButton } from 'antd';
 import Title from "antd/es/typography/Title";
+import { PlusOutlined } from "@ant-design/icons";
 
 const titleSx: CSSProperties = {
 	color: "primary.light",
@@ -64,7 +64,7 @@ const PageTitle: FC<PageTitleProps> = ({
 			{!isMobile && handleClick && (
 				<Button
 					aria-label={`Create new ${title}`}
-					icon={icon ?? <AddOutlined />}
+					icon={icon ?? <PlusOutlined />}
 					onClick={handleClick}
 					shape={"round"}
 					style={buttonStyle}
@@ -75,7 +75,7 @@ const PageTitle: FC<PageTitleProps> = ({
 			)}
 			{isMobile && handleClick && (
 				<FloatButton
-					icon={icon ?? <AddOutlined />}
+					icon={icon ?? <PlusOutlined />}
 					onClick={handleClick}
 					shape={"circle"}
 					style={{ insetInlineEnd: MOBILE_BUTTON_OFFSET, ...buttonStyle }}
