@@ -1,11 +1,5 @@
 import { PageTitle } from "@components/PageWrapper";
-import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
-import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
-import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { AlternateEmailOutlined } from "@mui/icons-material";
 import {
 	CONTACT_CONSTANT,
 	ContactSection,
@@ -14,19 +8,23 @@ import {
 } from "@pages/Contact";
 import { NoteSection } from "@pages/Home";
 import { useQuery } from "@tanstack/react-query";
-import type { FC } from "react";
+import type { CSSProperties, FC } from "react";
 import { getDefaultContacts } from "@/api";
+import { Card, Flex, Typography, type CardProps } from "antd";
+import { EnvironmentOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 
-const contactDetailSx: SxProps<Theme> = {
-	display: "flex",
-	flexDirection: "column",
-	gap: 2,
-	p: 3,
-	my: 2,
-	"& svg": {
-		fontSize: 22,
-	},
+const contactDetailSx: CardProps['styles'] = {
+	root: {
+		display: "flex",
+		flexDirection: "column",
+		margin: '16px 0px 24px',
+	}
 };
+
+const iconStyle: CSSProperties = {
+	fontSize: '1rem',
+	color: 'inherit',
+}
 
 const Contact: FC = () => {
 	const { data, isLoading, error } = useQuery({
@@ -41,33 +39,35 @@ const Contact: FC = () => {
 				title={CONTACT_CONSTANT.PAGE_TITLE}
 			/>
 
-			<Paper elevation={3} sx={contactDetailSx}>
+			<Card styles={contactDetailSx}>
 				{/* address */}
 				{!isLoading && !error && (
 					<>
+
 						<ContactSection title={data?.contact_name}>
-							<Stack direction="row" gap={2}>
-								<Stack justifyContent="center">
-									<LocationOnOutlined color="primary" />
-								</Stack>
-								<Stack>
-									<Typography variant="body1">{data.street}</Typography>
-									<Typography variant="body1">
-										{`${data.city}, ${data.zipCode}, ${data.country}`}
-									</Typography>
-								</Stack>
-							</Stack>
+
 							{[
 								{
+									id: 1,
+									icon: <EnvironmentOutlined style={iconStyle} />,
+									content: (
+										<Flex vertical>
+											<Typography.Text >{data.street}</Typography.Text>
+											<Typography.Text >
+												{`${data.city}, ${data.zip_code}, ${data.country}`}
+											</Typography.Text></Flex>
+									)
+								},
+								{
 									id: 2,
-									icon: <PhoneOutlined />,
+									icon: <PhoneOutlined style={iconStyle} />,
 									component: "a",
 									href: `tel:${data.phone}`,
 									content: data.phone,
 								},
 								{
 									id: 3,
-									icon: <AlternateEmailOutlined />,
+									icon: <AlternateEmailOutlined style={iconStyle} />,
 									component: "a",
 									href: `mailto:${data.email}`,
 									content: data.email,
@@ -81,7 +81,7 @@ const Contact: FC = () => {
 							<NoteSection
 								columnLayout
 								content={data.mail_address}
-								icon={<EmailOutlined color="primary" />}
+								icon={<MailOutlined style={iconStyle} />}
 								title={data.mailing_recipient}
 							/>
 						</ContactSection>
@@ -89,7 +89,7 @@ const Contact: FC = () => {
 				)}
 
 				<ServiceTimes />
-			</Paper>
+			</Card>
 
 			<MapDirection />
 		</>

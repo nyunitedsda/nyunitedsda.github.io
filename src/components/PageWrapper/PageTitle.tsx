@@ -44,7 +44,7 @@ const PageTitle: FC<PageTitleProps> = ({
 	const buttonStyle = useMemo(
 		() => ({
 			color: theme.palette.primary.contrastText,
-			backgroundColor: theme.palette.primary.main
+			backgroundColor: theme.palette.primary.light
 		}),
 		[theme],
 	);
@@ -52,7 +52,7 @@ const PageTitle: FC<PageTitleProps> = ({
 	return (
 		<Flex vertical={false} style={rootStyle}>
 			<Flex style={{ flexGrow: 1, flexDirection: 'column' }} >
-				<Title level={2} style={{ ...titleSx, color: theme.palette.primary.main }}>
+				<Title level={2} style={{ ...titleSx, color: theme.palette.primary.light }}>
 					{title}
 				</Title>
 				{subtitle && (

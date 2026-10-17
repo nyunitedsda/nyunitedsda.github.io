@@ -1,17 +1,14 @@
-import Box from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import type { NoteSectionProps } from "@pages/Home";
-import { type FC, memo } from "react";
+import { Flex, Typography } from "antd";
+import { type CSSProperties, type FC, memo } from "react";
 
-const noteSx: SxProps<Theme> = {
+const noteSx: CSSProperties = {
 	display: "flex",
 	alignItems: "center",
-	gap: 2,
-	"& svg": { color: "primary.light" },
+	gap: '12px',
 };
 
-const contentSx: SxProps<Theme> = { display: "flex", rowGap: 0, columnGap: 2 };
+const contentSx: CSSProperties = { display: "flex", rowGap: 0, columnGap: 2 };
 
 const NoteSection: FC<NoteSectionProps> = ({
 	icon,
@@ -19,21 +16,21 @@ const NoteSection: FC<NoteSectionProps> = ({
 	title,
 	columnLayout = false,
 }) => (
-	<Box sx={noteSx}>
+	<Flex style={noteSx}>
 		{icon && icon}
-		<Box sx={[contentSx, { flexDirection: columnLayout ? "column" : "row" }]}>
+		<Flex style={{ ...contentSx, flexDirection: columnLayout ? "column" : "row", columnGap: '12px' }}>
 			{title && (
-				<Typography variant="body1" color="text.primary" fontWeight="bold">
+				<Typography.Text style={{ fontWeight: 'bold' }}>
 					{title}
-				</Typography>
+				</Typography.Text>
 			)}
 			{content && (
-				<Typography color="text.primary" variant="body1">
+				<Typography.Text color="text.primary" >
 					{content}
-				</Typography>
+				</Typography.Text>
 			)}
-		</Box>
-	</Box>
+		</Flex>
+	</Flex>
 );
 
 export default memo(NoteSection);

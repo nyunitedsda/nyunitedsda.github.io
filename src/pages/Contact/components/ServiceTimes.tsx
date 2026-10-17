@@ -16,7 +16,7 @@ const ServiceTimes: FC = () => {
 			{!isLoading && !error && (
 				<ContactSection title={CONTACT_CONSTANT.SERVICES}>
 					{data?.map((i) => (
-						<NoteSection content={i.time} key={i.title} title={`${i.title}:`} />
+						<NoteSection content={i.time} key={i.title} title={`${i.title}:  `} />
 					))}
 				</ContactSection>
 			)}
