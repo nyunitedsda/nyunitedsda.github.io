@@ -1,49 +1,39 @@
-import Carousel from "@components/Carousel";
-import { Stack } from "@mui/material";
 import {
-	HOME_CONSTANTS,
 	PageAnnouncements,
 	PageMinistries,
-	SectionWrapper,
 	sliderImages,
 } from "@pages/Home";
+import { Carousel, Flex, theme, Image } from "antd";
 import type { FC } from "react";
 
 const Home: FC = () => {
+	const { token } = theme.useToken();
 	return (
-		<Stack sx={HOME_CONSTANTS.rootSx}>
+		<Flex vertical style={{ margin: "0px auto", maxWidth: token.screenXL }}>
 			{/* Image Slides */}
-			<SectionWrapper>
-				<Carousel
-					options={{
-						align: "center",
-						startIndex: 0,
-					}}
-					sx={{
-						"& .embla__slide": {
-							height: { xs: "350px", sm: "unset" },
-						},
-					}}
-				>
+
+			<Image.PreviewGroup items={sliderImages.map((i) => i.src)} >
+				<Carousel arrows adaptiveHeight
+					style={{ borderRadius: '40px !important' }}>
 					{sliderImages.map((i) => (
-						<Stack direction="row" className="embla__slide" key={i.src}>
-							<img
-								loading="lazy"
-								className="embla__slide__number"
-								src={i.src}
-								alt={i.alt ?? `${i.src}-image`}
-							/>
-						</Stack>
+						<Image
+							width={'100%'}
+							key={i.src}
+							src={i.src}
+							alt={i.alt ?? `${i.src}-image`}
+
+							style={{ borderRadius: '80px' }}
+						/>
 					))}
 				</Carousel>
-			</SectionWrapper>
+			</Image.PreviewGroup>
 
 			{/* Notification Slides */}
 			<PageAnnouncements />
 
 			{/* Ministries content */}
 			<PageMinistries />
-		</Stack>
+		</Flex>
 	);
 };
 

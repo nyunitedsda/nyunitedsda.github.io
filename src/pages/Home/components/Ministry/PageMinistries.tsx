@@ -1,18 +1,19 @@
 import RingLoader from "@components/Loaders";
-import Stack from "@mui/material/Stack";
 import { HOME_CONSTANTS, MinistryCard, SectionWrapper } from "@pages/Home";
 import type { FC } from "react";
 import { useLoaderData } from "react-router-dom";
 import type { MinistriesDT } from "@/api";
+import { Row } from "antd";
 
 const PageMinistries: FC = () => {
 	const { ministries, isLoading } = useLoaderData();
 
 	return (
 		<SectionWrapper header={HOME_CONSTANTS.MINISTRIES_HEADER}>
-			<Stack
-				direction={{ xs: "column", md: "row" }}
-				sx={HOME_CONSTANTS.cardContainerSx}
+			<Row
+				justify={'center'}
+				style={{gap: '24px'}}
+				gutter={16}
 			>
 				{!isLoading &&
 					ministries?.map((i: MinistriesDT) => (
@@ -30,7 +31,7 @@ const PageMinistries: FC = () => {
 						/>
 					))}
 				{isLoading && <RingLoader />}
-			</Stack>
+			</Row>
 		</SectionWrapper>
 	);
 };

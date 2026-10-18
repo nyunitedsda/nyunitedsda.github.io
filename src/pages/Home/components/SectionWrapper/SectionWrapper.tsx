@@ -1,32 +1,31 @@
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import type { SectionWrapperProps } from "@pages/Home";
-import { type FC, memo } from "react";
+import { Flex, theme, Typography } from "antd";
+import { type CSSProperties, type FC, memo } from "react";
 
-const headerSx: SxProps<Theme> = {
+const headerSx: CSSProperties = {
+	fontFamily: "inter",
 	fontWeight: "bold",
-	color: "primary.light",
 	textAlign: "center",
 	width: "100%",
-	fontFamily: "inter",
 };
 
 const SectionWrapper: FC<SectionWrapperProps> = ({
 	children,
 	header,
-	spacing = 3,
 }) => {
+	const { token } = theme.useToken();
 	return (
-		<Stack spacing={spacing}>
+		<Flex vertical >
 			{header && (
-				<Typography variant="h4" component="h2" sx={headerSx}>
+				<Typography.Title
+					level={2}
+					style={{ ...headerSx, color: token.colorPrimary }}
+				>
 					{header}
-				</Typography>
+				</Typography.Title>
 			)}
-
 			{children}
-		</Stack>
+		</Flex>
 	);
 };
 

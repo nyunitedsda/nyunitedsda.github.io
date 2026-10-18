@@ -21,7 +21,7 @@ const SiteLayout: FC = () => {
       </Layout.Header>
 
       <Layout.Content
-        style={{ backgroundColor: 'lightgreen' }}
+        style={{ padding: "24px 0px" }}
       >
         <Outlet />
       </Layout.Content>

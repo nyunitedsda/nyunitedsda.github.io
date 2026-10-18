@@ -7,8 +7,6 @@ const DEFAULTS = {
 
 const antDTheme: ConfigProviderProps['theme'] = {
   token:{
-    // fontSize: 16,
-    // containerMax: 1200,
     colorPrimary: DEFAULTS.colorPrimary,
     colorPrimaryText: 'white',
   },
