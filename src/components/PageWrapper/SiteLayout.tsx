@@ -1,8 +1,9 @@
 import Footer from '@/components/Footer';
 import Header from '@components/Header';
-import { Layout } from 'antd';
+import { Layout, theme } from 'antd';
 import type { CSSProperties, FC } from 'react';
 import { Outlet } from 'react-router';
+import ScrollToTop from 'react-scroll-to-top';
 
 const rootStyle: CSSProperties = {
   width: '100vw',
@@ -11,6 +12,7 @@ const rootStyle: CSSProperties = {
 }
 
 const SiteLayout: FC = () => {
+  const {token} = theme.useToken();
 
   return (
     <Layout style={rootStyle}>
@@ -27,6 +29,7 @@ const SiteLayout: FC = () => {
       </Layout.Content>
 
       <Footer />
+      <ScrollToTop smooth top={30} color={token.colorPrimary} />
     </Layout>
   );
 };
