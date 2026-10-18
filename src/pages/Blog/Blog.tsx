@@ -2,22 +2,18 @@ import RingLoader from "@components/Loaders";
 import { PageTitle } from "@components/PageWrapper";
 import ProjectCard from "@components/ProjectCard";
 import CalendarToday from "@mui/icons-material/CalendarToday";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
-import { type FC, useCallback, useMemo, useState } from "react";
+import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
 import { useLoaderData } from "react-router";
 import type { ArticleDT } from "@/api";
 import {
 	BLOG_HEADER,
-	BLOG_PREVIEW_LENGTH,
 	BLOG_SUBHEADER,
 	DEFAULT_POST_PER_PAGE,
 } from "./blogConstant";
+import { Button, Flex, Pagination, Typography } from "antd";
 
 const containerSx: SxProps<Theme> = {
 	alignContent: "flex-start",
@@ -35,10 +31,9 @@ const containerSx: SxProps<Theme> = {
 	},
 };
 
-const paginationSx: SxProps<Theme> = {
+const paginationSx: CSSProperties = {
 	justifyContent: "center",
 	bottom: 0,
-	mt: 6,
 };
 
 const Blog: FC = () => {
@@ -60,7 +55,7 @@ const Blog: FC = () => {
 	);
 
 	const handlePageChange = useCallback(
-		(_event: React.ChangeEvent<unknown>, value: number) => {
+		( value: number) => {
 			setPage(value);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		},
@@ -79,45 +74,40 @@ const Blog: FC = () => {
 							<ProjectCard
 								header={{
 									title,
-									subheader: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author ?? "")}`,
+									description: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author ?? "")}`,
 									avatar: <CalendarToday />,
 								}}
-								content={
-									<Typography
-										component="div"
-										variant="body1"
-										sx={{ "& p": { m: 0 } }}
-									>
-										{content.length > BLOG_PREVIEW_LENGTH
-											? content.slice(0, BLOG_PREVIEW_LENGTH)
-											: content}
-									</Typography>
-								}
 								actions={
-									<Button
-										size="small"
-										color="primary"
-										component={"a"}
+									[<Button
+										style={{ height: '100%' }}
 										href={`/blog/${id}`}
+										type="text"
 									>
 										Read More
-									</Button>
+									</Button>, ,,]
 								}
-							/>
+							>
+								<Typography.Paragraph
+									ellipsis={{ rows: 3 }}
+								>
+									{content}
+								</Typography.Paragraph>
+							</ProjectCard>
 						</Grid>
 					))
 				)}
 			</Grid>
 
-			<Stack direction={"row"} sx={paginationSx}>
+			<Flex vertical={false} style={paginationSx}>
 				<Pagination
-					count={totalPages}
-					page={page}
+					total={totalPages}
+					// page={page}
+					defaultCurrent={1}
 					onChange={handlePageChange}
-					color="primary"
+					// color="primary"
 					size="medium"
 				/>
-			</Stack>
+			</Flex>
 		</>
 	);
 };

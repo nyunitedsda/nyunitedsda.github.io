@@ -1,52 +1,49 @@
-import ProjectCard from "@components/ProjectCard";
-import Box from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import { cardStyles, type MinistryCardProps } from "@pages/Home";
+import { type MinistryCardProps } from "@pages/Home";
+import { Card, theme, Typography } from "antd";
 import type { CSSProperties, FC } from "react";
-
-const { headerSx } = cardStyles;
+import { Link } from "react-router";
 
 const imageStyles: CSSProperties = {
 	objectFit: "scale-down",
 	maxWidth: "100%",
 	maxHeight: "64px",
-	height: "auto",
+	height: "45px",
 	aspectRatio: "auto",
 };
 
-const contentSx: SxProps<Theme> = {
+const cardSx: CSSProperties = {
 	display: "flex",
-	alignItems: "center",
-	overflow: "hidden",
-	"& a": {
-		textDecoration: "none",
-		color: (theme) => `${theme.palette.primary.light} !important`,
-	},
+	flexDirection: "column",
+	borderRadius: '8px',
+	maxWidth: `350px`,
+	gap: '16px',
 };
 
 const MinistryCard: FC<MinistryCardProps> = (props) => {
-	const { header, content, link: _, image } = props;
+	const { header, content, link, image } = props;
+	const {token} = theme.useToken();
 	return (
-		<ProjectCard
-			header={{
-				...header,
-				sx: headerSx,
+		<Card
+			styles={{
+				header: {
+					backgroundColor: token.colorPrimary,
+					color: token.colorPrimaryText,
+				}
 			}}
-			content={
-				<Box sx={contentSx}>
-					<Typography variant="body1">
-						{content}
-						{/* <a href={link}>{" Click here"}</a> */}
-					</Typography>
-				</Box>
-			}
-			actions={
+			style={cardSx}
+			title={header.title}
+			actions={[
 				image ? (
+					<Link to={link as string} target={"_blank"} >
 					<img src={image.src} alt={image.alt} style={imageStyles} />
+					</Link>
 				) : undefined
-			}
-		/>
+			]}
+		>
+			<Typography.Paragraph ellipsis={{ rows: 3 }}>
+				{content}
+			</Typography.Paragraph>
+		</Card>
 	);
 };
 

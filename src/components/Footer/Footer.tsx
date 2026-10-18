@@ -1,12 +1,10 @@
+import { YoutubeOutlined } from "@ant-design/icons";
 import {
 	FooterContact,
 	FooterSegment,
 	FooterServiceTime,
 	FooterSocial,
-	getCopyright,
 } from "@components/Footer";
-import { YoutubeIcon } from "@components/Icons";
-import { PageContentContainer } from "@components/PageWrapper";
 import footer from "@constants/footer";
 import { useMenuItems } from "@hooks/routes";
 import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
@@ -15,37 +13,10 @@ import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
 import type { SxProps, Theme } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import ListItem from "@mui/material/ListItem";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import { Col, Divider, Layout, Row, theme, Typography } from "antd";
+import dayjs from "dayjs";
 import type { FC, ReactNode } from "react";
-
-const footerSx: SxProps<Theme> = {
-	bgcolor: "primary.main",
-	color: "primary.contrastText !important",
-	"& *": {
-		color: (theme) => `${theme.palette.primary.contrastText} !important`,
-	},
-	p: 2,
-	width: "100%",
-	"& a": {
-		textDecoration: "none",
-		color: "primary.contrastText",
-	},
-	"& .MuiContainer-root": {
-		p: { xs: 0, md: 2 },
-	},
-	"& .MuiIconButton-root": {
-		"& img": {
-			width: 32,
-			height: 32,
-			fill: "red !important",
-			strokeWidth: 4,
-		},
-	},
-};
 
 const menuSx: SxProps<Theme> = {
 	"& a": {
@@ -53,32 +24,38 @@ const menuSx: SxProps<Theme> = {
 	},
 };
 
-const dividerSx: SxProps<Theme> = {
-	my: 2,
-	backgroundColor: (theme) => `${theme.palette.divider}`,
-};
-
 const iconMap: Record<string, ReactNode> = {
 	Facebook: <Facebook />,
 	Instagram: <Instagram />,
 	Twitter: <Twitter />,
-	YouTube: <YoutubeIcon />,
+	YouTube: <YoutubeOutlined style={{fontSize: '1.125rem', color: 'red'}} />,
 	Phone: <Phone fontSize="small" />,
 	Email: <AlternateEmailOutlined fontSize="small" />,
 	Mail: <EmailOutlined fontSize="small" />,
 };
 
+const columnSize = {
+	sm: { "flex": "50%" },
+	lg: { "flex": "25%" },
+}
+
 const Footer: FC = () => {
 	const { activeMenu } = useMenuItems();
+	const { token } = theme.useToken();
 
 	return (
-		<Stack sx={footerSx}>
-			<PageContentContainer>
-				<Grid container spacing={{ xs: 0, md: 4 }}>
-					{/* Social Media */}
-					<FooterSocial iconMap={iconMap} />
+		<Layout.Footer >
+			<Row
+				justify={{ xs: 'start', sm: 'center' }}
+				style={{ maxWidth: token.screenXL, margin: 'auto' }}
+			>
 
-					{/* Menu */}
+				{/* Social Media */}
+				<Col {...columnSize}>
+					<FooterSocial iconMap={iconMap} />
+				</Col>
+				{/* Menu */}
+				<Col {...columnSize}>
 					<FooterSegment sx={menuSx} title={footer.QUICK_LINKS}>
 						{activeMenu.map((i) => (
 							<ListItem
@@ -91,21 +68,31 @@ const Footer: FC = () => {
 							</ListItem>
 						))}
 					</FooterSegment>
+				</Col>
 
-					{/* Services */}
+				{/* Services */}
+				<Col {...columnSize}>
 					<FooterServiceTime />
+				</Col>
 
-					{/* Contacts */}
+				{/* Contacts */}
+				<Col {...columnSize}>
 					<FooterContact iconMap={iconMap} />
-				</Grid>
+				</Col>
+			</Row>
 
-				<Divider sx={dividerSx} />
+			<Divider />
 
-				<Typography variant="body2" align="center">
-					&copy; {getCopyright()}
-				</Typography>
-			</PageContentContainer>
-		</Stack>
+			<Row justify={'center'}>
+				<Typography.Text >&copy; {`${dayjs().year()} `}</Typography.Text>
+				<Typography.Text
+					style={{ fontWeight: 'bold', fontStyle: 'italic', paddingLeft: '4px' }}
+				>
+					{footer.WEBSITE_TITLE}
+				</Typography.Text>
+				<Typography.Text >{'. All rights reserved'}</Typography.Text>
+			</Row>
+		</Layout.Footer>
 	);
 };
 

@@ -6,8 +6,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ConfigProvider } from "antd";
 import { SnackbarProvider } from "notistack";
 import React, { type FC, type PropsWithChildren, useMemo } from "react";
+import antDTheme from "./antDTheme";
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders
@@ -32,19 +34,15 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 						preventDuplicate
 						dense
 					>
-						{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-						{/* <BrowserRouter> */}
 						<AuthProvider>
-							<ThemeProvider theme={theme}>
-								{/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-								{/* Using enableColorScheme for better dark/light mode handling */}
-								<CssBaseline enableColorScheme />
-								<NotificationProvider>{children}</NotificationProvider>
-								{/* </LocalizationProvider> */}
-							</ThemeProvider>
+							<ConfigProvider theme={antDTheme}>
+								<ThemeProvider theme={theme}>
+									{/* Using enableColorScheme for better dark/light mode handling */}
+									<CssBaseline enableColorScheme />
+									<NotificationProvider>{children}</NotificationProvider>
+								</ThemeProvider>
+							</ConfigProvider>
 						</AuthProvider>
-						{/* </BrowserRouter> */}
-						{/* </LocalizationProvider> */}
 					</SnackbarProvider>
 				</QueryClientProvider>
 			</LocalizationProvider>

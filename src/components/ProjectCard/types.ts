@@ -1,9 +1,6 @@
-import type { CardHeaderProps } from "@mui/material/CardHeader";
+import type { CardMetaProps, CardProps } from "antd";
 import type { ReactNode } from "react";
 
-export interface CardProps {
-	header: CardHeaderProps;
-	content?: ReactNode;
-	actions?: ReactNode;
-	className?: string;
+export interface PCardProps extends Omit<CardProps, 'title'>{
+	header: CardMetaProps;
 }

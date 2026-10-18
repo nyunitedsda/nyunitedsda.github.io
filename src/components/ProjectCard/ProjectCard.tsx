@@ -1,43 +1,36 @@
-import type { CardProps } from "@components/ProjectCard";
-import type { SxProps, Theme } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import type { FC } from "react";
+import type { PCardProps } from "@components/ProjectCard";
+import { Card } from "antd";
+import type { CSSProperties, FC } from "react";
 
-const cardContentSx: SxProps<Theme> = {
+
+
+const cardSx: CSSProperties = {
 	display: "flex",
 	flexDirection: "column",
-	gap: 2,
-	flexGrow: 1,
-	overflowY: "auto",
-	py: 1,
+	borderRadius: '8px',
+	maxWidth: `350px`,
+	gap: '16px',
 };
 
-const cardSx: SxProps<Theme> = (theme) => ({
-	display: "flex",
-	flexDirection: "column",
-	boxShadow: 5,
-	borderRadius: 1,
-	maxWidth: `${theme.spacing(50)}`,
-	"& .MuiCardHeader-title": {
-		fontSize: "1.25rem",
-		fontFamily: "inter",
-	},
-});
-
-const ProjectCard: FC<CardProps> = ({
+const ProjectCard: FC<PCardProps> = ({
 	actions,
-	content,
 	header,
 	className,
+	children,
 }) => {
 	return (
-		<Card sx={cardSx} className={`card-animation ${className}`}>
-			<CardHeader {...header} />
-			{content && <CardContent sx={cardContentSx}>{content}</CardContent>}
-			{actions && <CardActions>{actions}</CardActions>}
+		<Card
+			actions={actions}
+			className={`card-animation ${className}`}
+			style={cardSx}
+		>
+			<Card.Meta
+				avatar={header.avatar}
+				description={header.description}
+				style={{ marginBottom: '16px' }}
+				title={header.title}
+			/>
+			{children}
 		</Card>
 	);
 };

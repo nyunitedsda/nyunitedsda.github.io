@@ -7,10 +7,11 @@ import {
 } from "@constants/donationConstant";
 import { useEntityList } from "@hooks/api";
 import { routePaths } from "@hooks/routes";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import type { FC } from "react";
 import { Navigate } from "react-router";
 import type { DonationDT } from "@/api";
+import { Flex, Typography } from "antd";
 
 const Donations: FC = () => {
 	const { data, error, isLoading } = useEntityList<DonationDT>("donations");
@@ -19,26 +20,25 @@ const Donations: FC = () => {
 		<>
 			<PageTitle title={DONATION_HEADER} subtitle={DONATION_SUBHEADER} />
 			<Stack spacing={2} className="fade-in">
-				<Typography color="text.primary">{DONATION_TEXT}</Typography>
+				<Typography.Text >{DONATION_TEXT}</Typography.Text>
 				{isLoading && (
-					<Stack
-						width="100%"
-						height="100%"
-						justifyContent="center"
+					<Flex
+						vertical
+						style={{ width: '100%', height: '100%', justifyContent: 'center' }}
 						className="fade-in"
 					>
 						<RingLoader />
-					</Stack>
+					</Flex>
 				)}
 
 				{!isLoading &&
 					data &&
 					data.length !== 0 &&
 					data.map((i) => (
-						<Typography key={i.title} color="text.primary">
+						<Typography.Text key={i.title} >
 							<strong>{i.title}: </strong>
 							{i.description}
-						</Typography>
+						</Typography.Text>
 					))}
 				{error && (
 					<Navigate to={routePaths.NOT_FOUND} replace state={{ error }} />

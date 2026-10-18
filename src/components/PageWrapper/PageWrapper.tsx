@@ -4,51 +4,70 @@ import NotificationBanner from "@components/NotificationBanner";
 import { PageContentContainer } from "@components/PageWrapper";
 import ProjectSuspense from "@components/ProjectSuspense";
 import { NotificationContext } from "@contexts/NotificationContext";
-import Stack from "@mui/material/Stack";
 import { type SxProps, type Theme, useTheme } from "@mui/material/styles";
-import { type FC, useContext } from "react";
+import { Flex } from "antd";
+import { type CSSProperties, type FC, useContext } from "react";
 import { Outlet } from "react-router";
 import ScrollToTop from "react-scroll-to-top";
+import SiteLayout from "./SiteLayout";
 
-const containerSx: SxProps<Theme> = {
+const containerSx: CSSProperties = {
 	display: "flex",
 	flexDirection: "column",
 	flexGrow: 1,
 	height: "100%",
 	justifyContent: "flex-start",
 	maxWidth: "1200px",
-	ml: "auto",
-	mr: "auto",
-	p: { xs: 1, md: 2 },
+	alignItems: "center",
+	// ml: "auto",
+	// mr: "auto",
+	p: '0px',
 	width: "100%",
 };
 
-const rootSx: SxProps<Theme> = {
-	backgroundColor: (theme) => theme.palette.background.paper,
-	height: "100%",
-	minHeight: "100dvh",
-	overflowY: "auto",
+const rootSx: CSSProperties = {
+	// height: "100%",
+	// minHeight: "100dvh",
+	// overflowY: "auto",
 	width: "100%",
+	flexGrow: 1,
+	alignItems: "center",
 };
 
 const PageWrapper: FC = () => {
 	const theme = useTheme();
 	const { notifications } = useContext(NotificationContext);
 	return (
-		<Stack sx={rootSx}>
+		<>
 			{notifications.map((i) => (
 				<NotificationBanner key={i.id} {...i} open />
 			))}
+
+			<SiteLayout />
+
+			{/* 			
+		<Flex
+			vertical
+			style={{
+				...rootSx,
+				backgroundColor: theme.palette.background.paper
+			}}
+		>
+			{/* {notifications.map((i) => (
+				<NotificationBanner key={i.id} {...i} open />
+			))} *}
 			<Header />
-			<PageContentContainer sx={containerSx}>
+			<Flex vertical style={containerSx}>
 				<ProjectSuspense>
 					<Outlet />
 				</ProjectSuspense>
-			</PageContentContainer>
-
-			<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
+				<ScrollToTop smooth top={30} color={theme.palette.primary.light} />
 			<Footer />
-		</Stack>
+			</Flex>			
+		</Flex> */}
+
+
+		</>
 	);
 };
 
