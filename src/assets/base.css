@@ -1,5 +1,6 @@
-
-  *, *::before,*::after {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
@@ -19,20 +20,24 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body,
+#root {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	min-width: 320px;
 	width: 100%;
-	min-height: 100vh;
-  height: 100%;
-	overflow: auto;
+	overflow-x: hidden;
+	/* overflow: auto; */
 }
 
 #root {
 	width: 100%;
 	min-height: 100dvh;
-  height: 100%;
-  overflow-y: visible;
+	overflow-y: visible;
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
@@ -41,8 +46,8 @@ body {
 }
 
 .no-content {
-  padding: 0px !important;
-  border-radius: 0px !important;
-  height: 100dvh;
-  overflow-y: visible;
-} 
+	padding: 0px !important;
+	border-radius: 0px !important;
+	height: 100dvh;
+	overflow-y: visible;
+}

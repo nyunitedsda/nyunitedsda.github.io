@@ -1,6 +1,6 @@
 import { AppProvider } from "@components/AppProvider";
 import RingLoader from "@components/Loaders";
-import PageWrapper from "@components/PageWrapper";
+import { SiteLayout } from '@components/PageWrapper'
 import { useAuthentication } from "@hooks/auth";
 import { routePaths } from "@hooks/routes";
 import { type FC, useEffect } from "react";
@@ -22,7 +22,7 @@ const ProtectedLayout: FC = () => {
 	return (
 		<>
 			{isLoading && <RingLoader />}
-			{!isLoading && isAuthenticated && <PageWrapper />}
+			{!isLoading && isAuthenticated && <SiteLayout />}
 		</>
 	);
 };
@@ -30,7 +30,7 @@ const ProtectedLayout: FC = () => {
 const AppLayout: FC<{ restricted?: boolean }> = ({ restricted = false }) => {
 	return (
 		<AppProvider>
-			{restricted ? <ProtectedLayout /> : <PageWrapper />}
+			{restricted ? <ProtectedLayout /> : <SiteLayout />}
 		</AppProvider>
 	);
 };

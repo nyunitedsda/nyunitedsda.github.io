@@ -3,3 +3,4 @@ export { default as PageTitle } from "./PageTitle";
 export { default } from "./PageWrapper";
 export { default as ProtectedPageWrapper } from "./ProtectedPageWrapper";
 export * from "./types";
+export {default  as SiteLayout } from "./SiteLayout";

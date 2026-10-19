@@ -1,32 +1,26 @@
 import RingLoader from "@components/Loaders";
 import type { TabPanelProps } from "@components/TabPanel";
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
 import type { FC } from "react";
 
-const rootSx: SxProps<Theme> = {
-	flexGrow: 1,
-	width: "100%",
-	color: "text.primary",
-};
-
 const TabPanel: FC<TabPanelProps> = (props) => {
-	const { children, index, sx, value, ...other } = props;
+	const { children, index, value } = props;
 
 	return (
 		<>
 			{(!value || !index) && <RingLoader />}
 			{value === index && (
-				<Stack
-					{...other}
-					aria-labelledby={`full-width-tab-${index}`}
-					hidden={value !== index}
-					id={`full-width-tabpanel-${index}`}
-					sx={[rootSx, ...(sx ? (Array.isArray(sx) ? sx : [sx]) : [])]}
-					role="tabpanel"
-				>
-					{children}
-				</Stack>
+				// <Flex
+				// 	vertical
+				// 	// {...other}
+				// 	aria-labelledby={`full-width-tab-${index}`}
+				// 	hidden={value !== index}
+				// 	id={`full-width-tabpanel-${index}`}
+				// 	// sx={[rootSx, ...(sx ? (Array.isArray(sx) ? sx : [sx]) : [])]}
+				// 	role="tabpanel"
+				// >
+					// {children}
+					children
+				// </Flex>
 			)}
 		</>
 	);

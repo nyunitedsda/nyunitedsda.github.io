@@ -1,35 +1,6 @@
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
 import { type FC, useEffect, useRef } from "react";
 import type { StreamDisplayProps } from "./types";
-
-const rootSx: SxProps<Theme> = {
-	flexGrow: 1,
-	height: "100%",
-	minHeight: "-webkit-fill-available",
-	position: "relative",
-	backgroundColor: (theme) => `${theme.palette.background.paper} !important`,
-	"& iframe": {
-		border: 0,
-		height: "auto",
-		minHeight: "-webkit-fill-available",
-		position: "absolute",
-	},
-
-	"& .responsive-iframe": {
-		position: "relative",
-		/*aspect ratio 16:9 */
-		height: 0,
-		overflow: "hidden",
-	},
-	".responsive-iframe iframe": {
-		width: "100%",
-		height: "100%",
-		position: "absolute",
-		left: 0,
-		top: 0,
-	},
-};
+import { Flex } from "antd";
 
 const StreamDisplay: FC<
 	StreamDisplayProps & React.IframeHTMLAttributes<HTMLIFrameElement>
@@ -46,25 +17,28 @@ const StreamDisplay: FC<
 	});
 
 	return (
-		<Stack
+		<Flex
+			vertical
 			id={`wrap-${id}`}
-			sx={rootSx}
-			className="responsive-iframe"
-			{...stackProps}
-		>
-			<iframe
-				allow="fullscreen"
-				allowFullScreen
-				ref={ref}
-				className="responsive-iframe iframe"
-				id={id}
-				width="100%"
-				height="100%"
-				// sandbox="allow-scripts"
-				loading={loading}
-				{...(rest as React.IframeHTMLAttributes<HTMLIFrameElement>)}
-			></iframe>
-		</Stack>
+			// sx={rootSx}
+			// className="responsive-iframe"
+			// {...stackProps}
+			style={{ backgroundColor: 'red', flex: 1,  minHeight: 0}}
+		> 
+			 <iframe
+				 allow="fullscreen"
+				 allowFullScreen
+				 ref={ref}
+				 className="responsive-iframe iframe"
+				 id={id}
+				 width="100%"
+				//  height="100vh"
+				 sandbox="allow-scripts"
+				 style={{ flex: 1, border: 0}}
+				//  loading={loading}
+				 {...(rest as React.IframeHTMLAttributes<HTMLIFrameElement>)}
+			 ></iframe>
+		</Flex>
 	);
 };
 

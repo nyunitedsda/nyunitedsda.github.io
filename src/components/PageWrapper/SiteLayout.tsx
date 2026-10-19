@@ -1,29 +1,45 @@
 import Footer from '@/components/Footer';
+import { NotificationContext } from '@/contexts';
 import Header from '@components/Header';
 import { Layout, theme } from 'antd';
-import type { CSSProperties, FC } from 'react';
+import { useContext, type CSSProperties, type FC } from 'react';
 import { Outlet } from 'react-router';
 import ScrollToTop from 'react-scroll-to-top';
+import NotificationBanner from '../NotificationBanner';
 
 const rootStyle: CSSProperties = {
-  width: '100vw',
+  minHeight: '100%',
   overflowX: 'hidden',
+  width: '100%',
+}
 
+const contentStyle: CSSProperties = {
+  flex: 1,
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  margin: '0 auto',
+  minHeight: '100%',
+  padding: "24px 0px",
 }
 
 const SiteLayout: FC = () => {
-  const {token} = theme.useToken();
+  const { token } = theme.useToken();
+  const { notifications } = useContext(NotificationContext);
 
   return (
     <Layout style={rootStyle}>
+      {notifications.map((i) => (
+        <NotificationBanner key={i.id} {...i} open />
+      ))}
       <Layout.Header
-        style={{ backgroundColor: 'lightblue' }}
+        style={{ backgroundColor: 'lightblue', position: 'sticky', top: 0, zIndex: 10000 }}
       >
         <Header />
       </Layout.Header>
 
       <Layout.Content
-        style={{ padding: "24px 0px" }}
+        style={{ ...contentStyle, maxWidth: `${token.screenXL}px` }}
       >
         <Outlet />
       </Layout.Content>

@@ -1,5 +1,5 @@
 import RingLoader from "@components/Loaders";
-import PageWrapper from "@components/PageWrapper";
+import { SiteLayout } from "@components/PageWrapper";
 import { useAuthentication } from "@hooks/auth";
 import { routePaths } from "@hooks/routes";
 import type { FC } from "react";
@@ -17,7 +17,7 @@ const ProtectedPageWrapper: FC = () => {
 		);
 	}
 
-	return <PageWrapper />;
+	return <SiteLayout />;
 };
 
 export default ProtectedPageWrapper;
