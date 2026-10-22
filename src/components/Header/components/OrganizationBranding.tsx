@@ -9,15 +9,17 @@ import { darkLogo, smallLogo } from "@/assets";
 
 export interface OrganizationBrandingProps {
 	isLogoVisible?: boolean;
+	isVisibleBrand?: boolean;
 	sx?: SxProps<Theme>;
 }
 
 const WEBSITE_TITLE =
 	import.meta.env.VITE_WEBSITE_TITLE || "NY United SDA Church";
-const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
+export const LOGO_ALT = `An Arch containing 3 trumpets above a city, located above ${WEBSITE_TITLE}`;
 
 const OrganizationBranding: FC<OrganizationBrandingProps> = ({
 	isLogoVisible = true,
+	isVisibleBrand = true,
 	sx,
 }) => {
 	const { mode } = useColorTheme();
@@ -32,14 +34,14 @@ const OrganizationBranding: FC<OrganizationBrandingProps> = ({
 					/>
 				</Box>
 			)}
-			<Typography
+			{isVisibleBrand && (<Typography
 				variant="h5"
 				component={"a"}
 				href={routePaths.HOME}
 				sx={brandingStyles.brandingSx}
 			>
 				{WEBSITE_TITLE}
-			</Typography>
+			</Typography>)}
 		</Box>
 	);
 };

@@ -1,34 +1,27 @@
+import { smallLogo } from "@/assets";
+import { MenuOutlined } from "@ant-design/icons";
 import {
-	DesktopMenu,
-	headerStyles,
 	OrganizationBranding,
-	Sidebar,
 } from "@components/Header";
-import { PageContentContainer } from "@components/PageWrapper";
 import { useMenuItems } from "@hooks/routes";
-import MenuRounded from "@mui/icons-material/MenuRounded";
-import { useMediaQuery } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import { Flex, Layout, Menu, theme } from "antd";
-import { createRef, type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
+import { Button, Drawer, Flex, Grid, Layout, Menu, theme } from "antd";
+import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { LOGO_ALT } from "./components/OrganizationBranding";
 
 const rootStyle: CSSProperties = {
 	position: 'sticky',
 	top: 0,
-	zIndex: 10000,
+	zIndex: 1000,
 }
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { pathname } = useLocation();
-	const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
-	const appBarRef = useMemo(() => createRef<HTMLDivElement>(), []);
 	const { activeMenu } = useMenuItems();
 	const navigate = useNavigate();
 	const { token } = theme.useToken();
+	const isMobile = Grid.useBreakpoint()?.md === false;
 
 	const handleDrawerToggle = useCallback(() => {
 		setDrawerOpen((prev) => !prev);
@@ -61,78 +54,64 @@ const Header: FC = () => {
 
 	const menu = useMemo(() => {
 		return activeMenu.map((i) => ({
-			onclick: (!i.children && i.path) ? () => navigate(i.path) : undefined,
+			onClick: (!i.children && i.path) ? () => {
+				if (drawerOpen) handleDrawerToggle();
+				navigate(i.path)
+			} : undefined,
 			label: i.name,
 			key: i.id,
 			children: i.children ? i.children.map((si) => ({
-				onclick: (si.path) ? () => navigate(si.path) : undefined,
+				onClick: (!si.children && si.path) ? () => {
+					if (drawerOpen) handleDrawerToggle();
+					navigate(si.path)
+				} : undefined,
 				label: si.name,
 				key: si.id,
 			})) : undefined
 		}));
-	}, [activeMenu]);
+	}, [activeMenu, drawerOpen]);
 
 	return (
 		<>
 			<Layout.Header
-				style={{ ...rootStyle, background: token.colorBgContainer }}
+				style={{ ...rootStyle, background: token.colorBgContainer, display: 'flex', alignItems: 'center' }}
 			>
-				<Flex style={{ margin: "0 auto", maxWidth: token.screenXLMax }}>
+				<Flex style={{ margin: "0 auto", maxWidth: token.screenXLMax, justifyContent: 'space-between', width: '100%' }}>
 					<OrganizationBranding />
-
-					<Menu
-						mode={"horizontal"}
-						items={menu}
-						style={{ flex: 1, minWidth: 0, justifyContent: 'end' }}
-					/>
+					{
+						isMobile ? (
+							<Button
+								icon={<MenuOutlined />}
+								onClick={() => setDrawerOpen((d) => !d)}
+								style={{ border: 0, color: token.colorPrimary, boxShadow: 'none' }}
+							/>
+						) : (
+							<Menu
+								mode={"horizontal"}
+								items={menu}
+								style={{ flex: 1, minWidth: 0, justifyContent: 'end' }}
+							/>
+						)
+					}
 				</Flex>
 			</Layout.Header>
-			{/* <Layout.Header
-				style={rootStyle}
+
+			<Drawer
+				open={drawerOpen}
+				title={
+					<img src={smallLogo} alt={LOGO_ALT} height={38} />
+				}
+				style={{ height: '100%' }}
+				placement={"left"}
+				onClose={handleDrawerToggle}
+				closable={{ placement: 'end' }}
 			>
-				<AppBar
-					ref={appBarRef}
-					position="sticky"
-					color="default"
-					elevation={1}
-					sx={headerStyles.rootSx}
-				>
-					<PageContentContainer sx={{ height: (theme) => `${theme.spacing(8)}` }}>
-						<Toolbar disableGutters>
-							{/* Mobile Hamburger Menu *
-							<IconButton
-								sx={headerStyles.hamburgerMenuSx}
-								aria-label="open drawer"
-								color="primary"
-								edge="start"
-								onClick={handleDrawerToggle}
-								size="large"
-							>
-								<MenuRounded />
-							</IconButton>
-
-							<OrganizationBranding />
-
-							{/* Menu *
-							{!isMobile && (
-								<DesktopMenu
-									menuList={activeMenu}
-									isActive={isActive}
-									sx={{ display: { xs: "none", md: "flex" } }}
-								/>
-							)}
-						</Toolbar>
-					</PageContentContainer>
-
-					{drawerOpen && isMobile && (
-						<Sidebar
-							open={drawerOpen}
-							onClose={handleDrawerToggle}
-							isActive={isActive}
-						/>
-					)}
-				</AppBar>
-			</Layout.Header> */}
+				<Menu
+					mode={"inline"}
+					items={menu}
+					style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 'none' }}
+				/>
+			</Drawer>
 		</>
 	);
 };
