@@ -23,7 +23,7 @@ const StreamDisplay: FC<
 			// sx={rootSx}
 			// className="responsive-iframe"
 			// {...stackProps}
-			style={{ backgroundColor: 'red', flex: 1,  minHeight: 0}}
+			style={{ flex: 1,  minHeight: 0}}
 		> 
 			 <iframe
 				 allow="fullscreen"

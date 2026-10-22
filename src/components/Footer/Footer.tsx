@@ -12,29 +12,25 @@ import Facebook from "@mui/icons-material/Facebook";
 import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
-import type { SxProps, Theme } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { Col, Divider, Layout, Row, theme, Typography } from "antd";
 import dayjs from "dayjs";
 import type { FC, ReactNode } from "react";
 
-const menuSx: SxProps<Theme> = {
-	"& a": {
-		color: "inherit",
-	},
-};
+
 
 const iconMap: Record<string, ReactNode> = {
 	Facebook: <Facebook />,
 	Instagram: <Instagram />,
 	Twitter: <Twitter />,
-	YouTube: <YoutubeOutlined style={{fontSize: '1.125rem', color: 'red'}} />,
+	YouTube: <YoutubeOutlined style={{ fontSize: '1.125rem', color: 'red' }} />,
 	Phone: <Phone fontSize="small" />,
 	Email: <AlternateEmailOutlined fontSize="small" />,
 	Mail: <EmailOutlined fontSize="small" />,
 };
 
 const columnSize = {
+	xs: { "flex": "100%" },
 	sm: { "flex": "50%" },
 	lg: { "flex": "25%" },
 }
@@ -56,7 +52,7 @@ const Footer: FC = () => {
 				</Col>
 				{/* Menu */}
 				<Col {...columnSize}>
-					<FooterSegment sx={menuSx} title={footer.QUICK_LINKS}>
+					<FooterSegment title={footer.QUICK_LINKS}>
 						{activeMenu.map((i) => (
 							<ListItem
 								component={"a"}
