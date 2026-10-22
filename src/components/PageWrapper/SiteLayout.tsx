@@ -32,11 +32,8 @@ const SiteLayout: FC = () => {
       {notifications.map((i) => (
         <NotificationBanner key={i.id} {...i} open />
       ))}
-      <Layout.Header
-        style={{ backgroundColor: 'lightblue', position: 'sticky', top: 0, zIndex: 10000 }}
-      >
-        <Header />
-      </Layout.Header>
+
+      <Header />
 
       <Layout.Content
         style={{ ...contentStyle, maxWidth: `${token.screenXL}px` }}

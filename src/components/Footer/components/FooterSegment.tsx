@@ -8,7 +8,6 @@ import { Col, Collapse, Flex, Typography } from "antd";
 import type { CSSProperties, FC } from "react";
 
 const contentSx: CSSProperties = {
-	color: "white",
 	gap: 1,
 	paddingLeft: '16px',
 	paddingTop: '16px',
@@ -20,7 +19,6 @@ const titleStyle: CSSProperties = {
 	fontFamily: 'inter',
 	marginTop: 0,
 	marginBottom: 0,
-	color: "white"
 }
 
 const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
