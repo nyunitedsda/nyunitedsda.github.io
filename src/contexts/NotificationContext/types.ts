@@ -1,10 +1,10 @@
-import type { NotificationProps } from "@components/NotificationBanner";
+import type { NotificationDT } from "@/api";
 import type { PropsWithChildren } from "react";
 
 type NotificationContextProps = PropsWithChildren<{
-	notifications: NotificationProps[];
-	registerNotification: (notice: NotificationProps) => void;
-	dismissNotification: (id: NotificationProps["id"]) => void;
+	notifications: NotificationDT[];
+	registerNotification: (notice: NotificationDT) => void;
+	dismissNotification: (id: NotificationDT["id"]) => void;
 	clearNotification: () => void;
 }>;
 

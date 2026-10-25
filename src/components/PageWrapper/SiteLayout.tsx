@@ -1,11 +1,11 @@
-import Footer from '@/components/Footer';
-import { NotificationContext } from '@/contexts';
 import Header from '@components/Header';
-import { Layout, theme } from 'antd';
-import { useContext, type CSSProperties, type FC } from 'react';
+import { Alert, type AlertProps, Layout, theme } from 'antd';
+import { type CSSProperties, type FC, useContext } from 'react';
+import Marquee from "react-fast-marquee";
 import { Outlet } from 'react-router';
 import ScrollToTop from 'react-scroll-to-top';
-import NotificationBanner from '../NotificationBanner';
+import Footer from '@/components/Footer';
+import { NotificationContext } from '@/contexts';
 
 const rootStyle: CSSProperties = {
   minHeight: '100%',
@@ -30,7 +30,26 @@ const SiteLayout: FC = () => {
   return (
     <Layout style={rootStyle}>
       {notifications.map((i) => (
-        <NotificationBanner key={i.id} {...i} open />
+        <Alert
+          key={i.id}
+          title={i.title}
+          description={
+            <Marquee>{i.message}</Marquee>
+          }
+          closable
+          styles={{
+            title: {
+              fontWeight: 'bold',
+              color: 'AccentColor'
+            },
+            description: {
+              // color: 'AccentColor'
+            }
+          }}
+          style={{ borderRadius: 0 }}
+          type={(i?.severity_color ?? 'info') as AlertProps['type']}
+          banner
+        />
       ))}
 
       <Header />

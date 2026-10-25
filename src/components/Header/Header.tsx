@@ -54,6 +54,10 @@ const Header: FC = () => {
 
 	const menu = useMemo(() => {
 		return activeMenu.map((i) => ({
+			// style: isActive(i.path) ? {
+			// 	borderBottom: `2px solid ${ token.colorPrimary}`,
+			// 	color: 'white',
+			// } : undefined,
 			onClick: (!i.children && i.path) ? () => {
 				if (drawerOpen) handleDrawerToggle();
 				navigate(i.path)
@@ -76,7 +80,7 @@ const Header: FC = () => {
 			<Layout.Header
 				style={{ ...rootStyle, background: token.colorBgContainer, display: 'flex', alignItems: 'center' }}
 			>
-				<Flex style={{ margin: "0 auto", maxWidth: token.screenXLMax, justifyContent: 'space-between', width: '100%' }}>
+				<Flex style={{ margin: "0 auto", maxWidth: token.screenXL, justifyContent: 'space-between', width: '100%' }}>
 					<OrganizationBranding />
 					{
 						isMobile ? (
