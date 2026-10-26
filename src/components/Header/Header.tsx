@@ -1,4 +1,3 @@
-import { smallLogo } from "@/assets";
 import { MenuOutlined } from "@ant-design/icons";
 import {
 	OrganizationBranding,
@@ -7,6 +6,7 @@ import { useMenuItems } from "@hooks/routes";
 import { Button, Drawer, Flex, Grid, Layout, Menu, theme } from "antd";
 import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { smallLogo } from "@/assets";
 import { LOGO_ALT } from "./components/OrganizationBranding";
 
 const rootStyle: CSSProperties = {
@@ -14,6 +14,8 @@ const rootStyle: CSSProperties = {
 	top: 0,
 	zIndex: 1000,
 }
+
+// FEATURE: Shrinking the header and content on scroll
 
 const Header: FC = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,7 +29,7 @@ const Header: FC = () => {
 		setDrawerOpen((prev) => !prev);
 	}, []);
 
-	const isActive = useCallback(
+	const _isActive = useCallback(
 		(path: string) => {
 			// Handle exact matches first
 			if (pathname === path) {
@@ -73,7 +75,7 @@ const Header: FC = () => {
 				key: si.id,
 			})) : undefined
 		}));
-	}, [activeMenu, drawerOpen]);
+	}, [activeMenu, drawerOpen, navigate, handleDrawerToggle]);
 
 	return (
 		<>

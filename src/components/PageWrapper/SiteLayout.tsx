@@ -1,7 +1,7 @@
 import Header from '@components/Header';
-import { Alert, type AlertProps, Layout, theme } from 'antd';
+import { Notifications } from "@components/Notifications";
+import { Layout, theme } from 'antd';
 import { type CSSProperties, type FC, useContext } from 'react';
-import Marquee from "react-fast-marquee";
 import { Outlet } from 'react-router';
 import ScrollToTop from 'react-scroll-to-top';
 import Footer from '@/components/Footer';
@@ -23,34 +23,15 @@ const contentStyle: CSSProperties = {
   padding: "24px 0px",
 }
 
+// TODO: Update the  alert title text color dynamically to the severity type
+
 const SiteLayout: FC = () => {
   const { token } = theme.useToken();
   const { notifications } = useContext(NotificationContext);
 
   return (
     <Layout style={rootStyle}>
-      {notifications.map((i) => (
-        <Alert
-          key={i.id}
-          title={i.title}
-          description={
-            <Marquee>{i.message}</Marquee>
-          }
-          closable
-          styles={{
-            title: {
-              fontWeight: 'bold',
-              color: 'AccentColor'
-            },
-            description: {
-              // color: 'AccentColor'
-            }
-          }}
-          style={{ borderRadius: 0 }}
-          type={(i?.severity_color ?? 'info') as AlertProps['type']}
-          banner
-        />
-      ))}
+      <Notifications {...{ notifications }} />
 
       <Header />
 
