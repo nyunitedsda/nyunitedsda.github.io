@@ -3,7 +3,7 @@ import {
 	PageMinistries,
 	sliderImages,
 } from "@pages/Home";
-import { Carousel, Flex, theme, Image } from "antd";
+import { Carousel, Flex, Image, theme } from "antd";
 import type { FC } from "react";
 
 const Home: FC = () => {

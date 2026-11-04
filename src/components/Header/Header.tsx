@@ -1,5 +1,6 @@
 import { MenuOutlined } from "@ant-design/icons";
 import {
+	LOGO_ALT,
 	OrganizationBranding,
 } from "@components/Header";
 import { useMenuItems } from "@hooks/routes";
@@ -7,7 +8,7 @@ import { Button, Drawer, Flex, Grid, Layout, Menu, theme } from "antd";
 import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { smallLogo } from "@/assets";
-import { LOGO_ALT } from "./components/OrganizationBranding";
+import { LoginButton, ThemeButton } from "../Buttons";
 
 const rootStyle: CSSProperties = {
 	position: 'sticky',
@@ -54,12 +55,13 @@ const Header: FC = () => {
 		[pathname],
 	);
 
+
 	const menu = useMemo(() => {
-		return activeMenu.map((i) => ({
-			// style: isActive(i.path) ? {
-			// 	borderBottom: `2px solid ${ token.colorPrimary}`,
-			// 	color: 'white',
-			// } : undefined,
+		return [...activeMenu.map((i) => ({
+			style: _isActive(i.path) ? {
+				// borderBottom: `2px solid ${ token.colorPrimary}`,
+				color: token.colorPrimary,
+			} : undefined,
 			onClick: (!i.children && i.path) ? () => {
 				if (drawerOpen) handleDrawerToggle();
 				navigate(i.path)
@@ -74,8 +76,8 @@ const Header: FC = () => {
 				label: si.name,
 				key: si.id,
 			})) : undefined
-		}));
-	}, [activeMenu, drawerOpen, navigate, handleDrawerToggle]);
+		}))];
+	}, [activeMenu, drawerOpen, navigate, handleDrawerToggle, _isActive, token]);
 
 	return (
 		<>
@@ -83,7 +85,7 @@ const Header: FC = () => {
 				style={{ ...rootStyle, background: token.colorBgContainer, display: 'flex', alignItems: 'center' }}
 			>
 				<Flex style={{ margin: "0 auto", maxWidth: token.screenXL, justifyContent: 'space-between', width: '100%' }}>
-					<OrganizationBranding />
+					<OrganizationBranding isLogoVisible={!isMobile} />
 					{
 						isMobile ? (
 							<Button
@@ -97,6 +99,14 @@ const Header: FC = () => {
 								items={menu}
 								style={{ flex: 1, minWidth: 0, justifyContent: 'end' }}
 							/>
+						)
+					}
+					{
+						!isMobile && (
+							<>
+								<ThemeButton />
+								<LoginButton />
+							</>
 						)
 					}
 				</Flex>
@@ -117,6 +127,17 @@ const Header: FC = () => {
 					items={menu}
 					style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 'none' }}
 				/>
+				<Flex 
+					vertical 
+					align={"flex-start"} 
+					style={{
+						// paddingLeft: '24px'
+						bottom: 0
+					}}
+					>
+					<ThemeButton expanded/>
+					<LoginButton />
+				</Flex>
 			</Drawer>
 		</>
 	);

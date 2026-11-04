@@ -13,7 +13,7 @@ import Instagram from "@mui/icons-material/Instagram";
 import Phone from "@mui/icons-material/Phone";
 import Twitter from "@mui/icons-material/Twitter";
 import ListItem from "@mui/material/ListItem";
-import { Col, Divider, Layout, Row, theme, Typography } from "antd";
+import { Col, Divider, Layout, Row, Typography, theme } from "antd";
 import dayjs from "dayjs";
 import type { FC, ReactNode } from "react";
 
@@ -59,6 +59,10 @@ const Footer: FC = () => {
 								href={i.path}
 								key={i.name}
 								disablePadding
+								style={{
+									color: token.colorPrimaryText,
+
+								}}
 							>
 								{i.name}
 							</ListItem>
@@ -77,16 +81,29 @@ const Footer: FC = () => {
 				</Col>
 			</Row>
 
-			<Divider />
+			<Divider style={{
+				backgroundColor: token.colorPrimaryBorder,
+			}}/>
 
-			<Row justify={'center'}>
-				<Typography.Text >&copy; {`${dayjs().year()} `}</Typography.Text>
+			<Row justify={'center'} style={{ color: token.colorPrimaryText }}>
 				<Typography.Text
-					style={{ fontWeight: 'bold', fontStyle: 'italic', paddingLeft: '4px' }}
+					style={{ color: "inherit" }}>
+					&copy; {`${dayjs().year()} `}
+				</Typography.Text>
+				<Typography.Text
+					style={{
+						fontWeight: 'bold',
+						fontStyle: 'italic',
+						paddingLeft: '4px',
+						color: 'inherit',
+					}}
 				>
 					{footer.WEBSITE_TITLE}
 				</Typography.Text>
-				<Typography.Text >{'. All rights reserved'}</Typography.Text>
+				<Typography.Text
+					style={{ color: "inherit" }}>
+					{'. All rights reserved'}
+				</Typography.Text>
 			</Row>
 		</Layout.Footer>
 	);

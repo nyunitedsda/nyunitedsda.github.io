@@ -4,13 +4,11 @@ import {
 } from "@components/Footer";
 import type { Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Col, Collapse, Flex, Typography } from "antd";
-import type { CSSProperties, FC } from "react";
+import { Col, Collapse, Flex, Typography, theme } from "antd";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 const contentSx: CSSProperties = {
 	gap: 1,
-	paddingLeft: '16px',
-	paddingTop: '16px',
 	paddingBottom: '8px',
 };
 
@@ -21,12 +19,37 @@ const titleStyle: CSSProperties = {
 	marginBottom: 0,
 }
 
+type LabelProps = {
+	title: string;
+	subtitle?: string;
+	color?: CSSProperties["color"];
+}
+
+
+const LabelComponent: FC<LabelProps> = ({ title, subtitle, color }) => (
+	<>
+		<Typography.Title level={5} style={{ ...titleStyle, color }}>
+			{title}
+		</Typography.Title>
+		{subtitle && (
+			<Typography.Text style={{ color }}>
+				{subtitle}
+			</Typography.Text>
+		)}
+	</>
+);
+
+const ContentComponent: FC<PropsWithChildren<{ style: CSSProperties }>> = ({ children, style }) => (
+	<Flex vertical style={{ ...contentSx, ...style }}>{children}</Flex>
+)
+
 const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 	title,
 	subtitle,
 	children,
 }) => {
 
+	const { token } = theme.useToken();
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("md"),
 	);
@@ -39,44 +62,56 @@ const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 						accordion
 						bordered={false}
 						size={"small"}
+						ghost
 						style={{
-							background: 'transparent'
+							color: 'inherit',
 						}}
 						styles={{
 							header: {
 								alignItems: "center",
+								color: 'inherit',
+							},
+							icon: {
+								color: token.colorPrimaryText,
 							}
 						}}
 						items={[
 							{
 								key: title,
 								label: (
-									<Flex vertical style={{ color: "white !important"}}>
-										<Typography.Title level={5} style={titleStyle}>
-											{title}
-										</Typography.Title>
-										{subtitle && (
-											<Typography.Text>
-												{subtitle}
-											</Typography.Text>
-										)}
+									<Flex vertical style={{ color: "white !important" }}>
+										<LabelComponent {...{
+											title,
+											subtitle,
+											color: token.colorPrimaryText
+										}} />
 									</Flex>
 								),
-								children: (<Flex vertical style={contentSx}>{children}</Flex>)
+								children: <ContentComponent {...{
+									children,
+									style: {
+										color: token.colorPrimaryText,
+										paddingLeft: '24px',
+									}
+								}} />
 							}
 						]} />
 				</>
 			) : (
 				<>
-					<Typography.Title level={5} style={titleStyle} >
-						{title}
-					</Typography.Title>
-					{subtitle && (
-						<Typography.Text>
-							{subtitle}
-						</Typography.Text>
-					)}
-					<Flex vertical style={{ ...contentSx, paddingLeft: '4px' }}>{children}</Flex>
+					<LabelComponent {...{
+						title,
+						subtitle,
+						color: token.colorPrimaryText
+					}} />
+					<ContentComponent {...{
+						children,
+						style: {
+							color: token.colorPrimaryText,
+							paddingTop: '12px',
+							paddingLeft: '16px',
+						}
+					}} />
 				</>
 			)}
 		</>

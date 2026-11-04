@@ -19,8 +19,8 @@ const contentStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   margin: '0 auto',
-  minHeight: '100%',
-  padding: "24px 0px",
+  minHeight: 'auto',
+  padding: "24px 16px",
 }
 
 // TODO: Update the  alert title text color dynamically to the severity type
@@ -36,7 +36,7 @@ const SiteLayout: FC = () => {
       <Header />
 
       <Layout.Content
-        style={{ ...contentStyle, maxWidth: `${token.screenXL}px` }}
+        style={{ ...contentStyle, maxWidth: token.screenXL }}
       >
         <Outlet />
       </Layout.Content>

@@ -6,7 +6,7 @@
 
 :root {
 	/* Theme variables */
-	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 	width: 100%;
@@ -21,7 +21,10 @@
 }
 
 html,
-body,
+body {
+	height: 100vh;
+}
+
 #root {
 	height: 100%;
 }
@@ -30,19 +33,31 @@ body {
 	margin: 0;
 	min-width: 320px;
 	width: 100%;
+
 	overflow-x: hidden;
 	/* overflow: auto; */
 }
 
 #root {
 	width: 100%;
-	min-height: 100dvh;
-	overflow-y: visible;
+	min-height: 100%;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+
+@media screen and (min-width: 768px) {
+  .responsive-iframe {
+    min-height: 100dvh;
+  }
+}
+
+.ant-layout-footer a:hover {
+	font-weight: 600;
 }
 
 .no-content {

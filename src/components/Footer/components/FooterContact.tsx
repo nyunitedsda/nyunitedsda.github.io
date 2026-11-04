@@ -5,6 +5,7 @@ import {
 } from "@components/Footer";
 import { CONTACT_CONSTANT } from "@pages/Contact";
 import { NoteSection } from "@pages/Home";
+import { theme } from "antd";
 import { type FC, type ReactNode, useMemo } from "react";
 import { useLoaderData } from "react-router";
 
@@ -14,6 +15,7 @@ interface FCProps {
 
 const FooterContact: FC<FCProps> = ({ iconMap }) => {
 	const { defaultContact: data, isLoading } = useLoaderData();
+	const {token} = theme.useToken();
 
 	const contactData = useMemo(() => {
 		return data ? formatFooterContactData(data) : [];
@@ -30,6 +32,7 @@ const FooterContact: FC<FCProps> = ({ iconMap }) => {
 						content={i.content}
 						icon={i?.icon ? iconMap[i.icon] : undefined}
 						key={i.content}
+						style={{color: token.colorPrimaryText}}
 					/>
 				))
 			)}

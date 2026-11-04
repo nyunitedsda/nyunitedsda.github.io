@@ -1,49 +1,39 @@
+import { YoutubeOutlined } from "@ant-design/icons";
 import { FOOTER_LEGAL_LINKS, FooterSegment } from "@components/Footer";
 import footer from "@constants/footer";
-import { Box, IconButton } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Button, Flex, Typography, theme } from "antd";
 import type { FC, ReactNode } from "react";
+import { Link } from "react-router";
 
-const { WEBSITE_TITLE, MOTTO, socialMediaInfo } = footer;
+const { WEBSITE_TITLE, MOTTO } = footer;
 
-const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = ({
-	iconMap,
-}) => {
+const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = () => {
+	const { token } = theme.useToken()
+
+
 	return (
 		<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO.text}>
 			{FOOTER_LEGAL_LINKS.map((i) => (
-				<Typography
-					component="a"
-					href={i.href}
+				<Typography.Text
 					key={i.label}
-					target="_self"
-					variant="body2"
 				>
-					{i.label}
-				</Typography>
+					<Link to={i.href} target="_self" style={{
+						color: token.colorPrimaryText
+					}}>{i.label}</Link>
+				</Typography.Text>
 			))}
 
-			<Box display="flex" gap={1}>
-				{socialMediaInfo.map((i) => (
-					<IconButton
-						aria-label={i.label}
-						component="a"
-						disabled={i.disabled}
-						href={i.href}
-						key={i.label}
-						size="small"
-						sx={{
-							"& .MuiSvgIcon-root": {
-								...(i.icon === "YouTube" ? { fill: "red !important" } : {}),
-							},
-						}}
-						target="__blank"
-						title={i.label}
-					>
-						{iconMap[i.icon]}
-					</IconButton>
-				))}
-			</Box>
+			<Flex gap={1}>
+				<Button 
+					type="text"
+					style={{ color: token.colorPrimaryText, paddingLeft: 0}}
+					icon={
+						<YoutubeOutlined style={{ color: token.colorError, fontSize: 24 }}/>
+					}
+				>
+					{"YouTube Channel"}
+				</Button>
+			</Flex>
 		</FooterSegment>
 	);
 };

@@ -1,9 +1,9 @@
 import RingLoader from "@components/Loaders";
 import { HOME_CONSTANTS, MinistryCard, SectionWrapper } from "@pages/Home";
+import { Row } from "antd";
 import type { FC } from "react";
 import { useLoaderData } from "react-router-dom";
 import type { MinistriesDT } from "@/api";
-import { Row } from "antd";
 
 const PageMinistries: FC = () => {
 	const { ministries, isLoading } = useLoaderData();
@@ -12,7 +12,7 @@ const PageMinistries: FC = () => {
 		<SectionWrapper header={HOME_CONSTANTS.MINISTRIES_HEADER}>
 			<Row
 				justify={'center'}
-				style={{gap: '24px'}}
+				style={{ gap: '24px' }}
 				gutter={16}
 			>
 				{!isLoading &&

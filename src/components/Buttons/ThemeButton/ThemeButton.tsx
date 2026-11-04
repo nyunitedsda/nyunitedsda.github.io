@@ -1,59 +1,27 @@
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
-import { day } from "@components/Buttons";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import {
-	type SxProps,
-	type Theme,
-	useColorScheme,
-	useTheme,
-} from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Button, theme } from "antd";
 import {
 	type FC,
 	type MouseEvent,
-	type TouchEvent,
 	useCallback,
-	useMemo,
+	useContext,
 } from "react";
-
-const expandedBtnSx: SxProps<Theme> = {
-	position: "relative",
-	alignItems: "center",
-	borderRadius: 16,
-	cursor: "pointer",
-	height: "100%",
-	padding: "2px",
-	transition: "background-color 0.3s ease",
-	width: 120,
-	border: (theme) => `2px inset ${theme.palette.divider}`,
-	background: `center / 110%  no-repeat url('${day}')`,
-};
+import context from "@/contexts/ThemeContext/context";
 
 const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
-	const { mode, setMode } = useColorScheme();
-	const theme = useTheme();
-
-	const toggledMode = useMemo(
-		() => (mode === "light" ? "dark" : "light"),
-		[mode],
-	);
+	const { mode, toggleMode } = useContext(context)
+	const { token } = theme.useToken();
 
 	const _handleBtnClick = useCallback<
 		(
-			e:
-				| MouseEvent<HTMLButtonElement>
-				| TouchEvent<HTMLButtonElement>
-				| MouseEvent<HTMLAnchorElement>
-				| TouchEvent<HTMLAnchorElement>,
+			e: MouseEvent<HTMLButtonElement>
 		) => void
 	>(
 		(e) => {
 			e.stopPropagation();
-			setMode(toggledMode);
+			toggleMode();
 		},
-		[setMode, toggledMode],
+		[toggleMode],
 	);
 
 	if (!mode) {
@@ -61,43 +29,31 @@ const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	}
 
 	return (
-		<>
-			{expanded ? (
-				<ListItem
-					title={`Switch to ${toggledMode} mode`}
-					sx={{ height: "48px" }}
-				>
-					<Button onClick={_handleBtnClick} sx={expandedBtnSx}>
-						{mode === "dark" ? (
-							<SunOutlined style={{ color: theme.palette.warning.light }} />
-						) : (
-							<MoonOutlined
-								style={{
-									color: theme.palette.primary.light,
-								}}
-							/>
-						)}
-					</Button>
+		<Button
+			onClick={_handleBtnClick}
+			type="text"
+			title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
+			style={{
 
-					<Typography sx={{ ml: 2 }}>{"Theme"}</Typography>
-				</ListItem>
-			) : (
-				<IconButton
-					onClick={_handleBtnClick}
-					title={`Switch to ${toggledMode} mode`}
-				>
-					{mode === "dark" ? (
-						<SunOutlined style={{ color: theme.palette.warning.light }} />
-					) : (
-						<MoonOutlined
-							style={{
-								color: theme.palette.primary.light,
-							}}
-						/>
-					)}
-				</IconButton>
-			)}
-		</>
+				...(expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 24 } : {})
+			}}
+			icon={
+				mode === "dark" ? (
+					<SunOutlined style={{ color: token.colorWarning, fontSize: '24px' }} />
+				) : (
+					<MoonOutlined
+						style={{
+							color: token.colorPrimary,
+							fontSize: '24px'
+						}}
+					/>
+				)
+			}
+		>
+			{
+				expanded ? `${"Theme"}` : undefined
+			}
+		</Button >
 	);
 };
 

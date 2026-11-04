@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { AnnouncementDT } from "@/api";
 
 type AnnouncementCardProps = AnnouncementDT & {
@@ -10,6 +10,7 @@ interface NoteSectionProps {
 	content: ReactNode;
 	title?: ReactNode;
 	columnLayout?: boolean;
+	style?: CSSProperties;
 }
 
 export type { AnnouncementCardProps, NoteSectionProps };

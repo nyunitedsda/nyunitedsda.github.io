@@ -15,17 +15,18 @@ const NoteSection: FC<NoteSectionProps> = ({
 	content,
 	title,
 	columnLayout = false,
+	style,
 }) => (
-	<Flex style={noteSx}>
+	<Flex style={{ ...noteSx, ...style }}>
 		{icon && icon}
 		<Flex style={{ ...contentSx, flexDirection: columnLayout ? "column" : "row", columnGap: '12px' }}>
 			{title && (
-				<Typography.Text style={{ fontWeight: 'bold' }}>
+				<Typography.Text style={{ fontWeight: 'bold', color: 'inherit' }}>
 					{title}
 				</Typography.Text>
 			)}
 			{content && (
-				<Typography.Text color="text.primary" >
+				<Typography.Text style={{ color: 'inherit' }} >
 					{content}
 				</Typography.Text>
 			)}

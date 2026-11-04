@@ -1,4 +1,4 @@
-import type { ConfigProviderProps } from "antd";
+import { type ConfigProviderProps, theme } from "antd";
 
 const DEFAULTS = {
   colorPrimary: '#187cc2',
@@ -6,17 +6,17 @@ const DEFAULTS = {
 
 
 const antDTheme: ConfigProviderProps['theme'] = {
-  token:{
-    colorPrimary: DEFAULTS.colorPrimary,
-    colorPrimaryText: 'white',
-  },
+  algorithm: [theme.darkAlgorithm, theme.defaultAlgorithm],
   components: {
     Layout: {
       footerBg: DEFAULTS.colorPrimary,
       colorText: 'red',
     }
-  }
-
+  },
+  token: {
+    colorPrimary: DEFAULTS.colorPrimary,
+    colorPrimaryText: 'white',
+  },
 };
 
 export default antDTheme;

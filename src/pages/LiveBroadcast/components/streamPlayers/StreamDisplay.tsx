@@ -5,7 +5,7 @@ import type { StreamDisplayProps } from "./types";
 const StreamDisplay: FC<
 	StreamDisplayProps & React.IframeHTMLAttributes<HTMLIFrameElement>
 > = (props) => {
-	const { loading = "lazy", stackProps, id, ...rest } = props;
+	const { loading = "lazy", id, ...rest } = props;
 	const ref = useRef(null);
 
 	useEffect(() => {
@@ -20,10 +20,7 @@ const StreamDisplay: FC<
 		<Flex
 			vertical
 			id={`wrap-${id}`}
-			// sx={rootSx}
-			// className="responsive-iframe"
-			// {...stackProps}
-			style={{ flex: 1, minHeight: 0 }}
+			style={{ flex: 1, minHeight: 'auto' }}
 		>
 			<iframe
 				allow="fullscreen"
@@ -32,10 +29,12 @@ const StreamDisplay: FC<
 				className="responsive-iframe iframe"
 				id={id}
 				width="100%"
-				//  height="100vh"
 				sandbox="allow-scripts"
-				style={{ flex: 1, border: 0 }}
-				//  loading={loading}
+				style={{ 
+					flex: 1, 
+					border: 0, 
+				
+				}}
 				{...(rest as React.IframeHTMLAttributes<HTMLIFrameElement>)}
 			></iframe>
 		</Flex>

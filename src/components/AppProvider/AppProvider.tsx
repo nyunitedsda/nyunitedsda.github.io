@@ -1,15 +1,14 @@
-import { queryClient, theme } from "@components/AppProvider";
+import { queryClient } from "@components/AppProvider";
 import { AuthProvider } from "@contexts/AuthenticationContext";
 import { NotificationProvider } from "@contexts/NotificationContext";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider as Provider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ConfigProvider } from "antd";
 import { SnackbarProvider } from "notistack";
 import React, { type FC, type PropsWithChildren, useMemo } from "react";
-import antDTheme from "./antDTheme";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 	// Memoize snackbar options to prevent unnecessary re-renders
@@ -35,13 +34,12 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 						dense
 					>
 						<AuthProvider>
-							<ConfigProvider theme={antDTheme}>
-								<ThemeProvider theme={theme}>
-									{/* Using enableColorScheme for better dark/light mode handling */}
+							<ThemeProvider>
+								<Provider theme={createTheme({palette: {mode: 'dark'}})}>
 									<CssBaseline enableColorScheme />
 									<NotificationProvider>{children}</NotificationProvider>
-								</ThemeProvider>
-							</ConfigProvider>
+								</Provider>
+							</ThemeProvider>
 						</AuthProvider>
 					</SnackbarProvider>
 				</QueryClientProvider>
