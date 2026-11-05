@@ -1,10 +1,11 @@
+import { CalendarOutlined } from "@ant-design/icons";
 import RingLoader from "@components/Loaders";
 import { PageTitle } from "@components/PageWrapper";
 import ProjectCard from "@components/ProjectCard";
-import CalendarToday from "@mui/icons-material/CalendarToday";
 import Grid from "@mui/material/Grid";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { capitalize } from "@mui/material/utils";
+import { Button, Flex, Pagination, Typography } from "antd";
 import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
 import { useLoaderData } from "react-router";
 import type { ArticleDT } from "@/api";
@@ -13,7 +14,6 @@ import {
 	BLOG_SUBHEADER,
 	DEFAULT_POST_PER_PAGE,
 } from "./blogConstant";
-import { Button, Flex, Pagination, Typography } from "antd";
 
 const containerSx: SxProps<Theme> = {
 	alignContent: "flex-start",
@@ -55,7 +55,7 @@ const Blog: FC = () => {
 	);
 
 	const handlePageChange = useCallback(
-		( value: number) => {
+		(value: number) => {
 			setPage(value);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		},
@@ -75,7 +75,7 @@ const Blog: FC = () => {
 								header={{
 									title,
 									description: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author ?? "")}`,
-									avatar: <CalendarToday />,
+									avatar: <CalendarOutlined />,
 								}}
 								actions={
 									[<Button
@@ -84,7 +84,7 @@ const Blog: FC = () => {
 										type="text"
 									>
 										Read More
-									</Button>, ,,]
+									</Button>,]
 								}
 							>
 								<Typography.Paragraph

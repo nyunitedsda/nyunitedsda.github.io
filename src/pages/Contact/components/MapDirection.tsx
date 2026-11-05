@@ -1,4 +1,4 @@
-import { LinkOutlined } from "@mui/icons-material";
+import { LinkOutlined } from "@ant-design/icons";
 import { useTheme } from "@mui/material/styles";
 import { CONTACT_CONSTANT } from "@pages/Contact";
 import { Card, type CardProps } from "antd";
@@ -43,7 +43,7 @@ const MapDirection: FC = () => {
 					to={TRANSIT_URL}
 				>
 					{TRIP_PLANNER}
-					<LinkOutlined />
+					<LinkOutlined style={{ fontSize: "large" }} />
 				</Link>
 			}>
 

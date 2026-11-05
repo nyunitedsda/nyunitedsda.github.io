@@ -1,33 +1,10 @@
-import ProjectSuspense from "@components/ProjectSuspense";
-import { lazy } from "react";
+import { ArrowLeftOutlined, BookOutlined, CalendarOutlined, CommentOutlined, EyeOutlined, ShareAltOutlined, StarOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
 
-const AccountCircleOutlined = lazy(
-	() => import("@mui/icons-material/AccountCircleOutlined"),
-);
-const ArrowBackIosNewSharp = lazy(
-	() => import("@mui/icons-material/ArrowBackIosNewSharp"),
-);
-const BookmarkAddOutlined = lazy(
-	() => import("@mui/icons-material/BookmarkAddOutlined"),
-);
-const CalendarTodayOutlined = lazy(
-	() => import("@mui/icons-material/CalendarTodayOutlined"),
-);
-const CommentOutlined = lazy(
-	() => import("@mui/icons-material/CommentOutlined"),
-);
-const LocalOfferOutlined = lazy(
-	() => import("@mui/icons-material/LocalOfferOutlined"),
-);
-const RateReviewOutlined = lazy(
-	() => import("@mui/icons-material/RateReviewOutlined"),
-);
-const ShareOutlined = lazy(() => import("@mui/icons-material/ShareOutlined"));
-const VisibilityOutlined = lazy(
-	() => import("@mui/icons-material/VisibilityOutlined"),
-);
+
+
 
 import RingLoader from "@components/Loaders";
+import ProjectSuspense from "@components/ProjectSuspense";
 import { capitalize } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -51,17 +28,17 @@ const backBtnSx: SxProps<Theme> = {
 const ICONS = {
 	author: (
 		<ProjectSuspense>
-			<AccountCircleOutlined />
+			<UserOutlined />
 		</ProjectSuspense>
 	),
 	published_at: (
 		<ProjectSuspense>
-			<CalendarTodayOutlined />
+			<CalendarOutlined />
 		</ProjectSuspense>
 	),
 	views: (
 		<ProjectSuspense>
-			<VisibilityOutlined />
+			<EyeOutlined />
 		</ProjectSuspense>
 	),
 	comments: (
@@ -71,17 +48,17 @@ const ICONS = {
 	),
 	rating: (
 		<ProjectSuspense>
-			<RateReviewOutlined />
+			<StarOutlined />
 		</ProjectSuspense>
 	),
 	share: (
 		<ProjectSuspense>
-			<ShareOutlined />
+			<ShareAltOutlined />
 		</ProjectSuspense>
 	),
 	save: (
 		<ProjectSuspense>
-			<BookmarkAddOutlined />
+			<BookOutlined />
 		</ProjectSuspense>
 	),
 };
@@ -105,7 +82,7 @@ const BlogDetails: FC = () => {
 
 				<Button
 					variant="text"
-					startIcon={<ArrowBackIosNewSharp />}
+					startIcon={<ArrowLeftOutlined />}
 					color="primary"
 					component={"a"}
 					href="/blog"
@@ -173,10 +150,8 @@ const BlogDetails: FC = () => {
 
 						<Box sx={{ mb: 3 }}>
 							<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-								<LocalOfferOutlined
-									fontSize="small"
-									sx={{ mr: 1, color: "primary.light" }}
-								/>
+
+								<TagOutlined color="primary" style={{ marginRight: 8, fontSize: "large" }} />
 								<Typography
 									variant="h6"
 									sx={{ fontWeight: "bold", color: "primary.light" }}

@@ -1,3 +1,4 @@
+import { ColumnHeightOutlined, MenuOutlined } from "@ant-design/icons";
 import {
 	type ColumnDefinition,
 	type DataTableProps,
@@ -13,15 +14,10 @@ import TableCell, { type TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { lazy, type ReactNode, useMemo, useState } from "react";
+import { type ReactNode, useMemo, useState } from "react";
 import RingLoader from "react-spinners/RingLoader";
 
-const DensitySmallOutlined = lazy(
-	() => import("@mui/icons-material/DensitySmallOutlined"),
-);
-const DensityMediumOutlined = lazy(
-	() => import("@mui/icons-material/DensityMediumOutlined"),
-);
+
 
 const rootSx: SxProps<Theme> = {
 	flexDirection: "column",
@@ -59,14 +55,14 @@ const DataTable = <T extends { [key: string]: unknown }>({
 	const tableOptions: Partial<IconButtonProps>[] = useMemo(() => {
 		return [
 			{
-				children: <DensitySmallOutlined />,
+				children: <ColumnHeightOutlined />,
 				color: "primary",
 				disabled: density === "small",
 				onClick: () => setDensity("small"),
 				title: "Compact View",
 			},
 			{
-				children: <DensityMediumOutlined />,
+				children: <MenuOutlined />,
 				color: "primary",
 				disabled: density === "medium",
 				onClick: () => setDensity("medium"),

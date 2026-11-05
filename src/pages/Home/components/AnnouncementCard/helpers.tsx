@@ -1,5 +1,6 @@
+import { CalendarOutlined, CodeOutlined, EnvironmentOutlined, PhoneOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
-import { createElement, lazy, type ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 import type { AnnouncementDT } from "@/api";
 
 type Section = {
@@ -32,24 +33,13 @@ const NOTIFICATION_KEYS: NoteKeys[] = [
 	"conference_code",
 ];
 
-const AutoStoriesOutlined = lazy(
-	() => import("@mui/icons-material/AutoStoriesOutlined"),
-);
-const CodeOutlined = lazy(() => import("@mui/icons-material/CodeOutlined"));
-const EventOutlined = lazy(() => import("@mui/icons-material/EventOutlined"));
-const LocationOnOutlined = lazy(
-	() => import("@mui/icons-material/LocationOnOutlined"),
-);
-const Person3Outlined = lazy(
-	() => import("@mui/icons-material/Person3Outlined"),
-);
-const PhoneOutlined = lazy(() => import("@ant-design/icons/es/icons/PhoneOutlined"));
+
 
 const NOTIFICATION_ATTRIBUTES: Record<NoteKeys, Omit<Section, "content">> = {
-	event_date: { icon: createElement(EventOutlined), title: WHEN },
-	location: { icon: createElement(LocationOnOutlined), title: WHERE },
-	speaker: { icon: createElement(Person3Outlined), title: SPEAKER },
-	sermon: { icon: createElement(AutoStoriesOutlined), title: SERMON_TITLE },
+	event_date: { icon: createElement(CalendarOutlined), title: WHEN },
+	location: { icon: createElement(EnvironmentOutlined), title: WHERE },
+	speaker: { icon: createElement(UserOutlined), title: SPEAKER },
+	sermon: { icon: createElement(ReadOutlined), title: SERMON_TITLE },
 	phone_number: { icon: createElement(PhoneOutlined), title: PHONE_NUMBER },
 	conference_code: {
 		icon: createElement(CodeOutlined),

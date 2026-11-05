@@ -1,4 +1,4 @@
-import { YoutubeOutlined } from "@ant-design/icons";
+import { MailFilled, MailOutlined, PhoneOutlined, YoutubeOutlined } from "@ant-design/icons";
 import {
 	FooterContact,
 	FooterSegment,
@@ -7,11 +7,6 @@ import {
 } from "@components/Footer";
 import footer from "@constants/footer";
 import { useMenuItems } from "@hooks/routes";
-import { AlternateEmailOutlined, EmailOutlined } from "@mui/icons-material";
-import Facebook from "@mui/icons-material/Facebook";
-import Instagram from "@mui/icons-material/Instagram";
-import Phone from "@mui/icons-material/Phone";
-import Twitter from "@mui/icons-material/Twitter";
 import ListItem from "@mui/material/ListItem";
 import { Col, Divider, Layout, Row, Typography, theme } from "antd";
 import dayjs from "dayjs";
@@ -20,13 +15,10 @@ import type { FC, ReactNode } from "react";
 
 
 const iconMap: Record<string, ReactNode> = {
-	Facebook: <Facebook />,
-	Instagram: <Instagram />,
-	Twitter: <Twitter />,
 	YouTube: <YoutubeOutlined style={{ fontSize: '1.125rem', color: 'red' }} />,
-	Phone: <Phone fontSize="small" />,
-	Email: <AlternateEmailOutlined fontSize="small" />,
-	Mail: <EmailOutlined fontSize="small" />,
+	Phone: <PhoneOutlined style={{ fontSize: "large" }} />,
+	Email: <MailFilled style={{ fontSize: "large" }} />,
+	Mail: <MailOutlined style={{ fontSize: "large" }} />,
 };
 
 const columnSize = {
@@ -83,7 +75,7 @@ const Footer: FC = () => {
 
 			<Divider style={{
 				backgroundColor: token.colorPrimaryBorder,
-			}}/>
+			}} />
 
 			<Row justify={'center'} style={{ color: token.colorPrimaryText }}>
 				<Typography.Text

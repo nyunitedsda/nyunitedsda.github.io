@@ -1,6 +1,5 @@
 export * from "./AppProvider";
 export * from "./Buttons";
-export * from "./Carousel";
 export * from "./ConfirmationDialog";
 export * from "./DataTable";
 export * from "./Footer";

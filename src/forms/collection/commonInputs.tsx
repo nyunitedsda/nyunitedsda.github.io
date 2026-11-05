@@ -1,12 +1,9 @@
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { PlaceholderIcon } from "@components/Icons";
 import type { FormFieldType } from "@forms/Input";
 import InputAdornment from "@mui/material/InputAdornment";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 
-const LockOutlined = lazy(() => import("@mui/icons-material/LockOutlined"));
-const Person3Outlined = lazy(
-	() => import("@mui/icons-material/Person3Outlined"),
-);
 
 export const configurePasswordInput = ({
 	name = "password",
@@ -40,7 +37,7 @@ export const configureUsernameInput = () => ({
 		startAdornment: (
 			<InputAdornment position="start">
 				<Suspense fallback={<PlaceholderIcon />}>
-					<Person3Outlined color="primary" />
+					<UserOutlined color="primary" />
 				</Suspense>
 			</InputAdornment>
 		),

@@ -1,6 +1,4 @@
 import ProjectCard from "@components/ProjectCard";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
@@ -22,7 +20,7 @@ const meta: Meta<typeof ProjectCard> = {
 			description: "Header content of the card",
 			defaultValue: {
 				title: "Project Title",
-				subheader: "Project Subtitle",
+				description: "Project Subtitle",
 			},
 		},
 		content: {
@@ -46,10 +44,10 @@ export const Default: Story = {
 	args: {
 		header: {
 			title: "Project Title",
-			subheader: "Project Subtitle",
+			description: "Project Subtitle",
 		},
 		content: "This is a sample project card content.",
-		actions: <Button variant="contained">Action</Button>,
+		actions: [<Button variant="contained">Action</Button>],
 	},
 };
 
@@ -57,18 +55,17 @@ export const WithMultipleActions: Story = {
 	args: {
 		header: {
 			title: "Project with Actions",
-			subheader: "Multiple actions available",
+			description: "Multiple actions available",
 		},
 		content: "This project card has multiple actions.",
 		actions: (
-			<>
-				<Button variant="contained" color="primary">
-					Primary
-				</Button>
-				<Button variant="outlined" color="secondary">
-					Secondary
-				</Button>
-			</>
+			[<Button variant="contained" color="primary">
+				Primary
+			</Button>,
+			<Button variant="outlined" color="secondary">
+				Secondary
+			</Button>]
+
 		),
 	},
 };
@@ -77,7 +74,7 @@ export const NoActions: Story = {
 	args: {
 		header: {
 			title: "Project without Actions",
-			subheader: "No actions available",
+			description: "No actions available",
 		},
 		content: "This project card does not have any actions.",
 		actions: undefined,
@@ -88,10 +85,10 @@ export const NoContent: Story = {
 	args: {
 		header: {
 			title: "Project with Header Only",
-			subheader: "No content provided",
+			description: "No content provided",
 		},
 		content: undefined,
-		actions: <Button variant="contained">Action</Button>,
+		actions: [<Button variant="contained">Action</Button>],
 	},
 };
 
@@ -99,7 +96,7 @@ export const CustomHeader: Story = {
 	args: {
 		header: {
 			title: "Custom Project",
-			subheader: "With custom header props",
+			description: "With custom header props",
 			avatar: (
 				<span role="img" aria-label="rocket">
 					🚀
@@ -107,7 +104,7 @@ export const CustomHeader: Story = {
 			),
 		},
 		content: "This project card has a custom header with an avatar.",
-		actions: <Button variant="outlined">Action</Button>,
+		actions: [<Button variant="outlined">Action</Button>],
 	},
 };
 
@@ -115,14 +112,10 @@ export const ActionHeader: Story = {
 	args: {
 		header: {
 			title: "Custom Project",
-			subheader: "With custom header props",
-			action: (
-				<IconButton aria-label="settings" size="small">
-					<CloseOutlined fontSize="small" sx={{ color: "action.active" }} />
-				</IconButton>
-			),
+			description: "With custom header props",
+
 		},
 		content: "This project card has a custom header with an avatar.",
-		actions: <Button variant="outlined">Action</Button>,
+		actions: [<Button variant="outlined">Action</Button>],
 	},
 };

@@ -1,13 +1,13 @@
 "use client";
 
+import { LockOutlined } from "@ant-design/icons";
 import { routePaths } from "@hooks/routes";
-import LockOutlined from "@mui/icons-material/LockOutlined";
 import Box from "@mui/material/Box";
 import Button, { type ButtonProps } from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { type FC, useCallback } from "react";
+import { type CSSProperties, type FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppProvider } from "@/components";
 import { PERMISSION_ERROR } from "../constants";
@@ -22,10 +22,10 @@ const actionSx: SxProps<Theme> = {
 	width: "100%",
 };
 
-const errorIconSx: SxProps<Theme> = {
+const errorIconSx: CSSProperties = {
 	fontSize: 80,
 	color: "warning.main",
-	mb: 2,
+	marginBottom: 16,
 };
 
 const rootSx: SxProps<Theme> = {
@@ -68,7 +68,7 @@ const UnauthorizedError: FC = () => {
 		<AppProvider>
 			<Stack spacing={3} sx={rootSx} className="fade-in">
 				<Stack alignItems={"center"} spacing={2}>
-					<LockOutlined sx={errorIconSx} />
+					<LockOutlined style={errorIconSx} />
 					<Typography variant="h2" component="h1" fontWeight={"bold"}>
 						{ERROR_MSG}
 					</Typography>

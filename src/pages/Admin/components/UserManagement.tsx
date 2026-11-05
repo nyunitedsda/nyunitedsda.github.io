@@ -1,13 +1,8 @@
+import { DeleteOutlined, EditOutlined, KeyOutlined, MoreOutlined } from "@ant-design/icons";
 import DataTable from "@components/DataTable";
 import { PageTitle } from "@components/PageWrapper";
 import { PasswordEditor, UserEditor } from "@forms/collection";
 import { useDeleteUser, usePermission } from "@hooks/auth";
-import {
-	DeleteOutlined,
-	Edit,
-	KeyOutlined,
-	MoreVertOutlined,
-} from "@mui/icons-material";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { initialUser } from "@test/mock_data";
@@ -71,7 +66,7 @@ const UserManagement: FC = () => {
 				title: "Edit User",
 				onClick: setCreateUserOpen,
 				disabled: !canEdit,
-				icon: <Edit color="primary" />,
+				icon: <EditOutlined color="primary" />,
 			},
 			{
 				title: "Change User Password",
@@ -115,7 +110,7 @@ const UserManagement: FC = () => {
 								})
 							}
 						>
-							<MoreVertOutlined color="primary" />
+							<MoreOutlined color="primary" />
 						</IconButton>
 					);
 				}}

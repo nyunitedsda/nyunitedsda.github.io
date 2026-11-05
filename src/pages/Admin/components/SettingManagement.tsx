@@ -1,8 +1,8 @@
+import { SafetyOutlined, UserOutlined } from "@ant-design/icons";
 import { PageTitle } from "@components/PageWrapper";
 import ProjectCard from "@components/ProjectCard";
 import { PasswordEditor } from "@forms/collection";
 import { useAuthentication } from "@hooks/auth";
-import { Person3Outlined, SecurityOutlined } from "@mui/icons-material";
 import { Button, capitalize } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -24,14 +24,14 @@ const SettingManagement: FC = () => {
 		return [
 			{
 				title: "Account",
-				icon: <Person3Outlined color="primary" />,
+				icon: <UserOutlined color="primary" />,
 				description: "Manage your account information and preferences",
 				action: user?.is_system
 					? undefined
 					: {
-							label: "Edit Account",
-							onClick: () => console.log("Edit Account"),
-						},
+						label: "Edit Account",
+						onClick: () => console.log("Edit Account"),
+					},
 				content: (
 					<>
 						{user &&
@@ -48,10 +48,10 @@ const SettingManagement: FC = () => {
 										<strong>{capitalize(field.replace(/_/g, " "))}:</strong>{" "}
 										{field === "last_login" && user[field as keyof UserDT]
 											? dayjs(user[field as keyof UserDT] as string).format(
-													"MMMM D, YYYY",
-												)
+												"MMMM D, YYYY",
+											)
 											: typeof user[field as keyof UserDT] === "object" &&
-													user[field as keyof UserDT] instanceof Date
+												user[field as keyof UserDT] instanceof Date
 												? (user[field as keyof UserDT] as Date).toISOString()
 												: String(user[field as keyof UserDT] ?? "N/A")}
 									</Typography>
@@ -62,15 +62,15 @@ const SettingManagement: FC = () => {
 			},
 			{
 				title: "Security",
-				icon: <SecurityOutlined color="primary" />,
+				icon: <SafetyOutlined color="primary" />,
 				description: "Manage your security settings and preferences",
 				action: user?.is_system
 					? undefined
 					: {
-							label: "Change Password",
-							onClick: () => setChangePasswordOpen(user as UserDT),
-							disabled: user?.is_system,
-						},
+						label: "Change Password",
+						onClick: () => setChangePasswordOpen(user as UserDT),
+						disabled: user?.is_system,
+					},
 				content: (
 					<>
 						{user &&
@@ -115,30 +115,30 @@ const SettingManagement: FC = () => {
 								{i.title}{" "}
 							</Stack>
 						),
-						subheader: i.description,
+						description: i.description,
 					}}
-					content={
-						<Stack
-							justifyContent="space-between"
-							alignItems="center"
-							direction="row"
-						>
-							<Stack>{i.content}</Stack>
-							{i.action && (
-								<Button
-									variant="outlined"
-									color="primary"
-									onClick={i.action.onClick}
-									size="large"
-									sx={{ height: "40px" }}
-									disabled={i.action.disabled}
-								>
-									{i.action.label}
-								</Button>
-							)}
-						</Stack>
-					}
-				/>
+				>
+
+					<Stack
+						justifyContent="space-between"
+						alignItems="center"
+						direction="row"
+					>
+						<Stack>{i.content}</Stack>
+						{i.action && (
+							<Button
+								variant="outlined"
+								color="primary"
+								onClick={i.action.onClick}
+								size="large"
+								sx={{ height: "40px" }}
+								disabled={i.action.disabled}
+							>
+								{i.action.label}
+							</Button>
+						)}
+					</Stack>
+				</ProjectCard>
 			))}
 			{changePasswordOpen && (
 				<PasswordEditor

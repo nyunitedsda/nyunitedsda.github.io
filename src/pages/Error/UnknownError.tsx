@@ -1,7 +1,5 @@
+import { ArrowLeftOutlined, HomeOutlined, WarningOutlined } from "@ant-design/icons";
 import { routePaths } from "@hooks/routes";
-import { ArrowBackIosNew } from "@mui/icons-material";
-import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
-import HomeRounded from "@mui/icons-material/HomeRounded";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -22,11 +20,6 @@ const actionSx: SxProps<Theme> = {
 	width: "100%",
 };
 
-const errorIconSx: SxProps<Theme> = {
-	fontSize: 80,
-	color: (theme) => theme.palette.error.main,
-	mb: 2,
-};
 
 const rootSx: SxProps<Theme> = {
 	backgroundColor: (theme) => theme.palette.background.default,
@@ -74,7 +67,7 @@ const UnknownError: FC = () => {
 		<AppProvider>
 			<Stack spacing={3} sx={rootSx} className="fade-in">
 				<Stack alignItems={"center"} spacing={2}>
-					<ErrorOutlineOutlined sx={errorIconSx} />
+					<WarningOutlined color="warning" style={{ fontSize: 80, marginBottom: 16 }} />
 					<Typography variant="h2" component="h1" fontWeight={"bold"}>
 						{ERROR_MSG}
 					</Typography>
@@ -93,7 +86,7 @@ const UnknownError: FC = () => {
 						color="primary"
 						onClick={() => handleSelection(-1)}
 						size="large"
-						startIcon={<ArrowBackIosNew />}
+						startIcon={<ArrowLeftOutlined />}
 						title={BACKWARDS}
 						variant="outlined"
 					>
@@ -105,7 +98,7 @@ const UnknownError: FC = () => {
 						color="primary"
 						onClick={() => handleSelection(routePaths.HOME)}
 						size="large"
-						startIcon={<HomeRounded />}
+						startIcon={<HomeOutlined />}
 						variant="contained"
 					>
 						{`Return to ${HOME}`}

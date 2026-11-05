@@ -1,9 +1,9 @@
+import { BgColorsOutlined } from "@ant-design/icons";
 import { theme } from "@components/AppProvider";
 import { ProjectModal } from "@components/ProjectModal";
 import EntityEditor from "@forms/EntityEditor/EntityEditor";
 import { InputField } from "@forms/Input";
 import { useEntityList } from "@hooks/api";
-import { Palette } from "@mui/icons-material";
 import {
 	ButtonBase,
 	type Palette as PaletteType,
@@ -70,13 +70,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-						initialValues: data,
-						title: EDIT_TITLE,
-					}
+					initialValues: data,
+					title: EDIT_TITLE,
+				}
 				: {
-						initialValues: initialNotification,
-						title: ADD_TITLE,
-					},
+					initialValues: initialNotification,
+					title: ADD_TITLE,
+				},
 		[data],
 	);
 
@@ -115,14 +115,14 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (
 							theme.palette[
-								colorKey?.color as keyof PaletteType
+							colorKey?.color as keyof PaletteType
 							] as SimplePaletteColorOptions
 						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting
 						return (
 							<ButtonBase key={item.id} sx={severityItemSx} value={item.id}>
 								<span style={{ color, display: "flex", alignItems: "center" }}>
-									<Palette fontSize="small" />
+									<BgColorsOutlined style={{ fontSize: "large" }} />
 								</span>
 								<span style={{ color }}>{item.title}</span>
 							</ButtonBase>

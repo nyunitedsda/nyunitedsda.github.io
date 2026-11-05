@@ -1,5 +1,5 @@
+import { EnvironmentOutlined, MailFilled, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { PageTitle } from "@components/PageWrapper";
-import { AlternateEmailOutlined } from "@mui/icons-material";
 import {
 	CONTACT_CONSTANT,
 	ContactSection,
@@ -8,10 +8,9 @@ import {
 } from "@pages/Contact";
 import { NoteSection } from "@pages/Home";
 import { useQuery } from "@tanstack/react-query";
+import { Card, type CardProps, Flex, Typography } from "antd";
 import type { CSSProperties, FC } from "react";
 import { getDefaultContacts } from "@/api";
-import { Card, Flex, Typography, type CardProps } from "antd";
-import { EnvironmentOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 
 const contactDetailSx: CardProps['styles'] = {
 	root: {
@@ -67,7 +66,7 @@ const Contact: FC = () => {
 								},
 								{
 									id: 3,
-									icon: <AlternateEmailOutlined style={iconStyle} />,
+									icon: <MailFilled style={iconStyle} />,
 									component: "a",
 									href: `mailto:${data.email}`,
 									content: data.email,

@@ -1,3 +1,4 @@
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import type { ConfirmationButtonProps } from "@components/Buttons";
 import { ConfirmationButton } from "@components/Buttons";
 import {
@@ -5,7 +6,6 @@ import {
 	type TableActionProps,
 	tableActions,
 } from "@components/DataTable";
-import { DeleteOutlined, VisibilityOutlined } from "@mui/icons-material";
 import {
 	type ButtonOwnProps,
 	MenuItem,
@@ -14,9 +14,7 @@ import {
 	useMediaQuery,
 	useTheme,
 } from "@mui/material";
-import { type FC, lazy, Suspense, useMemo } from "react";
-
-const EditOutlined = lazy(() => import("@mui/icons-material/EditOutlined"));
+import { type FC, Suspense, useMemo } from "react";
 
 const LazyIcon: FC<LazyIconProps> = ({ children, fallback }) => (
 	<Suspense fallback={fallback || <div>Loading...</div>}>{children}</Suspense>
@@ -25,7 +23,7 @@ const LazyIcon: FC<LazyIconProps> = ({ children, fallback }) => (
 const ICONS = {
 	Delete: <DeleteOutlined />,
 	Edit: <EditOutlined />,
-	View: <VisibilityOutlined />,
+	View: <EyeOutlined />,
 };
 
 const { deleteConfirm, editConfirm, viewConfirm } = tableActions;
@@ -60,22 +58,22 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 		return actions.map(({ title, ...rest }) => {
 			const buttonProps = isMobile
 				? {
-						...rest,
-						variant: "text",
-						title,
-						sx: { width: "100%" },
-						startIcon: (
-							<LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>
-						),
-						children: (
-							<Typography sx={{ color: "text.primary" }}>{title}</Typography>
-						),
-					}
+					...rest,
+					variant: "text",
+					title,
+					sx: { width: "100%" },
+					startIcon: (
+						<LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>
+					),
+					children: (
+						<Typography sx={{ color: "text.primary" }}>{title}</Typography>
+					),
+				}
 				: {
-						...rest,
-						confirmVariant: "icon",
-						children: <LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>,
-					};
+					...rest,
+					confirmVariant: "icon",
+					children: <LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>,
+				};
 
 			return isMobile ? (
 				<MenuItem

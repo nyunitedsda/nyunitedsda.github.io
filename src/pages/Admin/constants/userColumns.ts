@@ -1,8 +1,5 @@
+import { CheckSquareOutlined } from "@ant-design/icons";
 import type { ColumnDefinition } from "@components/DataTable";
-import {
-	CheckBoxOutlineBlankOutlined,
-	CheckBoxOutlined,
-} from "@mui/icons-material";
 import { Checkbox, capitalize } from "@mui/material";
 import dayjs from "dayjs";
 import { createElement } from "react";
@@ -34,8 +31,8 @@ const userColumns: ColumnDefinition<User>[] = [
 		renderCell: ({ is_active }) =>
 			createElement(Checkbox, {
 				checked: is_active,
-				icon: createElement(CheckBoxOutlineBlankOutlined),
-				checkedIcon: createElement(CheckBoxOutlined),
+				// icon: createElement(CheckBoxOutlineBlankOutlined),
+				checkedIcon: createElement(CheckSquareOutlined),
 			}),
 	},
 	{
