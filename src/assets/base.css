@@ -51,9 +51,9 @@ body {
 
 
 @media screen and (min-width: 768px) {
-  .responsive-iframe {
-    min-height: 100dvh;
-  }
+	.responsive-iframe {
+		min-height: 100dvh;
+	}
 }
 
 .ant-layout-footer a:hover {
@@ -65,4 +65,35 @@ body {
 	border-radius: 0px !important;
 	height: 100dvh;
 	overflow-y: visible;
+}
+
+/* Alert / Notification CSS */
+.ant-alert-close-icon {
+	position: absolute;
+	right: 20px;
+}
+
+.ant-alert-section {
+	max-width: 1200px;
+	padding-right: 16px;
+	align-items: center;
+	display: flex;
+	column-gap: 24px;
+	flex-wrap: wrap;
+
+}
+
+.ant-alert {
+	justify-content: center;
+}
+
+.ant-alert-icon {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.ant-alert-title {
+	margin-bottom: 0;
 }
