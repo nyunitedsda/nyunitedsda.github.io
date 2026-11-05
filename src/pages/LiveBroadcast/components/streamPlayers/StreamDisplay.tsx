@@ -29,7 +29,7 @@ const StreamDisplay: FC<
 				className="responsive-iframe iframe"
 				id={id}
 				width="100%"
-				sandbox="allow-scripts"
+				sandbox={"allow-scripts allow-same-origin"}
 				style={{ 
 					flex: 1, 
 					border: 0, 

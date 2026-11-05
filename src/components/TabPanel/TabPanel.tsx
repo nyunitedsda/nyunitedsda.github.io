@@ -8,20 +8,7 @@ const TabPanel: FC<TabPanelProps> = (props) => {
 	return (
 		<>
 			{(!value || !index) && <RingLoader />}
-			{value === index && (
-				// <Flex
-				// 	vertical
-				// 	// {...other}
-				// 	aria-labelledby={`full-width-tab-${index}`}
-				// 	hidden={value !== index}
-				// 	id={`full-width-tabpanel-${index}`}
-				// 	// sx={[rootSx, ...(sx ? (Array.isArray(sx) ? sx : [sx]) : [])]}
-				// 	role="tabpanel"
-				// >
-					// {children}
-					children
-				// </Flex>
-			)}
+			{value === index && (children)}
 		</>
 	);
 };

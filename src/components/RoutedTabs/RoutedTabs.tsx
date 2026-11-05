@@ -1,45 +1,20 @@
 import type { RoutedTabsProps } from "@components/RoutedTabs";
-import TabPanel from "@components/TabPanel";
-import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Tab from "@mui/material/Tab";
-import Tabs, { type TabsProps } from "@mui/material/Tabs";
+
+import { Tabs } from "antd";
 import {
 	type FC,
-	type SyntheticEvent,
+	type ReactNode,
 	useCallback,
 	useEffect,
 	useState,
 } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 
-const panelSx: SxProps<Theme> = {
-	"& a": {
-		color: "primary.light",
-	},
-};
-
-const tabsSx: SxProps<Theme> = {
-	color: "text.primary",
-
-	borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-	"& .MuiTab-root": {
-		fontSize: "1rem",
-	},
-	"& .MuiTabs-indicator": {
-		color: "primary.light",
-	},
-	"& .Mui-selected": {
-		fontWeight: "bold",
-		color: (theme) => `${theme.palette.primary.light} !important`,
-	},
-};
-
 const RoutedTabs: FC<RoutedTabsProps> = (props) => {
-	const { baseUrl, tabItems, tabsProps, tabProps, tabPanelProps } = props;
+	const { baseUrl, tabItems } = props;
 
-	const [selectedTabId, setSelectedTabId] = useState<number>();
+	const [activeTabKey, setActiveTabKey] = useState<string>('');
 	const { tab } = useParams();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
@@ -55,69 +30,49 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 			}
 
 			if (currentTab?.id) {
-				setSelectedTabId(currentTab.id);
+				setActiveTabKey(currentTab.tag);
 			} else if (pathname.includes(baseUrl)) {
 				// If no matching tab found but we're on the base URL, default to first tab
 				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
-				setSelectedTabId(tabItems[0].id);
+				setActiveTabKey(tabItems[0].tag);
 			}
 		} catch (error) {
 			console.error("Error setting selected tab:", error);
 			if (pathname.includes(baseUrl) && tabItems.length > 0) {
 				navigate(`${baseUrl}/${tabItems[0].tag}`, { replace: true });
-				setSelectedTabId(tabItems[0].id);
+				setActiveTabKey(tabItems[0].tag);
 			}
 		}
 	}, [baseUrl, tab, pathname, tabItems, navigate]);
 
-	const handleChange = useCallback(
-		(_event: SyntheticEvent, newValue: number) => {
-			try {
-				const path = tabItems.find((i) => i.id === newValue)?.tag;
-				if (path) navigate(`${baseUrl}/${path}`);
-			} catch (error) {
-				console.error(error);
+	const _handleChange2 = useCallback((key: string) => {
+		try {
+			const path = tabItems.find((i) => i.tag === key)?.tag;
+			if (path) {
+				navigate(`${baseUrl}/${path}`);
+				setActiveTabKey(key);
+				navigate(`${baseUrl}/${path}`);
 			}
-		},
-		[navigate, tabItems, baseUrl],
-	);
+		} catch (error) {
+			console.error(error);
+		}
+
+	}, [tabItems, navigate, baseUrl]);
 
 	return (
 		<>
-			{selectedTabId ? (
-				<>
-					<Tabs
-						{...(tabsProps as TabsProps)}
-						onChange={handleChange}
-						sx={{ ...tabsSx, ...tabsProps?.sx }}
-						value={selectedTabId}
-						variant="scrollable"
-					>
-						{tabItems.map((i) => (
-							<Tab {...tabProps} key={i.label} label={i.label} value={i.id} />
-						))}
-					</Tabs>
-					{tabItems.map((i) => (
-						<TabPanel
-							{...tabPanelProps}
-							index={i.id}
-							key={i.label}
-							sx={panelSx}
-							value={selectedTabId}
-						>
-							{typeof i.content === "string" ? (
-								<Box
-									component={"div"}
-									dangerouslySetInnerHTML={{ __html: i.content }}
-								></Box>
-							) : typeof i.content === "function" ? (
-								<i.content />
-							) : (
-								i.content
-							)}
-						</TabPanel>
-					))}
-				</>
+			{activeTabKey ? (
+				<Tabs
+					activeKey={activeTabKey}
+					onChange={_handleChange2}
+					items={[
+						...tabItems.map((i) =>
+						({
+							key: i.tag,
+							label: i.label,
+							children: i.content as ReactNode
+						}))]
+					} />
 			) : (
 				<Skeleton variant="rectangular" width="100%" height="100%" />
 			)}

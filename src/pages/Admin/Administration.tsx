@@ -33,11 +33,11 @@ const Administration: FC<AdministrationProps> = () => {
 		return approvedTabs;
 	}, [user]);
 
-	console.table({ user });
+
 	return (
 		<RoutedTabs
 			baseUrl="/admin"
-			tabsProps={{ "aria-label": "Media streaming" }}
+			tabsProps={{ "aria-label": "Admin section" }}
 			tabItems={accessibleTabs}
 		/>
 	);
