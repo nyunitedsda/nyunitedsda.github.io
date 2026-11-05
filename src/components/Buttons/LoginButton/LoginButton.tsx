@@ -1,12 +1,10 @@
+import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useAuthentication } from "@hooks/auth";
 import { routePaths } from "@hooks/routes";
-import Button, { type ButtonProps } from "@mui/material/Button";
-import Skeleton from "@mui/material/Skeleton";
-import React, { type FC, lazy, useCallback, useMemo } from "react";
+import { Button, type ButtonProps, Skeleton, theme } from "antd";
+import React, { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutOutlined = lazy(() => import("@mui/icons-material/LogoutOutlined"));
-const LoginOutlined = lazy(() => import("@mui/icons-material/LoginOutlined"));
 
 const LOGIN_TITLE = "Login";
 const LOGOUT_TITLE = "Logout";
@@ -14,6 +12,7 @@ const LOGOUT_TITLE = "Logout";
 const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	const navigate = useNavigate();
 	const { isAuthenticated, logout } = useAuthentication();
+	const { token } = theme.useToken();
 
 	const handleLogout = useCallback(async () => {
 		try {
@@ -29,28 +28,31 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 		() => ({
 			fullWidth: expanded,
 			"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
-			color: "primary",
-			sx: { color: "primary.light" },
+			type: 'text',
+			style: expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 24 } : 
+			{ color: token.colorPrimary },
 			onClick: isAuthenticated
 				? handleLogout
 				: () => navigate(routePaths.LOGIN),
-			startIcon: isAuthenticated ? <LogoutOutlined /> : <LoginOutlined />,
+			icon: isAuthenticated ? 
+				<LogoutOutlined style={{color: token.colorPrimary, fontSize: '20px'}}/> : 
+				<LoginOutlined style={{color: token.colorPrimary, fontSize: '20px'}}/>,
 			title: isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
 		}),
-		[expanded, isAuthenticated, handleLogout, navigate],
+		[expanded, isAuthenticated, handleLogout, navigate, token.colorPrimary],
 	);
 
 	return (
 		<React.Suspense
 			fallback={
-				<Skeleton
-					variant="rectangular"
-					width={expanded ? "100%" : 90}
-					height={"auto"}
+				<Skeleton.Button
+					shape={expanded ? 'square' : "circle"}
+					active
+					size={"medium"}
 				/>
 			}
 		>
-			<Button {...commonProps}>{commonProps.title}</Button>
+			<Button {...commonProps}>{expanded && commonProps.title}</Button>
 		</React.Suspense>
 	);
 };

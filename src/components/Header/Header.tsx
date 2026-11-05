@@ -105,7 +105,7 @@ const Header: FC = () => {
 						!isMobile && (
 							<>
 								<ThemeButton />
-								<LoginButton />
+								<LoginButton expanded={false} />
 							</>
 						)
 					}
@@ -135,7 +135,7 @@ const Header: FC = () => {
 					}}
 				>
 					<ThemeButton expanded />
-					<LoginButton />
+					<LoginButton expanded />
 				</Flex>
 			</Drawer>
 		</>

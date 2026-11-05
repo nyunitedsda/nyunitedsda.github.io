@@ -35,7 +35,7 @@ const ThemeButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 			title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
 			style={{
 
-				...(expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 24 } : {})
+				...(expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 20 } : {})
 			}}
 			icon={
 				mode === "dark" ? (
