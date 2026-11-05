@@ -26,7 +26,6 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 
 	const commonProps: ButtonProps = useMemo(
 		() => ({
-			fullWidth: expanded,
 			"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
 			type: 'text',
 			style: expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 24 } : 

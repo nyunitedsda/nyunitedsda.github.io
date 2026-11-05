@@ -43,7 +43,7 @@ const LocationOnOutlined = lazy(
 const Person3Outlined = lazy(
 	() => import("@mui/icons-material/Person3Outlined"),
 );
-const PhoneOutlined = lazy(() => import("@mui/icons-material/PhoneOutlined"));
+const PhoneOutlined = lazy(() => import("@ant-design/icons/es/icons/PhoneOutlined"));
 
 const NOTIFICATION_ATTRIBUTES: Record<NoteKeys, Omit<Section, "content">> = {
 	event_date: { icon: createElement(EventOutlined), title: WHEN },
