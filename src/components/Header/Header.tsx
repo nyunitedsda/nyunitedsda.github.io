@@ -84,12 +84,12 @@ const Header: FC = () => {
 			<Layout.Header
 				style={{ ...rootStyle, background: token.colorBgContainer, display: 'flex', alignItems: 'center' }}
 			>
-				<Flex style={{ margin: "0 auto", maxWidth: token.screenXL, justifyContent: 'space-between', width: '100%' }}>
+				<Flex style={{ margin: "0 auto", maxWidth: token.screenXL, justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
 					<OrganizationBranding isLogoVisible={!isMobile} />
 					{
 						isMobile ? (
 							<Button
-								icon={<MenuOutlined />}
+								icon={<MenuOutlined style={{ fontSize: '1.25rem' }} />}
 								onClick={() => setDrawerOpen((d) => !d)}
 								style={{ border: 0, color: token.colorPrimary, boxShadow: 'none' }}
 							/>
@@ -97,7 +97,7 @@ const Header: FC = () => {
 							<Menu
 								mode={"horizontal"}
 								items={menu}
-								style={{ flex: 1, minWidth: 0, justifyContent: 'end' }}
+								style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 0 }}
 							/>
 						)
 					}
@@ -125,17 +125,16 @@ const Header: FC = () => {
 				<Menu
 					mode={"inline"}
 					items={menu}
-					style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 'none' }}
+					style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 'none', backgroundColor: 'transparent' }}
 				/>
-				<Flex 
-					vertical 
-					align={"flex-start"} 
+				<Flex
+					vertical
+					align={"flex-start"}
 					style={{
-						// paddingLeft: '24px'
 						bottom: 0
 					}}
-					>
-					<ThemeButton expanded/>
+				>
+					<ThemeButton expanded />
 					<LoginButton />
 				</Flex>
 			</Drawer>

@@ -11,6 +11,11 @@ const antDTheme: ConfigProviderProps['theme'] = {
     Layout: {
       footerBg: DEFAULTS.colorPrimary,
       colorText: 'red',
+    },
+    Carousel: {
+      arrowSize: 24,
+      dotHeight: 4,
+      
     }
   },
   token: {

@@ -1,13 +1,10 @@
-import { InfoOutlined } from "@mui/icons-material";
-import Box from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
-import {Typography as Typo} from "@mui/material";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import {
 	type AnnouncementCardProps,
 	createFormattedContent,
 	NoteSection,
 } from "@pages/Home";
-import { Card, theme, Typography } from "antd";
+import { Card, Flex, Typography, theme } from "antd";
 import { type CSSProperties, type FC, useMemo } from "react";
 
 const cardSx: CSSProperties = {
@@ -17,19 +14,15 @@ const cardSx: CSSProperties = {
 	maxWidth: `350px`,
 	width: '100%',
 	gap: '16px',
+	margin: '0 auto',
+	height: '320px',
 };
 
-const descriptionSx: SxProps<Theme> = {
-	pt: 2,
+const descriptionSx: CSSProperties = {
 	display: "flex",
 	alignItems: "center",
-	gap: 2,
+	gap: '16px',
 	height: "100%",
-	borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-	"& p": {
-		height: "inherit",
-		overflowY: "auto",
-	},
 };
 
 const AnnouncementCard: FC<AnnouncementCardProps> = (props) => {
@@ -43,37 +36,36 @@ const AnnouncementCard: FC<AnnouncementCardProps> = (props) => {
 				header: {
 					backgroundColor: token.colorPrimary,
 					color: token.colorPrimaryText,
+				},
+				body: {
+					display: "flex",
+					flexDirection: "column",
+					gap: "8px",
 				}
 			}}
 			title={title}
 			style={cardSx}
-			actions={[
-				description ?  (
-					<Typography.Paragraph title={description}>{'more'}</Typography.Paragraph>
-				) : undefined
-			]}
+
 		>
-			{contents.map(({ title, ...rest }) => (
-				<NoteSection {...rest} key={title} title={`${title}:`} />
-			))}
+			{
+				contents.map(({ title, ...rest }) => (
+					<NoteSection {...rest} key={title} title={`${title}:`} />
+				))
+			}
 
 			{
 				description ? (
-					<Box sx={descriptionSx}>
-						<InfoOutlined color="primary" />
+					<Flex style={descriptionSx}>
+						<InfoCircleOutlined style={{ color: token.colorPrimary, fontSize: '24px' }} />
 
-						<Typo
-							variant="body2"
-							color="text.secondary"
-							fontWeight="bold"
-						>
+						<Typography.Paragraph ellipsis={{ tooltip: description, rows: 3 }} >
 							{description}
-						</Typo>
-					</Box>
+						</Typography.Paragraph>
+					</Flex>
 				) : undefined
 			}
-		</Card>
-		
+		</Card >
+
 	);
 };
 

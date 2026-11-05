@@ -9,7 +9,7 @@ import type { FC } from "react";
 const Home: FC = () => {
 	const { token } = theme.useToken();
 	return (
-		<Flex vertical style={{ margin: "0px auto", maxWidth: token.screenXL }}>
+		<Flex vertical style={{ margin: "0px auto", maxWidth: token.screenXL, width: '100%' }}>
 			{/* Image Slides */}
 
 			<Image.PreviewGroup items={sliderImages.map((i) => i.src)} >
