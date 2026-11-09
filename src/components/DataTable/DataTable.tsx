@@ -17,8 +17,6 @@ import TableRow from "@mui/material/TableRow";
 import { type ReactNode, useMemo, useState } from "react";
 import RingLoader from "react-spinners/RingLoader";
 
-
-
 const rootSx: SxProps<Theme> = {
 	flexDirection: "column",
 	bgcolor: "background.paper",

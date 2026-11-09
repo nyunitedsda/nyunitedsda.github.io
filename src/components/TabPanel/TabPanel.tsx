@@ -8,7 +8,7 @@ const TabPanel: FC<TabPanelProps> = (props) => {
 	return (
 		<>
 			{(!value || !index) && <RingLoader />}
-			{value === index && (children)}
+			{value === index && children}
 		</>
 	);
 };

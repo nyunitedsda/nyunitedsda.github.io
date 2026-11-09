@@ -1,4 +1,9 @@
-import { EnvironmentOutlined, MailFilled, MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import {
+	EnvironmentOutlined,
+	MailFilled,
+	MailOutlined,
+	PhoneOutlined,
+} from "@ant-design/icons";
 import { PageTitle } from "@components/PageWrapper";
 import {
 	CONTACT_CONSTANT,
@@ -12,18 +17,18 @@ import { Card, type CardProps, Flex, Typography } from "antd";
 import type { CSSProperties, FC } from "react";
 import { getDefaultContacts } from "@/api";
 
-const contactDetailSx: CardProps['styles'] = {
+const contactDetailSx: CardProps["styles"] = {
 	root: {
 		display: "flex",
 		flexDirection: "column",
-		margin: '16px 0px 24px',
-	}
+		margin: "16px 0px 24px",
+	},
 };
 
 const iconStyle: CSSProperties = {
-	fontSize: '1rem',
-	color: 'inherit',
-}
+	fontSize: "1rem",
+	color: "inherit",
+};
 
 const Contact: FC = () => {
 	const { data, isLoading, error } = useQuery({
@@ -42,20 +47,19 @@ const Contact: FC = () => {
 				{/* address */}
 				{!isLoading && !error && (
 					<>
-
 						<ContactSection title={data?.contact_name}>
-
 							{[
 								{
 									id: 1,
 									icon: <EnvironmentOutlined style={iconStyle} />,
 									content: (
 										<Flex vertical>
-											<Typography.Text >{data.street}</Typography.Text>
-											<Typography.Text >
+											<Typography.Text>{data.street}</Typography.Text>
+											<Typography.Text>
 												{`${data.city}, ${data.zip_code}, ${data.country}`}
-											</Typography.Text></Flex>
-									)
+											</Typography.Text>
+										</Flex>
+									),
 								},
 								{
 									id: 2,

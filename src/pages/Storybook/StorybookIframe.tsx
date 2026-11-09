@@ -12,7 +12,6 @@ const TITLE = "Component Library";
 
 const StorybookIframe: FC = () => {
 	useLayoutEffect(() => {
-
 		document.getElementById(".page-container")?.classList.add("no-content");
 		return document
 			.getElementById("page-container")

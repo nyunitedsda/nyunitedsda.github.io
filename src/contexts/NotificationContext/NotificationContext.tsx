@@ -1,4 +1,3 @@
-import type { NotificationProps } from "@components/NotificationBanner";
 import { useEntityList } from "@hooks/api";
 import {
 	type FC,
@@ -37,11 +36,11 @@ const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 		[notificationList],
 	);
 
-	const registerNotification = useCallback((notice: NotificationProps) => {
+	const registerNotification = useCallback((notice: NotificationDT) => {
 		setNotificationList((d) => [...d, { ...notice }]);
 	}, []);
 
-	const dismissNotification = useCallback((id: NotificationProps["id"]) => {
+	const dismissNotification = useCallback((id: NotificationDT["id"]) => {
 		setNotificationList((d) => d.filter((i) => i.id !== id));
 	}, []);
 

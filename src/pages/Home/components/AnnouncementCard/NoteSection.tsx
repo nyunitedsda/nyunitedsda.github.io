@@ -5,7 +5,7 @@ import { type CSSProperties, type FC, memo } from "react";
 const noteSx: CSSProperties = {
 	display: "flex",
 	alignItems: "center",
-	gap: '12px',
+	gap: "12px",
 };
 
 const contentSx: CSSProperties = { display: "flex", rowGap: 0, columnGap: 2 };
@@ -19,14 +19,20 @@ const NoteSection: FC<NoteSectionProps> = ({
 }) => (
 	<Flex style={{ ...noteSx, ...style }}>
 		{icon && icon}
-		<Flex style={{ ...contentSx, flexDirection: columnLayout ? "column" : "row", columnGap: '12px' }}>
+		<Flex
+			style={{
+				...contentSx,
+				flexDirection: columnLayout ? "column" : "row",
+				columnGap: "12px",
+			}}
+		>
 			{title && (
-				<Typography.Text style={{ fontWeight: 'bold', color: 'inherit' }}>
+				<Typography.Text style={{ fontWeight: "bold", color: "inherit" }}>
 					{title}
 				</Typography.Text>
 			)}
 			{content && (
-				<Typography.Text style={{ color: 'inherit' }} >
+				<Typography.Text style={{ color: "inherit" }}>
 					{content}
 				</Typography.Text>
 			)}

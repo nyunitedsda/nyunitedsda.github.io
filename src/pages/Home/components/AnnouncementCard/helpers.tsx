@@ -1,4 +1,11 @@
-import { CalendarOutlined, CodeOutlined, EnvironmentOutlined, PhoneOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
+import {
+	CalendarOutlined,
+	CodeOutlined,
+	EnvironmentOutlined,
+	PhoneOutlined,
+	ReadOutlined,
+	UserOutlined,
+} from "@ant-design/icons";
 import dayjs from "dayjs";
 import { createElement, type ReactNode } from "react";
 import type { AnnouncementDT } from "@/api";
@@ -32,8 +39,6 @@ const NOTIFICATION_KEYS: NoteKeys[] = [
 	"phone_number",
 	"conference_code",
 ];
-
-
 
 const NOTIFICATION_ATTRIBUTES: Record<NoteKeys, Omit<Section, "content">> = {
 	event_date: { icon: createElement(CalendarOutlined), title: WHEN },

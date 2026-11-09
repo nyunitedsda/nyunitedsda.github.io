@@ -70,13 +70,13 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 		() =>
 			data && Object.hasOwn(data, "id")
 				? {
-					initialValues: data,
-					title: EDIT_TITLE,
-				}
+						initialValues: data,
+						title: EDIT_TITLE,
+					}
 				: {
-					initialValues: initialNotification,
-					title: ADD_TITLE,
-				},
+						initialValues: initialNotification,
+						title: ADD_TITLE,
+					},
 		[data],
 	);
 
@@ -115,7 +115,7 @@ const NotificationEditor: FC<EditorProps<Partial<NotificationDT>>> = ({
 						const colorKey = severityData?.find((i) => i.id === item.id);
 						const color = (
 							theme.palette[
-							colorKey?.color as keyof PaletteType
+								colorKey?.color as keyof PaletteType
 							] as SimplePaletteColorOptions
 						).main;
 						// Avoid ListItemIcon/ListItemText to prevent <li> nesting

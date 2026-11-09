@@ -58,15 +58,14 @@ export const WithMultipleActions: Story = {
 			description: "Multiple actions available",
 		},
 		content: "This project card has multiple actions.",
-		actions: (
-			[<Button variant="contained" color="primary">
+		actions: [
+			<Button variant="contained" color="primary">
 				Primary
 			</Button>,
 			<Button variant="outlined" color="secondary">
 				Secondary
-			</Button>]
-
-		),
+			</Button>,
+		],
 	},
 };
 
@@ -113,7 +112,6 @@ export const ActionHeader: Story = {
 		header: {
 			title: "Custom Project",
 			description: "With custom header props",
-
 		},
 		content: "This project card has a custom header with an avatar.",
 		actions: [<Button variant="outlined">Action</Button>],

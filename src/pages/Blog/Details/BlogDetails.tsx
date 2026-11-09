@@ -1,7 +1,14 @@
-import { ArrowLeftOutlined, BookOutlined, CalendarOutlined, CommentOutlined, EyeOutlined, ShareAltOutlined, StarOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
-
-
-
+import {
+	ArrowLeftOutlined,
+	BookOutlined,
+	CalendarOutlined,
+	CommentOutlined,
+	EyeOutlined,
+	ShareAltOutlined,
+	StarOutlined,
+	TagOutlined,
+	UserOutlined,
+} from "@ant-design/icons";
 
 import RingLoader from "@components/Loaders";
 import ProjectSuspense from "@components/ProjectSuspense";
@@ -150,8 +157,10 @@ const BlogDetails: FC = () => {
 
 						<Box sx={{ mb: 3 }}>
 							<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-
-								<TagOutlined color="primary" style={{ marginRight: 8, fontSize: "large" }} />
+								<TagOutlined
+									color="primary"
+									style={{ marginRight: 8, fontSize: "large" }}
+								/>
 								<Typography
 									variant="h6"
 									sx={{ fontWeight: "bold", color: "primary.light" }}

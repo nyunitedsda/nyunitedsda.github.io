@@ -14,7 +14,7 @@ import { useLocation, useNavigate, useParams } from "react-router";
 const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 	const { baseUrl, tabItems } = props;
 
-	const [activeTabKey, setActiveTabKey] = useState<string>('');
+	const [activeTabKey, setActiveTabKey] = useState<string>("");
 	const { tab } = useParams();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
@@ -45,19 +45,21 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 		}
 	}, [baseUrl, tab, pathname, tabItems, navigate]);
 
-	const _handleChange2 = useCallback((key: string) => {
-		try {
-			const path = tabItems.find((i) => i.tag === key)?.tag;
-			if (path) {
-				navigate(`${baseUrl}/${path}`);
-				setActiveTabKey(key);
-				navigate(`${baseUrl}/${path}`);
+	const _handleChange2 = useCallback(
+		(key: string) => {
+			try {
+				const path = tabItems.find((i) => i.tag === key)?.tag;
+				if (path) {
+					navigate(`${baseUrl}/${path}`);
+					setActiveTabKey(key);
+					navigate(`${baseUrl}/${path}`);
+				}
+			} catch (error) {
+				console.error(error);
 			}
-		} catch (error) {
-			console.error(error);
-		}
-
-	}, [tabItems, navigate, baseUrl]);
+		},
+		[tabItems, navigate, baseUrl],
+	);
 
 	return (
 		<>
@@ -66,13 +68,13 @@ const RoutedTabs: FC<RoutedTabsProps> = (props) => {
 					activeKey={activeTabKey}
 					onChange={_handleChange2}
 					items={[
-						...tabItems.map((i) =>
-						({
+						...tabItems.map((i) => ({
 							key: i.tag,
 							label: i.label,
-							children: i.content as ReactNode
-						}))]
-					} />
+							children: i.content as ReactNode,
+						})),
+					]}
+				/>
 			) : (
 				<Skeleton variant="rectangular" width="100%" height="100%" />
 			)}

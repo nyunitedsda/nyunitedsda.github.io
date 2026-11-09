@@ -15,7 +15,7 @@ const meta: Meta<MinistryCardProps> = {
 		},
 	},
 	argTypes: {
-		header: {
+		title: {
 			control: "object",
 			description: "Header content of the MinistryCard",
 			defaultValue: {
@@ -37,10 +37,7 @@ type Story = StoryObj<MinistryCardProps>;
 
 export const WithAction: Story = {
 	args: {
-		header: {
-			title: "Card with Actions",
-			subheader: "Has Some Actions",
-		},
+		title: "Card with Actions",
 		content: "🚀This card has an avatar.",
 		image: {
 			src: smallLogo,
@@ -50,10 +47,7 @@ export const WithAction: Story = {
 
 export const WithNoAction: Story = {
 	args: {
-		header: {
-			title: "Card without Actions",
-			subheader: "No Actions Provided",
-		},
+		title: "Card without Actions",
 		content: "This card has no actions.",
 	},
 };

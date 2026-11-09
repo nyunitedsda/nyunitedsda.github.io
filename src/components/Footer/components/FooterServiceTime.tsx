@@ -18,7 +18,7 @@ const FooterServiceTime: FC = () => {
 					<Typography.Text
 						key={i.title}
 						style={{
-							color: token.colorPrimaryText
+							color: token.colorPrimaryText,
 						}}
 					>
 						<strong>{`${i.title}: `}</strong> {i.time}

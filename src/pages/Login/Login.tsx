@@ -18,8 +18,8 @@ const headerSx: CSSProperties = {
 	position: "relative",
 	textAlign: "center",
 	color: "primary.light",
-	padding: '32px',
-	gap: '16px',
+	padding: "32px",
+	gap: "16px",
 };
 
 const rootSx: CSSProperties = {
@@ -27,7 +27,7 @@ const rootSx: CSSProperties = {
 	height: "100%",
 	justifyContent: "center",
 	width: "100%",
-	gap: '32px'
+	gap: "32px",
 };
 
 const AUTHENTICATION_HEADER = {
@@ -41,18 +41,18 @@ const Login: FC = () => {
 	return isAuthenticated ? (
 		<Navigate to={routePaths.ADMIN_USERS} replace />
 	) : (
-		<Flex vertical style={rootSx} >
-			<Flex vertical style={headerSx} >
+		<Flex vertical style={rootSx}>
+			<Flex vertical style={headerSx}>
 				<Typography variant="h2" component="h1" fontWeight="bold">
 					{AUTHENTICATION_HEADER.title}
 				</Typography>
 				<Typography variant="h6">{AUTHENTICATION_HEADER.subtitle}</Typography>
-			</Flex >
+			</Flex>
 
-			<Card  style={containerSx}>
+			<Card style={containerSx}>
 				<LoginForm />
 			</Card>
-		</Flex >
+		</Flex>
 	);
 };
 

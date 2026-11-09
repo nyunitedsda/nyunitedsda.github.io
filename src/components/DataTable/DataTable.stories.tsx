@@ -1,5 +1,5 @@
+import { StarOutlined } from "@ant-design/icons";
 import DataTable, { type ColumnDefinition } from "@components/DataTable";
-import { StarOutlineOutlined } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { action } from "storybook/actions";
@@ -112,7 +112,7 @@ export const CustomActionColumns: Story = {
 				onClick={() => action("custom-action-clicked")(data)}
 				sx={{ color: "warning.main" }}
 			>
-				<StarOutlineOutlined />
+				<StarOutlined />
 			</IconButton>
 		),
 	},

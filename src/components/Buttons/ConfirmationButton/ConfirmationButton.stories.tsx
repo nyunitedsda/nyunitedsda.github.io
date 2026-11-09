@@ -1,12 +1,14 @@
 import {
+	DeleteOutlined,
+	EditOutlined,
+	LogoutOutlined,
+	PlusOutlined,
+	SaveOutlined,
+} from "@ant-design/icons";
+import {
 	ConfirmationButton,
 	type ConfirmationButtonProps,
 } from "@components/Buttons";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import LogoutIcon from "@mui/icons-material/Logout";
-import SaveIcon from "@mui/icons-material/Save";
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
@@ -132,7 +134,7 @@ export const LogoutWithConfirmation: Story = {
 export const IconButtonWithoutConfirmation: Story = {
 	args: {
 		shouldConfirm: false,
-		children: <EditIcon />,
+		children: <EditOutlined />,
 		confirmVariant: "icon",
 		color: "primary",
 		onClick: () => console.log("Edit icon clicked!"),
@@ -143,7 +145,7 @@ export const IconButtonWithoutConfirmation: Story = {
 export const DeleteIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
-		children: <DeleteIcon />,
+		children: <DeleteOutlined />,
 		confirmVariant: "icon",
 		color: "error",
 		confirmationTitle: "Delete Item",
@@ -167,7 +169,7 @@ export const DeleteIconWithConfirmation: Story = {
 export const SaveIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
-		children: <SaveIcon />,
+		children: <SaveOutlined />,
 		confirmVariant: "icon",
 		color: "primary",
 		confirmationTitle: "Save Changes",
@@ -190,7 +192,7 @@ export const SaveIconWithConfirmation: Story = {
 export const LogoutIconWithConfirmation: Story = {
 	args: {
 		shouldConfirm: true,
-		children: <LogoutIcon />,
+		children: <LogoutOutlined />,
 		confirmVariant: "icon",
 		color: "secondary",
 		confirmationTitle: "Logout",
@@ -236,7 +238,7 @@ export const DisabledButton: Story = {
 export const DisabledIconButton: Story = {
 	args: {
 		shouldConfirm: true,
-		children: <DeleteIcon />,
+		children: <DeleteOutlined />,
 		confirmVariant: "icon",
 		color: "error",
 		disabled: true,
@@ -312,11 +314,11 @@ argTypes = {
 		],
 		mapping: {
 			"Test Button": "Test Button",
-			AddIcon: <AddIcon />,
-			EditIcon: <EditIcon />,
-			DeleteIcon: <DeleteIcon />,
-			SaveIcon: <SaveIcon />,
-			LogoutIcon: <LogoutIcon />,
+			AddIcon: <PlusOutlined />,
+			EditIcon: <EditOutlined />,
+			DeleteIcon: <DeleteOutlined />,
+			SaveIcon: <SaveOutlined />,
+			LogoutIcon: <LogoutOutlined />,
 		},
 		description:
 			"Content of the button (text for button variant, icon for icon variant)",

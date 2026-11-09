@@ -3,8 +3,38 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 // import fs from "node:fs";
 import { visualizer } from "rollup-plugin-visualizer";
-import { defineConfig, type BuildEnvironmentOptions, type UserConfig } from "vite";
+import { defineConfig, type BuildEnvironmentOptions, type UserConfig, type Plugin } from "vite";
 // import generateWebConfig from "./src/constants/webconfigcontent.ts";
+
+
+const kb = (n: number) => (n / 1024).toFixed(2) + ' kB';
+
+function printModuleSizes(topN = 10): Plugin {
+  return {
+    name: 'print-module-sizes',
+    apply: 'build',
+    generateBundle(_options, bundle) {
+      for (const file of Object.values(bundle)) {
+        if (file.type !== 'chunk') continue;
+
+        const total = Buffer.byteLength(file.code);
+        console.log(`\n📦 ${file.fileName}  (${kb(total)})`);
+
+        Object.entries(file.modules)
+          .map(([id, info]) => ({ id, size: info.renderedLength }))
+          .sort((a, b) => b.size - a.size)
+          .slice(0, topN)
+          .forEach(({ id, size }) => {
+            const short = id.split('node_modules/').pop()!.replace(process.cwd(), '');
+            console.log(`   ${kb(size).padStart(10)}  ${short}`);
+          });
+      }
+    },
+  };
+}
+
+
+
 
 // https://vite.dev/config/
 export default defineConfig((props: UserConfig) => {
@@ -34,6 +64,7 @@ export default defineConfig((props: UserConfig) => {
 					gzipSize: true,
 					brotliSize: true,
 				}),
+				printModuleSizes(10),
 			].filter(Boolean)
 		: [react()];
 
@@ -67,15 +98,9 @@ export default defineConfig((props: UserConfig) => {
 							if (id.includes("@mui/system")) {
 								return "vendor_mui_system";
 							}
-							if (id.includes("@emotion")) {
-								return "vendor_emo_react";
-							}
 							if (id.includes("@emotion/styled")) {
 								return "vendor_emo_styled";
 							}
-							// if (id.includes("react") || id.includes("react-dom")) {
-							// 	return "vendor_react";
-							// }
 							if (id.includes("@tanstack")) {
 								return "vendor_tanstack";
 							}
@@ -91,6 +116,39 @@ export default defineConfig((props: UserConfig) => {
 							if (id.includes("formik")) {
 								return "vendor_formik";
 							}
+							if (id.includes("axios")) {
+								return "vendor_axios";
+							}
+							if (id.includes("antd")) {
+								return "vendor_antd";
+							}
+							if (id.includes("stylis")) {
+								return "vendor_stylis";
+							}
+							if (id.includes("lodash-es")) {
+								return "vendor_lodash-es";
+							}
+							if (id.includes("@popperjs")) {
+								return "vendor_@popperjs";
+							}
+							if (id.includes("dayjs")) {
+								return "vendor_dayjs";
+							}
+							if (id.includes("react-fast-marquee")) {
+								return "vendor_react-fast-marquee";
+							}
+							if (id.includes("react-spinners")) {
+								return "vendor_react-spinners";
+							}
+							if (id.includes("react-router")) {
+								return "vendor_react-router";
+							}
+							if (id.includes("react-dom") || id.includes("react") || id.includes("@rc-component")) {
+								return "vendor_react";
+							}
+							
+							console.log("id", id);
+							
 							return "vendor"; // other dependencies
 						}
 					},

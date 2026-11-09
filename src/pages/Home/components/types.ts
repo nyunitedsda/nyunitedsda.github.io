@@ -1,4 +1,4 @@
-import type { CardProps } from "@components/ProjectCard";
+import type { CardProps } from "antd";
 import type { PropsWithChildren } from "react";
 
 interface MinistryCardProps extends Omit<CardProps, "content" | "actions"> {

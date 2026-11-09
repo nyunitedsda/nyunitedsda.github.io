@@ -1,5 +1,5 @@
 import type { SectionWrapperProps } from "@pages/Home";
-import { Flex, theme, Typography } from "antd";
+import { Flex, Typography, theme } from "antd";
 import { type CSSProperties, type FC, memo } from "react";
 
 const headerSx: CSSProperties = {
@@ -9,13 +9,10 @@ const headerSx: CSSProperties = {
 	width: "100%",
 };
 
-const SectionWrapper: FC<SectionWrapperProps> = ({
-	children,
-	header,
-}) => {
+const SectionWrapper: FC<SectionWrapperProps> = ({ children, header }) => {
 	const { token } = theme.useToken();
 	return (
-		<Flex vertical >
+		<Flex vertical>
 			{header && (
 				<Typography.Title
 					level={2}

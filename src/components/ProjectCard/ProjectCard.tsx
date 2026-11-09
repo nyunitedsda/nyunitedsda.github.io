@@ -2,14 +2,12 @@ import type { PCardProps } from "@components/ProjectCard";
 import { Card } from "antd";
 import type { CSSProperties, FC } from "react";
 
-
-
 const cardSx: CSSProperties = {
 	display: "flex",
 	flexDirection: "column",
-	borderRadius: '8px',
+	borderRadius: "8px",
 	maxWidth: `350px`,
-	gap: '16px',
+	gap: "16px",
 };
 
 const ProjectCard: FC<PCardProps> = ({
@@ -27,7 +25,7 @@ const ProjectCard: FC<PCardProps> = ({
 			<Card.Meta
 				avatar={header.avatar}
 				description={header.description}
-				style={{ marginBottom: '16px' }}
+				style={{ marginBottom: "16px" }}
 				title={header.title}
 			/>
 			{children}

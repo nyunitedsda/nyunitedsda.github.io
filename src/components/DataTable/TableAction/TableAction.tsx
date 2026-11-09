@@ -58,22 +58,22 @@ const TableAction = <T extends {}>(props: TableActionProps<T>) => {
 		return actions.map(({ title, ...rest }) => {
 			const buttonProps = isMobile
 				? {
-					...rest,
-					variant: "text",
-					title,
-					sx: { width: "100%" },
-					startIcon: (
-						<LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>
-					),
-					children: (
-						<Typography sx={{ color: "text.primary" }}>{title}</Typography>
-					),
-				}
+						...rest,
+						variant: "text",
+						title,
+						sx: { width: "100%" },
+						startIcon: (
+							<LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>
+						),
+						children: (
+							<Typography sx={{ color: "text.primary" }}>{title}</Typography>
+						),
+					}
 				: {
-					...rest,
-					confirmVariant: "icon",
-					children: <LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>,
-				};
+						...rest,
+						confirmVariant: "icon",
+						children: <LazyIcon>{ICONS[title as keyof typeof ICONS]}</LazyIcon>,
+					};
 
 			return isMobile ? (
 				<MenuItem

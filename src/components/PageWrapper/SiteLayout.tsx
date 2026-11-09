@@ -1,50 +1,48 @@
-import Header from '@components/Header';
+import Header from "@components/Header";
 import { Notifications } from "@components/Notifications";
-import { Layout, theme } from 'antd';
-import { type CSSProperties, type FC, useContext } from 'react';
-import { Outlet } from 'react-router';
-import ScrollToTop from 'react-scroll-to-top';
-import Footer from '@/components/Footer';
-import { NotificationContext } from '@/contexts';
+import { Layout, theme } from "antd";
+import { type CSSProperties, type FC, useContext } from "react";
+import { Outlet } from "react-router";
+import ScrollToTop from "react-scroll-to-top";
+import Footer from "@/components/Footer";
+import { NotificationContext } from "@/contexts";
 
 const rootStyle: CSSProperties = {
-  minHeight: '100%',
-  overflowX: 'hidden',
-  width: '100%',
-}
+	minHeight: "100%",
+	overflowX: "hidden",
+	width: "100%",
+};
 
 const contentStyle: CSSProperties = {
-  flex: 1,
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  margin: '0 auto',
-  minHeight: 'auto',
-  padding: "24px 16px",
-}
+	flex: 1,
+	width: "100%",
+	display: "flex",
+	flexDirection: "column",
+	margin: "0 auto",
+	minHeight: "auto",
+	padding: "24px 16px",
+};
 
 // TODO: Update the  alert title text color dynamically to the severity type
 
 const SiteLayout: FC = () => {
-  const { token } = theme.useToken();
-  const { notifications } = useContext(NotificationContext);
+	const { token } = theme.useToken();
+	const { notifications } = useContext(NotificationContext);
 
-  return (
-    <Layout style={rootStyle}>
-      <Notifications {...{ notifications }} />
+	return (
+		<Layout style={rootStyle}>
+			<Notifications {...{ notifications }} />
 
-      <Header />
+			<Header />
 
-      <Layout.Content
-        style={{ ...contentStyle, maxWidth: token.screenXL }}
-      >
-        <Outlet />
-      </Layout.Content>
+			<Layout.Content style={{ ...contentStyle, maxWidth: token.screenXL }}>
+				<Outlet />
+			</Layout.Content>
 
-      <Footer />
-      <ScrollToTop smooth top={30} color={token.colorPrimary} />
-    </Layout>
-  );
+			<Footer />
+			<ScrollToTop smooth top={30} color={token.colorPrimary} />
+		</Layout>
+	);
 };
 
 export default SiteLayout;

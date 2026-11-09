@@ -1,6 +1,6 @@
 import { AppProvider } from "@components/AppProvider";
 import RingLoader from "@components/Loaders";
-import { SiteLayout } from '@components/PageWrapper'
+import { SiteLayout } from "@components/PageWrapper";
 import { useAuthentication } from "@hooks/auth";
 import { routePaths } from "@hooks/routes";
 import { type FC, useEffect } from "react";

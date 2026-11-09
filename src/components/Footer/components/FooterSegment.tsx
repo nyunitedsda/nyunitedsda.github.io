@@ -9,22 +9,21 @@ import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 const contentSx: CSSProperties = {
 	gap: 1,
-	paddingBottom: '8px',
+	paddingBottom: "8px",
 };
 
 const titleStyle: CSSProperties = {
-	fontWeight: 'bold',
-	fontFamily: 'inter',
+	fontWeight: "bold",
+	fontFamily: "inter",
 	marginTop: 0,
 	marginBottom: 0,
-}
+};
 
 type LabelProps = {
 	title: string;
 	subtitle?: string;
 	color?: CSSProperties["color"];
-}
-
+};
 
 const LabelComponent: FC<LabelProps> = ({ title, subtitle, color }) => (
 	<>
@@ -32,23 +31,25 @@ const LabelComponent: FC<LabelProps> = ({ title, subtitle, color }) => (
 			{title}
 		</Typography.Title>
 		{subtitle && (
-			<Typography.Text style={{ color }}>
-				{subtitle}
-			</Typography.Text>
+			<Typography.Text style={{ color }}>{subtitle}</Typography.Text>
 		)}
 	</>
 );
 
-const ContentComponent: FC<PropsWithChildren<{ style: CSSProperties }>> = ({ children, style }) => (
-	<Flex vertical style={{ ...contentSx, ...style }}>{children}</Flex>
-)
+const ContentComponent: FC<PropsWithChildren<{ style: CSSProperties }>> = ({
+	children,
+	style,
+}) => (
+	<Flex vertical style={{ ...contentSx, ...style }}>
+		{children}
+	</Flex>
+);
 
 const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 	title,
 	subtitle,
 	children,
 }) => {
-
 	const { token } = theme.useToken();
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("md"),
@@ -64,54 +65,65 @@ const ComponentContent: FC<Omit<FooterSegmentProps, "isLoading">> = ({
 						size={"small"}
 						ghost
 						style={{
-							color: 'inherit',
+							color: "inherit",
 						}}
 						styles={{
 							header: {
 								alignItems: "center",
-								color: 'inherit',
+								color: "inherit",
 							},
 							icon: {
 								color: token.colorPrimaryText,
-							}
+							},
 						}}
 						items={[
 							{
 								key: title,
 								label: (
 									<Flex vertical style={{ color: "white !important" }}>
-										<LabelComponent {...{
-											title,
-											subtitle,
-											color: token.colorPrimaryText
-										}} />
+										<LabelComponent
+											{...{
+												title,
+												subtitle,
+												color: token.colorPrimaryText,
+											}}
+										/>
 									</Flex>
 								),
-								children: <ContentComponent {...{
-									children,
-									style: {
-										color: token.colorPrimaryText,
-										paddingLeft: '24px',
-									}
-								}} />
-							}
-						]} />
+								children: (
+									<ContentComponent
+										{...{
+											children,
+											style: {
+												color: token.colorPrimaryText,
+												paddingLeft: "24px",
+											},
+										}}
+									/>
+								),
+							},
+						]}
+					/>
 				</>
 			) : (
 				<>
-					<LabelComponent {...{
-						title,
-						subtitle,
-						color: token.colorPrimaryText
-					}} />
-					<ContentComponent {...{
-						children,
-						style: {
+					<LabelComponent
+						{...{
+							title,
+							subtitle,
 							color: token.colorPrimaryText,
-							paddingTop: '12px',
-							paddingLeft: '16px',
-						}
-					}} />
+						}}
+					/>
+					<ContentComponent
+						{...{
+							children,
+							style: {
+								color: token.colorPrimaryText,
+								paddingTop: "12px",
+								paddingLeft: "16px",
+							},
+						}}
+					/>
 				</>
 			)}
 		</>
@@ -124,12 +136,7 @@ const FooterSegment: FC<FooterSegmentProps> = ({
 	title,
 	isLoading = false,
 }) => (
-	<Col
-		xs={{ flex: '100%' }}
-		sm={{ flex: "50%" }}
-		lg={{ flex: "25%" }}
-
-	>
+	<Col xs={{ flex: "100%" }} sm={{ flex: "50%" }} lg={{ flex: "25%" }}>
 		{isLoading ? (
 			<FooterSegmentSkeleton />
 		) : (

@@ -35,7 +35,7 @@ const AppProvider: FC<PropsWithChildren> = ({ children }) => {
 					>
 						<AuthProvider>
 							<ThemeProvider>
-								<Provider theme={createTheme({palette: {mode: 'dark'}})}>
+								<Provider theme={createTheme({ palette: { mode: "dark" } })}>
 									<CssBaseline enableColorScheme />
 									<NotificationProvider>{children}</NotificationProvider>
 								</Provider>

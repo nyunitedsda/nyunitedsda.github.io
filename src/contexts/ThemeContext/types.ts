@@ -1,6 +1,6 @@
-export type Mode = 'light' | 'dark';
+export type Mode = "light" | "dark";
 
 export interface ThemeContextState {
-  mode: Mode;
-  toggleMode: () => void;
+	mode: Mode;
+	toggleMode: () => void;
 }

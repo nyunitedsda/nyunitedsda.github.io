@@ -1,4 +1,9 @@
-import { MailFilled, MailOutlined, PhoneOutlined, YoutubeOutlined } from "@ant-design/icons";
+import {
+	MailFilled,
+	MailOutlined,
+	PhoneOutlined,
+	YoutubeOutlined,
+} from "@ant-design/icons";
 import {
 	FooterContact,
 	FooterSegment,
@@ -12,32 +17,29 @@ import { Col, Divider, Layout, Row, Typography, theme } from "antd";
 import dayjs from "dayjs";
 import type { FC, ReactNode } from "react";
 
-
-
 const iconMap: Record<string, ReactNode> = {
-	YouTube: <YoutubeOutlined style={{ fontSize: '1.125rem', color: 'red' }} />,
+	YouTube: <YoutubeOutlined style={{ fontSize: "1.125rem", color: "red" }} />,
 	Phone: <PhoneOutlined style={{ fontSize: "large" }} />,
 	Email: <MailFilled style={{ fontSize: "large" }} />,
 	Mail: <MailOutlined style={{ fontSize: "large" }} />,
 };
 
 const columnSize = {
-	xs: { "flex": "100%" },
-	sm: { "flex": "50%" },
-	lg: { "flex": "25%" },
-}
+	xs: { flex: "100%" },
+	sm: { flex: "50%" },
+	lg: { flex: "25%" },
+};
 
 const Footer: FC = () => {
 	const { activeMenu } = useMenuItems();
 	const { token } = theme.useToken();
 
 	return (
-		<Layout.Footer >
+		<Layout.Footer>
 			<Row
-				justify={{ xs: 'start', sm: 'center' }}
-				style={{ maxWidth: token.screenXL, margin: 'auto' }}
+				justify={{ xs: "start", sm: "center" }}
+				style={{ maxWidth: token.screenXL, margin: "auto" }}
 			>
-
 				{/* Social Media */}
 				<Col {...columnSize}>
 					<FooterSocial iconMap={iconMap} />
@@ -53,7 +55,6 @@ const Footer: FC = () => {
 								disablePadding
 								style={{
 									color: token.colorPrimaryText,
-
 								}}
 							>
 								{i.name}
@@ -73,28 +74,28 @@ const Footer: FC = () => {
 				</Col>
 			</Row>
 
-			<Divider style={{
-				backgroundColor: token.colorPrimaryBorder,
-			}} />
+			<Divider
+				style={{
+					backgroundColor: token.colorPrimaryBorder,
+				}}
+			/>
 
-			<Row justify={'center'} style={{ color: token.colorPrimaryText }}>
-				<Typography.Text
-					style={{ color: "inherit" }}>
+			<Row justify={"center"} style={{ color: token.colorPrimaryText }}>
+				<Typography.Text style={{ color: "inherit" }}>
 					&copy; {`${dayjs().year()} `}
 				</Typography.Text>
 				<Typography.Text
 					style={{
-						fontWeight: 'bold',
-						fontStyle: 'italic',
-						paddingLeft: '4px',
-						color: 'inherit',
+						fontWeight: "bold",
+						fontStyle: "italic",
+						paddingLeft: "4px",
+						color: "inherit",
 					}}
 				>
 					{footer.WEBSITE_TITLE}
 				</Typography.Text>
-				<Typography.Text
-					style={{ color: "inherit" }}>
-					{'. All rights reserved'}
+				<Typography.Text style={{ color: "inherit" }}>
+					{". All rights reserved"}
 				</Typography.Text>
 			</Row>
 		</Layout.Footer>

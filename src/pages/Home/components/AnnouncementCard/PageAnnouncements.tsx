@@ -19,8 +19,7 @@ const PageAnnouncements: FC = () => {
 				autoplaySpeed={5000}
 				adaptiveHeight
 				infinite
-				slidesToShow={ isMobile ? 1 : 3}
-				
+				slidesToShow={isMobile ? 1 : 3}
 			>
 				{!isLoading && announcements ? (
 					((announcements ?? []) as AnnouncementDT[]).map((i) => (

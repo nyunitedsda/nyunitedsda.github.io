@@ -1,4 +1,8 @@
-import { ArrowLeftOutlined, HomeOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+	ArrowLeftOutlined,
+	HomeOutlined,
+	WarningOutlined,
+} from "@ant-design/icons";
 import { routePaths } from "@hooks/routes";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,7 +23,6 @@ const actionSx: SxProps<Theme> = {
 	p: 2,
 	width: "100%",
 };
-
 
 const rootSx: SxProps<Theme> = {
 	backgroundColor: (theme) => theme.palette.background.default,
@@ -67,7 +70,10 @@ const UnknownError: FC = () => {
 		<AppProvider>
 			<Stack spacing={3} sx={rootSx} className="fade-in">
 				<Stack alignItems={"center"} spacing={2}>
-					<WarningOutlined color="warning" style={{ fontSize: 80, marginBottom: 16 }} />
+					<WarningOutlined
+						color="warning"
+						style={{ fontSize: 80, marginBottom: 16 }}
+					/>
 					<Typography variant="h2" component="h1" fontWeight={"bold"}>
 						{ERROR_MSG}
 					</Typography>

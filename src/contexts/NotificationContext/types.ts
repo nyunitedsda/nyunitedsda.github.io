@@ -1,5 +1,5 @@
-import type { NotificationDT } from "@/api";
 import type { PropsWithChildren } from "react";
+import type { NotificationDT } from "@/api";
 
 type NotificationContextProps = PropsWithChildren<{
 	notifications: NotificationDT[];

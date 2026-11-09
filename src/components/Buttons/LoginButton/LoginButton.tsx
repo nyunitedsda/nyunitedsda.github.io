@@ -5,7 +5,6 @@ import { Button, type ButtonProps, Skeleton, theme } from "antd";
 import React, { type FC, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const LOGIN_TITLE = "Login";
 const LOGOUT_TITLE = "Logout";
 
@@ -27,15 +26,27 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 	const commonProps: ButtonProps = useMemo(
 		() => ({
 			"aria-label": isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
-			type: 'text',
-			style: expanded ? { width: '100%', justifyContent: 'flex-start', height: 40,paddingLeft: 24 } : 
-			{ color: token.colorPrimary },
+			type: "text",
+			style: expanded
+				? {
+						width: "100%",
+						justifyContent: "flex-start",
+						height: 40,
+						paddingLeft: 24,
+					}
+				: { color: token.colorPrimary },
 			onClick: isAuthenticated
 				? handleLogout
 				: () => navigate(routePaths.LOGIN),
-			icon: isAuthenticated ? 
-				<LogoutOutlined style={{color: token.colorPrimary, fontSize: '20px'}}/> : 
-				<LoginOutlined style={{color: token.colorPrimary, fontSize: '20px'}}/>,
+			icon: isAuthenticated ? (
+				<LogoutOutlined
+					style={{ color: token.colorPrimary, fontSize: "20px" }}
+				/>
+			) : (
+				<LoginOutlined
+					style={{ color: token.colorPrimary, fontSize: "20px" }}
+				/>
+			),
 			title: isAuthenticated ? LOGOUT_TITLE : LOGIN_TITLE,
 		}),
 		[expanded, isAuthenticated, handleLogout, navigate, token.colorPrimary],
@@ -45,7 +56,7 @@ const LoginButton: FC<{ expanded?: boolean }> = ({ expanded = false }) => {
 		<React.Suspense
 			fallback={
 				<Skeleton.Button
-					shape={expanded ? 'square' : "circle"}
+					shape={expanded ? "square" : "circle"}
 					active
 					size={"medium"}
 				/>

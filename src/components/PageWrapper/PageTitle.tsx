@@ -1,30 +1,30 @@
-import type { PageTitleProps } from "@components/PageWrapper";
-import { useTheme, type Theme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { type CSSProperties, type FC, useMemo } from "react";
-import { Flex, Button, FloatButton } from 'antd';
-import Title from "antd/es/typography/Title";
 import { PlusOutlined } from "@ant-design/icons";
+import type { PageTitleProps } from "@components/PageWrapper";
+import { type Theme, useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Button, Flex, FloatButton } from "antd";
+import Title from "antd/es/typography/Title";
+import { type CSSProperties, type FC, useMemo } from "react";
 
 const titleSx: CSSProperties = {
 	color: "primary.light",
 	fontFamily: "inter",
 	fontWeight: "bold",
-	marginTop: '0px',
+	marginTop: "0px",
 };
 
 const subtitleSx: CSSProperties = {
 	color: "text.primary",
 	fontWeight: "bold",
-	margin: '0px',
+	margin: "0px",
 };
 
 const rootStyle: CSSProperties = {
-	alignItems: 'center',
-	gap: '24px',
+	alignItems: "center",
+	gap: "24px",
 	justifyContent: "space-between",
-	padding: '16px 0px',
-}
+	padding: "16px 0px",
+};
 
 const MOBILE_BUTTON_OFFSET = 18;
 
@@ -34,7 +34,6 @@ const PageTitle: FC<PageTitleProps> = ({
 	handleClick,
 	icon,
 }) => {
-
 	const theme = useTheme();
 
 	const isMobile = useMediaQuery((theme: Theme) =>
@@ -44,19 +43,22 @@ const PageTitle: FC<PageTitleProps> = ({
 	const buttonStyle = useMemo(
 		() => ({
 			color: theme.palette.primary.contrastText,
-			backgroundColor: theme.palette.primary.light
+			backgroundColor: theme.palette.primary.light,
 		}),
 		[theme],
 	);
 
 	return (
 		<Flex vertical={false} style={rootStyle}>
-			<Flex style={{ flexGrow: 1, flexDirection: 'column' }} >
-				<Title level={2} style={{ ...titleSx, color: theme.palette.primary.light }}>
+			<Flex style={{ flexGrow: 1, flexDirection: "column" }}>
+				<Title
+					level={2}
+					style={{ ...titleSx, color: theme.palette.primary.light }}
+				>
 					{title}
 				</Title>
 				{subtitle && (
-					<Title level={4} style={subtitleSx} type={'secondary'}>
+					<Title level={4} style={subtitleSx} type={"secondary"}>
 						{subtitle}
 					</Title>
 				)}
@@ -69,7 +71,7 @@ const PageTitle: FC<PageTitleProps> = ({
 					shape={"round"}
 					style={buttonStyle}
 					type={"primary"}
-					>
+				>
 					{"Create"}
 				</Button>
 			)}
@@ -81,7 +83,7 @@ const PageTitle: FC<PageTitleProps> = ({
 					style={{ insetInlineEnd: MOBILE_BUTTON_OFFSET, ...buttonStyle }}
 					tooltip={{
 						title: "Create",
-						color: 'lightgrey'
+						color: "lightgrey",
 					}}
 				/>
 			)}

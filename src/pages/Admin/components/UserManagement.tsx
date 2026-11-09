@@ -1,4 +1,9 @@
-import { DeleteOutlined, EditOutlined, KeyOutlined, MoreOutlined } from "@ant-design/icons";
+import {
+	DeleteOutlined,
+	EditOutlined,
+	KeyOutlined,
+	MoreOutlined,
+} from "@ant-design/icons";
 import DataTable from "@components/DataTable";
 import { PageTitle } from "@components/PageWrapper";
 import { PasswordEditor, UserEditor } from "@forms/collection";

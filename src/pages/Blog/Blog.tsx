@@ -6,7 +6,13 @@ import Grid from "@mui/material/Grid";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { capitalize } from "@mui/material/utils";
 import { Button, Flex, Pagination, Typography } from "antd";
-import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
+import {
+	type CSSProperties,
+	type FC,
+	useCallback,
+	useMemo,
+	useState,
+} from "react";
 import { useLoaderData } from "react-router";
 import type { ArticleDT } from "@/api";
 import {
@@ -54,13 +60,10 @@ const Blog: FC = () => {
 		[blogs, postsPerPage, page],
 	);
 
-	const handlePageChange = useCallback(
-		(value: number) => {
-			setPage(value);
-			window.scrollTo({ top: 0, behavior: "smooth" });
-		},
-		[],
-	);
+	const handlePageChange = useCallback((value: number) => {
+		setPage(value);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, []);
 
 	return (
 		<>
@@ -77,19 +80,17 @@ const Blog: FC = () => {
 									description: `${new Date(published_at).toLocaleDateString()} | ${capitalize(author ?? "")}`,
 									avatar: <CalendarOutlined />,
 								}}
-								actions={
-									[<Button
-										style={{ height: '100%' }}
+								actions={[
+									<Button
+										style={{ height: "100%" }}
 										href={`/blog/${id}`}
 										type="text"
 									>
 										Read More
-									</Button>,]
-								}
+									</Button>,
+								]}
 							>
-								<Typography.Paragraph
-									ellipsis={{ rows: 3 }}
-								>
+								<Typography.Paragraph ellipsis={{ rows: 3 }}>
 									{content}
 								</Typography.Paragraph>
 							</ProjectCard>

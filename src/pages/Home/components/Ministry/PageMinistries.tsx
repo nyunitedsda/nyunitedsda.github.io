@@ -10,16 +10,12 @@ const PageMinistries: FC = () => {
 
 	return (
 		<SectionWrapper header={HOME_CONSTANTS.MINISTRIES_HEADER}>
-			<Row
-				justify={'center'}
-				style={{ gap: '24px' }}
-				gutter={16}
-			>
+			<Row justify={"center"} style={{ gap: "24px" }} gutter={16}>
 				{!isLoading &&
 					ministries?.map((i: MinistriesDT) => (
 						<MinistryCard
 							{...{
-								header: { title: i.title },
+								title: i.title,
 								content: i.content,
 								link: i.link_url,
 								image: {

@@ -17,11 +17,7 @@ const StreamDisplay: FC<
 	});
 
 	return (
-		<Flex
-			vertical
-			id={`wrap-${id}`}
-			style={{ flex: 1, minHeight: 'auto' }}
-		>
+		<Flex vertical id={`wrap-${id}`} style={{ flex: 1, minHeight: "auto" }}>
 			<iframe
 				allow="fullscreen"
 				allowFullScreen
@@ -30,10 +26,9 @@ const StreamDisplay: FC<
 				id={id}
 				width="100%"
 				sandbox={"allow-scripts allow-same-origin"}
-				style={{ 
-					flex: 1, 
-					border: 0, 
-				
+				style={{
+					flex: 1,
+					border: 0,
 				}}
 				{...(rest as React.IframeHTMLAttributes<HTMLIFrameElement>)}
 			></iframe>

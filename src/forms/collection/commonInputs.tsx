@@ -4,7 +4,6 @@ import type { FormFieldType } from "@forms/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Suspense } from "react";
 
-
 export const configurePasswordInput = ({
 	name = "password",
 	label = "Password",

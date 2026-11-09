@@ -1,20 +1,26 @@
 import { MenuOutlined } from "@ant-design/icons";
-import {
-	LOGO_ALT,
-	OrganizationBranding,
-} from "@components/Header";
+import { LOGO_ALT, OrganizationBranding } from "@components/Header";
 import { useMenuItems } from "@hooks/routes";
 import { Button, Drawer, Flex, Grid, Layout, Menu, theme } from "antd";
-import { type CSSProperties, type FC, useCallback, useMemo, useState } from "react";
+import {
+	type CSSProperties,
+	type FC,
+	useCallback,
+	useMemo,
+	useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router";
 import { smallLogo } from "@/assets";
-import { LoginButton, ThemeButton } from "../Buttons";
+import {
+	// LoginButton,
+	ThemeButton,
+} from "../Buttons";
 
 const rootStyle: CSSProperties = {
-	position: 'sticky',
+	position: "sticky",
 	top: 0,
 	zIndex: 1000,
-}
+};
 
 // FEATURE: Shrinking the header and content on scroll
 
@@ -55,87 +61,115 @@ const Header: FC = () => {
 		[pathname],
 	);
 
-
 	const menu = useMemo(() => {
-		return [...activeMenu.map((i) => ({
-			style: _isActive(i.path) ? {
-				// borderBottom: `2px solid ${ token.colorPrimary}`,
-				color: token.colorPrimary,
-			} : undefined,
-			onClick: (!i.children && i.path) ? () => {
-				if (drawerOpen) handleDrawerToggle();
-				navigate(i.path)
-			} : undefined,
-			label: i.name,
-			key: i.id,
-			children: i.children ? i.children.map((si) => ({
-				onClick: (!si.children && si.path) ? () => {
-					if (drawerOpen) handleDrawerToggle();
-					navigate(si.path)
-				} : undefined,
-				label: si.name,
-				key: si.id,
-			})) : undefined
-		}))];
+		return [
+			...activeMenu.map((i) => ({
+				style: _isActive(i.path)
+					? {
+							// borderBottom: `2px solid ${ token.colorPrimary}`,
+							color: token.colorPrimary,
+						}
+					: undefined,
+				onClick:
+					!i.children && i.path
+						? () => {
+								if (drawerOpen) handleDrawerToggle();
+								navigate(i.path);
+							}
+						: undefined,
+				label: i.name,
+				key: i.id,
+				children: i.children
+					? i.children.map((si) => ({
+							onClick:
+								!si.children && si.path
+									? () => {
+											if (drawerOpen) handleDrawerToggle();
+											navigate(si.path);
+										}
+									: undefined,
+							label: si.name,
+							key: si.id,
+						}))
+					: undefined,
+			})),
+		];
 	}, [activeMenu, drawerOpen, navigate, handleDrawerToggle, _isActive, token]);
 
 	return (
 		<>
 			<Layout.Header
-				style={{ ...rootStyle, background: token.colorBgContainer, display: 'flex', alignItems: 'center' }}
+				style={{
+					...rootStyle,
+					background: token.colorBgContainer,
+					display: "flex",
+					alignItems: "center",
+				}}
 			>
-				<Flex style={{ margin: "0 auto", maxWidth: token.screenXL, justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+				<Flex
+					style={{
+						margin: "0 auto",
+						maxWidth: token.screenXL,
+						justifyContent: "space-between",
+						width: "100%",
+						alignItems: "center",
+					}}
+				>
 					<OrganizationBranding isLogoVisible={!isMobile} />
-					{
-						isMobile ? (
-							<Button
-								icon={<MenuOutlined style={{ fontSize: '1.25rem' }} />}
-								onClick={() => setDrawerOpen((d) => !d)}
-								style={{ border: 0, color: token.colorPrimary, boxShadow: 'none' }}
-							/>
-						) : (
-							<Menu
-								mode={"horizontal"}
-								items={menu}
-								style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 0 }}
-							/>
-						)
-					}
-					{
-						!isMobile && (
-							<>
-								<ThemeButton />
-								<LoginButton expanded={false} />
-							</>
-						)
-					}
+					{isMobile ? (
+						<Button
+							icon={<MenuOutlined style={{ fontSize: "1.25rem" }} />}
+							onClick={() => setDrawerOpen((d) => !d)}
+							style={{
+								border: 0,
+								color: token.colorPrimary,
+								boxShadow: "none",
+							}}
+						/>
+					) : (
+						<Menu
+							mode={"horizontal"}
+							items={menu}
+							style={{ flex: 1, minWidth: 0, justifyContent: "end", border: 0 }}
+						/>
+					)}
+					{!isMobile && (
+						<>
+							<ThemeButton />
+							{/* <LoginButton expanded={false} /> */}
+						</>
+					)}
 				</Flex>
 			</Layout.Header>
 
 			<Drawer
 				open={drawerOpen}
-				title={
-					<img src={smallLogo} alt={LOGO_ALT} height={38} />
-				}
-				style={{ height: '100%' }}
+				title={<img src={smallLogo} alt={LOGO_ALT} height={38} />}
+				style={{ height: "100%" }}
 				placement={"left"}
 				onClose={handleDrawerToggle}
-				closable={{ placement: 'end' }}
+				closable={{ placement: "end" }}
 			>
 				<Menu
 					mode={"inline"}
 					items={menu}
-					style={{ flex: 1, minWidth: 0, justifyContent: 'end', border: 'none', backgroundColor: 'transparent' }}
+					style={{
+						flex: 1,
+						minWidth: 0,
+						justifyContent: "end",
+						border: "none",
+						backgroundColor: "transparent",
+					}}
 				/>
 				<Flex
 					vertical
 					align={"flex-start"}
 					style={{
-						bottom: 0
+						bottom: 0,
 					}}
 				>
 					<ThemeButton expanded />
-					<LoginButton expanded />
+					{/* <LoginButton expanded /> */}
 				</Flex>
 			</Drawer>
 		</>

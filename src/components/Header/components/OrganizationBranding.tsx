@@ -22,7 +22,7 @@ const OrganizationBranding: FC<OrganizationBrandingProps> = ({
 	return (
 		<Flex align="center" gap={10}>
 			{isLogoVisible && (
-				<Flex >
+				<Flex>
 					<img
 						src={mode === "dark" ? darkLogo : smallLogo}
 						alt={LOGO_ALT}
@@ -30,21 +30,23 @@ const OrganizationBranding: FC<OrganizationBrandingProps> = ({
 					/>
 				</Flex>
 			)}
-			{isVisibleBrand && (<Typography.Title
-				level={3}
-				style={{
-					color: token.colorPrimary,
-					flexGrow: 1,
-					fontFamily: "Inter",
-					fontWeight: 700,
-					textDecoration: "none",
-					margin: 0,
-				}}
-			>
-				<Link to={routePaths.HOME} style={{ color: token.colorPrimary }}>
-					{WEBSITE_TITLE}
-				</Link>
-			</Typography.Title>)}
+			{isVisibleBrand && (
+				<Typography.Title
+					level={3}
+					style={{
+						color: token.colorPrimary,
+						flexGrow: 1,
+						fontFamily: "Inter",
+						fontWeight: 700,
+						textDecoration: "none",
+						margin: 0,
+					}}
+				>
+					<Link to={routePaths.HOME} style={{ color: token.colorPrimary }}>
+						{WEBSITE_TITLE}
+					</Link>
+				</Typography.Title>
+			)}
 		</Flex>
 	);
 };

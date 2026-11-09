@@ -10,12 +10,17 @@ const ContactSection: FC<
 
 	return (
 		<Flex vertical style={sx}>
-			<Title level={4} style={{ color: theme.palette.primary.light, fontWeight: 'bold' }}>
+			<Title
+				level={4}
+				style={{ color: theme.palette.primary.light, fontWeight: "bold" }}
+			>
 				{title}
 			</Title>
-			<Flex vertical style={{ paddingLeft: '8px', gap: 1 }}>{children}</Flex>
+			<Flex vertical style={{ paddingLeft: "8px", gap: 1 }}>
+				{children}
+			</Flex>
 		</Flex>
-	)
+	);
 };
 
 export default ContactSection;

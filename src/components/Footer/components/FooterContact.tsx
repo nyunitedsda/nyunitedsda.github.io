@@ -15,7 +15,7 @@ interface FCProps {
 
 const FooterContact: FC<FCProps> = ({ iconMap }) => {
 	const { defaultContact: data, isLoading } = useLoaderData();
-	const {token} = theme.useToken();
+	const { token } = theme.useToken();
 
 	const contactData = useMemo(() => {
 		return data ? formatFooterContactData(data) : [];
@@ -32,7 +32,7 @@ const FooterContact: FC<FCProps> = ({ iconMap }) => {
 						content={i.content}
 						icon={i?.icon ? iconMap[i.icon] : undefined}
 						key={i.content}
-						style={{color: token.colorPrimaryText}}
+						style={{ color: token.colorPrimaryText }}
 					/>
 				))
 			)}
