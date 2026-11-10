@@ -1,20 +1,18 @@
 import { PlusOutlined } from "@ant-design/icons";
 import type { PageTitleProps } from "@components/PageWrapper";
-import { type Theme, useTheme } from "@mui/material/styles";
+import { type Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Button, Flex, FloatButton } from "antd";
+import { Button, Flex, FloatButton, theme } from "antd";
 import Title from "antd/es/typography/Title";
 import { type CSSProperties, type FC, useMemo } from "react";
 
 const titleSx: CSSProperties = {
-	color: "primary.light",
 	fontFamily: "inter",
 	fontWeight: "bold",
 	marginTop: "0px",
 };
 
 const subtitleSx: CSSProperties = {
-	color: "text.primary",
 	fontWeight: "bold",
 	margin: "0px",
 };
@@ -34,7 +32,7 @@ const PageTitle: FC<PageTitleProps> = ({
 	handleClick,
 	icon,
 }) => {
-	const theme = useTheme();
+	const {token} = theme.useToken();
 
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm"),
@@ -42,10 +40,10 @@ const PageTitle: FC<PageTitleProps> = ({
 
 	const buttonStyle = useMemo(
 		() => ({
-			color: theme.palette.primary.contrastText,
-			backgroundColor: theme.palette.primary.light,
+			color: token.colorPrimaryText,
+			backgroundColor: token.colorPrimary,
 		}),
-		[theme],
+		[token],
 	);
 
 	return (
@@ -53,12 +51,12 @@ const PageTitle: FC<PageTitleProps> = ({
 			<Flex style={{ flexGrow: 1, flexDirection: "column" }}>
 				<Title
 					level={2}
-					style={{ ...titleSx, color: theme.palette.primary.light }}
+					style={{ ...titleSx, color: token.colorPrimary }}
 				>
 					{title}
 				</Title>
 				{subtitle && (
-					<Title level={4} style={subtitleSx} type={"secondary"}>
+					<Title level={4} style={{ ...subtitleSx, color: token.colorTextSecondary}} type={"secondary"}>
 						{subtitle}
 					</Title>
 				)}

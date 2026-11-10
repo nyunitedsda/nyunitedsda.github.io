@@ -4,7 +4,6 @@ export * from "./ConfirmationDialog";
 export * from "./DataTable";
 export * from "./Footer";
 export * from "./Header";
-export * from "./Icons";
 export * from "./InteractiveStory";
 export * from "./Loaders";
 export * from "./Notifications";

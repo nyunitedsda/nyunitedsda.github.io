@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { PlaceholderIcon } from "@components/Icons";
 import type { FormFieldType } from "@forms/Input";
 import InputAdornment from "@mui/material/InputAdornment";
+import { Skeleton } from "antd";
 import { Suspense } from "react";
 
 export const configurePasswordInput = ({
@@ -20,7 +20,7 @@ export const configurePasswordInput = ({
 	InputProps: {
 		startAdornment: (
 			<InputAdornment position="start">
-				<Suspense fallback={<PlaceholderIcon />}>
+				<Suspense fallback={<Skeleton.Avatar />}>
 					<LockOutlined color="primary" />
 				</Suspense>
 			</InputAdornment>
@@ -35,7 +35,7 @@ export const configureUsernameInput = () => ({
 	InputProps: {
 		startAdornment: (
 			<InputAdornment position="start">
-				<Suspense fallback={<PlaceholderIcon />}>
+				<Suspense fallback={<Skeleton.Avatar />}>
 					<UserOutlined color="primary" />
 				</Suspense>
 			</InputAdornment>

@@ -13,7 +13,7 @@ import {
 } from "@pages/Contact";
 import { NoteSection } from "@pages/Home";
 import { useQuery } from "@tanstack/react-query";
-import { Card, type CardProps, Flex, Typography } from "antd";
+import { Card, type CardProps, Flex, Typography, theme } from "antd";
 import type { CSSProperties, FC } from "react";
 import { getDefaultContacts } from "@/api";
 
@@ -31,6 +31,8 @@ const iconStyle: CSSProperties = {
 };
 
 const Contact: FC = () => {
+	const { token } = theme.useToken();
+
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["contactInfo"],
 		queryFn: async () => getDefaultContacts(),
@@ -51,7 +53,7 @@ const Contact: FC = () => {
 							{[
 								{
 									id: 1,
-									icon: <EnvironmentOutlined style={iconStyle} />,
+									icon: <EnvironmentOutlined style={{ ...iconStyle, color: token.colorPrimary }} />,
 									content: (
 										<Flex vertical>
 											<Typography.Text>{data.street}</Typography.Text>
@@ -63,14 +65,14 @@ const Contact: FC = () => {
 								},
 								{
 									id: 2,
-									icon: <PhoneOutlined style={iconStyle} />,
+									icon: <PhoneOutlined style={{ ...iconStyle, color: token.colorPrimary }} />,
 									component: "a",
 									href: `tel:${data.phone}`,
 									content: data.phone,
 								},
 								{
 									id: 3,
-									icon: <MailFilled style={iconStyle} />,
+									icon: <MailFilled style={{ ...iconStyle, color: token.colorPrimary }} />,
 									component: "a",
 									href: `mailto:${data.email}`,
 									content: data.email,
@@ -84,7 +86,7 @@ const Contact: FC = () => {
 							<NoteSection
 								columnLayout
 								content={data.mail_address}
-								icon={<MailOutlined style={iconStyle} />}
+								icon={<MailOutlined style={{ ...iconStyle, color: token.colorPrimary }} />}
 								title={data.mailing_recipient}
 							/>
 						</ContactSection>

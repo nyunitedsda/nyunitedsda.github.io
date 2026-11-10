@@ -14,8 +14,8 @@ import TableCell, { type TableCellProps } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { Spin } from "antd";
 import { type ReactNode, useMemo, useState } from "react";
-import RingLoader from "react-spinners/RingLoader";
 
 const rootSx: SxProps<Theme> = {
 	flexDirection: "column",
@@ -112,7 +112,7 @@ const DataTable = <T extends { [key: string]: unknown }>({
 					{isLoading && (
 						<TableRow>
 							<TableCell colSpan={formattedColumns.length} align="center">
-								<RingLoader />
+								<Spin spinning />
 							</TableCell>
 						</TableRow>
 					)}

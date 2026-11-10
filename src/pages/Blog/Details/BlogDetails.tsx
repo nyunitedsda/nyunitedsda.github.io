@@ -14,19 +14,16 @@ import RingLoader from "@components/Loaders";
 import ProjectSuspense from "@components/ProjectSuspense";
 import { capitalize } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { authorMetaInfo } from "@test/mock_data";
-import type { FC } from "react";
-import { useParams } from "react-router";
+import { Button, Flex, Tag, Typography, theme } from "antd";
+import type { CSSProperties, FC } from "react";
+import { useNavigate, useParams } from "react-router";
 import type { ArticleDT } from "@/api";
 import { getDatabaseItem } from "@/api";
 
-const backBtnSx: SxProps<Theme> = {
+const backBtnSx: CSSProperties = {
 	maxWidth: "150px",
 	width: "auto",
 	alignSelf: "flex-start",
@@ -35,7 +32,7 @@ const backBtnSx: SxProps<Theme> = {
 const ICONS = {
 	author: (
 		<ProjectSuspense>
-			<UserOutlined />
+			<UserOutlined  color="primary"/>
 		</ProjectSuspense>
 	),
 	published_at: (
@@ -71,6 +68,8 @@ const ICONS = {
 };
 const BlogDetails: FC = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
+	const { token } = theme.useToken();
 
 	const { isLoading, data } = useQuery({
 		queryKey: ["get-article-id", id],
@@ -83,17 +82,16 @@ const BlogDetails: FC = () => {
 	});
 
 	return (
-		<Stack spacing={2}>
+		<Flex vertical style={{ gap: 2 }}>
 			<Stack spacing={2} sx={{ "& a, svg": { color: "primary.light" } }}>
 				{/* Back Button */}
 
 				<Button
-					variant="text"
-					startIcon={<ArrowLeftOutlined />}
+					type="text"
+					icon={<ArrowLeftOutlined style={{ fontSize: 'large' }} />}
 					color="primary"
-					component={"a"}
-					href="/blog"
-					sx={backBtnSx}
+					onClick={() => navigate(-1)}
+					style={backBtnSx}
 				>
 					Back
 				</Button>
@@ -105,13 +103,12 @@ const BlogDetails: FC = () => {
 							<img src={data?.img_src as string} alt={`${data?.title} blog`} />
 						)}
 
-						<Typography
-							variant="h4"
-							component="h1"
-							sx={{ color: "primary.light" }}
+						<Typography.Title
+							level={1}
+							style={{ color: token.colorPrimary }}
 						>
 							{data?.title}
-						</Typography>
+						</Typography.Title>
 
 						{/* Author info */}
 						<Stack
@@ -132,9 +129,8 @@ const BlogDetails: FC = () => {
 										}}
 									>
 										{ICONS[i as keyof typeof ICONS]}
-										<Typography
-											variant="body2"
-											sx={{ fontWeight: "bold", color: "text.secondary" }}
+										<Typography.Text
+											style={{ fontWeight: "bold", color: token.colorTextSecondary }}
 										>
 											{(() => {
 												const value = data[i as keyof ArticleDT];
@@ -142,7 +138,7 @@ const BlogDetails: FC = () => {
 													? value.toLocaleDateString()
 													: value;
 											})()}
-										</Typography>
+										</Typography.Text>
 									</Stack>
 								) : null,
 							)}
@@ -150,40 +146,35 @@ const BlogDetails: FC = () => {
 
 						{/* Content */}
 						<Box sx={{ mb: 4 }}>
-							<Typography variant="body1" sx={{ lineHeight: 1.8 }}>
+							<Typography.Paragraph style={{ lineHeight: 1.8 }}>
 								{data?.content}
-							</Typography>
+							</Typography.Paragraph>
 						</Box>
 
 						<Box sx={{ mb: 3 }}>
 							<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
 								<TagOutlined
-									color="primary"
-									style={{ marginRight: 8, fontSize: "large" }}
+									style={{ marginRight: 8, fontSize: "large", color: token.colorPrimary }}
 								/>
-								<Typography
-									variant="h6"
-									sx={{ fontWeight: "bold", color: "primary.light" }}
+								<Typography.Title
+									level={5}
+									style={{ fontWeight: "bold", color: token.colorPrimary }}
 								>
 									Tags
-								</Typography>
+								</Typography.Title>
 							</Box>
 							<Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
 								{
 									// FEATURE: Update database for multiple categories
 									[data?.category]?.map((tag) => (
-										<Chip
+										<Tag
 											key={tag}
-											label={tag}
-											size="small"
-											variant="outlined"
-											sx={{
-												"&:hover": {
-													bgcolor: "primary.light",
-													color: "white",
-												},
+											variant="filled"
+											style={{
+												borderRadius: '6px',
+												backgroundColor: token.colorFillSecondary,
 											}}
-										/>
+										>{tag}</Tag>
 									))
 								}
 							</Box>
@@ -193,7 +184,7 @@ const BlogDetails: FC = () => {
 					<RingLoader />
 				)}
 			</Stack>
-		</Stack>
+		</Flex>
 	);
 };
 

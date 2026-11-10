@@ -1,6 +1,5 @@
 import { PageTitle } from "@components/PageWrapper";
-import { Stack } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Flex, Typography } from "antd";
 import type { FC } from "react";
 import ContactSection from "../Contact/components/ContactSection";
 import ServiceTimes from "../Contact/components/ServiceTimes";
@@ -17,35 +16,30 @@ const AboutUs: FC = () => {
 	return (
 		<>
 			<PageTitle title={HEADER} subtitle={SUBHEADER} />
-			<Stack spacing={2} className="fade-in" sx={{}}>
+			<Flex vertical className="fade-in" >
 				{aboutContent.map((i) => (
-					<Typography variant="body1" color="text.primary" key={i}>
+					<Typography.Paragraph key={i}>
 						{i}
-					</Typography>
+					</Typography.Paragraph>
 				))}
 
 				<ContactSection title={organization}>
-					<Typography
-						variant="body1"
-						sx={{
-							"& strong": { color: "text.secondary" },
-							color: "text.primary",
-						}}
+					<Typography.Paragraph
 					>
 						{organizationContent}
-					</Typography>
+					</Typography.Paragraph>
 				</ContactSection>
 
 				{details.map((i) => (
 					<ContactSection key={i.title} title={i.title}>
-						<Typography variant="body1" color="text.primary">
+						<Typography.Paragraph >
 							{i.content}
-						</Typography>
+						</Typography.Paragraph>
 					</ContactSection>
 				))}
 
 				<ServiceTimes />
-			</Stack>
+			</Flex>
 		</>
 	);
 };

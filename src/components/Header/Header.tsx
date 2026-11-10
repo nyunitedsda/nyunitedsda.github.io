@@ -11,10 +11,7 @@ import {
 } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { smallLogo } from "@/assets";
-import {
-	// LoginButton,
-	ThemeButton,
-} from "../Buttons";
+import { LoginButton, ThemeButton } from "../Buttons";
 
 const rootStyle: CSSProperties = {
 	position: "sticky",
@@ -136,7 +133,7 @@ const Header: FC = () => {
 					{!isMobile && (
 						<>
 							<ThemeButton />
-							{/* <LoginButton expanded={false} /> */}
+							<LoginButton expanded={false} />
 						</>
 					)}
 				</Flex>
@@ -169,7 +166,7 @@ const Header: FC = () => {
 					}}
 				>
 					<ThemeButton expanded />
-					{/* <LoginButton expanded /> */}
+					<LoginButton expanded />
 				</Flex>
 			</Drawer>
 		</>

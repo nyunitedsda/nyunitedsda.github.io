@@ -5,7 +5,7 @@ import React, {
 	useMemo,
 	useState,
 } from "react";
-import { antDTheme } from "@/components/AppProvider";
+import { antDTheme, DARK_TOKEN, LIGHT_TOKEN } from "./antDTheme";
 import context from "./context";
 import type { Mode } from "./types";
 
@@ -39,6 +39,15 @@ const ThemeContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
 			<ConfigProvider
 				theme={{
 					...antDTheme,
+					...(mode === "dark"
+						? {
+								algorithm: theme.darkAlgorithm,
+								token: DARK_TOKEN,
+							}
+						: {
+								algorithm: theme.defaultAlgorithm,
+								token: LIGHT_TOKEN,
+							}),
 					algorithm:
 						mode === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
 				}}

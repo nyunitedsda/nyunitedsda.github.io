@@ -1,18 +1,17 @@
-import { useTheme } from "@mui/system";
-import { Flex } from "antd";
+import { Flex, theme } from "antd";
 import Title from "antd/es/typography/Title";
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 const ContactSection: FC<
 	PropsWithChildren<{ title: string; sx?: CSSProperties }>
 > = ({ children, title, sx }) => {
-	const theme = useTheme();
+	const {token} = theme.useToken();
 
 	return (
 		<Flex vertical style={sx}>
 			<Title
 				level={4}
-				style={{ color: theme.palette.primary.light, fontWeight: "bold" }}
+				style={{ color: token.colorPrimary, fontWeight: "bold" }}
 			>
 				{title}
 			</Title>

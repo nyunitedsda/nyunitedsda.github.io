@@ -1,21 +1,7 @@
-import type { RingLoaderProps } from "@components/Loaders";
-import Stack from "@mui/material/Stack";
-import {
-	alpha,
-	type SxProps,
-	type Theme,
-	useTheme,
-} from "@mui/material/styles";
+import { Flex, Spin } from "antd";
 import type { CSSProperties, FC } from "react";
-import { default as Loader } from "react-spinners/RingLoader";
 
-const override: CSSProperties = {
-	display: "block",
-	margin: "50% auto",
-	height: "100%",
-};
-
-const rootSx: SxProps<Theme> = {
+const rootSx: CSSProperties = {
 	height: "100%",
 	width: "100%",
 	justifyContent: "center",
@@ -23,19 +9,11 @@ const rootSx: SxProps<Theme> = {
 	backgroundColor: "inherit",
 };
 
-const RingLoader: FC<RingLoaderProps> = (props) => {
-	const theme = useTheme();
-
+const RingLoader: FC = () => {
 	return (
-		<Stack sx={rootSx}>
-			<Loader
-				color={alpha(theme.palette.primary.main, 0.6)}
-				cssOverride={override}
-				aria-label="Loading Spinner"
-				data-testid="loader"
-				{...props}
-			/>
-		</Stack>
+		<Flex style={rootSx}>
+			<Spin spinning size={"large"} />
+		</Flex>
 	);
 };
 
