@@ -14,8 +14,12 @@ const UserAgreements: FC = () => {
 			...rest,
 			label: title,
 			title,
-			content: <Typography.Paragraph key={title} ><p dangerouslySetInnerHTML={{__html: content as string}} /></Typography.Paragraph>,
-		})) ?? []) as (LegalContentDT & { label: string, content: ReactNode })[];
+			content: (
+				<Typography.Paragraph key={title}>
+					<p dangerouslySetInnerHTML={{ __html: content as string }} />
+				</Typography.Paragraph>
+			),
+		})) ?? []) as (LegalContentDT & { label: string; content: ReactNode })[];
 	}, [data]);
 	return (
 		<>

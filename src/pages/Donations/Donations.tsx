@@ -35,8 +35,13 @@ const Donations: FC = () => {
 					data &&
 					data.length !== 0 &&
 					data.map((i) => (
-						<Typography.Paragraph key={i.title} style={{ whiteSpace: 'pre-line' }} >
-							<Typography.Text strong style={{ fontSize: "medium"}}>{i.title}: </Typography.Text>
+						<Typography.Paragraph
+							key={i.title}
+							style={{ whiteSpace: "pre-line" }}
+						>
+							<Typography.Text strong style={{ fontSize: "medium" }}>
+								{i.title}:{" "}
+							</Typography.Text>
 							<Typography.Text>{i.description}</Typography.Text>
 						</Typography.Paragraph>
 					))}

@@ -6,7 +6,7 @@ import type { FC, ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 
 const { WEBSITE_TITLE, MOTTO } = footer;
-const youTubeLink = 'https://www.youtube.com/@161nyusda';
+const youTubeLink = "https://www.youtube.com/@161nyusda";
 
 const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = () => {
 	const { token } = theme.useToken();
@@ -37,9 +37,11 @@ const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = () => {
 							style={{ color: token.colorError, fontSize: 24 }}
 						/>
 					}
-					onClick={() => navigate(youTubeLink,{})}
+					onClick={() => navigate(youTubeLink, {})}
 				>
-					<a href={youTubeLink} target="__blank" rel="noopener noreferrer" >{"YouTube Channel"}</a>
+					<a href={youTubeLink} target="__blank" rel="noopener noreferrer">
+						{"YouTube Channel"}
+					</a>
 				</Button>
 			</Flex>
 		</FooterSegment>

@@ -83,12 +83,12 @@ const BlogDetails: FC = () => {
 
 	return (
 		<Flex vertical style={{ gap: 2 }}>
-			<Stack spacing={2} >
+			<Stack spacing={2}>
 				{/* Back Button */}
 
 				<Button
 					type="text"
-					icon={<ArrowLeftOutlined style={{  color: token.colorPrimary  }} />}
+					icon={<ArrowLeftOutlined style={{ color: token.colorPrimary }} />}
 					onClick={() => navigate(-1)}
 					style={{ ...backBtnSx, color: token.colorPrimary }}
 					size="medium"
@@ -146,7 +146,9 @@ const BlogDetails: FC = () => {
 
 						{/* Content */}
 						<Box sx={{ mb: 4 }}>
-							<Typography.Paragraph style={{ lineHeight: 1.8, whiteSpace: 'pre-line' }}>
+							<Typography.Paragraph
+								style={{ lineHeight: 1.8, whiteSpace: "pre-line" }}
+							>
 								{data?.content}
 							</Typography.Paragraph>
 						</Box>

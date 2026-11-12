@@ -90,7 +90,10 @@ const Blog: FC = () => {
 									</Button>,
 								]}
 							>
-								<Typography.Paragraph ellipsis={{ rows: 3 }} style={{ whiteSpace: 'pre-line' }}>
+								<Typography.Paragraph
+									ellipsis={{ rows: 3 }}
+									style={{ whiteSpace: "pre-line" }}
+								>
 									{content}
 								</Typography.Paragraph>
 							</ProjectCard>

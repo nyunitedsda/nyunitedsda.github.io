@@ -6,8 +6,7 @@ const COMMON_TOKEN: ThemeConfig["token"] = {
 	colorPrimary: primaryColor,
 	colorPrimaryText: "white",
 	// fontFamily: "inter",
-}
-
+};
 
 const LIGHT_TOKEN: ThemeConfig["token"] = {
 	...COMMON_TOKEN,
