@@ -1,10 +1,4 @@
-import {
-	DatePicker,
-	DateTimePicker,
-	renderDateViewCalendar,
-	renderTimeViewClock,
-	TimePicker,
-} from "@mui/x-date-pickers";
+import { DatePicker, TimePicker } from "antd";
 import dayjs from "dayjs";
 import { useField, useFormikContext } from "formik";
 import { type FC, useMemo } from "react";
@@ -14,59 +8,30 @@ const TIME = "Time";
 const DATE = "Date";
 
 const DTPicker: FC<DTPickerProps> = (props) => {
-	const { name, type, ...rest } = props;
+	const { name, type } = props;
 	const [meta] = useField(name as string);
 	const values = useFormikContext();
 
 	const elements = useMemo(() => {
 		const commonProps = {
-			...rest,
+			// ...rest,
 			name,
 			value: dayjs(meta.value),
-			onChange: (v: any) => values.setFieldValue(name ?? "", v),
+			// onChange: (v: any) => values.setFieldValue(name ?? "", v),
+			onOk: (v: any) => values.setFieldValue(name ?? "", v),
 		};
 
 		switch (type) {
 			case DATE:
-				return (
-					<DatePicker
-						{...commonProps}
-						viewRenderers={{
-							day: renderDateViewCalendar,
-						}}
-						views={["day", "month", "year"]}
-						view="day"
-						openTo="day"
-					/>
-				);
+				return <DatePicker {...commonProps} />;
 
 			case TIME:
-				return (
-					<TimePicker
-						{...commonProps}
-						viewRenderers={{
-							hours: renderTimeViewClock,
-							minutes: renderTimeViewClock,
-						}}
-						openTo="hours"
-						view="hours"
-						views={["hours", "minutes"]}
-					/>
-				);
+				return <TimePicker {...commonProps} />;
 
 			default:
-				return (
-					<DateTimePicker
-						{...commonProps}
-						viewRenderers={{
-							hours: renderTimeViewClock,
-							minutes: renderTimeViewClock,
-						}}
-					/>
-				);
+				return <DatePicker {...commonProps} showTime />;
 		}
-		// biome-ignore lint/correctness/useExhaustiveDependencies: rest is ok
-	}, [type, name, meta, values, rest]);
+	}, [type, name, meta, values]);
 
 	return elements;
 };

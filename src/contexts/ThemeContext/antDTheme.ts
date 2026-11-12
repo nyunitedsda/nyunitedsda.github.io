@@ -2,15 +2,20 @@ import { type ConfigProviderProps, type ThemeConfig } from "antd";
 
 const primaryColor = "#187cc2";
 
-const LIGHT_TOKEN: ThemeConfig["token"] = {
+const COMMON_TOKEN: ThemeConfig["token"] = {
 	colorPrimary: primaryColor,
 	colorPrimaryText: "white",
+	// fontFamily: "inter",
+}
+
+
+const LIGHT_TOKEN: ThemeConfig["token"] = {
+	...COMMON_TOKEN,
 };
 
 const DARK_TOKEN: ThemeConfig["token"] = {
-	colorPrimaryText: "white",
+	...COMMON_TOKEN,
 	colorBgLayout: "rgb(53, 67, 84)",
-	colorPrimary: primaryColor,
 	colorBgContainer: "rgb(48, 55, 66)",
 };
 

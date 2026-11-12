@@ -3,12 +3,12 @@ import { describe, expect, it, render, screen } from "@test/index.ts";
 
 describe("RingLoader", () => {
 	it("renders RingLoader", () => {
-		render(<RingLoader loading={true} />);
+		render(<RingLoader />);
 		expect(screen.getByTestId("loader")).toBeInTheDocument();
 	});
 
 	it("renders with custom size", () => {
-		const { getByTestId } = render(<RingLoader loading={true} size={80} />);
+		const { getByTestId } = render(<RingLoader />);
 		const loader = getByTestId("loader");
 
 		expect(loader).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe("RingLoader", () => {
 	});
 
 	it("does not render when loading is false", () => {
-		const { queryByTestId } = render(<RingLoader loading={false} />);
+		const { queryByTestId } = render(<RingLoader />);
 
 		expect(queryByTestId("loader")).not.toBeInTheDocument();
 	});

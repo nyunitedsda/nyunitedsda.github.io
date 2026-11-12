@@ -1,12 +1,11 @@
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Typography } from "antd";
 import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
-import { useCallback, useMemo } from "react";
+import { type CSSProperties, useCallback, useMemo } from "react";
 import { createEntity, updateEntity } from "@/api";
 import { type EntityEditorProps, FormContainer } from "@/forms";
 
-const titleSx: SxProps<Theme> = {
+const titleSx: CSSProperties = {
 	position: "sticky",
 	top: 0,
 	backgroundColor: "inherit",
@@ -80,9 +79,9 @@ const EntityEditor = <T extends { id?: number }>({
 	return (
 		<>
 			{title && (
-				<Typography variant="h6" gutterBottom sx={titleSx}>
+				<Typography.Title level={5} style={titleSx}>
 					{title}
-				</Typography>
+				</Typography.Title>
 			)}
 
 			<FormContainer

@@ -32,7 +32,7 @@ const PageTitle: FC<PageTitleProps> = ({
 	handleClick,
 	icon,
 }) => {
-	const {token} = theme.useToken();
+	const { token } = theme.useToken();
 
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm"),
@@ -49,14 +49,15 @@ const PageTitle: FC<PageTitleProps> = ({
 	return (
 		<Flex vertical={false} style={rootStyle}>
 			<Flex style={{ flexGrow: 1, flexDirection: "column" }}>
-				<Title
-					level={2}
-					style={{ ...titleSx, color: token.colorPrimary }}
-				>
+				<Title level={2} style={{ ...titleSx, color: token.colorPrimary }}>
 					{title}
 				</Title>
 				{subtitle && (
-					<Title level={4} style={{ ...subtitleSx, color: token.colorTextSecondary}} type={"secondary"}>
+					<Title
+						level={4}
+						style={{ ...subtitleSx, color: token.colorTextSecondary }}
+						type={"secondary"}
+					>
 						{subtitle}
 					</Title>
 				)}

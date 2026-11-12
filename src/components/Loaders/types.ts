@@ -1,5 +1,5 @@
-import type { LoaderSizeProps } from "react-spinners/helpers/props";
+import type { SpinProps } from "antd";
 
-type RingLoaderProps = LoaderSizeProps;
+type RingLoaderProps = SpinProps;
 
 export type { RingLoaderProps };

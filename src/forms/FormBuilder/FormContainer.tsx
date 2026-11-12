@@ -1,23 +1,26 @@
 import { ConfirmationButton } from "@components/Buttons";
 import type { FormContainerProps } from "@forms/FormBuilder";
-import Stack from "@mui/material/Stack";
-import type { SxProps, Theme } from "@mui/material/styles";
+import { Flex } from "antd";
 import { Form, Formik, type FormikHelpers } from "formik";
+import type { CSSProperties } from "react";
 
-const childrenSx: SxProps<Theme> = {
+const childrenSx: CSSProperties = {
 	width: "100%",
 	maxWidth: 600,
 	overflowY: "auto",
-	pt: 1,
+	paddingTop: 8,
 	backgroundColor: "inherit",
+	gap: 2,
 };
 
-const actionSx: SxProps<Theme> = {
-	mt: 3,
+const actionSx: CSSProperties = {
+	marginTop: 24,
 	position: "sticky",
 	bottom: 0,
 	backgroundColor: "inherit",
 	flexGrow: 0,
+	justifyContent: "flex-end",
+	gap: 16,
 };
 
 const CANCEL_CONFIRMATION = {
@@ -57,41 +60,38 @@ const FormContainer = <T extends { [key: string]: unknown }>({
 			}}
 		>
 			{({ isSubmitting, dirty }) => (
-				<Form style={{ width: "100%" }}>
-					<Stack spacing={2} sx={childrenSx}>
-						{children}
-					</Stack>
+				<>
+					<Form style={{ width: "100%" }}>
+						<Flex vertical style={childrenSx}>
+							{children}
+						</Flex>
 
-					<Stack
-						direction="row"
-						spacing={2}
-						justifyContent="flex-end"
-						sx={actionSx}
-					>
-						{onCancel && (
+						<Flex style={actionSx}>
+							{onCancel && (
+								<ConfirmationButton
+									shouldConfirm={dirty}
+									variant="outlined"
+									color="secondary"
+									onClick={onCancel}
+									{...CANCEL_CONFIRMATION}
+								>
+									{cancelButtonText}
+								</ConfirmationButton>
+							)}
 							<ConfirmationButton
-								shouldConfirm={dirty}
-								variant="outlined"
-								color="secondary"
-								onClick={onCancel}
-								{...CANCEL_CONFIRMATION}
+								type="submit"
+								variant="contained"
+								color="primary"
+								disabled={isSubmitting}
+								fullWidth={!onCancel}
+								{...(confirmOnSave ? { shouldConfirm: dirty } : {})}
+								{...SAVE_CONFIRMATION}
 							>
-								{cancelButtonText}
+								{isSubmitting ? "Submitting..." : submitButtonText}
 							</ConfirmationButton>
-						)}
-						<ConfirmationButton
-							type="submit"
-							variant="contained"
-							color="primary"
-							disabled={isSubmitting}
-							fullWidth={!onCancel}
-							{...(confirmOnSave ? { shouldConfirm: dirty } : {})}
-							{...SAVE_CONFIRMATION}
-						>
-							{isSubmitting ? "Submitting..." : submitButtonText}
-						</ConfirmationButton>
-					</Stack>
-				</Form>
+						</Flex>
+					</Form>
+				</>
 			)}
 		</Formik>
 	);

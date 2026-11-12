@@ -56,7 +56,10 @@ const AnnouncementCard: FC<AnnouncementCardProps> = (props) => {
 						style={{ color: token.colorPrimary, fontSize: "24px" }}
 					/>
 
-					<Typography.Paragraph ellipsis={{ tooltip: description, rows: 3 }}>
+					<Typography.Paragraph
+						ellipsis={{ tooltip: description, rows: 3 }}
+						style={{ whiteSpace: "pre-line" }}
+					>
 						{description}
 					</Typography.Paragraph>
 				</Flex>

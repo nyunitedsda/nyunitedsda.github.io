@@ -16,25 +16,18 @@ const AboutUs: FC = () => {
 	return (
 		<>
 			<PageTitle title={HEADER} subtitle={SUBHEADER} />
-			<Flex vertical className="fade-in" >
+			<Flex vertical className="fade-in">
 				{aboutContent.map((i) => (
-					<Typography.Paragraph key={i}>
-						{i}
-					</Typography.Paragraph>
+					<Typography.Paragraph key={i}>{i}</Typography.Paragraph>
 				))}
 
 				<ContactSection title={organization}>
-					<Typography.Paragraph
-					>
-						{organizationContent}
-					</Typography.Paragraph>
+					<Typography.Paragraph>{organizationContent}</Typography.Paragraph>
 				</ContactSection>
 
 				{details.map((i) => (
 					<ContactSection key={i.title} title={i.title}>
-						<Typography.Paragraph >
-							{i.content}
-						</Typography.Paragraph>
+						<Typography.Paragraph>{i.content}</Typography.Paragraph>
 					</ContactSection>
 				))}
 

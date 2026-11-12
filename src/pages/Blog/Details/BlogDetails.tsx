@@ -32,7 +32,7 @@ const backBtnSx: CSSProperties = {
 const ICONS = {
 	author: (
 		<ProjectSuspense>
-			<UserOutlined  color="primary"/>
+			<UserOutlined color="primary" />
 		</ProjectSuspense>
 	),
 	published_at: (
@@ -83,15 +83,15 @@ const BlogDetails: FC = () => {
 
 	return (
 		<Flex vertical style={{ gap: 2 }}>
-			<Stack spacing={2} sx={{ "& a, svg": { color: "primary.light" } }}>
+			<Stack spacing={2} >
 				{/* Back Button */}
 
 				<Button
 					type="text"
-					icon={<ArrowLeftOutlined style={{ fontSize: 'large' }} />}
-					color="primary"
+					icon={<ArrowLeftOutlined style={{  color: token.colorPrimary  }} />}
 					onClick={() => navigate(-1)}
-					style={backBtnSx}
+					style={{ ...backBtnSx, color: token.colorPrimary }}
+					size="medium"
 				>
 					Back
 				</Button>
@@ -103,10 +103,7 @@ const BlogDetails: FC = () => {
 							<img src={data?.img_src as string} alt={`${data?.title} blog`} />
 						)}
 
-						<Typography.Title
-							level={1}
-							style={{ color: token.colorPrimary }}
-						>
+						<Typography.Title level={1} style={{ color: token.colorPrimary }}>
 							{data?.title}
 						</Typography.Title>
 
@@ -130,7 +127,10 @@ const BlogDetails: FC = () => {
 									>
 										{ICONS[i as keyof typeof ICONS]}
 										<Typography.Text
-											style={{ fontWeight: "bold", color: token.colorTextSecondary }}
+											style={{
+												fontWeight: "bold",
+												color: token.colorTextSecondary,
+											}}
 										>
 											{(() => {
 												const value = data[i as keyof ArticleDT];
@@ -146,7 +146,7 @@ const BlogDetails: FC = () => {
 
 						{/* Content */}
 						<Box sx={{ mb: 4 }}>
-							<Typography.Paragraph style={{ lineHeight: 1.8 }}>
+							<Typography.Paragraph style={{ lineHeight: 1.8, whiteSpace: 'pre-line' }}>
 								{data?.content}
 							</Typography.Paragraph>
 						</Box>
@@ -154,7 +154,11 @@ const BlogDetails: FC = () => {
 						<Box sx={{ mb: 3 }}>
 							<Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
 								<TagOutlined
-									style={{ marginRight: 8, fontSize: "large", color: token.colorPrimary }}
+									style={{
+										marginRight: 8,
+										fontSize: "large",
+										color: token.colorPrimary,
+									}}
 								/>
 								<Typography.Title
 									level={5}
@@ -171,10 +175,12 @@ const BlogDetails: FC = () => {
 											key={tag}
 											variant="filled"
 											style={{
-												borderRadius: '6px',
+												borderRadius: "6px",
 												backgroundColor: token.colorFillSecondary,
 											}}
-										>{tag}</Tag>
+										>
+											{tag}
+										</Tag>
 									))
 								}
 							</Box>

@@ -5,7 +5,7 @@ import type { CSSProperties, FC, PropsWithChildren } from "react";
 const ContactSection: FC<
 	PropsWithChildren<{ title: string; sx?: CSSProperties }>
 > = ({ children, title, sx }) => {
-	const {token} = theme.useToken();
+	const { token } = theme.useToken();
 
 	return (
 		<Flex vertical style={sx}>

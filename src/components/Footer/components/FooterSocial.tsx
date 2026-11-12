@@ -3,12 +3,14 @@ import { FOOTER_LEGAL_LINKS, FooterSegment } from "@components/Footer";
 import footer from "@constants/footer";
 import { Button, Flex, Typography, theme } from "antd";
 import type { FC, ReactNode } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const { WEBSITE_TITLE, MOTTO } = footer;
+const youTubeLink = 'https://www.youtube.com/@161nyusda';
 
 const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = () => {
 	const { token } = theme.useToken();
+	const navigate = useNavigate();
 
 	return (
 		<FooterSegment title={WEBSITE_TITLE} subtitle={MOTTO.text}>
@@ -35,8 +37,9 @@ const FooterSocial: FC<{ iconMap: Record<string, ReactNode> }> = () => {
 							style={{ color: token.colorError, fontSize: 24 }}
 						/>
 					}
+					onClick={() => navigate(youTubeLink,{})}
 				>
-					{"YouTube Channel"}
+					<a href={youTubeLink} target="__blank" rel="noopener noreferrer" >{"YouTube Channel"}</a>
 				</Button>
 			</Flex>
 		</FooterSegment>

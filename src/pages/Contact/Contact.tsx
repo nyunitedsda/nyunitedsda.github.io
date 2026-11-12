@@ -53,7 +53,11 @@ const Contact: FC = () => {
 							{[
 								{
 									id: 1,
-									icon: <EnvironmentOutlined style={{ ...iconStyle, color: token.colorPrimary }} />,
+									icon: (
+										<EnvironmentOutlined
+											style={{ ...iconStyle, color: token.colorPrimary }}
+										/>
+									),
 									content: (
 										<Flex vertical>
 											<Typography.Text>{data.street}</Typography.Text>
@@ -65,14 +69,22 @@ const Contact: FC = () => {
 								},
 								{
 									id: 2,
-									icon: <PhoneOutlined style={{ ...iconStyle, color: token.colorPrimary }} />,
+									icon: (
+										<PhoneOutlined
+											style={{ ...iconStyle, color: token.colorPrimary }}
+										/>
+									),
 									component: "a",
 									href: `tel:${data.phone}`,
 									content: data.phone,
 								},
 								{
 									id: 3,
-									icon: <MailFilled style={{ ...iconStyle, color: token.colorPrimary }} />,
+									icon: (
+										<MailFilled
+											style={{ ...iconStyle, color: token.colorPrimary }}
+										/>
+									),
 									component: "a",
 									href: `mailto:${data.email}`,
 									content: data.email,
@@ -86,7 +98,11 @@ const Contact: FC = () => {
 							<NoteSection
 								columnLayout
 								content={data.mail_address}
-								icon={<MailOutlined style={{ ...iconStyle, color: token.colorPrimary }} />}
+								icon={
+									<MailOutlined
+										style={{ ...iconStyle, color: token.colorPrimary }}
+									/>
+								}
 								title={data.mailing_recipient}
 							/>
 						</ContactSection>

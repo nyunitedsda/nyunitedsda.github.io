@@ -10,12 +10,11 @@ import { InputField } from "@forms/Input";
 import { useEntityList } from "@hooks/api";
 import { useRegister } from "@hooks/auth";
 import { capitalize, Grid } from "@mui/material";
-import type { SxProps, Theme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
+import { Typography } from "antd";
 import type { FormikHelpers } from "formik";
 import { useSnackbar } from "notistack";
-import { type FC, useCallback, useMemo } from "react";
+import { type CSSProperties, type FC, useCallback, useMemo } from "react";
 import type { RoleDT, UserDT } from "@/api";
 import { getUserById, updateUser } from "@/api";
 
@@ -25,11 +24,12 @@ const LAST_NAME_FIELD_LABEL = "Last Name";
 const ROLE_FIELD_LABEL = "User Role";
 const IS_ACTIVE_FIELD_LABEL = "Active";
 
-const titleSx: SxProps<Theme> = {
+const titleSx: CSSProperties = {
 	position: "sticky",
 	top: 0,
 	backgroundColor: "inherit",
 	zIndex: 1,
+	gap: 16,
 };
 
 const EDIT_TITLE = "Edit User";
@@ -100,9 +100,9 @@ const UserEditor: FC<UserEditorProps> = ({
 
 	return (
 		<ProjectModal open={open} onClose={onClose}>
-			<Typography variant="h6" gutterBottom sx={titleSx}>
+			<Typography.Title level={4} style={titleSx}>
 				{title}
-			</Typography>
+			</Typography.Title>
 
 			<FormContainer
 				initialValues={data?.id ? (userData ?? {}) : data}
